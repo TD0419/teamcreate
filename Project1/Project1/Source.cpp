@@ -2,5 +2,5 @@ void main()
 {
 	int i;
 
-	char* banana = "バナナ大好き";
+	char* banana = "バナナ大嫌い";
 }
