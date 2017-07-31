@@ -2,6 +2,6 @@ void main()
 {
 	int i;
 
-	char* tingeee = "tuda「笑止！」,アルカリ性";
+	char* comment = "tuda「愚か者め！」,弱酸性";
 	char o;
 }
