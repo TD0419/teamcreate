@@ -12,6 +12,7 @@ enum OBJ_NAME
 	OBJ_ENEMY,
 	OBJ_BULLE,
 	OBJ_ITEM,
+	OBJ_BANANA,
 };
 //------------------------------------------------
 
