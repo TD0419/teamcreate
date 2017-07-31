@@ -1,6 +1,6 @@
 void main()
 {
-	int test2;
+	int test3;
 
 	int i;
 
