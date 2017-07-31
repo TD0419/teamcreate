@@ -2,5 +2,5 @@ void main()
 {
 	int i;
 
-	char* banana = "";
+	char* banana = "‚æ`‚­l‚¦‚æ`ô‚¨‹à‚Í‘å–‚¾‚æ`ô‚¤`‚¤‚¤`‚¤‚¤‚¤‚¤`ô";
 }
