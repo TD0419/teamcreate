@@ -81,6 +81,7 @@
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ObjButton.h" />
+    <ClInclude Include="SceneMain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp" />
@@ -96,6 +97,7 @@
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjButton.cpp" />
+    <ClCompile Include="SceneMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />
