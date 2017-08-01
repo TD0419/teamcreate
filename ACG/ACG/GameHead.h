@@ -8,6 +8,7 @@ enum OBJ_NAME
 	//OBJ_ÅõÅõÇ∆ï\ãL
 	OBJ_BUTTON,
 	OBJ_HERO,
+	OBJ_ROCK,
 };
 //------------------------------------------------
 
@@ -54,6 +55,7 @@ struct UserData
 
 #include "ObjButton.h"
 #include "ObjHero.h"
+#include "ObjRock.h"
 
 //------------------------------------------------
 
