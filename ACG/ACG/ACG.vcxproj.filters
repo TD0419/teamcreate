@@ -159,7 +159,7 @@
       <Filter>ソース ファイル\GameMain\Button</Filter>
     </ClCompile>
     <ClCompile Include="ObjLaggers.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\GameMain\Ladder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
