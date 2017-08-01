@@ -6,13 +6,6 @@ enum OBJ_NAME
 	OBJ_NO_NAME,	//オブジェクト名無し(禁止)
 	//ゲームで使うオブジェクトの名前
 	//OBJ_○○と表記
-	OBJ_HERO,
-	OBJ_BLOCK,
-	OBJ_TIME,
-	OBJ_ENEMY,
-	OBJ_BULLE,
-	OBJ_ITEM,
-	OBJ_BANANA,
 	OBJ_BUTTON,
 };
 //------------------------------------------------

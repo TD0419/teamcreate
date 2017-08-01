@@ -1,6 +1,5 @@
 //使用するヘッダーファイル
 #include "GameL\DrawTexture.h"
-#include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\UserData.h"
