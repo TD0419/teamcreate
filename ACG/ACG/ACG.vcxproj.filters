@@ -13,6 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\GameMain">
+      <UniqueIdentifier>{021454eb-66bd-413d-83e2-02b470091534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameMain\Hero">
+      <UniqueIdentifier>{8b1083a3-0fb6-4995-bd3d-7f950eb40bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameMain\Enemy">
+      <UniqueIdentifier>{aec4a4a7-e525-4626-9edd-744fae9061d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameMain\Boss">
+      <UniqueIdentifier>{afb813ad-0f53-4e34-ace3-e4871b91e485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameMain\Block">
+      <UniqueIdentifier>{d36488c6-9a06-4260-b8e3-8180b059e204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameMain\Ladder">
+      <UniqueIdentifier>{a45e3ba1-adbe-4d61-8646-1436e9d209bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameMain\Button">
+      <UniqueIdentifier>{d60b9c0f-e409-4aa7-ad7a-e0478a94129d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameMain\Rock">
+      <UniqueIdentifier>{60ccb8f2-c901-4578-b103-4d03714740e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -54,26 +78,29 @@
     <ClInclude Include="GameL\WinInputs.h">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjButton.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SceneMain.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjHero.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjRock.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="ObjBlock.h">
+      <Filter>ソース ファイル\GameMain\Block</Filter>
     </ClInclude>
     <ClInclude Include="ObjBossEnemy.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\GameMain\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy.h">
+      <Filter>ソース ファイル\GameMain\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHero.h">
+      <Filter>ソース ファイル\GameMain\Hero</Filter>
     </ClInclude>
     <ClInclude Include="ObjLadders.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\GameMain\Ladder</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBlock.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="ObjButton.h">
+      <Filter>ソース ファイル\GameMain\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRock.h">
+      <Filter>ソース ファイル\GameMain\Rock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,23 +140,23 @@
     <ClCompile Include="GameL\WinInputs.cpp">
       <Filter>リソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjButton.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjHero.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SceneMain.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBossEnemy.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjBlock.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\GameMain\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBossEnemy.cpp">
+      <Filter>ソース ファイル\GameMain\Boss</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\GameMain\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHero.cpp">
+      <Filter>ソース ファイル\GameMain\Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjButton.cpp">
+      <Filter>ソース ファイル\GameMain\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
