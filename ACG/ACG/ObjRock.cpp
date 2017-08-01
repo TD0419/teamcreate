@@ -1,4 +1,4 @@
-//使用するヘッダーファイル
+//使用するヘッダーファイル　
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
