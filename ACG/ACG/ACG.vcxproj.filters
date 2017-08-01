@@ -66,6 +66,15 @@
     <ClInclude Include="ObjRock.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBossEnemy.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLadders.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlock.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -110,7 +119,19 @@
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjRock.cpp">
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBossEnemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBlock.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLaggers.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

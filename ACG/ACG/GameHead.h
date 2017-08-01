@@ -9,6 +9,9 @@ enum OBJ_NAME
 	OBJ_BUTTON,
 	OBJ_HERO,
 	OBJ_ROCK,
+    OBJ_BOSS_ENEMY,
+	OBJ_LADDERS,
+	OBJ_BLOCK,
 };
 //------------------------------------------------
 
@@ -42,7 +45,8 @@ struct UserData
 
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
-
+#define MAP_X 10
+#define MAP_Y 10
 
 
 //------------------------------------------------
@@ -55,8 +59,10 @@ struct UserData
 
 #include "ObjButton.h"
 #include "ObjHero.h"
-#include "ObjRock.h"
+#include "ObjBlock.h"
 
+#include "ObjRock.h"
+#include "ObjBossEnemy.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
