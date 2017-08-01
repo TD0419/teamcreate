@@ -105,6 +105,7 @@
     <ClCompile Include="ObjBossEnemy.cpp" />
     <ClCompile Include="ObjButton.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
+    <ClCompile Include="ObjLaggers.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="ObjHero.cpp" />
   </ItemGroup>
