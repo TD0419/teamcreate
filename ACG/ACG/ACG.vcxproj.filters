@@ -159,6 +159,12 @@
       <Filter>ソース ファイル\GameMain\Button</Filter>
     </ClCompile>
     <ClCompile Include="ObjLaggers.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRock.cpp">
+      <Filter>ソース ファイル\GameMain\Rock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLadders.cpp">
       <Filter>ソース ファイル\GameMain\Ladder</Filter>
     </ClCompile>
   </ItemGroup>
