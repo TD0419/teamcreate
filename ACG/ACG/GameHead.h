@@ -10,6 +10,7 @@ enum OBJ_NAME
 	OBJ_HERO,
 	OBJ_ROCK,
     OBJ_BOSS_ENEMY,
+	OBJ_LADDERS,
 	OBJ_BLOCK,
 };
 //------------------------------------------------
