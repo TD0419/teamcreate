@@ -1,11 +1,10 @@
 #pragma once
 //使用ヘッダー
-#include "GameL\DrawTexture.h"
 #include "GameL\SceneObjManager.h"
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：リフト
+//オブジェクト：ボタン
 class CObjButton : public CObj
 {
 	public:
