@@ -32,11 +32,14 @@ CSceneMain::~CSceneMain()
 void CSceneMain::InitScene()
 {
 	//マップ情報格納用変数テスト用
-	int map[10][10] = { 0 };
+	int map[MAP_Y][MAP_X] = { 0 };
+	//マップ情報を読み込み
 	MapDataLoading(map);
 
 
-
+	//blockオブジェクト作成
+	CObjBlock* obj_block = new CObjBlock(map);
+	Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
 }
 
 //ゲームメイン実行中メソッド
@@ -45,7 +48,7 @@ void CSceneMain::Scene()
 
 }
 //マップデータ読み込み関数
-void CSceneMain::MapDataLoading(int map[10][10])
+void CSceneMain::MapDataLoading(int map[MAP_Y][MAP_X])
 {
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;//ステージ情報ポインター
@@ -61,9 +64,9 @@ void CSceneMain::MapDataLoading(int map[10][10])
 
 	int count = 1;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < MAP_Y; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < MAP_X; j++)
 		{
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);
