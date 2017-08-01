@@ -81,6 +81,7 @@
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="ObjBossEnemy.h" />
     <ClInclude Include="ObjBlock.h" />
+    <ClInclude Include="ObjEnemy.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ObjButton.h" />

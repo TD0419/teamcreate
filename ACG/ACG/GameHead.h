@@ -60,7 +60,7 @@ struct UserData
 #include "ObjButton.h"
 #include "ObjHero.h"
 #include "ObjBlock.h"
-
+#include "ObjEnemy.h"
 #include "ObjRock.h"
 #include "ObjBossEnemy.h"
 //------------------------------------------------
