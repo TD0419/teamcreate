@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\Main">
+      <UniqueIdentifier>{b34ebc1d-67b9-4b76-aba6-c4a9108cffe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Title">
+      <UniqueIdentifier>{82100ff4-7f6b-4131-a72c-29415e5309b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -54,20 +60,26 @@
     <ClInclude Include="GameL\WinInputs.h">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjButton.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="ObjBossEnemy.h">
+      <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="ObjButton.h">
+      <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
     <ClInclude Include="ObjHero.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
     <ClInclude Include="ObjRock.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBossEnemy.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -107,20 +119,26 @@
     <ClCompile Include="GameL\WinInputs.cpp">
       <Filter>リソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBossEnemy.cpp">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
     <ClCompile Include="ObjButton.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
     <ClCompile Include="ObjHero.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
     <ClCompile Include="ObjRock.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
     <ClCompile Include="SceneMain.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBossEnemy.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

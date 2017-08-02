@@ -84,7 +84,9 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="ObjButton.h" />
     <ClInclude Include="ObjRock.h" />
+    <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="SceneMain.h" />
+    <ClInclude Include="SceneTitle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp" />
@@ -101,9 +103,11 @@
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjBossEnemy.cpp" />
     <ClCompile Include="ObjButton.cpp" />
+    <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjRock.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />
