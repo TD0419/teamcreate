@@ -24,8 +24,8 @@ public:
 	void SetVX(float vx) { m_vx = vx; }
 	void SetVY(float vy) { m_vy = vy; }
 private:
-	float m_x;	//X座標
-	float m_y;	//Y座標
+	float m_px;	//X座標
+	float m_py;	//Y座標
 	float m_vx;	//X軸方向のベクトル
 	float m_vy;	//Y軸方向のベクトル
 
