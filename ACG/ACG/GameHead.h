@@ -60,11 +60,13 @@ struct UserData
 #include "ObjRock.h"
 #include "ObjBossEnemy.h"
 #include "ObjTitle.h"
+#include "ObjGameOver.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"
 #include "SceneTitle.h"
+#include "SceneGameOver.h"
 
 //-----------------------------------------------
 
