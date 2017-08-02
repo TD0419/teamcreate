@@ -36,6 +36,9 @@ void CSceneMain::InitScene()
 	//マップ情報を読み込み
 	MapDataLoading(map);
 
+	//主人公オブジェクトを作成する
+	CObjHero* ObjHero = new CObjHero();
+	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
 
 	//blockオブジェクト作成
 	CObjBlock* obj_block = new CObjBlock(map);
