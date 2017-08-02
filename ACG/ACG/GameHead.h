@@ -62,6 +62,8 @@ struct UserData
 #include "ObjRock.h"
 #include "ObjBossEnemy.h"
 #include "ObjTitle.h"
+#include "objblock.h"
+
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
