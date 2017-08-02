@@ -81,10 +81,12 @@
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="objblock.h" />
     <ClInclude Include="ObjBossEnemy.h" />
+    <ClInclude Include="ObjEnemy.h" />
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ObjButton.h" />
+    <ClInclude Include="ObjLadders.h" />
     <ClInclude Include="ObjRock.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="SceneGameOver.h" />
@@ -107,7 +109,9 @@
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBossEnemy.cpp" />
     <ClCompile Include="ObjButton.cpp" />
+    <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
+    <ClCompile Include="ObjLaggers.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMain.cpp" />
