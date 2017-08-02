@@ -7,11 +7,11 @@
 using namespace GameL;
 
 //オブジェクト：主人公
-class CObjHero :public CObj
+class CObjEnemy : public CObj
 {
 public:
-	CObjHero(); 	//コンストラクタ
-	~CObjHero() {};	//デストラクタ
+	CObjEnemy(); 	//コンストラクタ
+	~CObjEnemy() {};	//デストラクタ
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー
