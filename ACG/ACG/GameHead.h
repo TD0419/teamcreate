@@ -11,6 +11,7 @@ enum OBJ_NAME
 	OBJ_ROCK,
     OBJ_BOSS_ENEMY,
 	OBJ_TITLE,
+	OBJ_GAME_OVER,
 };
 //------------------------------------------------
 
