@@ -11,6 +11,7 @@ enum OBJ_NAME
 	OBJ_ROCK,
     OBJ_BOSS_ENEMY,
 	OBJ_TITLE,
+	OBJ_BLOCK,
 };
 //------------------------------------------------
 
@@ -44,8 +45,8 @@ struct UserData
 
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
-
-
+#define MAP_X 10
+#define MAP_Y 10
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -60,6 +61,7 @@ struct UserData
 #include "ObjRock.h"
 #include "ObjBossEnemy.h"
 #include "ObjTitle.h"
+#include "ObjBlock.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
@@ -70,5 +72,5 @@ struct UserData
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneMain
+#define SET_GAME_START CSceneTitle
 //-----------------------------------------------
