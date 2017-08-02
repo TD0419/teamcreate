@@ -93,6 +93,12 @@
     <ClInclude Include="SceneGameOver.h">
       <Filter>ソース ファイル\GameOver</Filter>
     </ClInclude>
+    <ClInclude Include="ObjGameClear.h">
+      <Filter>ソース ファイル\GameClear</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameClear.h">
+      <Filter>ソース ファイル\GameClear</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -157,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="SceneGameOver.cpp">
       <Filter>ソース ファイル\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameClear.cpp">
+      <Filter>ソース ファイル\GameClear</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameClear.cpp">
+      <Filter>ソース ファイル\GameClear</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
