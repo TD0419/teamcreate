@@ -359,32 +359,32 @@ void CObjBlock::BlockHit(
 //アクション
 void CObjBlock::Action()
 {
-	//主人公の位置を習得
-	CObjHero* hero = (CObjHero*) Objs::GetObj(OBJ_HERO);
-	if (hero == nullptr)return;//Heroオブジェクトが存在しなかったら関数処理終了
-	float hx = hero->GetX();
-	float hy = hero->GetY();
+	////主人公の位置を習得
+	//CObjHero* hero = (CObjHero*) Objs::GetObj(OBJ_HERO);
+	//if (hero == nullptr)return;//Heroオブジェクトが存在しなかったら関数処理終了
+	//float hx = hero->GetX();
+	//float hy = hero->GetY();
 
-	//後方スクロールライン
-	if(hx < 80)
-	{
-		hero->SetX(80);			//主人公はラインを超えないようにする
-		m_scroll-=hero->GetVX();//主人公が本来動くべき分の値をm_scrollに加える
-	}
+	////後方スクロールライン
+	//if(hx < 80)
+	//{
+	//	hero->SetX(80);			//主人公はラインを超えないようにする
+	//	m_scroll-=hero->GetVX();//主人公が本来動くべき分の値をm_scrollに加える
+	//}
 
-	//前方スクロールライン
-	if(hx > 300)
-	{
-		hero->SetX(300);
-		m_scroll-=hero->GetVX();
-	}
+	////前方スクロールライン
+	//if(hx > 300)
+	//{
+	//	hero->SetX(300);
+	//	m_scroll-=hero->GetVX();
+	//}
 
-	//敵出現ライン
-	//主人公の位置+500を敵出現ラインにする
-	float line = hx + (-m_scroll) + 500;
+	////敵出現ライン
+	////主人公の位置+500を敵出現ラインにする
+	//float line = hx + (-m_scroll) + 500;
 
-	//敵出現ラインを要素番号
-	int ex =((int)line) / 64;
+	////敵出現ラインを要素番号
+	//int ex =((int)line) / 64;
 
 	//敵出現ラインの列を検索
 	//for(int i = 0 ; i < 10 ; i++)

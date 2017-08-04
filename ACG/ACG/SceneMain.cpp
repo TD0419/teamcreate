@@ -36,6 +36,9 @@ void CSceneMain::InitScene()
 	//マップ情報を読み込み
 	MapDataLoading(map);
 
+	ImageDataLoading();//画像データ読み込み関数
+	AudioDataLoading();//音楽データ読み込み関数
+
 	//主人公オブジェクトを作成する
 	CObjHero* ObjHero = new CObjHero();
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
@@ -88,12 +91,16 @@ void CSceneMain::MapDataLoading(int map[MAP_Y][MAP_X])
 }
 
 //画像データ読み込み関数
-void CSceneMain::InageDataLoading()
+void CSceneMain::ImageDataLoading()
 {
 	//画像登録ID
-	int id = 0;
+	//int id = 0;
 	//グラフィック読み込み
 	//Draw::LoadImageW(L"", id++, TEX_SIZE_???);
+	
+	//debug用hero画像
+	Draw::LoadImageW(L"image.jpg",0, TEX_SIZE_512);
+
 }
 
 //音楽データ読み込み関数
