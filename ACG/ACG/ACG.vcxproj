@@ -87,6 +87,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="ObjButton.h" />
     <ClInclude Include="ObjLadders.h" />
+    <ClInclude Include="ObjLift.h" />
     <ClInclude Include="ObjRock.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="SceneGameOver.h" />
@@ -112,6 +113,7 @@
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
     <ClCompile Include="ObjLaggers.cpp" />
+    <ClCompile Include="ObjLift.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMain.cpp" />

@@ -12,8 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjRock::CObjRock(float x, float y)
 {
-	m_x = x;
-	m_y = y;
+	m_Rock_x = x;
+	m_Rock_y = y;
 }
 
 //イニシャライズ

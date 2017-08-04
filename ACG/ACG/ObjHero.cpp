@@ -22,10 +22,10 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = 0.0f;
-	m_py = 0.0f;
-	m_vx = 0.0f;
-	m_vy = 0.0f;
+	m_Hero_x = 0.0f;
+	m_Hero_y = 0.0f;
+	m_Hero_vx = 0.0f;
+	m_Hero_vy = 0.0f;
 
 	//debug---------------
 	Font::SetStrTex(L"A");
@@ -36,8 +36,8 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	m_px += m_vx;
-	m_py += m_vy;
+	m_Hero_x += m_Hero_vx;
+	m_Hero_y += m_Hero_vy;
 }
 
 //ドロー
@@ -47,6 +47,6 @@ void CObjHero::Draw()
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 	
 	//debug-------------
-	Font::StrDraw(L"A", m_px, m_py, 32.0f, color);
+	Font::StrDraw(L"A", m_Hero_vx, m_Hero_vy, 32.0f, color);
 	//-----------------
 }

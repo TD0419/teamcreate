@@ -13,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjButton::CObjButton(float x, float y)
 {
-	m_x = x;
-	m_y = y;
+	m_Button_x = x;
+	m_Button_y = y;
 }
 
 //イニシャライズ
