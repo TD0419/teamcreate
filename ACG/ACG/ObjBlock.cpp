@@ -27,7 +27,6 @@ void CObjBlock::Init()
 {
 	m_scroll = 0.0f;
 	m_magma =192.0f;
-	
 }
 
 //BlockDrawMethodä÷êî

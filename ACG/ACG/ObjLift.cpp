@@ -1,38 +1,31 @@
 #include "GameL\DrawTexture.h"
-#include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy.h"
+#include "ObjLift.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //コンストラクタ
-CObjEnemy::CObjEnemy()
+CObjLift::CObjLift(float x, float y)
 {
-
+	m_Lift_x = x;
+	m_Lift_x = y;
 }
 
 //イニシャライズ
-void CObjEnemy::Init()
+void CObjLift::Init()
 {
-	m_Enemy_x  = 0.0f;
-	m_Enemy_y  = 0.0f;
-	m_Enemy_vx = 0.0f;
-	m_Enemy_vy = 0.0f;
-
 }
 
 //アクション
-void CObjEnemy::Action()
+void CObjLift::Action()
 {
-
 }
 
 //ドロー
-void CObjEnemy::Draw()
+void CObjLift::Draw()
 {
-
 }

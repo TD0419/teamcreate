@@ -17,12 +17,12 @@ CObjBossEnemy::CObjBossEnemy()
 //イニシャライズ
 void CObjBossEnemy::Init()
 {
-    m_x = 0.0f;
-    m_y = 0.0f;
-    m_vx = 0.0f;
-    m_vy = 0.0f;
+    m_Boss_x  = 0.0f;
+    m_Boss_y  = 0.0f;
+    m_Boss_vx = 0.0f;
+    m_Boss_vy = 0.0f;
 
-    m_hp = 10;//ボスのＨＰ(仮にＨＰを[ 10 ]と設定)
+	m_Boss_hp = 10; //ボスのＨＰ(仮にＨＰを[ 10 ]と設定)
 
 }
 

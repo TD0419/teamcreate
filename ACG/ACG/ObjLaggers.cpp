@@ -11,16 +11,13 @@ using namespace GameL;
 //コンストラクタ
 CObjLadders::CObjLadders(float x, float y)
 {
-
 }
 
 //イニシャライズ
 void CObjLadders::Init()
 {
-    m_x = 0.0f;
-    m_y = 0.0f;
-    
-
+	m_Ladders_x = 0.0f;
+	m_Ladders_y = 0.0f;
 }
 
 //アクション

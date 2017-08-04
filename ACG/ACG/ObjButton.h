@@ -14,11 +14,12 @@ class CObjButton : public CObj
 		void Action();  //アクション
 		void Draw();	//ドロー
 
+		/*-----------------------アクセサ-------------------------*/
 		bool GetFlag() { return m_door_flag; } //弾とあたっているかどうかを返す
 
 	private:
-		float m_x;		//位置
-		float m_y;
+		float m_Button_x; //ボタンX位置
+		float m_Button_y; //ボタンY位置
 
 		bool m_door_flag; //弾とあっているかどうかを入れる変数
 

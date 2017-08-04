@@ -11,22 +11,24 @@ class CObjEnemy : public CObj
 {
 public:
 	CObjEnemy(); 	//コンストラクタ
-	~CObjEnemy() {};	//デストラクタ
+	~CObjEnemy(){}; //デストラクタ
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー
-	float GetX() { return m_x; }
-	float GetY() { return m_y; }
-	float GetVX() { return m_vx; }
-	float GetVY() { return m_vy; }
-	void SetX(float x) { m_x = x; }
-	void SetY(float y) { m_y = y; }
-	void SetVX(float vx) { m_vx = vx; }
-	void SetVY(float vy) { m_vy = vy; }
+
+   /*-----------------------アクセサ-------------------------*/
+	float GetX() { return m_Enemy_x; }    // X位置情報取得関数
+	float GetY() { return m_Enemy_y; }    // Y位置情報取得関数
+	float GetVX() { return m_Enemy_vx; }  // X移動速度取得関数
+	float GetVY() { return m_Enemy_vy; }  // Y移動速度取得関数
+	void SetX(float x) { m_Enemy_x = x; } // X位置変更関数
+	void SetY(float y) { m_Enemy_y = y; } // Y位置変更関数
+	void SetVX(float vx) { m_Enemy_vx = vx; } // X移動速度変更関数
+	void SetVY(float vy) { m_Enemy_vy = vy; } // Y移動速度変更関数
 private:
-	float m_x;	//X座標
-	float m_y;	//Y座標
-	float m_vx;	//X軸方向のベクトル
-	float m_vy;	//Y軸方向のベクトル
+	float m_Enemy_x;	//敵X座標
+	float m_Enemy_y;	//敵Y座標
+	float m_Enemy_vx;	//敵X軸方向のベクトル
+	float m_Enemy_vy;	//敵Y軸方向のベクトル
 
 };
