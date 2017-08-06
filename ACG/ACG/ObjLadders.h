@@ -16,6 +16,6 @@ public:
 	void Draw();	    //ドロー
 
 private:
-	float m_Ladders_x; //ハシゴX座標
-	float m_Ladders_y; //ハシゴY座標
+	float m_ladders_x; //ハシゴX座標
+	float m_ladders_y; //ハシゴY座標
 };

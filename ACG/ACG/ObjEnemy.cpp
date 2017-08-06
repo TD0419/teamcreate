@@ -18,10 +18,10 @@ CObjEnemy::CObjEnemy()
 //イニシャライズ
 void CObjEnemy::Init()
 {
-	m_Enemy_x  = 0.0f;
-	m_Enemy_y  = 0.0f;
-	m_Enemy_vx = 0.0f;
-	m_Enemy_vy = 0.0f;
+	m_enemy_x  = 0.0f;
+	m_enemy_y  = 0.0f;
+	m_enemy_vx = 0.0f;
+	m_enemy_vy = 0.0f;
 
 }
 

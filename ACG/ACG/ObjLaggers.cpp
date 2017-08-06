@@ -16,8 +16,8 @@ CObjLadders::CObjLadders(float x, float y)
 //イニシャライズ
 void CObjLadders::Init()
 {
-	m_Ladders_x = 0.0f;
-	m_Ladders_y = 0.0f;
+	m_ladders_x = 0.0f;
+	m_ladders_y = 0.0f;
 }
 
 //アクション

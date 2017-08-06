@@ -11,8 +11,8 @@ using namespace GameL;
 //コンストラクタ
 CObjLift::CObjLift(float x, float y)
 {
-	m_Lift_x = x;
-	m_Lift_x = y;
+	m_lift_x = x;
+	m_lift_x = y;
 }
 
 //イニシャライズ

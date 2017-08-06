@@ -16,6 +16,6 @@ public:
 	void Draw();	// ドロー
 
 private:
-	float m_Lift_x;	// リフトX座標
-	float m_Lift_y; // リフトY座標
+	float m_lift_x;	// リフトX座標
+	float m_lift_y; // リフトY座標
 };
