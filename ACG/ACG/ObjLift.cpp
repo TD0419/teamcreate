@@ -12,7 +12,7 @@ using namespace GameL;
 CObjLift::CObjLift(float x, float y)
 {
 	m_lift_x = x;
-	m_lift_x = y;
+	m_lift_y = y;
 }
 
 //イニシャライズ
