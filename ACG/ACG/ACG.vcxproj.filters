@@ -49,6 +49,9 @@
     <Filter Include="ソース ファイル\Main\Rock">
       <UniqueIdentifier>{9c04e7e5-6731-4ff5-bdbf-00301dc46c6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Map">
+      <UniqueIdentifier>{47854930-c117-438c-8a1e-d9b9167fed75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -105,9 +108,6 @@
     <ClInclude Include="SceneGameOver.h">
       <Filter>ソース ファイル\GameOver</Filter>
     </ClInclude>
-    <ClInclude Include="objblock.h">
-      <Filter>ソース ファイル\Main\Block</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBossEnemy.h">
       <Filter>ソース ファイル\Main\Boss</Filter>
     </ClInclude>
@@ -128,6 +128,12 @@
     </ClInclude>
     <ClInclude Include="ObjRock.h">
       <Filter>ソース ファイル\Main\Rock</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMap.h">
+      <Filter>ソース ファイル\Main\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlock.h">
+      <Filter>ソース ファイル\Main\Block</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="ObjRock.cpp">
       <Filter>ソース ファイル\Main\Rock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMap.cpp">
+      <Filter>ソース ファイル\Main\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

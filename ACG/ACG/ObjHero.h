@@ -15,13 +15,14 @@ public:
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー
+	void Scroll();	//スクロール処理の関数
 
 private:
 	float m_px;	//X座標
 	float m_py;	//Y座標
 	float m_vx;	//X軸方向のベクトル
 	float m_vy;	//Y軸方向のベクトル
-	float m_scroll_x;//X軸スクロール
-	float m_scroll_y;//Y軸スクロール
 	float m_r;//主人公の回転角度
+
+
 };

@@ -39,6 +39,10 @@ void CSceneMain::InitScene()
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
 
+   //Mapオブジェクトを作成する
+	CObjMap* ObjMap = new CObjMap();
+	Objs::InsertObj(ObjMap, OBJ_MAP, 10);
+
 	//主人公オブジェクトを作成する
 	CObjHero* ObjHero = new CObjHero();
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);

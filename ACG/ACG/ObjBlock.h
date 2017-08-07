@@ -18,8 +18,6 @@ public:
 	void SetScroll(float s) { m_scroll = s; }
 	float GetScroll() { return m_scroll; }
 
-
-
 	//マップ変更用関数
 	void MapChange(int map[MAP_Y][MAP_X]);
 
@@ -29,4 +27,4 @@ private:
 
 	float m_scroll;		//左右スクリーン用
 	
-}
+};

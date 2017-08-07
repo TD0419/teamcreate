@@ -79,7 +79,8 @@
     <ClInclude Include="GameL\SetWindow.h" />
     <ClInclude Include="GameL\UserData.h" />
     <ClInclude Include="GameL\WinInputs.h" />
-    <ClInclude Include="objblock.h" />
+    <ClInclude Include="ObjBlock.h" />
+    <ClInclude Include="ObjMap.h" />
     <ClInclude Include="ObjBossEnemy.h" />
     <ClInclude Include="ObjEnemy.h" />
     <ClInclude Include="ObjGameOver.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="GameL\SetWindow.cpp" />
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
+    <ClCompile Include="ObjMap.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBossEnemy.cpp" />
     <ClCompile Include="ObjButton.cpp" />

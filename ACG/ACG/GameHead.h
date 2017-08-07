@@ -14,6 +14,7 @@ enum OBJ_NAME
 	OBJ_BLOCK,
 	OBJ_LIFT,
 	OBJ_GAME_OVER,
+	OBJ_MAP,
 };
 //------------------------------------------------
 
@@ -47,18 +48,34 @@ struct UserData
 
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
+
+//ウィンドウサイズ
+#define WINDOW_SIZE_W	(1024)
+#define WINDOW_SIZE_H	(768)
+//解像度サイズ
+#define PIXEL_SIZE_W	(1024)
+#define PIXEL_SIZE_H	(768)
+
+//マップサイズ
 #define MAP_X 10
 #define MAP_Y 10
 
+//オブジェクトのサイズ
 #define HERO_SIZE 64.0f
+
+//スクロールのライン
+#define SCROLL_LINE_LEFT	(480.0f)
+#define SCROLL_LINE_RIGHT	(WINDOW_SIZE_W - SCROLL_LINE_LEFT)
+#define SCROLL_LINE_UP		(200.0f)
+#define SCROLL_LINE_DOWN	(WINDOW_SIZE_H - SCROLL_LINE_UP)
+
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
 
 
 //------------------------------------------------
 
-//ゲームシーンオブジェクトヘッダ------------------
-
+//ゲームシーンオブジェクトヘッダ-----------------
 #include "ObjButton.h"
 #include "ObjHero.h"
 #include "ObjRock.h"
@@ -67,13 +84,13 @@ struct UserData
 #include "ObjBlock.h"
 #include "ObjLift.h"
 #include "ObjLadders.h"
+#include "ObjMap.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"
 #include "SceneTitle.h"
 #include "SceneGameOver.h"
-
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
