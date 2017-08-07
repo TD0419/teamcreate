@@ -66,7 +66,7 @@ struct UserData
 //スクロールのライン
 #define SCROLL_LINE_LEFT	(480.0f)
 #define SCROLL_LINE_RIGHT	(WINDOW_SIZE_W - SCROLL_LINE_LEFT)
-#define SCROLL_LINE_UP		(200.0f)
+#define SCROLL_LINE_UP		(250.0f)
 #define SCROLL_LINE_DOWN	(WINDOW_SIZE_H - SCROLL_LINE_UP)
 
 //------------------------------------------------
