@@ -23,6 +23,5 @@ private:
 	float m_vx;	//X軸方向のベクトル
 	float m_vy;	//Y軸方向のベクトル
 	float m_r;//主人公の回転角度
-
-
+	float m_mouse_angle;	//マウスの角度
 };

@@ -23,7 +23,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_r = 0.0f;
-
+	m_mouse_angle = 0.0f;
 }
 
 //アクション
@@ -65,6 +65,28 @@ void CObjHero::Action()
 	m_vy = 0.0f;
 
 	//移動終わり-----------------------------------------
+
+	//マウスの位置と主人公の位置からマウスの角度を求める------
+	//マウスの位置情報取得
+	double mous_x = Input::GetPosX();
+	double mous_y = Input::GetPosY();
+
+	//主人公の位置からマウスの位置のベクトル情報取得
+	double vector_x = mous_x - m_px;
+	double vector_y = mous_y - m_py;
+
+	//斜辺取得
+	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
+
+	//角度を求める
+	m_mouse_angle = acos(vector_x / hypotenuse) * 180.0/3.14;
+
+	//マウスのY位置が主人公のY位置より下だったらーにする
+	if (mous_y > m_py)
+	{
+		m_mouse_angle *= -1;
+	}
+	//-------------------------------------------------------
 }
 
 //スクロール処理の関数
