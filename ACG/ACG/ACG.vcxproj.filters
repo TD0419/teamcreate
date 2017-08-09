@@ -52,6 +52,9 @@
     <Filter Include="ソース ファイル\Main\Map">
       <UniqueIdentifier>{47854930-c117-438c-8a1e-d9b9167fed75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Wood">
+      <UniqueIdentifier>{58f624c0-6287-49bc-8469-d0bfe61e2bb8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -135,6 +138,9 @@
     <ClInclude Include="ObjBlock.h">
       <Filter>ソース ファイル\Main\Block</Filter>
     </ClInclude>
+    <ClInclude Include="ObjWood.h">
+      <Filter>ソース ファイル\Main\Wood</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -214,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="ObjMap.cpp">
       <Filter>ソース ファイル\Main\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjWood.cpp">
+      <Filter>ソース ファイル\Main\Wood</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
