@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjRopeSwitch :public CObj
 {
 public:
-    CObjRopeSwitch();        //コンストラクタ
+    CObjRopeSwitch() {};        //コンストラクタ
     ~CObjRopeSwitch() {};	 //デストラクタ
     void Init();	         //イニシャライズ
     void Action();	         //アクション
