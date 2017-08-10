@@ -92,6 +92,7 @@
     <ClInclude Include="ObjRock.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjWood.h" />
+    <ClInclude Include="ObjRopeSwitch.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
@@ -119,6 +120,7 @@
     <ClCompile Include="ObjLift.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjWood.cpp" />
+    <ClCompile Include="ObjRopeSwitch.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="ObjHero.cpp" />

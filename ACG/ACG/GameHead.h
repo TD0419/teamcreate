@@ -16,6 +16,7 @@ enum OBJ_NAME
 	OBJ_GAME_OVER,
 	OBJ_MAP,
     OBJ_WOOD,
+    OBJ_ROPE_SWITCH,
 };
 //------------------------------------------------
 
@@ -87,6 +88,7 @@ struct UserData
 #include "ObjLadders.h"
 #include "ObjMap.h"
 #include "ObjWood.h"
+#include "ObjRopeSwitch.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

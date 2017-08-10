@@ -55,6 +55,9 @@
     <Filter Include="ソース ファイル\Main\Wood">
       <UniqueIdentifier>{58f624c0-6287-49bc-8469-d0bfe61e2bb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\RopeSwitch">
+      <UniqueIdentifier>{7008c4d1-3a1b-4ced-9e1f-fc3526d7a85e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -141,6 +144,9 @@
     <ClInclude Include="ObjWood.h">
       <Filter>ソース ファイル\Main\Wood</Filter>
     </ClInclude>
+    <ClInclude Include="ObjRopeSwitch.h">
+      <Filter>ソース ファイル\Main\RopeSwitch</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -223,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="ObjWood.cpp">
       <Filter>ソース ファイル\Main\Wood</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRopeSwitch.cpp">
+      <Filter>ソース ファイル\Main\RopeSwitch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
