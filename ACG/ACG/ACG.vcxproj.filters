@@ -58,6 +58,9 @@
     <Filter Include="ソース ファイル\Main\RopeSwitch">
       <UniqueIdentifier>{7008c4d1-3a1b-4ced-9e1f-fc3526d7a85e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Bullet">
+      <UniqueIdentifier>{130f064e-db86-4394-a28d-1e3764f02cac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -147,6 +150,9 @@
     <ClInclude Include="ObjRopeSwitch.h">
       <Filter>ソース ファイル\Main\RopeSwitch</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBullet.h">
+      <Filter>ソース ファイル\Main\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -232,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="ObjRopeSwitch.cpp">
       <Filter>ソース ファイル\Main\RopeSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBullet.cpp">
+      <Filter>ソース ファイル\Main\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

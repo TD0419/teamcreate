@@ -8,6 +8,7 @@ enum OBJ_NAME
 	//OBJ_○○と表記
 	OBJ_BUTTON,
 	OBJ_HERO,
+    OBJ_BULLET,
 	OBJ_ROCK,
     OBJ_BOSS_ENEMY,
 	OBJ_TITLE,
@@ -80,6 +81,7 @@ struct UserData
 //ゲームシーンオブジェクトヘッダ-----------------
 #include "ObjButton.h"
 #include "ObjHero.h"
+#include "ObjBullet.h"
 #include "ObjRock.h"
 #include "ObjBossEnemy.h"
 #include "ObjTitle.h"
