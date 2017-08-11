@@ -9,7 +9,7 @@
 using namespace GameL;
 
 //コンストラクタ
-CObjRopeSwitch::CObjRopeSwitch()
+CObjRopeSwitch::CObjRopeSwitch(float x, float y)
 {
 
 }

@@ -18,6 +18,7 @@ enum OBJ_NAME
 	OBJ_MAP,
     OBJ_WOOD,
     OBJ_ROPE_SWITCH,
+	OBJ_LADDERS,
 };
 //------------------------------------------------
 

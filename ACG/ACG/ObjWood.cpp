@@ -9,9 +9,8 @@
 using namespace GameL;
 
 //コンストラクタ
-CObjWood::CObjWood()
+CObjWood::CObjWood(float x, float y)
 {
-
 }
 
 //イニシャライズ

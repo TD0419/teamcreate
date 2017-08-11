@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjWood :public CObj
 {
 public:
-    CObjWood() {};        //コンストラクタ
+    CObjWood(float x, float y);        //コンストラクタ
     ~CObjWood() {};	   //デストラクタ
     void Init();	   //イニシャライズ
     void Action();	   //アクション
