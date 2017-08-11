@@ -66,6 +66,7 @@ struct UserData
 
 //オブジェクトのサイズ
 #define HERO_SIZE 64.0f
+#define BULLET_SIZE 20.0f
 
 //スクロールのライン
 #define SCROLL_LINE_LEFT	(480.0f)

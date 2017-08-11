@@ -2,6 +2,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\DrawFont.h"
 
 #include "GameHead.h"
 #include "ObjHero.h"
@@ -67,13 +68,15 @@ void CObjHero::Action()
 	//移動終わり-----------------------------------------
 
 	//マウスの位置と主人公の位置からマウスの角度を求める------
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//マウスの位置情報取得
 	double mous_x = Input::GetPosX();
 	double mous_y = Input::GetPosY();
 
 	//主人公の位置からマウスの位置のベクトル情報取得
-	double vector_x = mous_x - m_px;
-	double vector_y = mous_y - m_py;
+	double vector_x = mous_x - m_px - obj_m->GetScrollX();
+	double vector_y = mous_y - m_py - obj_m->GetScrollY();
 
 	//斜辺取得
 	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
@@ -81,10 +84,11 @@ void CObjHero::Action()
 	//角度を求める
 	m_mouse_angle = acos(vector_x / hypotenuse) * 180.0/3.14;
 
-	//マウスのY位置が主人公のY位置より下だったらーにする
-	if (mous_y > m_py)
+	//マウスのY位置が主人公のY位置より下だったら
+	if (mous_y > m_py - obj_m->GetScrollY())
 	{
-		m_mouse_angle *= -1;
+		//180°～360°の値にする
+		m_mouse_angle = 360 - abs(m_mouse_angle);
 	}
 	//-------------------------------------------------------
 
@@ -107,6 +111,16 @@ void CObjHero::Action()
 	//}
 
 	//はしご終了---------------------------------------------
+
+	//発砲---------------------------------------------------
+	//左クリックを押したら
+	if (Input::GetMouButtonL() == true)
+	{
+		//弾丸作成
+		CObjBullet* Objbullet = new CObjBullet(m_px,m_py,m_mouse_angle);
+		Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+	}
+	//発砲終了-----------------------------------------------
 }
 
 //スクロール処理の関数
@@ -154,4 +168,5 @@ void CObjHero::Draw()
 	dst.m_bottom	= dst.m_top + HERO_SIZE;
 
 	Draw::Draw(0, &src, &dst, color, m_r);
+
 }
