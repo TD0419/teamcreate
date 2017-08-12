@@ -167,6 +167,7 @@ void CObjHero::Draw()
 	dst.m_right		= dst.m_left + HERO_SIZE;
 	dst.m_bottom	= dst.m_top + HERO_SIZE;
 
+	//•`‰æ
 	Draw::Draw(0, &src, &dst, color, m_r);
 
 }
