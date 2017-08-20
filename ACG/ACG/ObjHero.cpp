@@ -1,8 +1,6 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\WinInputs.h"
-#include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
-#include "GameL\DrawFont.h"
 
 #include "GameHead.h"
 #include "ObjHero.h"
@@ -31,30 +29,24 @@ void CObjHero::Init()
 void CObjHero::Action()
 {
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-	//左キーがおされたとき
-	if (Input::GetVKey(VK_LEFT) == true)
+	//Aキーがおされたとき：左移動
+	if (Input::GetVKey('A') == true)
 	{
 		m_vx -= 3.0f;
 	}
 
-	//右キーがおされたとき
-	if (Input::GetVKey(VK_RIGHT) == true)
+	//Dキーがおされたとき：右移動
+	if (Input::GetVKey('D') == true)
 	{
 		m_vx += 3.0f;
 	}
 	
-	//上キーがおされたとき
-	if (Input::GetVKey(VK_UP) == true)
+	//SPACEキーがおされたとき：ジャンプ
+	if (Input::GetVKey(VK_SPACE) == true)
 	{
 		m_vy -= 3.0f;
 	}
 
-	//下キーがおされたとき
-	if (Input::GetVKey(VK_DOWN) == true)
-	{
-		m_vy += 3.0f;
-	}
-	
 	Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算

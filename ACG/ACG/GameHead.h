@@ -59,7 +59,7 @@ struct UserData
 #define WINDOW_SIZE_W	(1024)	//横
 #define WINDOW_SIZE_H	(768)	//縦
 //解像度サイズ
-#define PIXEL_SIZE_W	(1024)　//横
+#define PIXEL_SIZE_W	(1024)	//横
 #define PIXEL_SIZE_H	(768)	//縦
 
 //マップサイズ
