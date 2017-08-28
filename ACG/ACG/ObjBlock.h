@@ -9,13 +9,29 @@ using namespace GameL;
 class CObjBlock : public CObj
 {
 public:
-	CObjBlock(float x,float y);
+	CObjBlock(int map[MAP_Y_MAX][MAP_X_MAX]);
 	~CObjBlock() {};
 
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー
+	void SetScroll(float s) { m_scroll = s; }
+	float GetScroll() { return m_scroll; }
+
+	//マップ変更用関数
+	void MapChange(int map[MAP_Y_MAX][MAP_X_MAX]);
+
+	//ブロックとの当たり判定
+	void BlockHit(
+		float *x, float *y, bool scroll_on,
+		bool*up, bool* down, bool* left, bool* right,
+		float* vx, float*vy, int* bt
+	);
+
 private:
-	float m_px;		//位置X
-	float m_py;		//位置Y
+	
+	int m_map[MAP_Y_MAX][MAP_X_MAX]; //マップ情報
+
+	float m_scroll;		//左右スクリーン用
+	
 };
