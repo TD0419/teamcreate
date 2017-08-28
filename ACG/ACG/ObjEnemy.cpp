@@ -10,29 +10,25 @@
 using namespace GameL;
 
 //コンストラクタ
-CObjEnemy::CObjEnemy()
+CObjEnemy::CObjEnemy(int x,int y)
 {
-
+	m_enemy_x = x * BLOCK_SIZE;
+	m_enemy_y = y * BLOCK_SIZE;
 }
 
 //イニシャライズ
 void CObjEnemy::Init()
 {
-	m_x = 0.0f;
-	m_y = 0.0f;
-	m_vx = 0.0f;
-	m_vy = 0.0f;
-
+	m_enemy_vx = 0.0f;
+	m_enemy_vy = 0.0f;
 }
 
 //アクション
 void CObjEnemy::Action()
 {
-
 }
 
 //ドロー
 void CObjEnemy::Draw()
 {
-
 }

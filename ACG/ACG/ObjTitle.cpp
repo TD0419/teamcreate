@@ -17,12 +17,17 @@ CObjTitle::CObjTitle()
 //イニシャライズ
 void CObjTitle::Init()
 {
+
 }
 
 //アクション
 void CObjTitle::Action()
 {
-
+	if (Input::GetVKey(VK_RETURN) == true)
+	{
+		//シーンメインに移動
+		Scene::SetScene(new CSceneMain);
+	}
 }
 
 //ドロー

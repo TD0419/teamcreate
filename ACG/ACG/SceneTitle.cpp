@@ -17,12 +17,12 @@ using namespace GameL;
 #include "GameHead.h"
 
 //初期化メソッド
-void InitScene()
+void CSceneTitle::InitScene()
 {
 }
 
 //実行中メソッド
-void Scene()
+void CSceneTitle::Scene()
 {
 	//オブジェクトを作成する
 	CObjTitle* ObjTitle = new CObjTitle();
@@ -30,12 +30,12 @@ void Scene()
 }
 
 //画像データ読み込み関数
-void InageDataLoading()
+void CSceneTitle::InageDataLoading()
 {
 }
 
 //音楽データ読み込み関数
-void AudioDataLoading()
+void CSceneTitle::AudioDataLoading()
 {
 }
 

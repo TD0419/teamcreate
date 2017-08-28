@@ -25,6 +25,42 @@
     <Filter Include="ソース ファイル\GameClear">
       <UniqueIdentifier>{dd15b67a-49f8-4ed3-ae5a-86151bb6d95b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Block">
+      <UniqueIdentifier>{f347293b-fdcc-4f18-bd9e-0ad1eba741be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Boss">
+      <UniqueIdentifier>{862a521f-4685-4caf-b11c-b4c4921a9ebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Button">
+      <UniqueIdentifier>{5d98c5b6-f265-461f-bebd-bc34e5dbdaf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Enemy">
+      <UniqueIdentifier>{6e975bc4-bc93-4b1e-8ecf-e81ad5d655b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Hero">
+      <UniqueIdentifier>{74643e16-b5b7-49bb-baf5-84ba48c2560f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Ladder">
+      <UniqueIdentifier>{36f01b8e-aaa4-4747-af35-15f50575c0d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Lift">
+      <UniqueIdentifier>{2fc3a81a-d1b7-4d79-9426-eabcd7bb71b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Rock">
+      <UniqueIdentifier>{9c04e7e5-6731-4ff5-bdbf-00301dc46c6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Map">
+      <UniqueIdentifier>{47854930-c117-438c-8a1e-d9b9167fed75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Wood">
+      <UniqueIdentifier>{58f624c0-6287-49bc-8469-d0bfe61e2bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\RopeSwitch">
+      <UniqueIdentifier>{7008c4d1-3a1b-4ced-9e1f-fc3526d7a85e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Bullet">
+      <UniqueIdentifier>{130f064e-db86-4394-a28d-1e3764f02cac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -66,18 +102,6 @@
     <ClInclude Include="GameL\WinInputs.h">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBossEnemy.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjButton.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjHero.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjRock.h">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
     <ClInclude Include="SceneMain.h">
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
@@ -92,6 +116,42 @@
     </ClInclude>
     <ClInclude Include="SceneGameOver.h">
       <Filter>ソース ファイル\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBossEnemy.h">
+      <Filter>ソース ファイル\Main\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjButton.h">
+      <Filter>ソース ファイル\Main\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy.h">
+      <Filter>ソース ファイル\Main\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHero.h">
+      <Filter>ソース ファイル\Main\Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLadders.h">
+      <Filter>ソース ファイル\Main\Ladder</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLift.h">
+      <Filter>ソース ファイル\Main\Lift</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRock.h">
+      <Filter>ソース ファイル\Main\Rock</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMap.h">
+      <Filter>ソース ファイル\Main\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlock.h">
+      <Filter>ソース ファイル\Main\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjWood.h">
+      <Filter>ソース ファイル\Main\Wood</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRopeSwitch.h">
+      <Filter>ソース ファイル\Main\RopeSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBullet.h">
+      <Filter>ソース ファイル\Main\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="ObjGameClear.h">
       <Filter>ソース ファイル\GameClear</Filter>
@@ -137,18 +197,6 @@
     <ClCompile Include="GameL\WinInputs.cpp">
       <Filter>リソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBossEnemy.cpp">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjButton.cpp">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjHero.cpp">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjRock.cpp">
-      <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
     <ClCompile Include="SceneMain.cpp">
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
@@ -163,6 +211,42 @@
     </ClCompile>
     <ClCompile Include="SceneGameOver.cpp">
       <Filter>ソース ファイル\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBlock.cpp">
+      <Filter>ソース ファイル\Main\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBossEnemy.cpp">
+      <Filter>ソース ファイル\Main\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjButton.cpp">
+      <Filter>ソース ファイル\Main\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy.cpp">
+      <Filter>ソース ファイル\Main\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHero.cpp">
+      <Filter>ソース ファイル\Main\Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLaggers.cpp">
+      <Filter>ソース ファイル\Main\Ladder</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLift.cpp">
+      <Filter>ソース ファイル\Main\Lift</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRock.cpp">
+      <Filter>ソース ファイル\Main\Rock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMap.cpp">
+      <Filter>ソース ファイル\Main\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjWood.cpp">
+      <Filter>ソース ファイル\Main\Wood</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRopeSwitch.cpp">
+      <Filter>ソース ファイル\Main\RopeSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBullet.cpp">
+      <Filter>ソース ファイル\Main\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="SceneGameClear.cpp">
       <Filter>ソース ファイル\GameClear</Filter>

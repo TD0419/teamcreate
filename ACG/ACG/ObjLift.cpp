@@ -3,31 +3,29 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjLadders.h"
+#include "ObjLift.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //コンストラクタ
-CObjLadders::CObjLadders(float x, float y)
+CObjLift::CObjLift(float x, float y)
 {
+	m_lift_x = x;
+	m_lift_y = y;
 }
 
 //イニシャライズ
-void CObjLadders::Init()
+void CObjLift::Init()
 {
-	m_ladders_x = 0.0f;
-	m_ladders_y = 0.0f;
 }
 
 //アクション
-void CObjLadders::Action()
+void CObjLift::Action()
 {
-
 }
 
 //ドロー
-void CObjLadders::Draw()
+void CObjLift::Draw()
 {
-
 }
