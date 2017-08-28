@@ -68,38 +68,5 @@ void CObjMap::Draw()
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,0.5f, 1.0f };
 
-	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	for (int map_y = 0; map_y < MAP_Y_MAX; map_y++)
-	{
-		for (int map_x = 0; map_x < MAP_X_MAX; map_x++)
-		{
-			RECT_F src, dst;
-			//ブロック(ノーマル)
-			switch (m_map[map_y][map_x])
-			{
-			case MAP_BLOCK:
-				//切り取り位置
-				src.m_top = 0.0f;
-				src.m_left = 0.0f;
-				src.m_right = 512.0f;
-				src.m_bottom = 512.0f;
-
-				//描画位置
-				dst.m_top = map_y * BLOCK_SIZE - obj_m->GetScrollY();
-				dst.m_left = map_x * BLOCK_SIZE - obj_m->GetScrollX();
-				dst.m_right = dst.m_left + BLOCK_SIZE;
-				dst.m_bottom = dst.m_top + BLOCK_SIZE;
-
-				//描画
-				Draw::Draw(0, &src, &dst, color, 0.0f);
-				break;
-
-			
-			default:
-				break;
-			}
-		}
-	}
+	
 }
