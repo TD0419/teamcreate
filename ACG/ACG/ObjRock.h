@@ -16,6 +16,6 @@ public:
 	void Action();	//アクション
 	void Draw();	//ドロー
 private:
-	float m_rock_x;	//岩X座標
-	float m_rock_y;	//岩Y座標
+	float m_x;	//岩X座標
+	float m_y;	//岩Y座標
 };
