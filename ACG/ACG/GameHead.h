@@ -20,8 +20,8 @@ enum OBJ_NAME
 	OBJ_BOSS_ENEMY,	//ボス
 	OBJ_TITLE,		//タイトル
 	OBJ_GAME_OVER,	//ゲームオーバー
+	OBJ_GAME_CLEAR,	//ゲームクリア
 	OBJ_SIGN,		//看板
-
 };
 //------------------------------------------------
 
@@ -112,12 +112,17 @@ struct UserData
 #include "ObjBossEnemy.h"	//ボス
 #include "ObjTitle.h"		//タイトル
 #include "ObjSign.h"		//看板
+#include "ObjGameClear.h"	//クリア
+#include "ObjGameOver.h"	//ゲームオーバー
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"		//メイン
 #include "SceneTitle.h"		//タイトル
 #include "SceneGameOver.h"	//ゲームオーバー
+#include "SceneGameClear.h"	//クリア
+
+
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

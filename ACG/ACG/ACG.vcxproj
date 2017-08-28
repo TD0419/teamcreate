@@ -84,6 +84,7 @@
     <ClInclude Include="ObjMap.h" />
     <ClInclude Include="ObjBossEnemy.h" />
     <ClInclude Include="ObjEnemy.h" />
+    <ClInclude Include="ObjGameClear.h" />
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="main.h" />
@@ -95,6 +96,7 @@
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjWood.h" />
     <ClInclude Include="ObjRopeSwitch.h" />
+    <ClInclude Include="SceneGameClear.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
@@ -118,12 +120,14 @@
     <ClCompile Include="ObjBossEnemy.cpp" />
     <ClCompile Include="ObjButton.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
+    <ClCompile Include="ObjGameClear.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
     <ClCompile Include="ObjLaggers.cpp" />
     <ClCompile Include="ObjLift.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjWood.cpp" />
     <ClCompile Include="ObjRopeSwitch.cpp" />
+    <ClCompile Include="SceneGameClear.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="ObjHero.cpp" />

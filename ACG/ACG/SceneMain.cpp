@@ -32,10 +32,10 @@ CSceneMain::~CSceneMain()
 void CSceneMain::InitScene()
 {
 	//マップ情報格納用変数テスト用
-	int map[MAP_Y_MAX][MAP_X_MAX] = { 0 };
-
+	int map[MAP_Y][MAP_X] ;
+	
 	//マップ情報を読み込み
-//	MapDataLoading(map);
+	MapDataLoading(map);
 
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
@@ -63,40 +63,40 @@ void CSceneMain::Scene()
 
 }
 //マップデータ読み込み関数
-void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
+void CSceneMain::MapDataLoading(int map[MAP_Y][MAP_X])
 {
-	////外部データの読み込み（ステージ情報）
-	//unique_ptr<wchar_t> p;//ステージ情報ポインター
-	//int size;				//ステージ情報の大きさ
+	//外部データの読み込み（ステージ情報）
+	unique_ptr<wchar_t> p;//ステージ情報ポインター
+	int size;				//ステージ情報の大きさ
 
-	//p = Save::ExternalDataOpen(L"testomap.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
-	//if (p == nullptr)
-	//{
-	//	MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
-	//	return;
-	//}
+	if (p == nullptr)
+	{
+		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
+		return;
+	}
 
-	//int count = 1;
+	int count = 1;
 
-	//for (int i = 0; i < MAP_Y; i++)
-	//{
-	//	for (int j = 0; j < MAP_X; j++)
-	//	{
-	//		int w = 0;
-	//		swscanf_s(&p.get()[count], L"%d", &w);
-	//		
-	//		map[i][j] = w;
+	for (int i = 0; i < MAP_Y; i++)
+	{
+		for (int j = 0; j < MAP_X; j++)
+		{
+			int w = 0;
+			swscanf_s(&p.get()[count], L"%d", &w);
+			
+			map[i][j] = w;
 
-	//		while (w/10 != 0)
-	//		{
-	//			count++;
-	//			w /= 10;
-	//		}
-	//		
-	//		count += 2;
-	//	}
-	//}
+			while (w/10 != 0)
+			{
+				count++;
+				w /= 10;
+			}
+			
+			count += 2;
+		}
+	}
 }
 
 //画像データ読み込み関数
