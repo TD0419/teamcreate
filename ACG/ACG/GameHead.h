@@ -20,6 +20,7 @@ enum OBJ_NAME
 	OBJ_BOSS_ENEMY,	//ボス
 	OBJ_TITLE,		//タイトル
 	OBJ_GAME_OVER,	//ゲームオーバー
+	OBJ_SIGN,		//看板
 
 	OBJ_BUTTON,
 	OBJ_HERO,
@@ -117,6 +118,7 @@ struct UserData
 #include "ObjEnemy.h"		//敵
 #include "ObjBossEnemy.h"	//ボス
 #include "ObjTitle.h"		//タイトル
+#include "ObjSign.h"		//看板
 //ゲームシーンオブジェクトヘッダ------------------
 
 #include "ObjButton.h"

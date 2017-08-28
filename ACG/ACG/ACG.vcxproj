@@ -92,6 +92,7 @@
     <ClInclude Include="ObjLadders.h" />
     <ClInclude Include="ObjLift.h" />
     <ClInclude Include="ObjRock.h" />
+    <ClInclude Include="ObjSign.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjWood.h" />
     <ClInclude Include="ObjRopeSwitch.h" />
@@ -131,6 +132,7 @@
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjRock.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="ObjSign.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />
