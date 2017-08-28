@@ -29,6 +29,13 @@ void CObjEnemy::Init()
 //アクション
 void CObjEnemy::Action()
 {
+
+	//摩擦
+	//m_vx += -(m_vx * 0.098);
+
+	//自由落下運動(重力)
+	//m_vy += 9.8 / (16.0f);
+
 	//弾丸のHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_x, m_y);//HitBoxの位置を更新
