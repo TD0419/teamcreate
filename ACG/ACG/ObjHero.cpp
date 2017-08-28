@@ -33,11 +33,11 @@ void CObjHero::Action()
 {
 	//落下にリスタート----------------------------------
 	//m_pyが1000以下ならリスタートする
-	//if (m_py > 1000.0f)
-	//{
-	//	//場外に出たらリスタート
-	//	Scene::SetScene(new CSceneMain());
-	//}
+	if (m_py > 1000.0f)
+	{
+		//場外に出たらリスタート
+		Scene::SetScene(new CSceneMain());
+	}
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 	//Aキーがおされたとき：左移動
@@ -54,14 +54,14 @@ void CObjHero::Action()
 	//SPACEキーがおされたとき：ジャンプ
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
-		m_vy -= 3.0f;
+		//m_vy =- 8.0f; ブロックに着地できるようになったらはずしてください
 	}
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
 	//自由落下運動
-	//m_vy += 9.8 / (16.0f);
+	//m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 
 	//Scroll();	//スクロール処理をおこなう
 
@@ -71,7 +71,6 @@ void CObjHero::Action()
 
 	//移動ベクトルを初期化
 	m_vx = 0.0f;
-	m_vy = 0.0f;
 
 	//移動終わり-----------------------------------------
 
@@ -105,13 +104,13 @@ void CObjHero::Action()
 	////はしごと接触しているかどうかを調べる
 	//if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
 	//{
-	//	//Wキーがおされたとき
+	//	//Wキーがおされたとき 上るとき
 	//	if (Input::GetVKey('W') == true)
 	//	{
 	//		m_vy -= 3.0f;
 	//	}
 
-	//	//Sキーがおされたとき
+	//	//Sキーがおされたとき　下るとき
 	//	if (Input::GetVKey('S') == true)
 	//	{
 	//		m_vy += 3.0f;
