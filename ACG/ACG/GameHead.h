@@ -69,9 +69,18 @@ struct UserData
 
 
 //マップの番号とオブジェクトの対応　（仮）
-#define MAP_SPACE	(0) //何もない場所
-#define MAP_BLOCK	(1)	//ブロック(ノーマル)
-#define MAP_ENEMY	(2) //敵（ノーマル）
+#define MAP_SPACE	(0)		//何もない場所
+#define MAP_BLOCK	(1)		//ブロック(ノーマル)
+#define MAP_LADDER	(2)		//はしご
+#define MAP_BUTTON	(3)		//ボタン
+#define MAP_ROPE_SWITCH	(4) //ロープスイッチ
+#define MAP_LIFT	(5)		//リフト
+#define MAP_ROCK	(6)		//岩
+#define MAP_WOOD	(7)		//木
+#define MAP_WATER	(8)		//水
+#define MAP_ENEMY	(9)		//敵
+#define MAP_BOSS	(10)	//ボス
+
 
 //オブジェクトのサイズ
 #define HERO_SIZE	(64.0f)	//主人公のサイズ(仮)		

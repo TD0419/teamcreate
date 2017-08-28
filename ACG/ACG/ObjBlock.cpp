@@ -29,10 +29,40 @@ void CObjBlock::Init()
 //アクション
 void CObjBlock::Action()
 {
+	//自身のHitBoxをもってくる
+	CHitBox*hit = Hits::GetHitBox(this);
 
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//HitBoxの位置情報の変更
+	hit->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY());
 }
 
 //ドロー
 void CObjBlock::Draw()
 {
+	//描画カラー
+	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+
+	RECT_F src, dst;
+
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//切り取り位置
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 512.0f;
+	src.m_bottom = 512.0f;
+
+	//描画位置
+	dst.m_top = 0.0f + m_py - obj_m->GetScrollY();
+	dst.m_left = 0.0f + m_px - obj_m->GetScrollX();
+	dst.m_right = dst.m_left + BLOCK_SIZE;
+	dst.m_bottom = dst.m_top + BLOCK_SIZE;
+
+	//描画
+	Draw::Draw(0, &src, &dst, color, 0.0f);
+
 }

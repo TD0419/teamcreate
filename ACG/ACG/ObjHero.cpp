@@ -31,6 +31,8 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+
+
 	//落下にリスタート----------------------------------
 	//m_pyが1000以下ならリスタートする
 	if (m_py > 1000.0f)
@@ -150,8 +152,9 @@ void CObjHero::Action()
 	&m_block_type
 	);*/
 
+	
 	//HitBoxの位置情報の変更
-	hit->SetPos(m_px, m_py);
+	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
 
 }
 

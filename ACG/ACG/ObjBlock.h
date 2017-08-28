@@ -18,15 +18,15 @@ public:
 	void SetScroll(float s) { m_scroll = s; }
 	float GetScroll() { return m_scroll; }
 
-	//マップ変更用関数
-	void MapChange(int map[MAP_Y_MAX][MAP_X_MAX]);
+	////マップ変更用関数
+	//void MapChange(int map[MAP_Y_MAX][MAP_X_MAX]);
 
-	//ブロックとの当たり判定
-	void BlockHit(
-		float *x, float *y, bool scroll_on,
-		bool*up, bool* down, bool* left, bool* right,
-		float* vx, float*vy, int* bt
-	);
+	////ブロックとの当たり判定
+	//void BlockHit(
+	//	float *x, float *y, bool scroll_on,
+	//	bool*up, bool* down, bool* left, bool* right,
+	//	float* vx, float*vy, int* bt
+	//);
 
 private:
 	

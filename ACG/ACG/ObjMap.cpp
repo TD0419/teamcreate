@@ -26,6 +26,28 @@ void CObjMap::Init()
 //アクション
 void CObjMap::Action()
 {
+	//マップを元にオブジェクトを生成--------------------------------------
+
+	//iが　画面に収まる最大値　または　マップの最大値になるまでまわす
+	for (int i = 0; i < MAP_WINDOW_MAX_Y && i<MAP_Y_MAX; i++)
+	{
+		//jが　画面に収まる最大値　または　マップの最大値になるまでまわす
+		for (int j = 0; j < MAP_WINDOW_MAX_X && j<MAP_X_MAX; j++)
+		{
+			//ブロック作成
+			if (m_map[i][j] == MAP_BLOCK)
+			{
+				//blockオブジェクト作成
+				CObjBlock* obj_block = new CObjBlock(i,j);
+				Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+		}
+	}
+
+	//オブジェクト生成おわり	-----------------------------------------------
+
 	//スクロール量(ブロックの数に計算して渡す)をもとにオブジェクトを生成する
 	CreateObj(int(m_scroll_x / BLOCK_SIZE), int(m_scroll_y / BLOCK_SIZE));	//←マップデータの読み込みをするまで使えないのでコメント化しておく	
 }
@@ -64,9 +86,5 @@ void CObjMap::CreateObj(int scroll_block_num_x, int scroll_block_num_y)
 
 //ドロー
 void CObjMap::Draw()
-{
-	//描画カラー
-	float color[4] = { 1.0f,1.0f,0.5f, 1.0f };
-
-	
+{	
 }
