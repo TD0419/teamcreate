@@ -61,6 +61,9 @@
     <Filter Include="ソース ファイル\Main\Bullet">
       <UniqueIdentifier>{130f064e-db86-4394-a28d-1e3764f02cac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Water">
+      <UniqueIdentifier>{d89a5f9e-16d0-4bda-ae5b-67f5463cc289}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -153,6 +156,9 @@
     <ClInclude Include="ObjBullet.h">
       <Filter>ソース ファイル\Main\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="ObjWater.h">
+      <Filter>ソース ファイル\Main\Water</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -241,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="ObjBullet.cpp">
       <Filter>ソース ファイル\Main\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjWater.cpp">
+      <Filter>ソース ファイル\Main\Water</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

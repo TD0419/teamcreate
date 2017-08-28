@@ -14,6 +14,7 @@ enum OBJ_NAME
 	OBJ_LIFT,		//リフト
 	OBJ_MAP,		//マップ
     OBJ_WOOD,		//木
+	OBJ_WATER,		//水
     OBJ_ROPE_SWITCH,//ロープスイッチ
 	OBJ_LADDERS,	//梯子	
 	OBJ_ENEMY,		//敵
@@ -108,6 +109,7 @@ struct UserData
 #include "ObjLadders.h"		//梯子
 #include "ObjMap.h"			//マップ
 #include "ObjWood.h"		//木	
+#include "ObjWater.h"		//水
 #include "ObjRopeSwitch.h"	//ロープスイッチ
 #include "ObjEnemy.h"		//敵
 #include "ObjBossEnemy.h"	//ボス

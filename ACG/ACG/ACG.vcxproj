@@ -97,6 +97,7 @@
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="ObjWater.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp" />
@@ -128,6 +129,7 @@
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjRock.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="ObjWater.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />
