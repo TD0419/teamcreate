@@ -32,8 +32,8 @@ CSceneMain::~CSceneMain()
 void CSceneMain::InitScene()
 {
 	//マップ情報格納用変数テスト用
-	int map[MAP_Y_MAX][MAP_X_MAX] ;
-	
+	int map[MAP_Y_MAX][MAP_X_MAX] = { 0 };
+
 	//マップ情報を読み込み
 	MapDataLoading(map);
 
@@ -41,7 +41,7 @@ void CSceneMain::InitScene()
 	AudioDataLoading();//音楽データ読み込み関数
 
    //Mapオブジェクトを作成する
-	CObjMap* ObjMap = new CObjMap();
+	CObjMap* ObjMap = new CObjMap(map);
 	Objs::InsertObj(ObjMap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する

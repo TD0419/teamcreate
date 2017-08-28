@@ -33,8 +33,8 @@ void CObjEnemy::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_x, m_y);//HitBoxの位置を更新
 
-	//弾丸とあたったら消去		↓弾丸の属性にして
-	if (hit->SearchElementHit(ELEMENT_PLAYER) != nullptr)
+	//弾丸とあたったら消去
+	if (hit->SearchObjNameHit(OBJ_BULLET) != nullptr)
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。

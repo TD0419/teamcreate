@@ -70,7 +70,8 @@ struct UserData
 
 //マップの番号とオブジェクトの対応　（仮）
 #define MAP_SPACE	(0) //何もない場所
-#define MAP_ENEMY	(1) //敵（ノーマル）
+#define MAP_BLOCK	(1)	//ブロック(ノーマル)
+#define MAP_ENEMY	(2) //敵（ノーマル）
 
 //オブジェクトのサイズ
 #define HERO_SIZE	(64.0f)	//主人公のサイズ(仮)		
