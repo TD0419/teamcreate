@@ -48,6 +48,10 @@ void CSceneMain::InitScene()
 	CObjHero* ObjHero = new CObjHero();
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
 
+	//test敵オブジェクトを作成する
+	CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
+	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 10);
+
 	////blockオブジェクト作成
 	//CObjBlock* obj_block = new CObjBlock(map);
 	//Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
@@ -105,6 +109,8 @@ void CSceneMain::ImageDataLoading()
 	
 	//debug用hero画像
 	Draw::LoadImageW(L"image.jpg",0, TEX_SIZE_512);
+	//debug用enemy画像
+	Draw::LoadImageW(L"image2.jpg", 1, TEX_SIZE_512);
 
 }
 
