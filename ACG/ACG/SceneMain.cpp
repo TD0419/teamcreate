@@ -52,13 +52,13 @@ void CSceneMain::InitScene()
 	//CObjEnemy* ObjEnemy = new CObjEnemy(10, 20);
 	//Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 10);
 
-	//水オブジェクトを作成する
-	CObjWater* ObjWater = new CObjWater(10, 10);
-	Objs::InsertObj(ObjWater, OBJ_WATER, 10);
+	////水オブジェクトを作成する
+	//CObjWater* ObjWater = new CObjWater(10, 10);
+	//Objs::InsertObj(ObjWater, OBJ_WATER, 10);
 
-	////blockオブジェクト作成
-	//CObjBlock* obj_block = new CObjBlock(map);
-	//Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
+	//blockオブジェクト作成
+	/*CObjBlock* obj_block = new CObjBlock(10,10);
+	Objs::InsertObj(obj_block, OBJ_BLOCK, 9);*/
 }
 
 //ゲームメイン実行中メソッド
