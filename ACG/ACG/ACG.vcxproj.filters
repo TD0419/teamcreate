@@ -64,6 +64,9 @@
     <Filter Include="ソース ファイル\Main\Water">
       <UniqueIdentifier>{d89a5f9e-16d0-4bda-ae5b-67f5463cc289}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Sign">
+      <UniqueIdentifier>{43c2d251-286d-4ccd-93b7-60eb6d60b4b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -155,6 +158,15 @@
     </ClInclude>
     <ClInclude Include="ObjBullet.h">
       <Filter>ソース ファイル\Main\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSign.h">
+      <Filter>ソース ファイル\Main\Sign</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGameClear.h">
+      <Filter>ソース ファイル\GameClear</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameClear.h">
+      <Filter>ソース ファイル\GameClear</Filter>
     </ClInclude>
     <ClInclude Include="ObjWater.h">
       <Filter>ソース ファイル\Main\Water</Filter>
@@ -250,6 +262,15 @@
     </ClCompile>
     <ClCompile Include="ObjWater.cpp">
       <Filter>ソース ファイル\Main\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSign.cpp">
+      <Filter>ソース ファイル\Main\Sign</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameClear.cpp">
+      <Filter>ソース ファイル\GameClear</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameClear.cpp">
+      <Filter>ソース ファイル\GameClear</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

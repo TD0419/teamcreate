@@ -1,20 +1,22 @@
 #pragma once
 //使用するヘッダー
 #include "GameL\SceneObjManager.h"
-#include "GameL\DrawTexture.h"
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：ブロック＆背景
-class CObjBlock : public CObj
+//オブジェクト：タイトル
+class CObjGameClear : public CObj
 {
 public:
-	CObjBlock() {};
-	~CObjBlock() {};
-
+	CObjGameClear() {};
+	~CObjGameClear() {};
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー
+
 private:
-	
+	int m_time; //時間管理
+	int m_bouns;
+	bool m_key_flag;//キー制御フラグ
+	int m_audio_se; //SEの音楽の管理
 };

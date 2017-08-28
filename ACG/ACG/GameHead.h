@@ -21,7 +21,8 @@ enum OBJ_NAME
 	OBJ_BOSS_ENEMY,	//ボス
 	OBJ_TITLE,		//タイトル
 	OBJ_GAME_OVER,	//ゲームオーバー
-
+	OBJ_GAME_CLEAR,	//ゲームクリア
+	OBJ_SIGN,		//看板
 };
 //------------------------------------------------
 
@@ -64,8 +65,6 @@ struct UserData
 #define PIXEL_SIZE_H	(768)	//縦
 
 //マップサイズ
-#define MAP_X 10	//←作った人はなんの定数なのかコメント書いて
-#define MAP_Y 10	//	同上
 #define MAP_X_MAX (100)	//mapの最大値X
 #define MAP_Y_MAX (100)	//mapの最大値X
 #define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X
@@ -114,12 +113,18 @@ struct UserData
 #include "ObjEnemy.h"		//敵
 #include "ObjBossEnemy.h"	//ボス
 #include "ObjTitle.h"		//タイトル
+#include "ObjSign.h"		//看板
+#include "ObjGameClear.h"	//クリア
+#include "ObjGameOver.h"	//ゲームオーバー
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"		//メイン
 #include "SceneTitle.h"		//タイトル
 #include "SceneGameOver.h"	//ゲームオーバー
+#include "SceneGameClear.h"	//クリア
+
+
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

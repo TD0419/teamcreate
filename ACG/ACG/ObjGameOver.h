@@ -15,6 +15,5 @@ public:
 	void Draw();	//ドロー
 private:
 	bool m_key_flag;//キーフラグ
-	int m_time;		//時間管理
 	int m_audio_se; //SEの音楽の管理
 };
