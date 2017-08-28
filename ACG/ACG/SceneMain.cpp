@@ -73,7 +73,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	if (p == nullptr)
 	{
-		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
+		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラー01", MB_OK);
 		return;
 	}
 
