@@ -10,6 +10,12 @@
 //使用するネームスペース
 using namespace GameL;
 
+//コンストラクタ
+CObjBlock::CObjBlock(int map[MAP_Y_MAX][MAP_X_MAX])
+{
+
+}
+
 //イニシャライズ
 void CObjBlock::Init()
 {

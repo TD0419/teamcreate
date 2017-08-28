@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjBlock : public CObj
 {
 public:
-	CObjBlock(int map[MAP_X][MAP_Y]);
+	CObjBlock(int map[MAP_Y_MAX][MAP_X_MAX]);
 	~CObjBlock() {};
 
 	void Init();	//イニシャライズ
@@ -19,7 +19,7 @@ public:
 	float GetScroll() { return m_scroll; }
 
 	//マップ変更用関数
-	void MapChange(int map[MAP_Y][MAP_X]);
+	void MapChange(int map[MAP_Y_MAX][MAP_X_MAX]);
 
 	//ブロックとの当たり判定
 	void BlockHit(
@@ -30,7 +30,7 @@ public:
 
 private:
 	
-	int m_map[MAP_Y][MAP_X]; //マップ情報
+	int m_map[MAP_Y_MAX][MAP_X_MAX]; //マップ情報
 
 	float m_scroll;		//左右スクリーン用
 	
