@@ -28,6 +28,14 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//落下にリスタート----------------------------------
+	//m_pyが1000以下ならリスタートする
+	//if (m_py > 1000.0f)
+	//{
+	//	//場外に出たらリスタート
+	//	Scene::SetScene(new CSceneMain());
+	//}
+
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 	//Aキーがおされたとき：左移動
 	if (Input::GetVKey('A') == true)
@@ -40,12 +48,17 @@ void CObjHero::Action()
 	{
 		m_vx += 3.0f;
 	}
-	
 	//SPACEキーがおされたとき：ジャンプ
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
 		m_vy -= 3.0f;
 	}
+
+	//摩擦
+	m_vx += -(m_vx * 0.098);
+
+	//自由落下運動
+	//m_vy += 9.8 / (16.0f);
 
 	Scroll();	//スクロール処理をおこなう
 
