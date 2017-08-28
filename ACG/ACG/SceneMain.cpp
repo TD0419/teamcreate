@@ -50,7 +50,7 @@ void CSceneMain::InitScene()
 
 	//test敵オブジェクトを作成する
 	CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
-	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 10);
+	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
 
 	////blockオブジェクト作成
 	//CObjBlock* obj_block = new CObjBlock(map);
