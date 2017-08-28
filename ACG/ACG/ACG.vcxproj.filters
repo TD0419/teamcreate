@@ -257,10 +257,10 @@
     <ClCompile Include="ObjSign.cpp">
       <Filter>ソース ファイル\Main\Sign</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGameClear.cpp">
+    <ClCompile Include="ObjGameClear.cpp">
       <Filter>ソース ファイル\GameClear</Filter>
     </ClCompile>
-    <ClCompile Include="ObjGameClear.cpp">
+    <ClCompile Include="SceneGameClear.cpp">
       <Filter>ソース ファイル\GameClear</Filter>
     </ClCompile>
   </ItemGroup>
