@@ -17,7 +17,7 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = WINDOW_SIZE_W/2.0f;
+	m_px = WINDOW_SIZE_W / 2.0f;
 	m_py = WINDOW_SIZE_H / 2.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;

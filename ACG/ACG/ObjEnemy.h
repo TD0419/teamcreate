@@ -6,11 +6,11 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：主人公
+//オブジェクト：敵
 class CObjEnemy : public CObj
 {
 public:
-	CObjEnemy(int x,int y); 	//コンストラクタ
+	CObjEnemy(float x,float y); 	//コンストラクタ
 	~CObjEnemy(){}; //デストラクタ
 	void Init();	//イニシャライズ
 	void Action();	//アクション
@@ -30,5 +30,5 @@ private:
 	float m_y;	//敵Y座標
 	float m_vx;	//敵X軸方向のベクトル
 	float m_vy;	//敵Y軸方向のベクトル
-
+	float m_r;  //敵の回転角度
 };

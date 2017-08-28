@@ -48,6 +48,10 @@ void CSceneMain::InitScene()
 	CObjHero* ObjHero = new CObjHero();
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
 
+	//test敵オブジェクトを作成する
+	CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
+	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
+
 	////blockオブジェクト作成
 	//CObjBlock* obj_block = new CObjBlock(map);
 	//Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
@@ -66,7 +70,29 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	p = Save::ExternalDataOpen(L"testomap.csv", &size);//外部データ読み込み
+	/*
+	//外部データの読み込み（ステージ情報）
+	unique_ptr<wchar_t> p;	//ステージ情報ポインター
+	int size;				//ステージ情報の大きさ
 
+	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
+
+	if (p == nullptr)
+	{
+		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーイコッチャ", MB_OK);
+		return;
+	}
+
+	int count = 1;
+
+	for (int i = 0; i < MAP_Y_MAX; i++)
+	{
+		for (int j = 0; j < MAP_X_MAX; j++)
+		{
+			int w = 0;
+			swscanf_s(&p.get()[count], L"%d", &w);
+			
+			map[i][j] = w;
 	if (p == nullptr)
 	{
 		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
@@ -93,6 +119,16 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			count += 2;
 		}
 	}
+			while (w/10 != 0)
+			{
+				count++;
+				w /= 10;
+			}
+			
+			count += 2;
+		}
+	}
+	*/
 }
 
 //画像データ読み込み関数
@@ -105,6 +141,8 @@ void CSceneMain::ImageDataLoading()
 	
 	//debug用hero画像
 	Draw::LoadImageW(L"image.jpg",0, TEX_SIZE_512);
+	//debug用enemy画像
+	Draw::LoadImageW(L"image2.jpg", 1, TEX_SIZE_512);
 
 }
 
