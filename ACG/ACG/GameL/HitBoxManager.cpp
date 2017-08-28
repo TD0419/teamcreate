@@ -309,15 +309,16 @@ void CHitBoxManager::AllHitCheck()
 					hit = Hit(&(*itr_my)->m_hit_box , &(*itr)->m_hit_box , &(*itr_my)->m_hit_data[(*itr_my)->m_hit_count]);
 					if(hit == true)
 					{
+						if( (*itr_my)->m_hit_count > MAX_HITS-1 )
+						{
+							continue;
+						}
 						(*itr_my)->m_hit_data[(*itr_my)->m_hit_count].e  = (*itr)->GetStatus()->e;
 						(*itr_my)->m_hit_data[(*itr_my)->m_hit_count].p  = (*itr)->GetStatus()->p;
 						(*itr_my)->m_hit_data[(*itr_my)->m_hit_count].n  = (*itr)->GetStatus()->n;
 						(*itr_my)->m_hit_data[(*itr_my)->m_hit_count].o  = (*itr)->GetMyObj();		
 						(*itr_my)->m_hit_count++;
-						if( (*itr_my)->m_hit_count > MAX_HITS-1 )
-						{
-							continue;
-						}
+						
 					}
 				}
 			}
