@@ -32,7 +32,7 @@ CSceneMain::~CSceneMain()
 void CSceneMain::InitScene()
 {
 	//マップ情報格納用変数テスト用
-	int map[MAP_Y][MAP_X] = { 0 };
+	int map[MAP_Y_MAX][MAP_X_MAX] = { 0 };
 
 	//マップ情報を読み込み
 //	MapDataLoading(map);
@@ -59,7 +59,7 @@ void CSceneMain::Scene()
 
 }
 //マップデータ読み込み関数
-void CSceneMain::MapDataLoading(int map[MAP_Y][MAP_X])
+void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 {
 	////外部データの読み込み（ステージ情報）
 	//unique_ptr<wchar_t> p;//ステージ情報ポインター
