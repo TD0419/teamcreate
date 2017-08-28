@@ -12,20 +12,33 @@ using namespace GameL;
 //コンストラクタ
 CObjEnemy::CObjEnemy(int x,int y)
 {
-	m_enemy_x = x * BLOCK_SIZE;
-	m_enemy_y = y * BLOCK_SIZE;
+	m_x = x;
+	m_y = y;
 }
 
 //イニシャライズ
 void CObjEnemy::Init()
 {
-	m_enemy_vx = 0.0f;
-	m_enemy_vy = 0.0f;
+	m_vx = 0.0f;
+	m_vy = 0.0f;
+
+	//当たり判定用HitBoxを作成
+	Hits::SetHitBox(this, m_x, m_y, 64.0f, 64.0f, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 }
 
 //アクション
 void CObjEnemy::Action()
 {
+	//弾丸のHitBox更新用ポインター取得
+	CHitBox* hit = Hits::GetHitBox(this);
+	hit->SetPos(m_x, m_y);//HitBoxの位置を更新
+
+	//弾丸とあたったら消去		↓弾丸の属性にして
+	if (hit->SearchElementHit(ELEMENT_PLAYER) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
+	}
 }
 
 //ドロー
