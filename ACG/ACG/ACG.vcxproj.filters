@@ -61,8 +61,17 @@
     <Filter Include="ソース ファイル\Main\Bullet">
       <UniqueIdentifier>{130f064e-db86-4394-a28d-1e3764f02cac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Water">
+      <UniqueIdentifier>{d89a5f9e-16d0-4bda-ae5b-67f5463cc289}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ソース ファイル\Main\Sign">
       <UniqueIdentifier>{43c2d251-286d-4ccd-93b7-60eb6d60b4b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\EnemyBullet">
+      <UniqueIdentifier>{90437a14-4104-4ac8-838d-f327ec316b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Rope">
+      <UniqueIdentifier>{06a9a7c3-50d0-4b75-bd4f-72f36d0adf0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +174,15 @@
     <ClInclude Include="SceneGameClear.h">
       <Filter>ソース ファイル\GameClear</Filter>
     </ClInclude>
+    <ClInclude Include="ObjWater.h">
+      <Filter>ソース ファイル\Main\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemyBullet.h">
+      <Filter>ソース ファイル\Main\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRope.h">
+      <Filter>ソース ファイル\Main\Rope</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -254,6 +272,9 @@
     <ClCompile Include="ObjBullet.cpp">
       <Filter>ソース ファイル\Main\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="ObjWater.cpp">
+      <Filter>ソース ファイル\Main\Water</Filter>
+    </ClCompile>
     <ClCompile Include="ObjSign.cpp">
       <Filter>ソース ファイル\Main\Sign</Filter>
     </ClCompile>
@@ -262,6 +283,12 @@
     </ClCompile>
     <ClCompile Include="SceneGameClear.cpp">
       <Filter>ソース ファイル\GameClear</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemyBullet.cpp">
+      <Filter>ソース ファイル\Main\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRope.cpp">
+      <Filter>ソース ファイル\Main\Rope</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

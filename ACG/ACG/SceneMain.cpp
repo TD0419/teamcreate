@@ -48,6 +48,11 @@ void CSceneMain::InitScene()
 	CObjHero* ObjHero = new CObjHero();
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
 
+
+	//水オブジェクトを作成する
+	CObjWater* ObjWater = new CObjWater(10, 10);
+	Objs::InsertObj(ObjWater, OBJ_WATER, 10);
+
 	////blockオブジェクト作成
 	//CObjBlock* obj_block = new CObjBlock(map);
 	//Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
@@ -69,7 +74,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	if (p == nullptr)
 	{
-		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
+		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラー01", MB_OK);
 		return;
 	}
 

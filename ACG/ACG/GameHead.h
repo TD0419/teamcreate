@@ -6,22 +6,25 @@ enum OBJ_NAME
 	OBJ_NO_NAME,	//オブジェクト名無し(禁止)
 	//ゲームで使うオブジェクトの名前
 	//OBJ_○○と表記
-	OBJ_HERO,		//主人公
-	OBJ_BUTTON,		//ボタン
-    OBJ_BULLET,		//弾丸
-	OBJ_ROCK,		//岩
-    OBJ_BLOCK,		//ブロック
-	OBJ_LIFT,		//リフト
-	OBJ_MAP,		//マップ
-    OBJ_WOOD,		//木
-    OBJ_ROPE_SWITCH,//ロープスイッチ
-	OBJ_LADDERS,	//梯子	
-	OBJ_ENEMY,		//敵
-	OBJ_BOSS_ENEMY,	//ボス
-	OBJ_TITLE,		//タイトル
-	OBJ_GAME_OVER,	//ゲームオーバー
-	OBJ_GAME_CLEAR,	//ゲームクリア
-	OBJ_SIGN,		//看板
+	OBJ_HERO,			//主人公
+	OBJ_BUTTON,			//ボタン
+    OBJ_BULLET,			//弾丸(主人公用)
+	OBJ_ENEMY_BULLET,	//弾丸(敵用)
+	OBJ_ROCK,			//岩
+    OBJ_BLOCK,			//ブロック
+	OBJ_LIFT,			//リフト
+	OBJ_MAP,			//マップ
+    OBJ_WOOD,			//木
+	OBJ_WATER,			//水
+    OBJ_ROPE_SWITCH,	//ロープスイッチ
+	OBJ_LADDERS,		//梯子	
+	OBJ_ENEMY,			//敵
+	OBJ_BOSS_ENEMY,		//ボス
+	OBJ_TITLE,			//タイトル
+	OBJ_GAME_OVER,		//ゲームオーバー
+	OBJ_GAME_CLEAR,		//ゲームクリア
+	OBJ_SIGN,			//看板
+	OBJ_ROPE,           //縄（スイッチに引っ掛ける縄）
 };
 //------------------------------------------------
 
@@ -40,7 +43,7 @@ enum HIT_ELEMENTS
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
 	ELEMENT_BLACK,
-	ELEMENT_WHITE,
+	ELEMENT_WATER,
 };
 //------------------------------------------------
 
@@ -78,7 +81,8 @@ struct UserData
 //オブジェクトのサイズ
 #define HERO_SIZE	(64.0f)	//主人公のサイズ(仮)		
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
-#define BLOCK_SIZE	(64.0f) //ブロックのサイズ（仮）	
+#define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	
+#define WATER_SIZE	(32.0f) //水のサイズ（仮）
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(480.0f)							//左
@@ -101,18 +105,21 @@ struct UserData
 //ゲームシーンオブジェクトヘッダ-----------------
 #include "ObjHero.h"		//主人公
 #include "ObjButton.h"		//ボタン
-#include "ObjBullet.h"		//弾丸
+#include "ObjBullet.h"		//弾丸(主人公用)
+#include "ObjEnemyBullet.h"	//弾丸(敵用)
 #include "ObjRock.h"		//岩
 #include "ObjBlock.h"		//ブロック
 #include "ObjLift.h"		//リフト
 #include "ObjLadders.h"		//梯子
 #include "ObjMap.h"			//マップ
 #include "ObjWood.h"		//木	
+#include "ObjWater.h"		//水
 #include "ObjRopeSwitch.h"	//ロープスイッチ
 #include "ObjEnemy.h"		//敵
 #include "ObjBossEnemy.h"	//ボス
 #include "ObjTitle.h"		//タイトル
 #include "ObjSign.h"		//看板
+#include "ObjRope.h"        //縄（スイッチに引っ掛ける縄）
 #include "ObjGameClear.h"	//クリア
 #include "ObjGameOver.h"	//ゲームオーバー
 //------------------------------------------------
