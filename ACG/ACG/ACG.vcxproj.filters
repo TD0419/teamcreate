@@ -67,6 +67,9 @@
     <Filter Include="ソース ファイル\Main\Sign">
       <UniqueIdentifier>{43c2d251-286d-4ccd-93b7-60eb6d60b4b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\EnemyBullet">
+      <UniqueIdentifier>{90437a14-4104-4ac8-838d-f327ec316b10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -171,6 +174,9 @@
     <ClInclude Include="ObjWater.h">
       <Filter>ソース ファイル\Main\Water</Filter>
     </ClInclude>
+    <ClInclude Include="ObjEnemyBullet.h">
+      <Filter>ソース ファイル\Main\EnemyBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -271,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="SceneGameClear.cpp">
       <Filter>ソース ファイル\GameClear</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemyBullet.cpp">
+      <Filter>ソース ファイル\Main\EnemyBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

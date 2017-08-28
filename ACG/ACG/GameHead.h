@@ -6,23 +6,24 @@ enum OBJ_NAME
 	OBJ_NO_NAME,	//オブジェクト名無し(禁止)
 	//ゲームで使うオブジェクトの名前
 	//OBJ_○○と表記
-	OBJ_HERO,		//主人公
-	OBJ_BUTTON,		//ボタン
-    OBJ_BULLET,		//弾丸
-	OBJ_ROCK,		//岩
-    OBJ_BLOCK,		//ブロック
-	OBJ_LIFT,		//リフト
-	OBJ_MAP,		//マップ
-    OBJ_WOOD,		//木
-	OBJ_WATER,		//水
-    OBJ_ROPE_SWITCH,//ロープスイッチ
-	OBJ_LADDERS,	//梯子	
-	OBJ_ENEMY,		//敵
-	OBJ_BOSS_ENEMY,	//ボス
-	OBJ_TITLE,		//タイトル
-	OBJ_GAME_OVER,	//ゲームオーバー
-	OBJ_GAME_CLEAR,	//ゲームクリア
-	OBJ_SIGN,		//看板
+	OBJ_HERO,			//主人公
+	OBJ_BUTTON,			//ボタン
+    OBJ_BULLET,			//弾丸(主人公用)
+	OBJ_ENEMY_BULLET,	//弾丸(敵用)
+	OBJ_ROCK,			//岩
+    OBJ_BLOCK,			//ブロック
+	OBJ_LIFT,			//リフト
+	OBJ_MAP,			//マップ
+    OBJ_WOOD,			//木
+	OBJ_WATER,			//水
+    OBJ_ROPE_SWITCH,	//ロープスイッチ
+	OBJ_LADDERS,		//梯子	
+	OBJ_ENEMY,			//敵
+	OBJ_BOSS_ENEMY,		//ボス
+	OBJ_TITLE,			//タイトル
+	OBJ_GAME_OVER,		//ゲームオーバー
+	OBJ_GAME_CLEAR,		//ゲームクリア
+	OBJ_SIGN,			//看板
 };
 //------------------------------------------------
 
@@ -101,7 +102,8 @@ struct UserData
 //ゲームシーンオブジェクトヘッダ-----------------
 #include "ObjHero.h"		//主人公
 #include "ObjButton.h"		//ボタン
-#include "ObjBullet.h"		//弾丸
+#include "ObjBullet.h"		//弾丸(主人公用)
+#include "EnemyBullet.h"	//弾丸(敵用)
 #include "ObjRock.h"		//岩
 #include "ObjBlock.h"		//ブロック
 #include "ObjLift.h"		//リフト
