@@ -32,26 +32,21 @@ CSceneMain::~CSceneMain()
 void CSceneMain::InitScene()
 {
 	//マップ情報格納用変数テスト用
-	int map[MAP_Y_MAX][MAP_X_MAX] ;
-	
+	int map[MAP_Y][MAP_X] = { 0 };
+
 	//マップ情報を読み込み
-	MapDataLoading(map);
+//	MapDataLoading(map);
 
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
 
    //Mapオブジェクトを作成する
-	CObjMap* ObjMap = new CObjMap(map);
+	CObjMap* ObjMap = new CObjMap();
 	Objs::InsertObj(ObjMap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
 	CObjHero* ObjHero = new CObjHero();
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
-
-
-	//水オブジェクトを作成する
-	CObjWater* ObjWater = new CObjWater(10, 10);
-	Objs::InsertObj(ObjWater, OBJ_WATER, 10);
 
 	////blockオブジェクト作成
 	//CObjBlock* obj_block = new CObjBlock(map);
@@ -64,25 +59,25 @@ void CSceneMain::Scene()
 
 }
 //マップデータ読み込み関数
-void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
+void CSceneMain::MapDataLoading(int map[MAP_Y][MAP_X])
 {
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"testomap.csv", &size);//外部データ読み込み
 
 	if (p == nullptr)
 	{
-		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラー01", MB_OK);
+		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
 		return;
 	}
 
 	int count = 1;
 
-	for (int i = 0; i < MAP_Y_MAX; i++)
+	for (int i = 0; i < MAP_Y; i++)
 	{
-		for (int j = 0; j < MAP_X_MAX; j++)
+		for (int j = 0; j < MAP_X; j++)
 		{
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);

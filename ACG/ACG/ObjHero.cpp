@@ -51,6 +51,7 @@ void CObjHero::Action()
 	{
 		m_vx += 3.0f;
 	}
+	
 	//SPACEキーがおされたとき：ジャンプ
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
@@ -63,7 +64,7 @@ void CObjHero::Action()
 	//自由落下運動
 	//m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 
-	//Scroll();	//スクロール処理をおこなう
+	Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
@@ -142,6 +143,13 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMain());
 	}
 
+	/*	//ブロックとの当たり判定実行
+	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
+	pb -> BlockHit(&m_px,&m_py,true,
+	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
+	&m_block_type
+	);*/
+
 	//HitBoxの位置情報の変更
 	hit->SetPos(m_px, m_py);
 
@@ -195,3 +203,4 @@ void CObjHero::Draw()
 	Draw::Draw(0, &src, &dst, color, m_r);
 
 }
+
