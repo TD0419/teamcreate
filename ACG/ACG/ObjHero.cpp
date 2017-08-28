@@ -23,11 +23,22 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_r = 0.0f;
 	m_mouse_angle = 0.0f;
+
+	//当たり判定
+	Hits::SetHitBox(this, m_px, m_py, HERO_SIZE, HERO_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
 }
 
 //アクション
 void CObjHero::Action()
 {
+	//落下にリスタート----------------------------------
+	//m_pyが1000以下ならリスタートする
+	if (m_py > 1000.0f)
+	{
+		//場外に出たらリスタート
+		Scene::SetScene(new CSceneMain());
+	}
+
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 	//Aキーがおされたとき：左移動
 	if (Input::GetVKey('A') == true)
@@ -44,8 +55,14 @@ void CObjHero::Action()
 	//SPACEキーがおされたとき：ジャンプ
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
-		m_vy -= 3.0f;
+		//m_vy =- 8.0f; ブロックに着地できるようになったらはずしてください
 	}
+
+	//摩擦
+	m_vx += -(m_vx * 0.098);
+
+	//自由落下運動
+	//m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 
 	Scroll();	//スクロール処理をおこなう
 
@@ -55,7 +72,6 @@ void CObjHero::Action()
 
 	//移動ベクトルを初期化
 	m_vx = 0.0f;
-	m_vy = 0.0f;
 
 	//移動終わり-----------------------------------------
 
@@ -89,13 +105,13 @@ void CObjHero::Action()
 	////はしごと接触しているかどうかを調べる
 	//if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
 	//{
-	//	//Wキーがおされたとき
+	//	//Wキーがおされたとき 上るとき
 	//	if (Input::GetVKey('W') == true)
 	//	{
 	//		m_vy -= 3.0f;
 	//	}
 
-	//	//Sキーがおされたとき
+	//	//Sキーがおされたとき　下るとき
 	//	if (Input::GetVKey('S') == true)
 	//	{
 	//		m_vy += 3.0f;
@@ -114,12 +130,29 @@ void CObjHero::Action()
 	}
 	//発砲終了-----------------------------------------------
 
+	//自身のHitBoxをもってくる
+	CHitBox*hit = Hits::GetHitBox(this);
+
+	//水オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+		//メインへ移行
+		Scene::SetScene(new CSceneMain());
+	}
+
 	/*	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
 	pb -> BlockHit(&m_px,&m_py,true,
-		&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
-		&m_block_type
-		);*/
+	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
+	&m_block_type
+	);*/
+
+	//HitBoxの位置情報の変更
+	hit->SetPos(m_px, m_py);
+
 }
 
 //スクロール処理の関数
