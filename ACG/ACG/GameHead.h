@@ -24,6 +24,7 @@ enum OBJ_NAME
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
 	OBJ_SIGN,			//看板
+	OBJ_ROPE,           //縄（スイッチに引っ掛ける縄）
 };
 //------------------------------------------------
 
@@ -116,6 +117,7 @@ struct UserData
 #include "ObjBossEnemy.h"	//ボス
 #include "ObjTitle.h"		//タイトル
 #include "ObjSign.h"		//看板
+#include "ObjRope.h"        //縄（スイッチに引っ掛ける縄）
 #include "ObjGameClear.h"	//クリア
 #include "ObjGameOver.h"	//ゲームオーバー
 //------------------------------------------------
