@@ -63,8 +63,6 @@ struct UserData
 #define PIXEL_SIZE_H	(768)	//縦
 
 //マップサイズ
-#define MAP_X 10	//←作った人はなんの定数なのかコメント書いて
-#define MAP_Y 10	//	同上
 #define MAP_X_MAX (100)	//mapの最大値X
 #define MAP_Y_MAX (100)	//mapの最大値X
 #define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X
