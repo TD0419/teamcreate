@@ -104,7 +104,7 @@ struct UserData
 #include "ObjHero.h"		//主人公
 #include "ObjButton.h"		//ボタン
 #include "ObjBullet.h"		//弾丸(主人公用)
-#include "EnemyBullet.h"	//弾丸(敵用)
+#include "ObjEnemyBullet.h"	//弾丸(敵用)
 #include "ObjRock.h"		//岩
 #include "ObjBlock.h"		//ブロック
 #include "ObjLift.h"		//リフト
