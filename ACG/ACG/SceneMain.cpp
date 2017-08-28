@@ -35,14 +35,14 @@ void CSceneMain::InitScene()
 	int map[MAP_Y_MAX][MAP_X_MAX] = { 0 };
 
 	//マップ情報を読み込み
-	//MapDataLoading(map);
+	MapDataLoading(map);
 
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
 
     //Mapオブジェクトを作成する
-	//CObjMap* ObjMap = new CObjMap();
-	//Objs::InsertObj(ObjMap, OBJ_MAP, 10);
+	CObjMap* ObjMap = new CObjMap(map);
+	Objs::InsertObj(ObjMap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
 	CObjHero* ObjHero = new CObjHero();

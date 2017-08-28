@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjBlock : public CObj
 {
 public:
-	CObjBlock(int map[MAP_Y_MAX][MAP_X_MAX]);
+	CObjBlock(float x, float y);
 	~CObjBlock() {};
 
 	void Init();	//イニシャライズ
@@ -32,6 +32,7 @@ private:
 	
 	int m_map[MAP_Y_MAX][MAP_X_MAX]; //マップ情報
 
-	float m_scroll;		//左右スクリーン用
-	
+	float m_scroll; //左右スクリーン用
+	float m_px;     //ブロック位置X
+	float m_py;     //ブロック位置Y
 };
