@@ -1,5 +1,5 @@
 //使用するヘッダーファイル　
-
+#include "GameL\HitBoxManager.h"
 #include "GameHead.h"
 #include "ObjWater.h"
 
@@ -16,6 +16,8 @@ CObjWater::CObjWater(float x, float y)
 //イニシャライズ
 void CObjWater::Init()
 {
+	//当たり判定
+	Hits::SetHitBox(this, m_px, m_py, WATER_SIZE, WATER_SIZE, ELEMENT_WATER, OBJ_WATER, 1);
 }
 
 //アクション

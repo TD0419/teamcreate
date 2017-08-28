@@ -23,6 +23,9 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_r = 0.0f;
 	m_mouse_angle = 0.0f;
+
+	//当たり判定
+	Hits::SetHitBox(this, m_px, m_py, HERO_SIZE, HERO_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
 }
 
 //アクション
@@ -60,7 +63,7 @@ void CObjHero::Action()
 	//自由落下運動
 	//m_vy += 9.8 / (16.0f);
 
-	Scroll();	//スクロール処理をおこなう
+	//Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
@@ -126,6 +129,23 @@ void CObjHero::Action()
 		Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
 	}
 	//発砲終了-----------------------------------------------
+
+	//自身のHitBoxをもってくる
+	CHitBox*hit = Hits::GetHitBox(this);
+
+	//水オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+		//メインへ移行
+		Scene::SetScene(new CSceneMain());
+	}
+
+	//HitBoxの位置情報の変更
+	hit->SetPos(m_px, m_py);
+
 }
 
 //スクロール処理の関数

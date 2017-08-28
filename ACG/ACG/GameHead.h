@@ -41,7 +41,7 @@ enum HIT_ELEMENTS
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
 	ELEMENT_BLACK,
-	ELEMENT_WHITE,
+	ELEMENT_WATER,
 };
 //------------------------------------------------
 
@@ -79,6 +79,7 @@ struct UserData
 #define HERO_SIZE	(64.0f)	//主人公のサイズ(仮)		
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
 #define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	
+#define WATER_SIZE	(32.0f) //水のサイズ（仮）
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(480.0f)							//左
