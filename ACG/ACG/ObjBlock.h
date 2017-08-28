@@ -21,6 +21,13 @@ public:
 	//マップ変更用関数
 	void MapChange(int map[MAP_Y][MAP_X]);
 
+	//ブロックとの当たり判定
+	void BlockHit(
+		float *x, float *y, bool scroll_on,
+		bool*up, bool* down, bool* left, bool* right,
+		float* vx, float*vy, int* bt
+	);
+
 private:
 	
 	int m_map[MAP_Y][MAP_X]; //マップ情報
