@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjMap :public CObj
 {
 public:
-	CObjMap(); 	//コンストラクタ
+	CObjMap(int map[MAP_Y_MAX][MAP_X_MAX]); 	//コンストラクタ
 	~CObjMap() {};	//デストラクタ
 	void Init();	//イニシャライズ
 	void Action();	//アクション
@@ -29,5 +29,5 @@ private:
 	float m_scroll_x;//X軸のスクロール値
 	float m_scroll_y;//Y軸のスクロール値
 
-	//int m_map[MAP_X_MAX][MAP_Y_MAX];//マップ用配列	←マップができたらこの配列に入れる（関数で使っているので名前変更などはしないで）
+	int m_map[MAP_Y_MAX][MAP_X_MAX];//マップ用配列	←マップができたらこの配列に入れる
 };

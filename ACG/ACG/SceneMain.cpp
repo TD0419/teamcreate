@@ -41,16 +41,12 @@ void CSceneMain::InitScene()
 	AudioDataLoading();//音楽データ読み込み関数
 
    //Mapオブジェクトを作成する
-	CObjMap* ObjMap = new CObjMap();
+	CObjMap* ObjMap = new CObjMap(map);
 	Objs::InsertObj(ObjMap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
 	CObjHero* ObjHero = new CObjHero();
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
-
-	//敵オブジェクトを作成する
-	CObjEnemy* ObjEnemy = new CObjEnemy(10, 20);
-	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 10);
 
 	////blockオブジェクト作成
 	//CObjBlock* obj_block = new CObjBlock(map);

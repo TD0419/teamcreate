@@ -72,12 +72,13 @@ struct UserData
 
 //マップの番号とオブジェクトの対応　（仮）
 #define MAP_SPACE	(0) //何もない場所
-#define MAP_ENEMY	(1) //敵（ノーマル）
+#define MAP_BLOCK	(1)	//ブロック(ノーマル)
+#define MAP_ENEMY	(2) //敵（ノーマル）
 
 //オブジェクトのサイズ
 #define HERO_SIZE	(64.0f)	//主人公のサイズ(仮)		
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
-#define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	
+#define BLOCK_SIZE	(64.0f) //ブロックのサイズ（仮）	
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(480.0f)							//左
