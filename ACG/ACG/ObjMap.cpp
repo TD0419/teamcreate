@@ -34,15 +34,15 @@ void CObjMap::Action()
 		//jが　画面に収まる最大値　または　マップの最大値になるまでまわす
 		for (int j = 0; j < MAP_WINDOW_MAX_X && j<MAP_X_MAX; j++)
 		{
-			//ブロック作成
-			if (m_map[i][j] == MAP_BLOCK)
-			{
-				//blockオブジェクト作成
-				CObjBlock* obj_block = new CObjBlock(i,j);
-				Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
+			////ブロック作成
+			//if (m_map[i][j] == MAP_BLOCK)
+			//{
+			//	//blockオブジェクト作成
+			//	CObjBlock* obj_block = new CObjBlock(i,j);
+			//	Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
 
-				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
-			}
+			//	m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			//}
 		}
 	}
 

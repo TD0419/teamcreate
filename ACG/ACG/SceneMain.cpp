@@ -52,9 +52,9 @@ void CSceneMain::InitScene()
 	CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
 	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
 
-	////blockオブジェクト作成
-	//CObjBlock* obj_block = new CObjBlock(map);
-	//Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
+	//blockオブジェクト作成
+	CObjBlock* obj_block = new CObjBlock();
+	Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
 }
 
 //ゲームメイン実行中メソッド
@@ -69,7 +69,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	unique_ptr<wchar_t> p;//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	p = Save::ExternalDataOpen(L"testomap.csv", &size);//外部データ読み込み
+	//p = Save::ExternalDataOpen(L"testomap.csv", &size);//外部データ読み込み
 	/*
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
@@ -140,9 +140,14 @@ void CSceneMain::ImageDataLoading()
 	//Draw::LoadImageW(L"", id++, TEX_SIZE_???);
 	
 	//debug用hero画像
-	Draw::LoadImageW(L"image.jpg",0, TEX_SIZE_512);
+	//Draw::LoadImageW(L"image.jpg",0, TEX_SIZE_512);
 	//debug用enemy画像
 	Draw::LoadImageW(L"image2.jpg", 1, TEX_SIZE_512);
+	// debug用block画像
+	Draw::LoadImageW(L"testblock.png", 2, TEX_SIZE_512);
+
+	//hero画像
+	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_256);
 
 }
 

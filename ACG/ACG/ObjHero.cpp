@@ -17,8 +17,8 @@ CObjHero::CObjHero()
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = WINDOW_SIZE_W / 2.0f;
-	m_py = WINDOW_SIZE_H / 2.0f;
+	m_px = 0.0f;
+	m_py = 0.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_r = 0.0f;
@@ -57,16 +57,19 @@ void CObjHero::Action()
 	//SPACEキーがおされたとき：ジャンプ
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
-		//m_vy =- 8.0f; ブロックに着地できるようになったらはずしてください
+		if (m_hit_down == true)
+		{
+			m_vy = -20.0f;
+		}
 	}
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
 	//自由落下運動
-	//m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
+	m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 
-	Scroll();	//スクロール処理をおこなう
+	//Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
@@ -132,27 +135,28 @@ void CObjHero::Action()
 	}
 	//発砲終了-----------------------------------------------
 
-	//自身のHitBoxをもってくる
-	CHitBox*hit = Hits::GetHitBox(this);
 
-	//水オブジェクトと衝突していれば
-	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
-	{
-		this->SetStatus(false);		//自身を削除
-		Hits::DeleteHitBox(this);	//ヒットボックスを削除
 
-		//メインへ移行
-		Scene::SetScene(new CSceneMain());
-	}
-
-	/*	//ブロックとの当たり判定実行
+	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
 	pb -> BlockHit(&m_px,&m_py,true,
 	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
 	&m_block_type
-	);*/
+	);
 
+	//自身のHitBoxをもってくる
+	CHitBox*hit = Hits::GetHitBox(this);
 	
+	////水オブジェクトと衝突していれば
+	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	//{
+	//	this->SetStatus(false);		//自身を削除
+	//	Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+	//								//メインへ移行
+	//	Scene::SetScene(new CSceneMain());
+	//}
+
 	//HitBoxの位置情報の変更
 	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
 
@@ -193,8 +197,8 @@ void CObjHero::Draw()
 	//切り取り位置
 	src.m_top		= 0.0f;
 	src.m_left		= 0.0f;
-	src.m_right		= 512.0f;
-	src.m_bottom	= 512.0f;
+	src.m_right		= 64.0f;		
+	src.m_bottom	= 126.0f;
 
 	//描画位置
 	dst.m_top		= 0.0f + m_py - obj_m->GetScrollY();
@@ -203,7 +207,7 @@ void CObjHero::Draw()
 	dst.m_bottom	= dst.m_top + HERO_SIZE;
 
 	//描画
-	Draw::Draw(0, &src, &dst, color, m_r);
+	Draw::Draw(3, &src, &dst, color, m_r);
 
 }
 
