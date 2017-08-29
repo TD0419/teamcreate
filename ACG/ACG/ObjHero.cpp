@@ -169,6 +169,7 @@ void CObjHero::Action()
 
 		//メインへ移行
 		Scene::SetScene(new CSceneMain());
+		return;
 	}
 
 	//敵オブジェクトと衝突していれば
@@ -179,6 +180,7 @@ void CObjHero::Action()
 
 		//メインへ移行
 		Scene::SetScene(new CSceneMain());
+		return;
 	}
 
 	/*	//ブロックとの当たり判定実行
@@ -191,7 +193,6 @@ void CObjHero::Action()
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
-	dfhah
 }
 
 //スクロール処理の関数
