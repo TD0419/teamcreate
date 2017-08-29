@@ -79,6 +79,9 @@
     <Filter Include="ソース ファイル\Main\EndlessSpring">
       <UniqueIdentifier>{c782f425-bfb7-4f8a-a267-1bfd7a9162d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\LeverSwich">
+      <UniqueIdentifier>{1238450d-e6ac-4e91-a418-a53b16b7385a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -198,6 +201,9 @@
     <ClInclude Include="ObjEndlessSpring.h">
       <Filter>ソース ファイル\Main\EndlessSpring</Filter>
     </ClInclude>
+    <ClInclude Include="ObjLeverswich.h">
+      <Filter>ソース ファイル\Main\LeverSwich</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -313,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="ObjEndlessSpring.cpp">
       <Filter>ソース ファイル\Main\EndlessSpring</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLeverswich.cpp">
+      <Filter>ソース ファイル\Main\LeverSwich</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
