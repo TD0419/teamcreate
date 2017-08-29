@@ -70,10 +70,10 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//p = Save::ExternalDataOpen(L"testomap.csv", &size);//外部データ読み込み
-	/*
-	//外部データの読み込み（ステージ情報）
-	unique_ptr<wchar_t> p;	//ステージ情報ポインター
-	int size;				//ステージ情報の大きさ
+	
+	////外部データの読み込み（ステージ情報）
+	//unique_ptr<wchar_t> p;	//ステージ情報ポインター
+	//int size;				//ステージ情報の大きさ
 
 	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
