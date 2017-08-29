@@ -196,7 +196,7 @@ void CObjHero::Action()
 	);
 
 	//自身のHitBoxをもってくる
-	CHitBox*hit = Hits::GetHitBox(this);
+	//CHitBox*hit = Hits::GetHitBox(this);
 	
 	////水オブジェクトと衝突していれば
 	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
