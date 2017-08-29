@@ -7,12 +7,13 @@
 #include "GameL\HitBoxManager.h"
 #include "GameHead.h"
 #include "ObjBlock.h"
+#include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //コンストラクタ
-CObjBlock::CObjBlock(float x, float y)
+CObjBlock::CObjBlock(int x, int y)
 {
 	m_px = x * BLOCK_SIZE;
 	m_py = y * BLOCK_SIZE;
@@ -29,14 +30,8 @@ void CObjBlock::Init()
 //アクション
 void CObjBlock::Action()
 {
-	//自身のHitBoxをもってくる
-	CHitBox*hit = Hits::GetHitBox(this);
-
-	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	//HitBoxの位置情報の変更
-	hit->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY());
+	//HitBoxの位置を更新する
+	HitBoxUpData( Hits::GetHitBox(this),m_px,m_py);	
 }
 
 //ドロー

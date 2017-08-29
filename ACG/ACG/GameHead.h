@@ -17,14 +17,15 @@ enum OBJ_NAME
     OBJ_WOOD,			//木
 	OBJ_WATER,			//水
     OBJ_ROPE_SWITCH,	//ロープスイッチ
-	OBJ_LADDERS,		//梯子	
+	OBJ_LADDERS,		//梯子
+	OBJ_SIGN,			//看板
+	OBJ_ROPE,           //縄（スイッチに引っ掛ける縄）
 	OBJ_ENEMY,			//敵
 	OBJ_BOSS_ENEMY,		//ボス
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
-	OBJ_SIGN,			//看板
-	OBJ_ROPE,           //縄（スイッチに引っ掛ける縄）
+	
 };
 //------------------------------------------------
 
@@ -34,11 +35,11 @@ enum HIT_ELEMENTS
 	ELEMENT_NULL,//属性無し 全ての属性と当たり判定が実行される
 	//以下　同じ属性同士では当たり判定は実行されない
 	//属性は追加可能だが、デバック時の色は初期設定分しか無い
-	ELEMENT_PLAYER,
-	ELEMENT_ENEMY,
-	ELEMENT_ITEM,
-	ELEMENT_BLOCK,	//ブロック
-	ELEMENT_WATER,	//水
+	ELEMENT_PLAYER,		//プレイヤー
+	ELEMENT_ENEMY,		//敵
+	ELEMETN_ITEM,		//アイテム
+	ELEMENT_GIMMICK,	//ギミック
+	ELEMENT_BLOCK,		//ブロック
 };
 //------------------------------------------------
 
@@ -67,11 +68,10 @@ struct UserData
 #define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X
 #define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y
 
-
 //マップの番号とオブジェクトの対応　（仮）
 #define MAP_SPACE	(0)		//何もない場所
 #define MAP_BLOCK	(1)		//ブロック(ノーマル)
-#define MAP_LADDER	(2)		//はしご
+#define MAP_LADDERS	(2)		//はしご
 #define MAP_BUTTON	(3)		//ボタン
 #define MAP_ROPE_SWITCH	(4) //ロープスイッチ
 #define MAP_LIFT	(5)		//リフト
@@ -81,13 +81,20 @@ struct UserData
 #define MAP_ENEMY	(9)		//敵
 #define MAP_BOSS	(10)	//ボス
 
-
 //オブジェクトのサイズ
 #define HERO_SIZE	(64.0f)	//主人公のサイズ(仮)	
 #define ENEMY_SIZE	(64.0f) //敵のサイズ(仮)
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
 #define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	
 #define WATER_SIZE	(32.0f) //水のサイズ（仮）
+#define LADDERS_SIZE (32.0f)//はしごのサイズ（仮）
+#define BUTTON_SIZE	(32.0f)//ボタンサイズ（仮）
+#define ROPE_SWITCH_SIZE	(32.0f)	//ロープスイッチのサイズ（仮）
+#define LIFT_SIZE	(32.0f)//リフトサイズ(仮)
+#define ROCK_SIZE	(32.0f)//岩サイズ（仮）
+#define WOOD_SIZE	(32.0f)//木サイズ(仮)
+#define BOSS_SIZE	(32.0f)//BOSSサイズ(仮)
+
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(480.0f)							//左
@@ -134,9 +141,8 @@ struct UserData
 #include "SceneTitle.h"		//タイトル
 #include "SceneGameOver.h"	//ゲームオーバー
 #include "SceneGameClear.h"	//クリア
-
-
 //-----------------------------------------------
+
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録

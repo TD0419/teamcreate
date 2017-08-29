@@ -183,6 +183,9 @@
     <ClInclude Include="ObjRope.h">
       <Filter>ソース ファイル\Main\Rope</Filter>
     </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -289,6 +292,9 @@
     </ClCompile>
     <ClCompile Include="ObjRope.cpp">
       <Filter>ソース ファイル\Main\Rope</Filter>
+    </ClCompile>
+    <ClCompile Include="Function.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjWater :public CObj
 {
 public:
-	CObjWater(float x, float y); 	//コンストラクタ
+	CObjWater(int x, int y); 	//コンストラクタ
 	~CObjWater() {};	//デストラクタ
 	void Init();	//イニシャライズ
 	void Action();	//アクション

@@ -21,13 +21,15 @@ void CObjMap::Init()
 {
 	m_scroll_x = 0.0f;
 	m_scroll_y = 0.0f;
+
 }
 
 //アクション
 void CObjMap::Action()
 {
+	
 	//マップを元にオブジェクトを生成--------------------------------------
-
+	
 	//iが　画面に収まる最大値　または　マップの最大値になるまでまわす
 	for (int i = 0; i < MAP_WINDOW_MAX_Y && i<MAP_Y_MAX; i++)
 	{
@@ -37,9 +39,89 @@ void CObjMap::Action()
 			//ブロック作成
 			if (m_map[i][j] == MAP_BLOCK)
 			{
-				//blockオブジェクト作成
 				CObjBlock* obj_block = new CObjBlock(i,j);
 				Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+			
+			//はしご作成
+			if (m_map[i][j] == MAP_LADDERS)
+			{
+				CObjLadders* obj_ladders = new CObjLadders(i, j);
+				Objs::InsertObj(obj_ladders, OBJ_LADDERS, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+
+			//ボタン作成
+			if (m_map[i][j] == MAP_BUTTON)
+			{
+				CObjButton* obj_button = new CObjButton(i, j);
+				Objs::InsertObj(obj_button, OBJ_BUTTON, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+
+			//ロープスイッチ作成
+			if (m_map[i][j] == MAP_ROPE_SWITCH)
+			{
+				CObjRopeSwitch* obj_rope_switch = new CObjRopeSwitch(i, j);
+				Objs::InsertObj(obj_rope_switch, OBJ_ROPE_SWITCH, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+
+			//リフト作成
+			if (m_map[i][j] == MAP_LIFT)
+			{
+				CObjLift* obj_lift = new CObjLift(i, j);
+				Objs::InsertObj(obj_lift, OBJ_LIFT, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+
+			//岩作成
+			if (m_map[i][j] == MAP_LIFT)
+			{
+				CObjRock* obj_rock = new CObjRock(i, j);
+				Objs::InsertObj(obj_rock, OBJ_ROCK, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+
+			//木作成
+			if (m_map[i][j] == MAP_WOOD)
+			{
+				CObjWood* obj_wood = new CObjWood(i, j);
+				Objs::InsertObj(obj_wood, OBJ_WOOD, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+
+			//水作成
+			if (m_map[i][j] == MAP_WATER)
+			{
+				CObjWater* obj_water = new CObjWater(i, j);
+				Objs::InsertObj(obj_water, OBJ_WATER, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+		
+			//敵作成
+			if (m_map[i][j] == MAP_ENEMY)
+			{
+				CObjEnemy* obj_enemy = new CObjEnemy(i, j);
+				Objs::InsertObj(obj_enemy, OBJ_ENEMY, 9);
+
+				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
+			}
+
+			//BOSS作成
+			if (m_map[i][j] == MAP_ENEMY)
+			{
+				CObjBossEnemy* obj_boss = new CObjBossEnemy(i, j);
+				Objs::InsertObj(obj_boss, OBJ_BOSS_ENEMY, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
 			}

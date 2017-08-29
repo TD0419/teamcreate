@@ -1,7 +1,7 @@
 #pragma once
 //使用するヘッダー
 #include "GameL\SceneObjManager.h"
-#include "GameL\DrawTexture.h"
+
 //使用するネームスペース
 using namespace GameL;
 
@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjBlock : public CObj
 {
 public:
-	CObjBlock(float x, float y);
+	CObjBlock(int x, int y);
 	~CObjBlock() {};
 
 	void Init();	//イニシャライズ
