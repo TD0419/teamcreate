@@ -175,8 +175,24 @@ void CObjHero::Action()
 	&m_block_type
 	);
 
-	//自身のHitBoxをもってくる
-	CHitBox*hit = Hits::GetHitBox(this);
+	if (hit->CheckObjNameHit(OBJ_BLOCK) != nullptr)
+	{
+		HIT_DATA** hit_data;
+		hit_data = hit->SearchObjNameHit(OBJ_BLOCK);
+
+		int count = hit->GetCount;
+
+		for (int i = 0; i < count; i++)
+		{
+			if (hit_data != nullptr)
+			{
+				float r = hit_data[i]->r;
+
+
+			}
+		}
+
+	}
 	
 	////水オブジェクトと衝突していれば
 	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
