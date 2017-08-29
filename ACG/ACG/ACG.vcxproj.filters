@@ -76,6 +76,9 @@
     <Filter Include="ソース ファイル\Main\Stage3Boss">
       <UniqueIdentifier>{e32fec2d-4a65-4cb2-b78b-a8e226b765bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\EndlessSpring">
+      <UniqueIdentifier>{c782f425-bfb7-4f8a-a267-1bfd7a9162d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -189,6 +192,9 @@
     <ClInclude Include="ObjStage3Boss.h">
       <Filter>ソース ファイル\Main\Stage3Boss</Filter>
     </ClInclude>
+    <ClInclude Include="ObjEndlessSpring.h">
+      <Filter>ソース ファイル\Main\EndlessSpring</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -298,6 +304,9 @@
     </ClCompile>
     <ClCompile Include="ObjStage3Boss.cpp">
       <Filter>ソース ファイル\Main\Stage3Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEndlessSpring.cpp">
+      <Filter>ソース ファイル\Main\EndlessSpring</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
