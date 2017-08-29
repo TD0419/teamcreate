@@ -23,7 +23,7 @@ void CObjButton::Init()
 	m_trick_flag = false;
 
 	//“–‚½‚è”»’è
-	Hits::SetHitBox(this, m_px, m_py, BUTTON_SIZE, BUTTON_SIZE, ELEMENT_GIMMICK, OBJ_LADDERS, 1);
+	Hits::SetHitBox(this, m_px, m_py, BUTTON_SIZE, BUTTON_SIZE, ELEMENT_GIMMICK, OBJ_BUTTON, 1);
 
 }
 

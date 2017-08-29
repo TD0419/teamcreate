@@ -72,6 +72,7 @@ void CObjEnemy::Action()
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
+		return;
 	}
 
 	//HitBoxの位置を更新する

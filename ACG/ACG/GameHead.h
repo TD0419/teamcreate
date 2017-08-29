@@ -84,7 +84,7 @@ struct UserData
 
 //オブジェクトのサイズ
 #define HERO_SIZE_X (64.0f)	//主人公の横サイズ	
-#define HERO_SIZE_Y (128.0f)	//主人公の縦サイズ	
+#define HERO_SIZE_Y (128.0f)//主人公の縦サイズ	
 #define ENEMY_SIZE	(64.0f) //敵のサイズ(仮)
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
 #define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	

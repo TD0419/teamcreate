@@ -71,7 +71,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	//p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
 	
 	if (p == nullptr)
@@ -99,17 +99,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			
 			count += 2;
 		}
-	}
-			while (w/10 != 0)
-			{
-				count++;
-				w /= 10;
-			}
-			
-			count += 2;
-		}
-	}
-	
+	}	
 }
 
 //画像データ読み込み関数

@@ -12,8 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjHero::CObjHero(int x, int y)
 {
-	m_px = x * HERO_SIZE;
-	m_py = y * HERO_SIZE;
+	m_px = x * HERO_SIZE_X;
+	m_py = y * HERO_SIZE_Y;
 }
 
 //イニシャライズ
