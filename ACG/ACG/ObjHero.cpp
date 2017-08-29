@@ -188,25 +188,12 @@ void CObjHero::Action()
 		return;
 	}
 
-	/*	//ブロックとの当たり判定実行
+	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
 	pb -> BlockHit(&m_px,&m_py,true,
 	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
 	&m_block_type
 	);
-
-	//自身のHitBoxをもってくる
-	//CHitBox*hit = Hits::GetHitBox(this);
-	
-	////水オブジェクトと衝突していれば
-	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
-	//{
-	//	this->SetStatus(false);		//自身を削除
-	//	Hits::DeleteHitBox(this);	//ヒットボックスを削除
-
-	//								//メインへ移行
-	//	Scene::SetScene(new CSceneMain());
-	//}
 
 	//HitBoxの位置情報の変更
 	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
