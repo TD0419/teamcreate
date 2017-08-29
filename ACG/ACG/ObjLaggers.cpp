@@ -4,25 +4,31 @@
 
 #include "GameHead.h"
 #include "ObjLadders.h"
+#include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //コンストラクタ
-CObjLadders::CObjLadders(float x, float y)
+CObjLadders::CObjLadders(int x, int y)
 {
+	m_px = x * LADDERS_SIZE;
+	m_py = y * LADDERS_SIZE;
 }
 
 //イニシャライズ
 void CObjLadders::Init()
 {
-	m_ladders_x = 0.0f;
-	m_ladders_y = 0.0f;
+	//当たり判定
+	Hits::SetHitBox(this, m_px, m_py, LADDERS_SIZE, LADDERS_SIZE, ELEMENT_GIMMICK, OBJ_LADDERS, 1);
 }
 
 //アクション
 void CObjLadders::Action()
 {
+
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
 }
 

@@ -7,6 +7,7 @@
 #include "GameL\HitBoxManager.h"
 #include "GameHead.h"
 #include "ObjBlock.h"
+#include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -17,6 +18,12 @@ using namespace GameL;
 //	m_px = x;
 //	m_py = y;
 //}
+//コンストラクタ
+CObjBlock::CObjBlock(int x, int y)
+{
+	m_px = x * BLOCK_SIZE;
+	m_py = y * BLOCK_SIZE;
+}
 
 //イニシャライズ
 void CObjBlock::Init()

@@ -5,28 +5,27 @@
 
 #include "GameHead.h"
 #include "ObjEnemy.h"
+#include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //コンストラクタ
-CObjEnemy::CObjEnemy(float x,float y)
+CObjEnemy::CObjEnemy(int x, int y)
 {
-	
-
+	m_px = x * ENEMY_SIZE;
+	m_py = y * ENEMY_SIZE;
 }
 
 //イニシャライズ
 void CObjEnemy::Init()
 {
-	m_x = WINDOW_SIZE_W / 2.0f;
-	m_y = WINDOW_SIZE_H / 2.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_r = 0.0f;
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, 64.0f, 64.0f, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, ENEMY_SIZE,ENEMY_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 }
 
 //アクション
@@ -56,8 +55,8 @@ void CObjEnemy::Action()
 	//m_vy += 9.8 / (16.0f);
 
 	//移動ベクトルをポジションに加算
-	m_x += m_vx;
-	m_y += m_vy;
+	m_px += m_vx;
+	m_py += m_vy;
 
 	//移動ベクトルを初期化
 	m_vx = 0.0f;
@@ -65,20 +64,21 @@ void CObjEnemy::Action()
 
 	//移動終わり-----------------------------------------
 
-
 	//弾丸のHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_x, m_y);//HitBoxの位置を更新
 
 	//弾丸とあたったら消去
 	if (hit->SearchObjNameHit(OBJ_BULLET) != nullptr)
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
+		return;
 	}
 
-	//HitBoxの位置情報の変更
-	hit->SetPos(m_x, m_y);
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+
+	
 }
 
 //ドロー
@@ -99,8 +99,8 @@ void CObjEnemy::Draw()
 	src.m_bottom = 512.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_y /*- obj_m->GetScrollY()*/;
-	dst.m_left = 0.0f + m_x /*- obj_m->GetScrollX()*/;
+	dst.m_top = 0.0f + m_py - obj_m->GetScrollY();
+	dst.m_left = 0.0f + m_px - obj_m->GetScrollX();
 	dst.m_right = dst.m_left + ENEMY_SIZE;
 	dst.m_bottom = dst.m_top + ENEMY_SIZE;
 

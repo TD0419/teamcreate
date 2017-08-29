@@ -9,10 +9,10 @@
 using namespace GameL;
 
 //コンストラクタ
-CObjRope::CObjRope(float x, float y)
+CObjRope::CObjRope(int x, int y)
 {
-	m_x = x;
-	m_y = y;
+	m_px = x;
+	m_py = y;
 }
 
 //イニシャライズ

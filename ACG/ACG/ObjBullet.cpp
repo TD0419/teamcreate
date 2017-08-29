@@ -14,7 +14,7 @@ using namespace GameL;
 //引数1	float x		:初期位置X
 //引数2	float y		:初期位置Y
 //引数3	float angle	:移動する角度
-CObjBullet::CObjBullet(float x,float y,float angle)
+CObjBullet::CObjBullet(int x, int y,float angle)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -90,6 +90,14 @@ void CObjBullet::Action()
 
 	//岩とあたったら消去
 	if (hit->CheckObjNameHit(OBJ_ROCK) != nullptr)//仮　ElementHitに変えるかも
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
+	//Water(水)とあたったら消去
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。

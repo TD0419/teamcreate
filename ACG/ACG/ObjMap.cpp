@@ -21,13 +21,15 @@ void CObjMap::Init()
 {
 	m_scroll_x = 0.0f;
 	m_scroll_y = 0.0f;
+
 }
 
 //アクション
 void CObjMap::Action()
 {
+	
 	//マップを元にオブジェクトを生成--------------------------------------
-
+	
 	//iが　画面に収まる最大値　または　マップの最大値になるまでまわす
 	for (int i = 0; i < MAP_WINDOW_MAX_Y && i<MAP_Y_MAX; i++)
 	{
