@@ -12,15 +12,15 @@ using namespace GameL;
 //コンストラクタ
 CObjLadders::CObjLadders(int x, int y)
 {
-	m_px = x * LADDERS_SIZE;
-	m_py = y * LADDERS_SIZE;
+	m_px = x * LADDERS_SIZE_X;
+	m_py = y * LADDERS_SIZE_Y;
 }
 
 //イニシャライズ
 void CObjLadders::Init()
 {
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, LADDERS_SIZE, LADDERS_SIZE, ELEMENT_GIMMICK, OBJ_LADDERS, 1);
+	Hits::SetHitBox(this, m_px, m_py, LADDERS_SIZE_X, LADDERS_SIZE_Y, ELEMENT_GIMMICK, OBJ_LADDERS, 1);
 }
 
 //アクション
