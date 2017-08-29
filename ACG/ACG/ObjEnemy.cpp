@@ -19,8 +19,8 @@ CObjEnemy::CObjEnemy(float x,float y)
 //イニシャライズ
 void CObjEnemy::Init()
 {
-	m_x = WINDOW_SIZE_W / 2.0f;
-	m_y = WINDOW_SIZE_H / 2.0f;
+	m_x = WINDOW_SIZE_W / 4.0f;
+	m_y = WINDOW_SIZE_H / 4.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_r = 0.0f;
