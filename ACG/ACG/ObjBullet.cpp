@@ -95,6 +95,14 @@ void CObjBullet::Action()
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
+
+	//Water(水)とあたったら消去
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
 	
 	//ブロックとあたった場合
 	if (hit->CheckObjNameHit(OBJ_BLOCK) != nullptr)

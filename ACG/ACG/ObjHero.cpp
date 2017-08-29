@@ -21,11 +21,16 @@ void CObjHero::Init()
 {
 	m_vx = 0.0f;
 	m_vy = 0.0f;
+	m_posture = 0.0f; //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 	m_mouse_angle = 0.0f;
 
+	m_ani_time = 0;
+	m_ani_frame = 1;  //静止フレームを初期にする
+	m_ani_max_time = 6; //アニメーション間隔幅
+
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, HERO_SIZE, HERO_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, m_px, m_py, HERO_SIZE_X, HERO_SIZE_Y, ELEMENT_PLAYER, OBJ_HERO, 1);
 }
 
 //アクション
@@ -43,16 +48,40 @@ void CObjHero::Action()
 	}
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-	//Aキーがおされたとき：左移動
-	if (Input::GetVKey('A') == true)
-	{
-		m_vx -= 3.0f;
-	}
-
-	//Dキーがおされたとき：右移動
+	//Aキーがおされたとき：右移動
 	if (Input::GetVKey('D') == true)
 	{
-		m_vx += 3.0f;
+		m_vx += 5.0f;
+		m_ani_frame_stop = 0;
+		m_posture = 0.0f;//主人公の向き
+		m_ani_time += 1;
+	}
+	//Dキーがおされたとき：左移動
+	else if (Input::GetVKey('A') == true)
+	{
+		m_vx -= 5.0f;
+		m_ani_frame_stop = 0;
+		m_posture = 1.0f;//主人公の向き
+		m_ani_time += 1;
+	}
+	else
+	{
+		m_ani_frame_stop = 1; //キー入力が無い時は1を入れる
+		m_ani_frame = 1; //キー入力が無い場合は静止フレームにする
+		m_ani_time = 0;
+	}
+
+	//アニメーションの感覚管理
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	//最後までアニメーションが進むと最初に戻る
+	if (m_ani_frame == 3)
+	{
+		m_ani_frame = 0;
 	}
 	
 	//SPACEキーがおされたとき：ジャンプ
@@ -177,7 +206,12 @@ void CObjHero::Scroll()
 //ドロー
 void CObjHero::Draw()
 {
-	
+	//画像の切り取り配列
+	int AniData[3] =
+	{
+		0  , 1 , 2
+	};
+
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -187,16 +221,27 @@ void CObjHero::Draw()
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
-	src.m_top		= 0.0f;
-	src.m_left		= 0.0f;
-	src.m_right		= 512.0f;
-	src.m_bottom	= 512.0f;
+	//止まっている時
+	if (m_ani_frame_stop == 1)  //仮
+	{
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 128.0f;
+	}
+	else//動いているとき
+	{
+		src.m_top = 128.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64;
+		src.m_right = 64.0f + AniData[m_ani_frame] * 64;
+		src.m_bottom = 256.0f;
+	}
 
 	//描画位置
 	dst.m_top		= 0.0f + m_py - obj_m->GetScrollY();
-	dst.m_left		= 0.0f + m_px - obj_m->GetScrollX();
-	dst.m_right		= dst.m_left + HERO_SIZE;
-	dst.m_bottom	= dst.m_top + HERO_SIZE;
+	dst.m_left		= (HERO_SIZE_X * m_posture) + m_px - obj_m->GetScrollX();
+	dst.m_right	    = (HERO_SIZE_X - HERO_SIZE_X * m_posture) + m_px - obj_m->GetScrollX();
+	dst.m_bottom	= dst.m_top  + HERO_SIZE_Y;
 
 	//描画
 	Draw::Draw(0, &src, &dst, color, m_r);

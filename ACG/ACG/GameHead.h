@@ -22,6 +22,7 @@ enum OBJ_NAME
 	OBJ_ROPE,           //縄（スイッチに引っ掛ける縄）
 	OBJ_ENEMY,			//敵
 	OBJ_BOSS_ENEMY,		//ボス
+	OBJ_STAGE3_BOSS,	//第三ステージボス
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
@@ -82,7 +83,8 @@ struct UserData
 #define MAP_BOSS	(10)	//ボス
 
 //オブジェクトのサイズ
-#define HERO_SIZE	(64.0f)	//主人公のサイズ(仮)	
+#define HERO_SIZE_X (64.0f)	//主人公の横サイズ	
+#define HERO_SIZE_Y (128.0f)	//主人公の縦サイズ	
 #define ENEMY_SIZE	(64.0f) //敵のサイズ(仮)
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
 #define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	
@@ -129,6 +131,7 @@ struct UserData
 #include "ObjRopeSwitch.h"	//ロープスイッチ
 #include "ObjEnemy.h"		//敵
 #include "ObjBossEnemy.h"	//ボス
+#include "ObjStage3Boss.h"  //第三ステージボス
 #include "ObjTitle.h"		//タイトル
 #include "ObjSign.h"		//看板
 #include "ObjRope.h"        //縄（スイッチに引っ掛ける縄）
