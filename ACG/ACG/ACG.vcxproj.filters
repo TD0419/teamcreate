@@ -79,6 +79,9 @@
     <Filter Include="ソース ファイル\Main\EndlessSpring">
       <UniqueIdentifier>{c782f425-bfb7-4f8a-a267-1bfd7a9162d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\ReflectBlock">
+      <UniqueIdentifier>{3e17a3b5-d192-436d-b626-dad0185afe93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -198,6 +201,9 @@
     <ClInclude Include="ObjEndlessSpring.h">
       <Filter>ソース ファイル\Main\EndlessSpring</Filter>
     </ClInclude>
+    <ClInclude Include="ObjReflectBlock.h">
+      <Filter>ソース ファイル\Main\ReflectBlock</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -313,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="ObjEndlessSpring.cpp">
       <Filter>ソース ファイル\Main\EndlessSpring</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjReflectBlock.cpp">
+      <Filter>ソース ファイル\Main\ReflectBlock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

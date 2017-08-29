@@ -25,7 +25,7 @@ CObjBullet::CObjBullet(int x, int y,float angle)
 	m_px = x;
 	m_py = y;
 	//‘¬‚³‚ðŒˆ‚ß‚é
-	m_speed = 0.5f;
+	m_speed = 3.0f;
 	//Šp“x‚ð‘ã“ü
 	m_angle = angle;
 
