@@ -39,7 +39,7 @@ void CObjMap::Action()
 			//ブロック作成
 			if (m_map[i][j] == MAP_BLOCK)
 			{
-				CObjBlock* obj_block = new CObjBlock(i,j);
+				CObjBlock* obj_block = new CObjBlock(j,i);
 				Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
@@ -48,7 +48,7 @@ void CObjMap::Action()
 			//はしご作成
 			if (m_map[i][j] == MAP_LADDERS)
 			{
-				CObjLadders* obj_ladders = new CObjLadders(i, j);
+				CObjLadders* obj_ladders = new CObjLadders(j,i);
 				Objs::InsertObj(obj_ladders, OBJ_LADDERS, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
@@ -57,7 +57,7 @@ void CObjMap::Action()
 			//ボタン作成
 			if (m_map[i][j] == MAP_BUTTON)
 			{
-				CObjButton* obj_button = new CObjButton(i, j);
+				CObjButton* obj_button = new CObjButton(j, i);
 				Objs::InsertObj(obj_button, OBJ_BUTTON, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
@@ -66,7 +66,7 @@ void CObjMap::Action()
 			//ロープスイッチ作成
 			if (m_map[i][j] == MAP_ROPE_SWITCH)
 			{
-				CObjRopeSwitch* obj_rope_switch = new CObjRopeSwitch(i, j);
+				CObjRopeSwitch* obj_rope_switch = new CObjRopeSwitch(j, i);
 				Objs::InsertObj(obj_rope_switch, OBJ_ROPE_SWITCH, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
@@ -75,7 +75,7 @@ void CObjMap::Action()
 			//リフト作成
 			if (m_map[i][j] == MAP_LIFT)
 			{
-				CObjLift* obj_lift = new CObjLift(i, j);
+				CObjLift* obj_lift = new CObjLift(j, i);
 				Objs::InsertObj(obj_lift, OBJ_LIFT, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
@@ -84,7 +84,7 @@ void CObjMap::Action()
 			//岩作成
 			if (m_map[i][j] == MAP_LIFT)
 			{
-				CObjRock* obj_rock = new CObjRock(i, j);
+				CObjRock* obj_rock = new CObjRock(j, i);
 				Objs::InsertObj(obj_rock, OBJ_ROCK, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
@@ -93,7 +93,7 @@ void CObjMap::Action()
 			//木作成
 			if (m_map[i][j] == MAP_WOOD)
 			{
-				CObjWood* obj_wood = new CObjWood(i, j);
+				CObjWood* obj_wood = new CObjWood(j, i);
 				Objs::InsertObj(obj_wood, OBJ_WOOD, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
@@ -102,7 +102,7 @@ void CObjMap::Action()
 			//水作成
 			if (m_map[i][j] == MAP_WATER)
 			{
-				CObjWater* obj_water = new CObjWater(i, j);
+				CObjWater* obj_water = new CObjWater(j, i);
 				Objs::InsertObj(obj_water, OBJ_WATER, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
@@ -111,7 +111,7 @@ void CObjMap::Action()
 			//敵作成
 			if (m_map[i][j] == MAP_ENEMY)
 			{
-				CObjEnemy* obj_enemy = new CObjEnemy(i, j);
+				CObjEnemy* obj_enemy = new CObjEnemy(j, i);
 				Objs::InsertObj(obj_enemy, OBJ_ENEMY, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
@@ -120,7 +120,7 @@ void CObjMap::Action()
 			//BOSS作成
 			if (m_map[i][j] == MAP_ENEMY)
 			{
-				CObjBossEnemy* obj_boss = new CObjBossEnemy(i, j);
+				CObjBossEnemy* obj_boss = new CObjBossEnemy(j, i);
 				Objs::InsertObj(obj_boss, OBJ_BOSS_ENEMY, 9);
 
 				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる

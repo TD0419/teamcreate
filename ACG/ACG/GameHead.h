@@ -26,7 +26,7 @@ enum OBJ_NAME
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
-	
+	OBJ_ENDLESS_SPRING,//敵生成システム(エンドレス沸き)
 };
 //------------------------------------------------
 
@@ -137,6 +137,7 @@ struct UserData
 #include "ObjRope.h"        //縄（スイッチに引っ掛ける縄）
 #include "ObjGameClear.h"	//クリア
 #include "ObjGameOver.h"	//ゲームオーバー
+#include "ObjEndlessSpring.h"//敵生成システム(エンドレス沸き)
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
