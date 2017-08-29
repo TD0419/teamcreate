@@ -26,8 +26,6 @@ enum OBJ_NAME
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
-	OBJ_SIGN,			//看板
-	OBJ_ROPE,           //縄（スイッチに引っ掛ける縄）
 	OBJ_ENDLESS_SPRING,//敵生成システム(エンドレス沸き)
 };
 //------------------------------------------------
