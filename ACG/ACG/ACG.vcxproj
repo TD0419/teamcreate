@@ -85,6 +85,7 @@
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="ObjBlock.h" />
     <ClInclude Include="ObjBullet.h" />
+    <ClInclude Include="ObjLeverswich.h" />
     <ClInclude Include="ObjMap.h" />
     <ClInclude Include="ObjBossEnemy.h" />
     <ClInclude Include="ObjEnemy.h" />
@@ -125,6 +126,7 @@
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjBullet.cpp" />
+    <ClCompile Include="ObjLeverswich.cpp" />
     <ClCompile Include="ObjMap.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBossEnemy.cpp" />

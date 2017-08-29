@@ -25,7 +25,6 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
-	m_mouse_angle = 0.0f;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
@@ -111,32 +110,7 @@ void CObjHero::Action()
 	m_vy = 0.0f;//ブロックに着地できるようになったらはずしてください
 
 	//移動終わり-----------------------------------------
-
-	//マウスの位置と主人公の位置からマウスの角度を求める------
-	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	//マウスの位置情報取得
-	double mous_x = Input::GetPosX();
-	double mous_y = Input::GetPosY();
-
-	//主人公の位置からマウスの位置のベクトル情報取得
-	double vector_x = mous_x - m_px - obj_m->GetScrollX();
-	double vector_y = mous_y - m_py - obj_m->GetScrollY();
-
-	//斜辺取得
-	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
-
-	//角度を求める
-	m_mouse_angle = acos(vector_x / hypotenuse) * 180.0/3.14;
-
-	//マウスのY位置が主人公のY位置より下だったら
-	if (mous_y > m_py - obj_m->GetScrollY())
-	{
-		//180°～360°の値にする
-		m_mouse_angle = 360 - abs(m_mouse_angle);
-	}
-	//-------------------------------------------------------
-
+	
 	//はしご-------------------------------------------------
 	////はしごと接触しているかどうかを調べる
 	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
@@ -160,12 +134,32 @@ void CObjHero::Action()
 	if (Input::GetMouButtonL() == true)
 	{
 		//弾丸作成
-		CObjBullet* Objbullet = new CObjBullet(m_px,m_py,m_mouse_angle);
+		CObjBullet* Objbullet = new CObjBullet(m_px,m_py);
 		Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
 	}
 	//発砲終了-----------------------------------------------
 
+	//水オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
 
+		//メインへ移行
+		Scene::SetScene(new CSceneMain());
+		return;
+	}
+
+	//敵オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr) //仮です。敵が多いようならElementに変えます
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+		//メインへ移行
+		Scene::SetScene(new CSceneMain());
+		return;
+	}
 
 	////ブロックとの当たり判定実行
 	//CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
@@ -184,6 +178,15 @@ void CObjHero::Action()
 	//	Scene::SetScene(new CSceneMain());
 	//}
 
+	//ブロックとの当たり判定実行
+	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
+	pb -> BlockHit(&m_px,&m_py,true,
+	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
+	&m_block_type
+	);
+
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//HitBoxの位置情報の変更
 	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
 
@@ -227,10 +230,21 @@ void CObjHero::Draw()
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
-	src.m_top		= 0.0f;
-	src.m_left		= 0.0f;
-	src.m_right		= 64.0f;		
-	src.m_bottom	= 126.0f;
+	//止まっている時
+	if (m_ani_frame_stop == 1)  //仮
+	{
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 128.0f;
+	}
+	else//動いているとき
+	{
+		src.m_top = 128.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64;
+		src.m_right = 64.0f + AniData[m_ani_frame] * 64;
+		src.m_bottom = 256.0f;
+	}
 
 	//描画位置
 	dst.m_top		= 0.0f + m_py - obj_m->GetScrollY();

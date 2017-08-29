@@ -24,7 +24,6 @@ private:
 	float m_vy;	//Y軸方向のベクトル
 	float m_posture;//姿勢
 	float m_r;//主人公の回転角度
-	float m_mouse_angle;	//マウスの角度
 
 	//アニメーション関係
 	int m_ani_frame_stop; //止まった時の描画を調整

@@ -27,7 +27,8 @@ enum OBJ_NAME
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
-	OBJ_ENDLESS_SPRING,//敵生成システム(エンドレス沸き)
+	OBJ_ENDLESS_SPRING, //敵生成システム(エンドレス沸き)
+	OBJ_LEVER_SWICH,    //レバースイッチ
 };
 //------------------------------------------------
 
@@ -90,7 +91,8 @@ struct UserData
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
 #define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	
 #define WATER_SIZE	(32.0f) //水のサイズ（仮）
-#define LADDERS_SIZE (32.0f)//はしごのサイズ（仮）
+#define LADDERS_SIZE_X (64.0f)//はしごの横サイズ
+#define LADDERS_SIZE_Y (320.0f)//はしごの縦サイズ
 #define BUTTON_SIZE	(32.0f)//ボタンサイズ（仮）
 #define ROPE_SWITCH_SIZE	(32.0f)	//ロープスイッチのサイズ（仮）
 #define LIFT_SIZE	(32.0f)//リフトサイズ(仮)
@@ -140,6 +142,7 @@ struct UserData
 #include "ObjGameClear.h"	//クリア
 #include "ObjGameOver.h"	//ゲームオーバー
 #include "ObjEndlessSpring.h"//敵生成システム(エンドレス沸き)
+#include "ObjLeverSwich.h"  //レバースイッチ
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

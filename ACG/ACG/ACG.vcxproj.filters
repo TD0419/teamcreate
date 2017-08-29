@@ -82,6 +82,9 @@
     <Filter Include="ソース ファイル\Main\ReflectBlock">
       <UniqueIdentifier>{3e17a3b5-d192-436d-b626-dad0185afe93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\LeverSwich">
+      <UniqueIdentifier>{1238450d-e6ac-4e91-a418-a53b16b7385a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -204,6 +207,9 @@
     <ClInclude Include="ObjReflectBlock.h">
       <Filter>ソース ファイル\Main\ReflectBlock</Filter>
     </ClInclude>
+    <ClInclude Include="ObjLeverswich.h">
+      <Filter>ソース ファイル\Main\LeverSwich</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -319,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="ObjEndlessSpring.cpp">
       <Filter>ソース ファイル\Main\EndlessSpring</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLeverswich.cpp">
+      <Filter>ソース ファイル\Main\LeverSwich</Filter>
     </ClCompile>
     <ClCompile Include="ObjReflectBlock.cpp">
       <Filter>ソース ファイル\Main\ReflectBlock</Filter>
