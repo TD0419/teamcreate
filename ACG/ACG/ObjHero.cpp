@@ -19,6 +19,8 @@ CObjHero::CObjHero(int x, int y)
 //イニシャライズ
 void CObjHero::Init()
 {
+	m_px = 0.0f;
+	m_py = 0.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
@@ -87,16 +89,19 @@ void CObjHero::Action()
 	//SPACEキーがおされたとき：ジャンプ
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
-		m_vy =- 8.0f; 
+		if (m_hit_down == true)
+		{
+			m_vy = -20.0f;
+		}
 	}
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
 	//自由落下運動
-	//m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
+	m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 
-	Scroll();	//スクロール処理をおこなう
+	//Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
@@ -188,10 +193,23 @@ void CObjHero::Action()
 	pb -> BlockHit(&m_px,&m_py,true,
 	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
 	&m_block_type
-	);*/
+	);
 
-	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	//自身のHitBoxをもってくる
+	CHitBox*hit = Hits::GetHitBox(this);
+	
+	////水オブジェクトと衝突していれば
+	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	//{
+	//	this->SetStatus(false);		//自身を削除
+	//	Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+	//								//メインへ移行
+	//	Scene::SetScene(new CSceneMain());
+	//}
+
+	//HitBoxの位置情報の変更
+	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
 
 }
 
@@ -256,7 +274,7 @@ void CObjHero::Draw()
 	dst.m_bottom	= dst.m_top  + HERO_SIZE_Y;
 
 	//描画
-	Draw::Draw(0, &src, &dst, color, m_r);
+	Draw::Draw(3, &src, &dst, color, m_r);
 
 }
 
