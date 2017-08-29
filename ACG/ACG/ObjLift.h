@@ -10,13 +10,13 @@ using namespace GameL;
 class CObjLift :public CObj
 {
 public:
-	CObjLift(float x, float y); // コンストラクタ
+	CObjLift(int x, int y); // コンストラクタ
 	~CObjLift() {};	// デストラクタ
 	void Init();	// イニシャライズ
 	void Action();	// アクション
 	void Draw();	// ドロー
 
 private:
-	float m_lift_x;	// リフトX座標
-	float m_lift_y; // リフトY座標
+	float m_px;	// リフトX座標
+	float m_py; // リフトY座標
 };

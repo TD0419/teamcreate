@@ -4,21 +4,21 @@
 
 #include "GameHead.h"
 #include "ObjHero.h"
+#include"Function.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //コンストラクタ
-CObjHero::CObjHero()
+CObjHero::CObjHero(int x, int y)
 {
-
+	m_px = x * HERO_SIZE_X;
+	m_py = y * HERO_SIZE_Y;
 }
 
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = WINDOW_SIZE_W / 2.0f;
-	m_py = WINDOW_SIZE_H / 2.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
@@ -36,7 +36,8 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-
+	//自身のHitBoxをもってくる
+	CHitBox*hit = Hits::GetHitBox(this);
 
 	//落下にリスタート----------------------------------
 	//m_pyが1000以下ならリスタートする
@@ -86,7 +87,7 @@ void CObjHero::Action()
 	//SPACEキーがおされたとき：ジャンプ
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
-		//m_vy =- 8.0f; ブロックに着地できるようになったらはずしてください
+		m_vy =- 8.0f; 
 	}
 
 	//摩擦
@@ -103,6 +104,7 @@ void CObjHero::Action()
 
 	//移動ベクトルを初期化
 	m_vx = 0.0f;
+	//m_vy = 0.0f;//ブロックに着地できるようになったらはずしてください
 
 	//移動終わり-----------------------------------------
 
@@ -132,23 +134,21 @@ void CObjHero::Action()
 	//-------------------------------------------------------
 
 	//はしご-------------------------------------------------
-
 	////はしごと接触しているかどうかを調べる
-	//if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
-	//{
-	//	//Wキーがおされたとき 上るとき
-	//	if (Input::GetVKey('W') == true)
-	//	{
-	//		m_vy -= 3.0f;
-	//	}
+	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
+	{
+		//Wキーがおされたとき 上るとき
+		if (Input::GetVKey('W') == true)
+		{
+			m_vy -= 3.0f;
+		}
 
-	//	//Sキーがおされたとき　下るとき
-	//	if (Input::GetVKey('S') == true)
-	//	{
-	//		m_vy += 3.0f;
-	//	}
-	//}
-
+		//Sキーがおされたとき　下るとき
+		if (Input::GetVKey('S') == true)
+		{
+			m_vy += 3.0f;
+		}
+	}
 	//はしご終了---------------------------------------------
 
 	//発砲---------------------------------------------------
@@ -160,9 +160,6 @@ void CObjHero::Action()
 		Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
 	}
 	//発砲終了-----------------------------------------------
-
-	//自身のHitBoxをもってくる
-	CHitBox*hit = Hits::GetHitBox(this);
 
 	//水オブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
@@ -181,9 +178,8 @@ void CObjHero::Action()
 	&m_block_type
 	);*/
 
-	
-	//HitBoxの位置情報の変更
-	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
 }
 

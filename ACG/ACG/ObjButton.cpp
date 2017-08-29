@@ -6,31 +6,40 @@
 
 #include "GameHead.h"
 #include "ObjButton.h"
-
+#include "Function.h"
 //使用するネームスペース
 using namespace GameL;
 
 //コンストラクタ
-CObjButton::CObjButton(float x, float y)
+CObjButton::CObjButton(int x, int y)
 {
-	m_button_x = x;
-	m_button_y = y;
+	m_px = x;
+	m_py = y;
 }
 
 //イニシャライズ
 void CObjButton::Init()
 {
 	m_trick_flag = false;
+
+	//当たり判定
+	Hits::SetHitBox(this, m_px, m_py, BUTTON_SIZE, BUTTON_SIZE, ELEMENT_GIMMICK, OBJ_BUTTON, 1);
+
 }
 
 //アクション
 void CObjButton::Action()
 {
+	
 	////弾と接触しているかどうかを調べる
 	//if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	//{
 	//	m_trick_flag = true; //弾とあたっているならtrueを入れる
 	//}
+
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+
 }
 
 //ドロー

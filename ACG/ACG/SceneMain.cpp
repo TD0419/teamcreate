@@ -45,7 +45,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(ObjMap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
-	CObjHero* ObjHero = new CObjHero();
+	CObjHero* ObjHero = new CObjHero(3,5);
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
 
 	//test敵オブジェクトを作成する
@@ -99,9 +99,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			
 			count += 2;
 		}
-	}
-		
-	
+	}	
 }
 
 //画像データ読み込み関数

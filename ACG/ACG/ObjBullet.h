@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjBullet :public CObj
 {
 public:
-    CObjBullet(float x,float y,float angle) ;  //コンストラクタ
+    CObjBullet(int x, int y,float angle) ;  //コンストラクタ
     ~CObjBullet() {};	            //デストラクタ
     void Init();	                //イニシャライズ
     void Action();	                //アクション

@@ -10,15 +10,15 @@ using namespace GameL;
 class CObjRopeSwitch :public CObj
 {
 public:
-    CObjRopeSwitch(float x, float y);       //コンストラクタ
+    CObjRopeSwitch(int x, int y);       //コンストラクタ
     ~CObjRopeSwitch() {};
 	//デストラクタ
     void Init();	         //イニシャライズ
     void Action();	         //アクション
     void Draw();	         //ドロー
 private:
-    float m_RopeSwitch_x;	 // ロープスイッチX座標
-    float m_RopeSwitch_y;	 // ロープスイッチY座標
+    float m_px;	 // ロープスイッチX座標
+    float m_py;	 // ロープスイッチY座標
 
 
 };

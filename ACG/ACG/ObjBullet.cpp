@@ -14,7 +14,7 @@ using namespace GameL;
 //引数1	float x		:初期位置X
 //引数2	float y		:初期位置Y
 //引数3	float angle	:移動する角度
-CObjBullet::CObjBullet(float x,float y,float angle)
+CObjBullet::CObjBullet(int x, int y,float angle)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
