@@ -171,6 +171,16 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMain());
 	}
 
+	//敵オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr) //仮です。敵が多いようならElementに変えます
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+		//メインへ移行
+		Scene::SetScene(new CSceneMain());
+	}
+
 	/*	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
 	pb -> BlockHit(&m_px,&m_py,true,
