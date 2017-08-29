@@ -68,6 +68,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Function.h" />
+    <ClInclude Include="ObjEndlessSpring.h" />
     <ClInclude Include="ObjEnemyBullet.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
@@ -108,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Function.cpp" />
+    <ClCompile Include="ObjEndlessSpring.cpp" />
     <ClCompile Include="ObjEnemyBullet.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
