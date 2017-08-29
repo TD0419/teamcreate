@@ -181,6 +181,7 @@ void CObjHero::Action()
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
+	dfhah
 }
 
 //スクロール処理の関数
