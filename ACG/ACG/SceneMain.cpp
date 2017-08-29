@@ -139,8 +139,8 @@ void CSceneMain::ImageDataLoading()
 	//グラフィック読み込み
 	//Draw::LoadImageW(L"", id++, TEX_SIZE_???);
 	
-	//debug用hero画像
-	Draw::LoadImageW(L"image.jpg",0, TEX_SIZE_512);
+	//hero画像
+	Draw::LoadImageW(L"Hero.png",0, TEX_SIZE_256);
 	//debug用enemy画像
 	Draw::LoadImageW(L"image2.jpg", 1, TEX_SIZE_512);
 
