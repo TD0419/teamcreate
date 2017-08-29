@@ -103,6 +103,7 @@
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjWater.h" />
+    <ClInclude Include="ObjStage3Boss.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ObjEnemyBullet.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjWater.cpp" />
     <ClCompile Include="ObjSign.cpp" />
+    <ClCompile Include="ObjStage3Boss.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />

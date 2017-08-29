@@ -20,6 +20,7 @@ enum OBJ_NAME
 	OBJ_LADDERS,		//梯子	
 	OBJ_ENEMY,			//敵
 	OBJ_BOSS_ENEMY,		//ボス
+	OBJ_STAGE3_BOSS,	//第三ステージボス
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
@@ -123,6 +124,7 @@ struct UserData
 #include "ObjRopeSwitch.h"	//ロープスイッチ
 #include "ObjEnemy.h"		//敵
 #include "ObjBossEnemy.h"	//ボス
+#include "ObjStage3Boss.h"  //第三ステージボス
 #include "ObjTitle.h"		//タイトル
 #include "ObjSign.h"		//看板
 #include "ObjRope.h"        //縄（スイッチに引っ掛ける縄）

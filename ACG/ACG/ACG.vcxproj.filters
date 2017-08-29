@@ -73,6 +73,9 @@
     <Filter Include="ソース ファイル\Main\Rope">
       <UniqueIdentifier>{06a9a7c3-50d0-4b75-bd4f-72f36d0adf0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Stage3Boss">
+      <UniqueIdentifier>{e32fec2d-4a65-4cb2-b78b-a8e226b765bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -183,6 +186,9 @@
     <ClInclude Include="ObjRope.h">
       <Filter>ソース ファイル\Main\Rope</Filter>
     </ClInclude>
+    <ClInclude Include="ObjStage3Boss.h">
+      <Filter>ソース ファイル\Main\Stage3Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -289,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="ObjRope.cpp">
       <Filter>ソース ファイル\Main\Rope</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStage3Boss.cpp">
+      <Filter>ソース ファイル\Main\Stage3Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
