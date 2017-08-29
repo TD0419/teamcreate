@@ -166,7 +166,27 @@ void CObjHero::Action()
 	}
 	//発砲終了-----------------------------------------------
 
+	//水オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
 
+		//メインへ移行
+		Scene::SetScene(new CSceneMain());
+		return;
+	}
+
+	//敵オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr) //仮です。敵が多いようならElementに変えます
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+		//メインへ移行
+		Scene::SetScene(new CSceneMain());
+		return;
+	}
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
@@ -174,19 +194,6 @@ void CObjHero::Action()
 	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
 	&m_block_type
 	);
-
-	//自身のHitBoxをもってくる
-	//CHitBox*hit = Hits::GetHitBox(this);
-	
-	////水オブジェクトと衝突していれば
-	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
-	//{
-	//	this->SetStatus(false);		//自身を削除
-	//	Hits::DeleteHitBox(this);	//ヒットボックスを削除
-
-	//								//メインへ移行
-	//	Scene::SetScene(new CSceneMain());
-	//}
 
 	//HitBoxの位置情報の変更
 	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
@@ -231,10 +238,21 @@ void CObjHero::Draw()
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
-	src.m_top		= 0.0f;
-	src.m_left		= 0.0f;
-	src.m_right		= 64.0f;		
-	src.m_bottom	= 126.0f;
+	//止まっている時
+	if (m_ani_frame_stop == 1)  //仮
+	{
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 128.0f;
+	}
+	else//動いているとき
+	{
+		src.m_top = 128.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64;
+		src.m_right = 64.0f + AniData[m_ani_frame] * 64;
+		src.m_bottom = 256.0f;
+	}
 
 	//描画位置
 	dst.m_top		= 0.0f + m_py - obj_m->GetScrollY();
