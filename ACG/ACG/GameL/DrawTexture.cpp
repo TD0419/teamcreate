@@ -35,6 +35,11 @@ int CDrawTexture::m_height;
 //取得イメージ最大数
 int CDrawTexture::m_img_max;
 
+//画面全体を固定色にするかどうか
+bool CDrawTexture::m_fill;
+//固定色
+float CDrawTexture::m_color[4];
+
 //シェーダ関係
 ID3D11VertexShader* CDrawTexture::m_pVertexShader;		//バーテックスシェーダー
 ID3D11PixelShader*  CDrawTexture::m_pPixelShader;		//ピクセルシェーダー
@@ -78,8 +83,21 @@ void C_TEX_DATA::SetTexSize(TEX_SIZE size)
 {
 	m_tex_size=size;
 }
-	
+
 //テクスチャ読み込み・表示クラスメソッド郡-------
+//画面全体を固定色にするかどうか
+void CDrawTexture::SetFill(bool fill)
+{
+	m_fill = fill;
+}
+//固定色を決める
+void CDrawTexture::SetColor(float color[4])
+{
+	m_color[0] = color[0];
+	m_color[1] = color[1];
+	m_color[2] = color[2];
+	m_color[3] = color[3];
+}
 //２D使用設定
 void  CDrawTexture::Set2DDraw()
 {
@@ -148,7 +166,10 @@ void CDrawTexture::DrawStr(ID3D11ShaderResourceView* ptex_res_view,float x,float
 	{
 		DRAW_2D_TEX  data;
 		data.color[0]=col[0];	data.color[1]=col[1];	data.color[2]=col[2];	data.color[3]=col[3];
-
+		//画面全体を固定色にするならする
+		if (m_fill == true) {
+			data.color[0] += m_color[0];	data.color[1] += m_color[1];	data.color[2] += m_color[2];	data.color[3] += m_color[3];
+		}
 		data.size[0]=1.0f;				data.size[1]=0.0f;
 		data.size[2]=(float)m_width;	data.size[3]=(float)m_height;
 
@@ -183,8 +204,13 @@ void CDrawTexture:: Draw(int id,RECT_F* src,RECT_F* dst,float col[4],float r)
 	if( SUCCEEDED( m_pDeviceContext->Map( m_pConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &pData ) ) )
 	{
 		DRAW_2D_TEX  data;
-		data.color[0]=col[0];	data.color[1]=col[1];	data.color[2]=col[2];	data.color[3]=col[3];
 
+		data.color[0] = col[0];	data.color[1] = col[1];	data.color[2] = col[2];	data.color[3] = col[3];
+		//画面全体を固定色にするならする
+		if (m_fill == true) {
+			data.color[0] += m_color[0];	data.color[1] += m_color[1];	data.color[2] += m_color[2];	data.color[3] += m_color[3];
+		}
+		
 		data.size[0]=(float)vec_tex_data[id]->GetTexSize();	data.size[1]=r;
 		data.size[2]=(float)m_width;		data.size[3]=(float)m_height;
 
@@ -223,6 +249,11 @@ void CDrawTexture::InitDraw(ID3D11Device* p_device,ID3D11DeviceContext* p_device
 	vec_tex_data.reserve(m_img_max);//配列の許容量設定
 	vec_tex_data.resize(m_img_max);	//配列の要素数設定
 	
+	//画面全体を固定色にしない
+	m_fill = false;
+
+	//固定色初期化
+	m_color[0] = 0.0f; m_color[1] = 0.0f; m_color[2] = 0.0f; m_color[3] = 1.0f;
 
 	//取得テクスチャメモリ確保
 	for(int i=0; i<m_img_max;i++)
