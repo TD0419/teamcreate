@@ -98,17 +98,16 @@ void CObjHero::Action()
 	m_vx += -(m_vx * 0.098);
 
 	//自由落下運動
-	m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
+	//m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 
 	//Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
 	m_py += m_vy;
-
 	//移動ベクトルを初期化
 	m_vx = 0.0f;
-	//m_vy = 0.0f;//ブロックに着地できるようになったらはずしてください
+	m_vy = 0.0f;//ブロックに着地できるようになったらはずしてください
 
 	//移動終わり-----------------------------------------
 	
@@ -161,6 +160,23 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMain());
 		return;
 	}
+
+	////ブロックとの当たり判定実行
+	//CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
+	//pb -> BlockHit(&m_px,&m_py,true,
+	//&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
+	//&m_block_type
+	//);
+
+	////水オブジェクトと衝突していれば
+	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	//{
+	//	this->SetStatus(false);		//自身を削除
+	//	Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+	//								//メインへ移行
+	//	Scene::SetScene(new CSceneMain());
+	//}
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);

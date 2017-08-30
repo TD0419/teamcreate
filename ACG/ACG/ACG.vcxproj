@@ -68,6 +68,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Function.h" />
+    <ClInclude Include="ObjReflectBlock.h" />
     <ClInclude Include="ObjEndlessSpring.h" />
     <ClInclude Include="ObjEnemyBullet.h" />
     <ClInclude Include="GameHead.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="ObjWater.cpp" />
     <ClCompile Include="ObjSign.cpp" />
     <ClCompile Include="ObjStage3Boss.cpp" />
+    <ClCompile Include="ObjReflectBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />

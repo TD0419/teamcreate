@@ -12,6 +12,7 @@ enum OBJ_NAME
 	OBJ_ENEMY_BULLET,	//弾丸(敵用)
 	OBJ_ROCK,			//岩
     OBJ_BLOCK,			//ブロック
+	OBJ_REFLECT_BLOCK,	//弾を反射するブロック
 	OBJ_LIFT,			//リフト
 	OBJ_MAP,			//マップ
     OBJ_WOOD,			//木
@@ -125,6 +126,7 @@ struct UserData
 #include "ObjEnemyBullet.h"	//弾丸(敵用)
 #include "ObjRock.h"		//岩
 #include "ObjBlock.h"		//ブロック
+#include "ObjReflectBlock.h"//弾を反射するブロック
 #include "ObjLift.h"		//リフト
 #include "ObjLadders.h"		//梯子
 #include "ObjMap.h"			//マップ

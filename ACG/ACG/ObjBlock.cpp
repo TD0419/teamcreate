@@ -139,7 +139,7 @@ void CObjBlock::BlockHit(
 				float scroll = scroll_on ? m_scroll : 0;
 
 				//主人公とブロックの当たり判定
-				if ((*x/* + (-scroll)*/ + 64.0f > bx) && (*x /*+ (-scroll)*/ < bx + 64.0f) && (*y + 64.0f > by) && (*y < by + 64.0f))
+				if ((*x/* + (-scroll)*/ + 64.0f > bx) && (*x /*+ (-scroll)*/ < bx + 64.0f) && (*y + HERO_SIZE_Y > by) && (*y < (by + BLOCK_SIZE)))
 				{
 					//上下左右判定
 
@@ -178,7 +178,7 @@ void CObjBlock::BlockHit(
 						{
 							//上
 							*down = (true);					//主人公の下の部分が衝突している
-							*y = by - 64.0f;				//ブロックの位置＋主人公の幅
+							*y = by - HERO_SIZE_Y ;				//ブロックの位置＋主人公の幅
 															//種類を渡すのスタートとゴールのみ変更する
 							if (m_map[i][j] >= 2)
 							{
@@ -197,11 +197,12 @@ void CObjBlock::BlockHit(
 						{
 							//下
 							*up = (true);					//主人公の上の部分が衝突している
-							*y = by + 64.0f;				//ブロックの位置＋主人公の幅
+							*y = by + HERO_SIZE_Y;				//ブロックの位置＋主人公の幅
 							if (*vy < 0)
 							{
 								*vy = 0.0f;
 							}
+							
 						}
 					}
 				}
