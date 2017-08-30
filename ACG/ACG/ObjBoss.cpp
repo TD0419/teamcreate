@@ -1,4 +1,5 @@
 #include "GameL\DrawTexture.h"
+#include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 
@@ -22,7 +23,7 @@ void CObjBoss::Init()
    
     m_vx = 0.0f;
     m_vy = 0.0f;
-
+	m_r = 0.0f;
 	m_hp = 10; //ƒ{ƒX‚Ì‚g‚o(‰¼‚É‚g‚o‚ð[ 10 ]‚ÆÝ’è)
 
 	 //“–‚½‚è”»’è—pHitBox‚ðì¬
@@ -33,7 +34,15 @@ void CObjBoss::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjBoss::Action()
 {
-	
+	//ˆÚ“®ƒxƒNƒgƒ‹‚ðƒ|ƒWƒVƒ‡ƒ“‚É‰ÁŽZ
+	m_px += m_vx;
+	m_py += m_vy;
+
+	//ˆÚ“®ƒxƒNƒgƒ‹‚ð‰Šú‰»
+	m_vx = 0.0f;
+	m_vy = 0.0f;
+
+
 	//–€ŽC
 	//m_vx += -(m_vx * 0.098);
 
@@ -65,8 +74,8 @@ void CObjBoss::Draw()
 	//•`‰æˆÊ’u
 	dst.m_top = 0.0f + m_py - obj_m->GetScrollY();
 	dst.m_left = 0.0f + m_px - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + BOSS_SIZE;
-	dst.m_bottom = dst.m_top + BOSS_SIZE;
+	dst.m_right = dst.m_left +140.0f+ BOSS_SIZE;
+	dst.m_bottom = dst.m_top +140.0f+ BOSS_SIZE;
 
 	//•`‰æ
 	Draw::Draw(4, &src, &dst, color, m_r);
