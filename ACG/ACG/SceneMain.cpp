@@ -60,6 +60,11 @@ void CSceneMain::InitScene()
 	//CObjBoss* ObjBoss = new CObjBoss(10,15);
 	//Objs::InsertObj(ObjBoss, OBJ_BOSS, 11);
 
+	//リフトオブジェクトを作成する
+	CObjLift* Obj_lift = new CObjLift(6, 5);
+	Objs::InsertObj(Obj_lift, OBJ_LIFT, 10);
+
+
 }
 
 //ゲームメイン実行中メソッド
@@ -77,6 +82,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
+	//p = Save::ExternalDataOpen(L"Stage1.1.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
 	{

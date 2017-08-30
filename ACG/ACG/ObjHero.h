@@ -36,7 +36,7 @@ private:
 	float m_r;//主人公の回転角度
 
 	bool  m_f;  //弾丸発射制御用
-
+	bool  m_rf; //ロープ発射制御用
 	//アニメーション関係
 	int m_ani_frame_stop; //止まった時の描画を調整
 	int m_ani_time; //アニメーションフレーム動作感覚
