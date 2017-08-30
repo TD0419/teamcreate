@@ -46,7 +46,7 @@ void CObjMap::Action()
 				m_map[i][j] = MAP_SPACE;//¶¬‚ªI‚í‚é‚Æ‹ó”’‚ğ“ü‚ê‚é
 			}
 
-			‚Í‚µ‚²ì¬
+			//‚Í‚µ‚²ì¬
 			if (m_map[i][j] == MAP_LADDERS)
 			{
 				CObjLadders* obj_ladders = new CObjLadders(j,i);
