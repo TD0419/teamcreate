@@ -121,31 +121,35 @@ void CObjBlock::HeroHit()
 
 	for (int i = 0; i < hit->GetCount(); i++)
 	{
-		float r = hit_data[i]->r;//あたっている角度をもってくる
+		//データがあれば
+		if (hit_data[i] != nullptr)
+		{
+			float r = hit_data[i]->r;//あたっている角度をもってくる
 
-		//ブロックの右側が衝突している場合
-		if (0 < r && r < 45 || 315 < r && r < 360)
-		{
-			obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-			obj_hero->SetPosX(m_px + BLOCK_SIZE);//主人公の位置をブロックの右側までずらす
-		}
-		//ブロックの上側が衝突している場合
-		else if (45 < r && r < 125)
-		{
-			obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-			obj_hero->SetPosY(m_py - HERO_SIZE_Y);//主人公の位置をブロックの上側までずらす
-		}
-		//ブロックの左側が衝突している場合
-		else if (125 < r && r < 225)
-		{
-			obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-			obj_hero->SetPosX(m_px - HERO_SIZE_X);//主人公の位置をブロックの左側までずらす
-		}
-		//ブロックの下側が衝突している場合
-		else if (225 < r && r < 315)
-		{
-			obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-			obj_hero->SetPosY(m_py + BLOCK_SIZE);//主人公の位置をブロックの上側までずらす
+			//ブロックの右側が衝突している場合
+			if (0 < r && r < 45 || 315 < r && r < 360)
+			{
+				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				obj_hero->SetPosX(m_px + BLOCK_SIZE);//主人公の位置をブロックの右側までずらす
+			}
+			//ブロックの上側が衝突している場合
+			else if (45 < r && r < 125)
+			{
+				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+				obj_hero->SetPosY(m_py - HERO_SIZE_Y);//主人公の位置をブロックの上側までずらす
+			}
+			//ブロックの左側が衝突している場合
+			else if (125 < r && r < 225)
+			{
+				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				obj_hero->SetPosX(m_px - HERO_SIZE_X);//主人公の位置をブロックの左側までずらす
+			}
+			//ブロックの下側が衝突している場合
+			else if (225 < r && r < 315)
+			{
+				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+				obj_hero->SetPosY(m_py + BLOCK_SIZE);//主人公の位置をブロックの上側までずらす
+			}
 		}
 	}
 }
