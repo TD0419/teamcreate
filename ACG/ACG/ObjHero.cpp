@@ -86,13 +86,13 @@ void CObjHero::Action()
 	{
 		m_ani_frame = 0;
 	}
-	
+
 	//SPACEキーがおされたとき：ジャンプ
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
 		//if (m_hit_down == true)
 		//{
-			m_vy = -20.0f;
+		m_vy = -20.0f;
 		//}
 	}
 	//↓キーがおされたとき：下に下がる（デバッグ）
@@ -100,6 +100,9 @@ void CObjHero::Action()
 	{
 		m_vy = 20.0f;
 	}
+
+
+	
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
@@ -116,9 +119,9 @@ void CObjHero::Action()
 	//移動ベクトルを初期化
 	m_vx = 0.0f;
 	m_vy = 0.0f;
-	
+
 	//移動終わり-----------------------------------------
-	
+
 	//はしご-------------------------------------------------
 	////はしごと接触しているかどうかを調べる
 	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
@@ -151,6 +154,7 @@ void CObjHero::Action()
 	}
 	else
 		m_f = true; //左クリックしてなければ弾丸をでるフラグにする。
+
 	//発砲終了-----------------------------------------------
 
 	//水オブジェクトと衝突していれば
@@ -164,6 +168,8 @@ void CObjHero::Action()
 		return;
 	}
 
+	
+
 	//敵オブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr) //仮です。敵が多いようならElementに変えます
 	{
@@ -175,14 +181,6 @@ void CObjHero::Action()
 		return;
 	}
 
-	
-
-	////ブロックとの当たり判定実行
-	//CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
-	//pb -> BlockHit(&m_px,&m_py,true,
-	//&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
-	//&m_block_type
-	//);
 
 	////水オブジェクトと衝突していれば
 	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)

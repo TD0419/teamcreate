@@ -37,23 +37,6 @@ void CObjMap::Action()
 		//jが　画面に収まる最大値　または　マップの最大値になるまでまわす
 		for (int x = 0; x < MAP_WINDOW_MAX_X && x<MAP_X_MAX;x++)
 		{
-			//ブロック作成
-			if (m_map[i][j] == MAP_BLOCK)
-			{
-				CObjBlock* obj_block = new CObjBlock(j,i);
-				Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
-
-				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
-			}
-
-			//はしご作成
-			if (m_map[i][j] == MAP_LADDERS)
-			{
-				CObjLadders* obj_ladders = new CObjLadders(j,i);
-				Objs::InsertObj(obj_ladders, OBJ_LADDERS, 9);
-
-				m_map[i][j] = MAP_SPACE;//生成が終わると空白を入れる
-			}
 			CreateObj(x, y);//オブジェクトの生成
 		}
 	}
