@@ -26,6 +26,8 @@ void CObjHero::Init()
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 
+	m_f = false;
+
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 6; //アニメーション間隔幅
@@ -100,7 +102,7 @@ void CObjHero::Action()
 	//自由落下運動
 	//m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 
-	//Scroll();	//スクロール処理をおこなう
+	Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
@@ -133,10 +135,16 @@ void CObjHero::Action()
 	//左クリックを押したら
 	if (Input::GetMouButtonL() == true)
 	{
-		//弾丸作成
-		CObjBullet* Objbullet = new CObjBullet(m_px,m_py);
-		Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+		if (m_f == true)
+		{
+			//弾丸作成
+			CObjBullet* Objbullet = new CObjBullet(m_px, m_py);
+			Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+			m_f = false; //弾丸を出ないフラグにする。
+		}
 	}
+	else
+		m_f = true; //左クリックしてなければ弾丸をでるフラグにする。
 	//発砲終了-----------------------------------------------
 
 	//水オブジェクトと衝突していれば
@@ -178,17 +186,16 @@ void CObjHero::Action()
 	//	Scene::SetScene(new CSceneMain());
 	//}
 
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
-	pb -> BlockHit(&m_px,&m_py,true,
-	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
-	&m_block_type
-	);
+	////ブロックとの当たり判定実行
+	//CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
+	//pb -> BlockHit(&m_px,&m_py,true,
+	//&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
+	//&m_block_type
+	//);
 
-	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	//HitBoxの位置情報の変更
-	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
+
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
 }
 

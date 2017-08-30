@@ -3,21 +3,21 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjBossEnemy.h"
+#include "ObjBoss.h"
 #include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //コンストラクタ
-CObjBossEnemy::CObjBossEnemy(int x,int y)
+CObjBoss::CObjBoss(int x,int y)
 {
 	m_px = x * BOSS_SIZE;
 	m_py = y * BOSS_SIZE;
 }
 
 //イニシャライズ
-void CObjBossEnemy::Init()
+void CObjBoss::Init()
 {
    
     m_vx = 0.0f;
@@ -26,12 +26,12 @@ void CObjBossEnemy::Init()
 	m_hp = 10; //ボスのＨＰ(仮にＨＰを[ 10 ]と設定)
 
 	 //当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE, BOSS_SIZE, ELEMENT_ENEMY, OBJ_BOSS_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE, BOSS_SIZE, ELEMENT_ENEMY, OBJ_BOSS, 1);
 
 }
 
 //アクション
-void CObjBossEnemy::Action()
+void CObjBoss::Action()
 {
 	
 	//摩擦
@@ -46,7 +46,7 @@ void CObjBossEnemy::Action()
 }
 
 //ドロー
-void CObjBossEnemy::Draw()
+void CObjBoss::Draw()
 {
 
 }

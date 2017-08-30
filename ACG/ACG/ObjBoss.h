@@ -1,17 +1,17 @@
 #pragma once
 
 //使用するヘッダー
-#include "GameL\SceneManager.h"
+#include "GameL\SceneObjManager.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //オブジェクト：ボス
-class CObjBossEnemy :public CObj
+class CObjBoss :public CObj
 {
 public:
-    CObjBossEnemy(int x,int y);        //コンストラクタ
-    ~CObjBossEnemy() {};	//デストラクタ
+    CObjBoss(int x,int y);        //コンストラクタ
+    ~CObjBoss() {};	//デストラクタ
     void Init();	        //イニシャライズ
     void Action();	        //アクション
     void Draw();	        //ドロー
