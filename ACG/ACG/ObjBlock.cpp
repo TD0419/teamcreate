@@ -21,24 +21,7 @@ CObjBlock::CObjBlock(int x, int y)
 
 //イニシャライズ
 void CObjBlock::Init()
-{
-	//// testブロックあたり判定
-	//int block_data[10][10] =
-	//{
-	//	 {0,0,0,0,0,0,0,0,0,0},
-	//	 {0,0,0,0,0,0,0,0,0,0},
-	//	 {1,0,0,0,0,0,0,1,1,1},
-	//	 {1,0,0,0,0,0,0,0,0,0},
-	//	 {1,0,0,0,0,0,0,0,0,0},
-	//	 {1,0,0,1,1,1,1,0,1,1},
-	//	 {1,0,0,0,0,0,0,0,0,0},
-	//	 {1,0,0,0,0,0,0,0,0,0},
-	//	 {1,0,0,0,0,0,0,0,0,0},
-	//	 {1,1,1,1,1,0,0,0,0,0},
-	//};
-	//// test
-	//memcpy(m_map, block_data, sizeof(int)*(10 * 10));
-	
+{	
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 
@@ -92,25 +75,6 @@ void CObjBlock::Draw()
 	//描画
 	Draw::Draw(2, &src, &dst, color, 0.0f);
 
-
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	for (int j = 0; j < 10; j++)
-	//	{
-	//		if (m_map[i][j] > 0)
-	//		{
-	//			//描画位置
-	//			dst.m_top = i * 64.0f;
-	//			dst.m_left = j * 64.0f;
-	//			dst.m_right = dst.m_left + 64.0;
-	//			dst.m_bottom = dst.m_top + 64.0;
-
-	//			//描画
-	//			Draw::Draw(2, &src, &dst, color, 0.0f);
-
-	//		}
-	//	}
-	//}
 }
 
 void CObjBlock::HeroHit()

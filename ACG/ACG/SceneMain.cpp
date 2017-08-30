@@ -56,6 +56,11 @@ void CSceneMain::InitScene()
 	//CObjBoss* ObjBoss = new CObjBoss(10,15);
 	//Objs::InsertObj(ObjBoss, OBJ_BOSS, 11);
 
+	//リフトオブジェクトを作成する
+	CObjLift* Obj_lift = new CObjLift(6, 5);
+	Objs::InsertObj(Obj_lift, OBJ_LIFT, 10);
+
+
 }
 
 //ゲームメイン実行中メソッド
