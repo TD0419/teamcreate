@@ -24,6 +24,7 @@ enum OBJ_NAME
 	OBJ_ENEMY,			//敵
 	OBJ_BOSS,			//ボス
 	OBJ_STAGE3_BOSS,	//第三ステージボス
+	OBJ_BOSS_DROP_KEY,	//ボスが落とす鍵
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
@@ -99,6 +100,7 @@ struct UserData
 #define ROCK_SIZE	(32.0f)//岩サイズ（仮）
 #define WOOD_SIZE	(32.0f)//木サイズ(仮)
 #define BOSS_SIZE	(32.0f)//BOSSサイズ(仮)
+#define BOSS_DORP_KEY_SIZE	(32.0f)//ボスドロップキーサイズ(仮)
 
 
 //スクロールのライン　（要調整）
@@ -136,6 +138,7 @@ struct UserData
 #include "ObjEnemy.h"		//敵
 #include "ObjBoss.h"	//ボス
 #include "ObjStage3Boss.h"  //第三ステージボス
+#include "ObjBossDropKey.h"	//ボスが落とす鍵
 #include "ObjTitle.h"		//タイトル
 #include "ObjSign.h"		//看板
 #include "ObjRope.h"        //縄（スイッチに引っ掛ける縄）

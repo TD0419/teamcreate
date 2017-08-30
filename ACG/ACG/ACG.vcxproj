@@ -67,6 +67,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ObjBossDropKey.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="ObjReflectBlock.h" />
     <ClInclude Include="ObjEndlessSpring.h" />
@@ -110,6 +111,7 @@
     <ClInclude Include="ObjStage3Boss.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ObjBossDropKey.cpp" />
     <ClCompile Include="Function.cpp" />
     <ClCompile Include="ObjEndlessSpring.cpp" />
     <ClCompile Include="ObjEnemyBullet.cpp" />

@@ -85,6 +85,9 @@
     <Filter Include="ソース ファイル\Main\LeverSwich">
       <UniqueIdentifier>{1238450d-e6ac-4e91-a418-a53b16b7385a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\BossDropKey">
+      <UniqueIdentifier>{a7e1b532-76af-4058-ba94-098cb00ab2ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -207,6 +210,9 @@
     <ClInclude Include="ObjLeverswich.h">
       <Filter>ソース ファイル\Main\LeverSwich</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBossDropKey.h">
+      <Filter>ソース ファイル\BossDropKey</Filter>
+    </ClInclude>
     <ClInclude Include="ObjBoss.h">
       <Filter>ソース ファイル\Main\Boss</Filter>
     </ClInclude>
@@ -328,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="ObjReflectBlock.cpp">
       <Filter>ソース ファイル\Main\ReflectBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBossDropKey.cpp">
+      <Filter>ソース ファイル\BossDropKey</Filter>
     </ClCompile>
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソース ファイル\Main\Boss</Filter>

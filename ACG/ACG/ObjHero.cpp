@@ -26,6 +26,8 @@ void CObjHero::Init()
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 
+	m_f = false;
+
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 6; //アニメーション間隔幅
@@ -133,10 +135,16 @@ void CObjHero::Action()
 	//左クリックを押したら
 	if (Input::GetMouButtonL() == true)
 	{
-		//弾丸作成
-		CObjBullet* Objbullet = new CObjBullet(m_px,m_py);
-		Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+		if (m_f == true)
+		{
+			//弾丸作成
+			CObjBullet* Objbullet = new CObjBullet(m_px, m_py);
+			Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+			m_f = false; //弾丸を出ないフラグにする。
+		}
 	}
+	else
+		m_f = true; //左クリックしてなければ弾丸をでるフラグにする。
 	//発砲終了-----------------------------------------------
 
 	//水オブジェクトと衝突していれば
