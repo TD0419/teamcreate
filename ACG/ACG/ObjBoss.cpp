@@ -49,6 +49,24 @@ void CObjBoss::Action()
 	//自由落下運動
 	//m_vy += 9.8 / (16.0f);
 
+	/*
+	//ブロックとの当たり判定実行
+	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
+	pb -> BlockHit(&m_px,&m_py,true,
+	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
+	&m_block_type
+	);
+	*/
+
+	//弾丸のHitBox更新用ポインター取得
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	//弾丸とあたったらHP-1
+	if (hit->SearchObjNameHit(OBJ_BULLET) != nullptr)
+	{
+		m_hp -= 1;
+	}
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
