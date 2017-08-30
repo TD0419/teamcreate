@@ -9,10 +9,10 @@
 using namespace GameL;
 
 //コンストラクタ
-CObjSign::CObjSign(float x, float y)
+CObjSign::CObjSign(int x, int y)
 {
-	m_x = x;
-	m_y = y;
+	m_px = x;
+	m_py = y;
 }
 
 //イニシャライズ

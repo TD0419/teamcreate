@@ -7,11 +7,11 @@
 using namespace GameL;
 
 //オブジェクト：リフト
-class CObjSign :public CObj
+class CObjDoor :public CObj
 {
 public:
-	CObjSign(int x, int y); // コンストラクタ
-	~CObjSign() {};	// デストラクタ
+	CObjDoor(int x, int y); // コンストラクタ
+	~CObjDoor() {};	// デストラクタ
 	void Init();	// イニシャライズ
 	void Action();	// アクション
 	void Draw();	// ドロー

@@ -37,6 +37,7 @@ private:
 	float m_r;//主人公の回転角度
 
 	bool  m_f;  //弾丸発射制御用
+	bool  m_rf; //ロープ発射制御用
 	bool  m_j;  //ジャンプ制御
 
 	//アニメーション関係
