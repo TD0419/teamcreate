@@ -38,7 +38,7 @@ void CObjBlock::Init()
 	//};
 	//// test
 	//memcpy(m_map, block_data, sizeof(int)*(10 * 10));
-	
+
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 
@@ -135,6 +135,7 @@ void CObjBlock::HeroHit()
 			//ブロックの上側が衝突している場合
 			else if (45 < r && r < 125)
 			{
+				obj_hero->bu = true;
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 				obj_hero->SetPosY(m_py - HERO_SIZE_Y);//主人公の位置をブロックの上側までずらす
 			}

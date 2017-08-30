@@ -29,6 +29,7 @@ public:
 		float* vx, float*vy, int* bt
 	);*/
 
+	bool j;//ジャンプ用
 	
 
 private:
@@ -38,4 +39,7 @@ private:
 	float m_scroll; //左右スクリーン用
 	float m_px;     //ブロック位置X
 	float m_py;     //ブロック位置Y
+
+	
+	bool m_j; //
 };

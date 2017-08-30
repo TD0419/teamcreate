@@ -26,6 +26,7 @@ public:
 	float GetPosX() { return m_px; }//ポジションXを返す
 	float GetPosY() { return m_py; }//ポジションXを返す
 
+	bool bu;//ブロックの上にのっている時の情報を持ってくる奴
 
 private:
 	float m_px;	//X座標
@@ -36,6 +37,7 @@ private:
 	float m_r;//主人公の回転角度
 
 	bool  m_f;  //弾丸発射制御用
+	bool  m_j;  //ジャンプ制御
 
 	//アニメーション関係
 	int m_ani_frame_stop; //止まった時の描画を調整
