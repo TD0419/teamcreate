@@ -22,5 +22,6 @@ private:
     float m_vy; // ボスY軸方向のベクトル
 
     int m_hp;   // ボスのＨＰ
+	float m_r;  //ボスの回転角度
 
 };
