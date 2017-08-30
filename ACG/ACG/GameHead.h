@@ -98,8 +98,9 @@ struct UserData
 #define LIFT_SIZE	(32.0f)//リフトサイズ(仮)
 #define ROCK_SIZE	(32.0f)//岩サイズ（仮）
 #define WOOD_SIZE	(32.0f)//木サイズ(仮)
-#define BOSS_SIZE	(32.0f)//BOSSサイズ(仮)
+#define BOSS_SIZE	(170.0f)//BOSSサイズ(仮)
 #define BOSS_DORP_KEY_SIZE	(32.0f)//ボスドロップキーサイズ(仮)
+//#define BOSS_CORRECTION (90.0f)//ボスサイズ補正(仮)
 
 
 //スクロールのライン　（要調整）

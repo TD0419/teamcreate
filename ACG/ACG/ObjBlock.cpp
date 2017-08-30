@@ -56,6 +56,11 @@ void CObjBlock::Action()
 		HeroHit();//当たり判定の処理を行う
 	}
 	
+	//ボスオブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_BOSS) != nullptr)
+	{
+		BossHit();//当たり判定の処理を行う
+	}
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
@@ -149,6 +154,53 @@ void CObjBlock::HeroHit()
 			{
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 				obj_hero->SetPosY(m_py + BLOCK_SIZE);//主人公の位置をブロックの上側までずらす
+			}
+		}
+	}
+}
+
+//確認用にボス版を用意しました。今後、削除変更してもかまいません。
+void CObjBlock::BossHit()
+{
+	//自身のHitBoxを取得
+	CHitBox*hit = Hits::GetHitBox(this);
+
+	HIT_DATA** hit_data;						//衝突の情報を入れる構造体
+	hit_data = hit->SearchObjNameHit(OBJ_BOSS); //衝突の情報をhit_dataに入れる
+
+	//デバッグ用ボスオブジェクト情報を取得
+	CObjBoss* obj_boss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+
+	for (int i = 0; i < hit->GetCount(); i++)
+	{
+		//データあり
+		if (hit_data[i] != nullptr)
+		{
+			float r = hit_data[i]->r;//ぶつかっている角度をもってくる
+
+			//ブロックの右側が衝突している場合
+			if (0 < r && r < 45 || 315 < r && r < 360)
+			{
+				obj_boss->SetVecX(0.0f);//ボスのX方向の移動を０にする
+				obj_boss->SetPosX(m_px + BLOCK_SIZE);//ボスの位置をブロックの右側までずらす
+			}
+			//ブロックの上側が衝突している場合
+			else if (45 < r && r < 125)
+			{
+				obj_boss->SetVecY(0.0f);//ボスのY方向の移動を０にする
+				obj_boss->SetPosY(m_py - BOSS_SIZE);//ボスの位置をブロックの上側までずらす
+			}
+			//ブロックの左側が衝突している場合
+			else if (125 < r && r < 225)
+			{
+				obj_boss->SetVecX(0.0f);//ボスのX方向の移動を０にする
+				obj_boss->SetPosX(m_px - BOSS_SIZE);//ボスの位置をブロックの左側までずらす
+			}
+			//ブロックの下側が衝突している場合
+			else if (225 < r && r < 315)
+			{
+				obj_boss->SetVecY(0.0f);//ボスのY方向の移動を０にする
+				obj_boss->SetPosY(m_py + BLOCK_SIZE);//ボスの位置をブロックの上側までずらす
 			}
 		}
 	}
