@@ -25,8 +25,6 @@ CObjBullet::CObjBullet(int x, int y)
 	m_px = x;
 	m_py = y;
 	//速さを決める
-	m_speed = 3.0f;
-	//角度を代入
 	m_speed = 6.5f;
 
 	//マウスの位置と主人公の位置からマウスの角度を求める
