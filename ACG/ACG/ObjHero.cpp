@@ -100,7 +100,7 @@ void CObjHero::Action()
 	//自由落下運動
 	//m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 
-	//Scroll();	//スクロール処理をおこなう
+	Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
@@ -178,17 +178,16 @@ void CObjHero::Action()
 	//	Scene::SetScene(new CSceneMain());
 	//}
 
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
-	pb -> BlockHit(&m_px,&m_py,true,
-	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
-	&m_block_type
-	);
+	////ブロックとの当たり判定実行
+	//CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
+	//pb -> BlockHit(&m_px,&m_py,true,
+	//&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
+	//&m_block_type
+	//);
 
-	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	//HitBoxの位置情報の変更
-	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
+
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
 }
 

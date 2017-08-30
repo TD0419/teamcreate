@@ -48,13 +48,10 @@ void CSceneMain::InitScene()
 	CObjHero* ObjHero = new CObjHero(3,5);
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
 
-	//test敵オブジェクトを作成する
-	CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
-	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
+	////test敵オブジェクトを作成する
+	//CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
+	//Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
 
-	//blockオブジェクト作成
-	CObjBlock* obj_block = new CObjBlock();
-	Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
 }
 
 //ゲームメイン実行中メソッド

@@ -113,8 +113,8 @@ void CObjBullet::Action()
 		return;
 	}
 	
-	//ブロックとあたった場合
-	if (hit->CheckObjNameHit(OBJ_BLOCK) != nullptr)
+	//反射するブロックとあたった場合
+	if (hit->CheckObjNameHit(OBJ_REFLECT_BLOCK) != nullptr)
 	{
 		HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 		hit_data = hit->SearchObjNameHit(OBJ_BLOCK);//衝突の情報をhit_dataに入れる

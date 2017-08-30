@@ -141,9 +141,6 @@
     <ClInclude Include="SceneGameOver.h">
       <Filter>ソース ファイル\GameOver</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBossEnemy.h">
-      <Filter>ソース ファイル\Main\Boss</Filter>
-    </ClInclude>
     <ClInclude Include="ObjButton.h">
       <Filter>ソース ファイル\Main\Button</Filter>
     </ClInclude>
@@ -210,6 +207,9 @@
     <ClInclude Include="ObjLeverswich.h">
       <Filter>ソース ファイル\Main\LeverSwich</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBoss.h">
+      <Filter>ソース ファイル\Main\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -265,9 +265,6 @@
     </ClCompile>
     <ClCompile Include="ObjBlock.cpp">
       <Filter>ソース ファイル\Main\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBossEnemy.cpp">
-      <Filter>ソース ファイル\Main\Boss</Filter>
     </ClCompile>
     <ClCompile Include="ObjButton.cpp">
       <Filter>ソース ファイル\Main\Button</Filter>
@@ -331,6 +328,9 @@
     </ClCompile>
     <ClCompile Include="ObjReflectBlock.cpp">
       <Filter>ソース ファイル\Main\ReflectBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBoss.cpp">
+      <Filter>ソース ファイル\Main\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

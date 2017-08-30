@@ -87,7 +87,7 @@
     <ClInclude Include="ObjBullet.h" />
     <ClInclude Include="ObjLeverswich.h" />
     <ClInclude Include="ObjMap.h" />
-    <ClInclude Include="ObjBossEnemy.h" />
+    <ClInclude Include="ObjBoss.h" />
     <ClInclude Include="ObjEnemy.h" />
     <ClInclude Include="ObjGameClear.h" />
     <ClInclude Include="ObjGameOver.h" />
@@ -129,7 +129,7 @@
     <ClCompile Include="ObjLeverswich.cpp" />
     <ClCompile Include="ObjMap.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
-    <ClCompile Include="ObjBossEnemy.cpp" />
+    <ClCompile Include="ObjBoss.cpp" />
     <ClCompile Include="ObjButton.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="ObjGameClear.cpp" />
