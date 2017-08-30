@@ -54,7 +54,7 @@ void CObjHero::Action()
 	//Aキーがおされたとき：右移動
 	if (Input::GetVKey('D') == true)
 	{
-		m_vx += 5.0f;
+		m_vx += 0.5f;
 		m_ani_frame_stop = 0;
 		m_posture = 0.0f;//主人公の向き
 		m_ani_time += 1;
@@ -62,7 +62,7 @@ void CObjHero::Action()
 	//Dキーがおされたとき：左移動
 	else if (Input::GetVKey('A') == true)
 	{
-		m_vx -= 5.0f;
+		m_vx -= 0.5f;
 		m_ani_frame_stop = 0;
 		m_posture = 1.0f;//主人公の向き
 		m_ani_time += 1;
@@ -114,7 +114,7 @@ void CObjHero::Action()
 	m_py += m_vy;
 
 	//移動ベクトルを初期化
-	m_vx = 0.0f;
+	//m_vx = 0.0f;
 	//m_vy = 0.0f;
 	
 	//移動終わり-----------------------------------------
