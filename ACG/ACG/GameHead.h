@@ -30,6 +30,7 @@ enum OBJ_NAME
 	OBJ_GAME_CLEAR,		//ゲームクリア
 	OBJ_ENDLESS_SPRING, //敵生成システム(エンドレス沸き)
 	OBJ_LEVER_SWICH,    //レバースイッチ
+	OBJ_DOOR,           //ドア
 };
 //------------------------------------------------
 
@@ -145,6 +146,7 @@ struct UserData
 #include "ObjGameOver.h"	//ゲームオーバー
 #include "ObjEndlessSpring.h"//敵生成システム(エンドレス沸き)
 #include "ObjLeverSwich.h"  //レバースイッチ
+#include "ObjDoor.h"        //ドア
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
