@@ -52,6 +52,10 @@ void CSceneMain::InitScene()
 	//CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
 	//Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
 
+	//testボスオブジェクトを作成する
+	//CObjBoss* ObjBoss = new CObjBoss(100,300);
+	//Objs::InsertObj(ObjBoss, OBJ_BOSS, 11);
+
 }
 
 //ゲームメイン実行中メソッド
@@ -115,6 +119,9 @@ void CSceneMain::ImageDataLoading()
 
 	//hero画像
 	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_256);
+
+	//debug用Boss画像
+	Draw::LoadImageW(L"image3.jpg", 4, TEX_SIZE_512);
 
 	//Ladders画像
 	Draw::LoadImageW(L"Ladders.png", 4, TEX_SIZE_64);
