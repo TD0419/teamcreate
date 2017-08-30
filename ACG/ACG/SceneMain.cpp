@@ -122,6 +122,10 @@ void CSceneMain::ImageDataLoading()
 
 	//debug用Boss画像
 	Draw::LoadImageW(L"image3.jpg", 4, TEX_SIZE_512);
+
+	//Ladders画像
+	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
+
 }
 
 //音楽データ読み込み関数
