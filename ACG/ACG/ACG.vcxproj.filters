@@ -88,6 +88,9 @@
     <Filter Include="ソース ファイル\BossDropKey">
       <UniqueIdentifier>{a7e1b532-76af-4058-ba94-098cb00ab2ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\door">
+      <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -216,6 +219,9 @@
     <ClInclude Include="ObjBoss.h">
       <Filter>ソース ファイル\Main\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="ObjDoor.h">
+      <Filter>ソース ファイル\Main\door</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -340,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソース ファイル\Main\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjDoor.cpp">
+      <Filter>ソース ファイル\Main\door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
