@@ -123,7 +123,7 @@ void CObjHero::Action()
 			m_vy -= 3.0f;
 		}
 
-		//Sキーがおされたとき　下るとき
+		//Sキーがおされたとき　下るとき6
 		if (Input::GetVKey('S') == true)
 		{
 			m_vy += 3.0f;
