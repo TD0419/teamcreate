@@ -116,6 +116,9 @@ void CSceneMain::ImageDataLoading()
 	//hero画像
 	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_256);
 
+	//Ladders画像
+	Draw::LoadImageW(L"Ladders.png", 4, TEX_SIZE_64);
+
 }
 
 //音楽データ読み込み関数

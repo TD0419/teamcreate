@@ -20,7 +20,7 @@ CObjLift::CObjLift(int x, int y)
 void CObjLift::Init()
 {
 	//“–‚½‚è”»’è
-	Hits::SetHitBox(this, m_px, m_py, LADDERS_SIZE_X, LADDERS_SIZE_Y, ELEMENT_GIMMICK, OBJ_LADDERS, 1);
+	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE, LIFT_SIZE, ELEMENT_GIMMICK, OBJ_LIFT, 1);
 
 }
 

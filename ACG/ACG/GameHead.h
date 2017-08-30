@@ -92,8 +92,7 @@ struct UserData
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
 #define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	
 #define WATER_SIZE	(32.0f) //水のサイズ（仮）
-#define LADDERS_SIZE_X (64.0f)//はしごの横サイズ
-#define LADDERS_SIZE_Y (320.0f)//はしごの縦サイズ
+#define LADDERS_SIZE (64.0f)//はしごのサイズ
 #define BUTTON_SIZE	(32.0f)//ボタンサイズ（仮）
 #define ROPE_SWITCH_SIZE	(32.0f)	//ロープスイッチのサイズ（仮）
 #define LIFT_SIZE	(32.0f)//リフトサイズ(仮)
