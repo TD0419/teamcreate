@@ -17,6 +17,7 @@ public:
 	void Draw();	//ドロー
 	void SetScroll(float s) { m_scroll = s; }
 	float GetScroll() { return m_scroll; }
+	void HeroHit();//主人公との当たり判定を処理する
 
 	////マップ変更用関数
 	//void MapChange(int map[MAP_Y_MAX][MAP_X_MAX]);
@@ -27,6 +28,8 @@ public:
 		bool*up, bool* down, bool* left, bool* right,
 		float* vx, float*vy, int* bt
 	);*/
+
+	
 
 private:
 	

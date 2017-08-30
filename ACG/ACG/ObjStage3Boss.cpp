@@ -17,8 +17,6 @@ CObjStage3Boss::CObjStage3Boss()
 //イニシャライズ
 void CObjStage3Boss::Init()
 {
-	m_x = 0.0f;
-	m_y = 0.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
