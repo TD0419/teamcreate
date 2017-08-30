@@ -193,7 +193,6 @@ void CObjHero::Action()
 	//&m_block_type
 	//);
 
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
@@ -262,5 +261,14 @@ void CObjHero::Draw()
 	//描画
 	Draw::Draw(3, &src, &dst, color, m_r);
 
+	////画面全体を暗くするです。
+	//Draw::SetFill(true);
+	////画面全体をこの色にする
+	////staticなのは消すかもしれないから
+	//static float col[4] = { 0.0f };
+	//col[0] -= 0.01f;
+	//col[1] -= 0.01f;
+	//col[2] -= 0.01f;
+	//Draw::SetColor(col);
 }
 
