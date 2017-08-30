@@ -16,6 +16,16 @@ public:
 	void Action();	//アクション
 	void Draw();	//ドロー
 	void Scroll();	//スクロール処理の関数
+	void BlockHit();//ブロックとの当たり判定を処理する関数
+
+	//アクセサ------------------------------------------
+	void SetVecX(float x) { m_vx = x; };	//ベクトルXをセットする
+	void SetVecY(float y) { m_vy = y; };	//ベクトルYをセットする
+	void SetPosX(float x) { m_px = x; };	//ポジションXをセットする
+	void SetPosY(float y) { m_py = y; };	//ポジションYをセットする
+	float GetPosX() { return m_px; }//ポジションXを返す
+	float GetPosY() { return m_py; }//ポジションXを返す
+
 
 private:
 	float m_px;	//X座標
@@ -39,6 +49,6 @@ private:
 	bool m_hit_left;
 	bool m_hit_right;
 
-	//踏んでいるブロックの種類を確認用
-	int m_block_type;
+	////踏んでいるブロックの種類を確認用
+	//int m_block_type;
 };
