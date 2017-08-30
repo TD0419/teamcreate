@@ -17,6 +17,11 @@ public:
 	void Draw();	// ドロー
 
 private:
-	float m_px;	// リフトX座標
-	float m_py; // リフトY座標
+	float m_px;	// ロープX座標
+	float m_py;	// ロープY座標
+	float m_vx;	// X軸方向のベクトル
+	float m_vy;	// Y軸方向のベクトル
+	float m_speed;					//速さ
+	float m_angle;					//ロープの角度			
+
 };

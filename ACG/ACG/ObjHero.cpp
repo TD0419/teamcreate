@@ -26,7 +26,8 @@ void CObjHero::Init()
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 
-	m_f = false;
+	m_f  = false;
+	m_rf = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
@@ -152,6 +153,23 @@ void CObjHero::Action()
 	else
 		m_f = true; //左クリックしてなければ弾丸をでるフラグにする。
 	//発砲終了-----------------------------------------------
+
+
+	//ロープ射出---------------------------------------------
+	//右クリックを押したら
+	if (Input::GetMouButtonR() == true)
+	{
+		if (m_rf == true)
+		{
+			//ロープ作成
+			CObjRope* Objrope = new CObjRope(m_px, m_py);
+			Objs::InsertObj(Objrope, OBJ_ROPE, 10);
+			m_rf = false;
+		}
+	}
+	else
+		m_rf = true; //右クリックを押していなければロープが出るフラグを立てる。
+	//射出終了------------------------------------------------
 
 	//水オブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
