@@ -56,5 +56,5 @@ void CObjLadders::Draw()
 	dst.m_bottom = dst.m_top + LADDERS_SIZE;
 
 	//•`‰æ
-	Draw::Draw(4, &src, &dst, color, 0);
+	Draw::Draw(5, &src, &dst, color, 0);
 }

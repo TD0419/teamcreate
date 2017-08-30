@@ -124,7 +124,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"image3.jpg", 4, TEX_SIZE_512);
 
 	//Ladders‰æ‘œ
-	Draw::LoadImageW(L"Ladders.png", 4, TEX_SIZE_64);
+	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
 
 }
 
