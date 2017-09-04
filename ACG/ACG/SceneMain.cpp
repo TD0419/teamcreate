@@ -48,7 +48,7 @@ void CSceneMain::InitScene()
 	CObjHero* ObjHero = new CObjHero(3,5);
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
 
-	//主人公オブジェクトを作成する
+	//Doorオブジェクトを作成する
 	CObjDoor* ObjDoor = new CObjDoor(3, 0);
 	Objs::InsertObj(ObjDoor, OBJ_DOOR, 10);
 
@@ -136,7 +136,10 @@ void CSceneMain::ImageDataLoading()
 	//debug用enemy画像
 	Draw::LoadImageW(L"image2.jpg", 1, TEX_SIZE_512);
 	// debug用block画像
-	Draw::LoadImageW(L"testblock.png", 2, TEX_SIZE_512);
+	//Draw::LoadImageW(L"testblock.png", 2, TEX_SIZE_512);
+
+	// block画像
+	Draw::LoadImageW(L"block.png", 2, TEX_SIZE_128);
 
 	//hero画像
 	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_256);
