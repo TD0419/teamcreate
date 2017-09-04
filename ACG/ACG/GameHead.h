@@ -115,9 +115,9 @@ enum MAP_BER
 
 
 //スクロールのライン　（要調整）
-#define SCROLL_LINE_LEFT	(480.0f)							//左
+#define SCROLL_LINE_LEFT	(400.0f)							//左
 #define SCROLL_LINE_RIGHT	(WINDOW_SIZE_W - SCROLL_LINE_LEFT)	//右
-#define SCROLL_LINE_UP		(250.0f)							//上
+#define SCROLL_LINE_UP		(50.0f)							//上
 #define SCROLL_LINE_DOWN	(WINDOW_SIZE_H - SCROLL_LINE_UP)	//下
 
 //オブジェクトの生成ライン（要調整）

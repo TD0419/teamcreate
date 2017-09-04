@@ -44,7 +44,7 @@ void CObjMap::Action()
 	//オブジェクト生成おわり	-----------------------------------------------
 
 	//スクロール量(ブロックの数に計算して渡す)をもとにオブジェクトを生成する
-	//ScrollCreateObj(int(m_scroll_x / BLOCK_SIZE), int(m_scroll_y / BLOCK_SIZE));	
+	ScrollCreateObj(int(m_scroll_x / BLOCK_SIZE), int(m_scroll_y / BLOCK_SIZE));	
 }
 
 
