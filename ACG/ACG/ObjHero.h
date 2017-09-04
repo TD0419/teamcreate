@@ -17,6 +17,9 @@ public:
 	void Draw();	//ドロー
 	void Scroll();	//スクロール処理の関数
 	void BlockHit();//ブロックとの当たり判定を処理する関数
+	void LandingCheck();//着地できてるかどうかを調べる関数
+	bool HitUpCheck(int obj_name);//指定したオブジェクトの上側と当たっているかしらべる関数
+
 
 	//アクセサ------------------------------------------
 	void SetVecX(float x) { m_vx = x; };	//ベクトルXをセットする
@@ -25,8 +28,6 @@ public:
 	void SetPosY(float y) { m_py = y; };	//ポジションYをセットする
 	float GetPosX() { return m_px; }//ポジションXを返す
 	float GetPosY() { return m_py; }//ポジションXを返す
-
-	bool bu;//blockup:ブロックの上にのっている時の情報を持ってくる奴
 
 private:
 	float m_px;	//X座標
@@ -46,12 +47,14 @@ private:
 	int m_ani_frame;//描画フレーム
 	float m_ani_max_time;   //アニメーション動作間隔最大値
 
+	bool m_landingflag;	//着地してるかどうかのフラグ
+	
+
 	//blockとの衝突確認用
 	bool m_hit_up;
 	bool m_hit_down;
 	bool m_hit_left;
 	bool m_hit_right;
 
-	////踏んでいるブロックの種類を確認用
-	//int m_block_type;
+	
 };

@@ -29,8 +29,8 @@ void CObjHero::Init()
 	m_f  = false;
 	m_rf = false;
 	m_jf = false;//ジャンプ制御
+	m_landingflag = false;
 
-	bu = false;
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 6; //アニメーション間隔幅
@@ -52,6 +52,11 @@ void CObjHero::Action()
 		//場外に出たらリスタート
 		Scene::SetScene(new CSceneMain());
 	}
+	
+	LandingCheck();//着地フラグの更新
+
+	if (m_landingflag == true)//着地していれば
+		m_vy = 0.0f;//移動ベクトルを初期化
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 	//Aキーがおされたとき：右移動
@@ -89,11 +94,11 @@ void CObjHero::Action()
 	{
 		m_ani_frame = 0;
 	}
+	
 	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//ジャンプ--------------------------------------------------------------------------------
-	//SPACEキーがおされたとき：ジャンプ
-	if (/*bu == true&&*/Input::GetVKey(VK_SPACE)==true&&m_vy==0)
+	//着地フラグがオン　かつ　SPACEキーがおされたとき：ジャンプ
+	if (m_landingflag == true && Input::GetVKey(VK_SPACE)==true&&m_vy==0)
 	{
 		if (m_jf == true)
 		{
@@ -132,8 +137,11 @@ void CObjHero::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
-	//自由落下運動
-	m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
+	if (m_landingflag == false)
+	{
+		//自由落下運動
+		m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
+	}
 
 	//Scroll();	//スクロール処理をおこなう
 
@@ -147,7 +155,16 @@ void CObjHero::Action()
 
 	//移動終わり-----------------------------------------
 
-
+	//はしご-------------------------------------------------
+	////はしごと接触しているかどうかを調べる
+	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
+	{
+		//Wキーがおされたとき 上るとき
+		if (Input::GetVKey('W') == true)
+		{
+			m_vy -= 3.0f;
+		}
+	}
 
 	//発砲---------------------------------------------------
 	//左クリックを押したら
@@ -310,5 +327,52 @@ void CObjHero::Draw()
 	//Draw::SetColor(col);
 }
 
+//着地できてるかどうかを調べる関数
+void CObjHero::LandingCheck()
+{
+	bool c1, c2;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+	
+	c1=HitUpCheck(OBJ_BLOCK);//ブロックとの着地チェック
+	c2=HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 
+	//チェック項目のどれか一つでもtrueなら
+	if (c1 == true || c2 == true)
+		m_landingflag = true;//着地フラグをオンにする
+	else
+		m_landingflag = false;//着地フラグをオフにする
+
+}
+
+//指定したオブジェクトの上側に当たっているかしらべる
+//引数　調べたいオブジェクトネーム
+//戻り値　着地していれば:true　していなければ:false
+bool CObjHero::HitUpCheck(int obj_name)
+{
+	//自身のHitBoxをもってくる
+	CHitBox*hit = Hits::GetHitBox(this);
+	
+	//引数で持ってきたオブジェクトとあたっているか調べる
+	if (hit->CheckObjNameHit(obj_name) != nullptr)
+	{
+		HIT_DATA** hit_data;	//衝突の情報を入れる構造体
+		hit_data = hit->SearchObjNameHit(obj_name);//衝突の情報をhit_dataに入れる
+
+		//あたっている数分調べる
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			//データがあれば
+			if (hit_data[i] != nullptr)
+			{
+				float r = hit_data[i]->r;//あたっている角度をもってくる
+
+				 //Heroの下側があたっていれば
+				if (225.0f < r && r < 315.0f)
+				{
+					return true;//着地している
+				}
+			}
+		}
+	}
+	return false;//着地していない
+}
 
