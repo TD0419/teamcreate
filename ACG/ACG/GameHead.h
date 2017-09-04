@@ -74,18 +74,21 @@ struct UserData
 #define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y
 
 //マップの番号とオブジェクトの対応　（仮）
-#define MAP_SPACE	(0)		//何もない場所
-#define MAP_BLOCK	(1)		//ブロック(ノーマル)
-#define MAP_LADDERS	(2)		//はしご
-#define MAP_BUTTON	(3)		//ボタン
-#define MAP_ROPE_SWITCH	(4) //ロープスイッチ
-#define MAP_LIFT	(5)		//リフト
-#define MAP_ROCK	(6)		//岩
-#define MAP_WOOD	(7)		//木
-#define MAP_WATER	(8)		//水
-#define MAP_ENEMY	(9)		//敵
-#define MAP_BOSS	(10)	//ボス
-#define MAP_BLOCK2  (11)	//ブロック(二段目以降)	
+enum MAP_BER
+{
+	MAP_SPACE		,		//何もない場所
+	MAP_BLOCK		,	//ブロック(ノーマル)
+	MAP_LADDERS		,	//はしご
+	MAP_BUTTON		,	//ボタン
+	MAP_ROPE_SWITCH	, //ロープスイッチ
+	MAP_LIFT		,	//リフト
+	MAP_ROCK		,	//岩
+	MAP_WOOD		,	//木
+	MAP_WATER		,	//水
+	MAP_ENEMY		,	//敵
+	MAP_BOSS		,	//ボス
+	MAP_BLOCK2		,	//ブロック(二段目以降)
+};
 
 //オブジェクトのサイズ
 #define HERO_SIZE_X (64.0f)	//主人公の横サイズ	
