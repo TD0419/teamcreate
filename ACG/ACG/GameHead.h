@@ -74,24 +74,28 @@ struct UserData
 #define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y
 
 //マップの番号とオブジェクトの対応　（仮）
-#define MAP_SPACE	(0)		//何もない場所
-#define MAP_BLOCK	(1)		//ブロック(ノーマル)
-#define MAP_LADDERS	(2)		//はしご
-#define MAP_BUTTON	(3)		//ボタン
-#define MAP_ROPE_SWITCH	(4) //ロープスイッチ
-#define MAP_LIFT	(5)		//リフト
-#define MAP_ROCK	(6)		//岩
-#define MAP_WOOD	(7)		//木
-#define MAP_WATER	(8)		//水
-#define MAP_ENEMY	(9)		//敵
-#define MAP_BOSS	(10)	//ボス
+enum MAP_BER
+{
+	MAP_SPACE		,		//何もない場所
+	MAP_BLOCK		,	//ブロック(ノーマル)
+	MAP_LADDERS		,	//はしご
+	MAP_BUTTON		,	//ボタン
+	MAP_ROPE_SWITCH	, //ロープスイッチ
+	MAP_LIFT		,	//リフト
+	MAP_ROCK		,	//岩
+	MAP_WOOD		,	//木
+	MAP_WATER		,	//水
+	MAP_ENEMY		,	//敵
+	MAP_BOSS		,	//ボス
+	MAP_BLOCK2		,	//ブロック(二段目以降)
+};
 
 //オブジェクトのサイズ
 #define HERO_SIZE_X (128.0f)	//主人公の横サイズ	
 #define HERO_SIZE_Y (128.0f)//主人公の縦サイズ	
 #define ENEMY_SIZE	(64.0f) //敵のサイズ(仮)
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
-#define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	
+#define BLOCK_SIZE	(64.0f) //ブロックのサイズ（仮）	
 #define WATER_SIZE	(32.0f) //水のサイズ（仮）
 #define LADDERS_SIZE (64.0f)//はしごのサイズ
 #define BUTTON_SIZE	(32.0f)//ボタンサイズ（仮）
@@ -99,7 +103,8 @@ struct UserData
 #define ROPE_SWITCH_SIZE	(32.0f)	//ロープスイッチのサイズ（仮）
 #define LIFT_SIZE	(32.0f)//リフトサイズ(仮)
 #define ROCK_SIZE	(32.0f)//岩サイズ（仮）
-#define WOOD_SIZE	(32.0f)//木サイズ(仮)
+#define WOOD_SIZE_X	(64.0f)//木の横サイズ(仮)
+#define WOOD_SIZE_Y	(192.0f)//木の縦サイズ(仮)
 #define BOSS_SIZE	(170.0f)//BOSSサイズ(仮)
 #define BOSS_DORP_KEY_SIZE	(32.0f)//ボスドロップキーサイズ(仮)
 #define DOOR_SIZE_X (32.0f)//ドアの横サイズ(仮)

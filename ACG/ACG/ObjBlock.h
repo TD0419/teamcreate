@@ -38,5 +38,5 @@ private:
 	float m_px;     //ブロック位置X
 	float m_py;     //ブロック位置Y
 
-	bool m_j; 
+	
 };

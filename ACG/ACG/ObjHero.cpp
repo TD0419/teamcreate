@@ -29,6 +29,7 @@ void CObjHero::Init()
 	m_f  = false;
 	m_rf = false;
 	m_jf = false;//ジャンプ制御
+	m_djf = false;//二段ジャンプ制御
 	m_landingflag = false;
 
 	m_ani_time = 0;
@@ -103,9 +104,20 @@ void CObjHero::Action()
 	
 	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	
-	//着地フラグがオン　かつ　SPACEキーがおされたとき：ジャンプ
-	/*if (m_landingflag == true && Input::GetVKey(VK_SPACE)==true&&m_vy==0)
+
+	//ジャンプ--------------------------------------------------------------------
+	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
+	if (Input::GetVKey(VK_SPACE) == true)
+	{
+		m_djf = true;
+	}
+	else
+	{
+		m_djf = false;
+	}
+
+	//着地フラグがオン かつ　二段ジャンプ防止フラグがオンのとき：ジャンプ
+	if (m_landingflag == true && m_djf == true)
 	{
 		if (m_jf == true)
 		{
@@ -114,7 +126,10 @@ void CObjHero::Action()
 		}
 	}
 	else
-		m_jf = true; //スペース押してなければジャンプでるフラグにする。*/
+		m_jf = true; //スペース押してなければジャンプでるフラグにする。
+
+	//ジャンプ終了-------------------------------------------------------------------------------------
+
 
 	//↓キーがおされたとき：下に下がる（デバッグ）
 	if (Input::GetVKey(VK_DOWN) == true)
@@ -144,23 +159,15 @@ void CObjHero::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
-	//if (m_landingflag == false)
-	//{
+	if (m_landingflag == false)
+	{
 		//自由落下運動
 		m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
-	//}
+	}
 
 	//Scroll();	//スクロール処理をおこなう
 	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_X, HERO_SIZE_Y, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
-
-	if (Input::GetVKey(VK_SPACE))
-	{
-		if (m_hit_down == true)
-		{
-			m_vy = -20.0f;
-		}
-	}
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
@@ -171,6 +178,17 @@ void CObjHero::Action()
 	//m_vy = 0.0f;
 
 	//移動終わり-----------------------------------------
+
+	//はしご-------------------------------------------------
+	////はしごと接触しているかどうかを調べる
+	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
+	{
+		//Wキーがおされたとき 上るとき
+		if (Input::GetVKey('W') == true)
+		{
+			m_vy -= 3.0f;
+		}
+	}
 
 	//発砲---------------------------------------------------
 	//左クリックを押したら
@@ -241,7 +259,7 @@ void CObjHero::Action()
 	//木オブジェクトと衝突してれば
 	if (hit->CheckObjNameHit(OBJ_WOOD) != nullptr)
 	{
-
+		
 	}
 
 	////水オブジェクトと衝突していれば
