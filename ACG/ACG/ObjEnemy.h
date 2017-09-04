@@ -31,4 +31,13 @@ private:
 	float m_vx;	//敵X軸方向のベクトル
 	float m_vy;	//敵Y軸方向のベクトル
 	float m_r;  //敵の回転角度
+	float m_posture;//姿勢
+
+	//アニメーション関係
+	int m_ani_time; //アニメーションフレーム動作感覚
+	int m_ani_frame;//描画フレーム
+	float m_ani_max_time;   //アニメーション動作間隔最大値
+
+	int	  m_first_x;//最初に生成されたときのマップのXの要素数
+	int	  m_first_y;//最初に生成されたときのマップのYの要素数
 };

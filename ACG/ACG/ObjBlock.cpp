@@ -84,8 +84,8 @@ void CObjBlock::Draw()
 
 	//切り取り位置
 	src.m_top = 0.0f;
-	src.m_left = 320.0f;
-	src.m_right = 384.0f;
+	src.m_left = 0.0f;
+	src.m_right = 64.0f;
 	src.m_bottom = 64.0f;
 
 	//描画位置
@@ -144,7 +144,6 @@ void CObjBlock::HeroHit()
 		}
 	}
 }
-
 //確認用にボス版を用意しました。今後、削除変更してもかまいません。
 void CObjBlock::BossHit()
 {
@@ -154,7 +153,7 @@ void CObjBlock::BossHit()
 	HIT_DATA** hit_data;						//衝突の情報を入れる構造体
 	hit_data = hit->SearchObjNameHit(OBJ_BOSS); //衝突の情報をhit_dataに入れる
 
-	//デバッグ用ボスオブジェクト情報を取得
+												//デバッグ用ボスオブジェクト情報を取得
 	CObjBoss* obj_boss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 
 	for (int i = 0; i < hit->GetCount(); i++)
@@ -164,7 +163,7 @@ void CObjBlock::BossHit()
 		{
 			float r = hit_data[i]->r;//ぶつかっている角度をもってくる
 
-			//ブロックの右側が衝突している場合
+									 //ブロックの右側が衝突している場合
 			if (0 < r && r < 45 || 315 < r && r < 360)
 			{
 				obj_boss->SetVecX(0.0f);//ボスのX方向の移動を０にする

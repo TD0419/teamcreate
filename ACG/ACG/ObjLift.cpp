@@ -62,10 +62,11 @@ void CObjLift::HeroRide()
 	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
 
-	//データがあれば
-	if (hit_data[0] != nullptr)
+	for (int i = 0; i < hit->GetCount(); i++)
 	{
-		float r = hit_data[0]->r;//あたっている角度を持ってくる
+		if (hit_data[i] != nullptr)
+		{
+			float r = hit_data[i]->r;//あたっている角度を持ってくる
 
 		//上側があたっていればで
 		if (45.0f <= r && r <= 135.0f)
