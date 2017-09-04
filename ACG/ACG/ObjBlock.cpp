@@ -192,7 +192,5 @@ void CObjBlock::HeroHit()
 				}
 			}
 		}
-
-
 	}
 }
