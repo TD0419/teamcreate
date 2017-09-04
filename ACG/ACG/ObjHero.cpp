@@ -26,10 +26,10 @@ void CObjHero::Init()
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 
-	m_f  = false;
-	m_rf = false;
-	m_jf = false;//ジャンプ制御
-	m_djf = false;//二段ジャンプ制御
+	m_BulletControl = false;  //弾丸発射制御用
+	m_RopeControl = false;	//ロープ発射制御用
+	m_JumpControl = false;	//ジャンプ制御
+	m_W_JumpControl = false; //2段ジャンプ制御
 	m_landingflag = false;
 
 	m_ani_time = 0;
@@ -109,24 +109,24 @@ void CObjHero::Action()
 	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
-		m_djf = true;
+		m_W_JumpControl = true;
 	}
 	else
 	{
-		m_djf = false;
+		m_W_JumpControl = false;
 	}
 
 	//着地フラグがオン かつ　二段ジャンプ防止フラグがオンのとき：ジャンプ
-	if (m_landingflag == true && m_djf == true)
+	if (m_landingflag == true && m_W_JumpControl == true)
 	{
-		if (m_jf == true)
+		if (m_JumpControl == true)
 		{
 			m_vy = -20.0f;
-			m_jf = false;
+			m_JumpControl = false;
 		}
 	}
 	else
-		m_jf = true; //スペース押してなければジャンプでるフラグにする。*/
+		m_JumpControl = true; //スペース押してなければジャンプでるフラグにする。*/
 
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
@@ -166,6 +166,7 @@ void CObjHero::Action()
 	}
 
 	//Scroll();	//スクロール処理をおこなう
+	//ブロックとの当たり判定
 	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_X, HERO_SIZE_Y, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
@@ -183,26 +184,26 @@ void CObjHero::Action()
 	//左クリックを押したら
 	if (Input::GetMouButtonL() == true)
 	{
-		if (m_f == true)
+		if (m_BulletControl == true)
 		{
 			if (m_posture == 0)//主人公が右を向いているとき右側から発射
 			{
 				//弾丸作成
 				CObjBullet* Objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
 				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-				m_f = false; //弾丸を出ないフラグにする。
+				m_BulletControl = false; //弾丸を出ないフラグにする。
 			}
 			else//主人公が左を向いているとき右側から発射
 			{
 				//弾丸作成
 				CObjBullet* Objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
 				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-				m_f = false; //弾丸を出ないフラグにする。
+				m_BulletControl = false; //弾丸を出ないフラグにする。
 			}
 		}
 	}
 	else
-		m_f = true; //左クリックしてなければ弾丸をでるフラグにする。
+		m_BulletControl = true; //左クリックしてなければ弾丸をでるフラグにする。
 
 	//発砲終了-----------------------------------------------
 
@@ -211,16 +212,16 @@ void CObjHero::Action()
 	//右クリックを押したら
 	if (Input::GetMouButtonR() == true)
 	{
-		if (m_rf == true)
+		if (m_RopeControl == true)
 		{
 			//ロープ作成
 			CObjRope* Objrope = new CObjRope(m_px, m_py);
 			Objs::InsertObj(Objrope, OBJ_ROPE, 10);
-			m_rf = false;
+			m_RopeControl = false;
 		}
 	}
 	else
-		m_rf = true; //右クリックを押していなければロープが出るフラグを立てる。
+		m_RopeControl = true; //右クリックを押していなければロープが出るフラグを立てる。
 	//射出終了------------------------------------------------
 
 	//水オブジェクトと衝突していれば
