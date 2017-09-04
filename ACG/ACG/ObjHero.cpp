@@ -154,10 +154,20 @@ void CObjHero::Action()
 	{
 		if (m_f == true)
 		{
-			//弾丸作成
-			CObjBullet* Objbullet = new CObjBullet(m_px, m_py);
-			Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-			m_f = false; //弾丸を出ないフラグにする。
+			if (m_posture == 0)//主人公が右を向いているとき右側から発射
+			{
+				//弾丸作成
+				CObjBullet* Objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
+				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+				m_f = false; //弾丸を出ないフラグにする。
+			}
+			else//主人公が左を向いているとき右側から発射
+			{
+				//弾丸作成
+				CObjBullet* Objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
+				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+				m_f = false; //弾丸を出ないフラグにする。
+			}
 		}
 	}
 	else
