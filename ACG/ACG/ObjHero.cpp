@@ -28,7 +28,9 @@ void CObjHero::Init()
 
 	m_f  = false;
 	m_rf = false;
+	m_jf = false;//ジャンプ制御
 
+	bu = false;
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 6; //アニメーション間隔幅
@@ -87,15 +89,20 @@ void CObjHero::Action()
 	{
 		m_ani_frame = 0;
 	}
+	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//SPACEキーがおされたとき：ジャンプ
-	if (Input::GetVKey(VK_SPACE) == true)
+	if (/*bu == true&&*/Input::GetVKey(VK_SPACE)==true&&m_vy==0)
 	{
-		//if (m_hit_down == true)
-		//{
-		m_vy = -20.0f;
-		//}
+		if (m_jf == true)
+		{
+			m_vy = -20.0f;
+			m_jf = false;
+		}
 	}
+	else
+		m_jf = true; //スペース押してなければジャンプでるフラグにする。
+
 	//↓キーがおされたとき：下に下がる（デバッグ）
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
@@ -117,9 +124,9 @@ void CObjHero::Action()
 	m_px += m_vx;
 	m_py += m_vy;
 
-	//移動ベクトルを初期化
-	m_vx = 0.0f;
-	m_vy = 0.0f;
+	////移動ベクトルを初期化
+	//m_vx = 0.0f;
+	//m_vy = 0.0f;
 
 	//移動終わり-----------------------------------------
 

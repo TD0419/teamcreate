@@ -48,6 +48,10 @@ void CSceneMain::InitScene()
 	CObjHero* ObjHero = new CObjHero(3,5);
 	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
 
+	//主人公オブジェクトを作成する
+	CObjDoor* ObjDoor = new CObjDoor(3, 0);
+	Objs::InsertObj(ObjDoor, OBJ_DOOR, 10);
+
 	//test敵オブジェクトを作成する
 	//CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
 	//Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
@@ -81,6 +85,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
+	//p = Save::ExternalDataOpen(L"Stage1.1.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
 	{
@@ -134,6 +139,8 @@ void CSceneMain::ImageDataLoading()
 	//Ladders画像
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
 
+	//Door & Padlock画像
+	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_256);
 }
 
 //音楽データ読み込み関数
