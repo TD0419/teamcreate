@@ -103,6 +103,7 @@ struct UserData
 #define BOSS_DORP_KEY_SIZE	(32.0f)//ボスドロップキーサイズ(仮)
 #define DOOR_SIZE_X (32.0f)//ドアの横サイズ(仮)
 #define DOOR_SIZE_Y (384.0f)//ドアの縦サイズ(仮)
+#define SIGN_SIZE	(32.0f)//看板サイズ(仮)
 //#define BOSS_CORRECTION (90.0f)//ボスサイズ補正(仮)
 
 

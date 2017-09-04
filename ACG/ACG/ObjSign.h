@@ -17,6 +17,7 @@ public:
 	void Draw();	// ドロー
 
 private:
-	float m_px;	// リフトX座標
-	float m_py; // リフトY座標
+	float m_px;	//位置X
+	float m_py; //位置Y
+	bool m_strdrow;//文字を表示させるかのフラグ
 };
