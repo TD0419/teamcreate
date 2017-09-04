@@ -218,7 +218,7 @@ void CObjHero::Action()
 	//木オブジェクトと衝突してれば
 	if (hit->CheckObjNameHit(OBJ_WOOD) != nullptr)
 	{
-
+		
 	}
 
 	////水オブジェクトと衝突していれば
