@@ -96,7 +96,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
+	////p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
 	//p = Save::ExternalDataOpen(L"Stage1.1.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
@@ -106,26 +106,24 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 		return;
 	}
 
-	int count = 1;
+	//for (int i = 0; i < MAP_Y_MAX; i++)
+	//{
+	//	for (int j = 0; j < MAP_X_MAX; j++)
+	//	{
+	//		int w = 0;
+	//		swscanf_s(&p.get()[count], L"%d", &w);
+	//		
+	//		map[i][j] = w;
 
-	for (int i = 0; i < MAP_Y_MAX; i++)
-	{
-		for (int j = 0; j < MAP_X_MAX; j++)
-		{
-			int w = 0;
-			swscanf_s(&p.get()[count], L"%d", &w);
-			
-			map[i][j] = w;
-
-			while (w/10 != 0)
-			{
-				count++;
-				w /= 10;
-			}
-			
-			count += 2;
-		}
-	}	
+	//		while (w/10 != 0)
+	//		{
+	//			count++;
+	//			w /= 10;
+	//		}
+	//		
+	//		count += 2;
+	//	}
+	//}	
 }
 
 //画像データ読み込み関数
