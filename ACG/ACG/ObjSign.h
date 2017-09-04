@@ -10,13 +10,13 @@ using namespace GameL;
 class CObjSign :public CObj
 {
 public:
-	CObjSign(float x, float y); // コンストラクタ
+	CObjSign(int x, int y); // コンストラクタ
 	~CObjSign() {};	// デストラクタ
 	void Init();	// イニシャライズ
 	void Action();	// アクション
 	void Draw();	// ドロー
 
 private:
-	float m_x;	// リフトX座標
-	float m_y; // リフトY座標
+	float m_px;	// リフトX座標
+	float m_py; // リフトY座標
 };

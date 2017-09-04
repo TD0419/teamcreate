@@ -95,6 +95,7 @@ struct UserData
 #define WATER_SIZE	(32.0f) //水のサイズ（仮）
 #define LADDERS_SIZE (64.0f)//はしごのサイズ
 #define BUTTON_SIZE	(32.0f)//ボタンサイズ（仮）
+#define SIGN_SIZE	(32.0f)//看板のサイズ（仮）
 #define ROPE_SWITCH_SIZE	(32.0f)	//ロープスイッチのサイズ（仮）
 #define LIFT_SIZE	(32.0f)//リフトサイズ(仮)
 #define ROCK_SIZE	(32.0f)//岩サイズ（仮）

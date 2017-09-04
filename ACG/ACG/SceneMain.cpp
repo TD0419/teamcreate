@@ -60,6 +60,9 @@ void CSceneMain::InitScene()
 	CObjLift* Obj_lift = new CObjLift(6, 5);
 	Objs::InsertObj(Obj_lift, OBJ_LIFT, 10);
 
+	//看板オブジェクトを作成する
+	CObjSign* Obj_sign = new CObjSign(6, 7);
+	Objs::InsertObj(Obj_sign, OBJ_SIGN, 10);
 
 }
 
