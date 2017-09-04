@@ -68,6 +68,14 @@ void CSceneMain::InitScene()
 	CObjSign* Obj_sign = new CObjSign(6, 7);
 	Objs::InsertObj(Obj_sign, OBJ_SIGN, 10);
 
+	//testはしごオブジェクトを作成する（デバック用）
+	/*CObjLadders* ObjLadders = new CObjLadders(6, 3);
+	Objs::InsertObj(ObjLadders, OBJ_LADDERS, 10);
+	CObjLadders* ObjLadders2 = new CObjLadders(6, 2);
+	Objs::InsertObj(ObjLadders2, OBJ_LADDERS, 10);
+	CObjLadders* ObjLadder3 = new CObjLadders(6, 1);
+	Objs::InsertObj(ObjLadder3, OBJ_LADDERS, 10);*/
+
 }
 
 //ゲームメイン実行中メソッド
@@ -141,6 +149,9 @@ void CSceneMain::ImageDataLoading()
 
 	//Door & Padlock画像
 	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_256);
+
+	//Wood画像
+	Draw::LoadImageW(L"Wood.cpp", 7, TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数
