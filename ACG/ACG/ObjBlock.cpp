@@ -22,8 +22,11 @@ CObjBlock::CObjBlock(int x, int y)
 //イニシャライズ
 void CObjBlock::Init()
 {	
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
+	Hits::SetHitBox(this, m_px-obj_m->GetScrollX(), m_py - obj_m->GetScrollY(), BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 
 }
 
@@ -45,8 +48,27 @@ void CObjBlock::Action()
 		BossHit();//当たり判定の処理を行う
 	}
 
-	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//画面内か調べる
+	bool wincheck_flag =WindowCheck(m_px,m_py,BLOCK_SIZE,BLOCK_SIZE);
+
+	//画面ないなら
+	if (wincheck_flag == true)
+	{
+		//HitBoxの位置を更新する
+		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	}
+	else
+	{
+		//マップ要素に数値を入れる
+		obj_m->SetMap((m_px / BLOCK_SIZE), (m_py / BLOCK_SIZE), MAP_BLOCK);
+
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
+	}
+
 }
 
 //ドロー

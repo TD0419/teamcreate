@@ -19,17 +19,17 @@ CObjHero::CObjHero(int x, int y)
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = 0.0f;
+	m_px = 400.0f;
 	m_py = 0.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 
-	m_f  = false;
-	m_rf = false;
-	m_jf = false;//ジャンプ制御
-	m_djf = false;//二段ジャンプ制御
+	m_BulletControl = false;
+	m_RopeControl = false;
+	m_JumpControl = false;//ジャンプ制御
+	m_W_JumpControl = false;//二段ジャンプ制御
 	m_landingflag = false;
 
 	m_ani_time = 0;
@@ -109,24 +109,24 @@ void CObjHero::Action()
 	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
-		m_djf = true;
+		m_W_JumpControl = true;
 	}
 	else
 	{
-		m_djf = false;
+		m_W_JumpControl = false;
 	}
 
 	//着地フラグがオン かつ　二段ジャンプ防止フラグがオンのとき：ジャンプ
-	if (m_landingflag == true && m_djf == true)
+	if (m_landingflag == true && m_W_JumpControl == true)
 	{
-		if (m_jf == true)
+		if (m_JumpControl == true)
 		{
 			m_vy = -20.0f;
-			m_jf = false;
+			m_JumpControl = false;
 		}
 	}
 	else
-		m_jf = true; //スペース押してなければジャンプでるフラグにする。
+		m_JumpControl = true; //スペース押してなければジャンプでるフラグにする。
 
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
@@ -168,52 +168,43 @@ void CObjHero::Action()
 	//Scroll();	//スクロール処理をおこなう
 	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_X, HERO_SIZE_Y, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+	Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
 	m_py += m_vy;
 
-	////移動ベクトルを初期化
+	//移動ベクトルを初期化
 	//m_vx = 0.0f;
 	//m_vy = 0.0f;
 
 	//移動終わり-----------------------------------------
 
-	//はしご-------------------------------------------------
-	////はしごと接触しているかどうかを調べる
-	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
-	{
-		//Wキーがおされたとき 上るとき
-		if (Input::GetVKey('W') == true)
-		{
-			m_vy -= 3.0f;
-		}
-	}
 
 	//発砲---------------------------------------------------
 	//左クリックを押したら
 	if (Input::GetMouButtonL() == true)
 	{
-		if (m_f == true)
+		if (m_BulletControl == true)
 		{
 			if (m_posture == 0)//主人公が右を向いているとき右側から発射
 			{
 				//弾丸作成
 				CObjBullet* Objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
 				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-				m_f = false; //弾丸を出ないフラグにする。
+				m_BulletControl = false; //弾丸を出ないフラグにする。
 			}
 			else//主人公が左を向いているとき右側から発射
 			{
 				//弾丸作成
 				CObjBullet* Objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
 				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-				m_f = false; //弾丸を出ないフラグにする。
+				m_BulletControl = false; //弾丸を出ないフラグにする。
 			}
 		}
 	}
 	else
-		m_f = true; //左クリックしてなければ弾丸をでるフラグにする。
+		m_BulletControl = true; //左クリックしてなければ弾丸をでるフラグにする。
 
 	//発砲終了-----------------------------------------------
 
@@ -222,16 +213,16 @@ void CObjHero::Action()
 	//右クリックを押したら
 	if (Input::GetMouButtonR() == true)
 	{
-		if (m_rf == true)
+		if (m_RopeControl == true)
 		{
 			//ロープ作成
 			CObjRope* Objrope = new CObjRope(m_px, m_py);
 			Objs::InsertObj(Objrope, OBJ_ROPE, 10);
-			m_rf = false;
+			m_RopeControl = false;
 		}
 	}
 	else
-		m_rf = true; //右クリックを押していなければロープが出るフラグを立てる。
+		m_RopeControl = true; //右クリックを押していなければロープが出るフラグを立てる。
 	//射出終了------------------------------------------------
 
 	//水オブジェクトと衝突していれば
@@ -272,8 +263,12 @@ void CObjHero::Action()
 	//	Scene::SetScene(new CSceneMain());
 	//}
 
+
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py );
 
 }
 
@@ -290,7 +285,7 @@ void CObjHero::Scroll()
 	}
 
 	//主人公が上または下のスクロールラインを超えそうなら
-	if ((m_py + m_vy) < SCROLL_LINE_UP || (m_py + m_vy) > SCROLL_LINE_DOWN) 
+	if ((m_py + m_vy) > SCROLL_LINE_DOWN || (m_py + m_vy) < SCROLL_LINE_UP) 
 	{
 		obj_m->SetScrollY(m_vy);	//移動量をスクロールにセット
 	}
@@ -336,7 +331,7 @@ void CObjHero::Draw()
 	dst.m_left		= (HERO_SIZE_X * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_right	    = (HERO_SIZE_X - HERO_SIZE_X * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_bottom	= dst.m_top  + HERO_SIZE_Y;
-
+	 
 	//描画
 	Draw::Draw(3, &src, &dst, color, m_r);
 
