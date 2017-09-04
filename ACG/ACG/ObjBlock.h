@@ -30,9 +30,6 @@ public:
 		float* vx, float*vy, int* bt
 	);*/
 
-	bool j;//ジャンプ用
-	
-
 private:
 	
 	int m_map[10][10]; //マップ情報（仮）
@@ -40,7 +37,4 @@ private:
 	float m_scroll; //左右スクリーン用
 	float m_px;     //ブロック位置X
 	float m_py;     //ブロック位置Y
-
-	
-	bool m_j; //
 };

@@ -104,7 +104,7 @@ void CObjBlock::HeroHit()
 			//ブロックの上側が衝突している場合
 			else if (45 < r && r < 125)
 			{
-				obj_hero->bu = true;
+				obj_hero->bu = true;//blockupをtrueにする。
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 				obj_hero->SetPosY(m_py - HERO_SIZE_Y);//主人公の位置をブロックの上側までずらす
 			}

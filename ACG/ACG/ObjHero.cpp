@@ -91,6 +91,7 @@ void CObjHero::Action()
 	}
 	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
+	//ジャンプ--------------------------------------------------------------------------------
 	//SPACEキーがおされたとき：ジャンプ
 	if (/*bu == true&&*/Input::GetVKey(VK_SPACE)==true&&m_vy==0)
 	{
@@ -109,7 +110,7 @@ void CObjHero::Action()
 		m_vy = 20.0f;
 	}
 
-
+	//ジャンプ終了---------------------------------------------------------------------------------
 	
 
 	//摩擦
@@ -204,6 +205,11 @@ void CObjHero::Action()
 		return;
 	}
 
+	//木オブジェクトと衝突してれば
+	if (hit->CheckObjNameHit(OBJ_WOOD) != nullptr)
+	{
+
+	}
 
 	////水オブジェクトと衝突していれば
 	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)

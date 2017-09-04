@@ -26,7 +26,7 @@ public:
 	float GetPosX() { return m_px; }//ポジションXを返す
 	float GetPosY() { return m_py; }//ポジションXを返す
 
-	bool bu;//ブロックの上にのっている時の情報を持ってくる奴
+	bool bu;//blockup:ブロックの上にのっている時の情報を持ってくる奴
 
 private:
 	float m_px;	//X座標
