@@ -85,6 +85,7 @@ struct UserData
 #define MAP_WATER	(8)		//水
 #define MAP_ENEMY	(9)		//敵
 #define MAP_BOSS	(10)	//ボス
+#define MAP_BLOCK2  (11)	//ブロック(二段目以降)	
 
 //オブジェクトのサイズ
 #define HERO_SIZE_X (64.0f)	//主人公の横サイズ	

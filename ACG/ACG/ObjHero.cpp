@@ -29,6 +29,7 @@ void CObjHero::Init()
 	m_f  = false;
 	m_rf = false;
 	m_jf = false;//ジャンプ制御
+	m_djf = false;//二段ジャンプ制御
 	m_landingflag = false;
 
 	m_ani_time = 0;
@@ -97,8 +98,20 @@ void CObjHero::Action()
 	
 	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//着地フラグがオン　かつ　SPACEキーがおされたとき：ジャンプ
-	if (m_landingflag == true && Input::GetVKey(VK_SPACE)==true&&m_vy==0)
+
+	//ジャンプ--------------------------------------------------------------------
+	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
+	if (Input::GetVKey(VK_SPACE) == true)
+	{
+		m_djf = true;
+	}
+	else
+	{
+		m_djf = false;
+	}
+
+	//着地フラグがオン かつ　二段ジャンプ防止フラグがオンのとき：ジャンプ
+	if (m_landingflag == true && m_djf == true)
 	{
 		if (m_jf == true)
 		{
@@ -108,6 +121,9 @@ void CObjHero::Action()
 	}
 	else
 		m_jf = true; //スペース押してなければジャンプでるフラグにする。
+
+	//ジャンプ終了-------------------------------------------------------------------------------------
+
 
 	//↓キーがおされたとき：下に下がる（デバッグ）
 	if (Input::GetVKey(VK_DOWN) == true)
