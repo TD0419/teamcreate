@@ -122,77 +122,49 @@ void CObjBlock::HeroHit()
 		}
 	}
 }
+//確認用にボス版を用意しました。今後、削除変更してもかまいません。
+void CObjBlock::BossHit()
+{
+	//自身のHitBoxを取得
+	CHitBox*hit = Hits::GetHitBox(this);
 
-				//主人公とブロックの当たり判定
-				if ((*x/* + (-scroll)*/ + 64.0f > bx) && (*x /*+ (-scroll)*/ < bx + 64.0f) && (*y + 64.0f > by) && (*y < by + 64.0f))
-				{
-					//上下左右判定
+	HIT_DATA** hit_data;						//衝突の情報を入れる構造体
+	hit_data = hit->SearchObjNameHit(OBJ_BOSS); //衝突の情報をhit_dataに入れる
 
-					//vectorの作成
-					float rvx = (*x /*+ (-scroll)*/) - bx;
-					float rvy = *y - by;
+												//デバッグ用ボスオブジェクト情報を取得
+	CObjBoss* obj_boss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 
-					//長さを求める
-					float len = sqrt(rvx * rvx + rvy * rvy);
+	for (int i = 0; i < hit->GetCount(); i++)
+	{
+		//データあり
+		if (hit_data[i] != nullptr)
+		{
+			float r = hit_data[i]->r;//ぶつかっている角度をもってくる
 
-					//角度を求める
-					float r = atan2(rvy, rvx);
-					r = r * 180.0f / 3.14f;
-
-					if (r <= 0.0f)
-					{
-						r = abs(r);
-					}
-					else
-					{
-						r = 360.0f - abs(r);
-					}
-					//lenがある一定の長さのより短い場合に入る
-					if (len < 88.0f)
-					{
-
-						//角度で上下左右を判定
-						if ((r < 45 && r > 0) || r > 315)
-						{
-							//右
-							*right = (true);					//主人公の左の部分が衝突している
-							*x = bx + 64.0f /*+ (scroll)*/;   //ブロックの位置＋主人公の幅
-							*vx = -(*vx) * 0.1f; //-VX*反発係数
-						}
-						if (r > 45 && r < 135)
-						{
-							//上
-							*down = (true);					//主人公の下の部分が衝突している
-							*y = by - 64.0f;				//ブロックの位置＋主人公の幅
-															//種類を渡すのスタートとゴールのみ変更する
-							if (m_map[i][j] >= 2)
-							{
-								*bt = m_map[i][j];			//ブロック要素 ( type )を主人公に渡す
-							}
-							*vy = 0.0f;
-						}
-						if (r > 135 && r < 225)
-						{
-							//左
-							*left = (true);					//主人公の右の部分が衝突している
-							*x = bx - 64.0f /*+ (scroll)*/;	//ブロックの位置＋主人公の幅
-							*vx = -(*vx) * -0.1f; //-VX*反発係数
-						}
-						if (r > 255 && r < 315)
-						{
-							//下
-							*up = (true);					//主人公の上の部分が衝突している
-							*y = by + 64.0f;				//ブロックの位置＋主人公の幅
-							if (*vy < 0)
-							{
-								*vy = 0.0f;
-							}
-						}
-					}
-				}
+									 //ブロックの右側が衝突している場合
+			if (0 < r && r < 45 || 315 < r && r < 360)
+			{
+				obj_boss->SetVecX(0.0f);//ボスのX方向の移動を０にする
+				obj_boss->SetPosX(m_px + BLOCK_SIZE);//ボスの位置をブロックの右側までずらす
+			}
+			//ブロックの上側が衝突している場合
+			else if (45 < r && r < 125)
+			{
+				obj_boss->SetVecY(0.0f);//ボスのY方向の移動を０にする
+				obj_boss->SetPosY(m_py - BOSS_SIZE);//ボスの位置をブロックの上側までずらす
+			}
+			//ブロックの左側が衝突している場合
+			else if (125 < r && r < 225)
+			{
+				obj_boss->SetVecX(0.0f);//ボスのX方向の移動を０にする
+				obj_boss->SetPosX(m_px - BOSS_SIZE);//ボスの位置をブロックの左側までずらす
+			}
+			//ブロックの下側が衝突している場合
+			else if (225 < r && r < 315)
+			{
+				obj_boss->SetVecY(0.0f);//ボスのY方向の移動を０にする
+				obj_boss->SetPosY(m_py + BLOCK_SIZE);//ボスの位置をブロックの上側までずらす
 			}
 		}
-
-
 	}
 }
