@@ -7,17 +7,16 @@
 using namespace GameL;
 
 //オブジェクト：リフト
-class CObjSign :public CObj
+class CObjLeverSwich :public CObj
 {
 public:
-	CObjSign(int x, int y); // コンストラクタ
-	~CObjSign() {};	// デストラクタ
+	CObjLeverSwich(float x, float y); // コンストラクタ
+	~CObjLeverSwich() {};	// デストラクタ
 	void Init();	// イニシャライズ
 	void Action();	// アクション
 	void Draw();	// ドロー
 
 private:
-	float m_px;	//位置X
-	float m_py; //位置Y
-	bool m_strdrow;//文字を表示させるかのフラグ
+	float m_x;	// リフトX座標
+	float m_y; // リフトY座標
 };

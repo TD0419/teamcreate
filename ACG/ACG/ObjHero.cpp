@@ -25,7 +25,11 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
-	m_mouse_angle = 0.0f;
+
+	m_f  = false;
+	m_rf = false;
+	m_jf = false;//ジャンプ制御
+	m_landingflag = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
@@ -48,12 +52,17 @@ void CObjHero::Action()
 		//場外に出たらリスタート
 		Scene::SetScene(new CSceneMain());
 	}
+	
+	LandingCheck();//着地フラグの更新
+
+	if (m_landingflag == true)//着地していれば
+		m_vy = 0.0f;//移動ベクトルを初期化
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 	//Aキーがおされたとき：右移動
 	if (Input::GetVKey('D') == true)
 	{
-		m_vx += 5.0f;
+		m_vx += 0.5f;
 		m_ani_frame_stop = 0;
 		m_posture = 0.0f;//主人公の向き
 		m_ani_time += 1;
@@ -61,7 +70,7 @@ void CObjHero::Action()
 	//Dキーがおされたとき：左移動
 	else if (Input::GetVKey('A') == true)
 	{
-		m_vx -= 5.0f;
+		m_vx -= 0.5f;
 		m_ani_frame_stop = 0;
 		m_posture = 1.0f;//主人公の向き
 		m_ani_time += 1;
@@ -86,20 +95,53 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 	
-	//SPACEキーがおされたとき：ジャンプ
-	if (Input::GetVKey(VK_SPACE) == true)
+	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	//着地フラグがオン　かつ　SPACEキーがおされたとき：ジャンプ
+	if (m_landingflag == true && Input::GetVKey(VK_SPACE)==true&&m_vy==0)
 	{
-		if (m_hit_down == true)
+		if (m_jf == true)
 		{
 			m_vy = -20.0f;
+			m_jf = false;
 		}
 	}
+	else
+		m_jf = true; //スペース押してなければジャンプでるフラグにする。
+
+	//↓キーがおされたとき：下に下がる（デバッグ）
+	if (Input::GetVKey(VK_DOWN) == true)
+	{
+		m_vy = 20.0f;
+	}
+
+	//はしご-------------------------------------------------
+	////はしごと接触しているかどうかを調べる
+	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
+	{
+		//Wキーがおされたとき 上るとき
+		if (Input::GetVKey('W') == true)
+		{
+			m_vy = -2.0f;
+		}
+
+		//Sキーがおされたとき　下るとき
+		if (Input::GetVKey('S') == true)
+		{
+			m_vy = 2.0f;
+		}
+	}
+	//はしご終了---------------------------------------------
+	
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
-	//自由落下運動
-	m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
+	if (m_landingflag == false)
+	{
+		//自由落下運動
+		m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
+	}
 
 	//Scroll();	//スクロール処理をおこなう
 
@@ -107,36 +149,11 @@ void CObjHero::Action()
 	m_px += m_vx;
 	m_py += m_vy;
 
-	//移動ベクトルを初期化
-	m_vx = 0.0f;
-	//m_vy = 0.0f;//ブロックに着地できるようになったらはずしてください
+	////移動ベクトルを初期化
+	//m_vx = 0.0f;
+	//m_vy = 0.0f;
 
 	//移動終わり-----------------------------------------
-
-	//マウスの位置と主人公の位置からマウスの角度を求める------
-	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	//マウスの位置情報取得
-	double mous_x = Input::GetPosX();
-	double mous_y = Input::GetPosY();
-
-	//主人公の位置からマウスの位置のベクトル情報取得
-	double vector_x = mous_x - m_px - obj_m->GetScrollX();
-	double vector_y = mous_y - m_py - obj_m->GetScrollY();
-
-	//斜辺取得
-	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
-
-	//角度を求める
-	m_mouse_angle = acos(vector_x / hypotenuse) * 180.0/3.14;
-
-	//マウスのY位置が主人公のY位置より下だったら
-	if (mous_y > m_py - obj_m->GetScrollY())
-	{
-		//180°～360°の値にする
-		m_mouse_angle = 360 - abs(m_mouse_angle);
-	}
-	//-------------------------------------------------------
 
 	//はしご-------------------------------------------------
 	////はしごと接触しているかどうかを調べる
@@ -147,53 +164,80 @@ void CObjHero::Action()
 		{
 			m_vy -= 3.0f;
 		}
-
-		//Sキーがおされたとき　下るとき
-		if (Input::GetVKey('S') == true)
-		{
-			m_vy += 3.0f;
-		}
 	}
-	//はしご終了---------------------------------------------
 
 	//発砲---------------------------------------------------
 	//左クリックを押したら
 	if (Input::GetMouButtonL() == true)
 	{
-		//弾丸作成
-		CObjBullet* Objbullet = new CObjBullet(m_px,m_py,m_mouse_angle);
-		Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+		if (m_f == true)
+		{
+			if (m_posture == 0)//主人公が右を向いているとき右側から発射
+			{
+				//弾丸作成
+				CObjBullet* Objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
+				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+				m_f = false; //弾丸を出ないフラグにする。
+			}
+			else//主人公が左を向いているとき右側から発射
+			{
+				//弾丸作成
+				CObjBullet* Objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
+				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+				m_f = false; //弾丸を出ないフラグにする。
+			}
+		}
 	}
+	else
+		m_f = true; //左クリックしてなければ弾丸をでるフラグにする。
+
 	//発砲終了-----------------------------------------------
 
 
-
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
-	pb -> BlockHit(&m_px,&m_py,true,
-	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
-	&m_block_type
-	);
-
-	if (hit->CheckObjNameHit(OBJ_BLOCK) != nullptr)
+	//ロープ射出---------------------------------------------
+	//右クリックを押したら
+	if (Input::GetMouButtonR() == true)
 	{
-		HIT_DATA** hit_data;
-		hit_data = hit->SearchObjNameHit(OBJ_BLOCK);
-
-		int count = hit->GetCount;
-
-		for (int i = 0; i < count; i++)
+		if (m_rf == true)
 		{
-			if (hit_data != nullptr)
-			{
-				float r = hit_data[i]->r;
-
-
-			}
+			//ロープ作成
+			CObjRope* Objrope = new CObjRope(m_px, m_py);
+			Objs::InsertObj(Objrope, OBJ_ROPE, 10);
+			m_rf = false;
 		}
-
 	}
-	
+	else
+		m_rf = true; //右クリックを押していなければロープが出るフラグを立てる。
+	//射出終了------------------------------------------------
+
+	//水オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+		//メインへ移行
+		Scene::SetScene(new CSceneMain());
+		return;
+	}
+
+	//敵オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr) //仮です。敵が多いようならElementに変えます
+	{
+		this->SetStatus(false);		//自身を削除
+		Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
+		//メインへ移行
+		Scene::SetScene(new CSceneMain());
+		return;
+	}
+
+	//木オブジェクトと衝突してれば
+	if (hit->CheckObjNameHit(OBJ_WOOD) != nullptr)
+	{
+		
+	}
+
 	////水オブジェクトと衝突していれば
 	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
 	//{
@@ -204,8 +248,8 @@ void CObjHero::Action()
 	//	Scene::SetScene(new CSceneMain());
 	//}
 
-	//HitBoxの位置情報の変更
-	hit->SetPos(m_px - obj_m->GetScrollX() , m_py - obj_m->GetScrollY());
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
 }
 
@@ -247,10 +291,21 @@ void CObjHero::Draw()
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
-	src.m_top		= 0.0f;
-	src.m_left		= 0.0f;
-	src.m_right		= 64.0f;		
-	src.m_bottom	= 126.0f;
+	//止まっている時
+	if (m_ani_frame_stop == 1)  //仮
+	{
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 128.0f;
+	}
+	else//動いているとき
+	{
+		src.m_top = 128.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64;
+		src.m_right = 64.0f + AniData[m_ani_frame] * 64;
+		src.m_bottom = 256.0f;
+	}
 
 	//描画位置
 	dst.m_top		= 0.0f + m_py - obj_m->GetScrollY();
@@ -261,5 +316,63 @@ void CObjHero::Draw()
 	//描画
 	Draw::Draw(3, &src, &dst, color, m_r);
 
+	////画面全体を暗くするです。
+	//Draw::SetFill(true);
+	////画面全体をこの色にする
+	////staticなのは消すかもしれないから
+	//static float col[4] = { 0.0f };
+	//col[0] -= 0.01f;
+	//col[1] -= 0.01f;
+	//col[2] -= 0.01f;
+	//Draw::SetColor(col);
+}
+
+//着地できてるかどうかを調べる関数
+void CObjHero::LandingCheck()
+{
+	bool c1, c2;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+	
+	c1=HitUpCheck(OBJ_BLOCK);//ブロックとの着地チェック
+	c2=HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
+
+	//チェック項目のどれか一つでもtrueなら
+	if (c1 == true || c2 == true)
+		m_landingflag = true;//着地フラグをオンにする
+	else
+		m_landingflag = false;//着地フラグをオフにする
+
+}
+
+//指定したオブジェクトの上側に当たっているかしらべる
+//引数　調べたいオブジェクトネーム
+//戻り値　着地していれば:true　していなければ:false
+bool CObjHero::HitUpCheck(int obj_name)
+{
+	//自身のHitBoxをもってくる
+	CHitBox*hit = Hits::GetHitBox(this);
+	
+	//引数で持ってきたオブジェクトとあたっているか調べる
+	if (hit->CheckObjNameHit(obj_name) != nullptr)
+	{
+		HIT_DATA** hit_data;	//衝突の情報を入れる構造体
+		hit_data = hit->SearchObjNameHit(obj_name);//衝突の情報をhit_dataに入れる
+
+		//あたっている数分調べる
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			//データがあれば
+			if (hit_data[i] != nullptr)
+			{
+				float r = hit_data[i]->r;//あたっている角度をもってくる
+
+				 //Heroの下側があたっていれば
+				if (225.0f < r && r < 315.0f)
+				{
+					return true;//着地している
+				}
+			}
+		}
+	}
+	return false;//着地していない
 }
 

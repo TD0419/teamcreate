@@ -14,7 +14,7 @@ using namespace GameL;
 //引数1	float x		:初期位置X
 //引数2	float y		:初期位置Y
 //引数3	float angle	:移動する角度
-CObjBullet::CObjBullet(int x, int y,float angle)
+CObjBullet::CObjBullet(int x, int y)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -25,9 +25,7 @@ CObjBullet::CObjBullet(int x, int y,float angle)
 	m_px = x;
 	m_py = y;
 	//速さを決める
-	m_speed = 0.5f;
-	//角度を代入
-	m_angle = angle;
+	m_speed = 6.5f;
 
 	//マウスの位置と主人公の位置からマウスの角度を求める
 	//マウスの位置情報取得
@@ -41,9 +39,18 @@ CObjBullet::CObjBullet(int x, int y,float angle)
 	//斜辺取得
 	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
 
-	//角度を求め、その方向に移動
-	m_vx = cos(acos(vector_x / hypotenuse)) * m_speed;
+	//角度を求める
+	m_angle = acos(vector_x / hypotenuse);
+	//角度方向に移動
+	m_vx = cos(m_angle) * m_speed;
+	m_angle = m_angle * 180.0 / 3.14;
 
+	//マウスのY位置が主人公のY位置より下だったら
+	if (mous_y > y )
+	{
+		//180°～360°の値にする
+		m_angle = 360 - abs(m_angle);
+	}
 	//マウスのY位置が初期Y位置より上
 	if (mous_y < y)
 	{
@@ -104,8 +111,8 @@ void CObjBullet::Action()
 		return;
 	}
 	
-	//ブロックとあたった場合
-	if (hit->CheckObjNameHit(OBJ_BLOCK) != nullptr)
+	//反射するブロックとあたった場合
+	if (hit->CheckObjNameHit(OBJ_REFLECT_BLOCK) != nullptr)
 	{
 		HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 		hit_data = hit->SearchObjNameHit(OBJ_BLOCK);//衝突の情報をhit_dataに入れる

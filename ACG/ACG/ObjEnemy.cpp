@@ -13,6 +13,9 @@ using namespace GameL;
 //コンストラクタ
 CObjEnemy::CObjEnemy(int x, int y)
 {
+	//マップの要素数を補間
+	m_first_x = x;
+	m_first_y = y;
 	m_px = x * ENEMY_SIZE;
 	m_py = y * ENEMY_SIZE;
 }
@@ -72,6 +75,12 @@ void CObjEnemy::Action()
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
+		//死んだのでマップ情報に自身の復活の儀式を行う。
+		//儀式に必要なマップ情報を取得する
+		CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+		//復活の儀式を行う
+		map->SetMap(m_first_x, m_first_y, MAP_ENEMY);
+		
 		return;
 	}
 

@@ -31,4 +31,6 @@ private:
 	float m_vx;	//敵X軸方向のベクトル
 	float m_vy;	//敵Y軸方向のベクトル
 	float m_r;  //敵の回転角度
+	int	  m_first_x;//最初に生成されたときのマップのXの要素数
+	int	  m_first_y;//最初に生成されたときのマップのYの要素数
 };

@@ -12,6 +12,7 @@ enum OBJ_NAME
 	OBJ_ENEMY_BULLET,	//弾丸(敵用)
 	OBJ_ROCK,			//岩
     OBJ_BLOCK,			//ブロック
+	OBJ_REFLECT_BLOCK,	//弾を反射するブロック
 	OBJ_LIFT,			//リフト
 	OBJ_MAP,			//マップ
     OBJ_WOOD,			//木
@@ -21,12 +22,15 @@ enum OBJ_NAME
 	OBJ_SIGN,			//看板
 	OBJ_ROPE,           //縄（スイッチに引っ掛ける縄）
 	OBJ_ENEMY,			//敵
-	OBJ_BOSS_ENEMY,		//ボス
+	OBJ_BOSS,			//ボス
 	OBJ_STAGE3_BOSS,	//第三ステージボス
+	OBJ_BOSS_DROP_KEY,	//ボスが落とす鍵
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
-	OBJ_ENDLESS_SPRING,//敵生成システム(エンドレス沸き)
+	OBJ_ENDLESS_SPRING, //敵生成システム(エンドレス沸き)
+	OBJ_LEVER_SWICH,    //レバースイッチ
+	OBJ_DOOR,           //ドア
 };
 //------------------------------------------------
 
@@ -89,13 +93,20 @@ struct UserData
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
 #define BLOCK_SIZE	(64.0f) //ブロックのサイズ（仮）	
 #define WATER_SIZE	(32.0f) //水のサイズ（仮）
-#define LADDERS_SIZE (32.0f)//はしごのサイズ（仮）
+#define LADDERS_SIZE (64.0f)//はしごのサイズ
 #define BUTTON_SIZE	(32.0f)//ボタンサイズ（仮）
+#define SIGN_SIZE	(32.0f)//看板のサイズ（仮）
 #define ROPE_SWITCH_SIZE	(32.0f)	//ロープスイッチのサイズ（仮）
 #define LIFT_SIZE	(32.0f)//リフトサイズ(仮)
 #define ROCK_SIZE	(32.0f)//岩サイズ（仮）
-#define WOOD_SIZE	(32.0f)//木サイズ(仮)
-#define BOSS_SIZE	(32.0f)//BOSSサイズ(仮)
+#define WOOD_SIZE_X	(64.0f)//木の横サイズ(仮)
+#define WOOD_SIZE_Y	(192.0f)//木の縦サイズ(仮)
+#define BOSS_SIZE	(170.0f)//BOSSサイズ(仮)
+#define BOSS_DORP_KEY_SIZE	(32.0f)//ボスドロップキーサイズ(仮)
+#define DOOR_SIZE_X (32.0f)//ドアの横サイズ(仮)
+#define DOOR_SIZE_Y (384.0f)//ドアの縦サイズ(仮)
+#define SIGN_SIZE	(32.0f)//看板サイズ(仮)
+//#define BOSS_CORRECTION (90.0f)//ボスサイズ補正(仮)
 
 
 //スクロールのライン　（要調整）
@@ -123,6 +134,7 @@ struct UserData
 #include "ObjEnemyBullet.h"	//弾丸(敵用)
 #include "ObjRock.h"		//岩
 #include "ObjBlock.h"		//ブロック
+#include "ObjReflectBlock.h"//弾を反射するブロック
 #include "ObjLift.h"		//リフト
 #include "ObjLadders.h"		//梯子
 #include "ObjMap.h"			//マップ
@@ -130,14 +142,17 @@ struct UserData
 #include "ObjWater.h"		//水
 #include "ObjRopeSwitch.h"	//ロープスイッチ
 #include "ObjEnemy.h"		//敵
-#include "ObjBossEnemy.h"	//ボス
+#include "ObjBoss.h"	//ボス
 #include "ObjStage3Boss.h"  //第三ステージボス
+#include "ObjBossDropKey.h"	//ボスが落とす鍵
 #include "ObjTitle.h"		//タイトル
 #include "ObjSign.h"		//看板
 #include "ObjRope.h"        //縄（スイッチに引っ掛ける縄）
 #include "ObjGameClear.h"	//クリア
 #include "ObjGameOver.h"	//ゲームオーバー
 #include "ObjEndlessSpring.h"//敵生成システム(エンドレス沸き)
+#include "ObjLeverSwich.h"  //レバースイッチ
+#include "ObjDoor.h"        //ドア
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

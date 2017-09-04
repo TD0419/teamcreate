@@ -23,7 +23,14 @@ public:
 	void SetScrollY(float y) { m_scroll_y += y; }	//X方向のスクロール値をセットする関数
 	
 	//マップをもとにしたオブジェクトの生成関連----------------------------------
-	void CreateObj(int scroll_block_num_x, int scroll_block_num_y);//スクロール量をもとにオブジェクトの生成を行う
+	void CreateObj(int x, int y);//オブジェクトの生成を行う
+	void ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y);//スクロール量をもとにオブジェクトの生成を行う
+
+	//ーーーーーーーーーーーーアクセサーーーーーーーーーーーーーーーーー
+
+	//m_map[y][x]　のところにidを入れる
+	void SetMap(int x, int y, int id) { m_map[y][x] = id; }	
+	//------------------------------------------------------------------
 	
 private:
 	float m_scroll_x;//X軸のスクロール値
