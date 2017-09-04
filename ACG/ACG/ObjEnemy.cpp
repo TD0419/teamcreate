@@ -71,7 +71,7 @@ void CObjEnemy::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//弾丸とあたったら消去
-	if (hit->SearchObjNameHit(OBJ_BULLET) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
