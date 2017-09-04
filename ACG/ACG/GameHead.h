@@ -91,7 +91,7 @@ struct UserData
 #define HERO_SIZE_Y (128.0f)//主人公の縦サイズ	
 #define ENEMY_SIZE	(64.0f) //敵のサイズ(仮)
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
-#define BLOCK_SIZE	(32.0f) //ブロックのサイズ（仮）	
+#define BLOCK_SIZE	(64.0f) //ブロックのサイズ（仮）	
 #define WATER_SIZE	(32.0f) //水のサイズ（仮）
 #define LADDERS_SIZE (64.0f)//はしごのサイズ
 #define BUTTON_SIZE	(32.0f)//ボタンサイズ（仮）
@@ -109,9 +109,9 @@ struct UserData
 
 
 //スクロールのライン　（要調整）
-#define SCROLL_LINE_LEFT	(480.0f)							//左
+#define SCROLL_LINE_LEFT	(400.0f)							//左
 #define SCROLL_LINE_RIGHT	(WINDOW_SIZE_W - SCROLL_LINE_LEFT)	//右
-#define SCROLL_LINE_UP		(250.0f)							//上
+#define SCROLL_LINE_UP		(50.0f)							//上
 #define SCROLL_LINE_DOWN	(WINDOW_SIZE_H - SCROLL_LINE_UP)	//下
 
 //オブジェクトの生成ライン（要調整）

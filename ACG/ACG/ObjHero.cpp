@@ -19,7 +19,7 @@ CObjHero::CObjHero(int x, int y)
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = 0.0f;
+	m_px = 400.0f;
 	m_py = 0.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
@@ -102,7 +102,7 @@ void CObjHero::Action()
 	{
 		if (m_jf == true)
 		{
-			m_vy = -20.0f;
+			m_vy = -10.0f;
 			m_jf = false;
 		}
 	}
@@ -143,28 +143,18 @@ void CObjHero::Action()
 		m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 	}
 
-	//Scroll();	//スクロール処理をおこなう
+	Scroll();	//スクロール処理をおこなう
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
 	m_py += m_vy;
 
-	////移動ベクトルを初期化
+	//移動ベクトルを初期化
 	//m_vx = 0.0f;
 	//m_vy = 0.0f;
 
 	//移動終わり-----------------------------------------
 
-	//はしご-------------------------------------------------
-	////はしごと接触しているかどうかを調べる
-	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
-	{
-		//Wキーがおされたとき 上るとき
-		if (Input::GetVKey('W') == true)
-		{
-			m_vy -= 3.0f;
-		}
-	}
 
 	//発砲---------------------------------------------------
 	//左クリックを押したら
@@ -248,8 +238,12 @@ void CObjHero::Action()
 	//	Scene::SetScene(new CSceneMain());
 	//}
 
+
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py );
 
 }
 
@@ -266,7 +260,7 @@ void CObjHero::Scroll()
 	}
 
 	//主人公が上または下のスクロールラインを超えそうなら
-	if ((m_py + m_vy) < SCROLL_LINE_UP || (m_py + m_vy) > SCROLL_LINE_DOWN) 
+	if ((m_py + m_vy) > SCROLL_LINE_DOWN || (m_py + m_vy) < SCROLL_LINE_UP) 
 	{
 		obj_m->SetScrollY(m_vy);	//移動量をスクロールにセット
 	}
@@ -312,7 +306,7 @@ void CObjHero::Draw()
 	dst.m_left		= (HERO_SIZE_X * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_right	    = (HERO_SIZE_X - HERO_SIZE_X * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_bottom	= dst.m_top  + HERO_SIZE_Y;
-
+	 
 	//描画
 	Draw::Draw(3, &src, &dst, color, m_r);
 
