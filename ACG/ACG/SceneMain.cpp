@@ -96,9 +96,9 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
+	//p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
-	//p = Save::ExternalDataOpen(L"Stage1.1.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
+	p = Save::ExternalDataOpen(L"Stage1.1.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
 	{
@@ -154,7 +154,8 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_256);
 
 	//debug用Boss画像
-	Draw::LoadImageW(L"image3.jpg", 4, TEX_SIZE_512);
+	Draw::LoadImageW(L"image3.png", 4, TEX_SIZE_512);
+	//Draw::LoadImageW(L"image3.jpg", 4, TEX_SIZE_512);
 
 	//Ladders画像
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
