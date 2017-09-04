@@ -12,6 +12,7 @@ enum OBJ_NAME
 	OBJ_ENEMY_BULLET,	//弾丸(敵用)
 	OBJ_ROCK,			//岩
     OBJ_BLOCK,			//ブロック
+	OBJ_DOWN_DRAW_BLOCK,//ブロックの下にくるブロック
 	OBJ_REFLECT_BLOCK,	//弾を反射するブロック
 	OBJ_LIFT,			//リフト
 	OBJ_MAP,			//マップ
@@ -76,18 +77,18 @@ struct UserData
 //マップの番号とオブジェクトの対応　（仮）
 enum MAP_BER
 {
-	MAP_SPACE		,		//何もない場所
-	MAP_BLOCK		,	//ブロック(ノーマル)
-	MAP_LADDERS		,	//はしご
-	MAP_BUTTON		,	//ボタン
-	MAP_ROPE_SWITCH	, //ロープスイッチ
-	MAP_LIFT		,	//リフト
-	MAP_ROCK		,	//岩
-	MAP_WOOD		,	//木
-	MAP_WATER		,	//水
-	MAP_ENEMY		,	//敵
-	MAP_BOSS		,	//ボス
-	MAP_BLOCK2		,	//ブロック(二段目以降)
+	MAP_SPACE			,	//何もない場所
+	MAP_BLOCK			,	//ブロック(ノーマル)
+	MAP_LADDERS			,	//はしご
+	MAP_BUTTON			,	//ボタン
+	MAP_ROPE_SWITCH		,   //ロープスイッチ
+	MAP_LIFT			,	//リフト
+	MAP_ROCK			,	//岩
+	MAP_WOOD			,	//木
+	MAP_WATER			,	//水
+	MAP_ENEMY			,	//敵
+	MAP_BOSS			,	//ボス
+	MAP_DOWN_DRAW_BLOCK ,	//ブロック(二段目以降)
 };
 
 //オブジェクトのサイズ
@@ -138,6 +139,7 @@ enum MAP_BER
 #include "ObjEnemyBullet.h"	//弾丸(敵用)
 #include "ObjRock.h"		//岩
 #include "ObjBlock.h"		//ブロック
+#include "ObjDownDrawBlock.h"//ブロックの下のブロック
 #include "ObjReflectBlock.h"//弾を反射するブロック
 #include "ObjLift.h"		//リフト
 #include "ObjLadders.h"		//梯子

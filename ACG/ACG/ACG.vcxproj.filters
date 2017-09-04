@@ -222,6 +222,9 @@
     <ClInclude Include="ObjDoor.h">
       <Filter>ソース ファイル\Main\door</Filter>
     </ClInclude>
+    <ClInclude Include="ObjDownDrawBlock.h">
+      <Filter>ソース ファイル\Main\Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -349,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="ObjDoor.cpp">
       <Filter>ソース ファイル\Main\door</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjDownDrawBlock.cpp">
+      <Filter>ソース ファイル\Main\Block</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
