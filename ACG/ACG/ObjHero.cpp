@@ -110,7 +110,23 @@ void CObjHero::Action()
 		m_vy = 20.0f;
 	}
 
-	//ジャンプ終了---------------------------------------------------------------------------------
+	//はしご-------------------------------------------------
+	////はしごと接触しているかどうかを調べる
+	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
+	{
+		//Wキーがおされたとき 上るとき
+		if (Input::GetVKey('W') == true)
+		{
+			m_vy = -2.0f;
+		}
+
+		//Sキーがおされたとき　下るとき
+		if (Input::GetVKey('S') == true)
+		{
+			m_vy = 2.0f;
+		}
+	}
+	//はしご終了---------------------------------------------
 	
 
 	//摩擦
@@ -131,23 +147,7 @@ void CObjHero::Action()
 
 	//移動終わり-----------------------------------------
 
-	//はしご-------------------------------------------------
-	////はしごと接触しているかどうかを調べる
-	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
-	{
-		//Wキーがおされたとき 上るとき
-		if (Input::GetVKey('W') == true)
-		{
-			m_vy -= 3.0f;
-		}
 
-		//Sキーがおされたとき　下るとき6
-		if (Input::GetVKey('S') == true)
-		{
-			m_vy += 3.0f;
-		}
-	}
-	//はしご終了---------------------------------------------
 
 	//発砲---------------------------------------------------
 	//左クリックを押したら
@@ -155,10 +155,20 @@ void CObjHero::Action()
 	{
 		if (m_f == true)
 		{
-			//弾丸作成
-			CObjBullet* Objbullet = new CObjBullet(m_px, m_py);
-			Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-			m_f = false; //弾丸を出ないフラグにする。
+			if (m_posture == 0)//主人公が右を向いているとき右側から発射
+			{
+				//弾丸作成
+				CObjBullet* Objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
+				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+				m_f = false; //弾丸を出ないフラグにする。
+			}
+			else//主人公が左を向いているとき右側から発射
+			{
+				//弾丸作成
+				CObjBullet* Objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
+				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+				m_f = false; //弾丸を出ないフラグにする。
+			}
 		}
 	}
 	else
