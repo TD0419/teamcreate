@@ -50,6 +50,7 @@ void CSceneMain::InitScene()
 
 	//Doorオブジェクトを作成する
 	CObjDoor* ObjDoor = new CObjDoor(3, 0);
+
 	Objs::InsertObj(ObjDoor, OBJ_DOOR, 10);
 
 	//test敵オブジェクトを作成する
@@ -75,6 +76,10 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(ObjLadders2, OBJ_LADDERS, 10);
 	CObjLadders* ObjLadder3 = new CObjLadders(6, 1);
 	Objs::InsertObj(ObjLadder3, OBJ_LADDERS, 10);*/
+
+	//木のテストオブジェクト
+	CObjWood* ObjWood = new CObjWood(12, 0);
+	Objs::InsertObj(ObjWood, OBJ_WOOD, 10);
 
 }
 
@@ -152,6 +157,9 @@ void CSceneMain::ImageDataLoading()
 
 	//Door & Padlock画像
 	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_256);
+
+	//Wood画像
+	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数
