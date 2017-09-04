@@ -53,9 +53,9 @@ void CSceneMain::InitScene()
 
 	Objs::InsertObj(ObjDoor, OBJ_DOOR, 10);
 
-	//test敵オブジェクトを作成する
-	//CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
-	//Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
+	//敵オブジェクトを作成する
+	CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
+	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
 
 	//testボスオブジェクトを作成する
 	//CObjBoss* ObjBoss = new CObjBoss(10,15);
@@ -139,7 +139,7 @@ void CSceneMain::ImageDataLoading()
 	//debug用hero画像
 	//Draw::LoadImageW(L"image.jpg",0, TEX_SIZE_512);
 	//debug用enemy画像
-	Draw::LoadImageW(L"image2.jpg", 1, TEX_SIZE_512);
+	//Draw::LoadImageW(L"image2.jpg", 1, TEX_SIZE_512);
 	// debug用block画像
 	//Draw::LoadImageW(L"testblock.png", 2, TEX_SIZE_512);
 
@@ -160,6 +160,9 @@ void CSceneMain::ImageDataLoading()
 
 	//Wood画像
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_64);
+
+	//Enemy画像
+	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
 }
 
 //音楽データ読み込み関数

@@ -23,6 +23,11 @@ void CObjEnemy::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_r = 0.0f;
+	m_posture = 0.0f; //右向き1.0f 左向き0.0f
+
+	m_ani_time = 0;
+	m_ani_frame = 1;  //静止フレームを初期にする
+	m_ani_max_time = 4; //アニメーション間隔幅
 
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ENEMY_SIZE,ENEMY_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
@@ -39,13 +44,35 @@ void CObjEnemy::Action()
 	//Aキーがおされたとき：左移動
 	if (Input::GetVKey('J') == true)
 	{
+		m_posture = 0.0f;
 		m_vx -= 5.0f;
+		m_ani_time += 1;
 	}
 
 	//Dキーがおされたとき：右移動
-	if (Input::GetVKey('L') == true)
+	else if (Input::GetVKey('L') == true)
 	{
+		m_posture = 1.0f;
 		m_vx += 5.0f;
+		m_ani_time += 1;
+	}
+	else
+	{
+		m_ani_frame = 0; //キー入力が無い場合は静止フレームにする
+		m_ani_time = 0;
+	}
+
+	//アニメーションの感覚管理
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	//最後までアニメーションが進むと最初に戻る
+	if (m_ani_frame == 2)
+	{
+		m_ani_frame = 0;
 	}
 
 	//摩擦
@@ -84,6 +111,12 @@ void CObjEnemy::Action()
 //ドロー
 void CObjEnemy::Draw()
 {
+	//画像の切り取り配列
+	int AniData[2] =
+	{
+		0  , 1 , 
+	};
+
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -94,17 +127,17 @@ void CObjEnemy::Draw()
 
 	//切り取り位置
 	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 512.0f;
-	src.m_bottom = 512.0f;
+	src.m_left = 0.0f + AniData[m_ani_frame] * 64;
+	src.m_right = 64.0f + AniData[m_ani_frame] * 64;
+	src.m_bottom = 64.0f;
 
 	//描画位置
 	dst.m_top = 0.0f + m_py - obj_m->GetScrollY();
-	dst.m_left = 0.0f + m_px - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + ENEMY_SIZE;
+	dst.m_left = (ENEMY_SIZE * m_posture) + m_px - obj_m->GetScrollX();
+	dst.m_right = (ENEMY_SIZE - ENEMY_SIZE * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_bottom = dst.m_top + ENEMY_SIZE;
 
 	//描画
-	Draw::Draw(1, &src, &dst, color, m_r);
+	Draw::Draw(8, &src, &dst, color, m_r);
 
 }
