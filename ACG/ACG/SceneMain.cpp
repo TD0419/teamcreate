@@ -151,7 +151,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_256);
 
 	//Wood画像
-	Draw::LoadImageW(L"Wood.cpp", 7, TEX_SIZE_64);
+	//Draw::LoadImageW(L"Wood.cpp", 7, TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数

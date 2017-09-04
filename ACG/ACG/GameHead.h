@@ -87,7 +87,7 @@ struct UserData
 #define MAP_BOSS	(10)	//ボス
 
 //オブジェクトのサイズ
-#define HERO_SIZE_X (64.0f)	//主人公の横サイズ	
+#define HERO_SIZE_X (128.0f)	//主人公の横サイズ	
 #define HERO_SIZE_Y (128.0f)//主人公の縦サイズ	
 #define ENEMY_SIZE	(64.0f) //敵のサイズ(仮)
 #define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
@@ -106,7 +106,6 @@ struct UserData
 #define DOOR_SIZE_Y (384.0f)//ドアの縦サイズ(仮)
 #define SIGN_SIZE	(32.0f)//看板サイズ(仮)
 //#define BOSS_CORRECTION (90.0f)//ボスサイズ補正(仮)
-
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(480.0f)							//左
