@@ -38,7 +38,7 @@ private:
 
 	bool  m_f;  //弾丸発射制御用
 	bool  m_rf; //ロープ発射制御用
-	bool  m_j;  //ジャンプ制御
+	bool  m_jf;  //ジャンプ制御
 
 	//アニメーション関係
 	int m_ani_frame_stop; //止まった時の描画を調整

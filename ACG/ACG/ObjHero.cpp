@@ -28,7 +28,7 @@ void CObjHero::Init()
 
 	m_f  = false;
 	m_rf = false;
-	m_j = false;//ジャンプ制御
+	m_jf = false;//ジャンプ制御
 
 	bu = false;
 	m_ani_time = 0;
@@ -94,14 +94,14 @@ void CObjHero::Action()
 	//SPACEキーがおされたとき：ジャンプ
 	if (/*bu == true&&*/Input::GetVKey(VK_SPACE)==true&&m_vy==0)
 	{
-		if (m_j == true)
+		if (m_jf == true)
 		{
 			m_vy = -20.0f;
-			m_j = false;
+			m_jf = false;
 		}
 	}
 	else
-		m_j = true; //スペース押してなければジャンプでるフラグにする。
+		m_jf = true; //スペース押してなければジャンプでるフラグにする。
 
 	//↓キーがおされたとき：下に下がる（デバッグ）
 	if (Input::GetVKey(VK_DOWN) == true)
