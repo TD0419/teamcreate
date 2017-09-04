@@ -20,7 +20,7 @@ public:
 	void HeroHit();//主人公との当たり判定を処理する
 	void BossHit();//ボスとの当たり判定を見る
 
-	bool j;//ジャンプ用
+
 	
 
 private:
@@ -31,5 +31,5 @@ private:
 	float m_px;     //ブロック位置X
 	float m_py;     //ブロック位置Y
 
-	bool m_j; 
+	
 };
