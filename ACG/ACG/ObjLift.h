@@ -25,4 +25,5 @@ private:
 	float m_py; // リフトY座標
 	float m_vx;	// リフトの移動ベクトルX
 	float m_vy;	// リフトの移動ベクトルY
+
 };

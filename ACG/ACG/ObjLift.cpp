@@ -64,8 +64,8 @@ void CObjLift::HeroRide()
 
 	float r = hit_data[0]->r;//あたっている角度を持ってくる
 
-							 //上側があたっていればで
-	if (45 <= r && r <= 135)
+	//上側があたっていればで
+	if (45.0f <= r && r <= 135.0f)
 	{
 		//主人公オブジェクトを持ってくる
 		CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
