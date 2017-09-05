@@ -27,6 +27,7 @@ public:
 		float* vx, float*vy
 	);
 
+	bool jump;//ジャンプ用
 	bool m_b;//ジャンプ用
 	
 

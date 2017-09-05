@@ -26,6 +26,9 @@ public:
 	//マップ情報を返す
 	int   GetMap(int x, int y);
 
+	//マップのフラグを更新する
+	void SetMapCreate(int x, int y, int f) { m_map[y][x].create = f; }
+
 	//マップをもとにしたオブジェクトの生成関連----------------------------------
 	void CreateObj(int x, int y);//オブジェクトの生成を行う
 	void ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y);//スクロール量をもとにオブジェクトの生成を行う
@@ -33,12 +36,21 @@ public:
 	//ーーーーーーーーーーーーアクセサーーーーーーーーーーーーーーーーー
 
 	//m_map[y][x]　のところにidを入れる
-	void SetMap(int x, int y, int id) { m_map[y][x] = id; }	
+	void SetMap(int x, int y, int id) { m_map[y][x].num = id; }	
 	//------------------------------------------------------------------
 	
 private:
 	float m_scroll_x;//X軸のスクロール値
 	float m_scroll_y;//Y軸のスクロール値
 
-	int m_map[MAP_Y_MAX][MAP_X_MAX];//マップ用配列	←マップができたらこの配列に入れる
+	//マップの構造体
+	struct Map
+	{
+		int num;//マップの数値
+		bool create;//生成するかのフラグ
+	};
+
+	Map m_map[MAP_Y_MAX][MAP_X_MAX];//マップ用配列	←マップができたらこの配列に入れる
+
+	
 };

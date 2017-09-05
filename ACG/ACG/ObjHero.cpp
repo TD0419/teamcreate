@@ -26,10 +26,10 @@ void CObjHero::Init()
 	m_posture = 0.0f; //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 
-	m_BulletControl = false;  //弾丸発射制御用
-	m_RopeControl = false;	//ロープ発射制御用
-	m_JumpControl = false;	//ジャンプ制御
-	m_W_JumpControl = false; //2段ジャンプ制御
+	m_bullet_control = false;  //弾丸発射制御用
+	m_rope_control = false;	//ロープ発射制御用
+	m_jump_control = false;	//ジャンプ制御
+	m_w_jump_control = false; //2段ジャンプ制御
 	m_landingflag = false;
 
 	m_ani_time = 0;
@@ -107,26 +107,34 @@ void CObjHero::Action()
 
 	//ジャンプ--------------------------------------------------------------------
 	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
-	if (Input::GetVKey(VK_SPACE) == true)
+	/*if (Input::GetVKey(VK_SPACE) == true)
 	{
-		m_W_JumpControl = true;
+		m_w_jump_control = true;
 	}
 	else
 	{
-		m_W_JumpControl = false;
+		m_w_jump_control = false;
 	}
 
 	//着地フラグがオン かつ　二段ジャンプ防止フラグがオンのとき：ジャンプ
-	if (m_landingflag == true && m_W_JumpControl == true)
+	if (m_landingflag == true && m_w_jump_control == true)
 	{
-		if (m_JumpControl == true)
+		if (m_jump_control == true)
 		{
 			m_vy = -20.0f;
-			m_JumpControl = false;
+			m_jump_control = false;
 		}
 	}
 	else
-		m_JumpControl = true; //スペース押してなければジャンプでるフラグにする。*/
+		m_jump_control = true; //スペース押してなければジャンプでるフラグにする。*/
+
+	if (Input::GetVKey(VK_SPACE) == true)
+	{
+		if (m_hit_down == true)
+		{
+			m_vy = -20.0f;
+		}
+	}
 
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
@@ -159,18 +167,16 @@ void CObjHero::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
-	if (m_landingflag == false)
-	{
+
 		//自由落下運動
 		m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
-	}
+	
 
-	//Scroll();	//スクロール処理をおこなう
+	Scroll();	//スクロール処理をおこなう
 	//ブロックとの当たり判定
 	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_X, HERO_SIZE_Y, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
-	//移動ベクトルをポジションに加算
 	m_px += m_vx;
 	m_py += m_vy;
 
@@ -184,26 +190,41 @@ void CObjHero::Action()
 	//左クリックを押したら
 	if (Input::GetMouButtonL() == true)
 	{
-		if (m_BulletControl == true)
+		//マップオブジェクトの呼び出し
+		CObjMap* obj_map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+		//マウスの位置情報取得
+		float mous_x = Input::GetPosX();
+		//マウスの位置がプレイヤーから見てどの方向か調べるための変数
+		float mous_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
+
+		if ( (mous_x - ( m_px - obj_map->GetScrollX() ) ) < 0)//主人公より左をクリックしたとき
+			mous_way = 1.0f;
+
+		if (m_bullet_control == true)
 		{
-			if (m_posture == 0)//主人公が右を向いているとき右側から発射
+			//向いている方向とクリックしている方向が同じなら
+			if (m_posture == mous_way)
 			{
-				//弾丸作成
-				CObjBullet* Objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
-				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-				m_BulletControl = false; //弾丸を出ないフラグにする。
-			}
-			else//主人公が左を向いているとき右側から発射
-			{
-				//弾丸作成
-				CObjBullet* Objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
-				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-				m_BulletControl = false; //弾丸を出ないフラグにする。
+				if (m_posture == 0.0f)//主人公が右を向いているとき右側から発射
+				{
+					//弾丸作成
+					CObjBullet* Objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
+					Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+					m_bullet_control = false; //弾丸を出ないフラグにする。
+				}
+				else//主人公が左を向いているとき右側から発射
+				{
+					//弾丸作成
+					CObjBullet* Objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
+					Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+					m_bullet_control = false; //弾丸を出ないフラグにする。
+				}
 			}
 		}
 	}
 	else
-		m_BulletControl = true; //左クリックしてなければ弾丸をでるフラグにする。
+		m_bullet_control = true; //左クリックしてなければ弾丸をでるフラグにする。
 
 	//発砲終了-----------------------------------------------
 
@@ -212,16 +233,16 @@ void CObjHero::Action()
 	//右クリックを押したら
 	if (Input::GetMouButtonR() == true)
 	{
-		if (m_RopeControl == true)
+		if (m_rope_control == true)
 		{
 			//ロープ作成
 			CObjRope* Objrope = new CObjRope(m_px, m_py);
 			Objs::InsertObj(Objrope, OBJ_ROPE, 10);
-			m_RopeControl = false;
+			m_rope_control = false;
 		}
 	}
 	else
-		m_RopeControl = true; //右クリックを押していなければロープが出るフラグを立てる。
+		m_rope_control = true; //右クリックを押していなければロープが出るフラグを立てる。
 	//射出終了------------------------------------------------
 
 	//水オブジェクトと衝突していれば

@@ -23,18 +23,18 @@ CObjBlock::CObjBlock(int x, int y)
 void CObjBlock::Init()
 {	
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	//CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//当たり判定
-	Hits::SetHitBox(this, m_px-obj_m->GetScrollX(), m_py - obj_m->GetScrollY(), BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
-	m_b == false;
+	////当たり判定
+	//Hits::SetHitBox(this, m_px-obj_m->GetScrollX(), m_py - obj_m->GetScrollY(), BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
+
 }
 
 //アクション
 void CObjBlock::Action()
 {
-	//自身のHitBoxをもってくる
-	CHitBox*hit = Hits::GetHitBox(this);
+	////自身のHitBoxをもってくる
+	//CHitBox*hit = Hits::GetHitBox(this);
 
 	//主人公オブジェクトと衝突していれば
 	/*if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
@@ -42,11 +42,11 @@ void CObjBlock::Action()
 		HeroHit();//当たり判定の処理を行う
 	}*/
 	
-	//ボスオブジェクトと衝突していれば
-	if (hit->CheckObjNameHit(OBJ_BOSS) != nullptr)
-	{
-		BossHit();//当たり判定の処理を行う
-	}
+	////ボスオブジェクトと衝突していれば
+	//if (hit->CheckObjNameHit(OBJ_BOSS) != nullptr)
+	//{
+	//	BossHit();//当たり判定の処理を行う
+	//}
 
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -58,15 +58,18 @@ void CObjBlock::Action()
 	if (wincheck_flag == true)
 	{
 		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+//		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 	}
 	else
 	{
 		//マップ要素に数値を入れる
-		obj_m->SetMap((m_px / BLOCK_SIZE), (m_py / BLOCK_SIZE), MAP_BLOCK);
+		//obj_m->SetMap((m_px / BLOCK_SIZE), (m_py / BLOCK_SIZE), MAP_BLOCK);
+	
+		//削除するので次に来たときに生成するようにフラグをオンにする
+		obj_m->SetMapCreate(int(m_px / BLOCK_SIZE), int(m_py / BLOCK_SIZE), true);
 
 		this->SetStatus(false);		//自身を削除
-		Hits::DeleteHitBox(this);	//ヒットボックスを削除
+	//	Hits::DeleteHitBox(this);	//ヒットボックスを削除
 	}
 
 }
@@ -138,7 +141,8 @@ void CObjBlock::BlockHit(
 	//次フレームでの移動場所
 	float new_y = *y + *vy;
 	float new_x = *x + *vx;
-
+	
+	scroll_on = false;
 	//スクロールを加えるか(基本主人公のみ)
 	float scroll_x = scroll_on ? map->GetScrollX() : 0.0f;
 	float scroll_y = scroll_on ? map->GetScrollY() : 0.0f;
@@ -149,7 +153,7 @@ void CObjBlock::BlockHit(
 		for (int j = 0; j < MAP_X_MAX; j++)
 		{
 			//判定したいブロック
-			if (map->GetMap(j,i) == 100)
+			if (map->GetMap(j,i) == MAP_BLOCK/*100*/)
 			{
 				//要素番号を座標に変更
 				float bx = j*BLOCK_SIZE;
