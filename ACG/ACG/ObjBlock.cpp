@@ -128,7 +128,8 @@ void CObjBlock::BlockHit(
 	//次フレームでの移動場所
 	float new_y = *y + *vy;
 	float new_x = *x + *vx;
-
+	
+	scroll_on = false;
 	//スクロールを加えるか(基本主人公のみ)
 	float scroll_x = scroll_on ? map->GetScrollX() : 0.0f;
 	float scroll_y = scroll_on ? map->GetScrollY() : 0.0f;
