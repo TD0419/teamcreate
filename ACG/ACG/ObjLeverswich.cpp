@@ -18,7 +18,7 @@ CObjLeverSwich::CObjLeverSwich(float x, float y)
 //イニシャライズ
 void CObjLeverSwich::Init()
 {
-	lever_seich_control = false;
+	//lever_swich_control = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
