@@ -91,7 +91,7 @@ enum MAP_BER
 };
 
 //オブジェクトのサイズ
-#define HERO_SIZE_X (128.0f)		//主人公の横サイズ	
+#define HERO_SIZE_X (32.0f)		//主人公の横サイズ	
 #define HERO_SIZE_Y (128.0f)		//主人公の縦サイズ	
 #define ENEMY_SIZE	 (64.0f)		//敵のサイズ(仮)
 #define BULLET_SIZE  (20.0f)		//弾丸サイズ（仮）
@@ -109,7 +109,7 @@ enum MAP_BER
 #define BOSS_SIZE	(170.0f)		//BOSSサイズ(仮)
 #define BOSS_DORP_KEY_SIZE (32.0f)	//ボスドロップキーサイズ(仮)
 #define DOOR_SIZE_X  (32.0f)		//ドアの横サイズ(仮)
-#define DOOR_SIZE_Y (512.0f)		//ドアの縦サイズ(仮)
+#define DOOR_SIZE_Y (128.0f)		//ドアの縦サイズ(仮)
 #define SIGN_SIZE	 (32.0f)		//看板サイズ(仮)
 //#define BOSS_CORRECTION (90.0f)	//ボスサイズ補正(仮)
 
