@@ -31,6 +31,7 @@ enum OBJ_NAME
 	OBJ_ENDLESS_SPRING, //敵生成システム(エンドレス沸き)
 	OBJ_LEVER_SWICH,    //レバースイッチ
 	OBJ_DOOR,           //ドア
+	OBJ_THROUGHT_BLOCK,	//スルーブロック
 };
 //------------------------------------------------
 
@@ -111,6 +112,8 @@ enum MAP_BER
 #define DOOR_SIZE_Y (384.0f)		//ドアの縦サイズ(仮)
 #define SIGN_SIZE	 (32.0f)		//看板サイズ(仮)
 //#define BOSS_CORRECTION (90.0f)	//ボスサイズ補正(仮)
+#define THROUGHT_BLOCK_SIZE	(64.0f)	//スルーブロックサイズ（仮）
+
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(400.0f)							//左
@@ -156,6 +159,7 @@ enum MAP_BER
 #include "ObjEndlessSpring.h"	//敵生成システム(エンドレス沸き)
 #include "ObjLeverSwich.h"		//レバースイッチ
 #include "ObjDoor.h"			//ドア
+#include "ObjThroughBlock.h"	//スルーブロック
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

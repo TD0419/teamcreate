@@ -67,6 +67,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ObjThroughBlock.h" />
     <ClInclude Include="ObjBossDropKey.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="ObjDoor.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="ObjSign.cpp" />
     <ClCompile Include="ObjStage3Boss.cpp" />
     <ClCompile Include="ObjReflectBlock.cpp" />
+    <ClCompile Include="ObjThroughBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />
