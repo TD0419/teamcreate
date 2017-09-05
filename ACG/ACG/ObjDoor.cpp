@@ -19,6 +19,8 @@ CObjDoor::CObjDoor(int x, int y)
 //イニシャライズ
 void CObjDoor::Init()
 {
+	m_px = 100;//ドアX座標
+	m_py = 384;//ドアY座標
 }
 
 //アクション
@@ -40,8 +42,8 @@ void CObjDoor::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 63.0f;
-	src.m_bottom = 127.0f;
+	src.m_right = 64.0f;
+	src.m_bottom = 128.0f;
 
 	//描画位置
 	dst.m_top = 0.0f + m_py - obj_m->GetScrollY();

@@ -31,7 +31,7 @@ private:
 	float m_vx;	//敵X軸方向のベクトル
 	float m_vy;	//敵Y軸方向のベクトル
 	float m_r;  //敵の回転角度
-	float m_posture;//姿勢
+	float m_posture;//姿勢　 右向き1.0f 左向き0.0f
 	float m_speed;	//スピード
 	//アニメーション関係
 	int m_ani_time; //アニメーションフレーム動作感覚

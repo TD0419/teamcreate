@@ -6,7 +6,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：リフト
+//オブジェクト：ドアという名の
 class CObjDoor :public CObj
 {
 public:
@@ -17,6 +17,6 @@ public:
 	void Draw();	// ドロー
 
 private:
-	float m_px;	// リフトX座標
-	float m_py; // リフトY座標
+	float m_px;	// ドアX座標
+	float m_py; // ドアY座標
 };
