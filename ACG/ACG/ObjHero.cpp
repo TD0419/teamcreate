@@ -179,7 +179,7 @@ void CObjHero::Action()
 
 	Scroll();	//スクロール処理をおこなう
 	//ブロックとの当たり判定
-	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_X, HERO_SIZE_Y, true,
+	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_X, HERO_SIZE_Y,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
 	m_px += m_vx;

@@ -108,7 +108,7 @@ void CObjBlock::Draw()
 
 //ブロックとオブジェクトの当たり判定
 void CObjBlock::BlockHit(
-	float* x, float* y, float width, float height, bool scroll_on,
+	float* x, float* y, float width, float height,
 	bool*up, bool* down, bool* left, bool* right,
 	float* vx, float*vy
 )
@@ -116,13 +116,6 @@ void CObjBlock::BlockHit(
 	//マップ情報を持ってくる
 	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
-
-	RECT_F src, dst;
-
-	
-	//描画
-	Draw::Draw(2, &src, &dst, color, 0.0f);
 	//衝突情報初期化
 	*up		= false;
 	*left	= false;
@@ -140,11 +133,6 @@ void CObjBlock::BlockHit(
 	//次フレームでの移動場所
 	float new_y = *y + *vy;
 	float new_x = *x + *vx;
-	
-	scroll_on = false;
-	//スクロールを加えるか(基本主人公のみ)
-	float scroll_x = scroll_on ? map->GetScrollX() : 0.0f;
-	float scroll_y = scroll_on ? map->GetScrollY() : 0.0f;
 
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < MAP_Y_MAX; i++)
@@ -159,24 +147,23 @@ void CObjBlock::BlockHit(
 				float by = i*BLOCK_SIZE;
 
 				//ブロックとの当たり判定
-				if (abs((bx + block_width_half) - (*x - scroll_x + width_half)) <= block_width_half + width_half)
+				if (abs((bx + block_width_half) - (*x + width_half)) <= block_width_half + width_half)
 				{
-					if (abs((by + block_height_half) - (*y - scroll_y + height_half)) <= block_height_half + height_half)
+					if (abs((by + block_height_half) - (*y + height_half)) <= block_height_half + height_half)
 					{
 						//左に移動している
 						if (*vx < 0.0f)
 						{
 							//左にあるブロック
-							for (int i = (int)((*y - scroll_y + 10.0f) / BLOCK_SIZE);
-								i <= (int)((*y - scroll_y + height - 20.0f) / BLOCK_SIZE); i++)
+							for (int i = (int)((*y + 10.0f) / BLOCK_SIZE);
+								i <= (int)((*y + height - 20.0f) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x - scroll_x + *vx) / BLOCK_SIZE);
+								float map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
 								//進む先がブロックの右側が衝突している場合(当たっているのが0以外)
-								if (0 < map->GetMap(map_b_x, i) ||
-									0 < map->GetMap(map_b_x, i))
+								if (map->GetMap(map_b_x, i) == MAP_BLOCK)
 								{
 									*vx = 0.0f;
-									*x = map_b_x * BLOCK_SIZE + BLOCK_SIZE + scroll_x;
+									*x = map_b_x * BLOCK_SIZE + BLOCK_SIZE;
 									*right = true;
 								}
 							}
@@ -185,16 +172,15 @@ void CObjBlock::BlockHit(
 						else if (*vx > 0.0f)
 						{
 							//右にあるブロック
-							for (int i = (int)((*y - scroll_y + 10.0f) / BLOCK_SIZE);
-								i <= (int)((*y - scroll_y + height - 20.0f) / BLOCK_SIZE); i++)
+							for (int i = (int)((*y + 10.0f) / BLOCK_SIZE);
+								i <= (int)((*y + height - 20.0f) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x - scroll_x + width + *vx) / BLOCK_SIZE);
+								float map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
 								//進む先がブロックの左側が衝突している場合(当たっているのが0以外)
-								if (0 < map->GetMap(map_b_x, i) ||
-									0 < map->GetMap(map_b_x, i))
+								if (map->GetMap(map_b_x, i) == MAP_BLOCK)
 								{
 									*vx = 0.0f;
-									*x = map_b_x * BLOCK_SIZE - width + scroll_x;
+									*x = map_b_x * BLOCK_SIZE - width;
 									*left = true;
 								}
 							}
@@ -204,16 +190,15 @@ void CObjBlock::BlockHit(
 						if (*vy > 0.0f)
 						{
 							//下にあるブロックを全て調べる
-							for (int i = (int)((*x - scroll_x + 5.0f) / BLOCK_SIZE);
-								i <= (int)((*x - scroll_x + width - 5.0f) / BLOCK_SIZE); i++)
+							for (int i = (int)((*x + 5.0f) / BLOCK_SIZE);
+								i <= (int)((*x + width - 5.0f) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y + height - scroll_y + *vy) / BLOCK_SIZE);
-								//進む先がブロックの上側が衝突している場合(当たっているのが0以外)
-								if (0 < map->GetMap(i, map_b_y) ||
-									0 < map->GetMap(i, map_b_y))
+								float map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
+								//進む先がブロックの上側が衝突している場合(ブロック(1))
+								if (map->GetMap(i, map_b_y) == MAP_BLOCK)
 								{
 									*vy = 0.0f;
-									*y = map_b_y * BLOCK_SIZE - height + scroll_y;
+									*y = map_b_y * BLOCK_SIZE - height;
 									*down = true;
 								}
 							}
@@ -222,16 +207,15 @@ void CObjBlock::BlockHit(
 						else if (*vy < 0.0f)
 						{
 							//上にあるブロックを全て調べる
-							for (int i = (int)((*x - scroll_x + 5.0f) / BLOCK_SIZE);
-								i <= (int)((*x - scroll_x + width - 5.0f) / BLOCK_SIZE); i++)
+							for (int i = (int)((*x + 5.0f) / BLOCK_SIZE);
+								i <= (int)((*x + width - 5.0f) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y - scroll_y + *vy) / BLOCK_SIZE);
-								//進む先がブロックの下側が衝突している場合(当たっているのが0以外)
-								if (0 < map->GetMap(i, map_b_y) ||
-									0 < map->GetMap(i, map_b_y))
+								float map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
+								//進む先がブロックの下側が衝突している場合(ブロック(1))
+								if (map->GetMap(i, map_b_y) == MAP_BLOCK)
 								{
 									*vy = 0.0f;
-									*y = map_b_y * BLOCK_SIZE + BLOCK_SIZE + scroll_y;
+									*y = map_b_y * BLOCK_SIZE + BLOCK_SIZE;
 									*up = true;
 								}
 							}

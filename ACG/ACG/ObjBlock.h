@@ -22,7 +22,7 @@ public:
 
 	//オブジェクト
 	void BlockHit(
-		float* x, float* y, float width, float height, bool scroll_on,
+		float* x, float* y, float width, float height,
 		bool*up, bool* down, bool* left, bool* right,
 		float* vx, float*vy
 	);
