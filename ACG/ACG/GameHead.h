@@ -101,7 +101,8 @@ enum MAP_BER
 #define LADDERS_SIZE (64.0f)		//はしごのサイズ
 #define BUTTON_SIZE	 (32.0f)		//ボタンサイズ（仮）
 #define SIGN_SIZE	 (32.0f)		//看板のサイズ（仮）
-#define ROPE_SWITCH_SIZE   (32.0f)	//ロープスイッチのサイズ（仮）
+#define LEVER_SWITCH_SIZE  (64.0f)	//レバースイッチのサイズ
+#define ROPE_SWITCH_SIZE  (32.0f)	//ロープスイッチのサイズ（仮）
 #define LIFT_SIZE	 (32.0f)		//リフトサイズ(仮)
 #define ROCK_SIZE	 (32.0f)		//岩サイズ（仮）
 #define WOOD_SIZE_X	 (64.0f)		//木の横サイズ(仮)
@@ -109,7 +110,7 @@ enum MAP_BER
 #define BOSS_SIZE	(170.0f)		//BOSSサイズ(仮)
 #define BOSS_DORP_KEY_SIZE (32.0f)	//ボスドロップキーサイズ(仮)
 #define DOOR_SIZE_X  (32.0f)		//ドアの横サイズ(仮)
-#define DOOR_SIZE_Y (384.0f)		//ドアの縦サイズ(仮)
+#define DOOR_SIZE_Y (512.0f)		//ドアの縦サイズ(仮)
 #define SIGN_SIZE	 (32.0f)		//看板サイズ(仮)
 //#define BOSS_CORRECTION (90.0f)	//ボスサイズ補正(仮)
 #define THROUGHT_BLOCK_SIZE	(64.0f)	//スルーブロックサイズ（仮）
