@@ -50,7 +50,6 @@ void CSceneMain::InitScene()
 
 	//Doorオブジェクトを作成する
 	CObjDoor* ObjDoor = new CObjDoor(3, 0);
-
 	Objs::InsertObj(ObjDoor, OBJ_DOOR, 10);
 
 	//敵オブジェクトを作成する
@@ -68,6 +67,10 @@ void CSceneMain::InitScene()
 	//看板オブジェクトを作成する
 	CObjSign* Obj_sign = new CObjSign(6, 7);
 	Objs::InsertObj(Obj_sign, OBJ_SIGN, 10);
+
+	//レバースイッチオブジェクトを作成する
+	CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(7, 7);
+	Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 10);
 
 	//testはしごオブジェクトを作成する（デバック用）
 	/*CObjLadders* ObjLadders = new CObjLadders(6, 3);
@@ -97,7 +100,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
-
+	//p = Save::ExternalDataOpen(L"Stage01(proto).csv", &size);//外部データ読み込み
 	p = Save::ExternalDataOpen(L"Stage1.1.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
@@ -168,6 +171,9 @@ void CSceneMain::ImageDataLoading()
 
 	//Enemy画像
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
+
+	//Lever画像
+	Draw::LoadImageW(L"Lever.png", 9, TEX_SIZE_128);
 }
 
 //音楽データ読み込み関数

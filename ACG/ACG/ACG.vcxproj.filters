@@ -91,6 +91,9 @@
     <Filter Include="ソース ファイル\Main\door">
       <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\ThroughBlock">
+      <UniqueIdentifier>{77f04e69-178f-4e96-b919-0d0532fefba0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -222,6 +225,9 @@
     <ClInclude Include="ObjDoor.h">
       <Filter>ソース ファイル\Main\door</Filter>
     </ClInclude>
+    <ClInclude Include="ObjThroughBlock.h">
+      <Filter>ソース ファイル\Main\ThroughBlock</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -349,6 +355,9 @@
     </ClCompile>
     <ClCompile Include="ObjDoor.cpp">
       <Filter>ソース ファイル\Main\door</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjThroughBlock.cpp">
+      <Filter>ソース ファイル\Main\ThroughBlock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

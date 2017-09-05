@@ -144,6 +144,11 @@ void CObjHero::Action()
 	{
 		m_vy = 20.0f;
 	}
+	//↑キーがおされたとき：上に下がる（デバッグ）
+	if (Input::GetVKey(VK_UP) == true)
+	{
+		m_vy = -20.0f;
+	}
 
 	//はしご-------------------------------------------------
 	////はしごと接触しているかどうかを調べる
@@ -190,21 +195,36 @@ void CObjHero::Action()
 	//左クリックを押したら
 	if (Input::GetMouButtonL() == true)
 	{
+		//マップオブジェクトの呼び出し
+		CObjMap* obj_map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+		//マウスの位置情報取得
+		float mous_x = Input::GetPosX();
+		//マウスの位置がプレイヤーから見てどの方向か調べるための変数
+		float mous_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
+
+		if ( (mous_x - ( m_px - obj_map->GetScrollX() ) ) < 0)//主人公より左をクリックしたとき
+			mous_way = 1.0f;
+
 		if (m_bullet_control == true)
 		{
-			if (m_posture == 0)//主人公が右を向いているとき右側から発射
+			//向いている方向とクリックしている方向が同じなら
+			if (m_posture == mous_way)
 			{
-				//弾丸作成
-				CObjBullet* Objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
-				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-				m_bullet_control = false; //弾丸を出ないフラグにする。
-			}
-			else//主人公が左を向いているとき右側から発射
-			{
-				//弾丸作成
-				CObjBullet* Objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
-				Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
-				m_bullet_control = false; //弾丸を出ないフラグにする。
+				if (m_posture == 0.0f)//主人公が右を向いているとき右側から発射
+				{
+					//弾丸作成
+					CObjBullet* Objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
+					Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+					m_bullet_control = false; //弾丸を出ないフラグにする。
+				}
+				else//主人公が左を向いているとき右側から発射
+				{
+					//弾丸作成
+					CObjBullet* Objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
+					Objs::InsertObj(Objbullet, OBJ_BULLET, 10);
+					m_bullet_control = false; //弾丸を出ないフラグにする。
+				}
 			}
 		}
 	}
