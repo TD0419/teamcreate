@@ -91,14 +91,6 @@ void CObjMap::CreateObj(int x, int y)
 
 		m_map[y][x] = 100;//仮のブロックの番号をマップ情報を入れる(仮)
 	}
-	//ブロック作成
-	if (m_map[y][x] == MAP_DOWN_DRAW_BLOCK)
-	{
-		CObjDownDrawBlock* obj_down_drawblock = new CObjDownDrawBlock(x, y);
-		Objs::InsertObj(obj_down_drawblock, OBJ_DOWN_DRAW_BLOCK, 9);
-
-		m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-	}
 	//はしご作成
 	if (m_map[y][x] == MAP_LADDERS)
 	{

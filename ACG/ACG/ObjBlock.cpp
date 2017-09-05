@@ -27,7 +27,7 @@ void CObjBlock::Init()
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px-obj_m->GetScrollX(), m_py - obj_m->GetScrollY(), BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
-
+	m_b == false;
 }
 
 //アクション
@@ -87,7 +87,13 @@ void CObjBlock::Draw()
 	src.m_left = 0.0f;
 	src.m_right = 64.0f;
 	src.m_bottom = 64.0f;
-
+	if (m_b==true)
+	{
+		src.m_top = 0.0f;
+		src.m_left = 65.0f;
+		src.m_right = 128.0f;
+		src.m_bottom = 64.0f;
+	}
 	//描画位置
 	dst.m_top = m_py - obj_m->GetScrollY();
 	dst.m_left = m_px - obj_m->GetScrollX();
@@ -108,6 +114,13 @@ void CObjBlock::BlockHit(
 	//マップ情報を持ってくる
 	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+
+	RECT_F src, dst;
+
+	
+	//描画
+	Draw::Draw(2, &src, &dst, color, 0.0f);
 	//衝突情報初期化
 	*up		= false;
 	*left	= false;
@@ -218,6 +231,7 @@ void CObjBlock::BlockHit(
 									*y = map_b_y * BLOCK_SIZE + BLOCK_SIZE + scroll_y;
 									*up = true;
 								}
+								
 							}
 						}
 						return;

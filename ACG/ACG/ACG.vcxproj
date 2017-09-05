@@ -70,7 +70,6 @@
     <ClInclude Include="ObjBossDropKey.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="ObjDoor.h" />
-    <ClInclude Include="ObjDownDrawBlock.h" />
     <ClInclude Include="ObjReflectBlock.h" />
     <ClInclude Include="ObjEndlessSpring.h" />
     <ClInclude Include="ObjEnemyBullet.h" />
@@ -116,7 +115,6 @@
     <ClCompile Include="ObjBossDropKey.cpp" />
     <ClCompile Include="Function.cpp" />
     <ClCompile Include="ObjDoor.cpp" />
-    <ClCompile Include="ObjDownDrawBlock.cpp" />
     <ClCompile Include="ObjEndlessSpring.cpp" />
     <ClCompile Include="ObjEnemyBullet.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
