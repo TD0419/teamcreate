@@ -109,7 +109,7 @@ void CObjEnemy::Action()
 		CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 		//•œŠˆ‚Ì‹V®‚ğs‚¤
 		map->SetMap(m_first_x, m_first_y, MAP_ENEMY);
-		
+		map->SetMapCreate(m_first_x, m_first_y, true);
 		return;
 	}
 	
