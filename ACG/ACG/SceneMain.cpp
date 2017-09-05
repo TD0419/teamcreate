@@ -174,6 +174,9 @@ void CSceneMain::ImageDataLoading()
 
 	//Lever画像
 	Draw::LoadImageW(L"Lever.png", 9, TEX_SIZE_128);
+
+	//rock画像
+	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_128);
 }
 
 //音楽データ読み込み関数

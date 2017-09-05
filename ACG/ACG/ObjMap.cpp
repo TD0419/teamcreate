@@ -180,7 +180,7 @@ void CObjMap::CreateObj(int x, int y)
 		}
 
 		//êÖçÏê¨
-		if (m_map[y][x].num == MAP_WOOD)
+		if (m_map[y][x].num == MAP_WATER)
 		{
 			CObjWater* obj_water = new CObjWater(x, y);
 			Objs::InsertObj(obj_water, OBJ_WATER, 9);

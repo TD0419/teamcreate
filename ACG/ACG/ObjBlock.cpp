@@ -234,8 +234,8 @@ void CObjBlock::BlockHit(
 									*vy = 0.0f;
 									*y = map_b_y * BLOCK_SIZE + BLOCK_SIZE + scroll_y;
 									*up = true;
-									m_b = true;
 								}
+								m_b = true;
 								
 							}
 						}
