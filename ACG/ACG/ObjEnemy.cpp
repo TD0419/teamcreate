@@ -43,31 +43,19 @@ void CObjEnemy::Action()
 {
 	//ブロック情報を持ってくる
 	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
+	//マップ情報を取ってくる
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//移動----------------------------------------------
 
-	//デバッグ用にボタン操作で動くようにしてます。
-	//適当に移動処理をいじってもかまいません。
-
-	//Aキーがおされたとき：左移動
-	if (Input::GetVKey('J') == true)
+	//左に向いているなら左へ移動する
+	if (m_posture == 0.0)
 	{
-		m_posture = 0.0f;
 		m_vx -= m_speed;
-		m_ani_time ++;
 	}
-
-	//Dキーがおされたとき：右移動
-	else if (Input::GetVKey('L') == true)
-	{
-		m_posture = 1.0f;
-		m_vx += m_speed;
-		m_ani_time ++;
-	}
+	//右に向いているなら右へ移動する
 	else
 	{
-		m_ani_frame = 0; //キー入力が無い場合は静止フレームにする
-		m_ani_time = 0;
+		m_vx += m_speed;
 	}
 
 	//アニメーションの感覚管理
@@ -105,20 +93,51 @@ void CObjEnemy::Action()
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
 		//死んだのでマップ情報に自身の復活の儀式を行う。
-		//儀式に必要なマップ情報を取得する
-		CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 		//復活の儀式を行う
 		map->SetMap(m_first_x, m_first_y, MAP_ENEMY);
 		map->SetMapCreate(m_first_x, m_first_y, true);
 		return;
 	}
 	
+	
+
 	//ブロックとのあたり判定
 	obj_b->BlockHit(
 		&m_x, &m_y, ENEMY_SIZE, ENEMY_SIZE, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, 
 		&m_vx, &m_vy
 	);
+
+	//右に衝突判定があったら左方向にする
+	if (m_hit_left == true)
+	{
+		m_posture = 0.0;
+	}
+	//左に衝突判定があったら右方向にするです
+	if (m_hit_right == true)
+	{
+		m_posture = 1.0;
+	}
+
+	//下に衝突判定がある
+	if (m_hit_down == true)
+	{
+		//移動しようとしているところが崖なら方向転換
+		//右に動いていて && 
+		//右下にブロックが無かったら
+		if (m_vx > 0 && map->GetMap((m_x / BLOCK_SIZE + 1), (m_y / BLOCK_SIZE + 1)) != MAP_BLOCK)
+		{
+			//方向を左にする
+			m_posture = 0.0;
+		}
+		//左に移動していて &&
+		//左下にブロックが無かったら		↓原点調整
+		if (m_vx < 0 && map->GetMap(((m_x+ENEMY_SIZE) / BLOCK_SIZE - 1), (m_y / BLOCK_SIZE + 1)) != MAP_BLOCK)
+		{
+			//方向を右にする
+			m_posture = 1.0;
+		}
+	}
 
 	//移動ベクトルをポジションに加算
 	m_x += m_vx;
