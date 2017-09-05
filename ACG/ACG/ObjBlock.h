@@ -28,7 +28,6 @@ public:
 	);
 
 	bool jump;//ジャンプ用
-	bool m_b;//ブロック見地用用
 	
 
 private:
