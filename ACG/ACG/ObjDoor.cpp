@@ -40,8 +40,8 @@ void CObjDoor::Draw()
 	//Ø‚èŽæ‚èˆÊ’u
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 63.0f;
-	src.m_bottom = 127.0f;
+	src.m_right = 64.0f;
+	src.m_bottom = 128.0f;
 
 	//•`‰æˆÊ’u
 	dst.m_top = 0.0f + m_py - obj_m->GetScrollY();

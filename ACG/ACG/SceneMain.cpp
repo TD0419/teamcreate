@@ -53,7 +53,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(ObjDoor, OBJ_DOOR, 10);
 
 	//敵オブジェクトを作成する
-	CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
+	CObjEnemy* ObjEnemy = new CObjEnemy(10,7);
 	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
 
 	//testボスオブジェクトを作成する
