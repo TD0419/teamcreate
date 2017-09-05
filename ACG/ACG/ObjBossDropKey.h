@@ -16,8 +16,8 @@ public:
 	void Action();	   //アクション
 	void Draw();	   //ドロー
 private:
-	float m_px;	   // ボス鍵X座標
-	float m_py;	   // ボス鍵Y座標
+	float m_x;	   // ボス鍵X座標
+	float m_y;	   // ボス鍵Y座標
 
 
 };
