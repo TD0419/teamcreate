@@ -22,6 +22,9 @@ public:
 	void SetScrollX(float x) { m_scroll_x += x; }	//X方向のスクロール値をセットする関数
 	void SetScrollY(float y) { m_scroll_y += y; }	//Y方向のスクロール値をセットする関数
 	//void SetMap(int x, int y, int n) { m_map[y][x] = n; }//指定したマップの要素に数値をいれる
+	
+	//マップ情報を返す
+	int   GetMap(int x, int y);
 
 	//マップをもとにしたオブジェクトの生成関連----------------------------------
 	void CreateObj(int x, int y);//オブジェクトの生成を行う

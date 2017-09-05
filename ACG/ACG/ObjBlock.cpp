@@ -37,10 +37,10 @@ void CObjBlock::Action()
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	//主人公オブジェクトと衝突していれば
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	/*if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		HeroHit();//当たり判定の処理を行う
-	}
+	}*/
 	
 	//ボスオブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_BOSS) != nullptr)
@@ -96,7 +96,136 @@ void CObjBlock::Draw()
 
 	//描画
 	Draw::Draw(2, &src, &dst, color, 0.0f);
+}
 
+//ブロックとオブジェクトの当たり判定
+void CObjBlock::BlockHit(
+	float* x, float* y, float width, float height, bool scroll_on,
+	bool*up, bool* down, bool* left, bool* right,
+	float* vx, float*vy
+)
+{
+	//マップ情報を持ってくる
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//衝突情報初期化
+	*up		= false;
+	*left	= false;
+	*right	= false;
+	*down	= false;
+
+	//幅と高さを半分にする
+	float width_half = width / 2.0f;
+	float height_half = height / 2.0f;
+
+	//ブロックの幅と高さを半分にする
+	float block_width_half  = BLOCK_SIZE / 2.0f;
+	float block_height_half = BLOCK_SIZE / 2.0f;
+
+	//次フレームでの移動場所
+	float new_y = *y + *vy;
+	float new_x = *x + *vx;
+
+	//スクロールを加えるか(基本主人公のみ)
+	float scroll_x = scroll_on ? map->GetScrollX() : 0.0f;
+	float scroll_y = scroll_on ? map->GetScrollY() : 0.0f;
+
+	//m_mapの全要素にアクセス
+	for (int i = 0; i < MAP_Y_MAX; i++)
+	{
+		for (int j = 0; j < MAP_X_MAX; j++)
+		{
+			//判定したいブロック
+			if (map->GetMap(j,i) == 100)
+			{
+				//要素番号を座標に変更
+				float bx = j*BLOCK_SIZE;
+				float by = i*BLOCK_SIZE;
+
+				//ブロックとの当たり判定
+				if (abs((bx + block_width_half) - (*x - scroll_x + width_half)) <= block_width_half + width_half)
+				{
+					if (abs((by + block_height_half) - (*y - scroll_y + height_half)) <= block_height_half + height_half)
+					{
+						//左に移動している
+						if (*vx < 0.0f)
+						{
+							//左にあるブロック
+							for (int i = (int)((*y - scroll_y + 10.0f) / BLOCK_SIZE);
+								i <= (int)((*y - scroll_y + height - 20.0f) / BLOCK_SIZE); i++)
+							{
+								float map_b_x = (int)((*x - scroll_x + *vx) / BLOCK_SIZE);
+								//進む先がブロックの右側が衝突している場合(当たっているのが0以外)
+								if (0 < map->GetMap(map_b_x, i) ||
+									0 < map->GetMap(map_b_x, i))
+								{
+									*vx = 0.0f;
+									*x = map_b_x * BLOCK_SIZE + BLOCK_SIZE + scroll_x;
+									*right = true;
+								}
+							}
+						}
+						//右に移動している
+						else if (*vx > 0.0f)
+						{
+							//右にあるブロック
+							for (int i = (int)((*y - scroll_y + 10.0f) / BLOCK_SIZE);
+								i <= (int)((*y - scroll_y + height - 20.0f) / BLOCK_SIZE); i++)
+							{
+								float map_b_x = (int)((*x - scroll_x + width + *vx) / BLOCK_SIZE);
+								//進む先がブロックの左側が衝突している場合(当たっているのが0以外)
+								if (0 < map->GetMap(map_b_x, i) ||
+									0 < map->GetMap(map_b_x, i))
+								{
+									*vx = 0.0f;
+									*x = map_b_x * BLOCK_SIZE - width + scroll_x;
+									*left = true;
+								}
+							}
+						}
+
+						//下に移動している
+						if (*vy > 0.0f)
+						{
+							//下にあるブロックを全て調べる
+							for (int i = (int)((*x - scroll_x + 5.0f) / BLOCK_SIZE);
+								i <= (int)((*x - scroll_x + width - 5.0f) / BLOCK_SIZE); i++)
+							{
+								float map_b_y = (int)((*y + height - scroll_y + *vy) / BLOCK_SIZE);
+								//進む先がブロックの上側が衝突している場合(当たっているのが0以外)
+								if (0 < map->GetMap(i, map_b_y) ||
+									0 < map->GetMap(i, map_b_y))
+								{
+									*vy = 0.0f;
+									*y = map_b_y * BLOCK_SIZE - height + scroll_y;
+									*down = true;
+								}
+							}
+						}
+						//上に移動している
+						else if (*vy < 0.0f)
+						{
+							//上にあるブロックを全て調べる
+							for (int i = (int)((*x - scroll_x + 5.0f) / BLOCK_SIZE);
+								i <= (int)((*x - scroll_x + width - 5.0f) / BLOCK_SIZE); i++)
+							{
+								float map_b_y = (int)((*y - scroll_y + *vy) / BLOCK_SIZE);
+								//進む先がブロックの下側が衝突している場合(当たっているのが0以外)
+								if (0 < map->GetMap(i, map_b_y) ||
+									0 < map->GetMap(i, map_b_y))
+								{
+									*vy = 0.0f;
+									*y = map_b_y * BLOCK_SIZE + BLOCK_SIZE + scroll_y;
+									*up = true;
+								}
+							}
+						}
+						return;
+					}
+				}
+			}
+		}
+	}
 }
 
 void CObjBlock::HeroHit()
