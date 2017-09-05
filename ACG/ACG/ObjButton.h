@@ -8,11 +8,11 @@ using namespace GameL;
 class CObjButton : public CObj
 {
 	public:
-		CObjButton(int x, int y);
-		~CObjButton() {};
-		void Init();	//イニシャライズ
-		void Action();  //アクション
-		void Draw();	//ドロー
+		CObjButton(int x, int y);	//コンストラクタ
+		~CObjButton() {};			//デクトラクタ
+		void Init();				//イニシャライズ
+		void Action();				//アクション
+		void Draw();				//ドロー
 
 		/*-----------------------アクセサ-------------------------*/
 		bool GetTrickFlag() { return m_trick_flag; } //弾とあたっているかどうかを返す
