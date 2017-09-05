@@ -6,7 +6,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：リフト
+//オブジェクト：レバースイッチ
 class CObjLeverSwich :public CObj
 {
 public:
