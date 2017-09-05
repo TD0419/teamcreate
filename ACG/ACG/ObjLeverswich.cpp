@@ -20,7 +20,7 @@ CObjLeverSwich::CObjLeverSwich(float x, float y)
 void CObjLeverSwich::Init()
 {
 	m_ani_time = 0;
-	m_ani_frame = 1;  //静止フレームを初期にする
+	m_ani_frame = 0;  //静止フレームを初期にする
 	m_ani_max_time = 4; //アニメーション間隔幅
 
 	//当たり判定用HitBoxを作成

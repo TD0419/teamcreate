@@ -178,7 +178,7 @@ void CObjMap::CreateObj(int x, int y)
 
 //			m_map[y][x] = MAP_SPACE;//¶¬‚ªI‚í‚é‚Æ‹ó”’‚ğ“ü‚ê‚é
 		}
-
+		
 		//…ì¬
 		if (m_map[y][x].num == MAP_WATER)
 		{
