@@ -5,7 +5,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：ブロック＆背景
+//オブジェクト：反射ブロック
 class CObjReflectBlock : public CObj
 {
 public:
@@ -19,6 +19,6 @@ public:
 
 private:
 
-	float m_px;     //ブロック位置X
-	float m_py;     //ブロック位置Y
+	float m_x;     //ブロック位置X
+	float m_y;     //ブロック位置Y
 };
