@@ -16,7 +16,6 @@ public:
 	void Action();					//アクション
 	void Draw();					//ドロー
 	void Scroll();					//スクロール処理の関数
-	void BlockHit();				//ブロックとの当たり判定を処理する関数
 	void LandingCheck();			//着地できてるかどうかを調べる関数
 	bool HitUpCheck(int obj_name);	//指定したオブジェクトの上側と当たっているかしらべる関数
 
