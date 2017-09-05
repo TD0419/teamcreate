@@ -107,7 +107,7 @@ void CObjHero::Action()
 
 	//ジャンプ--------------------------------------------------------------------
 	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
-	if (Input::GetVKey(VK_SPACE) == true)
+	/*if (Input::GetVKey(VK_SPACE) == true)
 	{
 		m_w_jump_control = true;
 	}
@@ -127,6 +127,14 @@ void CObjHero::Action()
 	}
 	else
 		m_jump_control = true; //スペース押してなければジャンプでるフラグにする。*/
+
+	if (Input::GetVKey(VK_SPACE) == true)
+	{
+		if (m_hit_down == true)
+		{
+			m_vy = -20.0f;
+		}
+	}
 
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
@@ -159,11 +167,10 @@ void CObjHero::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
-	if (m_landingflag == false)
-	{
+
 		//自由落下運動
 		m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
-	}
+	
 
 	Scroll();	//スクロール処理をおこなう
 	//ブロックとの当たり判定
