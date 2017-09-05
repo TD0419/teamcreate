@@ -27,7 +27,7 @@ void CObjBlock::Init()
 
 	////“–‚½‚è”»’è
 	//Hits::SetHitBox(this, m_px-obj_m->GetScrollX(), m_py - obj_m->GetScrollY(), BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
-
+	m_b = false;
 }
 
 //ƒAƒNƒVƒ‡ƒ“
@@ -234,6 +234,7 @@ void CObjBlock::BlockHit(
 									*vy = 0.0f;
 									*y = map_b_y * BLOCK_SIZE + BLOCK_SIZE + scroll_y;
 									*up = true;
+									m_b = true;
 								}
 								
 							}
