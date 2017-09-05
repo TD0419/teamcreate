@@ -4,6 +4,7 @@
 
 #include "GameHead.h"
 #include "ObjLeverSwich.h"
+#include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -50,6 +51,8 @@ void CObjLeverSwich::Action()
 			m_ani_frame = 0;
 		}
 	}
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
 
 //ドロー
