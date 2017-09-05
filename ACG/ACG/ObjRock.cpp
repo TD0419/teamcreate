@@ -38,6 +38,7 @@ void CObjRock::Action()
 	{
 		this->SetStatus(false);		//自身に削除命令を出す
 		Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
+		return;
 	}
 
 	//HitBoxの位置を更新する
