@@ -121,7 +121,7 @@ void CObjHero::Action()
 	{
 		if (m_JumpControl == true)
 		{
-			m_vy = -20.0f;
+			m_vy = -11.0f;
 			m_JumpControl = false;
 		}
 	}
@@ -165,12 +165,11 @@ void CObjHero::Action()
 		m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 	}
 
-	//Scroll();	//スクロール処理をおこなう
+	Scroll();	//スクロール処理をおこなう
 	//ブロックとの当たり判定
 	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_X, HERO_SIZE_Y, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
-	//移動ベクトルをポジションに加算
 	m_px += m_vx;
 	m_py += m_vy;
 
