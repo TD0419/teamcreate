@@ -98,7 +98,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
-	p = Save::ExternalDataOpen(L"Stage1.1.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
+	p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
 	{
@@ -165,9 +165,14 @@ void CSceneMain::ImageDataLoading()
 
 	//Wood画像
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_64);
+	
+	// tstwater
+	Draw::LoadImageW(L"testwater.png", 8, TEX_SIZE_64);
 
 	//Enemy画像
-	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
+	Draw::LoadImageW(L"Snake.png", 9, TEX_SIZE_128);
+
+
 }
 
 //音楽データ読み込み関数
