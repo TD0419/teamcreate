@@ -51,11 +51,13 @@ void CObjEnemy::Action()
 	if (m_posture == 0.0)
 	{
 		m_vx -= m_speed;
+		m_ani_time += 1;
 	}
 	//右に向いているなら右へ移動する
 	else
 	{
 		m_vx += m_speed;
+		m_ani_time += 1;
 	}
 
 	//アニメーションの感覚管理
