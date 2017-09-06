@@ -24,7 +24,7 @@ void CObjWater::Init()
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_WATER, 1);
-	Hits::SetHitBox(this, m_px, m_py, WATER_SIZE, WATER_SIZE, ELEMENT_PLAYER, OBJ_WATER, 1);
+	Hits::SetHitBox(this, m_px, m_py, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT, ELEMENT_PLAYER, OBJ_WATER, 1);
 	m_water_gauge = 0.0f;
 }
 
@@ -51,7 +51,7 @@ void CObjWater::Action()
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-{	
+
 	CHitBox* hitbox = Hits::GetHitBox(this);
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -65,7 +65,7 @@ void CObjWater::Action()
 	m_water_gauge+=1; // 1ずつ増やしていく
 
 	// hitboxが小さくなる
-	hitbox->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() + m_water_gauge, WATER_SIZE - m_water_gauge, WATER_SIZE);
+	hitbox->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() + m_water_gauge, WATER_SIZE_WIDTH - m_water_gauge, WATER_SIZE_HEIGHT);
 
 }
 
@@ -100,6 +100,7 @@ void CObjWater::Draw()
 
 	//描画
 	Draw::Draw(11, &src, &dst, color, 0);
+	/*
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -113,7 +114,7 @@ void CObjWater::Draw()
 	dst.m_left   = m_px;
 	dst.m_right  = dst.m_left + BLOCK_SIZE; 
 	dst.m_bottom = 512.0f     + BLOCK_SIZE; // bottomは座標を固定する
-
+	*/
 	//描画
 	Draw::Draw(8, &src, &dst, color, 0.0f);
 }
