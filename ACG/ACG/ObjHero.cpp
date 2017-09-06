@@ -12,8 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjHero::CObjHero(int x, int y)
 {
-	m_px = x * HERO_SIZE_X;
-	m_py = y * HERO_SIZE_Y;
+	m_px = x * HERO_SIZE_WIDTH;
+	m_py = y * HERO_SIZE_HEIGHT;
 }
 
 //イニシャライズ
@@ -43,7 +43,7 @@ void CObjHero::Init()
 	m_hit_down  = false;
 
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, HERO_SIZE_X, HERO_SIZE_Y, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, m_px, m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, ELEMENT_PLAYER, OBJ_HERO, 1);
 }
 
 //アクション
@@ -179,7 +179,7 @@ void CObjHero::Action()
 
 	Scroll();	//スクロール処理をおこなう
 	//ブロックとの当たり判定
-	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_X, HERO_SIZE_Y,
+	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
 	m_px += m_vx;
@@ -349,9 +349,9 @@ void CObjHero::Draw()
 
 	//描画位置
 	dst.m_top		= 0.0f + m_py - obj_m->GetScrollY();
-	dst.m_left		= (HERO_SIZE_X * m_posture) + m_px - obj_m->GetScrollX();
-	dst.m_right	    = (HERO_SIZE_X - HERO_SIZE_X * m_posture) + m_px - obj_m->GetScrollX();
-	dst.m_bottom	= dst.m_top  + HERO_SIZE_Y;
+	dst.m_left		= (HERO_SIZE_WIDTH * m_posture) + m_px - obj_m->GetScrollX();
+	dst.m_right	    = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - obj_m->GetScrollX();
+	dst.m_bottom	= dst.m_top  + HERO_SIZE_HEIGHT;
 
 	//描画
 	Draw::Draw(3, &src, &dst, color, m_r);
