@@ -92,12 +92,13 @@ enum MAP_BER
 };
 
 //オブジェクトのサイズ
-#define HERO_SIZE_X (32.0f)		//主人公の横サイズ	
+#define HERO_SIZE_X (64.0f)		//主人公の横サイズ	
 #define HERO_SIZE_Y (128.0f)		//主人公の縦サイズ	
 #define ENEMY_SIZE	 (64.0f)		//敵のサイズ(仮)
 #define BULLET_SIZE  (20.0f)		//弾丸サイズ（仮）
 #define BLOCK_SIZE	 (64.0f)		//ブロックのサイズ（仮）	
-#define WATER_SIZE	 (32.0f)		//水のサイズ（仮）
+#define WATER_SIZE_WIDTH	 (128.0f)//水のサイズ横
+#define WATER_SIZE_HEIGHT	 (64.0f)//水のサイズ縦
 #define LADDERS_SIZE (64.0f)		//はしごのサイズ
 #define BUTTON_SIZE	 (32.0f)		//ボタンサイズ（仮）
 #define SIGN_SIZE	 (32.0f)		//看板のサイズ（仮）

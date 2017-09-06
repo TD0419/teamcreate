@@ -71,6 +71,13 @@ void CSceneMain::InitScene()
 	//レバースイッチオブジェクトを作成する
 	CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(7, 7);
 	Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 10);
+	//水オブジェクトを作成する
+	CObjWater* ObjWater = new CObjWater(8, 7);
+	Objs::InsertObj(ObjWater, OBJ_WATER, 10);
+	CObjWater* ObjWater2 = new CObjWater(7, 7);
+	Objs::InsertObj(ObjWater2, OBJ_WATER, 10);
+	CObjWater* ObjWater3 = new CObjWater(9, 7);
+	Objs::InsertObj(ObjWater3, OBJ_WATER, 10);
 
 	//testはしごオブジェクトを作成する（デバック用）
 	/*CObjLadders* ObjLadders = new CObjLadders(6, 3);
@@ -177,6 +184,9 @@ void CSceneMain::ImageDataLoading()
 
 	//rock画像
 	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_64);
+
+	//Water画像
+	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);
 }
 
 //音楽データ読み込み関数
