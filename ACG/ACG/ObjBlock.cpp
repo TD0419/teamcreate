@@ -255,14 +255,14 @@ void CObjBlock::HeroHit()
 			//ブロックの上側が衝突している場合
 			else if (45.0f < r && r < 125.0f)
 			{
-				obj_hero->SetPosY(m_py - HERO_SIZE_Y);//主人公の位置をブロックの上側までずらす
+				obj_hero->SetPosY(m_py - HERO_SIZE_HEIGHT);//主人公の位置をブロックの上側までずらす
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 			}
 			//ブロックの左側が衝突している場合
 			else if (125.0f < r && r < 225.0f)
 			{
 				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				obj_hero->SetPosX(m_px - HERO_SIZE_X);//主人公の位置をブロックの左側までずらす
+				obj_hero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置をブロックの左側までずらす
 			}
 			//ブロックの下側が衝突している場合
 			else if (225.0f < r && r < 315.0f)

@@ -77,7 +77,7 @@ void CObjLift::HeroRide()
 
 				//リフトに乗せる処理
 				obj_hero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
-				obj_hero->SetPosY(m_py - HERO_SIZE_Y);//主人公のポジションをリフトの上にする
+				obj_hero->SetPosY(m_py - HERO_SIZE_HEIGHT);//主人公のポジションをリフトの上にする
 			}
 		}
 	}
