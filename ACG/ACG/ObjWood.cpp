@@ -12,15 +12,15 @@ using namespace GameL;
 //コンストラクタ
 CObjWood::CObjWood(int x, int y)
 {
-	m_px = x * WOOD_SIZE_X;
-	m_py = y * WOOD_SIZE_Y;
+	m_px = x * WOOD_SIZE_WIDTH;
+	m_py = y * WOOD_SIZE_HEIGHT;
 }
 
 //イニシャライズ
 void CObjWood::Init()
 {
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, WOOD_SIZE_X, WOOD_SIZE_Y, ELEMENT_GIMMICK, OBJ_WOOD, 1);
+	Hits::SetHitBox(this, m_px, m_py, WOOD_SIZE_WIDTH, WOOD_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_WOOD, 1);
 
 }
 
@@ -45,30 +45,30 @@ void CObjWood::Action()
 		{
 			float r = hit_data[i]->r;//あたっている角度をもってくる
 
-									 //ブロックの右側が衝突している場合
+			//ブロックの右側が衝突している場合
 			if (0 < r && r < 45 || 315 < r && r < 360)
 			{
 				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				obj_hero->SetPosX(m_px + WOOD_SIZE_X);//主人公の位置を木の右側までずらす
+				obj_hero->SetPosX(m_px + WOOD_SIZE_WIDTH);//主人公の位置を木の右側までずらす
 			}
 			//ブロックの上側が衝突している場合
 			else if (45 < r && r < 125)
 			{
 
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				obj_hero->SetPosY(m_py - WOOD_SIZE_Y);//主人公の位置を木の上側までずらす
+				obj_hero->SetPosY(m_py - WOOD_SIZE_HEIGHT);//主人公の位置を木の上側までずらす
 			}
 			//ブロックの左側が衝突している場合
 			else if (125 < r && r < 225)
 			{
 				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				obj_hero->SetPosX(m_px - WOOD_SIZE_X);//主人公の位置を木の左側までずらす
+				obj_hero->SetPosX(m_px - WOOD_SIZE_WIDTH);//主人公の位置を木の左側までずらす
 			}
 			//ブロックの下側が衝突している場合
 			else if (225 < r && r < 315)
 			{
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				obj_hero->SetPosY(m_py + WOOD_SIZE_Y);//主人公の位置を木の下側までずらす
+				obj_hero->SetPosY(m_py + WOOD_SIZE_HEIGHT);//主人公の位置を木の下側までずらす
 			}
 		}
 	}
@@ -94,8 +94,8 @@ void CObjWood::Draw()
 	//描画位置
 	dst.m_top = 0.0f + m_py - obj_m->GetScrollY();
 	dst.m_left = 0.0f + m_px - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + WOOD_SIZE_X;
-	dst.m_bottom = dst.m_top + WOOD_SIZE_Y;
+	dst.m_right = dst.m_left + WOOD_SIZE_WIDTH;
+	dst.m_bottom = dst.m_top + WOOD_SIZE_HEIGHT;
 
 	//描画
 	Draw::Draw(7, &src, &dst, color, 0);

@@ -13,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjBoss::CObjBoss(int x,int y)
 {
-	m_px = x * 32;
-	m_py = y * 32;
+	m_x = x * BLOCK_SIZE;
+	m_y = y * BLOCK_SIZE;
 }
 
 //イニシャライズ
@@ -27,7 +27,7 @@ void CObjBoss::Init()
 	m_hp = 10; //ボスのＨＰ(仮にＨＰを[ 10 ]と設定)
 
 	 //当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE , BOSS_SIZE , ELEMENT_ENEMY, OBJ_BOSS, 1);
+	Hits::SetHitBox(this, m_x, m_y, BOSS_SIZE , BOSS_SIZE , ELEMENT_ENEMY, OBJ_BOSS, 1);
 
 }
 
@@ -41,25 +41,25 @@ void CObjBoss::Action()
 	//Aキーがおされたとき：左移動
 	if (Input::GetVKey('J') == true)
 	{
-		m_vx -= 5.0f;
+		m_vx -= 0.5f;
 	}
 
 	//Dキーがおされたとき：右移動
 	if (Input::GetVKey('L') == true)
 	{
-		m_vx += 5.0f;
+		m_vx += 0.5f;
 	}
 
 	//↑キーがおされたとき：上昇
 	if (Input::GetVKey('I') == true)
 	{
-		m_vy = -20.0f;
+		m_vy = -10.0f;
 	}
-	//↓キーがおされたとき：下降
-	if (Input::GetVKey('M') == true)
-	{
-		m_vy = 20.0f;
-	}
+	////↓キーがおされたとき：下降
+	//if (Input::GetVKey('M') == true)
+	//{
+	//	m_vy = 20.0f;
+	//}
 	//----------------------------------
 
 	//摩擦
@@ -69,21 +69,14 @@ void CObjBoss::Action()
 	m_vy += 9.8 / (16.0f);
 
 	//移動ベクトルをポジションに加算
-	m_px += m_vx;
-	m_py += m_vy;
+	m_x += m_vx;
+	m_y += m_vy;
 
-	//移動ベクトルを初期化
-	m_vx = 0.0f;
-	m_vy = 0.0f;
-
-	/*
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
-	pb -> BlockHit(&m_px,&m_py,true,
-	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy,
-	&m_block_type
+	pb -> BlockHit(&m_x,&m_y,BOSS_SIZE,BOSS_SIZE,
+	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy
 	);
-	*/
 
 	
 
@@ -94,7 +87,7 @@ void CObjBoss::Action()
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(Hits::GetHitBox(this), m_x, m_y);
 
 }
 
@@ -116,8 +109,8 @@ void CObjBoss::Draw()
 	src.m_bottom = 512.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_py - obj_m->GetScrollY();
-	dst.m_left = 0.0f + m_px - obj_m->GetScrollX();
+	dst.m_top = 0.0f + m_y - obj_m->GetScrollY();
+	dst.m_left = 0.0f + m_x - obj_m->GetScrollX();
 	dst.m_right = dst.m_left  + BOSS_SIZE;
 	dst.m_bottom = dst.m_top  + BOSS_SIZE;
 

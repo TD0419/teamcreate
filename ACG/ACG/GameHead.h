@@ -31,6 +31,7 @@ enum OBJ_NAME
 	OBJ_ENDLESS_SPRING, //敵生成システム(エンドレス沸き)
 	OBJ_LEVER_SWICH,    //レバースイッチ
 	OBJ_DOOR,           //ドア
+	OBJ_THROUGHT_BLOCK,	//スルーブロック
 };
 //------------------------------------------------
 
@@ -74,46 +75,52 @@ struct UserData
 #define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y
 
 //マップの番号とオブジェクトの対応　（仮）
-#define MAP_SPACE	(0)		//何もない場所
-#define MAP_BLOCK	(1)		//ブロック(ノーマル)
-#define MAP_LADDERS	(2)		//はしご
-#define MAP_BUTTON	(3)		//ボタン
-#define MAP_ROPE_SWITCH	(4) //ロープスイッチ
-#define MAP_LIFT	(5)		//リフト
-#define MAP_ROCK	(6)		//岩
-#define MAP_WOOD	(7)		//木
-#define MAP_WATER	(8)		//水
-#define MAP_ENEMY	(9)		//敵
-#define MAP_BOSS	(10)	//ボス
-#define MAP_BLOCK2  (11)	//ブロック(二段目以降)	
+enum MAP_BER
+{
+	MAP_SPACE		,	//何もない場所
+	MAP_BLOCK		,	//ブロック(ノーマル)
+	MAP_LADDERS		,	//はしご
+	MAP_BUTTON		,	//ボタン
+	MAP_ROPE_SWITCH	,	//ロープスイッチ
+	MAP_LIFT		,	//リフト
+	MAP_ROCK		,	//岩
+	MAP_WOOD		,	//木
+	MAP_WATER		,	//水
+	MAP_ENEMY		,	//敵
+	MAP_BOSS		,	//ボス
+	MAP_BLOCK2		,	//ブロック(二段目以降)
+};
 
 //オブジェクトのサイズ
-#define HERO_SIZE_X (64.0f)	//主人公の横サイズ	
-#define HERO_SIZE_Y (128.0f)//主人公の縦サイズ	
-#define ENEMY_SIZE	(64.0f) //敵のサイズ(仮)
-#define BULLET_SIZE (20.0f)	//弾丸サイズ（仮）
-#define BLOCK_SIZE	(64.0f) //ブロックのサイズ（仮）	
-#define WATER_SIZE	(64.0f) //水のサイズ（仮）
-#define LADDERS_SIZE (64.0f)//はしごのサイズ
-#define BUTTON_SIZE	(32.0f)//ボタンサイズ（仮）
-#define SIGN_SIZE	(32.0f)//看板のサイズ（仮）
-#define ROPE_SWITCH_SIZE	(32.0f)	//ロープスイッチのサイズ（仮）
-#define LIFT_SIZE	(32.0f)//リフトサイズ(仮)
-#define ROCK_SIZE	(32.0f)//岩サイズ（仮）
-#define WOOD_SIZE_X	(64.0f)//木の横サイズ(仮)
-#define WOOD_SIZE_Y	(192.0f)//木の縦サイズ(仮)
-#define BOSS_SIZE	(170.0f)//BOSSサイズ(仮)
-#define BOSS_DORP_KEY_SIZE	(32.0f)//ボスドロップキーサイズ(仮)
-#define DOOR_SIZE_X (32.0f)//ドアの横サイズ(仮)
-#define DOOR_SIZE_Y (384.0f)//ドアの縦サイズ(仮)
-#define SIGN_SIZE	(32.0f)//看板サイズ(仮)
-//#define BOSS_CORRECTION (90.0f)//ボスサイズ補正(仮)
+#define HERO_SIZE_WIDTH   (64.0f)		//主人公の横サイズ	
+#define HERO_SIZE_HEIGHT  (128.0f)		//主人公の縦サイズ	
+#define ENEMY_SIZE	      (64.0f)		//敵のサイズ(仮)
+#define BULLET_SIZE       (20.0f)		//弾丸サイズ（仮）
+#define BLOCK_SIZE	      (64.0f)		//ブロックのサイズ（仮）	
+#define WATER_SIZE_WIDTH  (128.0f)      //水の横サイズ
+#define WATER_SIZE_HEIGHT (64.0f)       //水の縦サイズ
+#define LADDERS_SIZE      (64.0f)		//はしごのサイズ
+#define BUTTON_SIZE	      (32.0f)		//ボタンサイズ（仮）
+#define SIGN_SIZE	      (32.0f)		//看板のサイズ（仮）
+#define LEVER_SWITCH_SIZE (64.0f)	    //レバースイッチのサイズ
+#define ROPE_SWITCH_SIZE  (32.0f)	    //ロープスイッチのサイズ（仮）
+#define LIFT_SIZE         (32.0f)		//リフトサイズ(仮)
+#define ROCK_SIZE	      (32.0f)		//岩サイズ（仮）
+#define WOOD_SIZE_WIDTH	  (64.0f)		//木の横サイズ(仮)
+#define WOOD_SIZE_HEIGHT  (192.0f)		//木の縦サイズ(仮)
+#define BOSS_SIZE	      (170.0f)		//BOSSサイズ(仮)
+#define BOSS_DORP_KEY_SIZE (32.0f)	    //ボスドロップキーサイズ(仮)
+#define DOOR_SIZE_WIDTH   (32.0f)		//ドアの横サイズ(仮)
+#define DOOR_SIZE_HEIGHT  (128.0f)		//ドアの縦サイズ(仮)
+#define SIGN_SIZE	      (32.0f)		//看板サイズ(仮)
+//#define BOSS_CORRECTION (90.0f)	    //ボスサイズ補正(仮)
+#define THROUGHT_BLOCK_SIZE	(64.0f)	    //スルーブロックサイズ（仮）
 
 
 //スクロールのライン　（要調整）
-#define SCROLL_LINE_LEFT	(480.0f)							//左
+#define SCROLL_LINE_LEFT	(400.0f)							//左
 #define SCROLL_LINE_RIGHT	(WINDOW_SIZE_W - SCROLL_LINE_LEFT)	//右
-#define SCROLL_LINE_UP		(250.0f)							//上
+#define SCROLL_LINE_UP		(50.0f)								//上
 #define SCROLL_LINE_DOWN	(WINDOW_SIZE_H - SCROLL_LINE_UP)	//下
 
 //オブジェクトの生成ライン（要調整）
@@ -129,31 +136,32 @@ struct UserData
 //------------------------------------------------
 
 //ゲームシーンオブジェクトヘッダ-----------------
-#include "ObjHero.h"		//主人公
-#include "ObjButton.h"		//ボタン
-#include "ObjBullet.h"		//弾丸(主人公用)
-#include "ObjEnemyBullet.h"	//弾丸(敵用)
-#include "ObjRock.h"		//岩
-#include "ObjBlock.h"		//ブロック
-#include "ObjReflectBlock.h"//弾を反射するブロック
-#include "ObjLift.h"		//リフト
-#include "ObjLadders.h"		//梯子
-#include "ObjMap.h"			//マップ
-#include "ObjWood.h"		//木	
-#include "ObjWater.h"		//水
-#include "ObjRopeSwitch.h"	//ロープスイッチ
-#include "ObjEnemy.h"		//敵
-#include "ObjBoss.h"	//ボス
-#include "ObjStage3Boss.h"  //第三ステージボス
-#include "ObjBossDropKey.h"	//ボスが落とす鍵
-#include "ObjTitle.h"		//タイトル
-#include "ObjSign.h"		//看板
-#include "ObjRope.h"        //縄（スイッチに引っ掛ける縄）
-#include "ObjGameClear.h"	//クリア
-#include "ObjGameOver.h"	//ゲームオーバー
-#include "ObjEndlessSpring.h"//敵生成システム(エンドレス沸き)
-#include "ObjLeverSwich.h"  //レバースイッチ
-#include "ObjDoor.h"        //ドア
+#include "ObjHero.h"			//主人公
+#include "ObjButton.h"			//ボタン
+#include "ObjBullet.h"			//弾丸(主人公用)
+#include "ObjEnemyBullet.h"		//弾丸(敵用)
+#include "ObjRock.h"			//岩
+#include "ObjBlock.h"			//ブロック
+#include "ObjReflectBlock.h"	//弾を反射するブロック
+#include "ObjLift.h"			//リフト
+#include "ObjLadders.h"			//梯子
+#include "ObjMap.h"				//マップ
+#include "ObjWood.h"			//木	
+#include "ObjWater.h"			//水
+#include "ObjRopeSwitch.h"		//ロープスイッチ
+#include "ObjEnemy.h"			//敵
+#include "ObjBoss.h"			//ボス
+#include "ObjStage3Boss.h"		//第三ステージボス
+#include "ObjBossDropKey.h"		//ボスが落とす鍵
+#include "ObjTitle.h"			//タイトル
+#include "ObjSign.h"			//看板
+#include "ObjRope.h"			//縄（スイッチに引っ掛ける縄）
+#include "ObjGameClear.h"		//クリア
+#include "ObjGameOver.h"		//ゲームオーバー
+#include "ObjEndlessSpring.h"	//敵生成システム(エンドレス沸き)
+#include "ObjLeverSwich.h"		//レバースイッチ
+#include "ObjDoor.h"			//ドア
+#include "ObjThroughBlock.h"	//スルーブロック
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

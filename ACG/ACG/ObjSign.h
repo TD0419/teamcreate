@@ -6,7 +6,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：リフト
+//オブジェクト：看板
 class CObjSign :public CObj
 {
 public:

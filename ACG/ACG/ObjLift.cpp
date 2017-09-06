@@ -62,17 +62,23 @@ void CObjLift::HeroRide()
 	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
 
-	float r = hit_data[0]->r;//あたっている角度を持ってくる
-
-	//上側があたっていればで
-	if (45.0f <= r && r <= 135.0f)
+	for (int i = 0; i < hit->GetCount(); i++)
 	{
-		//主人公オブジェクトを持ってくる
-		CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-		float h_px = obj_hero->GetPosX();//主人公の位置Xを持ってくる
+		if (hit_data[i] != nullptr)
+		{
+			float r = hit_data[i]->r;//あたっている角度を持ってくる
 
-		//リフトに乗せる処理
-		obj_hero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
-		obj_hero->SetPosY(m_py - HERO_SIZE_Y);//主人公のポジションをリフトの上にする
+			//上側があたっていればで
+			if (45.0f <= r && r <= 135.0f)
+			{
+				//主人公オブジェクトを持ってくる
+				CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+				float h_px = obj_hero->GetPosX();//主人公の位置Xを持ってくる
+
+				//リフトに乗せる処理
+				obj_hero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
+				obj_hero->SetPosY(m_py - HERO_SIZE_HEIGHT);//主人公のポジションをリフトの上にする
+			}
+		}
 	}
 }

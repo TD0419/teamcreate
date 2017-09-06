@@ -50,11 +50,10 @@ void CSceneMain::InitScene()
 
 	//Doorオブジェクトを作成する
 	CObjDoor* ObjDoor = new CObjDoor(3, 0);
-
 	Objs::InsertObj(ObjDoor, OBJ_DOOR, 10);
 
 	//敵オブジェクトを作成する
-	CObjEnemy* ObjEnemy = new CObjEnemy(10,10);
+	CObjEnemy* ObjEnemy = new CObjEnemy(10,7);
 	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
 
 	//testボスオブジェクトを作成する
@@ -68,6 +67,17 @@ void CSceneMain::InitScene()
 	//看板オブジェクトを作成する
 	CObjSign* Obj_sign = new CObjSign(6, 7);
 	Objs::InsertObj(Obj_sign, OBJ_SIGN, 10);
+
+	//レバースイッチオブジェクトを作成する
+	CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(7, 7);
+	Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 10);
+	//水オブジェクトを作成する
+	CObjWater* ObjWater = new CObjWater(8, 7);
+	Objs::InsertObj(ObjWater, OBJ_WATER, 10);
+	CObjWater* ObjWater2 = new CObjWater(7, 7);
+	Objs::InsertObj(ObjWater2, OBJ_WATER, 10);
+	CObjWater* ObjWater3 = new CObjWater(9, 7);
+	Objs::InsertObj(ObjWater3, OBJ_WATER, 10);
 
 	//testはしごオブジェクトを作成する（デバック用）
 	/*CObjLadders* ObjLadders = new CObjLadders(6, 3);
@@ -98,7 +108,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
-	p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
+	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
 	{
@@ -170,9 +180,16 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"testwater.png", 8, TEX_SIZE_64);
 
 	//Enemy画像
-	Draw::LoadImageW(L"Snake.png", 9, TEX_SIZE_128);
+	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
 
+	//Lever画像
+	Draw::LoadImageW(L"Lever.png", 9, TEX_SIZE_128);
 
+	//rock画像
+	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_64);
+
+	//Water画像
+	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);
 }
 
 //音楽データ読み込み関数
