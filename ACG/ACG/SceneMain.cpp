@@ -175,6 +175,9 @@ void CSceneMain::ImageDataLoading()
 
 	//Wood‰æ‘œ
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_64);
+	
+	// tstwater
+	Draw::LoadImageW(L"testwater.png", 8, TEX_SIZE_64);
 
 	//Enemy‰æ‘œ
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);

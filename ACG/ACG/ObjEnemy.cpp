@@ -181,6 +181,6 @@ void CObjEnemy::Draw()
 	dst.m_bottom = dst.m_top + ENEMY_SIZE;
 
 	//•`‰æ
-	Draw::Draw(8, &src, &dst, color, m_r);
+	Draw::Draw(9, &src, &dst, color, m_r);
 
 }
