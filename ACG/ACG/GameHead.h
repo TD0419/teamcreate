@@ -32,6 +32,7 @@ enum OBJ_NAME
 	OBJ_LEVER_SWICH,    //レバースイッチ
 	OBJ_DOOR,           //ドア
 	OBJ_THROUGHT_BLOCK,	//スルーブロック
+	OBJ_BACKGROUND,		//バッググラウンド(背景)
 };
 //------------------------------------------------
 
@@ -162,6 +163,7 @@ enum MAP_BER
 #include "ObjLeverSwich.h"		//レバースイッチ
 #include "ObjDoor.h"			//ドア
 #include "ObjThroughBlock.h"	//スルーブロック
+#include "ObjBackGround.h"		//バッググラウンド(背景)
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

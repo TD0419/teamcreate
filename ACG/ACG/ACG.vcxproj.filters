@@ -94,6 +94,9 @@
     <Filter Include="ソース ファイル\Main\ThroughBlock">
       <UniqueIdentifier>{77f04e69-178f-4e96-b919-0d0532fefba0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\BackGround">
+      <UniqueIdentifier>{477b5c30-202e-44a1-ab03-445b3ea37cc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -228,6 +231,9 @@
     <ClInclude Include="ObjThroughBlock.h">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBackGround.h">
+      <Filter>ソース ファイル\BackGround</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -358,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="ObjThroughBlock.cpp">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBackGround.cpp">
+      <Filter>ソース ファイル\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
