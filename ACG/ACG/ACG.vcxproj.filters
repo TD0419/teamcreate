@@ -97,6 +97,9 @@
     <Filter Include="ソース ファイル\Main\FallingWalls">
       <UniqueIdentifier>{6296e886-feb9-4dad-8082-74c958c81f8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\BackGround">
+      <UniqueIdentifier>{477b5c30-202e-44a1-ab03-445b3ea37cc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -234,6 +237,9 @@
     <ClInclude Include="ObjFallingWalls.h">
       <Filter>ソース ファイル\Main\FallingWalls</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBackGround.h">
+      <Filter>ソース ファイル\BackGround</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -367,6 +373,9 @@
     </ClCompile>
     <ClCompile Include="ObjFallingWalls.cpp">
       <Filter>ソース ファイル\Main\FallingWalls</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBackGround.cpp">
+      <Filter>ソース ファイル\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

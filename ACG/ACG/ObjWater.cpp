@@ -51,10 +51,10 @@ void CObjWater::Action()
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-	{
-		CHitBox* hitbox = Hits::GetHitBox(this);
-		//マップオブジェクトを持ってくる
-		CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	CHitBox* hitbox = Hits::GetHitBox(this);
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 		// m_water_gaugeが64を越えたら処理ストップ
 		if (m_water_gauge >= 64)
@@ -109,4 +109,21 @@ void CObjWater::Draw()
 
 	////描画
 	//Draw::Draw(8, &src, &dst, color, 0.0f);
+	/*
+	//描画カラー
+	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+
+	RECT_F src, dst;
+
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//描画位置
+	dst.m_top    = m_py + m_water_gauge;
+	dst.m_left   = m_px;
+	dst.m_right  = dst.m_left + BLOCK_SIZE; 
+	dst.m_bottom = 512.0f     + BLOCK_SIZE; // bottomは座標を固定する
+	*/
+	//描画
+	Draw::Draw(8, &src, &dst, color, 0.0f);
 }

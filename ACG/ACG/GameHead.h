@@ -33,6 +33,7 @@ enum OBJ_NAME
 	OBJ_DOOR,           //ドア
 	OBJ_THROUGHT_BLOCK,	//スルーブロック
 	OBJ_FALLING_WALLS,  //落下壁
+	OBJ_BACKGROUND,		//バッググラウンド(背景)
 };
 //------------------------------------------------
 
@@ -166,6 +167,7 @@ enum MAP_BER
 #include "ObjDoor.h"			//ドア
 #include "ObjThroughBlock.h"	//スルーブロック
 #include "ObjFallingWalls.h"	//落下壁
+#include "ObjBackGround.h"		//バッググラウンド(背景)
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
