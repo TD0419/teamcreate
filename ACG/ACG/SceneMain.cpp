@@ -74,10 +74,10 @@ void CSceneMain::InitScene()
 	//水オブジェクトを作成する
 	CObjWater* ObjWater = new CObjWater(8, 7);
 	Objs::InsertObj(ObjWater, OBJ_WATER, 10);
-	CObjWater* ObjWater2 = new CObjWater(7, 7);
+	/*CObjWater* ObjWater2 = new CObjWater(7, 7);
 	Objs::InsertObj(ObjWater2, OBJ_WATER, 10);
 	CObjWater* ObjWater3 = new CObjWater(9, 7);
-	Objs::InsertObj(ObjWater3, OBJ_WATER, 10);
+	Objs::InsertObj(ObjWater3, OBJ_WATER, 10);*/
 
 	//testはしごオブジェクトを作成する（デバック用）
 	/*CObjLadders* ObjLadders = new CObjLadders(6, 3);
@@ -175,9 +175,6 @@ void CSceneMain::ImageDataLoading()
 
 	//Wood画像
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_64);
-	
-	// tstwater
-	Draw::LoadImageW(L"testwater.png", 8, TEX_SIZE_64);
 
 	//Enemy画像
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);

@@ -56,13 +56,13 @@ void CObjWood::Action()
 			{
 
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				obj_hero->SetPosY(m_py - WOOD_SIZE_HEIGHT);//主人公の位置を木の上側までずらす
+				obj_hero->SetPosY(m_py - HERO_SIZE_HEIGHT);//主人公の位置を木の上側までずらす
 			}
 			//ブロックの左側が衝突している場合
 			else if (125 < r && r < 225)
 			{
 				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				obj_hero->SetPosX(m_px - WOOD_SIZE_WIDTH);//主人公の位置を木の左側までずらす
+				obj_hero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置を木の左側までずらす
 			}
 			//ブロックの下側が衝突している場合
 			else if (225 < r && r < 315)

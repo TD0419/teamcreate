@@ -11,7 +11,7 @@ using namespace GameL;
 //コンストラクタ
 CObjWater::CObjWater(int x, int y)
 {
-	m_px = x * WATER_SIZE_WIDTH;
+	m_px = x * 64.0f;
 	m_py = y * WATER_SIZE_HEIGHT;
 }
 
@@ -24,7 +24,6 @@ void CObjWater::Init()
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_WATER, 1);
-	/*Hits::SetHitBox(this, m_px, m_py, WATER_SIZE, WATER_SIZE, ELEMENT_PLAYER, OBJ_WATER, 1);*/
 	m_water_gauge = 0.0f;
 }
 
@@ -62,12 +61,11 @@ void CObjWater::Action()
 			return;
 		}
 
-		m_water_gauge += 1; // 1ずつ増やしていく
+		m_water_gauge += 0.1; // 1ずつ増やしていく
 
 		// hitboxが小さくなる
 		hitbox->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() + m_water_gauge, WATER_SIZE_HEIGHT - m_water_gauge, WATER_SIZE_WIDTH);
 
-	}
 }
 //ドロー
 void CObjWater::Draw()
@@ -93,10 +91,10 @@ void CObjWater::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_py - obj_m->GetScrollY();
-	dst.m_left = 0.0f + m_px - obj_m->GetScrollX();
+	dst.m_top =  m_py + m_water_gauge - obj_m->GetScrollY();
+	dst.m_left =  m_px - obj_m->GetScrollX();
 	dst.m_right = dst.m_left + WATER_SIZE_WIDTH;
-	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT;
+	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
 
 	//描画
 	Draw::Draw(11, &src, &dst, color, 0);
@@ -124,6 +122,6 @@ void CObjWater::Draw()
 	dst.m_right  = dst.m_left + BLOCK_SIZE; 
 	dst.m_bottom = 512.0f     + BLOCK_SIZE; // bottomは座標を固定する
 	*/
-	//描画
-	Draw::Draw(8, &src, &dst, color, 0.0f);
+	////描画
+	//Draw::Draw(8, &src, &dst, color, 0.0f);
 }
