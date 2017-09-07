@@ -48,9 +48,6 @@ void CObjWater::Action()
 		m_ani_frame = 0;
 	}
 
-	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-
 	CHitBox* hitbox = Hits::GetHitBox(this);
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -58,6 +55,8 @@ void CObjWater::Action()
 		// m_water_gaugeが64を越えたら処理ストップ
 		if (m_water_gauge >= 64)
 		{
+			this->SetStatus(false);		//自身に削除命令を出す
+			Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
 			return;
 		}
 
@@ -95,33 +94,6 @@ void CObjWater::Draw()
 	dst.m_left =  m_px - obj_m->GetScrollX();
 	dst.m_right = dst.m_left + WATER_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
-
 	//描画
-	Draw::Draw(11, &src, &dst, color, 0);
-	
-	////描画位置
-	//dst.m_top    = m_py + m_water_gauge;
-	//dst.m_left   = m_px;
-	//dst.m_right  = dst.m_left + BLOCK_SIZE; 
-	//dst.m_bottom = 512.0f     + BLOCK_SIZE; // bottomは座標を固定する
-
-	////描画
-	//Draw::Draw(8, &src, &dst, color, 0.0f);
-	/*
-	//描画カラー
-	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
-
-	RECT_F src, dst;
-
-	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	//描画位置
-	dst.m_top    = m_py + m_water_gauge;
-	dst.m_left   = m_px;
-	dst.m_right  = dst.m_left + BLOCK_SIZE; 
-	dst.m_bottom = 512.0f     + BLOCK_SIZE; // bottomは座標を固定する
-	*/
-	////描画
-	//Draw::Draw(8, &src, &dst, color, 0.0f);
+	Draw::Draw(11, &src, &dst, color, 0.0f);
 }
