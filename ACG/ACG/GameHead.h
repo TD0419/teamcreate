@@ -148,7 +148,7 @@ enum MAP_BER
 #include "ObjBlock.h"			//ブロック
 #include "ObjReflectBlock.h"	//弾を反射するブロック
 #include "ObjLift.h"			//リフト
-#include "ObjLadders.h"			//梯子
+#include "ObjLadders.h"			//はしご
 #include "ObjMap.h"				//マップ
 #include "ObjWood.h"			//木	
 #include "ObjWater.h"			//水

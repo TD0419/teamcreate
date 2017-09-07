@@ -11,8 +11,8 @@ class CSceneTitle :public CScene
 public:
 	CSceneTitle() {};
 	~CSceneTitle() {};
-	void InitScene();//初期化メソッド
-	void Scene();   //実行中メソッド
+	void InitScene();		//初期化メソッド
+	void Scene();			//実行中メソッド
 	void InageDataLoading();//画像データ読み込み関数
 	void AudioDataLoading();//音楽データ読み込み関数
 private:
