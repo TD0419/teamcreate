@@ -12,7 +12,7 @@ using namespace GameL;
 CObjWater::CObjWater(int x, int y)
 {
 	m_px = x * BLOCK_SIZE;
-	m_py = y * BLOCK_SIZE;
+	m_py = y * WATER_SIZE_HEIGHT;
 }
 
 //イニシャライズ
@@ -20,7 +20,7 @@ void CObjWater::Init()
 {
 
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_PLAYER, OBJ_WATER, 1);
+	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, WATER_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_WATER, 1);
 	m_water_gauge = 0.0f;
 }
 
@@ -34,6 +34,8 @@ void CObjWater::Action()
 		// m_water_gaugeが64を越えたら処理ストップ
 		if (m_water_gauge >= 64)
 		{
+			this->SetStatus(false);		//自身に削除命令を出す
+			Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
 			return;
 		}
 
@@ -54,12 +56,17 @@ void CObjWater::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//描画位置
-	dst.m_top    = m_py - obj_m->GetScrollY() + m_water_gauge;
-	dst.m_left   = m_px - obj_m->GetScrollX();
-	dst.m_right  = dst.m_left + BLOCK_SIZE; 
-	dst.m_bottom = 512.0f - obj_m->GetScrollY() + BLOCK_SIZE; // bottomは座標を固定する
+	//切り取り位置
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 128.0f ;
+	src.m_bottom = 64.0f;
 
+	//描画位置
+	dst.m_top = m_py + m_water_gauge - obj_m->GetScrollY();
+	dst.m_left = m_px - obj_m->GetScrollX();
+	dst.m_right = dst.m_left + WATER_SIZE_WIDTH;
+	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
 	//描画
-	Draw::Draw(8, &src, &dst, color, 0.0f);
+	Draw::Draw(11, &src, &dst, color, 0.0f);
 }

@@ -72,6 +72,10 @@ void CSceneMain::InitScene()
 	CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(7, 7);
 	Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 10);
 
+	//ロープスイッチオブジェクトを作成する
+	CObjRopeSwitch* ObjRopeSwitch = new CObjRopeSwitch(7, 5);
+	Objs::InsertObj(ObjRopeSwitch, OBJ_ROPE_SWITCH, 10);
+
 	//testはしごオブジェクトを作成する（デバック用）
 	/*CObjLadders* ObjLadders = new CObjLadders(6, 3);
 	Objs::InsertObj(ObjLadders, OBJ_LADDERS, 10);
@@ -179,10 +183,13 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_64);
 
 	//Water画像
-	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_64);	
+	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);	
 	
 	// tstwater
 	Draw::LoadImageW(L"testwater.png", 12, TEX_SIZE_64);
+
+	//RopeSwitch画像
+	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);
 
 }
 
