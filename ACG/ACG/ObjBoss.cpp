@@ -55,7 +55,7 @@ void CObjBoss::Action()
 	{
 		m_vy = -10.0f;
 	}
-	////↓キーがおされたとき：下降
+	//↓キーがおされたとき：下降
 	//if (Input::GetVKey('M') == true)
 	//{
 	//	m_vy = 20.0f;

@@ -40,17 +40,17 @@ public:
 	//------------------------------------------------------------------
 	
 private:
-	float m_scroll_x;//X軸のスクロール値
-	float m_scroll_y;//Y軸のスクロール値
+	float m_scroll_x;	//X軸のスクロール値
+	float m_scroll_y;	//Y軸のスクロール値
 
 	//マップの構造体
 	struct Map
 	{
-		int num;//マップの数値
-		bool create;//生成するかのフラグ
+		int num;		//マップの数値
+		bool create;	//生成するかのフラグ
 	};
 
-	Map m_map[MAP_Y_MAX][MAP_X_MAX];//マップ用配列	←マップができたらこの配列に入れる
+	Map m_map[MAP_Y_MAX][MAP_X_MAX];	//マップ用配列	←マップができたらこの配列に入れる
 
 	
 };

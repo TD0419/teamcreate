@@ -25,23 +25,23 @@ void CObjBlock::Init()
 	//マップオブジェクトを持ってくる
 	//CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	////当たり判定
+	//当たり判定
 	//Hits::SetHitBox(this, m_px-obj_m->GetScrollX(), m_py - obj_m->GetScrollY(), BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 }
 
 //アクション
 void CObjBlock::Action()
 {
-	////自身のHitBoxをもってくる
+	//自身のHitBoxをもってくる
 	//CHitBox*hit = Hits::GetHitBox(this);
 
 	//主人公オブジェクトと衝突していれば
-	/*if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		HeroHit();//当たり判定の処理を行う
-	}*/
+	//if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	//{
+	//	HeroHit();//当たり判定の処理を行う
+	//}
 	
-	////ボスオブジェクトと衝突していれば
+	//ボスオブジェクトと衝突していれば
 	//if (hit->CheckObjNameHit(OBJ_BOSS) != nullptr)
 	//{
 	//	BossHit();//当たり判定の処理を行う
@@ -57,7 +57,7 @@ void CObjBlock::Action()
 	if (wincheck_flag == true)
 	{
 		//HitBoxの位置を更新する
-//		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+		//HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 	}
 	else
 	{
@@ -68,7 +68,7 @@ void CObjBlock::Action()
 		obj_m->SetMapCreate(int(m_px / BLOCK_SIZE), int(m_py / BLOCK_SIZE), true);
 
 		this->SetStatus(false);		//自身を削除
-	//	Hits::DeleteHitBox(this);	//ヒットボックスを削除
+		//Hits::DeleteHitBox(this);	//ヒットボックスを削除
 	}
 
 }

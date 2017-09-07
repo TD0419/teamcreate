@@ -72,6 +72,11 @@ void CSceneMain::InitScene()
 	CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(7, 7);
 	Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 10);
 
+	////水ブジェクトを作成する
+	//CObjWater* Obj_water = new CObjWater(8, 9);
+	//Objs::InsertObj(Obj_water, OBJ_WATER, 10);
+
+
 	//ロープスイッチオブジェクトを作成する
 	CObjRopeSwitch* ObjRopeSwitch = new CObjRopeSwitch(7, 5);
 	Objs::InsertObj(ObjRopeSwitch, OBJ_ROPE_SWITCH, 10);
@@ -184,14 +189,13 @@ void CSceneMain::ImageDataLoading()
 
 	//Water画像
 	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);	
+	//Waterテスト画像
+	Draw::LoadImageW(L"WaterBlock.png", 12, TEX_SIZE_64);
 	
-	// tstwater
-	Draw::LoadImageW(L"testwater.png", 12, TEX_SIZE_64);
-
 	//RopeSwitch画像
 	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);
 	
-}
+	}
 
 //音楽データ読み込み関数
 void CSceneMain::AudioDataLoading()

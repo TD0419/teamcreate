@@ -11,13 +11,13 @@ class CObjSign :public CObj
 {
 public:
 	CObjSign(int x, int y); // コンストラクタ
-	~CObjSign() {};	// デストラクタ
-	void Init();	// イニシャライズ
-	void Action();	// アクション
-	void Draw();	// ドロー
+	~CObjSign() {};			// デストラクタ
+	void Init();			// イニシャライズ
+	void Action();			// アクション
+	void Draw();			// ドロー
 
 private:
-	float m_px;	//位置X
-	float m_py; //位置Y
-	bool m_strdrow;//文字を表示させるかのフラグ
+	float m_px;		//位置X
+	float m_py;		//位置Y
+	bool m_strdrow;	//文字を表示させるかのフラグ
 };
