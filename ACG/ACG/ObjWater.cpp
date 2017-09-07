@@ -39,7 +39,7 @@ void CObjWater::Action()
 			return;
 		}
 
-		m_water_gauge += 0.1; // 1‚¸‚Â‘‚â‚µ‚Ä‚¢‚­
+		m_water_gauge += 0.5f; // 1‚¸‚Â‘‚â‚µ‚Ä‚¢‚­
 
 	// hitbox‚ª¬‚³‚­‚È‚é
 	hitbox->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() + m_water_gauge, BLOCK_SIZE - m_water_gauge, BLOCK_SIZE);
@@ -65,7 +65,7 @@ void CObjWater::Draw()
 	//•`‰æˆÊ’u
 	dst.m_top = m_py + m_water_gauge - obj_m->GetScrollY();
 	dst.m_left = m_px - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + WATER_SIZE_WIDTH;
+	dst.m_right = dst.m_left + BLOCK_SIZE;
 	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
 	//•`‰æ
 	Draw::Draw(11, &src, &dst, color, 0.0f);
