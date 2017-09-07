@@ -11,7 +11,7 @@ class CObjTitle :public CObj
 {
 public:
 	CObjTitle(); 	//コンストラクタ
-	~CObjTitle() {};	//デストラクタ
+	~CObjTitle() {};//デストラクタ
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー

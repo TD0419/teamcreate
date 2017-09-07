@@ -85,12 +85,6 @@ void CObjWater::Action()
 //ドロー
 void CObjWater::Draw()
 {
-	//画像の切り取り配列
-	int AniData[2] =
-	{
-		0  , 1 ,
-	};
-
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -106,9 +100,9 @@ void CObjWater::Draw()
 	src.m_bottom = src.m_top+WATER_SIZE_HEIGHT;
 
 	//描画位置
-	dst.m_top =  m_py + m_water_gauge - obj_m->GetScrollY();
-	dst.m_left =  m_px - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + WATER_SIZE_WIDTH;
+	dst.m_top = m_py + m_water_gauge - obj_m->GetScrollY();
+	dst.m_left = m_px - obj_m->GetScrollX();
+	dst.m_right = dst.m_left + BLOCK_SIZE;
 	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
 
 	

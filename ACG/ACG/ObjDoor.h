@@ -11,10 +11,10 @@ class CObjDoor :public CObj
 {
 public:
 	CObjDoor(int x, int y); // コンストラクタ
-	~CObjDoor() {};	// デストラクタ
-	void Init();	// イニシャライズ
-	void Action();	// アクション
-	void Draw();	// ドロー
+	~CObjDoor() {};			// デストラクタ
+	void Init();			// イニシャライズ
+	void Action();			// アクション
+	void Draw();			// ドロー
 
 private:
 	float m_px;	// ドアX座標

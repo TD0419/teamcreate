@@ -16,9 +16,13 @@ public:
     void Init();	         //イニシャライズ
     void Action();	         //アクション
     void Draw();	         //ドロー
+
+	//アクセサ-----------------------------------------
+	bool GetRopeFlag() { return m_rope_flag; }//ロープが当たったときの状態を返す
+
 private:
     float m_px;	 // ロープスイッチX座標
     float m_py;	 // ロープスイッチY座標
 
-
+	bool m_rope_flag; //ロープがあったとき記憶する用
 };

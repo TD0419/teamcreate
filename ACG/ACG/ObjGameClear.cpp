@@ -8,6 +8,7 @@
 
 #include "ObjGameClear.h"
 #include "GameHead.h"
+
 //使用するネームスペース
 using namespace GameL;
 
@@ -32,7 +33,7 @@ void CObjGameClear::Draw()
 	RECT_F src;	//描画先切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-				//切り取り位置
+	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 1024.0f;

@@ -9,12 +9,11 @@ using namespace GameL;
 class CObjReflectBlock : public CObj
 {
 public:
-	CObjReflectBlock(int x, int y);
-	~CObjReflectBlock() {};
-
-	void Init();	//イニシャライズ
-	void Action();	//アクション
-	void Draw();	//ドロー
+	CObjReflectBlock(int x, int y); //コンストラクタ
+	~CObjReflectBlock() {};			//デクストラクタ
+	void Init();					//イニシャライズ
+	void Action();					//アクション
+	void Draw();					//ドロー
 
 
 private:
