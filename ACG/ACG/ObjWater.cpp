@@ -37,7 +37,7 @@ void CObjWater::Action()
 			return;
 		}
 
-		m_water_gauge += 0.1; // 1‚¸‚Â‘‚â‚µ‚Ä‚¢‚­
+		m_water_gauge += 1.0f; // 1‚¸‚Â‘‚â‚µ‚Ä‚¢‚­
 
 	// hitbox‚ª¬‚³‚­‚È‚é
 	hitbox->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() + m_water_gauge, BLOCK_SIZE - m_water_gauge, BLOCK_SIZE);
