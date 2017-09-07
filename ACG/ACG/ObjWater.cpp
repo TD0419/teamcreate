@@ -85,6 +85,11 @@ void CObjWater::Action()
 //ドロー
 void CObjWater::Draw()
 {
+	//画像の切り取り配列
+	int AniData[2] =
+	{
+		0  , 1 ,
+	};
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
