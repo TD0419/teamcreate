@@ -189,10 +189,9 @@ void CSceneMain::ImageDataLoading()
 
 	//Water‰æ‘œ
 	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);	
-	//Water‰æ‘œ
+	//WaterƒeƒXƒg‰æ‘œ
 	Draw::LoadImageW(L"WaterBlock.png", 12, TEX_SIZE_64);
-
-
+	
 	//RopeSwitch‰æ‘œ
 	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);
 	
