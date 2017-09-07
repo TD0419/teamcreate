@@ -130,6 +130,12 @@ void CObjHero::Action()
 
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
+		//リフトオブジェクトと衝突してれば
+		if (hit->CheckObjNameHit(OBJ_LIFT) != nullptr)
+		{
+			m_hit_down = true;//ジャンプできるようにする
+		}
+
 		if (m_hit_down == true)
 		{
 			m_vy = -20.0f;
@@ -277,6 +283,8 @@ void CObjHero::Action()
 	{
 		
 	}
+
+
 
 	////水オブジェクトと衝突していれば
 	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
