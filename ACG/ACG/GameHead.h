@@ -106,7 +106,7 @@ enum MAP_BER
 #define BUTTON_SIZE	      (32.0f)		//ボタンサイズ（仮）
 #define SIGN_SIZE	      (32.0f)		//看板のサイズ（仮）
 #define LEVER_SWITCH_SIZE (64.0f)	    //レバースイッチのサイズ
-#define ROPE_SWITCH_SIZE  (32.0f)	    //ロープスイッチのサイズ（仮）
+#define ROPE_SWITCH_SIZE  (64.0f)	    //ロープスイッチのサイズ
 #define LIFT_SIZE         (32.0f)		//リフトサイズ(仮)
 #define ROCK_SIZE	      (32.0f)		//岩サイズ（仮）
 #define WOOD_SIZE_WIDTH	  (64.0f)		//木の横サイズ(仮)
