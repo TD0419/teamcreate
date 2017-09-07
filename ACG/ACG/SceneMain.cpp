@@ -190,7 +190,7 @@ void CSceneMain::ImageDataLoading()
 
 	//RopeSwitch画像
 	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);
-
+	
 }
 
 //音楽データ読み込み関数
