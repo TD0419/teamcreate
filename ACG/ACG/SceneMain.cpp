@@ -84,9 +84,9 @@ void CSceneMain::InitScene()
 	CObjLadders* ObjLadder3 = new CObjLadders(6, 1);
 	Objs::InsertObj(ObjLadder3, OBJ_LADDERS, 10);*/
 
-	////木のテストオブジェクト
-	//CObjWood* ObjWood = new CObjWood(12, 0);
-	//Objs::InsertObj(ObjWood, OBJ_WOOD, 10);
+	//木のテストオブジェクト
+	CObjWood* ObjWood = new CObjWood(5, 1);
+	Objs::InsertObj(ObjWood, OBJ_WOOD, 10);
 
 }
 
