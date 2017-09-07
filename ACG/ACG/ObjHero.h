@@ -25,6 +25,7 @@ public:
 	void SetVecY(float y) { m_vy = y; };	//ベクトルYをセットする
 	void SetPosX(float x) { m_px = x; };	//ポジションXをセットする
 	void SetPosY(float y) { m_py = y; };	//ポジションYをセットする
+	void SetHitDown(bool b) { m_hit_down = b; }; //ヒットダウンをセットする
 	float GetPosX() { return m_px; }		//ポジションXを返す
 	float GetPosY() { return m_py; }		//ポジションXを返す
 
