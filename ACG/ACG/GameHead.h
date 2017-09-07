@@ -100,7 +100,7 @@ enum MAP_BER
 #define ENEMY_SIZE	      (64.0f)		//敵のサイズ(仮)
 #define BULLET_SIZE       (20.0f)		//弾丸サイズ（仮）
 #define BLOCK_SIZE	      (64.0f)		//ブロックのサイズ（仮）	
-#define WATER_SIZE_WIDTH  (128.0f)      //水の横サイズ
+#define WATER_SIZE_WIDTH  (64.0f)      //水の横サイズ
 #define WATER_SIZE_HEIGHT (64.0f)       //水の縦サイズ
 #define LADDERS_SIZE      (64.0f)		//はしごのサイズ
 #define BUTTON_SIZE	      (32.0f)		//ボタンサイズ（仮）
