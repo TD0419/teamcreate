@@ -35,7 +35,7 @@ void CObjWater::Action()
 		if (m_water_gauge >= 64)
 		{
 			this->SetStatus(false);		//自身に削除命令を出す
-			Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
+			Hits::DeleteHitBox(this);	//水が所有するHitBoxに削除する
 			return;
 		}
 
