@@ -85,14 +85,20 @@
     <Filter Include="ソース ファイル\Main\LeverSwich">
       <UniqueIdentifier>{1238450d-e6ac-4e91-a418-a53b16b7385a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\BossDropKey">
-      <UniqueIdentifier>{a7e1b532-76af-4058-ba94-098cb00ab2ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\door">
       <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Main\ThroughBlock">
       <UniqueIdentifier>{77f04e69-178f-4e96-b919-0d0532fefba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\BossDropKey">
+      <UniqueIdentifier>{a7e1b532-76af-4058-ba94-098cb00ab2ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\FallingWalls">
+      <UniqueIdentifier>{6296e886-feb9-4dad-8082-74c958c81f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BackGround">
+      <UniqueIdentifier>{477b5c30-202e-44a1-ab03-445b3ea37cc8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -217,7 +223,7 @@
       <Filter>ソース ファイル\Main\LeverSwich</Filter>
     </ClInclude>
     <ClInclude Include="ObjBossDropKey.h">
-      <Filter>ソース ファイル\BossDropKey</Filter>
+      <Filter>ソース ファイル\Main\BossDropKey</Filter>
     </ClInclude>
     <ClInclude Include="ObjBoss.h">
       <Filter>ソース ファイル\Main\Boss</Filter>
@@ -227,6 +233,12 @@
     </ClInclude>
     <ClInclude Include="ObjThroughBlock.h">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFallingWalls.h">
+      <Filter>ソース ファイル\Main\FallingWalls</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBackGround.h">
+      <Filter>ソース ファイル\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -332,9 +344,6 @@
     <ClCompile Include="ObjRope.cpp">
       <Filter>ソース ファイル\Main\Rope</Filter>
     </ClCompile>
-    <ClCompile Include="Function.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjStage3Boss.cpp">
       <Filter>ソース ファイル\Main\Stage3Boss</Filter>
     </ClCompile>
@@ -348,7 +357,7 @@
       <Filter>ソース ファイル\Main\ReflectBlock</Filter>
     </ClCompile>
     <ClCompile Include="ObjBossDropKey.cpp">
-      <Filter>ソース ファイル\BossDropKey</Filter>
+      <Filter>ソース ファイル\Main\BossDropKey</Filter>
     </ClCompile>
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソース ファイル\Main\Boss</Filter>
@@ -358,6 +367,15 @@
     </ClCompile>
     <ClCompile Include="ObjThroughBlock.cpp">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="Function.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFallingWalls.cpp">
+      <Filter>ソース ファイル\Main\FallingWalls</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBackGround.cpp">
+      <Filter>ソース ファイル\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

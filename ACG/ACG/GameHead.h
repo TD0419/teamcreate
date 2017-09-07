@@ -32,6 +32,8 @@ enum OBJ_NAME
 	OBJ_LEVER_SWICH,    //レバースイッチ
 	OBJ_DOOR,           //ドア
 	OBJ_THROUGHT_BLOCK,	//スルーブロック
+	OBJ_FALLING_WALLS,  //落下壁
+	OBJ_BACKGROUND,		//バッググラウンド(背景)
 };
 //------------------------------------------------
 
@@ -77,18 +79,19 @@ struct UserData
 //マップの番号とオブジェクトの対応　（仮）
 enum MAP_BER
 {
-	MAP_SPACE		,	//何もない場所
-	MAP_BLOCK		,	//ブロック(ノーマル)
-	MAP_LADDERS		,	//はしご
-	MAP_BUTTON		,	//ボタン
-	MAP_ROPE_SWITCH	,	//ロープスイッチ
-	MAP_LIFT		,	//リフト
-	MAP_ROCK		,	//岩
-	MAP_WOOD		,	//木
-	MAP_WATER		,	//水
-	MAP_ENEMY		,	//敵
-	MAP_BOSS		,	//ボス
-	MAP_BLOCK2		,	//ブロック(二段目以降)
+	MAP_SPACE		 , 	//何もない場所
+	MAP_BLOCK		 ,	//ブロック(ノーマル)
+	MAP_LADDERS		 ,	//はしご
+	MAP_BUTTON		 ,	//ボタン
+	MAP_ROPE_SWITCH	 ,	//ロープスイッチ
+	MAP_LIFT		 ,	//リフト
+	MAP_ROCK		 ,	//岩
+	MAP_WOOD		 ,	//木
+	MAP_WATER		 ,	//水
+	MAP_ENEMY		 ,	//敵
+	MAP_BOSS		 ,	//ボス
+	MAP_BLOCK2		 ,	//ブロック(二段目以降)
+	MAP_FALLING_WALLS,  //落下壁
 };
 
 //オブジェクトのサイズ
@@ -115,6 +118,7 @@ enum MAP_BER
 #define SIGN_SIZE	      (32.0f)		//看板サイズ(仮)
 //#define BOSS_CORRECTION (90.0f)	    //ボスサイズ補正(仮)
 #define THROUGHT_BLOCK_SIZE	(64.0f)	    //スルーブロックサイズ（仮）
+#define FALLING_WALLS_SAIZE (64.0f)		//落下壁サイズ(仮)
 
 
 //スクロールのライン　（要調整）
@@ -162,6 +166,8 @@ enum MAP_BER
 #include "ObjLeverSwich.h"		//レバースイッチ
 #include "ObjDoor.h"			//ドア
 #include "ObjThroughBlock.h"	//スルーブロック
+#include "ObjFallingWalls.h"	//落下壁
+#include "ObjBackGround.h"		//バッググラウンド(背景)
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

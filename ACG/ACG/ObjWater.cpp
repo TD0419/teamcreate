@@ -31,19 +31,18 @@ void CObjWater::Action()
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	// m_water_gaugeが64を越えたら処理ストップ
-	if (m_water_gauge >= 64)
-	{
-		return;
-	}
+		// m_water_gaugeが64を越えたら処理ストップ
+		if (m_water_gauge >= 64)
+		{
+			return;
+		}
 
-	m_water_gauge+=1; // 1ずつ増やしていく
+		m_water_gauge += 0.1; // 1ずつ増やしていく
 
 	// hitboxが小さくなる
 	hitbox->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() + m_water_gauge, BLOCK_SIZE - m_water_gauge, BLOCK_SIZE);
 
 }
-
 //ドロー
 void CObjWater::Draw()
 {
