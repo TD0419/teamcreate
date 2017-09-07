@@ -35,11 +35,11 @@ void CObjWater::Action()
 		if (m_water_gauge >= 64)
 		{
 			this->SetStatus(false);		//自身に削除命令を出す
-			Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
+			Hits::DeleteHitBox(this);	//水が所有するHitBoxに削除する
 			return;
 		}
 
-		m_water_gauge += 0.1; // 1ずつ増やしていく
+		m_water_gauge += 0.5f; // 1ずつ増やしていく
 
 	// hitboxが小さくなる
 	hitbox->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() + m_water_gauge, BLOCK_SIZE - m_water_gauge, BLOCK_SIZE);
@@ -65,7 +65,7 @@ void CObjWater::Draw()
 	//描画位置
 	dst.m_top = m_py + m_water_gauge - obj_m->GetScrollY();
 	dst.m_left = m_px - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + WATER_SIZE_WIDTH;
+	dst.m_right = dst.m_left + BLOCK_SIZE;
 	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
 	//描画
 	Draw::Draw(11, &src, &dst, color, 0.0f);

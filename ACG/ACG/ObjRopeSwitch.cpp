@@ -15,6 +15,7 @@ CObjRopeSwitch::CObjRopeSwitch(int x, int y)
 	m_px = x * ROPE_SWITCH_SIZE;
 	m_py = y * ROPE_SWITCH_SIZE;
 
+	m_rope_flag = false;
 }
 
 //イニシャライズ
@@ -29,6 +30,18 @@ void CObjRopeSwitch::Init()
 //アクション
 void CObjRopeSwitch::Action()
 {
+	//自身のHitBoxをもってくる
+	CHitBox*hit = Hits::GetHitBox(this);
+
+	//ロープが当たっていれば
+	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
+	{
+		m_rope_flag = true;//フラグをONにする
+	}
+	else if(hit->CheckObjNameHit(OBJ_ROPE) == nullptr)
+	{
+		m_rope_flag = false;//フラグをOFFにする
+	}
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);

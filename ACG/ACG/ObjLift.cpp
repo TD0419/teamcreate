@@ -19,7 +19,7 @@ CObjLift::CObjLift(int x, int y)
 //イニシャライズ
 void CObjLift::Init()
 {
-	m_vx = 1.0f;
+	m_vx = 0.0f;
 	m_vy = 0.0f;
 
 	//当たり判定
@@ -41,6 +41,18 @@ void CObjLift::Action()
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		HeroRide();//主人公を乗せる処理をする
+	}
+
+	//ロープオブジェクトを持ってくる
+	CObjRopeSwitch* obj_rope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
+	
+	if (obj_rope_switch->GetRopeFlag() == true)//ロープとロープスイッチがあたっているとき
+	{
+		m_vx = -1.0f;
+	}
+	else//ロープとロープスイッチがあたっていないとき
+	{
+		m_vx = 1.0f;
 	}
 
 	//HitBoxの位置を更新する
