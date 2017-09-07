@@ -71,13 +71,10 @@ void CSceneMain::InitScene()
 	//レバースイッチオブジェクトを作成する
 	CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(7, 7);
 	Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 10);
-	//水オブジェクトを作成する
-	CObjWater* ObjWater = new CObjWater(8, 7);
-	Objs::InsertObj(ObjWater, OBJ_WATER, 10);
-	/*CObjWater* ObjWater2 = new CObjWater(7, 7);
-	Objs::InsertObj(ObjWater2, OBJ_WATER, 10);
-	CObjWater* ObjWater3 = new CObjWater(9, 7);
-	Objs::InsertObj(ObjWater3, OBJ_WATER, 10);*/
+
+	//ロープスイッチオブジェクトを作成する
+	CObjRopeSwitch* ObjRopeSwitch = new CObjRopeSwitch(7, 5);
+	Objs::InsertObj(ObjRopeSwitch, OBJ_ROPE_SWITCH, 10);
 
 	//testはしごオブジェクトを作成する（デバック用）
 	/*CObjLadders* ObjLadders = new CObjLadders(6, 3);
@@ -87,9 +84,9 @@ void CSceneMain::InitScene()
 	CObjLadders* ObjLadder3 = new CObjLadders(6, 1);
 	Objs::InsertObj(ObjLadder3, OBJ_LADDERS, 10);*/
 
-	////木のテストオブジェクト
-	//CObjWood* ObjWood = new CObjWood(12, 0);
-	//Objs::InsertObj(ObjWood, OBJ_WOOD, 10);
+	//木のテストオブジェクト
+	CObjWood* ObjWood = new CObjWood(5, 1);
+	Objs::InsertObj(ObjWood, OBJ_WOOD, 10);
 
 }
 
@@ -108,7 +105,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
-	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
+	p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
 	{
@@ -175,7 +172,7 @@ void CSceneMain::ImageDataLoading()
 
 	//Wood画像
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_64);
-
+	
 	//Enemy画像
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
 
@@ -186,7 +183,14 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_64);
 
 	//Water画像
-	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);
+	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);	
+	
+	// tstwater
+	Draw::LoadImageW(L"testwater.png", 12, TEX_SIZE_64);
+
+	//RopeSwitch画像
+	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);
+	
 }
 
 //音楽データ読み込み関数
