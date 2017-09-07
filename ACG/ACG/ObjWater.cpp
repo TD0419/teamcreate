@@ -98,6 +98,8 @@ void CObjWater::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+
+
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = AniData[m_ani_frame] * WATER_SIZE_WIDTH;
