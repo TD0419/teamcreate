@@ -179,7 +179,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_64);
 
 	//Water‰æ‘œ
-	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_64);	
+	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);	
 	
 	// tstwater
 	Draw::LoadImageW(L"testwater.png", 12, TEX_SIZE_64);
