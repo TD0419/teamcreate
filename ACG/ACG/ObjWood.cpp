@@ -12,8 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjWood::CObjWood(int x, int y)
 {
-	m_px = x * WOOD_SIZE_WIDTH;
-	m_py = y * WOOD_SIZE_HEIGHT;
+	m_px = x * BLOCK_SIZE;
+	m_py = y * BLOCK_SIZE;
 }
 
 //イニシャライズ

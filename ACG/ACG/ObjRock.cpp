@@ -13,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjRock::CObjRock(int x, int y)
 {
-	m_px = x * ROCK_SIZE_WIDTH;
-	m_py = y * ROCK_SIZE_HEIGHT;
+	m_px = x * BLOCK_SIZE;
+	m_py = y * BLOCK_SIZE;
 }
 
 //イニシャライズ
@@ -42,7 +42,7 @@ void CObjRock::Action()
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py-128);
 
 }
 
@@ -58,13 +58,13 @@ void CObjRock::Draw()
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
-	src.m_top = 0.0f;
+	src.m_top = 1.0f;
 	src.m_left = 0.0f;
 	src.m_right = 64.0f;
-	src.m_bottom = 63.0f;
+	src.m_bottom = 64.0f;
 	
 	//描画位置
-	dst.m_top = m_py - obj_m->GetScrollY();
+	dst.m_top = m_py - obj_m->GetScrollY()-128;
 	dst.m_left = m_px - obj_m->GetScrollX();
 	dst.m_right = dst.m_left + ROCK_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + ROCK_SIZE_HEIGHT;
