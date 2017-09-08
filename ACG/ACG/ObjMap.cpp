@@ -90,7 +90,9 @@ void CObjMap::ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y)
 					x == (CREATE_LINE_LEFT	+ scroll_block_num_x)	|| x == ( CREATE_LINE_RIGHT + scroll_block_num_x)
 				)
 			{
-				CreateObj(x, y);//オブジェクトを生成
+				if(x >= 0 && y >= 0 &&
+					x < MAP_X_MAX && y < MAP_Y_MAX)
+						CreateObj(x, y);//オブジェクトを生成
 			}
 		}
 	}
