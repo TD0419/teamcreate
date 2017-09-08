@@ -62,6 +62,6 @@ void CObjSign::Draw()
 	//ŽålŒö‚Æ“–‚½‚Á‚Ä‚¢‚éŽž
 	if (m_strdrow == true)
 	{
-		Font::StrDraw(L"???u‰äAŒ‹É‚ß‚½‚èv", m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() - SIGN_SIZE, 32.0f, c);
+		Font::StrDraw(L"‰å”T“{—¯•€", m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() - SIGN_SIZE, 32.0f, c);
 	}
 }
