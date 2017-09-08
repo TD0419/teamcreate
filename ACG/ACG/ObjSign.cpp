@@ -52,8 +52,10 @@ void CObjSign::Action()
 //ドロー
 void CObjSign::Draw()
 {
-	//描画カラー
+	//描画カラー（枠）
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+	//描画カラー(文字)
+	float c[4] = { 0.0f,0.0f,0.0f, 1.0f };
 
 	RECT_F src, dst;
 
@@ -77,7 +79,7 @@ void CObjSign::Draw()
 	{
 		//描画
 		Draw::Draw(16, &src, &dst, color, 0);
-		Font::StrDraw(L"???「我、拳極めたりww」", dst.m_left, dst.m_top + 32.0f , 32.0f, color);
+		Font::StrDraw(L"???「我、拳極めたりww」", dst.m_left, dst.m_top + 32.0f , 32.0f, c);
 	}
 	
 }
