@@ -15,6 +15,8 @@ using namespace GameL;
 //コンストラクタ
 CObjBlock::CObjBlock(int x, int y)
 {
+	m_map_x = x;
+	m_map_y = y;
 	m_px = x * BLOCK_SIZE;
 	m_py = y * BLOCK_SIZE;
 }
@@ -84,18 +86,23 @@ void CObjBlock::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+	//map_numにマップ情報の一個上の情報を送る
+	int map_num = obj_m->GetMap(m_map_x, m_map_y - 1);
+
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 64.0f;
 	src.m_bottom = 64.0f;
-	/*if ()
+
+	//ブロックの一個上にブロックがある時描画変更
+	if (map_num==MAP_BLOCK)
 	{
 		src.m_top = 0.0f;
 		src.m_left = 65.0f;
 		src.m_right = 128.0f;
 		src.m_bottom = 64.0f;
-	}*/
+	}
 	//描画位置
 	dst.m_top = m_py - obj_m->GetScrollY();
 	dst.m_left = m_px - obj_m->GetScrollX();
