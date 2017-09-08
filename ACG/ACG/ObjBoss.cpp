@@ -13,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjBoss::CObjBoss(int x,int y)
 {
-	m_x = x * BLOCK_SIZE;
-	m_y = y * BLOCK_SIZE;
+	m_x = x * BOSS_SIZE;
+	m_y = y * BOSS_SIZE;
 }
 
 //イニシャライズ

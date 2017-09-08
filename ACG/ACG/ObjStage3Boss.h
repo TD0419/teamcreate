@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjStage3Boss :public CObj
 {
 public:
-	CObjStage3Boss();       //コンストラクタ
+	CObjStage3Boss(int x ,int y);       //コンストラクタ
 	~CObjStage3Boss() {};	//デストラクタ
 	void Init();	        //イニシャライズ
 	void Action();	        //アクション
