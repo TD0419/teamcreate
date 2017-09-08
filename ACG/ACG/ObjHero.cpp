@@ -107,11 +107,10 @@ void CObjHero::Action()
 
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
-		/*if (m_hit_down == true)
+		if (m_hit_down == true)
 		{
 			m_vy = -20.0f;
-		}*/
-		m_vy = -20.0f;
+		}
 	}
 
 	//ÉWÉÉÉìÉvèIóπ-------------------------------------------------------------------------------------
