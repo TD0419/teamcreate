@@ -21,8 +21,8 @@ CObjBoss::CObjBoss(int x,int y)
 void CObjBoss::Init()
 {
    
-    m_vx = 0.0f;
-    m_vy = 0.0f;
+    m_vx = 300.0f;
+    m_vy = 200.0f;
 	m_r = 0.0f;
 	m_hp = 10; //É{ÉXÇÃÇgÇo(âºÇ…ÇgÇoÇ[ 10 ]Ç∆ê›íË)
 
@@ -115,6 +115,6 @@ void CObjBoss::Draw()
 	dst.m_bottom = dst.m_top  + BOSS_SIZE;
 
 	//ï`âÊ
-	Draw::Draw(4, &src, &dst, color, m_r);
+	Draw::Draw(14, &src, &dst, color, m_r);
 
 }

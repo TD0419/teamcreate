@@ -93,6 +93,9 @@ void CSceneMain::InitScene()
 	CObjWood* ObjWood = new CObjWood(5, 1);
 	Objs::InsertObj(ObjWood, OBJ_WOOD, 10);
 
+	//test砲台オブジェクトを作成する
+	CObjBattery* ObjBattery = new CObjBattery(10, 5);
+	Objs::InsertObj(ObjBattery, OBJ_BATTERY, 10);
 }
 
 //ゲームメイン実行中メソッド
@@ -194,6 +197,9 @@ void CSceneMain::ImageDataLoading()
 	
 	//RopeSwitch画像
 	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);
+
+	//大砲
+	Draw::LoadImageW(L"image4.png", 14, TEX_SIZE_64);
 	
 	}
 

@@ -21,12 +21,12 @@ CObjBattery::CObjBattery(float x, float y)
 void CObjBattery::Init()
 {
 
-	m_x = 0.0f;
-	m_y = 0.0f;
+	m_x = 100.0f;
+	m_y = 100.0f;
 	m_r = 0.0f;
 	
 	//“–‚½‚è”»’è—pHitBox‚ðì¬
-	Hits::SetHitBox(this, m_x, m_y, BATTERY_SIZE_HEIGHT, BATTERY_SIZE_WIDTH, ELEMENT_ENEMY, OBJ_BATTERY, 1);
+	Hits::SetHitBox(this, m_x, m_y, BATTERY_SIZE_WIDTH, BATTERY_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BATTERY, 1);
 
 }
 
@@ -61,10 +61,10 @@ void CObjBattery::Draw()
 	//•`‰æˆÊ’u
 	dst.m_top = 0.0f + m_y - obj_m->GetScrollY();
 	dst.m_left = 0.0f + m_x - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + BATTERY_SIZE_HEIGHT;
-	dst.m_bottom = dst.m_top + BATTERY_SIZE_WIDTH;
+	dst.m_right = dst.m_left + BATTERY_SIZE_WIDTH;
+	dst.m_bottom = dst.m_top + BATTERY_SIZE_HEIGHT;
 
 	//•`‰æ
-	Draw::Draw(8, &src, &dst, color, m_r);
+	Draw::Draw(14, &src, &dst, color, m_r);
 
 }
