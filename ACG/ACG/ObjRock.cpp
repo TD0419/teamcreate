@@ -13,15 +13,15 @@ using namespace GameL;
 //コンストラクタ
 CObjRock::CObjRock(int x, int y)
 {
-	m_px = x * BLOCK_SIZE;
-	m_py = y * BLOCK_SIZE;
+	m_px = x * ROCK_SIZE_WIDTH;
+	m_py = y * ROCK_SIZE_HEIGHT;
 }
 
 //イニシャライズ
 void CObjRock::Init()
 {
 	//当たり判定用HitBoxを作成                          
-	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_GIMMICK, OBJ_ROCK, 1);
+	Hits::SetHitBox(this, m_px, m_py, ROCK_SIZE_WIDTH, ROCK_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_ROCK, 1);
 }
 
 //アクション
@@ -66,8 +66,8 @@ void CObjRock::Draw()
 	//描画位置
 	dst.m_top = m_py - obj_m->GetScrollY();
 	dst.m_left = m_px - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + BLOCK_SIZE;
-	dst.m_bottom = dst.m_top + BLOCK_SIZE;
+	dst.m_right = dst.m_left + ROCK_SIZE_WIDTH;
+	dst.m_bottom = dst.m_top + ROCK_SIZE_HEIGHT;
 
 	//描画
 	Draw::Draw(10, &src, &dst, color, 0.0f);
