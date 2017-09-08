@@ -91,7 +91,6 @@ enum MAP_BER
 	MAP_WATER		 ,	//水
 	MAP_ENEMY		 ,	//敵
 	MAP_BOSS		 ,	//ボス
-	MAP_BLOCK2		 ,	//ブロック(二段目以降)
 	MAP_FALLING_WALLS,  //落下壁
 };
 
