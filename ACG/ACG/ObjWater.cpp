@@ -85,6 +85,11 @@ void CObjWater::Action()
 //ドロー
 void CObjWater::Draw()
 {
+	//画像の切り取り配列
+	int AniData[2] =
+	{
+		0  , 1 ,
+	};
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -93,11 +98,7 @@ void CObjWater::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//画像の切り取り配列
-	int AniData[2] =
-	{
-		0  , 1 ,
-	};
+
 
 	//切り取り位置
 	src.m_top = 0.0f;

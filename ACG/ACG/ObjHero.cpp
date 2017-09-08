@@ -27,6 +27,7 @@ void CObjHero::Init()
 	m_r = 0.0f;
 
 	m_bullet_control = false;	//弾丸発射制御用
+	
 	m_rope_control = false;		//ロープ発射制御用
 	m_jump_control = false;		//ジャンプ制御
 	m_w_jump_control = false;	//2段ジャンプ制御
@@ -156,27 +157,6 @@ void CObjHero::Action()
 	
 
 	//ジャンプ--------------------------------------------------------------------
-	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
-	/*if (Input::GetVKey(VK_SPACE) == true)
-	{
-		m_w_jump_control = true;
-	}
-	else
-	{
-		m_w_jump_control = false;
-	}
-
-	//着地フラグがオン かつ　二段ジャンプ防止フラグがオンのとき：ジャンプ
-	if (m_hit_down== true && m_w_jump_control == true)
-	{
-		if (m_jump_control == true)
-		{
-			m_vy = -20.0f;
-			m_jump_control = false;
-		}
-	}
-	else
-		m_jump_control = true; //スペース押してなければジャンプでるフラグにする。*/
 
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
@@ -209,7 +189,11 @@ void CObjHero::Action()
 	
 
 	Scroll();	//スクロール処理をおこなう
+	//ブロックとの当たり判定
+	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
+					&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
+	Scroll();	//スクロール処理をおこなう
 	m_px += m_vx;
 	m_py += m_vy;
 
@@ -330,18 +314,44 @@ void CObjHero::Scroll()
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//主人公が左または右のスクロールラインを超えそうなら
-	if ((m_px + m_vx) < SCROLL_LINE_LEFT || (m_px + m_vx) > SCROLL_LINE_RIGHT)
+	//右にスクロールです
+	//原点を右にする
+	if ((m_px + HERO_SIZE_WIDTH) - obj_m->GetScrollX() > SCROLL_LINE_RIGHT)
 	{
-		obj_m->SetScrollX(m_vx);	//移動量をスクロールにセット
+		//差分を調べる
+		float scroll =  ((m_px + HERO_SIZE_WIDTH) - obj_m->GetScrollX())-SCROLL_LINE_RIGHT;
+		//スクロールに影響を与える
+		obj_m->SetScrollX(scroll);
+	}
+	//左にスクロールです
+	if (m_px - obj_m->GetScrollX() < SCROLL_LINE_LEFT &&
+		obj_m->GetScrollX() > 0)
+	{
+		//差分を調べる
+		float scroll = SCROLL_LINE_LEFT - (m_px - obj_m->GetScrollX());
+		//スクロールに影響を与える
+		obj_m->SetScrollX(-scroll);
 	}
 
-	//主人公が上または下のスクロールラインを超えそうなら
-	if ((m_py + m_vy) < SCROLL_LINE_UP || (m_py + m_vy) > SCROLL_LINE_DOWN) 
+	//上にスクロールです
+	if (m_py - obj_m->GetScrollY() < SCROLL_LINE_UP)
 	{
-		obj_m->SetScrollY(m_vy);	//移動量をスクロールにセット
+		//差分を調べる
+		float scroll = (m_py - obj_m->GetScrollY()) - SCROLL_LINE_UP;
+		//スクロールに影響を与える
+		obj_m->SetScrollY(scroll);
 	}
-
+	
+	//下にスクロールです
+	//原点を下にする
+	if ((m_py + HERO_SIZE_HEIGHT) - obj_m->GetScrollY() > SCROLL_LINE_DOWN &&
+		obj_m->GetScrollY() < 0)
+	{
+		//差分を調べる
+		float scroll = SCROLL_LINE_DOWN - ((m_py + HERO_SIZE_HEIGHT) - obj_m->GetScrollY());
+		//スクロールに影響を与える
+		obj_m->SetScrollY(-scroll);
+	}
 }
 
 //ドロー
@@ -430,7 +440,7 @@ bool CObjHero::HitUpCheck(int obj_name)
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//データがあれば
-			if (hit_data[i] != nullptr)
+  			if (hit_data[i] != nullptr)
 			{
 				float r = hit_data[i]->r;//あたっている角度をもってくる
 
