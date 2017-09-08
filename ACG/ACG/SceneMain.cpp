@@ -204,12 +204,12 @@ void CSceneMain::ImageDataLoading()
 
 	//大砲
 	Draw::LoadImageW(L"image4.png", 14, TEX_SIZE_64);
-
-	//看板
-	Draw::LoadImageW(L"Sign.png", 15, TEX_SIZE_256);
 	
 	//背景画像
 	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1024);
+
+	//看板
+	Draw::LoadImageW(L"Sign.png", 16, TEX_SIZE_256);
 }
 
 //音楽データ読み込み関数

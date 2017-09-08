@@ -246,14 +246,6 @@ void CObjHero::Action()
 		return;
 	}
 
-	//木オブジェクトと衝突してれば
-	if (hit->CheckObjNameHit(OBJ_WOOD) != nullptr)
-	{
-		
-	}
-
-
-
 	////水オブジェクトと衝突していれば
 	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
 	//{
