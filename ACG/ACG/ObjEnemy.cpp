@@ -32,7 +32,7 @@ void CObjEnemy::Init()
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 4; //アニメーション間隔幅
 
-	m_speed = 2.0f;	//初期スピード
+	m_speed = 0.5f;	//初期スピード
 
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_x, m_y, ENEMY_SIZE,ENEMY_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);

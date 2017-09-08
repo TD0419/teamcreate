@@ -27,9 +27,7 @@ void CObjHero::Init()
 	m_r = 0.0f;
 
 	m_bullet_control = false;	//弾丸発射制御用
-	m_rope_control = false;		//ロープ発射制御用
-	m_jump_control = false;		//ジャンプ制御
-	m_w_jump_control = false;	//2段ジャンプ制御
+	m_rope_control = false;		//ロープ発射制御
 	m_landingflag = false;
 
 	m_ani_time = 0;
@@ -106,27 +104,6 @@ void CObjHero::Action()
 
 
 	//ジャンプ--------------------------------------------------------------------
-	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
-	/*if (Input::GetVKey(VK_SPACE) == true)
-	{
-		m_w_jump_control = true;
-	}
-	else
-	{
-		m_w_jump_control = false;
-	}
-
-	//着地フラグがオン かつ　二段ジャンプ防止フラグがオンのとき：ジャンプ
-	if (m_landingflag == true && m_w_jump_control == true)
-	{
-		if (m_jump_control == true)
-		{
-			m_vy = -20.0f;
-			m_jump_control = false;
-		}
-	}
-	else
-		m_jump_control = true; //スペース押してなければジャンプでるフラグにする。*/
 
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
