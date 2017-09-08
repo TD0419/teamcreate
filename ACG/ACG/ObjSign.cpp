@@ -24,7 +24,7 @@ void CObjSign::Init()
 	m_strdrow = false;
 
 	//文字セット
-	Font::SetStrTex(L"ガノンドロフΩ");
+	Font::SetStrTex(L"???「我、拳極めたり」");
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -59,6 +59,6 @@ void CObjSign::Draw()
 	//主人公と当たっている時
 	if (m_strdrow == true)
 	{
-		Font::StrDraw(L"ガノンドロフΩ", m_px, m_py - SIGN_SIZE, 32.0f, c);
+		Font::StrDraw(L"???「我、拳極めたり」", m_px, m_py - SIGN_SIZE, 32.0f, c);
 	}
 }
