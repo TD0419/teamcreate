@@ -75,8 +75,9 @@ void CObjSign::Draw()
 	//主人公と当たっている時
 	if (m_strdrow == true)
 	{
+		//描画
+		Draw::Draw(16, &src, &dst, color, 0);
 		Font::StrDraw(L"???「我、拳極めたりww」", dst.m_left, dst.m_top + 32.0f , 32.0f, color);
 	}
-	//描画
-	Draw::Draw(15, &src, &dst, color, 0);
+	
 }
