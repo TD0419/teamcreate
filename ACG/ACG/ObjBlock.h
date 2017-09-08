@@ -29,7 +29,9 @@ public:
 	);
 
 	bool jump;//ジャンプ用
-	
+	//マップ上の位置（要素数）
+	int m_map_x;//X
+	int m_map_y;//Y
 private:
 	
 	int m_map[10][10];	//マップ情報（仮）

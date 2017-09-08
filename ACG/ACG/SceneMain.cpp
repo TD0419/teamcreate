@@ -65,7 +65,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(Obj_lift, OBJ_LIFT, 10);
 
 	//看板オブジェクトを作成する
-	CObjSign* Obj_sign = new CObjSign(6, 7);
+	CObjSign* Obj_sign = new CObjSign(14, 7);
 	Objs::InsertObj(Obj_sign, OBJ_SIGN, 10);
 
 	//レバースイッチオブジェクトを作成する

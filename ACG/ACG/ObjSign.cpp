@@ -53,12 +53,15 @@ void CObjSign::Action()
 //ドロー
 void CObjSign::Draw()
 {
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 	//色
 	float c[4] = {1.0f,1.0f,1.0f,1.0f};
 
 	//主人公と当たっている時
 	if (m_strdrow == true)
 	{
-		Font::StrDraw(L"牙乃怒留斧", m_px, m_py - SIGN_SIZE, 32.0f, c);
+		Font::StrDraw(L"???「我、拳極めたり」", m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() - SIGN_SIZE, 32.0f, c);
 	}
 }
