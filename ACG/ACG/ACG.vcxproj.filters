@@ -103,6 +103,9 @@
     <Filter Include="ソース ファイル\Main\Function">
       <UniqueIdentifier>{2207111e-4967-4a8d-849b-4f8b61ebc407}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Battery">
+      <UniqueIdentifier>{e5a59037-b682-4795-a1fd-babcfcd474bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -243,6 +246,9 @@
     <ClInclude Include="Function.h">
       <Filter>ソース ファイル\Main\Function</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBattery.h">
+      <Filter>ソース ファイル\Main\Battery</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -379,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="Function.cpp">
       <Filter>ソース ファイル\Main\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBattery.cpp">
+      <Filter>ソース ファイル\Main\Battery</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

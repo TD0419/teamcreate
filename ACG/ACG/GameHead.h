@@ -34,6 +34,7 @@ enum OBJ_NAME
 	OBJ_THROUGHT_BLOCK,	//スルーブロック
 	OBJ_FALLING_WALLS,  //落下壁
 	OBJ_BACKGROUND,		//バッググラウンド(背景)
+	OBJ_BATTERY,		//砲台
 };
 //------------------------------------------------
 
@@ -120,13 +121,15 @@ enum MAP_BER
 //#define BOSS_CORRECTION (90.0f)	    //ボスサイズ補正(仮)
 #define THROUGHT_BLOCK_SIZE	(64.0f)	    //スルーブロックサイズ（仮）
 #define FALLING_WALLS_SAIZE (64.0f)		//落下壁サイズ(仮)
+#define BATTERY_SIZE_WIDTH	(64.0f)		//砲台の横サイズ(仮)
+#define BATTERY_SIZE_HEIGHT	(32.0f)		//砲台の縦サイズ(仮)
 
 
 //スクロールのライン　（要調整）
-#define SCROLL_LINE_LEFT	(400.0f)							//左
-#define SCROLL_LINE_RIGHT	(WINDOW_SIZE_W - SCROLL_LINE_LEFT)	//右
-#define SCROLL_LINE_UP		(50.0f)								//上
-#define SCROLL_LINE_DOWN	(WINDOW_SIZE_H - SCROLL_LINE_UP)	//下
+#define SCROLL_LINE_LEFT	(400.0f)								//左
+#define SCROLL_LINE_RIGHT	(624.0f)								//右
+#define SCROLL_LINE_UP		( 50.0f)								//上
+#define SCROLL_LINE_DOWN	(400.0f)								//下
 
 //オブジェクトの生成ライン（要調整）
 #define CREATE_LINE_LEFT	(1)														//左
@@ -169,6 +172,7 @@ enum MAP_BER
 #include "ObjThroughBlock.h"	//スルーブロック
 #include "ObjFallingWalls.h"	//落下壁
 #include "ObjBackGround.h"		//バッググラウンド(背景)
+#include "ObjBattery.h"			//砲台
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
