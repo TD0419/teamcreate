@@ -172,16 +172,17 @@ void CObjHero::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
-
-		//自由落下運動
-		m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
+	
+	//自由落下運動
+	m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
 	
 
-	Scroll();	//スクロール処理をおこなう
+	
 	//ブロックとの当たり判定
 	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
+	Scroll();	//スクロール処理をおこなう
 	m_px += m_vx;
 	m_py += m_vy;
 
@@ -299,18 +300,44 @@ void CObjHero::Scroll()
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//主人公が左または右のスクロールラインを超えそうなら
-	if ((m_px + m_vx) < SCROLL_LINE_LEFT || (m_px + m_vx) > SCROLL_LINE_RIGHT)
+	//右にスクロールです
+	//原点を右にする
+	if ((m_px + HERO_SIZE_WIDTH) - obj_m->GetScrollX() > SCROLL_LINE_RIGHT)
 	{
-		obj_m->SetScrollX(m_vx);	//移動量をスクロールにセット
+		//差分を調べる
+		float scroll =  ((m_px + HERO_SIZE_WIDTH) - obj_m->GetScrollX())-SCROLL_LINE_RIGHT;
+		//スクロールに影響を与える
+		obj_m->SetScrollX(scroll);
+	}
+	//左にスクロールです
+	if (m_px - obj_m->GetScrollX() < SCROLL_LINE_LEFT &&
+		obj_m->GetScrollX() > 0)
+	{
+		//差分を調べる
+		float scroll = SCROLL_LINE_LEFT - (m_px - obj_m->GetScrollX());
+		//スクロールに影響を与える
+		obj_m->SetScrollX(-scroll);
 	}
 
-	//主人公が上または下のスクロールラインを超えそうなら
-	if ((m_py + m_vy) < SCROLL_LINE_UP || (m_py + m_vy) > SCROLL_LINE_DOWN) 
+	//上にスクロールです
+	if (m_py - obj_m->GetScrollY() < SCROLL_LINE_UP)
 	{
-		obj_m->SetScrollY(m_vy);	//移動量をスクロールにセット
+		//差分を調べる
+		float scroll = (m_py - obj_m->GetScrollY()) - SCROLL_LINE_UP;
+		//スクロールに影響を与える
+		obj_m->SetScrollY(scroll);
 	}
-
+	
+	//下にスクロールです
+	//原点を下にする
+	if ((m_py + HERO_SIZE_HEIGHT) - obj_m->GetScrollY() > SCROLL_LINE_DOWN &&
+		obj_m->GetScrollY() < 0)
+	{
+		//差分を調べる
+		float scroll = SCROLL_LINE_DOWN - ((m_py + HERO_SIZE_HEIGHT) - obj_m->GetScrollY());
+		//スクロールに影響を与える
+		obj_m->SetScrollY(-scroll);
+	}
 }
 
 //ドロー
@@ -401,7 +428,7 @@ bool CObjHero::HitUpCheck(int obj_name)
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//データがあれば
-			if (hit_data[i] != nullptr)
+  			if (hit_data[i] != nullptr)
 			{
 				float r = hit_data[i]->r;//あたっている角度をもってくる
 

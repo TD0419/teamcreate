@@ -27,6 +27,8 @@ public:
 	void SetPosY(float y) { m_py = y; };	//ポジションYをセットする
 	float GetPosX() { return m_px; }		//ポジションXを返す
 	float GetPosY() { return m_py; }		//ポジションXを返す
+	float GetVecX() { return m_vx; }		//ベクトルXを渡す
+	float GetVecY() { return m_vy; }		//ベクトルYを渡す
 
 private:
 	float m_px;		//X座標
