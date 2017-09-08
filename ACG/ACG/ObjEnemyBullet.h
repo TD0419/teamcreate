@@ -16,11 +16,11 @@ public:
 	void Action();	                //アクション
 	void Draw();	                //ドロー
 private:
-	float m_x;	            // 弾丸(敵用)X座標
-	float m_y;	            // 弾丸(敵用)Y座標
-	float m_vx;	            // X軸方向のベクトル
-	float m_vy;	            // Y軸方向のベクトル
-	float m_speed;					//速さ
+	float m_x;						// 弾丸(敵用)X座標
+	float m_y;						// 弾丸(敵用)Y座標
+	float m_vx;						// X軸方向のベクトル
+	float m_vy;						// Y軸方向のベクトル
+	float m_speed;					//弾丸の速度
 	float m_angle;					//弾丸の角度			
 
 };

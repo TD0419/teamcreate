@@ -23,18 +23,16 @@ void CObjHero::Init()
 	m_py = 0.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
-	m_posture = 0.0f; //右向き0.0f 左向き1.0f
+	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 
-	m_bullet_control = false;  //弾丸発射制御用
-	m_rope_control = false;	//ロープ発射制御用
-	m_jump_control = false;	//ジャンプ制御
-	m_w_jump_control = false; //2段ジャンプ制御
+	m_bullet_control = false;	//弾丸発射制御用
+	m_rope_control = false;		//ロープ発射制御
 	m_landingflag = false;
 
 	m_ani_time = 0;
-	m_ani_frame = 1;  //静止フレームを初期にする
-	m_ani_max_time = 6; //アニメーション間隔幅
+	m_ani_frame = 1;			//静止フレームを初期にする
+	m_ani_max_time = 6;			//アニメーション間隔幅
 
 	//ブロックとの衝突した状態(場所)確認用
 	m_hit_up	= false;
@@ -71,7 +69,7 @@ void CObjHero::Action()
 	{
 		m_vx += 0.5f;
 		m_ani_frame_stop = 0;
-		m_posture = 0.0f;//主人公の向き
+		m_posture = 0.0f;		//主人公の向き
 		m_ani_time += 1;
 	}
 	//Dキーがおされたとき：左移動
@@ -79,13 +77,13 @@ void CObjHero::Action()
 	{
 		m_vx -= 0.5f;
 		m_ani_frame_stop = 0;
-		m_posture = 1.0f;//主人公の向き
+		m_posture = 1.0f;		//主人公の向き
 		m_ani_time += 1;
 	}
 	else
 	{
-		m_ani_frame_stop = 1; //キー入力が無い時は1を入れる
-		m_ani_frame = 1; //キー入力が無い場合は静止フレームにする
+		m_ani_frame_stop = 1;	//キー入力が無い時は1を入れる
+		m_ani_frame = 1;		//キー入力が無い場合は静止フレームにする
 		m_ani_time = 0;
 	}
 
@@ -106,27 +104,6 @@ void CObjHero::Action()
 
 
 	//ジャンプ--------------------------------------------------------------------
-	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
-	/*if (Input::GetVKey(VK_SPACE) == true)
-	{
-		m_w_jump_control = true;
-	}
-	else
-	{
-		m_w_jump_control = false;
-	}
-
-	//着地フラグがオン かつ　二段ジャンプ防止フラグがオンのとき：ジャンプ
-	if (m_landingflag == true && m_w_jump_control == true)
-	{
-		if (m_jump_control == true)
-		{
-			m_vy = -20.0f;
-			m_jump_control = false;
-		}
-	}
-	else
-		m_jump_control = true; //スペース押してなければジャンプでるフラグにする。*/
 
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
@@ -180,7 +157,7 @@ void CObjHero::Action()
 	
 	//ブロックとの当たり判定
 	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+					&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
 	Scroll();	//スクロール処理をおこなう
 	m_px += m_vx;
@@ -278,6 +255,8 @@ void CObjHero::Action()
 	{
 		
 	}
+
+
 
 	////水オブジェクトと衝突していれば
 	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)

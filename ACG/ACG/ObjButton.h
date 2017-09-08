@@ -18,9 +18,9 @@ class CObjButton : public CObj
 		bool GetTrickFlag() { return m_trick_flag; } //弾とあたっているかどうかを返す
 
 	private:
-		float m_px; //ボタンX位置
-		float m_py; //ボタンY位置
+		float m_px;			//ボタンX位置
+		float m_py;			//ボタンY位置
 
-		bool m_trick_flag; //縄と当たっているかどうかを調べる
+		bool m_trick_flag;	//縄と当たっているかどうかを調べる
 
 };

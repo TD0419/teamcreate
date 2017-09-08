@@ -34,6 +34,7 @@ enum OBJ_NAME
 	OBJ_THROUGHT_BLOCK,	//スルーブロック
 	OBJ_FALLING_WALLS,  //落下壁
 	OBJ_BACKGROUND,		//バッググラウンド(背景)
+	OBJ_BATTERY,		//砲台
 };
 //------------------------------------------------
 
@@ -100,13 +101,13 @@ enum MAP_BER
 #define ENEMY_SIZE	      (64.0f)		//敵のサイズ(仮)
 #define BULLET_SIZE       (20.0f)		//弾丸サイズ（仮）
 #define BLOCK_SIZE	      (64.0f)		//ブロックのサイズ（仮）	
-#define WATER_SIZE_WIDTH  (128.0f)      //水の横サイズ
+#define WATER_SIZE_WIDTH  (64.0f)      //水の横サイズ
 #define WATER_SIZE_HEIGHT (64.0f)       //水の縦サイズ
 #define LADDERS_SIZE      (64.0f)		//はしごのサイズ
 #define BUTTON_SIZE	      (32.0f)		//ボタンサイズ（仮）
 #define SIGN_SIZE	      (32.0f)		//看板のサイズ（仮）
 #define LEVER_SWITCH_SIZE (64.0f)	    //レバースイッチのサイズ
-#define ROPE_SWITCH_SIZE  (32.0f)	    //ロープスイッチのサイズ（仮）
+#define ROPE_SWITCH_SIZE  (64.0f)	    //ロープスイッチのサイズ
 #define LIFT_SIZE         (32.0f)		//リフトサイズ(仮)
 #define ROCK_SIZE	      (32.0f)		//岩サイズ（仮）
 #define WOOD_SIZE_WIDTH	  (64.0f)		//木の横サイズ(仮)
@@ -119,6 +120,8 @@ enum MAP_BER
 //#define BOSS_CORRECTION (90.0f)	    //ボスサイズ補正(仮)
 #define THROUGHT_BLOCK_SIZE	(64.0f)	    //スルーブロックサイズ（仮）
 #define FALLING_WALLS_SAIZE (64.0f)		//落下壁サイズ(仮)
+#define BATTERY_SIZE_WIDTH	(64.0f)		//砲台の横サイズ(仮)
+#define BATTERY_SIZE_HEIGHT	(32.0f)		//砲台の縦サイズ(仮)
 
 
 //スクロールのライン　（要調整）
@@ -148,7 +151,7 @@ enum MAP_BER
 #include "ObjBlock.h"			//ブロック
 #include "ObjReflectBlock.h"	//弾を反射するブロック
 #include "ObjLift.h"			//リフト
-#include "ObjLadders.h"			//梯子
+#include "ObjLadders.h"			//はしご
 #include "ObjMap.h"				//マップ
 #include "ObjWood.h"			//木	
 #include "ObjWater.h"			//水
@@ -168,6 +171,7 @@ enum MAP_BER
 #include "ObjThroughBlock.h"	//スルーブロック
 #include "ObjFallingWalls.h"	//落下壁
 #include "ObjBackGround.h"		//バッググラウンド(背景)
+#include "ObjBattery.h"			//砲台
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

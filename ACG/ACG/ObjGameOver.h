@@ -10,10 +10,10 @@ class CObjGameOver : public CObj
 public:
 	CObjGameOver() {};
 	~CObjGameOver() {};
-	void Init();	//イニシャライズ
-	void Action();	//アクション
-	void Draw();	//ドロー
+	void Init();		//イニシャライズ
+	void Action();		//アクション
+	void Draw();		//ドロー
 private:
-	bool m_key_flag;//キーフラグ
-	int m_audio_se; //SEの音楽の管理
+	bool m_key_flag;	//キーフラグ
+	int m_audio_se;		//SEの音楽の管理
 };

@@ -10,15 +10,15 @@ using namespace GameL;
 class CObjLeverSwich :public CObj
 {
 public:
-	CObjLeverSwich(float x, float y); // コンストラクタ
-	~CObjLeverSwich() {};	// デストラクタ
-	void Init();	// イニシャライズ
-	void Action();	// アクション
-	void Draw();	// ドロー
+	CObjLeverSwich(float x, float y);	// コンストラクタ
+	~CObjLeverSwich() {};				// デストラクタ
+	void Init();						// イニシャライズ
+	void Action();						// アクション
+	void Draw();						// ドロー
 
 private:
-	float m_px;	// レバースイッチX座標
-	float m_py; // レバースイッチY座標
+	float m_px;				// レバースイッチX座標
+	float m_py;				// レバースイッチY座標
 
 	//アニメーション関係
 	int m_ani_time;         //アニメーションフレーム動作感覚

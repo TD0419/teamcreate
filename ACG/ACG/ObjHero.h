@@ -25,6 +25,7 @@ public:
 	void SetVecY(float y) { m_vy = y; };	//ベクトルYをセットする
 	void SetPosX(float x) { m_px = x; };	//ポジションXをセットする
 	void SetPosY(float y) { m_py = y; };	//ポジションYをセットする
+	void SetHitDown(bool b) { m_hit_down = b; }; //ヒットダウンをセットする
 	float GetPosX() { return m_px; }		//ポジションXを返す
 	float GetPosY() { return m_py; }		//ポジションXを返す
 	float GetVecX() { return m_vx; }		//ベクトルXを渡す
@@ -40,8 +41,6 @@ private:
 
 	bool  m_bullet_control; //弾丸発射制御用
 	bool  m_rope_control;	//ロープ発射制御用
-	bool  m_jump_control;	//ジャンプ制御
-	bool  m_w_jump_control; //二段ジャンプ制御
 
 	//アニメーション関係
 	int m_ani_frame_stop;	//止まった時の描画を調整
