@@ -35,7 +35,7 @@ void CObjWood::Action()
 	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
 
-											   //主人公オブジェクトを持ってくる
+	//主人公オブジェクトを持ってくる
 	CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	for (int i = 0; i < hit->GetCount(); i++)

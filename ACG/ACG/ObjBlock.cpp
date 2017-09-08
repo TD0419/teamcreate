@@ -111,6 +111,7 @@ void CObjBlock::BlockHit(
 	float* x, float* y, float width, float height,
 	bool*up, bool* down, bool* left, bool* right,
 	float* vx, float*vy
+
 )
 {
 	//ƒ}ƒbƒvî•ñ‚ğ‚Á‚Ä‚­‚é

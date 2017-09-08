@@ -30,7 +30,6 @@ void CObjHero::Init()
 	m_rope_control = false;		//ロープ発射制御用
 	m_jump_control = false;		//ジャンプ制御
 	m_w_jump_control = false;	//2段ジャンプ制御
-	m_landingflag = false;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;			//静止フレームを初期にする
@@ -52,6 +51,9 @@ void CObjHero::Action()
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	
 	//落下にリスタート----------------------------------
 	//m_pyが1000以下ならリスタートする
 	if (m_py > 1000.0f)
@@ -60,10 +62,59 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMain());
 	}
 	
+	//ブロックオブジェクトを持ってくる
+	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+
 	LandingCheck();//着地フラグの更新
 
-	if (m_landingflag == true)//着地していれば
-		m_vy = 0.0f;//移動ベクトルを初期化
+	//はしご-------------------------------------------------
+	//はしごと接触しているかどうかを調べる
+	//プレイヤーの位置をマップの要素番号に直す
+	int map_num_x = (int)((m_px + BLOCK_SIZE / 2) / BLOCK_SIZE);//中央を基準に調べる
+	int map_num_y = (int)(m_py / BLOCK_SIZE);	//主人公の上端を基準で調べる
+
+	int map_num_up = obj_map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る
+
+	map_num_y = (int)((m_py) / BLOCK_SIZE) + 1;//主人公の中央を基準に調べる
+	int map_num_center = obj_map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る	
+
+	map_num_y = (int)((m_py + BLOCK_SIZE) / BLOCK_SIZE) + 1;//主人公の下端を基準に調べる
+	int map_num_down = obj_map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る	
+
+	//マップの値がはしごなら
+	if (map_num_up == MAP_LADDERS || map_num_center == MAP_LADDERS || map_num_down == MAP_LADDERS)
+	{
+		//yの移動方向を初期化
+		m_vy = 0.0f;
+
+		//Wキーがおされたとき 上るとき
+ 		if (Input::GetVKey('W') == true)
+		{
+   			m_vy = -2.0f;
+			m_hit_down = true;//着地状態にする
+		}
+		
+		//Sキーがおされたとき　下るとき
+		if (Input::GetVKey('S') == true)
+		{
+			m_vy = 2.0f;
+			m_hit_down = true;//着地状態にする
+
+		}	
+
+	}
+	else
+	{
+		//ブロックとの当たり判定
+		obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+
+	}
+	
+	//はしご終了---------------------------------------------
+
+	
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 	//Aキーがおされたとき：右移動
@@ -102,8 +153,7 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 	
-	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
+	
 
 	//ジャンプ--------------------------------------------------------------------
 	//スペースキーを押されたとき：二段ジャンプ防止フラグオン
@@ -117,7 +167,7 @@ void CObjHero::Action()
 	}
 
 	//着地フラグがオン かつ　二段ジャンプ防止フラグがオンのとき：ジャンプ
-	if (m_landingflag == true && m_w_jump_control == true)
+	if (m_hit_down== true && m_w_jump_control == true)
 	{
 		if (m_jump_control == true)
 		{
@@ -130,12 +180,6 @@ void CObjHero::Action()
 
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
-		//リフトオブジェクトと衝突してれば
-		if (hit->CheckObjNameHit(OBJ_LIFT) != nullptr)
-		{
-			m_hit_down = true;//ジャンプできるようにする
-		}
-
 		if (m_hit_down == true)
 		{
 			m_vy = -20.0f;
@@ -156,42 +200,21 @@ void CObjHero::Action()
 		m_vy = -20.0f;
 	}
 
-	//はしご-------------------------------------------------
-	////はしごと接触しているかどうかを調べる
-	if (hit->CheckObjNameHit(OBJ_LADDERS) != nullptr)
-	{
-		//Wキーがおされたとき 上るとき
-		if (Input::GetVKey('W') == true)
-		{
-			m_vy = -2.0f;
-		}
-
-		//Sキーがおされたとき　下るとき
-		if (Input::GetVKey('S') == true)
-		{
-			m_vy = 2.0f;
-		}
-	}
-	//はしご終了---------------------------------------------
-	
-
 	//摩擦
 	m_vx += -(m_vx * 0.098);
-
-
-		//自由落下運動
-		m_vy += 9.8 / (16.0f);  //ブロックに着地できるようになったらはずしてください
+	
+	//自由落下運動
+	if(m_hit_down==false)//着地していなければ
+		m_vy += 9.8 / (16.0f);
 	
 
 	Scroll();	//スクロール処理をおこなう
-	//ブロックとの当たり判定
-	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
-					&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
 	m_px += m_vx;
 	m_py += m_vy;
 
-	////移動ベクトルを初期化
+	//移動ベクトルを初期化
+	
 	//m_vx = 0.0f;
 	//m_vy = 0.0f;
 
@@ -378,16 +401,14 @@ void CObjHero::Draw()
 //着地できてるかどうかを調べる関数
 void CObjHero::LandingCheck()
 {
-	bool c1, c2;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+	bool c1,c2;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
 	
-	c1=HitUpCheck(OBJ_BLOCK);//ブロックとの着地チェック
-	c2=HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
-
+	c1=HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
+	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
+								 
 	//チェック項目のどれか一つでもtrueなら
-	if (c1 == true || c2 == true)
-		m_landingflag = true;//着地フラグをオンにする
-	else
-		m_landingflag = false;//着地フラグをオフにする
+	if (c1 == true||c2 ==true)
+		m_hit_down = true;//着地フラグをオンにする
 
 }
 
