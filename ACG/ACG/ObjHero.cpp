@@ -29,9 +29,6 @@ void CObjHero::Init()
 	m_bullet_control = false;	//弾丸発射制御用
 	
 	m_rope_control = false;		//ロープ発射制御用
-	m_jump_control = false;		//ジャンプ制御
-	m_w_jump_control = false;	//2段ジャンプ制御
-
 	m_ani_time = 0;
 	m_ani_frame = 1;			//静止フレームを初期にする
 	m_ani_max_time = 6;			//アニメーション間隔幅
@@ -110,7 +107,6 @@ void CObjHero::Action()
 		//ブロックとの当たり判定
 		obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
-
 	}
 	
 	//はしご終了---------------------------------------------
