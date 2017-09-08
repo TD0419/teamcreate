@@ -38,6 +38,7 @@ private:
 	float m_vy;		//Y軸方向のベクトル
 	float m_posture;//姿勢
 	float m_r;		//主人公の回転角度
+	int m_block_type;//踏んでるブロックの値を保存する
 
 	bool  m_bullet_control; //弾丸発射制御用
 	bool  m_rope_control;	//ロープ発射制御用

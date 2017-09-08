@@ -101,8 +101,6 @@ void CObjEnemy::Action()
 		return;
 	}
 	
-	
-
 	//ƒuƒƒbƒN‚Æ‚Ì‚ ‚½‚è”»’è
 	obj_b->BlockHit(
 		&m_x, &m_y, ENEMY_SIZE, ENEMY_SIZE,

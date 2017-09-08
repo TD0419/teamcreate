@@ -63,52 +63,18 @@ void CObjHero::Action()
 	//ブロックオブジェクトを持ってくる
 	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
+	//ブロックとの当たり判定
+	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
 	LandingCheck();//着地フラグの更新
 
 	//はしご-------------------------------------------------
-	//はしごと接触しているかどうかを調べる
-	//プレイヤーの位置をマップの要素番号に直す
-	int map_num_x = (int)((m_px + BLOCK_SIZE / 2) / BLOCK_SIZE);//中央を基準に調べる
-	int map_num_y = (int)(m_py / BLOCK_SIZE);	//主人公の上端を基準で調べる
+	//はしごオブジェクトを持ってくる
+	CObjLadders* obj_ladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
 
-	int map_num_up = obj_map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る
+	obj_ladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
 
-	map_num_y = (int)((m_py) / BLOCK_SIZE) + 1;//主人公の中央を基準に調べる
-	int map_num_center = obj_map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る	
-
-	map_num_y = (int)((m_py + BLOCK_SIZE) / BLOCK_SIZE) + 1;//主人公の下端を基準に調べる
-	int map_num_down = obj_map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る	
-
-	//マップの値がはしごなら
-	if (map_num_up == MAP_LADDERS || map_num_center == MAP_LADDERS || map_num_down == MAP_LADDERS)
-	{
-		//yの移動方向を初期化
-		m_vy = 0.0f;
-
-		//Wキーがおされたとき 上るとき
- 		if (Input::GetVKey('W') == true)
-		{
-   			m_vy = -2.0f;
-			m_hit_down = true;//着地状態にする
-		}
-		
-		//Sキーがおされたとき　下るとき
-		if (Input::GetVKey('S') == true)
-		{
-			m_vy = 2.0f;
-			m_hit_down = true;//着地状態にする
-
-		}	
-
-	}
-	else
-	{
-		//ブロックとの当たり判定
-		obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
-	}
-	
 	//はしご終了---------------------------------------------
 
 	
@@ -178,18 +144,17 @@ void CObjHero::Action()
 
 	//摩擦
 	m_vx += -(m_vx * 0.098);
-	
+
+	if (m_hit_down == true)
+ 		int a = 0;
+
 	//自由落下運動
 	if(m_hit_down==false)//着地していなければ
 		m_vy += 9.8 / (16.0f);
 	
 
 	Scroll();	//スクロール処理をおこなう
-	//ブロックとの当たり判定
-	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
-					&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
-
-	Scroll();	//スクロール処理をおこなう
+	
 	m_px += m_vx;
 	m_py += m_vy;
 

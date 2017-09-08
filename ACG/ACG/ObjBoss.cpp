@@ -72,6 +72,7 @@ void CObjBoss::Action()
 	m_x += m_vx;
 	m_y += m_vy;
 
+
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
 	pb -> BlockHit(&m_x,&m_y,BOSS_SIZE,BOSS_SIZE,
