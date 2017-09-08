@@ -96,6 +96,10 @@ void CSceneMain::InitScene()
 	//test砲台オブジェクトを作成する
 	CObjBattery* ObjBattery = new CObjBattery(10, 5);
 	Objs::InsertObj(ObjBattery, OBJ_BATTERY, 10);
+
+	//背景オブジェクトを作成する
+	CObjBackGround* objBackGround = new CObjBackGround();
+	Objs::InsertObj(objBackGround, OBJ_BACKGROUND, 1);
 }
 
 //ゲームメイン実行中メソッド
@@ -201,7 +205,9 @@ void CSceneMain::ImageDataLoading()
 	//大砲
 	Draw::LoadImageW(L"image4.png", 14, TEX_SIZE_64);
 	
-	}
+	//背景画像
+	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1024);
+}
 
 //音楽データ読み込み関数
 void CSceneMain::AudioDataLoading()
