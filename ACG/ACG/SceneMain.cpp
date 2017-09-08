@@ -204,6 +204,9 @@ void CSceneMain::ImageDataLoading()
 
 	//‘å–C
 	Draw::LoadImageW(L"image4.png", 14, TEX_SIZE_64);
+
+	//ŠÅ”Â
+	Draw::LoadImageW(L"Sign.png", 15, TEX_SIZE_256);
 	
 	//”wŒi‰æ‘œ
 	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1024);

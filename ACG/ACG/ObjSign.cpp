@@ -1,5 +1,4 @@
 #include "GameL\DrawTexture.h"
-#include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
 
@@ -24,7 +23,7 @@ void CObjSign::Init()
 	m_strdrow = false;
 
 	//文字セット
-	Font::SetStrTex(L"牙乃怒留斧");
+	Font::SetStrTex(L"???「我、拳極めたりww」");
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -53,15 +52,31 @@ void CObjSign::Action()
 //ドロー
 void CObjSign::Draw()
 {
+	//描画カラー
+	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+
+	RECT_F src, dst;
+
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//色
-	float c[4] = {1.0f,1.0f,1.0f,1.0f};
+	//切り取り位置
+	src.m_top = 0.0f;
+	src.m_left = 0.0f ;
+	src.m_right = 256.0f ;
+	src.m_bottom = 256.0f;
+
+	//描画位置
+	dst.m_top = -SIGN_SIZE * 6.0f - 16.0f + m_py - obj_m->GetScrollY();
+	dst.m_left = -192.0f +SIGN_SIZE / 2.0f + m_px - obj_m->GetScrollX();
+	dst.m_right = dst.m_left + 384.0f;
+	dst.m_bottom = dst.m_top + 128.0f;
 
 	//主人公と当たっている時
 	if (m_strdrow == true)
 	{
-		Font::StrDraw(L"牙乃怒留斧", m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() - SIGN_SIZE, 32.0f, c);
+		Font::StrDraw(L"???「我、拳極めたりww」", dst.m_left, dst.m_top + 32.0f , 32.0f, color);
 	}
+	//描画
+	Draw::Draw(15, &src, &dst, color, 0);
 }
