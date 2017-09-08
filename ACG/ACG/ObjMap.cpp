@@ -210,12 +210,16 @@ void CObjMap::CreateObj(int x, int y)
 
 		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
 		}
+
+		
+
 	}
 }
 //調べたいマップの位置にあるマップ番号を返す
 int CObjMap::GetMap(int x, int y)
 {
 	if (0 <= y && y < MAP_Y_MAX && 0 <= x && x < MAP_X_MAX)
+
 		return m_map[y][x].num;
 
 	return -99999;//無かった場合

@@ -94,8 +94,8 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(ObjWood, OBJ_WOOD, 10);
 
 	//test砲台オブジェクトを作成する
-	CObjBattery* ObjBattery = new CObjBattery(10, 5);
-	Objs::InsertObj(ObjBattery, OBJ_BATTERY, 10);
+	CObjCannon* ObjCannon = new CObjCannon(10, 5);
+	Objs::InsertObj(ObjCannon, OBJ_CANNON, 10);
 
 	//背景オブジェクトを作成する
 	CObjBackGround* objBackGround = new CObjBackGround();
@@ -115,9 +115,9 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	//p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Stage01(proto).csv", &size);//外部データ読み込み
 
-	p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
+	//p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
 	{
