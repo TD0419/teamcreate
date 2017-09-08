@@ -13,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjThroughBlock::CObjThroughBlock(int x, int y)
 {
-	m_px = x * ROCK_SIZE;
-	m_py = y * ROCK_SIZE;
+	m_px = x * BLOCK_SIZE;
+	m_py = y * BLOCK_SIZE;
 }
 
 //イニシャライズ
