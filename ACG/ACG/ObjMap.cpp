@@ -90,7 +90,9 @@ void CObjMap::ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y)
 					x == (CREATE_LINE_LEFT	+ scroll_block_num_x)	|| x == ( CREATE_LINE_RIGHT + scroll_block_num_x)
 				)
 			{
-				CreateObj(x, y);//オブジェクトを生成
+				if(x >= 0 && y >= 0 &&
+					x < MAP_X_MAX && y < MAP_Y_MAX)
+						CreateObj(x, y);//オブジェクトを生成
 			}
 		}
 	}
@@ -210,12 +212,79 @@ void CObjMap::CreateObj(int x, int y)
 
 		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
 		}
+
+		//第三ボス作成
+		if (m_map[y][x].num == MAP_STAGE3_BOSS)
+		{
+			CObjStage3Boss* obj_stage3_boss = new CObjStage3Boss(x, y);
+			Objs::InsertObj(obj_stage3_boss, OBJ_STAGE3_BOSS, 9);
+
+			m_map[y][x].create = false;//フラグをオフにする
+
+		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
+		}
+		
+		//スルーブロック作成
+		if (m_map[y][x].num == MAP_THROUGH_BLOCK)
+		{
+			CObjThroughBlock* obj_through_block = new CObjThroughBlock(x, y);
+			Objs::InsertObj(obj_through_block, OBJ_THROUGHT_BLOCK, 9);
+
+			m_map[y][x].create = false;//フラグをオフにする
+		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
+		}
+
+		//反射用ブロック作成
+		if (m_map[y][x].num == MAP_REFLECT_BLOCK)
+		{
+			CObjReflectBlock* obj_reflec_block = new CObjReflectBlock(x, y);
+			Objs::InsertObj(obj_reflec_block, OBJ_REFLECT_BLOCK, 9);
+
+			m_map[y][x].create = false;//フラグをオフにする
+		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
+		}
+
+		//看板作成
+		if (m_map[y][x].num == MAP_SIGN)
+		{
+			//看板オブジェクトを作成する
+			CObjSign* Obj_sign = new CObjSign(x,y);
+			Objs::InsertObj(Obj_sign, OBJ_SIGN, 9);
+
+			m_map[y][x].create = false;//フラグをオフにする
+		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
+		}
+
+		//ドア作成
+		if (m_map[y][x].num == MAP_SIGN)
+		{
+			//Doorオブジェクトを作成する
+			CObjDoor* ObjDoor = new CObjDoor(x,y);
+			Objs::InsertObj(ObjDoor, OBJ_DOOR, 9);
+
+			m_map[y][x].create = false;//フラグをオフにする
+		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
+		}
+
+		//レバースイッチ作成
+		if (m_map[y][x].num == MAP_LEVER_SWICH)
+		{
+			//レバースイッチオブジェクトを作成する
+			CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(x,y);
+			Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 19);
+
+			m_map[y][x].create = false;//フラグをオフにする
+		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
+		}
+
+		
 	}
 }
 //調べたいマップの位置にあるマップ番号を返す
 int CObjMap::GetMap(int x, int y)
 {
 	if (0 <= y && y < MAP_Y_MAX && 0 <= x && x < MAP_X_MAX)
+
 		return m_map[y][x].num;
 
 	return -99999;//無かった場合

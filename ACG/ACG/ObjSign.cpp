@@ -23,7 +23,7 @@ void CObjSign::Init()
 	m_strdrow = false;
 
 	//文字セット
-	Font::SetStrTex(L"???「世に背く愚かな○○よ」");
+	Font::SetStrTex(L"???「ＤＣＳ…」");
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -79,7 +79,7 @@ void CObjSign::Draw()
 	{
 		//描画
 		Draw::Draw(16, &src, &dst, color, 0);
-		Font::StrDraw(L"???「世に背く愚かな○○よ」", dst.m_left, dst.m_top + 32.0f , 32.0f, c);
+		Font::StrDraw(L"???「ＤＣＳ…」", dst.m_left, dst.m_top + 32.0f , 32.0f, c);
 	}
 	
 }
