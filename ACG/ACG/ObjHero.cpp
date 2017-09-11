@@ -19,8 +19,8 @@ CObjHero::CObjHero(int x, int y)
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = 0.0f;
-	m_py = 0.0f;
+	m_px = 10.0f;
+	m_py = 5.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f

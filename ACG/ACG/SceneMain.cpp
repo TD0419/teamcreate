@@ -115,9 +115,9 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	p = Save::ExternalDataOpen(L"Stage01(proto).csv", &size);//外部データ読み込み
+	//p = Save::ExternalDataOpen(L"Stage01(proto).csv", &size);//外部データ読み込み
 
-	//p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
+	p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
 	{
@@ -182,7 +182,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_256);
 
 	//Wood画像
-	Draw::LoadImageW(L"FallingTree.png", 7, TEX_SIZE_64);
+	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);
 	
 	//Enemy画像
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
@@ -207,8 +207,8 @@ void CSceneMain::ImageDataLoading()
 	//背景画像
 	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1024);
 
-	//看板
-	Draw::LoadImageW(L"Sign.png", 16, TEX_SIZE_256);
+	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
+
 }
 
 //音楽データ読み込み関数
