@@ -13,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjBoss::CObjBoss(int x,int y)
 {
-	m_x = x * BLOCK_SIZE;
-	m_y = y * BLOCK_SIZE;
+	m_x = x * BOSS_SIZE;
+	m_y = y * BOSS_SIZE;
 }
 
 //イニシャライズ
@@ -71,6 +71,7 @@ void CObjBoss::Action()
 	//移動ベクトルをポジションに加算
 	m_x += m_vx;
 	m_y += m_vy;
+
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);

@@ -38,6 +38,7 @@ private:
 	float m_vy;		//Y軸方向のベクトル
 	float m_posture;//姿勢
 	float m_r;		//主人公の回転角度
+	int m_block_type;//踏んでるブロックの値を保存する
 
 	bool  m_bullet_control; //弾丸発射制御用
 	bool  m_rope_control;	//ロープ発射制御用
@@ -47,9 +48,6 @@ private:
 	int m_ani_time;			//アニメーションフレーム動作感覚
 	int m_ani_frame;		//描画フレーム
 	float m_ani_max_time;   //アニメーション動作間隔最大値
-
-	bool m_landingflag;		//着地してるかどうかのフラグ
-	
 
 	//blockとの衝突確認用
 	bool m_hit_up;

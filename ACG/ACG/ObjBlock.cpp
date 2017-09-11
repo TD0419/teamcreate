@@ -118,28 +118,33 @@ void CObjBlock::BlockHit(
 	float* x, float* y, float width, float height,
 	bool*up, bool* down, bool* left, bool* right,
 	float* vx, float*vy
+
 )
 {
 	//マップ情報を持ってくる
 	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//衝突情報初期化
-	*up		= false;
-	*left	= false;
-	*right	= false;
-	*down	= false;
+	*up = false;
+	*left = false;
+	*right = false;
+	*down = false;
 
 	//幅と高さを半分にする
 	float width_half = width / 2.0f;
 	float height_half = height / 2.0f;
 
 	//ブロックの幅と高さを半分にする
-	float block_width_half  = BLOCK_SIZE / 2.0f;
+	float block_width_half = BLOCK_SIZE / 2.0f;
 	float block_height_half = BLOCK_SIZE / 2.0f;
 
 	//次フレームでの移動場所
 	float new_y = *y + *vy;
 	float new_x = *x + *vx;
+
+	//はみ出し許容範囲
+	float bleed_x = 5.0f;
+	float bleed_y = 20.0f;
 
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < MAP_Y_MAX; i++)
@@ -147,7 +152,7 @@ void CObjBlock::BlockHit(
 		for (int j = 0; j < MAP_X_MAX; j++)
 		{
 			//判定したいブロック
-			if (map->GetMap(j,i) == MAP_BLOCK/*100*/)
+			if (map->GetMap(j, i) == MAP_BLOCK)
 			{
 				//要素番号を座標に変更
 				float bx = j*BLOCK_SIZE;
@@ -162,8 +167,8 @@ void CObjBlock::BlockHit(
 						if (*vx < 0.0f)
 						{
 							//左にあるブロック
-							for (int i = (int)((*y + 10.0f) / BLOCK_SIZE);
-								i <= (int)((*y + height - 20.0f) / BLOCK_SIZE); i++)
+							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
+								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
 								float map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
 								//進む先がブロックの右側が衝突している場合(当たっているのが0以外)
@@ -179,8 +184,8 @@ void CObjBlock::BlockHit(
 						else if (*vx > 0.0f)
 						{
 							//右にあるブロック
-							for (int i = (int)((*y + 10.0f) / BLOCK_SIZE);
-								i <= (int)((*y + height - 20.0f) / BLOCK_SIZE); i++)
+							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
+								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
 								float map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
 								//進む先がブロックの左側が衝突している場合(当たっているのが0以外)
@@ -197,12 +202,19 @@ void CObjBlock::BlockHit(
 						if (*vy > 0.0f)
 						{
 							//下にあるブロックを全て調べる
-							for (int i = (int)((*x + 5.0f) / BLOCK_SIZE);
-								i <= (int)((*x + width - 5.0f) / BLOCK_SIZE); i++)
+							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
+								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
 								float map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
 								//進む先がブロックの上側が衝突している場合(ブロック(1))
 								if (map->GetMap(i, map_b_y) == MAP_BLOCK)
+								{
+									*vy = 0.0f;
+									*y = map_b_y * BLOCK_SIZE - height;
+									*down = true;
+								}
+								//進む先がブロックの上側が衝突している場合(はしご(2))
+								if (map->GetMap(i, map_b_y) == MAP_LADDERS)
 								{
 									*vy = 0.0f;
 									*y = map_b_y * BLOCK_SIZE - height;
@@ -214,8 +226,8 @@ void CObjBlock::BlockHit(
 						else if (*vy < 0.0f)
 						{
 							//上にあるブロックを全て調べる
-							for (int i = (int)((*x + 5.0f) / BLOCK_SIZE);
-								i <= (int)((*x + width - 5.0f) / BLOCK_SIZE); i++)
+							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
+								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
 								float map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
 								//進む先がブロックの下側が衝突している場合(ブロック(1))

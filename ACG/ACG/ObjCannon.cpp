@@ -4,21 +4,21 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjBattery.h"
+#include "ObjCannon.h"
 #include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //コンストラクタ
-CObjBattery::CObjBattery(float x, float y)
+CObjCannon::CObjCannon(float x, float y)
 {
-	m_x = x * BATTERY_SIZE_HEIGHT;
-	m_y = y * BATTERY_SIZE_WIDTH;
+	m_x = x * CANNON_SIZE_HEIGHT;
+	m_y = y * CANNON_SIZE_WIDTH;
 }
 
 //イニシャライズ
-void CObjBattery::Init()
+void CObjCannon::Init()
 {
 
 	m_x = 100.0f;
@@ -26,12 +26,12 @@ void CObjBattery::Init()
 	m_r = 0.0f;
 	
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, BATTERY_SIZE_WIDTH, BATTERY_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BATTERY, 1);
+	Hits::SetHitBox(this, m_x, m_y, CANNON_SIZE_WIDTH, CANNON_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_CANNON, 1);
 
 }
 
 //アクション
-void CObjBattery::Action()
+void CObjCannon::Action()
 {
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -42,7 +42,7 @@ void CObjBattery::Action()
 }
 
 //ドロー
-void CObjBattery::Draw()
+void CObjCannon::Draw()
 {
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
@@ -61,8 +61,8 @@ void CObjBattery::Draw()
 	//描画位置
 	dst.m_top = 0.0f + m_y - obj_m->GetScrollY();
 	dst.m_left = 0.0f + m_x - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + BATTERY_SIZE_WIDTH;
-	dst.m_bottom = dst.m_top + BATTERY_SIZE_HEIGHT;
+	dst.m_right = dst.m_left + CANNON_SIZE_WIDTH;
+	dst.m_bottom = dst.m_top + CANNON_SIZE_HEIGHT;
 
 	//描画
 	Draw::Draw(14, &src, &dst, color, m_r);

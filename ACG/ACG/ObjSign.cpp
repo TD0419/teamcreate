@@ -23,7 +23,7 @@ void CObjSign::Init()
 	m_strdrow = false;
 
 	//文字セット
-	Font::SetStrTex(L"???「我、拳極めたりww」");
+	Font::SetStrTex(L"???「ＤＣＳ…」");
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -52,8 +52,10 @@ void CObjSign::Action()
 //ドロー
 void CObjSign::Draw()
 {
-	//描画カラー
+	//描画カラー（枠）
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+	//描画カラー(文字)
+	float c[4] = { 0.0f,0.0f,0.0f, 1.0f };
 
 	RECT_F src, dst;
 
@@ -75,8 +77,9 @@ void CObjSign::Draw()
 	//主人公と当たっている時
 	if (m_strdrow == true)
 	{
-		Font::StrDraw(L"???「我、拳極めたりww」", dst.m_left, dst.m_top + 32.0f , 32.0f, color);
+		//描画
+		Draw::Draw(16, &src, &dst, color, 0);
+		Font::StrDraw(L"???「ＤＣＳ…」", dst.m_left, dst.m_top + 32.0f , 32.0f, c);
 	}
-	//描画
-	Draw::Draw(15, &src, &dst, color, 0);
+	
 }
