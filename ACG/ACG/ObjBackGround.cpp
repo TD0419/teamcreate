@@ -42,8 +42,8 @@ void CObjBackGround::Draw()
 	//êÿÇËéÊÇËà íu
 	src.m_top = 0.0f;
 	src.m_left =0.0f;
-	src.m_right =src.m_left + 1000;
-	src.m_bottom = src.m_top + 100;
+	src.m_right =src.m_left + 1024;
+	src.m_bottom = src.m_top + 1024;
 
 	//ï`âÊà íu
 	dst.m_top =  WINDOW_SIZE_H - src.m_bottom - src.m_top;
