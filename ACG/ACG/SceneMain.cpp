@@ -174,7 +174,6 @@ void CSceneMain::ImageDataLoading()
 
 	//debug用Boss画像
 	Draw::LoadImageW(L"image3.png", 4, TEX_SIZE_512);
-	//Draw::LoadImageW(L"image3.jpg", 4, TEX_SIZE_512);
 
 	//Ladders画像
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
@@ -183,7 +182,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_128);
 
 	//Wood画像
-	Draw::LoadImageW(L"FallingTree.png", 7, TEX_SIZE_64);
+	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);
 	
 	//Enemy画像
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
@@ -208,8 +207,8 @@ void CSceneMain::ImageDataLoading()
 	//背景画像
 	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1024);
 
-	//看板
-	Draw::LoadImageW(L"Sign.png", 16, TEX_SIZE_256);
+	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
+
 }
 
 //音楽データ読み込み関数
