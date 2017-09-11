@@ -18,6 +18,9 @@ public:
 private:
     float m_px;	   // –ØXÀ•W
     float m_py;	   // –ØYÀ•W
+	float v_px;    // –Ø‚ÌˆÚ“®—ÊX
+	float v_py;    // –Ø‚ÌˆÚ“®—ÊY
+	float m_r;     // –Ø‚ğ‰ñ“]‚³‚¹‚é•Ï”
    
 
 };
