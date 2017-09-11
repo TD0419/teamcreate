@@ -8,11 +8,11 @@
 using namespace GameL;
 
 //オブジェクト：砲台
-class CObjBattery :public CObj
+class CObjCannon :public CObj
 {
 public:
-	CObjBattery(float x,float y); 	//コンストラクタ
-	~CObjBattery() {};			//デストラクタ
+	CObjCannon(float x,float y); 	//コンストラクタ
+	~CObjCannon() {};			//デストラクタ
 	void Init();				//イニシャライズ
 	void Action();				//アクション
 	void Draw();				//ドロー
