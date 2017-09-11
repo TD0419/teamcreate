@@ -179,7 +179,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
 
 	//Door & Padlock‰æ‘œ
-	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_256);
+	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_128);
 
 	//Wood‰æ‘œ
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);
@@ -191,7 +191,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Lever.png", 9, TEX_SIZE_128);
 
 	//rock‰æ‘œ
-	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_64);
+	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_256);
 
 	//Water‰æ‘œ
 	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);	

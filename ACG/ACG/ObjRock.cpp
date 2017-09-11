@@ -20,6 +20,11 @@ CObjRock::CObjRock(int x, int y)
 //イニシャライズ
 void CObjRock::Init()
 {
+	m_ani_time = 0;
+	m_ani_frame = 1;  //静止フレームを初期にする
+	m_ani_max_time = 6; //アニメーション間隔幅
+	m_ani_start_flag = false;//アニメフラグOFF
+
 	//当たり判定用HitBoxを作成                          
 	Hits::SetHitBox(this, m_px, m_py, ROCK_SIZE_WIDTH, ROCK_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_ROCK, 1);
 }
@@ -33,17 +38,36 @@ void CObjRock::Action()
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 	
-	//弾と接触しているかどうかを調べる　//ObjEnemyと同じようにしたほうがいいかも知れない。
+	//弾と接触しているかどうかを調べる
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
-		this->SetStatus(false);		//自身に削除命令を出す
-		Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
-		return;
+		m_ani_start_flag = true;//アニメフラグON
 	}
+	//アニメフラグONだと
+	if (m_ani_start_flag == true)
+	{
+		m_ani_time+=1;
+		//アニメーションの感覚管理
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame += 1;
+			m_ani_time = 0;
+		}
+
+		//最後までアニメーションが進むと存在を消す
+		if (m_ani_frame == 4)
+		{
+			Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
+			this->SetStatus(false);		//自身に削除命令を出す
+			return;
+		}
+	}
+
+
 	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
 
-											   //主人公オブジェクトを持ってくる
+	//主人公オブジェクトを持ってくる
 	CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	for (int i = 0; i < hit->GetCount(); i++)
@@ -57,37 +81,43 @@ void CObjRock::Action()
 			if (0 < r && r < 45 || 315 < r && r < 360)
 			{
 				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				obj_hero->SetPosX(m_px + ROCK_SIZE_WIDTH);//主人公の位置を木の右側までずらす
+				obj_hero->SetPosX(m_px + ROCK_SIZE_WIDTH);//主人公の位置を岩の右側までずらす
 			}
 			//ブロックの上側が衝突している場合
 			else if (45 < r && r < 125)
 			{
 
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				obj_hero->SetPosY(m_py - ROCK_SIZE_HEIGHT-58.0);//主人公の位置を木の上側までずらす
+				obj_hero->SetPosY(m_py - ROCK_SIZE_HEIGHT-58.0);//主人公の位置を岩の上側までずらす
 			}
 			//ブロックの左側が衝突している場合
 			else if (125 < r && r < 225)
 			{
 				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				obj_hero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置を木の左側までずらす
+				obj_hero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置を岩の左側までずらす
 			}
 			//ブロックの下側が衝突している場合
 			else if (225 < r && r < 315)
 			{
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				obj_hero->SetPosY(m_py + ROCK_SIZE_HEIGHT);//主人公の位置を木の下側までずらす
+				obj_hero->SetPosY(m_py + ROCK_SIZE_HEIGHT);//主人公の位置を岩の下側までずらす
 			}
 		}
 	}
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py-128);
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py- ROCK_SIZE_WIDTH);
 
 }
 
 //ドロー
 void CObjRock::Draw()
 {
+	//画像の切り取り配列
+	int AniData[4] =
+	{
+		0, 1, 2, 3
+	};
+
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -98,16 +128,17 @@ void CObjRock::Draw()
 
 	//切り取り位置
 	src.m_top = 1.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_left = AniData[m_ani_frame] * BLOCK_SIZE - BLOCK_SIZE;
+	src.m_right = src.m_left + BLOCK_SIZE;
+	src.m_bottom = src.m_top + BLOCK_SIZE;
 	
 	//描画位置
-	dst.m_top = m_py - obj_m->GetScrollY()-128;
+	dst.m_top = m_py - obj_m->GetScrollY()- ROCK_SIZE_WIDTH;
 	dst.m_left = m_px - obj_m->GetScrollX();
 	dst.m_right = dst.m_left + ROCK_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + ROCK_SIZE_HEIGHT;
 
+	
 	//描画
 	Draw::Draw(10, &src, &dst, color, 0.0f);
 }
