@@ -46,6 +46,7 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 

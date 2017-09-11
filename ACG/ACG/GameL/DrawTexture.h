@@ -63,7 +63,8 @@ namespace GameL
 			static void InitDraw(ID3D11Device* p_device,ID3D11DeviceContext* p_device_context,int w,int h,int img_max);	//初期化
 			static void LoadImage(wchar_t* name,int id,TEX_SIZE hw);			//グラフィック読み込み　サイズは定数で指定
 			static void DeleteImage();											//グラフィック破棄
-			static void Draw(int id,RECT_F* src,RECT_F* dst,float col[4],float r); //登録テクスチャ描画
+			static void Draw(int id, RECT_F* src, RECT_F* dst, float col[4], float r); //登録テクスチャ描画
+			static void Draw(int id,RECT_F* src,RECT_F* dst,float col[4],float r,int pattern); //登録テクスチャ描画
 			static void DrawStr(ID3D11ShaderResourceView* ptex_res_view,float x,float y,float size,float col[4]);//文字描画
 			static void DrawHitBox(float x,float y,float h,float w,float col[4]);//当たり判定描画
 			//ーーーーーーーーーーーーーーーアクセサーーーーーーーーーーーーーーーーー
@@ -93,7 +94,8 @@ namespace GameL
 			static float m_color[4];
 
 			//シェーダ関係
-			static ID3D11VertexShader* m_pVertexShader;		//バーテックスシェーダー
+			static ID3D11VertexShader* m_pVertexShader;		//バーテックスシェーダー（を中心に回転）
+			static ID3D11VertexShader* m_pVertexShader_side;		//バーテックスシェーダー（端を中心に回転）
 			static ID3D11PixelShader*  m_pPixelShader;		//ピクセルシェーダー
 			static ID3D11SamplerState* m_pSampleLinear;		//テクスチャーサンプラー
 			static ID3D11InputLayout*  m_pVertexLayout;		//頂点入力レイアウト
