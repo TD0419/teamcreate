@@ -84,7 +84,7 @@ void CObjWood::Draw()
 
 //主人公が触れたときの処理
 //引数1,2 木のポジション
-void CObjWood::HeroHit(float px,float py)
+void CObjWood::HeroHit(float px, float py)
 {
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
@@ -129,6 +129,7 @@ void CObjWood::HeroHit(float px,float py)
 			}
 		}
 	}
+}
 
 //ドロー
 void CObjWood::Draw()
