@@ -23,7 +23,8 @@ void CObjRock::Init()
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 6; //アニメーション間隔幅
-	l = false;
+	m_ani_start_flag = false;
+
 	//当たり判定用HitBoxを作成                          
 	Hits::SetHitBox(this, m_px, m_py, ROCK_SIZE_WIDTH, ROCK_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_ROCK, 1);
 }
@@ -37,12 +38,12 @@ void CObjRock::Action()
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 	
-	//弾と接触しているかどうかを調べる　//ObjEnemyと同じようにしたほうがいいかも知れない。
+	//弾と接触しているかどうかを調べる
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
-		l = true;
+		m_ani_start_flag = true;
 	}
-	if (l == true)
+	if (m_ani_start_flag == true)
 	{
 		m_ani_time+=1;
 		//アニメーションの感覚管理
