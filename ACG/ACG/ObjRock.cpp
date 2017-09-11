@@ -23,7 +23,7 @@ void CObjRock::Init()
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 6; //アニメーション間隔幅
-	m_ani_start_flag = false;
+	m_ani_start_flag = false;//アニメフラグOFF
 
 	//当たり判定用HitBoxを作成                          
 	Hits::SetHitBox(this, m_px, m_py, ROCK_SIZE_WIDTH, ROCK_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_ROCK, 1);
@@ -41,8 +41,9 @@ void CObjRock::Action()
 	//弾と接触しているかどうかを調べる
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
-		m_ani_start_flag = true;
+		m_ani_start_flag = true;//アニメフラグON
 	}
+	//アニメフラグONだと
 	if (m_ani_start_flag == true)
 	{
 		m_ani_time+=1;
@@ -53,7 +54,7 @@ void CObjRock::Action()
 			m_ani_time = 0;
 		}
 
-		//最後までアニメーションが進むと最初に戻る
+		//最後までアニメーションが進むと存在を消す
 		if (m_ani_frame == 4)
 		{
 			Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
