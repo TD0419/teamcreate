@@ -183,7 +183,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_256);
 
 	//Wood‰æ‘œ
-	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_64);
+	Draw::LoadImageW(L"FallingTree.png", 7, TEX_SIZE_64);
 	
 	//Enemy‰æ‘œ
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
