@@ -24,10 +24,6 @@ void CObjWood::Init()
 	m_r = 0.0f;
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, WOOD_SIZE, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
-
-	// 木の移動量変数初期化
-	v_px = 0.0f;
-	v_py = 0.0f;
 	
 	// 角度変数初期化
 	m_r  = 0.0f;
@@ -129,39 +125,6 @@ void CObjWood::HeroHit(float px, float py)
 			}
 		}
 	}
-}
-
-//ドロー
-void CObjWood::Draw()
-{
-	//描画カラー
-	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
-
-	RECT_F src, dst;
-
-	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	m_r = 90.0f;
-
-	//切り取り位置
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 128.0f;
-	src.m_bottom = 128.0f;
-
-	//描画位置
-	dst.m_top = m_py - obj_m->GetScrollY();
-	dst.m_left = m_px - obj_m->GetScrollX();
-	dst.m_right = dst.m_left + 320.0f;
-	dst.m_bottom = dst.m_top + 320.0f;
-	
-	//描画
-	Draw::Draw(16, &src, &dst, color, m_r);
-	
-	wchar_t str[256];
-	swprintf_s(str, L"X:%d,Y:%d", Input::GetPosX(), Input::GetPosY());
-	Font::StrDraw(str, 0.0f, 0.0f, 32.0f, color);
 }
 
 //---UnitVec関数
