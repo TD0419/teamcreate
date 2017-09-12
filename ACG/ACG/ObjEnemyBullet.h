@@ -23,4 +23,5 @@ private:
 	float m_speed;					//’eŠÛ‚Ì‘¬“x
 	float m_angle;					//’eŠÛ‚ÌŠp“x			
 
+	
 };
