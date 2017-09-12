@@ -5,25 +5,24 @@
 
 #include "GameHead.h"
 #include "ObjBullet.h"
+#include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
-
 
 //コンストラクタ
 //引数1	float x		:初期位置X
 //引数2	float y		:初期位置Y
 //引数3	float angle	:移動する角度
-CObjBullet::CObjBullet(int x, int y)
+CObjBullet::CObjBullet(float x, float y)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	//主人公が本来いる位置に変更
-	x -= obj_m->GetScrollX();
-	y -= obj_m->GetScrollY();
+	
 	//初期位置を決める
 	m_px = x;
 	m_py = y;
+
 	//速さを決める
 	m_speed = 6.5f;
 
@@ -65,13 +64,17 @@ CObjBullet::CObjBullet(int x, int y)
 //イニシャライズ
 void CObjBullet::Init()
 {
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_BULLET, 1);
+	Hits::SetHitBox(this, m_px-obj_m->GetScrollX(), m_py - obj_m->GetScrollY(), BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_BULLET, 1);
 }
 
 //アクション
 void CObjBullet::Action()
 {	
+	
 	//画面外へいったら消去
 	if (m_px < -(BULLET_SIZE+BULLET_SIZE/2) || //左　回転してるかもなので少し余裕を持たせる
 		m_px > WINDOW_SIZE_W||   //右
@@ -129,18 +132,22 @@ void CObjBullet::Action()
 			m_vx *= (-1);//移動ベクトルの左右を反転する
 		}
 	}
-
+	
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
 
-	hit->SetPos(m_px, m_py);//HitBoxの位置を更新
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
 }
 
 //ドロー
 void CObjBullet::Draw()
 {
+	//マップオブジェクトを持ってくる
+	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 	RECT_F src, dst;
@@ -152,8 +159,8 @@ void CObjBullet::Draw()
 	src.m_bottom = 512.0f;
 
 	//描画位置
-	dst.m_top = m_py;
-	dst.m_left =  m_px;
+	dst.m_top = m_py-obj_m->GetScrollY();
+	dst.m_left =  m_px-obj_m->GetScrollX();
 	dst.m_right = dst.m_left + BULLET_SIZE;
 	dst.m_bottom = dst.m_top + BULLET_SIZE;
 
