@@ -23,7 +23,7 @@ cbuffer global
 	float4 rect_out;
 };
 
-//頂点シェーダ
+//頂点シェーダ(中央を中心に回転)
 vertexOut vs(vertexIn IN)
 {
 	vertexOut OUT;
@@ -58,9 +58,52 @@ vertexOut vs(vertexIn IN)
 	uv.x=f[IN.uv.x];
 	uv.y=f[IN.uv.y];
 	
-	
 	OUT.pos = mul(IN.pos,outmat);
 	OUT.uv  = uv;
+	return OUT;
+}
+
+
+//頂点シェーダ(端っこを中心に回転)
+vertexOut vs_side(vertexIn IN)
+{
+	vertexOut OUT;
+
+	//貼り付け位置行列
+	float4x4 mat = {
+		((rect_out.z - rect_out.x) / size.z)*2.0f,									   0.0f,		0.0f,		0.0f,
+		0.0f,			 (-(rect_out.w - rect_out.y) / size.w)*2.0f,		0.0f,		0.0f,
+		0.0f,											   0.0f,		1.0f,		0.0f,
+		(rect_out.x*2.0f) / size.z - 1.0f,					  (-rect_out.y*2.0f) / size.w + 1.0,		0.0f,		1.0f,
+	};
+
+	//回転用行列
+	//平行移動
+	float4x4 tmat = {
+		1.0f, 0.0f,0.0f,0.0f,
+		0.0f, 1.0f,0.0f,0.0f,
+		0.0f, 0.0f,1.0f,0.0f,
+		-1.0f,-1.0f,0.0f,1.0f,
+	};
+	//回転
+	float4x4 rmat = {
+		cos(3.14f / 180.0f*size.y),	-sin(3.14f / 180.0f*size.y),0.0f,0.0f,
+		sin(3.14f / 180.0f*size.y),	 cos(3.14f / 180.0f*size.y),0.0f,0.0f,
+		0.0f,						 0.0f,1.0f,0.0f,
+		1.0f,					     1.0f,0.0f,1.0f,
+	};
+
+	//2D変換行列*回転行列
+	float4x4 outmat = mul(mul(tmat, rmat), mat);
+
+	float f[4] = { rect_in.x / size.x , rect_in.z / size.x , rect_in.y / size.x , rect_in.w / size.x };
+	float2 uv = (float2)0.0f;
+	uv.x = f[IN.uv.x];
+	uv.y = f[IN.uv.y];
+
+
+	OUT.pos = mul(IN.pos, outmat);
+	OUT.uv = uv;
 	return OUT;
 }
 
