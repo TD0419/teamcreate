@@ -23,7 +23,7 @@ void CObjSign::Init()
 	m_strdrow = false;
 
 	//文字セット
-	Font::SetStrTex(L"???「ＤＣＳ…」");
+	Font::SetStrTex(L"ヘビ「Don't escape!」");
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -79,7 +79,7 @@ void CObjSign::Draw()
 	{
 		//描画
 		Draw::Draw(16, &src, &dst, color, 0);
-		Font::StrDraw(L"???「ＤＣＳ…」", dst.m_left, dst.m_top + 32.0f , 32.0f, c);
+		Font::StrDraw(L"ヘビ「Don't escape!」", dst.m_left, dst.m_top + 32.0f , 32.0f, c);
 	}
 	
 }
