@@ -113,7 +113,6 @@ void CObjWood::Draw()
 	dst.m_left = m_px - obj_m->GetScrollX();
 	dst.m_right = dst.m_left + 320.0f;
 	dst.m_bottom = dst.m_top + 320.0f;
-	
 	//•`‰æ
 	Draw::Draw(16, &src, &dst, color, m_r);
 	
