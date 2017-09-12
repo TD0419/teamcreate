@@ -178,16 +178,15 @@ void CSceneMain::ImageDataLoading()
 
 	//debug用Boss画像
 	Draw::LoadImageW(L"image3.png", 4, TEX_SIZE_512);
-	//Draw::LoadImageW(L"image3.jpg", 4, TEX_SIZE_512);
 
 	//Ladders画像
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
 
 	//Door & Padlock画像
-	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_256);
+	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_128);
 
 	//Wood画像
-	Draw::LoadImageW(L"FallingTree.png", 7, TEX_SIZE_64);
+	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);
 	
 	//Enemy画像
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
@@ -196,10 +195,13 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Lever.png", 9, TEX_SIZE_128);
 
 	//rock画像
-	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_64);
+	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_256);
 
 	//Water画像
-	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);	
+	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);
+	//水の下部分
+	//Draw::LoadImageW(L"WaterUnder.png", 12, TEX_SIZE_64);
+
 	//Waterテスト画像
 	Draw::LoadImageW(L"WaterBlock.png", 12, TEX_SIZE_64);
 	
@@ -212,11 +214,12 @@ void CSceneMain::ImageDataLoading()
 	//背景画像
 	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1024);
 
-	//看板
-	Draw::LoadImageW(L"Sign.png", 16, TEX_SIZE_256);
+	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
 
+	//看板
+	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
 	//debug用敵弾丸画像
-	Draw::LoadImageW(L"bomb.png",17,TEX_SIZE_64);
+	Draw::LoadImageW(L"bomb.png",18,TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数
