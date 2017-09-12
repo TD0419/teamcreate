@@ -215,6 +215,8 @@ void CSceneMain::ImageDataLoading()
 	//看板
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
 
+	//testhero
+	Draw::LoadImageW(L"Hero2.png", 18, TEX_SIZE_1024);
 }
 
 //音楽データ読み込み関数
