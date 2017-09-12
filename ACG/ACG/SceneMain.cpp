@@ -194,7 +194,10 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_256);
 
 	//Water‰æ‘œ
-	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);	
+	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);
+	//…‚Ì‰º•”•ª
+	//Draw::LoadImageW(L"WaterUnder.png", 12, TEX_SIZE_64);
+
 	//WaterƒeƒXƒg‰æ‘œ
 	Draw::LoadImageW(L"WaterBlock.png", 12, TEX_SIZE_64);
 	
@@ -208,6 +211,9 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
+
+	//ŠÅ”Â
+	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
 
 }
 
