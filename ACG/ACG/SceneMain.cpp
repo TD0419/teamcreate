@@ -100,6 +100,10 @@ void CSceneMain::InitScene()
 	//背景オブジェクトを作成する
 	CObjBackGround* objBackGround = new CObjBackGround();
 	Objs::InsertObj(objBackGround, OBJ_BACKGROUND, 1);
+
+	//debug敵弾丸作成
+	//CObjEnemyBullet* Obj_enemy_bullet = new CObjEnemyBullet(64.0,  50.0, 0);
+	//Objs::InsertObj(Obj_enemy_bullet, OBJ_ENEMY_BULLET, 10);
 }
 
 //ゲームメイン実行中メソッド
@@ -115,9 +119,9 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	//p = Save::ExternalDataOpen(L"Stage01(proto).csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Stage01(proto).csv", &size);//外部データ読み込み
 
-	p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
+	//p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
 	if (p == nullptr)
 	{
@@ -214,9 +218,11 @@ void CSceneMain::ImageDataLoading()
 
 	//看板
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
+	//debug用敵弾丸画像
+	Draw::LoadImageW(L"bomb.png",18,TEX_SIZE_64);
 
 	//testhero
-	Draw::LoadImageW(L"Hero2.png", 18, TEX_SIZE_1024);
+	Draw::LoadImageW(L"Hero2.png", 19, TEX_SIZE_1024);
 }
 
 //音楽データ読み込み関数
