@@ -209,6 +209,9 @@ void CSceneMain::ImageDataLoading()
 
 	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
 
+	//看板
+	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
+
 }
 
 //音楽データ読み込み関数

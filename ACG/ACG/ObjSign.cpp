@@ -78,8 +78,8 @@ void CObjSign::Draw()
 	if (m_strdrow == true)
 	{
 		//描画
-		Draw::Draw(16, &src, &dst, color, 0);
-		Font::StrDraw(L"???「G…N…D…F」", dst.m_left, dst.m_top + 32.0f , 32.0f, c);
+		Draw::Draw(17, &src, &dst, color, 0);
+		Font::StrDraw(L"「帰れ」", dst.m_left, dst.m_top + 32.0f , 32.0f, c);
 	}
 	
 }
