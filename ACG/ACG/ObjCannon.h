@@ -19,5 +19,6 @@ public:
 private:
 	float m_x;	//XÀ•W
 	float m_y;	//YÀ•W
-	float m_r;  // –C‘ä‚Ì‰ñ“]Šp“x
+	float m_r;  //–C‘ä‚Ì‰ñ“]Šp“x
+	float m_rec;	//’eŠÛƒŠƒLƒƒƒXƒg
 };
