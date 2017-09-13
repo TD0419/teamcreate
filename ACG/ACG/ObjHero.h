@@ -18,7 +18,7 @@ public:
 	void Scroll();					//スクロール処理の関数
 	void LandingCheck();			//着地できてるかどうかを調べる関数
 	bool HitUpCheck(int obj_name);	//指定したオブジェクトの上側と当たっているかしらべる関数
-
+	bool  m_ladders_flag;			//梯子フラグ
 
 	//アクセサ------------------------------------------
 	void SetVecX(float x) { m_vx = x; };	//ベクトルXをセットする
@@ -42,6 +42,7 @@ private:
 
 	bool  m_bullet_control; //弾丸発射制御用
 	bool  m_rope_control;	//ロープ発射制御用
+	
 
 	//アニメーション関係
 	int m_ani_frame_stop;	//止まった時の描画を調整

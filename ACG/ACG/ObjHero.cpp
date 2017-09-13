@@ -26,6 +26,8 @@ void CObjHero::Init()
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 
+	m_ladders_flag = false;     //梯子上ってるときのフラグ
+
 	m_bullet_control = false;	//弾丸発射制御用
 	
 	m_rope_control = false;		//ロープ発射制御用
@@ -121,7 +123,7 @@ void CObjHero::Action()
 
 	//ジャンプ--------------------------------------------------------------------
 
-	if (Input::GetVKey(VK_SPACE) == true)
+	if (Input::GetVKey(VK_SPACE) == true && m_ladders_flag == false)
 	{
 		if (m_hit_down == true)
 		{
@@ -150,7 +152,7 @@ void CObjHero::Action()
  		int a = 0;
 
 	//自由落下運動
-	if(m_hit_down==false)//着地していなければ
+	if(m_hit_down==false&&m_ladders_flag == false)//着地していなければ
 		m_vy += 9.8 / (16.0f);
 	
 

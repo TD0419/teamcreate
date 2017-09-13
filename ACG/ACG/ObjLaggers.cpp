@@ -16,6 +16,7 @@ CObjLadders::CObjLadders(int x, int y)
 //イニシャライズ
 void CObjLadders::Init()
 {
+	l = false;
 }
 
 //アクション
@@ -52,7 +53,7 @@ void CObjLadders::Draw()
 }
 
 //プレイヤーがあたったときの処理
-void CObjLadders::HeroHit(float px,float py)
+void CObjLadders::HeroHit(float px, float py)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_map = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -76,20 +77,31 @@ void CObjLadders::HeroHit(float px,float py)
 		//主人公のオブジェクトを持ってくる
 		CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-		obj_hero->SetVecY(0.0f);//yの移動方向を初期化
-		obj_hero->SetHitDown(true);//着地状態にする
+		obj_hero->m_ladders_flag = true;//梯子に上ってるフラグオン
 		
 		//Wキーがおされたとき 上るとき
 		if (Input::GetVKey('W') == true)
 		{
 			obj_hero->SetVecY(-2.0f);
+			obj_hero->SetHitDown(true);//着地状態にする
+			
+			if (Input::GetVKey('W') != true)
+			{
+				obj_hero->SetVecY(0.0f);//yの移動方向を初期化
+			}
 		}
 
 		//Sキーがおされたとき　下るとき
 		if (Input::GetVKey('S') == true)
 		{
 			obj_hero->SetVecY(2.0f);
+			obj_hero->SetHitDown(true);//着地状態にする
 		}
 	}
-
+	else
+	{
+		//主人公のオブジェクトを持ってくる
+		CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		obj_hero->m_ladders_flag = false;//梯子に触ってないときはOFF
+	}
 }
