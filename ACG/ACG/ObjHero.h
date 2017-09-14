@@ -47,9 +47,6 @@ private:
 
 	int m_ladder_updown; //はしごHit管理
 	int m_ladder_ani_updown; //はしごアニメーション管理
-
-	int m_ladder_updown;		//はしごアニメーション管理
-	int m_ladder_ani_updown;	//はしごアニメーション管理
 	int m_ladder_jump;			//はしごジャンプ管理
 	//アニメーション関係
 	int m_ani_time_move;	    //移動アニメーションフレーム動作感覚
