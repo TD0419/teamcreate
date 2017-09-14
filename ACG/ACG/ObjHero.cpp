@@ -27,11 +27,18 @@ void CObjHero::Init()
 	m_r = 0.0f;
 
 	m_bullet_control = false;	//弾丸発射制御用
-	
 	m_rope_control = false;		//ロープ発射制御用
-	m_ani_time = 0;
-	m_ani_frame = 1;			//静止フレームを初期にする
-	m_ani_max_time = 6;			//アニメーション間隔幅
+	m_ladder_updown = 0;
+	m_ladder_ani_updown = 0;
+
+	m_ani_max_time_move = 6;	//アニメーション間隔幅
+	m_ani_time_move = 0;
+	m_ani_frame_move = 1;		//静止フレームを初期にする
+
+	m_ani_max_time_ladders = 9; //アニメーション間隔幅 
+	m_ani_time_ladders = 0;
+	m_ani_frame_ladders = 0;	//静止フレームを初期にする
+
 
 	//ブロックとの衝突した状態(場所)確認用
 	m_hit_up	= false;
@@ -74,7 +81,24 @@ void CObjHero::Action()
 	//はしごオブジェクトを持ってくる
 	CObjLadders* obj_ladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
 
+	if(obj_ladders != nullptr)
 	obj_ladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
+
+	//はしごのアニメーションタイムを進める
+	m_ani_time_ladders += m_ladder_ani_updown;//はしごから取ってくる
+
+	//はしごのMAXTIMEを超えるとアニメーションを進める
+	if (m_ani_time_ladders > m_ani_max_time_ladders)
+	{
+		m_ani_frame_ladders += 1;
+		m_ani_time_ladders = 0;
+	}
+
+	//最後までアニメーションが進むと最初に戻る
+	if (m_ani_frame_ladders == 4)
+	{
+		m_ani_frame_ladders = 0;
+	}
 
 	//はしご終了---------------------------------------------
 
@@ -85,36 +109,39 @@ void CObjHero::Action()
 	if (Input::GetVKey('D') == true)
 	{
 		m_vx += 0.5f;
-		m_ani_frame_stop = 0;
+		m_ani_frame_stop_move = 0;
 		m_posture = 0.0f;		//主人公の向き
-		m_ani_time += 1;
+		m_ani_time_move += 1;
 	}
 	//Dキーがおされたとき：左移動
 	else if (Input::GetVKey('A') == true)
 	{
 		m_vx -= 0.5f;
-		m_ani_frame_stop = 0;
-		m_posture = 1.0f;		//主人公の向き
-		m_ani_time += 1;
+		m_ani_frame_stop_move = 0;
+		if (m_ladder_updown == 1)
+			m_posture = 0.0f;		//主人公の向き
+		else
+			m_posture = 1.0f;		//主人公の向き
+		m_ani_time_move += 1;
 	}
 	else
 	{
-		m_ani_frame_stop = 1;	//キー入力が無い時は1を入れる
-		m_ani_frame = 1;		//キー入力が無い場合は静止フレームにする
-		m_ani_time = 0;
+		m_ani_frame_stop_move = 1;	//キー入力が無い時は1を入れる
+		m_ani_frame_move = 1;		//キー入力が無い場合は静止フレームにする
+		m_ani_time_move = 0;
 	}
 
 	//アニメーションの感覚管理
-	if (m_ani_time > m_ani_max_time)
+	if (m_ani_time_move > m_ani_max_time_move)
 	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
+		m_ani_frame_move += 1;
+		m_ani_time_move = 0;
 	}
 
 	//最後までアニメーションが進むと最初に戻る
-	if (m_ani_frame == 3)
+	if (m_ani_frame_move == 3)
 	{
-		m_ani_frame = 0;
+		m_ani_frame_move = 0;
 	}
 	
 	
@@ -256,16 +283,6 @@ void CObjHero::Action()
 		return;
 	}
 
-	////水オブジェクトと衝突していれば
-	//if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
-	//{
-	//	this->SetStatus(false);		//自身を削除
-	//	Hits::DeleteHitBox(this);	//ヒットボックスを削除
-
-	//								//メインへ移行
-	//	Scene::SetScene(new CSceneMain());
-	//}
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
@@ -336,20 +353,37 @@ void CObjHero::Draw()
 
 	//切り取り位置
 	//止まっている時
-	if (m_ani_frame_stop == 1)  //仮
+	if (m_ani_frame_stop_move == 1 && m_ladder_updown == 0)  //止まっているとき
 	{
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;
 		src.m_bottom = 128.0f;
 	}
-	else//動いているとき
+	else if (m_ani_frame_stop_move == 0 && m_ladder_updown == 0)//動いているとき
 	{
 		src.m_top = 128.0f;
-		src.m_left = 0.0f + AniData[m_ani_frame] * 64;
-		src.m_right = 64.0f + AniData[m_ani_frame] * 64;
+		src.m_left = 0.0f + AniData[m_ani_frame_move] * 64;
+		src.m_right = 64.0f + AniData[m_ani_frame_move] * 64;
 		src.m_bottom = 256.0f;
 	}
+	else if (m_ladder_updown == 1)//はしごに上っている時
+	{
+		src.m_top = 259.0f;
+		src.m_left = 0.0f + m_ani_frame_ladders * 64;
+		src.m_right = 64.0f + m_ani_frame_ladders * 64;
+		src.m_bottom = 387.0f;
+		
+	}
+	else if (m_ladder_updown == 2)//はしごを上りきるとき
+	{
+		src.m_top = 259.0f;
+		src.m_left = 256.0f;
+		src.m_right = 320.0f;
+		src.m_bottom = 387.0f;
+	}
+	
+	
 
 	//描画位置
 	dst.m_top		= 0.0f + m_py - obj_m->GetScrollY();
@@ -358,7 +392,7 @@ void CObjHero::Draw()
 	dst.m_bottom	= dst.m_top  + HERO_SIZE_HEIGHT;
 
 	//描画
-	Draw::Draw(3, &src, &dst, color, m_r);
+	Draw::Draw(19, &src, &dst, color, m_r);
 
 	////画面全体を暗くするです。
 	//Draw::SetFill(true);
