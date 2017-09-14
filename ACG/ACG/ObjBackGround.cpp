@@ -46,10 +46,10 @@ void CObjBackGround::Draw()
 	src.m_bottom = src.m_top + 1024;
 
 	//•`‰æˆÊ’u
-	dst.m_top =  WINDOW_SIZE_H - src.m_bottom - src.m_top - obj_m->GetScrollY();
+	dst.m_top =  WINDOW_SIZE_H - src.m_bottom - src.m_top - obj_m->GetScrollY() + 15;//­‚µ’²®—p(-15)
 	dst.m_left = WINDOW_SIZE_W - src.m_right - src.m_left;
 	dst.m_right = WINDOW_SIZE_W;
-	dst.m_bottom = WINDOW_SIZE_H - obj_m->GetScrollY();
+	dst.m_bottom = WINDOW_SIZE_H - obj_m->GetScrollY() + 15;//­‚µ’²®—p({15)
 
 	//•`‰æ
 	Draw::Draw(15, &src, &dst, color, 0.0f);
