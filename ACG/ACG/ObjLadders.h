@@ -19,5 +19,5 @@ public:
 private:
 	float m_px;					//ハシゴX座標
 	float m_py;					//ハシゴY座標
-	int l;
+								//マップ上の位置（要素数）
 };

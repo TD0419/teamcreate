@@ -94,57 +94,7 @@ void CObjEnemyBullet::Init()
 //アクション
 void CObjEnemyBullet::Action()
 {
-	/*
-	//主人公機と敵用弾丸で角度を取る
-	CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	
-	//主人公が生存している場合、角度の計算を行う
-	if (obj_hero != nullptr)
-	{
-		float hero_x = obj_hero->GetPosX() - m_x;		//主人公の位置情報X取得
-		float hero_y = obj_hero->GetPosY() - m_y;		//主人公の位置情報Y取得
-		float r_ar = atan2(-hero_y, hero_x)*180.0f / 3.14f;
-		if (r_ar < 0)
-		{
-			r_ar = 360 - abs(r_ar);
-		}
-
-
-		
-		//弾丸の現在の向きでの角度を取る
-		float r_br = atan2(-m_vy, m_vx)*180.0f / 3.14f;
-		if (r_br < 0)
-		{
-			r_br = 360 - abs(r_br);
-		}
-
-
-		if (r_ar - r_br > 20)
-		{
-			//移動方向を主人公の方向にする
-			m_vx = cos(3.14 / 180.0*r_ar);
-			m_vy = -sin(3.14 / 180.0*r_ar);
-
-		}
-
-		float r = 3.14 / 180.0f;
-		if (r_ar<r_br)
-		{
-			//移動方向に+1度加える
-			m_vx = m_vx*cos(r) - m_vy*sin(r);
-			m_vy = m_vy*cos(r) + m_vx*sin(r);
-
-		}
-		else
-		{
-			//移動方向に-1度加える
-			m_vx = m_vx*cos(-r) - m_vy*sin(-r);
-			m_vy = m_vy*cos(-r) + m_vx*sin(-r);
-
-		}
-		
-	}
-	*/
 	//移動
 	m_x += m_vx*1.0f;
 	m_y += m_vy*1.0f;
@@ -211,6 +161,6 @@ void CObjEnemyBullet::Draw()
 	dst.m_right = dst.m_left + BULLET_SIZE;
 	dst.m_bottom = dst.m_top + BULLET_SIZE;
 
-	Draw::Draw(17, &src, &dst, color, m_angle);
+	Draw::Draw(18, &src, &dst, color, m_angle);
 
 }
