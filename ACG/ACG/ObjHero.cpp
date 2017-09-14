@@ -365,10 +365,48 @@ void CObjHero::Draw()
 	////画面全体をこの色にする
 	////staticなのは消すかもしれないから
 	//static float col[4] = { 0.0f };
-	//col[0] -= 0.01f;
-	//col[1] -= 0.01f;
-	//col[2] -= 0.01f;
+	//col[0] -= 0.001f;
+	//col[1] -= 0.001f;
+	//col[2] -= 0.001f;
 	//Draw::SetColor(col);
+
+	//画面全体をだんだん暗くする処理----------------------------------
+	if (false)
+	{
+		//中央位置設定
+		static int ball_x = WINDOW_SIZE_W / 2;
+		static int ball_y = WINDOW_SIZE_H / 2;
+		//半径初期
+		static int ball_r = 768 ;
+		//半径をだんだん短くする
+		ball_r -= 3;
+		//カラー
+		float c[4] = {0.0f,0.0f,0.0f,1.0f};
+		//正四角形の１辺の長さ
+		//長ければ長いほど軽く
+		//短ければ短いほど重いよ
+		int one_side = 6;
+
+		//円外を四角形で埋め尽くす
+		for (int y = 0; y < WINDOW_SIZE_H; y+= one_side)
+		{
+			for (int x = 0; x < WINDOW_SIZE_W; x+= one_side)
+			{
+				//円の中
+				if ((x - ball_x)*(x - ball_x) + (y - ball_y)*(y - ball_y) <= ball_r * ball_r)
+				{
+
+				}
+				//円外
+				else
+				{
+					Draw::DrawHitBox(x, y, one_side, one_side, c);
+				}				
+			}
+		}
+
+	}
+	//----------------------------------------------------------------
 }
 
 //着地できてるかどうかを調べる関数
