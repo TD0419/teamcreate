@@ -212,7 +212,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"image4.png", 14, TEX_SIZE_64);
 	
 	//”wŒi‰æ‘œ
-	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1024);
+	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1536);
 
 	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
 

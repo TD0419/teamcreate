@@ -42,13 +42,13 @@ void CObjBackGround::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left =0.0f;
-	src.m_right =src.m_left + 1024;
-	src.m_bottom = src.m_top + 1024;
+	src.m_right =src.m_left + 1536;
+	src.m_bottom = src.m_top + 1536;
 
 	//描画位置
 	dst.m_top =  WINDOW_SIZE_H - src.m_bottom - src.m_top - obj_m->GetScrollY() + 15;//少し調整用(+15)
-	dst.m_left = WINDOW_SIZE_W - src.m_right - src.m_left;
-	dst.m_right = WINDOW_SIZE_W;
+	dst.m_left = 1536 - src.m_right - src.m_left;
+	dst.m_right = 1536;
 	dst.m_bottom = WINDOW_SIZE_H - obj_m->GetScrollY() + 15;//少し調整用(＋15)
 
 	//描画
