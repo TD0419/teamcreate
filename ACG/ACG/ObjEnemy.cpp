@@ -14,10 +14,10 @@ using namespace GameL;
 CObjEnemy::CObjEnemy(int x, int y)
 {
 	//マップの要素数を補間
-	m_first_x = x;
-	m_first_y = y;
-	m_x = x * ENEMY_SIZE;
-	m_y = y * ENEMY_SIZE;
+	m_map_x = x;
+	m_map_y = y;
+	m_px = x * ENEMY_SIZE;
+	m_py = y * ENEMY_SIZE;
 }
 
 //イニシャライズ
@@ -35,7 +35,7 @@ void CObjEnemy::Init()
 	m_speed = 0.5f;	//初期スピード
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, ENEMY_SIZE,ENEMY_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, ENEMY_SIZE,ENEMY_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 }
 
 //アクション
@@ -45,6 +45,22 @@ void CObjEnemy::Action()
 	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//マップ情報を取ってくる
 	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	
+	//画面内か調べる
+	m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
+
+	//画面外なら消去
+	if (m_window_check == false)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+
+		//戻ってきたときに復活するようにする
+		map->SetMapCreate(m_map_x, m_map_y, true);
+		
+		return;
+	}
+	
 	//移動----------------------------------------------
 
 	//左に向いているなら左へ移動する
@@ -79,11 +95,6 @@ void CObjEnemy::Action()
 	//自由落下運動
 	m_vy += 9.8 / (16.0f);
 
-
-	//移動ベクトルを初期化
-	/*m_vx = 0.0f;
-	m_vy = 0.0f;*/
-
 	//移動終わり-----------------------------------------
 
 	//弾丸のHitBox更新用ポインター取得
@@ -94,16 +105,13 @@ void CObjEnemy::Action()
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
-		//死んだのでマップ情報に自身の復活の儀式を行う。
-		//復活の儀式を行う
-		map->SetMap(m_first_x, m_first_y, MAP_ENEMY);
-		map->SetMapCreate(m_first_x, m_first_y, true);
+	
 		return;
 	}
 	
 	//ブロックとのあたり判定
 	obj_b->BlockHit(
-		&m_x, &m_y, ENEMY_SIZE, ENEMY_SIZE,
+		&m_px, &m_py, ENEMY_SIZE, ENEMY_SIZE,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, 
 		&m_vx, &m_vy
 	);
@@ -125,14 +133,14 @@ void CObjEnemy::Action()
 		//移動しようとしているところが崖なら方向転換
 		//右に動いていて && 
 		//右下にブロックが無かったら
-		if (m_vx > 0 && map->GetMap((m_x / BLOCK_SIZE + 1), (m_y / BLOCK_SIZE + 1)) != MAP_BLOCK)
+		if (m_vx > 0 && map->GetMap((m_px / BLOCK_SIZE + 1), (m_py / BLOCK_SIZE + 1)) != MAP_BLOCK)
 		{
 			//方向を左にする
 			m_posture = 0.0;
 		}
 		//左に移動していて &&
 		//左下にブロックが無かったら		↓原点調整
-		if (m_vx < 0 && map->GetMap(((m_x+ENEMY_SIZE) / BLOCK_SIZE - 1), (m_y / BLOCK_SIZE + 1)) != MAP_BLOCK)
+		if (m_vx < 0 && map->GetMap(((m_px+ENEMY_SIZE) / BLOCK_SIZE - 1), (m_py / BLOCK_SIZE + 1)) != MAP_BLOCK)
 		{
 			//方向を右にする
 			m_posture = 1.0;
@@ -140,11 +148,11 @@ void CObjEnemy::Action()
 	}
 
 	//移動ベクトルをポジションに加算
-	m_x += m_vx;
-	m_y += m_vy;
+	m_px += m_vx;
+	m_py += m_vy;
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_x, m_y);
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
 	
 }
@@ -173,9 +181,9 @@ void CObjEnemy::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_y - obj_m->GetScrollY();
-	dst.m_left = (ENEMY_SIZE * m_posture) + m_x - obj_m->GetScrollX();
-	dst.m_right = (ENEMY_SIZE - ENEMY_SIZE * m_posture) + m_x - obj_m->GetScrollX();
+	dst.m_top = m_py - obj_m->GetScrollY();
+	dst.m_left = (ENEMY_SIZE * m_posture) + m_px - obj_m->GetScrollX();
+	dst.m_right = (ENEMY_SIZE - ENEMY_SIZE * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_bottom = dst.m_top + ENEMY_SIZE;
 
 	//描画

@@ -164,7 +164,7 @@ void CObjHero::Action()
 	{
 		if (m_hit_down == true)
 		{
-			m_vy = -14.0f;
+			m_vy = -16.0f;
 		}
 	}
 
@@ -208,7 +208,6 @@ void CObjHero::Action()
 	m_px += m_vx;
 	m_py += m_vy;
 
-	//移動ベクトルを初期化
 	//移動終わり-----------------------------------------
 
 
@@ -424,7 +423,7 @@ void CObjHero::Draw()
 	
 
 	//描画位置
-	dst.m_top		= 0.0f + m_py - obj_m->GetScrollY();
+	dst.m_top		= m_py - obj_m->GetScrollY();
 	dst.m_left		= (HERO_SIZE_WIDTH * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_right	    = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_bottom	= dst.m_top  + HERO_SIZE_HEIGHT;
