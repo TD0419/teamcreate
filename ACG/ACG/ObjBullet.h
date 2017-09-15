@@ -24,5 +24,6 @@ private:
 	float m_angle;	// 弾丸の角度	
 	float m_scroll_x;	//スクロールの値X 
 	float m_scroll_y;	// スクロールの値Y
-	
+	bool m_window_check;//画面内かどうかのチェック用 true:画面内 false:画面外
+
 };
