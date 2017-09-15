@@ -16,6 +16,7 @@ CObjLadders::CObjLadders(int x, int y)
 //イニシャライズ
 void CObjLadders::Init()
 {
+	
 }
 
 //アクション
@@ -52,7 +53,7 @@ void CObjLadders::Draw()
 }
 
 //プレイヤーがあたったときの処理
-void CObjLadders::HeroHit(float px,float py)
+void CObjLadders::HeroHit(float px, float py)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_map = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -81,7 +82,7 @@ void CObjLadders::HeroHit(float px,float py)
 
 		obj_hero->SetVecY(0.0f);//yの移動方向を初期化
 		obj_hero->SetHitDown(true);//着地状態にする
-		
+		obj_hero->SetLadderJump(1);//1を渡す
 		//Wキーがおされたとき 上るとき
 		if (Input::GetVKey('W') == true)
 		{
@@ -94,15 +95,13 @@ void CObjLadders::HeroHit(float px,float py)
 			}
 			else
 				obj_hero->SetLaddersUpdown(1);//はしごを上っているときは1を渡す
-
-			obj_hero->SetLaddersAniUpdown(1);//アニメーションを進める
+				obj_hero->SetLaddersAniUpdown(1);//アニメーションを進める
 		}
 
 		//Sキーがおされたとき　下るとき
 		else if (Input::GetVKey('S') == true)
 		{
 			obj_hero->SetVecY(2.0f);
-
 			obj_hero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
 			obj_hero->SetLaddersAniUpdown(1);//アニメーションを進める
 		}
@@ -110,12 +109,14 @@ void CObjLadders::HeroHit(float px,float py)
 		else
 		{
 			obj_hero->SetLaddersAniUpdown(0);//アニメーションを止める
+			
 		}
 		
 	}
 	else
 	{
 		obj_hero->SetLaddersUpdown(0);//主人公がはしごに当たってないときは0を渡す
+		obj_hero->SetLadderJump(0);//ゼロを渡す
 	}
 	
 }

@@ -19,7 +19,6 @@ public:
 	void LandingCheck();			//着地できてるかどうかを調べる関数
 	bool HitUpCheck(int obj_name);	//指定したオブジェクトの上側と当たっているかしらべる関数
 
-
 	//アクセサ------------------------------------------
 	void SetVecX(float x) { m_vx = x; };	//ベクトルXをセットする
 	void SetVecY(float y) { m_vy = y; };	//ベクトルYをセットする
@@ -28,6 +27,7 @@ public:
 	void SetHitDown(bool b) { m_hit_down = b; }; //ヒットダウンをセットする
 	void SetLaddersUpdown(int x) { m_ladder_updown = x; }; //はしごの上の状況をセットする
 	void SetLaddersAniUpdown(int x) { m_ladder_ani_updown = x; };//はしごの上ってる状況をセットする
+	void SetLadderJump(int x) { m_ladder_jump=x; };//はしごの上の状況をセットする
 	float GetPosX() { return m_px; }		//ポジションXを返す
 	float GetPosY() { return m_py; }		//ポジションXを返す
 	float GetVecX() { return m_vx; }		//ベクトルXを渡す
@@ -45,18 +45,23 @@ private:
 	bool  m_bullet_control; //弾丸発射制御用
 	bool  m_rope_control;	//ロープ発射制御用
 
-	int m_ladder_updown; //はしごアニメーション管理
+	int m_ladder_updown; //はしごHit管理
 	int m_ladder_ani_updown; //はしごアニメーション管理
-
+	int m_ladder_jump;			//はしごジャンプ管理
 	//アニメーション関係
-	int m_ani_time_move;	     //移動アニメーションフレーム動作感覚
-	int m_ani_frame_move;	     //移動描画フレーム
-	int m_ani_frame_stop_move;   //止まった時の移動描画を調整
-	float m_ani_max_time_move;   //移動アニメーション動作間隔最大値
+	int m_ani_time_move;	    //移動アニメーションフレーム動作感覚
+	int m_ani_frame_move;	    //移動描画フレーム
+	int m_ani_frame_stop_move;  //止まった時の移動描画を調整
+	int m_ani_max_time_move;    //移動アニメーション動作間隔最大値
 
-	int m_ani_time_ladders;		 //はしごアニメーションフレーム動作感覚
-	int m_ani_frame_ladders;	 //はしご描画フレーム
-	float m_ani_max_time_ladders;//はしごアニメーション動作間隔最大値
+	int m_ani_time_ladders;		//はしごアニメーションフレーム動作感覚
+	int m_ani_frame_ladders;	//はしご描画フレーム
+	int m_ani_max_time_ladders; //はしごアニメーション動作間隔最大値
+
+	int m_ani_time_rope;	    //ロープアニメーションフレーム動作感覚
+	int m_ani_frame_rope;	    //ロープ描画フレーム
+	int m_ani_max_time_rope;    //ロープアニメーション動作間隔最大値
+
 
 	//blockとの衝突確認用
 	bool m_hit_up;
