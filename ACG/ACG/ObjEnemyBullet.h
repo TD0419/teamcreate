@@ -15,6 +15,7 @@ public:
 	void Init();	                //イニシャライズ
 	void Action();	                //アクション
 	void Draw();	                //ドロー
+	
 private:
 	float m_x;						// 弾丸(敵用)X座標
 	float m_y;						// 弾丸(敵用)Y座標

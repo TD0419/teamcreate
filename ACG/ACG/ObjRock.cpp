@@ -20,6 +20,7 @@ CObjRock::CObjRock(int x, int y)
 //イニシャライズ
 void CObjRock::Init()
 {
+	
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 6; //アニメーション間隔幅
@@ -77,26 +78,30 @@ void CObjRock::Action()
 		{
 			float r = hit_data[i]->r;//あたっている角度をもってくる
 
-									 //ブロックの右側が衝突している場合
-			if (0 < r && r < 45 || 315 < r && r < 360)
+			//岩の右側が衝突している場合
+			if (0 < r && r < 65|| 315 < r && r < 360)
 			{
 				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 				obj_hero->SetPosX(m_px + ROCK_SIZE_WIDTH);//主人公の位置を岩の右側までずらす
 			}
-			//ブロックの上側が衝突している場合
-			else if (45 < r && r < 125)
+			
+			//岩の上側が衝突している場合
+			else if (65 < r && r < 125)
 			{
 
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				obj_hero->SetPosY(m_py - ROCK_SIZE_HEIGHT-58.0);//主人公の位置を岩の上側までずらす
+				obj_hero->SetPosY(m_py - ROCK_SIZE_HEIGHT-57.0);//主人公の位置を岩の上側までずらす
+				
 			}
-			//ブロックの左側が衝突している場合
-			else if (125 < r && r < 225)
+
+			//岩の左側が衝突している場合
+			else if (125 < r && r < 225 )
 			{
 				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 				obj_hero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置を岩の左側までずらす
 			}
-			//ブロックの下側が衝突している場合
+
+			//岩の下側が衝突している場合
 			else if (225 < r && r < 315)
 			{
 				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
