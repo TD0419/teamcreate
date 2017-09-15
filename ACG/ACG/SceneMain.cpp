@@ -220,6 +220,9 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
 	//debug用敵弾丸画像
 	Draw::LoadImageW(L"bomb.png",18,TEX_SIZE_64);
+
+	//testhero
+	Draw::LoadImageW(L"Hero2.png", 19, TEX_SIZE_1024);
 }
 
 //音楽データ読み込み関数
