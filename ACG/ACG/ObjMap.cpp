@@ -13,9 +13,6 @@ using namespace GameL;
 CObjMap::CObjMap(int map[MAP_Y_MAX][MAP_X_MAX])
 {
 	//マップデータをコピー
-	//memcpy(m_map, map, sizeof(int)*(MAP_Y_MAX * MAP_X_MAX));
-
-	//マップデータをコピー
 	for (int i = 0; i < MAP_Y_MAX; i++)
 	{
 		for (int j = 0; j < MAP_X_MAX; j++)
@@ -25,13 +22,11 @@ CObjMap::CObjMap(int map[MAP_Y_MAX][MAP_X_MAX])
 	}
 }
 
-
 //イニシャライズ
 void CObjMap::Init()
 {
 	m_scroll_x = 0.0f;
 	m_scroll_y = 0.0f;
-
 
 	//フラグの初期化
 	for (int i = 0; i < MAP_Y_MAX; i++)
@@ -47,7 +42,6 @@ void CObjMap::Init()
 //アクション
 void CObjMap::Action()
 {
-	
 	//マップを元にオブジェクトを生成--------------------------------------
 	
 	//iが　画面に収まる最大値　または　マップの最大値になるまでまわす
@@ -56,7 +50,7 @@ void CObjMap::Action()
 		//jが　画面に収まる最大値　または　マップの最大値になるまでまわす
 		for (int x = 0; x < MAP_WINDOW_MAX_X && x<MAP_X_MAX;x++)
 		{
-			CreateObj(x, y);//オブジェクトの生成
+			CreateObj(x, y);//オブジェクトの生成	
 		}
 	}
 
@@ -66,12 +60,10 @@ void CObjMap::Action()
 	ScrollCreateObj(int(m_scroll_x / BLOCK_SIZE), int(m_scroll_y / BLOCK_SIZE));	
 }
 
-
 //ドロー
 void CObjMap::Draw()
 {
 }
-
 
 //スクロール量をもとにオブジェクトの生成をする関数
 //	scroll_block_num_x:	X軸の現在のスクロール量がブロック何個分か
@@ -90,196 +82,109 @@ void CObjMap::ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y)
 					x == (CREATE_LINE_LEFT	+ scroll_block_num_x)	|| x == ( CREATE_LINE_RIGHT + scroll_block_num_x)
 				)
 			{
-				if(x >= 0 && y >= 0 &&
-					x < MAP_X_MAX && y < MAP_Y_MAX)
+				//マップの範囲ないなら
+				if(x >= 0 && y >= 0 && x < MAP_X_MAX && y < MAP_Y_MAX)
 						CreateObj(x, y);//オブジェクトを生成
+
 			}
 		}
 	}
 }
-
 
 //オブジェクトの生成を行う関数
 //引数1　マップの要素数X
 //引数2　マップの要素数Y
 void CObjMap::CreateObj(int x, int y)
 {
-	//フラグがオンなら
-	if (m_map[y][x].create == true)
+	//フラグがオフなら 抜ける
+	if (m_map[y][x].create == false)	return;
+	
+	switch (m_map[y][x].num)
 	{
-		//ブロック作成
-		if (m_map[y][x].num == MAP_BLOCK)
-		{
+		case MAP_BLOCK:		//ブロック作成
 			CObjBlock* obj_block = new CObjBlock(x, y);
 			Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
-
-			m_map[y][x].create = false;//フラグをオフにする
-			//m_map[y][x] = 100;//仮のブロックの番号をマップ情報を入れる(仮)
-		}
-
-		//はしご作成
-		if (m_map[y][x].num == MAP_LADDERS)
-		{
+			break;
+		
+		case MAP_LADDERS:	//はしご作成
 			CObjLadders* obj_ladders = new CObjLadders(x, y);
 			Objs::InsertObj(obj_ladders, OBJ_LADDERS, 9);
-
-			m_map[y][x].create = false;//フラグをオフにする
-
-			//m_map[y][x]. = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//ボタン作成
-		if (m_map[y][x].num == MAP_BUTTON)
-		{
+			break;
+		
+		case MAP_BUTTON:	//ボタン作成
 			CObjButton* obj_button = new CObjButton(x, y);
 			Objs::InsertObj(obj_button, OBJ_BUTTON, 9);
-	
-			m_map[y][x].create = false;//フラグをオフにする
-			//m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//ロープスイッチ
-		if (m_map[y][x].num == MAP_ROPE_SWITCH)
-		{
+			break;
+		
+		case MAP_ROPE_SWITCH:	//ロープスイッチ作成
 			CObjRopeSwitch* obj_rope_switch = new CObjRopeSwitch(x, y);
 			Objs::InsertObj(obj_rope_switch, OBJ_ROPE_SWITCH, 9);
+			break;
 
-			m_map[y][x].create = false;//フラグをオフにする
-	//		m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//リフト作成
-		if (m_map[y][x].num == MAP_LIFT)
-		{
+		case MAP_LIFT:		//リフト作成
 			CObjLift* obj_lift = new CObjLift(x, y);
 			Objs::InsertObj(obj_lift, OBJ_LIFT, 9);
-
-			m_map[y][x].create = false;//フラグをオフにする
-
-			//m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//岩作成
-		if (m_map[y][x].num == MAP_ROCK)
-		{
+			break;
+		
+		case MAP_ROCK:		//岩作成
 			CObjRock* obj_rock = new CObjRock(x, y);
 			Objs::InsertObj(obj_rock, OBJ_ROCK, 9);
-
-			m_map[y][x].create = false;//フラグをオフにする
-
-			//m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//木作成
-		if (m_map[y][x].num == MAP_WOOD)
-		{
+			break;
+	
+		case MAP_WOOD:	//木作成
 			CObjWood* obj_wood = new CObjWood(x, y);
 			Objs::InsertObj(obj_wood, OBJ_WOOD, 9);
+			break;
 
-			m_map[y][x].create = false;//フラグをオフにする
-
-//			m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-		
-		//水作成
-		if (m_map[y][x].num == MAP_WATER)
-		{
+		case MAP_WATER: //水作成
 			CObjWater* obj_water = new CObjWater(x, y);
 			Objs::InsertObj(obj_water, OBJ_WATER, 9);
+			break;
 
-			m_map[y][x].create = false;//フラグをオフにする
-			//m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//敵作成
-		if (m_map[y][x].num == MAP_ENEMY)
-		{
+		case MAP_ENEMY://敵作成
 			CObjEnemy* obj_enemy = new CObjEnemy(x, y);
 			Objs::InsertObj(obj_enemy, OBJ_ENEMY, 9);
+			break;
 
-			m_map[y][x].create = false;//フラグをオフにする
-
-			//m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//ボス作成
-		if (m_map[y][x].num == MAP_BOSS)
-		{
+		case MAP_BOSS://ボス作成
 			CObjBoss* obj_boss = new CObjBoss(x, y);
 			Objs::InsertObj(obj_boss, OBJ_BOSS, 9);
-
-			m_map[y][x].create = false;//フラグをオフにする
-
-		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//第三ボス作成
-		if (m_map[y][x].num == MAP_STAGE3_BOSS)
-		{
+			break;
+		
+		case MAP_STAGE3_BOSS:		//第三ボス作成
 			CObjStage3Boss* obj_stage3_boss = new CObjStage3Boss(x, y);
 			Objs::InsertObj(obj_stage3_boss, OBJ_STAGE3_BOSS, 9);
+			break;
 
-			m_map[y][x].create = false;//フラグをオフにする
-
-		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-		
-		//スルーブロック作成
-		if (m_map[y][x].num == MAP_THROUGH_BLOCK)
-		{
+		case MAP_THROUGH_BLOCK://スルーブロック作成
 			CObjThroughBlock* obj_through_block = new CObjThroughBlock(x, y);
 			Objs::InsertObj(obj_through_block, OBJ_THROUGHT_BLOCK, 9);
+			break;
 
-			m_map[y][x].create = false;//フラグをオフにする
-		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//反射用ブロック作成
-		if (m_map[y][x].num == MAP_REFLECT_BLOCK)
-		{
+		case MAP_REFLECT_BLOCK:	//反射用ブロック作成
 			CObjReflectBlock* obj_reflec_block = new CObjReflectBlock(x, y);
 			Objs::InsertObj(obj_reflec_block, OBJ_REFLECT_BLOCK, 9);
-
-			m_map[y][x].create = false;//フラグをオフにする
-		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//看板作成
-		if (m_map[y][x].num == MAP_SIGN)
-		{
-			//看板オブジェクトを作成する
-			CObjSign* Obj_sign = new CObjSign(x,y);
-			Objs::InsertObj(Obj_sign, OBJ_SIGN, 9);
-
-			m_map[y][x].create = false;//フラグをオフにする
-		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//ドア作成
-		if (m_map[y][x].num == MAP_SIGN)
-		{
-			//Doorオブジェクトを作成する
-			CObjDoor* ObjDoor = new CObjDoor(x,y);
-			Objs::InsertObj(ObjDoor, OBJ_DOOR, 9);
-
-			m_map[y][x].create = false;//フラグをオフにする
-		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
-		//レバースイッチ作成
-		if (m_map[y][x].num == MAP_LEVER_SWICH)
-		{
-			//レバースイッチオブジェクトを作成する
-			CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(x,y);
-			Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 19);
-
-			m_map[y][x].create = false;//フラグをオフにする
-		//	m_map[y][x] = MAP_SPACE;//生成が終わると空白を入れる
-		}
-
+			break;
 		
+		case MAP_SIGN :	//看板作成
+			CObjSign* Obj_sign = new CObjSign(x, y);
+			Objs::InsertObj(Obj_sign, OBJ_SIGN, 9);
+			break;
+		
+		case MAP_DOOR:	//ドア作成
+			CObjDoor* ObjDoor = new CObjDoor(x, y);
+			Objs::InsertObj(ObjDoor, OBJ_DOOR, 9);
+			break;
+
+		case MAP_LEVER_SWICH:	//レバースイッチ作成
+			CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(x, y);
+			Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 19);
+			break;
 	}
+
+	m_map[y][x].create = false;//フラグをオフにする	
 }
+
 //調べたいマップの位置にあるマップ番号を返す
 int CObjMap::GetMap(int x, int y)
 {

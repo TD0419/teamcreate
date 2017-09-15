@@ -24,53 +24,24 @@ CObjBlock::CObjBlock(int x, int y)
 //イニシャライズ
 void CObjBlock::Init()
 {	
-	//マップオブジェクトを持ってくる
-	//CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	//当たり判定
-	//Hits::SetHitBox(this, m_px-obj_m->GetScrollX(), m_py - obj_m->GetScrollY(), BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 }
 
 //アクション
 void CObjBlock::Action()
 {
-	//自身のHitBoxをもってくる
-	//CHitBox*hit = Hits::GetHitBox(this);
-
-	//主人公オブジェクトと衝突していれば
-	//if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	//{
-	//	HeroHit();//当たり判定の処理を行う
-	//}
 	
-	//ボスオブジェクトと衝突していれば
-	//if (hit->CheckObjNameHit(OBJ_BOSS) != nullptr)
-	//{
-	//	BossHit();//当たり判定の処理を行う
-	//}
-
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//画面内か調べる
 	bool wincheck_flag =WindowCheck(m_px,m_py,BLOCK_SIZE,BLOCK_SIZE);
 
-	//画面ないなら
-	if (wincheck_flag == true)
+	//画面外なら
+	if (wincheck_flag == false)
 	{
-		//HitBoxの位置を更新する
-		//HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-	}
-	else
-	{
-		//マップ要素に数値を入れる
-		//obj_m->SetMap((m_px / BLOCK_SIZE), (m_py / BLOCK_SIZE), MAP_BLOCK);
-	
 		//削除するので次に来たときに生成するようにフラグをオンにする
-		obj_m->SetMapCreate(int(m_px / BLOCK_SIZE), int(m_py / BLOCK_SIZE), true);
-
+		obj_m->SetMapCreate(m_map_x, m_map_y, true);
 		this->SetStatus(false);		//自身を削除
-		//Hits::DeleteHitBox(this);	//ヒットボックスを削除
 	}
 
 }
@@ -118,7 +89,6 @@ void CObjBlock::BlockHit(
 	float* x, float* y, float width, float height,
 	bool*up, bool* down, bool* left, bool* right,
 	float* vx, float*vy
-
 )
 {
 	//マップ情報を持ってくる
@@ -247,6 +217,8 @@ void CObjBlock::BlockHit(
 	}
 }
 
+
+//Heroオブジェクトとあたったときの処理
 void CObjBlock::HeroHit()
 {
 	//自身のHitBoxをもってくる
@@ -258,6 +230,7 @@ void CObjBlock::HeroHit()
 	//主人公オブジェクトを持ってくる
 	CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
+	//あたっている数分まわす。
 	for (int i = 0; i < hit->GetCount(); i++)
 	{
 		//データがあれば
@@ -292,6 +265,7 @@ void CObjBlock::HeroHit()
 		}
 	}
 }
+
 //確認用にボス版を用意しました。今後、削除変更してもかまいません。
 void CObjBlock::BossHit()
 {
@@ -301,9 +275,10 @@ void CObjBlock::BossHit()
 	HIT_DATA** hit_data;						//衝突の情報を入れる構造体
 	hit_data = hit->SearchObjNameHit(OBJ_BOSS); //衝突の情報をhit_dataに入れる
 
-												//デバッグ用ボスオブジェクト情報を取得
+	//デバッグ用ボスオブジェクト情報を取得
 	CObjBoss* obj_boss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 
+	//当たっている数分まわす
 	for (int i = 0; i < hit->GetCount(); i++)
 	{
 		//データあり

@@ -423,7 +423,7 @@ void CObjHero::Draw()
 	
 
 	//•`‰æˆÊ’u
-	dst.m_top		= 0.0f + m_py - obj_m->GetScrollY();
+	dst.m_top		= m_py - obj_m->GetScrollY();
 	dst.m_left		= (HERO_SIZE_WIDTH * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_right	    = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - obj_m->GetScrollX();
 	dst.m_bottom	= dst.m_top  + HERO_SIZE_HEIGHT;
