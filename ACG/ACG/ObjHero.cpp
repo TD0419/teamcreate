@@ -5,6 +5,7 @@
 #include "GameHead.h"
 #include "ObjHero.h"
 #include"Function.h"
+#include <math.h>
 
 //使用するネームスペース
 using namespace GameL;
@@ -26,6 +27,9 @@ void CObjHero::Init()
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 
+	m_mous_x = 0.0f;//マウスの位置X
+	m_mous_y = 0.0f;//マウスの位置X
+	
 	m_bullet_control = false;	//弾丸発射制御用
 	m_rope_control = false;		//ロープ発射制御用
 	m_ladder_updown = 0;
@@ -73,6 +77,10 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMain());
 	}
 	
+	//マウスの位置情報取得
+	m_mous_x = Input::GetPosX();
+	m_mous_y = Input::GetPosY();
+
 	//ブロックオブジェクトを持ってくる
 	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -150,8 +158,6 @@ void CObjHero::Action()
 		m_ani_frame_move = 0;
 	}
 	
-	
-
 	//ジャンプ--------------------------------------------------------------------
 
 	if (Input::GetVKey(VK_SPACE) == true && m_ladder_jump == 0)
@@ -203,24 +209,31 @@ void CObjHero::Action()
 	m_py += m_vy;
 
 	//移動ベクトルを初期化
-	
-	//m_vx = 0.0f;
-	//m_vy = 0.0f;
-
 	//移動終わり-----------------------------------------
+
+
+	//腕の角度を求める-----------------------
+	
+	//マウスポインタとの距離を求める
+	float x = m_mous_x - (m_px - obj_map->GetScrollX());	//X
+	float y = m_mous_y - (m_py - obj_map->GetScrollY());	//Y
+	float inclination = sqrt(x * x + y * y);				//斜辺
+
+	//ラジアン値を求める
+	float rad = asin( - y / inclination);
+	//角度を求める
+	m_r = rad * 180.0f / 3.14f;
+	
+	//--------------------------------------------------------
+	
 
 	//発砲---------------------------------------------------
 	//左クリックを押したら
 	if (Input::GetMouButtonL() == true)
 	{
-		//マップオブジェクトの呼び出し
-		CObjMap* obj_map = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-		//マウスの位置情報取得
-		float mous_x = Input::GetPosX();
-
+		
 		//主人公をクリックしていた場合
-		if (m_px <= mous_x && mous_x <= (m_px + HERO_SIZE_WIDTH))
+		if (m_px <= m_mous_x && m_mous_x <= (m_px + HERO_SIZE_WIDTH))
 		{
 			;//ヒーロークリックした場合
 		}
@@ -229,7 +242,7 @@ void CObjHero::Action()
 			//マウスの位置がプレイヤーから見てどの方向か調べるための変数
 			float mous_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
 
-			if ((mous_x - (m_px - obj_map->GetScrollX())) < 0)//主人公より左をクリックしたとき
+			if ((m_mous_x - (m_px - obj_map->GetScrollX())) < 0)//主人公より左をクリックしたとき
 				mous_way = 1.0f;
 
 			if (m_bullet_control == true)
@@ -367,6 +380,7 @@ void CObjHero::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+	//本体---------------------------------
 	//切り取り位置
 	//止まっている時
 	
@@ -416,7 +430,26 @@ void CObjHero::Draw()
 	dst.m_bottom	= dst.m_top  + HERO_SIZE_HEIGHT;
 
 	//描画
-	Draw::Draw(19, &src, &dst, color, m_r);
+	Draw::Draw(3, &src, &dst, color, 0.0f);
+	//本体-------------------------------------
+
+	//腕---------------------------------------
+	//切り取り位置
+	src.m_top = 0.0f;
+	src.m_left = 64.0f;
+	src.m_right = 128.0f;
+	src.m_bottom = 64.0f;
+
+	//描画位置
+	dst.m_top += 48.0f;
+	dst.m_left += 33.0f - (HERO_SIZE_WIDTH * m_posture);
+	dst.m_right +=33.0f - (HERO_SIZE_WIDTH * m_posture);
+	dst.m_bottom = dst.m_top +64.0f;
+	
+	//描画
+	Draw::Draw(3, &src, &dst, color, m_r,-0.2f,-0.25f);
+	//-----------------------------------------
+
 
 	////画面全体を暗くするです。
 	//Draw::SetFill(true);

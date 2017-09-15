@@ -174,7 +174,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"block.png", 2, TEX_SIZE_128);
 
 	//hero‰æ‘œ
-	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_256);
+	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_1024);
 
 	//debug—pBoss‰æ‘œ
 	Draw::LoadImageW(L"image3.png", 4, TEX_SIZE_512);

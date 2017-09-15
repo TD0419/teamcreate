@@ -75,7 +75,7 @@ void CObjWood::Draw()
 	dst.m_bottom = dst.m_top + WOOD_SIZE;
 
 	//•`‰æ
-	Draw::Draw(7, &src, &dst, color, m_r,true);
+	Draw::Draw(7, &src, &dst, color, m_r,-1.0f,-1.0f);
 }
 
 //ålŒö‚ªG‚ê‚½‚Æ‚«‚Ìˆ—
