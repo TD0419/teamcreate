@@ -21,6 +21,7 @@ cbuffer global
 	float4 color;
 	float4 rect_in;
 	float4 rect_out;
+	float4 rev_pos;
 };
 
 //頂点シェーダ(中央を中心に回転)
@@ -83,14 +84,14 @@ vertexOut vs_side(vertexIn IN)
 		1.0f, 0.0f,0.0f,0.0f,
 		0.0f, 1.0f,0.0f,0.0f,
 		0.0f, 0.0f,1.0f,0.0f,
-		-1.0f,-1.0f,0.0f,1.0f,
+		rev_pos.x,rev_pos.y,0.0f,1.0f,
 	};
 	//回転
 	float4x4 rmat = {
 		cos(3.14f / 180.0f*size.y),	-sin(3.14f / 180.0f*size.y),0.0f,0.0f,
 		sin(3.14f / 180.0f*size.y),	 cos(3.14f / 180.0f*size.y),0.0f,0.0f,
 		0.0f,						 0.0f,1.0f,0.0f,
-		1.0f,					     1.0f,0.0f,1.0f,
+		-rev_pos.x,					-rev_pos.y,0.0f,1.0f,
 	};
 
 	//2D変換行列*回転行列

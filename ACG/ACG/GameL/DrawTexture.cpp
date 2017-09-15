@@ -9,6 +9,7 @@ struct DRAW_POLYGON
 {
 	float		   pos[3];	//x-y-z’¸“_î•ñ
 	unsigned int   id[2];	//‚t‚u‚Ì‚h‚c
+
 };
 
 //Draw2DTex.hlslƒOƒ[ƒoƒ‹
@@ -18,6 +19,7 @@ struct DRAW_2D_TEX
 	float color[4];		//ƒJƒ‰[î•ñ
 	float rect_in[4];	//Ø‚èæ‚èˆÊ’u
 	float rect_out[4];	//“\‚è•t‚¯ˆÊ’u
+	float rev_pos[4];	//‰ñ“]‚ÌˆÊ’u‚Æ‚Ì‹——£·
 };
 
 
@@ -223,6 +225,7 @@ void CDrawTexture:: Draw(int id,RECT_F* src,RECT_F* dst,float col[4],float r)
 
 		data.rect_in[0]=src->m_left;		data.rect_in[1]=src->m_top;
 		data.rect_in[2]=src->m_right;		data.rect_in[3]=src->m_bottom;
+
 		memcpy_s( pData.pData, pData.RowPitch, (void*)&data, sizeof( DRAW_2D_TEX  ) );
 
 		m_pDeviceContext->Unmap( m_pConstantBuffer, 0 );
@@ -237,7 +240,7 @@ void CDrawTexture:: Draw(int id,RECT_F* src,RECT_F* dst,float col[4],float r)
 }
 
 //•`‰æ(’[’†S‚Ì‰ñ“]j
-void CDrawTexture::Draw(int id, RECT_F* src, RECT_F* dst, float col[4], float r, int pattern)
+void CDrawTexture::Draw(int id, RECT_F* src, RECT_F* dst, float col[4], float r,float rev_x,float rev_y)
 {
 	if (m_img_max < id) return;
 	if (vec_tex_data[id]->GetTexData() == nullptr) return;
@@ -270,6 +273,10 @@ void CDrawTexture::Draw(int id, RECT_F* src, RECT_F* dst, float col[4], float r,
 
 		data.rect_in[0] = src->m_left;		data.rect_in[1] = src->m_top;
 		data.rect_in[2] = src->m_right;		data.rect_in[3] = src->m_bottom;
+
+		data.rev_pos[0] = rev_x;			data.rev_pos[1] = rev_y;
+		data.rev_pos[2] = 0.0f;				data.rev_pos[3] = 0.0f;
+
 		memcpy_s(pData.pData, pData.RowPitch, (void*)&data, sizeof(DRAW_2D_TEX));
 
 		m_pDeviceContext->Unmap(m_pConstantBuffer, 0);
