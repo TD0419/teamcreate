@@ -129,32 +129,3 @@ void CObjWood::HeroHit(float px, float py)
 		}
 	}
 }
-
-////---UnitVec関数
-////引数1　float* vx :ベクトルのＸ成分のポインタ
-////引数1　float* vx :ベクトルのＹ成分のポインタ
-////戻り値 bool　　  :true=計算成功 flase=計算失敗
-////内容
-////引数のベクトルの正規化し、その値をvx,vyに変更します
-//bool UnitVec(float* vx, float* vy)
-//{
-//	//ベクトルの長さを求める（三平方の定理）
-//	float r = 0.0f;
-//	r = (*vx) * (*vx) + (*vy) * (*vy);
-//	r = sqrt(r);// rをルートを求める
-//
-//				//長さが0がどうか調べる
-//	if (r == 0.0f)
-//	{
-//		;//0なら何もしない
-//	}
-//	else
-//	{
-//		//正規化を行う
-//		(*vx) = 1.0f / r*(*vx);
-//		(*vy) = 1.0f / r*(*vy);
-//	}
-//
-//	//計算成功
-//	return true;
-//}
