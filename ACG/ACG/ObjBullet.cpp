@@ -32,8 +32,8 @@ CObjBullet::CObjBullet(float x, float y)
 	double mous_y = Input::GetPosY();
 
 	//主人公の位置からマウスの位置のベクトル情報取得
-	double vector_x = mous_x - x;
-	double vector_y = mous_y - y;
+	double vector_x = mous_x - (x - obj_m->GetScrollX());
+	double vector_y = mous_y - (y - obj_m->GetScrollY());
 
 	//斜辺取得
 	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
@@ -67,6 +67,8 @@ void CObjBullet::Init()
 	//マップオブジェクトを持ってくる
 	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+	m_window_check = true;
+
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px-obj_m->GetScrollX(), m_py - obj_m->GetScrollY(), BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_BULLET, 1);
 }
@@ -75,18 +77,18 @@ void CObjBullet::Init()
 void CObjBullet::Action()
 {	
 	
-	//画面外へいったら消去
-	if (m_px < -(BULLET_SIZE+BULLET_SIZE/2) || //左　回転してるかもなので少し余裕を持たせる
-		m_px > WINDOW_SIZE_W||   //右
-		m_py < -(BULLET_SIZE+BULLET_SIZE/2) || //上　回転してるかもなので少し余裕を持たせる
-		m_py > WINDOW_SIZE_H     //下
-		)
+	
+	//画面内か調べる
+	m_window_check=WindowCheck(m_px,m_py,BULLET_SIZE,BULLET_SIZE);
+
+	//画面外なら消去
+	if(m_window_check==false)
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
+	
 	//弾丸のHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 

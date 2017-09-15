@@ -38,9 +38,12 @@ private:
 	float m_py;		//Y座標
 	float m_vx;		//X軸方向のベクトル
 	float m_vy;		//Y軸方向のベクトル
-	float m_posture;//姿勢
+	float m_posture;//姿勢 //右：0.0ｆ　左：1.0ｆ
 	float m_r;		//主人公の回転角度
 	int m_block_type;//踏んでるブロックの値を保存する
+
+	float m_mous_x;	//マウスの位置X
+	float m_mous_y; //マウスの位置X
 
 	bool  m_bullet_control; //弾丸発射制御用
 	bool  m_rope_control;	//ロープ発射制御用
