@@ -99,6 +99,8 @@ void CObjEnemyBullet::Action()
 	m_x += m_vx*1.0f;
 	m_y += m_vy*1.0f;
 
+	//Scroll();	//スクロール処理をおこなう
+
 	//画面外へいったら消去
 	if (m_x < -(BULLET_SIZE + BULLET_SIZE / 2) ||	//左　
 		m_x > WINDOW_SIZE_W ||						//右
