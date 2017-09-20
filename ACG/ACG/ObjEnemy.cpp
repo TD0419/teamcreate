@@ -42,7 +42,7 @@ void CObjEnemy::Init()
 void CObjEnemy::Action()
 {
 	//ブロック情報を持ってくる
-	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//マップ情報を取ってくる
 	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
@@ -110,7 +110,7 @@ void CObjEnemy::Action()
 	}
 	
 	//ブロックとのあたり判定
-	obj_b->BlockHit(
+	block->BlockHit(
 		&m_px, &m_py, ENEMY_SIZE, ENEMY_SIZE,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, 
 		&m_vx, &m_vy
@@ -172,7 +172,7 @@ void CObjEnemy::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
 	src.m_top = 0.0f;
@@ -181,9 +181,9 @@ void CObjEnemy::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = m_py - obj_m->GetScrollY();
-	dst.m_left = (ENEMY_SIZE * m_posture) + m_px - obj_m->GetScrollX();
-	dst.m_right = (ENEMY_SIZE - ENEMY_SIZE * m_posture) + m_px - obj_m->GetScrollX();
+	dst.m_top = m_py - map->GetScrollY();
+	dst.m_left = (ENEMY_SIZE * m_posture) + m_px - map->GetScrollX();
+	dst.m_right = (ENEMY_SIZE - ENEMY_SIZE * m_posture) + m_px - map->GetScrollX();
 	dst.m_bottom = dst.m_top + ENEMY_SIZE;
 
 	//描画

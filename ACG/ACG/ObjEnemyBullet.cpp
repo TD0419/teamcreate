@@ -14,7 +14,7 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float angle)
 {
 	
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//初期位置を決める
 	m_x = x;
@@ -25,15 +25,15 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float angle)
 	m_speed = 2.5f;
 
 	//主人公機と敵用弾丸で角度を取る
-	CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//主人公との角度の計算を行う
-	double hero_x = obj_hero->GetPosX();		//主人公の位置情報X取得
-	double hero_y = obj_hero->GetPosY();		//主人公の位置情報Y取得
+	double hero_x = hero->GetPosX();		//主人公の位置情報X取得
+	double hero_y = hero->GetPosY();		//主人公の位置情報Y取得
 
 	//主人公が本来いる位置に変更
-	x -= obj_m->GetScrollX();
-	y -= obj_m->GetScrollY();
+	x -= map->GetScrollX();
+	y -= map->GetScrollY();
 
 	//初期位置を決める
 	m_x = x;

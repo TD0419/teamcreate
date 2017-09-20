@@ -60,7 +60,7 @@ void CObjSign::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
 	src.m_top = 0.0f;
@@ -69,8 +69,8 @@ void CObjSign::Draw()
 	src.m_bottom = 256.0f;
 
 	//描画位置
-	dst.m_top = -SIGN_SIZE * 6.0f - 16.0f + m_py - obj_m->GetScrollY();
-	dst.m_left = -192.0f +SIGN_SIZE / 2.0f + m_px - obj_m->GetScrollX();
+	dst.m_top = -SIGN_SIZE * 6.0f - 16.0f + m_py - map->GetScrollY();
+	dst.m_left = -192.0f +SIGN_SIZE / 2.0f + m_px - map->GetScrollX();
 	dst.m_right = dst.m_left + 384.0f;
 	dst.m_bottom = dst.m_top + 128.0f;
 

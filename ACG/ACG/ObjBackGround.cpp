@@ -32,7 +32,7 @@ void CObjBackGround::Action()
 void CObjBackGround::Draw()
 {
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
@@ -46,10 +46,10 @@ void CObjBackGround::Draw()
 	src.m_bottom = src.m_top + 1536;
 
 	//描画位置
-	dst.m_top =  WINDOW_SIZE_H - src.m_bottom - src.m_top - obj_m->GetScrollY() + 15;//少し調整用(+15)
+	dst.m_top =  WINDOW_SIZE_H - src.m_bottom - src.m_top - map->GetScrollY() + 15;//少し調整用(+15)
 	dst.m_left = 1536 - src.m_right - src.m_left;
 	dst.m_right = 1536;
-	dst.m_bottom = WINDOW_SIZE_H - obj_m->GetScrollY() + 15;//少し調整用(＋15)
+	dst.m_bottom = WINDOW_SIZE_H - map->GetScrollY() + 15;//少し調整用(＋15)
 
 	//描画
 	Draw::Draw(15, &src, &dst, color, 0.0f);

@@ -39,9 +39,9 @@ void CObjWater::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
-	int map_num= obj_m->GetMap(m_map_x , m_map_y - 1);
+	int map_num= map->GetMap(m_map_x , m_map_y - 1);
 	
 	//1つ上のマスが水なら
  	if( map_num == MAP_WATER)
@@ -56,7 +56,7 @@ void CObjWater::Action()
 	if (m_water_gauge >= WATER_SIZE_HEIGHT)
 	{
 		Hits::DeleteHitBox(this);//hitbox削除
-		obj_m->SetMap(m_map_x, m_map_y, MAP_SPACE);//マップの数値を空にする
+		map->SetMap(m_map_x, m_map_y, MAP_SPACE);//マップの数値を空にする
 		this->SetStatus(false);//自身
 		return;
 	}
@@ -64,7 +64,7 @@ void CObjWater::Action()
 	{
 		m_water_gauge += 0.2f; // 1ずつ増やしていく
 		// hitboxが小さくなる
-        hit->SetPos(m_px - obj_m->GetScrollX(), m_py - obj_m->GetScrollY() + m_water_gauge, WATER_SIZE_HEIGHT - m_water_gauge, WATER_SIZE_WIDTH);
+        hit->SetPos(m_px - map->GetScrollX(), m_py - map->GetScrollY() + m_water_gauge, WATER_SIZE_HEIGHT - m_water_gauge, WATER_SIZE_WIDTH);
 
 
 		//アニメーションの感覚管理
@@ -96,7 +96,7 @@ void CObjWater::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 
 
@@ -107,8 +107,8 @@ void CObjWater::Draw()
 	src.m_bottom = src.m_top+WATER_SIZE_HEIGHT;
 
 	//描画位置
-	dst.m_top = m_py + m_water_gauge - obj_m->GetScrollY();
-	dst.m_left = m_px - obj_m->GetScrollX();
+	dst.m_top = m_py + m_water_gauge - map->GetScrollY();
+	dst.m_left = m_px - map->GetScrollX();
 	dst.m_right = dst.m_left + BLOCK_SIZE;
 	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
 

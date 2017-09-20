@@ -74,8 +74,8 @@ void CObjBoss::Action()
 
 
 	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
-	pb -> BlockHit(&m_x,&m_y,BOSS_SIZE,BOSS_SIZE,
+	CObjBlock* block = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
+	block-> BlockHit(&m_x,&m_y,BOSS_SIZE,BOSS_SIZE,
 	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy
 	);
 
@@ -101,7 +101,7 @@ void CObjBoss::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
 	src.m_top = 0.0f;
@@ -110,8 +110,8 @@ void CObjBoss::Draw()
 	src.m_bottom = 512.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_y - obj_m->GetScrollY();
-	dst.m_left = 0.0f + m_x - obj_m->GetScrollX();
+	dst.m_top = 0.0f + m_y - map->GetScrollY();
+	dst.m_left = 0.0f + m_x - map->GetScrollX();
 	dst.m_right = dst.m_left  + BOSS_SIZE;
 	dst.m_bottom = dst.m_top  + BOSS_SIZE;
 

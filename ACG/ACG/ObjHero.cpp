@@ -67,7 +67,7 @@ void CObjHero::Action()
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
 	//落下にリスタート----------------------------------
 	//m_pyが1000以下ならリスタートする
@@ -82,20 +82,20 @@ void CObjHero::Action()
 	m_mous_y = Input::GetPosY();
 
 	//ブロックオブジェクトを持ってくる
-	CObjBlock* obj_b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//ブロックとの当たり判定
-	obj_b->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
+	block->BlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
 	LandingCheck();//着地フラグの更新
 
 	//はしご-------------------------------------------------
 	//はしごオブジェクトを持ってくる
-	CObjLadders* obj_ladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
+	CObjLadders* ladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
 
-	if(obj_ladders != nullptr)
-	obj_ladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
+	if(ladders != nullptr)
+		ladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
 
 	//はしごのアニメーションタイムを進める
 	m_ani_time_ladders += m_ladder_ani_updown;//はしごから取ってくる
@@ -214,8 +214,8 @@ void CObjHero::Action()
 	//腕の角度を求める-----------------------
 	
 	//マウスポインタとの距離を求める
-	float x = m_mous_x - (m_px - obj_map->GetScrollX());	//X
-	float y = m_mous_y - (m_py - obj_map->GetScrollY());	//Y
+	float x = m_mous_x - (m_px - map->GetScrollX());	//X
+	float y = m_mous_y - (m_py - map->GetScrollY());	//Y
 	float inclination = sqrt(x * x + y * y);				//斜辺
 
 	//ラジアン値を求める
@@ -241,7 +241,7 @@ void CObjHero::Action()
 			//マウスの位置がプレイヤーから見てどの方向か調べるための変数
 			float mous_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
 
-			if ((m_mous_x - (m_px - obj_map->GetScrollX())) < 0)//主人公より左をクリックしたとき
+			if ((m_mous_x - (m_px - map->GetScrollX())) < 0)//主人公より左をクリックしたとき
 				mous_way = 1.0f;
 
 			if (m_bullet_control == true)
@@ -320,45 +320,45 @@ void CObjHero::Action()
 void CObjHero::Scroll()
 {
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//右にスクロールです
 	//原点を右にする
-	if ((m_px + HERO_SIZE_WIDTH) - obj_m->GetScrollX() > SCROLL_LINE_RIGHT)
+	if ((m_px + HERO_SIZE_WIDTH) - map->GetScrollX() > SCROLL_LINE_RIGHT)
 	{
 		//差分を調べる
-		float scroll =  ((m_px + HERO_SIZE_WIDTH) - obj_m->GetScrollX())-SCROLL_LINE_RIGHT;
+		float scroll =  ((m_px + HERO_SIZE_WIDTH) - map->GetScrollX())-SCROLL_LINE_RIGHT;
 		//スクロールに影響を与える
-		obj_m->SetScrollX(scroll);
+		map->SetScrollX(scroll);
 	}
 	//左にスクロールです
-	if (m_px - obj_m->GetScrollX() < SCROLL_LINE_LEFT &&
-		obj_m->GetScrollX() > 0)
+	if (m_px - map->GetScrollX() < SCROLL_LINE_LEFT &&
+		map->GetScrollX() > 0)
 	{
 		//差分を調べる
-		float scroll = SCROLL_LINE_LEFT - (m_px - obj_m->GetScrollX());
+		float scroll = SCROLL_LINE_LEFT - (m_px - map->GetScrollX());
 		//スクロールに影響を与える
-		obj_m->SetScrollX(-scroll);
+		map->SetScrollX(-scroll);
 	}
 
 	//上にスクロールです
-	if (m_py - obj_m->GetScrollY() < SCROLL_LINE_UP)
+	if (m_py - map->GetScrollY() < SCROLL_LINE_UP)
 	{
 		//差分を調べる
-		float scroll = (m_py - obj_m->GetScrollY()) - SCROLL_LINE_UP;
+		float scroll = (m_py - map->GetScrollY()) - SCROLL_LINE_UP;
 		//スクロールに影響を与える
-		obj_m->SetScrollY(scroll);
+		map->SetScrollY(scroll);
 	}
 	
 	//下にスクロールです
 	//原点を下にする
-	if ((m_py + HERO_SIZE_HEIGHT) - obj_m->GetScrollY() > SCROLL_LINE_DOWN &&
-		obj_m->GetScrollY() < 0)
+	if ((m_py + HERO_SIZE_HEIGHT) - map->GetScrollY() > SCROLL_LINE_DOWN &&
+		map->GetScrollY() < 0)
 	{
 		//差分を調べる
-		float scroll = SCROLL_LINE_DOWN - ((m_py + HERO_SIZE_HEIGHT) - obj_m->GetScrollY());
+		float scroll = SCROLL_LINE_DOWN - ((m_py + HERO_SIZE_HEIGHT) - map->GetScrollY());
 		//スクロールに影響を与える
-		obj_m->SetScrollY(-scroll);
+		map->SetScrollY(-scroll);
 	}
 }
 
@@ -377,7 +377,7 @@ void CObjHero::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//本体---------------------------------
 	//切り取り位置
@@ -423,9 +423,9 @@ void CObjHero::Draw()
 	
 
 	//描画位置
-	dst.m_top		= m_py - obj_m->GetScrollY();
-	dst.m_left		= (HERO_SIZE_WIDTH * m_posture) + m_px - obj_m->GetScrollX();
-	dst.m_right	    = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - obj_m->GetScrollX();
+	dst.m_top		= m_py - map->GetScrollY();
+	dst.m_left		= (HERO_SIZE_WIDTH * m_posture) + m_px - map->GetScrollX();
+	dst.m_right	    = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - map->GetScrollX();
 	dst.m_bottom	= dst.m_top  + HERO_SIZE_HEIGHT;
 
 	//描画

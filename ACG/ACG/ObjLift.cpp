@@ -44,9 +44,9 @@ void CObjLift::Action()
 	}
 
 	//ロープオブジェクトを持ってくる
-	CObjRopeSwitch* obj_rope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
+	CObjRopeSwitch* rope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
 	
-	if (obj_rope_switch->GetRopeFlag() == true)//ロープとロープスイッチがあたっているとき
+	if (rope_switch->GetRopeFlag() == true)//ロープとロープスイッチがあたっているとき
 	{
 		m_vx = -1.0f;
 	}
@@ -84,14 +84,14 @@ void CObjLift::HeroRide()
 			if (45.0f <= r && r <= 135.0f)
 			{
 				//主人公オブジェクトを持ってくる
-				CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-				float h_px = obj_hero->GetPosX();//主人公の位置Xを持ってくる
+				CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+				float h_px = hero->GetPosX();//主人公の位置Xを持ってくる
 
-				obj_hero->SetHitDown(true);//リフトの上に主人公が乗っていたらm_hit_downにtrueを返す
+				hero->SetHitDown(true);//リフトの上に主人公が乗っていたらm_hit_downにtrueを返す
 
 				//リフトに乗せる処理
-				obj_hero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
-				obj_hero->SetPosY(m_py - HERO_SIZE_HEIGHT);//主人公のポジションをリフトの上にする
+				hero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
+				hero->SetPosY(m_py - HERO_SIZE_HEIGHT);//主人公のポジションをリフトの上にする
 			}
 		}
 	}

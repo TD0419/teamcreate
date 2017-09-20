@@ -31,7 +31,7 @@ void CObjBlock::Action()
 {
 	
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//画面内か調べる
 	bool wincheck_flag =WindowCheck(m_px,m_py,BLOCK_SIZE,BLOCK_SIZE);
@@ -40,7 +40,7 @@ void CObjBlock::Action()
 	if (wincheck_flag == false)
 	{
 		//削除するので次に来たときに生成するようにフラグをオンにする
-		obj_m->SetMapCreate(m_map_x, m_map_y, true);
+		map->SetMapCreate(m_map_x, m_map_y, true);
 		this->SetStatus(false);		//自身を削除
 	}
 
@@ -55,10 +55,10 @@ void CObjBlock::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//map_numにマップ情報の一個上の情報を送る
-	int map_num = obj_m->GetMap(m_map_x, m_map_y - 1);
+	int map_num = map->GetMap(m_map_x, m_map_y - 1);
 
 	//切り取り位置
 	src.m_top = 0.0f;
@@ -75,8 +75,8 @@ void CObjBlock::Draw()
 		src.m_bottom = 64.0f;
 	}
 	//描画位置
-	dst.m_top = m_py - obj_m->GetScrollY();
-	dst.m_left = m_px - obj_m->GetScrollX();
+	dst.m_top = m_py - map->GetScrollY();
+	dst.m_left = m_px - map->GetScrollX();
 	dst.m_right = dst.m_left + BLOCK_SIZE;
 	dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
@@ -228,7 +228,7 @@ void CObjBlock::HeroHit()
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
 
 	//主人公オブジェクトを持ってくる
-	CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//あたっている数分まわす。
 	for (int i = 0; i < hit->GetCount(); i++)
@@ -241,26 +241,26 @@ void CObjBlock::HeroHit()
 			//ブロックの右側が衝突している場合
 			if (0.0f < r && r < 45.0f || 315.0f < r && r < 360.0f)
 			{
-				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				obj_hero->SetPosX(m_px + BLOCK_SIZE);//主人公の位置をブロックの右側までずらす
+				hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				hero->SetPosX(m_px + BLOCK_SIZE);//主人公の位置をブロックの右側までずらす
 			}
 			//ブロックの上側が衝突している場合
 			else if (45.0f < r && r < 125.0f)
 			{
-				obj_hero->SetPosY(m_py - HERO_SIZE_HEIGHT);//主人公の位置をブロックの上側までずらす
-				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+				hero->SetPosY(m_py - HERO_SIZE_HEIGHT);//主人公の位置をブロックの上側までずらす
+				hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 			}
 			//ブロックの左側が衝突している場合
 			else if (125.0f < r && r < 225.0f)
 			{
-				obj_hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				obj_hero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置をブロックの左側までずらす
+				hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				hero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置をブロックの左側までずらす
 			}
 			//ブロックの下側が衝突している場合
 			else if (225.0f < r && r < 315.0f)
 			{
-				obj_hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				obj_hero->SetPosY(m_py + BLOCK_SIZE);//主人公の位置をブロックの上側までずらす
+				hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+				hero->SetPosY(m_py + BLOCK_SIZE);//主人公の位置をブロックの上側までずらす
 			}
 		}
 	}
@@ -276,7 +276,7 @@ void CObjBlock::BossHit()
 	hit_data = hit->SearchObjNameHit(OBJ_BOSS); //衝突の情報をhit_dataに入れる
 
 	//デバッグ用ボスオブジェクト情報を取得
-	CObjBoss* obj_boss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+	CObjBoss* boss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 
 	//当たっている数分まわす
 	for (int i = 0; i < hit->GetCount(); i++)
@@ -289,26 +289,26 @@ void CObjBlock::BossHit()
 									 //ブロックの右側が衝突している場合
 			if (0 < r && r < 45 || 315 < r && r < 360)
 			{
-				obj_boss->SetVecX(0.0f);//ボスのX方向の移動を０にする
-				obj_boss->SetPosX(m_px + BLOCK_SIZE);//ボスの位置をブロックの右側までずらす
+				boss->SetVecX(0.0f);//ボスのX方向の移動を０にする
+				boss->SetPosX(m_px + BLOCK_SIZE);//ボスの位置をブロックの右側までずらす
 			}
 			//ブロックの上側が衝突している場合
 			else if (45 < r && r < 125)
 			{
-				obj_boss->SetVecY(0.0f);//ボスのY方向の移動を０にする
-				obj_boss->SetPosY(m_py - BOSS_SIZE);//ボスの位置をブロックの上側までずらす
+				boss->SetVecY(0.0f);//ボスのY方向の移動を０にする
+				boss->SetPosY(m_py - BOSS_SIZE);//ボスの位置をブロックの上側までずらす
 			}
 			//ブロックの左側が衝突している場合
 			else if (125 < r && r < 225)
 			{
-				obj_boss->SetVecX(0.0f);//ボスのX方向の移動を０にする
-				obj_boss->SetPosX(m_px - BOSS_SIZE);//ボスの位置をブロックの左側までずらす
+				boss->SetVecX(0.0f);//ボスのX方向の移動を０にする
+				boss->SetPosX(m_px - BOSS_SIZE);//ボスの位置をブロックの左側までずらす
 			}
 			//ブロックの下側が衝突している場合
 			else if (225 < r && r < 315)
 			{
-				obj_boss->SetVecY(0.0f);//ボスのY方向の移動を０にする
-				obj_boss->SetPosY(m_py + BLOCK_SIZE);//ボスの位置をブロックの上側までずらす
+				boss->SetVecY(0.0f);//ボスのY方向の移動を０にする
+				boss->SetPosY(m_py + BLOCK_SIZE);//ボスの位置をブロックの上側までずらす
 			}
 		}
 	}

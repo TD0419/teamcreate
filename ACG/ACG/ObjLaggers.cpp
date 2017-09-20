@@ -34,7 +34,7 @@ void CObjLadders::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
 	src.m_top = 0.0f;
@@ -43,8 +43,8 @@ void CObjLadders::Draw()
 	src.m_bottom = LADDERS_SIZE;
 
 	//描画位置
-	dst.m_top = m_py - obj_m->GetScrollY();
-	dst.m_left = m_px - obj_m->GetScrollX();
+	dst.m_top = m_py - map->GetScrollY();
+	dst.m_left = m_px - map->GetScrollX();
 	dst.m_right = dst.m_left + LADDERS_SIZE;
 	dst.m_bottom = dst.m_top + LADDERS_SIZE;
 
@@ -56,67 +56,68 @@ void CObjLadders::Draw()
 void CObjLadders::HeroHit(float px, float py)
 {
 	//マップオブジェクトを持ってくる
-	CObjMap* obj_map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//主人公のオブジェクトを持ってくる
-	CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//プレイヤーの位置をマップの要素番号に直す
 	int map_num_x = (int)((px + BLOCK_SIZE / 2) / BLOCK_SIZE);//中央を基準に調べる
 	int map_num_y = (int)(py / BLOCK_SIZE);	//主人公の上端を基準で調べる
-	int map_num_up = obj_map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る
+	int map_num_up = map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る
 	
 	map_num_y = (int)((py) / BLOCK_SIZE) + 1;//主人公の中央を基準に調べる
-	int map_num_center = obj_map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る	
+	int map_num_center = map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る	
 
 	map_num_y = (int)((py + BLOCK_SIZE) / BLOCK_SIZE) + 1;//主人公の下端を基準に調べる
-	int map_num_down = obj_map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る	
+	int map_num_down = map->GetMap(map_num_x, map_num_y);//主人公（上半分）のマップの値を持って来る	
 
 	//主人公がはしごを上りきる時に判定する用
 	int map_num_ladder = (int)(py / BLOCK_SIZE) + 1;	//主人公の上端を基準で調べる
-	int map_num_ladder_up = obj_map->GetMap(map_num_x, map_num_ladder);
+	int map_num_ladder_up = map->GetMap(map_num_x, map_num_ladder);
 
 	//マップの値がはしごなら
 	if (map_num_up == MAP_LADDERS || map_num_center == MAP_LADDERS || map_num_down == MAP_LADDERS)
 	{
 
-		obj_hero->SetVecY(0.0f);//yの移動方向を初期化
-		obj_hero->SetHitDown(true);//着地状態にする
-		obj_hero->SetLadderJump(1);//1を渡す
+		hero->SetVecY(0.0f);//yの移動方向を初期化
+		hero->SetHitDown(true);//着地状態にする
+		hero->SetLadderJump(1);//1を渡す
 		//Wキーがおされたとき 上るとき
 		if (Input::GetVKey('W') == true)
 		{
-			obj_hero->SetVecY(-2.0f);
+			hero->SetVecY(-2.0f);
 
 			//はしごを上りきる時に2を渡す
 			if (map_num_ladder_up == MAP_SPACE)
 			{
-				obj_hero->SetLaddersUpdown(2);
+				hero->SetLaddersUpdown(2);
 			}
 			else
-				obj_hero->SetLaddersUpdown(1);//はしごを上っているときは1を渡す
-				obj_hero->SetLaddersAniUpdown(1);//アニメーションを進める
+			{
+				hero->SetLaddersUpdown(1);//はしごを上っているときは1を渡す
+			}
+			hero->SetLaddersAniUpdown(1);//アニメーションを進める
 		}
 
 		//Sキーがおされたとき　下るとき
 		else if (Input::GetVKey('S') == true)
 		{
-			obj_hero->SetVecY(2.0f);
-			obj_hero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
-			obj_hero->SetLaddersAniUpdown(1);//アニメーションを進める
+			hero->SetVecY(2.0f);
+			hero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
+			hero->SetLaddersAniUpdown(1);//アニメーションを進める
 		}
 		//それ以外の時
 		else
 		{
-			obj_hero->SetLaddersAniUpdown(0);//アニメーションを止める
-			
+			hero->SetLaddersAniUpdown(0);//アニメーションを止める
 		}
 		
 	}
 	else
 	{
-		obj_hero->SetLaddersUpdown(0);//主人公がはしごに当たってないときは0を渡す
-		obj_hero->SetLadderJump(0);//ゼロを渡す
+		hero->SetLaddersUpdown(0);//主人公がはしごに当たってないときは0を渡す
+		hero->SetLadderJump(0);//ゼロを渡す
 	}
 	
 }
