@@ -105,113 +105,113 @@ void CObjMap::CreateObj(int x, int y)
 		{
 			CObjBlock* obj_block = new CObjBlock(x, y);
 			Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
-		}
 			break;
+		}
 		
 		case MAP_LADDERS:	//はしご作成
 		{
 			CObjLadders* obj_ladders = new CObjLadders(x, y);
 			Objs::InsertObj(obj_ladders, OBJ_LADDERS, 9);
-		}
 			break;
+		}
 		
 		case MAP_BUTTON:	//ボタン作成
 		{
 			CObjButton* obj_button = new CObjButton(x, y);
 			Objs::InsertObj(obj_button, OBJ_BUTTON, 9);
-		}
 			break;
+		}
 		
 		case MAP_ROPE_SWITCH:	//ロープスイッチ作成
 		{
 			CObjRopeSwitch* obj_rope_switch = new CObjRopeSwitch(x, y);
 			Objs::InsertObj(obj_rope_switch, OBJ_ROPE_SWITCH, 9);
-		}
 			break;
+		}
 
 		case MAP_LIFT:		//リフト作成
 		{
 			CObjLift* obj_lift = new CObjLift(x, y);
 			Objs::InsertObj(obj_lift, OBJ_LIFT, 9);
-		}
 			break;
+		}
 		
 		case MAP_ROCK:		//岩作成
 		{
 			CObjRock* obj_rock = new CObjRock(x, y);
 			Objs::InsertObj(obj_rock, OBJ_ROCK, 9);
-		}
 			break;
+		}
 	
 		case MAP_WOOD:	//木作成
 		{
 			CObjWood* obj_wood = new CObjWood(x, y);
 			Objs::InsertObj(obj_wood, OBJ_WOOD, 9);
-		}
 			break;
+		}
 
 		case MAP_WATER: //水作成
 		{
 			CObjWater* obj_water = new CObjWater(x, y);
 			Objs::InsertObj(obj_water, OBJ_WATER, 9);
-		}
 			break;
+		}
 
 		case MAP_ENEMY://敵作成
 		{
 			CObjEnemy* obj_enemy = new CObjEnemy(x, y);
 			Objs::InsertObj(obj_enemy, OBJ_ENEMY, 9);
-		}
 			break;
+		}
 
 		case MAP_BOSS://ボス作成
 		{
 			CObjBoss* obj_boss = new CObjBoss(x, y);
 			Objs::InsertObj(obj_boss, OBJ_BOSS, 9);
-		}
 			break;
+		}
 		
 		case MAP_STAGE3_BOSS:		//第三ボス作成
 		{
 			CObjStage3Boss* obj_stage3_boss = new CObjStage3Boss(x, y);
 			Objs::InsertObj(obj_stage3_boss, OBJ_STAGE3_BOSS, 9);
-		}
 			break;
+		}
 
 		case MAP_THROUGH_BLOCK://スルーブロック作成
 		{
 			CObjThroughBlock* obj_through_block = new CObjThroughBlock(x, y);
 			Objs::InsertObj(obj_through_block, OBJ_THROUGHT_BLOCK, 9);
-		}
 			break;
+		}
 
 		case MAP_REFLECT_BLOCK:	//反射用ブロック作成
 		{
 			CObjReflectBlock* obj_reflec_block = new CObjReflectBlock(x, y);
 			Objs::InsertObj(obj_reflec_block, OBJ_REFLECT_BLOCK, 9);
-		}
 			break;
+		}
 		
 		case MAP_SIGN :	//看板作成
 		{
 			CObjSign* Obj_sign = new CObjSign(x, y);
 			Objs::InsertObj(Obj_sign, OBJ_SIGN, 9);
-		}
 			break;
+		}
 		
 		case MAP_DOOR:	//ドア作成
 		{
 			CObjDoor* ObjDoor = new CObjDoor(x, y);
 			Objs::InsertObj(ObjDoor, OBJ_DOOR, 9);
-		}
 			break;
+		}
 
 		case MAP_LEVER_SWICH:	//レバースイッチ作成
 		{
 			CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(x, y);
 			Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 19);
-		}
 			break;
+		}
 	}
 
 	m_map[y][x].create = false;//フラグをオフにする	
