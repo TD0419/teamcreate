@@ -47,6 +47,7 @@ private:
 
 	bool  m_bullet_control; //弾丸発射制御用
 	bool  m_rope_control;	//ロープ発射制御用
+	bool  m_rope_ani_con;   //ロープアニメーション制御
 
 	int m_ladder_updown; //はしごHit管理
 	int m_ladder_ani_updown; //はしごアニメーション管理
