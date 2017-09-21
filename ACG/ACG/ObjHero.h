@@ -32,6 +32,7 @@ public:
 	float GetPosY() { return m_py; }		//ポジションXを返す
 	float GetVecX() { return m_vx; }		//ベクトルXを渡す
 	float GetVecY() { return m_vy; }		//ベクトルYを渡す
+	float GetPosture() { return m_posture; }//今の主人公の姿勢を渡す
 
 private:
 	float m_px;		//X座標
