@@ -110,6 +110,10 @@ void CObjRope::Draw()
 	//主人公オブジェクト情報を取得
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//主人公が向いている向きを持ってくる
+	float hero_postrue = objhero->GetPosture();
+
 	//主人公が存在していたら主人公と自身を結ぶ線を描画(仮)
 	if (objhero != nullptr)
 	{
@@ -119,9 +123,14 @@ void CObjRope::Draw()
 		int own_x = m_px;
 		int own_y = m_py;
 		//点を描画するX位置
-		int nextX = objhero->GetPosX() - objmap->GetScrollX();
+		int nextX;
+		//主人公が右を向いていたら
+		if(hero_postrue == 0.0f)
+			nextX = objhero->GetPosX() + 64.0f - objmap->GetScrollX();
+		else//左を向いていたら
+			nextX = objhero->GetPosX() - 10.0f - objmap->GetScrollX();
 		//点を描画するY位置
-		int nextY = objhero->GetPosY() - objmap->GetScrollY();
+		int nextY = objhero->GetPosY() + 50.0f - objmap->GetScrollY();
 		//自身から主人公の位置を引いた値X(変量)
 		int deltaX = own_x - nextX;
 		//自身から主人公の位置を引いた値Y(変量)

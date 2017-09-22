@@ -32,6 +32,8 @@ void CObjHero::Init()
 	
 	m_bullet_control = false;	//弾丸発射制御用
 	m_rope_control = false;		//ロープ発射制御用
+	m_rope_ani_con = false;
+
 	m_ladder_updown = 0;
 	m_ladder_ani_updown = 0;
 	m_ladder_jump = 0;
@@ -44,7 +46,7 @@ void CObjHero::Init()
 	m_ani_time_ladders = 0;
 	m_ani_frame_ladders = 0;	//ladders静止フレームを初期にする
 
-	m_ani_max_time_rope = 9; //ropeアニメーション間隔幅 
+	m_ani_max_time_rope = 25; //ropeアニメーション間隔幅 
 	m_ani_time_rope = 0;
 	m_ani_frame_rope = 0;	//rope静止フレームを初期にする
 
@@ -277,16 +279,60 @@ void CObjHero::Action()
 	//右クリックを押したら
 	if (Input::GetMouButtonR() == true)
 	{
-		if (m_rope_control == true)
+		if (m_rope_ani_con == false) //falseならtrueに変える
 		{
-			//ロープ作成
-			CObjRope* objrope = new CObjRope(m_px, m_py);
-			Objs::InsertObj(objrope, OBJ_ROPE, 10);
-			m_rope_control = false;
+			m_rope_ani_con = true;
 		}
 	}
-	else
-		m_rope_control = true; //右クリックを押していなければロープが出るフラグを立てる。
+	
+	if (m_rope_ani_con == true) 
+	{
+		//ロープのアニメーションフレームが3以外ならアニメーションを進める
+		if (m_ani_frame_rope != 3)
+		{
+			//ロープのアニメーションタイムを進める
+			m_ani_time_rope += 1;
+
+			 //ロープのMAXTIMEを超えるとアニメーションを進める
+			if (m_ani_time_rope > m_ani_max_time_rope)
+			{
+				m_ani_frame_rope += 1;
+				m_ani_time_rope = 0;
+			}
+			
+		}
+		//ロープのアニメーションフレームが２ならロープを出す
+		if (m_ani_frame_rope == 2)
+		{
+			if (m_rope_control == true)
+			{
+				//ロープ作成
+				if (m_posture == 0.0f)//主人公が右を向いているとき右側から発射
+				{
+					CObjRope* objrope = new CObjRope(m_px + 64.0f, m_py + 50.0f);
+					Objs::InsertObj(objrope, OBJ_ROPE, 10);
+					m_rope_control = false;
+				}
+				else if (m_posture == 1.0f)//主人公が右を向いているとき右側から発射
+				{
+					CObjRope* objrope = new CObjRope(m_px - 16.0f, m_py + 50.0f);
+					Objs::InsertObj(objrope, OBJ_ROPE, 10);
+					m_rope_control = false;
+				}
+			}
+		}
+		else
+			m_rope_control = true;
+
+		//ロープのアニメーションフレームが3ならアニメーションフレームを0に戻す
+		if (m_ani_frame_rope == 3)
+		{
+			
+			m_rope_ani_con = false;
+			m_ani_frame_rope = 0;
+		}
+	}
+
 	//射出終了------------------------------------------------
 
 	//水オブジェクトと衝突していれば
@@ -398,11 +444,11 @@ void CObjHero::Draw()
 		src.m_right = 320.0f;
 		src.m_bottom = 384.0f;
 	}
-	else if (Input::GetMouButtonR() == true) //ロープを投げるとき
+	else if (m_rope_ani_con == true) //ロープを投げるとき
 	{
 		src.m_top = 512.0f;
-		src.m_left = 0.0f + AniData[m_ani_frame_move] * 64;
-		src.m_right = 64.0f + AniData[m_ani_frame_move] * 64;
+		src.m_left = 0.0f + m_ani_frame_rope * 64;
+		src.m_right = 64.0f + m_ani_frame_rope * 64;
 		src.m_bottom = 640.0f;
 	}
 	else if (m_ani_frame_stop_move == 1 && m_ladder_updown == 0)  //止まっているとき
@@ -446,7 +492,12 @@ void CObjHero::Draw()
 	dst.m_bottom = dst.m_top +64.0f;
 	
 	//描画
-	Draw::Draw(3, &src, &dst, color, m_r,-0.2f,-0.25f);
+	if (m_rope_ani_con == true)//ロープの描画中は
+	{
+		;    //何も描画しない
+	}
+	else
+		Draw::Draw(3, &src, &dst, color, m_r,-0.2f,-0.25f);
 	//-----------------------------------------
 
 
