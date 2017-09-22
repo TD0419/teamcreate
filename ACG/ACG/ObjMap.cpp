@@ -103,113 +103,113 @@ void CObjMap::CreateObj(int x, int y)
 	{
 		case MAP_BLOCK:		//ブロック作成
 		{
-			CObjBlock* obj_block = new CObjBlock(x, y);
-			Objs::InsertObj(obj_block, OBJ_BLOCK, 9);
+			CObjBlock* objblock = new CObjBlock(x, y);
+			Objs::InsertObj(objblock, OBJ_BLOCK, 9);
 			break;
 		}
 		
 		case MAP_LADDERS:	//はしご作成
 		{
-			CObjLadders* obj_ladders = new CObjLadders(x, y);
-			Objs::InsertObj(obj_ladders, OBJ_LADDERS, 9);
+			CObjLadders* objladders = new CObjLadders(x, y);
+			Objs::InsertObj(objladders, OBJ_LADDERS, 9);
 			break;
 		}
 		
 		case MAP_BUTTON:	//ボタン作成
 		{
-			CObjButton* obj_button = new CObjButton(x, y);
-			Objs::InsertObj(obj_button, OBJ_BUTTON, 9);
+			CObjButton* objbutton = new CObjButton(x, y);
+			Objs::InsertObj(objbutton, OBJ_BUTTON, 9);
 			break;
 		}
 		
 		case MAP_ROPE_SWITCH:	//ロープスイッチ作成
 		{
-			CObjRopeSwitch* obj_rope_switch = new CObjRopeSwitch(x, y);
-			Objs::InsertObj(obj_rope_switch, OBJ_ROPE_SWITCH, 9);
+			CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(x, y);
+			Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 9);
 			break;
 		}
 
 		case MAP_LIFT:		//リフト作成
 		{
-			CObjLift* obj_lift = new CObjLift(x, y);
-			Objs::InsertObj(obj_lift, OBJ_LIFT, 9);
+			CObjLift* objlift = new CObjLift(x, y);
+			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
 		
 		case MAP_ROCK:		//岩作成
 		{
-			CObjRock* obj_rock = new CObjRock(x, y);
-			Objs::InsertObj(obj_rock, OBJ_ROCK, 9);
+			CObjRock* objrock = new CObjRock(x, y);
+			Objs::InsertObj(objrock, OBJ_ROCK, 9);
 			break;
 		}
 	
 		case MAP_WOOD:	//木作成
 		{
-			CObjWood* obj_wood = new CObjWood(x, y);
-			Objs::InsertObj(obj_wood, OBJ_WOOD, 9);
+			CObjWood* objwood = new CObjWood(x, y);
+			Objs::InsertObj(objwood, OBJ_WOOD, 9);
 			break;
 		}
 
 		case MAP_WATER: //水作成
 		{
-			CObjWater* obj_water = new CObjWater(x, y);
-			Objs::InsertObj(obj_water, OBJ_WATER, 9);
+			CObjWater* objwater = new CObjWater(x, y);
+			Objs::InsertObj(objwater, OBJ_WATER, 9);
 			break;
 		}
 
 		case MAP_ENEMY://敵作成
 		{
-			CObjEnemy* obj_enemy = new CObjEnemy(x, y);
-			Objs::InsertObj(obj_enemy, OBJ_ENEMY, 9);
+			CObjEnemy* objenemy = new CObjEnemy(x, y);
+			Objs::InsertObj(objenemy, OBJ_ENEMY, 9);
 			break;
 		}
 
 		case MAP_BOSS://ボス作成
 		{
-			CObjBoss* obj_boss = new CObjBoss(x, y);
-			Objs::InsertObj(obj_boss, OBJ_BOSS, 9);
+			CObjBoss* objboss = new CObjBoss(x, y);
+			Objs::InsertObj(objboss, OBJ_BOSS, 9);
 			break;
 		}
 		
 		case MAP_STAGE3_BOSS:		//第三ボス作成
 		{
-			CObjStage3Boss* obj_stage3_boss = new CObjStage3Boss(x, y);
-			Objs::InsertObj(obj_stage3_boss, OBJ_STAGE3_BOSS, 9);
+			CObjStage3Boss* objstage3_boss = new CObjStage3Boss(x, y);
+			Objs::InsertObj(objstage3_boss, OBJ_STAGE3_BOSS, 9);
 			break;
 		}
 
 		case MAP_THROUGH_BLOCK://スルーブロック作成
 		{
-			CObjThroughBlock* obj_through_block = new CObjThroughBlock(x, y);
-			Objs::InsertObj(obj_through_block, OBJ_THROUGHT_BLOCK, 9);
+			CObjThroughBlock* objthrough_block = new CObjThroughBlock(x, y);
+			Objs::InsertObj(objthrough_block, OBJ_THROUGHT_BLOCK, 9);
 			break;
 		}
 
 		case MAP_REFLECT_BLOCK:	//反射用ブロック作成
 		{
-			CObjReflectBlock* obj_reflec_block = new CObjReflectBlock(x, y);
-			Objs::InsertObj(obj_reflec_block, OBJ_REFLECT_BLOCK, 9);
+			CObjReflectBlock* objreflec_block = new CObjReflectBlock(x, y);
+			Objs::InsertObj(objreflec_block, OBJ_REFLECT_BLOCK, 9);
 			break;
 		}
 		
 		case MAP_SIGN :	//看板作成
 		{
-			CObjSign* Obj_sign = new CObjSign(x, y);
-			Objs::InsertObj(Obj_sign, OBJ_SIGN, 9);
+			CObjSign* objsign = new CObjSign(x, y);
+			Objs::InsertObj(objsign, OBJ_SIGN, 9);
 			break;
 		}
 		
 		case MAP_DOOR:	//ドア作成
 		{
-			CObjDoor* ObjDoor = new CObjDoor(x, y);
-			Objs::InsertObj(ObjDoor, OBJ_DOOR, 9);
+			CObjDoor* objDoor = new CObjDoor(x, y);
+			Objs::InsertObj(objDoor, OBJ_DOOR, 9);
 			break;
 		}
 
 		case MAP_LEVER_SWICH:	//レバースイッチ作成
 		{
-			CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(x, y);
-			Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 19);
+			CObjLeverSwich* objLeverSwich = new CObjLeverSwich(x, y);
+			Objs::InsertObj(objLeverSwich, OBJ_LEVER_SWICH, 19);
 			break;
 		}
 	}

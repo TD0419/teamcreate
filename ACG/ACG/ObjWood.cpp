@@ -63,7 +63,7 @@ void CObjWood::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
 	src.m_top = 0.0f;
@@ -72,8 +72,8 @@ void CObjWood::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_py - map->GetScrollY();
-	dst.m_left = 0.0f + m_px - map->GetScrollX();
+	dst.m_top = 0.0f + m_py - objmap->GetScrollY();
+	dst.m_left = 0.0f + m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + WOOD_SIZE;
 	dst.m_bottom = dst.m_top + WOOD_SIZE;
 
@@ -92,7 +92,7 @@ void CObjWood::HeroHit(float px, float py)
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
 
 	 //主人公オブジェクトを持ってくる
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	for (int i = 0; i < hit->GetCount(); i++)
 	{
@@ -104,27 +104,27 @@ void CObjWood::HeroHit(float px, float py)
 			//ブロックの右側が衝突している場合
 			if (0 < r && r < 45 || 315 < r && r < 360)
 			{
-				hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				hero->SetPosX(px + WOOD_SIZE);//主人公の位置を木の右側までずらす
+				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				objhero->SetPosX(px + WOOD_SIZE);//主人公の位置を木の右側までずらす
 			}
 			//ブロックの上側が衝突している場合
 			else if (45 < r && r < 125)
 			{
 
-				hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				hero->SetPosY(py - HERO_SIZE_HEIGHT);//主人公の位置を木の上側までずらす
+				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+				objhero->SetPosY(py - HERO_SIZE_HEIGHT);//主人公の位置を木の上側までずらす
 			}
 			//ブロックの左側が衝突している場合
 			else if (125 < r && r < 225)
 			{
-				hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				hero->SetPosX(px - HERO_SIZE_WIDTH);//主人公の位置を木の左側までずらす
+				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				objhero->SetPosX(px - HERO_SIZE_WIDTH);//主人公の位置を木の左側までずらす
 			}
 			//ブロックの下側が衝突している場合
 			else if (225 < r && r < 315)
 			{
-				hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				hero->SetPosY(py + WOOD_SIZE);//主人公の位置を木の下側までずらす
+				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+				objhero->SetPosY(py + WOOD_SIZE);//主人公の位置を木の下側までずらす
 			}
 		}
 	}

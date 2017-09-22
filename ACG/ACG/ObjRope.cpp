@@ -19,10 +19,10 @@ CObjRope::CObjRope(int x, int y)
 	m_py = y;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//主人公が本来いる位置に変更
-	x -= map->GetScrollX();
-	y -= map->GetScrollY();
+	x -= objmap->GetScrollX();
+	y -= objmap->GetScrollY();
 	//初期位置を決める
 	m_px = x;
 	m_py = y;
@@ -108,10 +108,10 @@ void CObjRope::Draw()
 {
 	float c[4] = {0.0f,0.0f,0.0f,1.0f};
 	//主人公オブジェクト情報を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//主人公が存在していたら主人公と自身を結ぶ線を描画(仮)
-	if (hero != nullptr)
+	if (objhero != nullptr)
 	{
 		//太、厚さ
 		int thick = 2;
@@ -119,9 +119,9 @@ void CObjRope::Draw()
 		int own_x = m_px;
 		int own_y = m_py;
 		//点を描画するX位置
-		int nextX = hero->GetPosX() - map->GetScrollX();
+		int nextX = objhero->GetPosX() - objmap->GetScrollX();
 		//点を描画するY位置
-		int nextY = hero->GetPosY() - map->GetScrollY();
+		int nextY = objhero->GetPosY() - objmap->GetScrollY();
 		//自身から主人公の位置を引いた値X(変量)
 		int deltaX = own_x - nextX;
 		//自身から主人公の位置を引いた値Y(変量)

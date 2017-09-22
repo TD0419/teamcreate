@@ -70,7 +70,7 @@ void CObjLeverSwich::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
 	src.m_top = 0.0f;
@@ -79,8 +79,8 @@ void CObjLeverSwich::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_py - map->GetScrollY();
-	dst.m_left = 0.0f + m_px - map->GetScrollX();
+	dst.m_top = 0.0f + m_py - objmap->GetScrollY();
+	dst.m_left = 0.0f + m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + LEVER_SWITCH_SIZE;
 	dst.m_bottom = dst.m_top + LEVER_SWITCH_SIZE;
 

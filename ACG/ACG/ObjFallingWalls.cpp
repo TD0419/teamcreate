@@ -28,7 +28,7 @@ void CObjFallingWalls::Init()
 void CObjFallingWalls::Action()
 {
 	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -48,7 +48,7 @@ void CObjFallingWalls::Draw()
 	//RECT_F src, dst;
 
 	////マップオブジェクトを持ってくる
-	//CObjMap* obj_m = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	//CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	////切り取り位置
 	//src.m_top = 0.0f;
@@ -57,8 +57,8 @@ void CObjFallingWalls::Draw()
 	//src.m_bottom = 64.0f;
 
 	////描画位置
-	//dst.m_top = m_py - obj_m->GetScrollY();
-	//dst.m_left = m_px - obj_m->GetScrollX();
+	//dst.m_top = m_py - objmap->GetScrollY();
+	//dst.m_left = m_px - objmap->GetScrollX();
 	//dst.m_right = dst.m_left + FALLING_WALLS_SAIZE;
 	//dst.m_bottom = dst.m_top + FALLING_WALLS_SAIZE;
 

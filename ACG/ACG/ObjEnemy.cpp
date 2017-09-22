@@ -42,9 +42,9 @@ void CObjEnemy::Init()
 void CObjEnemy::Action()
 {
 	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//マップ情報を取ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
 	//画面内か調べる
 	m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
@@ -56,7 +56,7 @@ void CObjEnemy::Action()
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 
 		//戻ってきたときに復活するようにする
-		map->SetMapCreate(m_map_x, m_map_y, true);
+		objmap->SetMapCreate(m_map_x, m_map_y, true);
 		
 		return;
 	}
@@ -110,7 +110,7 @@ void CObjEnemy::Action()
 	}
 	
 	//ブロックとのあたり判定
-	block->BlockHit(
+	objblock->BlockHit(
 		&m_px, &m_py, ENEMY_SIZE, ENEMY_SIZE,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, 
 		&m_vx, &m_vy
@@ -133,14 +133,14 @@ void CObjEnemy::Action()
 		//移動しようとしているところが崖なら方向転換
 		//右に動いていて && 
 		//右下にブロックが無かったら
-		if (m_vx > 0 && map->GetMap((m_px / BLOCK_SIZE + 1), (m_py / BLOCK_SIZE + 1)) != MAP_BLOCK)
+		if (m_vx > 0 && objmap->GetMap((m_px / BLOCK_SIZE + 1), (m_py / BLOCK_SIZE + 1)) != MAP_BLOCK)
 		{
 			//方向を左にする
 			m_posture = 0.0;
 		}
 		//左に移動していて &&
 		//左下にブロックが無かったら		↓原点調整
-		if (m_vx < 0 && map->GetMap(((m_px+ENEMY_SIZE) / BLOCK_SIZE - 1), (m_py / BLOCK_SIZE + 1)) != MAP_BLOCK)
+		if (m_vx < 0 && objmap->GetMap(((m_px+ENEMY_SIZE) / BLOCK_SIZE - 1), (m_py / BLOCK_SIZE + 1)) != MAP_BLOCK)
 		{
 			//方向を右にする
 			m_posture = 1.0;
@@ -172,7 +172,7 @@ void CObjEnemy::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
 	src.m_top = 0.0f;
@@ -181,9 +181,9 @@ void CObjEnemy::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = m_py - map->GetScrollY();
-	dst.m_left = (ENEMY_SIZE * m_posture) + m_px - map->GetScrollX();
-	dst.m_right = (ENEMY_SIZE - ENEMY_SIZE * m_posture) + m_px - map->GetScrollX();
+	dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_left = (ENEMY_SIZE * m_posture) + m_px - objmap->GetScrollX();
+	dst.m_right = (ENEMY_SIZE - ENEMY_SIZE * m_posture) + m_px - objmap->GetScrollX();
 	dst.m_bottom = dst.m_top + ENEMY_SIZE;
 
 	//描画

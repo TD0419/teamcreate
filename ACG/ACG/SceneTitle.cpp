@@ -25,8 +25,8 @@ void CSceneTitle::InitScene()
 void CSceneTitle::Scene()
 {
 	//オブジェクトを作成する
-	CObjTitle* ObjTitle = new CObjTitle();
-	Objs::InsertObj(ObjTitle, OBJ_TITLE, 10);
+	CObjTitle* objtitle = new CObjTitle();
+	Objs::InsertObj(objtitle, OBJ_TITLE, 10);
 }
 
 //画像データ読み込み関数

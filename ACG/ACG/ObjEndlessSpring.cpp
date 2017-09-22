@@ -28,7 +28,7 @@ void CObjEndlessSpring::Init()
 void CObjEndlessSpring::Action()
 {
 	//“G¶¬ˆ—(‰¼)
-	m_timelag +=TIME ;
+	m_timelag +=TIME;
 
 	if (m_timelag>=180.0f)
 	{

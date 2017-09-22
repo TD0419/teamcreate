@@ -17,7 +17,7 @@ using namespace GameL;
 CObjBullet::CObjBullet(float x, float y)
 {
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
 	//初期位置を決める
 	m_px = x;
@@ -32,8 +32,8 @@ CObjBullet::CObjBullet(float x, float y)
 	double mous_y = Input::GetPosY();
 
 	//主人公の位置からマウスの位置のベクトル情報取得
-	double vector_x = mous_x - (x - map->GetScrollX());
-	double vector_y = mous_y - (y - map->GetScrollY());
+	double vector_x = mous_x - (x - objmap->GetScrollX());
+	double vector_y = mous_y - (y - objmap->GetScrollY());
 
 	//斜辺取得
 	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
@@ -65,12 +65,12 @@ CObjBullet::CObjBullet(float x, float y)
 void CObjBullet::Init()
 {
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	m_window_check = true;
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px- map->GetScrollX(), m_py - map->GetScrollY(), BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_BULLET, 1);
+	Hits::SetHitBox(this, m_px- objmap->GetScrollX(), m_py - objmap->GetScrollY(), BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_BULLET, 1);
 }
 
 //アクション
@@ -148,7 +148,7 @@ void CObjBullet::Action()
 void CObjBullet::Draw()
 {
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
@@ -161,8 +161,8 @@ void CObjBullet::Draw()
 	src.m_bottom = 512.0f;
 
 	//描画位置
-	dst.m_top = m_py- map->GetScrollY();
-	dst.m_left =  m_px- map->GetScrollX();
+	dst.m_top = m_py- objmap->GetScrollY();
+	dst.m_left =  m_px- objmap->GetScrollX();
 	dst.m_right = dst.m_left + BULLET_SIZE;
 	dst.m_bottom = dst.m_top + BULLET_SIZE;
 

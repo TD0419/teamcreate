@@ -8,10 +8,10 @@
 void HitBoxUpData(CHitBox* hit,float m_px,float m_py)
 {
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//HitBoxの位置情報の変更
-	hit->SetPos(m_px - map->GetScrollX(), m_py - map->GetScrollY());
+	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY());
 }
 
 //画面の外に出ているか判定する関数
@@ -21,10 +21,10 @@ void HitBoxUpData(CHitBox* hit,float m_px,float m_py)
 bool WindowCheck(float m_px, float m_py,float obj_size_x, float obj_size_y)
 {
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	float x = m_px - map->GetScrollX();
-	float y = m_py - map->GetScrollY();
+	float x = m_px - objmap->GetScrollX();
+	float y = m_py - objmap->GetScrollY();
 
 	//上または下でチャック
 	if (y < 0 - obj_size_y || y > WINDOW_SIZE_H)

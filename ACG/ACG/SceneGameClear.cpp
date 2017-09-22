@@ -45,8 +45,8 @@ void CSceneGameClear::InitScene()
 	//SE----------------
 	Audio::LoadAudio(1, L".wav", EFFECT);			//決定音
 
-	CObjGameClear* obj = new CObjGameClear();	//クリアオブジェクト作成
-	Objs::InsertObj(obj, OBJ_GAME_CLEAR, 10);	//クリアオブジェクト登録
+	CObjGameClear* objgame_clear = new CObjGameClear();	//クリアオブジェクト作成
+	Objs::InsertObj(objgame_clear, OBJ_GAME_CLEAR, 10);	//クリアオブジェクト登録
 }
 
 //実行中メソッド

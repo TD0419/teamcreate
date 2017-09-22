@@ -41,69 +41,69 @@ void CSceneMain::InitScene()
 	AudioDataLoading();//音楽データ読み込み関数
 
     //Mapオブジェクトを作成する
-	CObjMap* ObjMap = new CObjMap(map);
-	Objs::InsertObj(ObjMap, OBJ_MAP, 10);
+	CObjMap* objmap = new CObjMap(map);
+	Objs::InsertObj(objmap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
-	CObjHero* ObjHero = new CObjHero(3,5);
-	Objs::InsertObj(ObjHero, OBJ_HERO, 10);
+	CObjHero* objhero = new CObjHero(3,5);
+	Objs::InsertObj(objhero, OBJ_HERO, 10);
 
 	//Doorオブジェクトを作成する
-	CObjDoor* ObjDoor = new CObjDoor(3, 0);
-	Objs::InsertObj(ObjDoor, OBJ_DOOR, 10);
+	CObjDoor* objdoor = new CObjDoor(3, 0);
+	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
 
 	//敵オブジェクトを作成する
-	CObjEnemy* ObjEnemy = new CObjEnemy(10,7);
-	Objs::InsertObj(ObjEnemy, OBJ_ENEMY, 11);
+	CObjEnemy* objenemy = new CObjEnemy(10,7);
+	Objs::InsertObj(objenemy, OBJ_ENEMY, 11);
 
 	//testボスオブジェクトを作成する
-	//CObjBoss* ObjBoss = new CObjBoss(10,15);
-	//Objs::InsertObj(ObjBoss, OBJ_BOSS, 11);
+	//CObjBoss* objboss = new CObjBoss(10,15);
+	//Objs::InsertObj(objboss, OBJ_BOSS, 11);
 
 	//リフトオブジェクトを作成する
-	CObjLift* Obj_lift = new CObjLift(6, 5);
-	Objs::InsertObj(Obj_lift, OBJ_LIFT, 10);
+	CObjLift* objlift = new CObjLift(6, 5);
+	Objs::InsertObj(objlift, OBJ_LIFT, 10);
 
 	//看板オブジェクトを作成する
-	CObjSign* Obj_sign = new CObjSign(14, 7);
-	Objs::InsertObj(Obj_sign, OBJ_SIGN, 10);
+	CObjSign* objsign = new CObjSign(14, 7);
+	Objs::InsertObj(objsign, OBJ_SIGN, 10);
 
 	//レバースイッチオブジェクトを作成する
-	CObjLeverSwich* ObjLeverSwich = new CObjLeverSwich(7, 7);
-	Objs::InsertObj(ObjLeverSwich, OBJ_LEVER_SWICH, 10);
+	CObjLeverSwich* objlever_swich = new CObjLeverSwich(7, 7);
+	Objs::InsertObj(objlever_swich, OBJ_LEVER_SWICH, 10);
 
 	////水ブジェクトを作成する
-	//CObjWater* Obj_water = new CObjWater(8, 9);
-	//Objs::InsertObj(Obj_water, OBJ_WATER, 10);
+	//CObjWater* objwater = new CObjWater(8, 9);
+	//Objs::InsertObj(objwater, OBJ_WATER, 10);
 
 
 	//ロープスイッチオブジェクトを作成する
-	CObjRopeSwitch* ObjRopeSwitch = new CObjRopeSwitch(7, 5);
-	Objs::InsertObj(ObjRopeSwitch, OBJ_ROPE_SWITCH, 10);
+	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
+	Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 10);
 
 	//testはしごオブジェクトを作成する（デバック用）
-	/*CObjLadders* ObjLadders = new CObjLadders(6, 3);
-	Objs::InsertObj(ObjLadders, OBJ_LADDERS, 10);
-	CObjLadders* ObjLadders2 = new CObjLadders(6, 2);
-	Objs::InsertObj(ObjLadders2, OBJ_LADDERS, 10);
-	CObjLadders* ObjLadder3 = new CObjLadders(6, 1);
-	Objs::InsertObj(ObjLadder3, OBJ_LADDERS, 10);*/
+	/*CObjLadders* objladders = new CObjLadders(6, 3);
+	Objs::InsertObj(objladders, OBJ_LADDERS, 10);
+	CObjLadders* objladders2 = new CObjLadders(6, 2);
+	Objs::InsertObj(objladders2, OBJ_LADDERS, 10);
+	CObjLadders* objladders3 = new CObjLadders(6, 1);
+	Objs::InsertObj(objladders3, OBJ_LADDERS, 10);*/
 
 	//木のテストオブジェクト
-	CObjWood* ObjWood = new CObjWood(5, 1);
-	Objs::InsertObj(ObjWood, OBJ_WOOD, 10);
+	CObjWood* objwood = new CObjWood(5, 1);
+	Objs::InsertObj(objwood, OBJ_WOOD, 10);
 
 	//test砲台オブジェクトを作成する
-	CObjCannon* ObjCannon = new CObjCannon(10, 5);
-	Objs::InsertObj(ObjCannon, OBJ_CANNON, 10);
+	CObjCannon* objcannon = new CObjCannon(10, 5);
+	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
 
 	//背景オブジェクトを作成する
-	CObjBackGround* objBackGround = new CObjBackGround();
-	Objs::InsertObj(objBackGround, OBJ_BACKGROUND, 1);
+	CObjBackGround* objback_ground = new CObjBackGround();
+	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
 	//debug敵弾丸作成
-	//CObjEnemyBullet* Obj_enemy_bullet = new CObjEnemyBullet(64.0,  50.0, 0);
-	//Objs::InsertObj(Obj_enemy_bullet, OBJ_ENEMY_BULLET, 10);
+	//CObjEnemyBullet* objenemy_bullet = new CObjEnemyBullet(64.0,  50.0, 0);
+	//Objs::InsertObj(objenemy_bullet, OBJ_ENEMY_BULLET, 10);
 }
 
 //ゲームメイン実行中メソッド
@@ -214,6 +214,7 @@ void CSceneMain::ImageDataLoading()
 	//背景画像
 	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1536);
 
+	//木画像
 	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
 
 	//看板

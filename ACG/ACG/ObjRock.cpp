@@ -34,7 +34,7 @@ void CObjRock::Init()
 void CObjRock::Action()
 {
 	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -69,7 +69,7 @@ void CObjRock::Action()
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
 
 	//主人公オブジェクトを持ってくる
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	for (int i = 0; i < hit->GetCount(); i++)
 	{
@@ -81,31 +81,31 @@ void CObjRock::Action()
 			//岩の右側が衝突している場合
 			if (0 < r && r < 65|| 315 < r && r < 360)
 			{
-				hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				hero->SetPosX(m_px + ROCK_SIZE_WIDTH);//主人公の位置を岩の右側までずらす
+				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				objhero->SetPosX(m_px + ROCK_SIZE_WIDTH);//主人公の位置を岩の右側までずらす
 			}
 			
 			//岩の上側が衝突している場合
 			else if (65 < r && r < 125)
 			{
 
-				hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				hero->SetPosY(m_py - ROCK_SIZE_HEIGHT-57.0);//主人公の位置を岩の上側までずらす
+				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+				objhero->SetPosY(m_py - ROCK_SIZE_HEIGHT-57.0);//主人公の位置を岩の上側までずらす
 				
 			}
 
 			//岩の左側が衝突している場合
 			else if (125 < r && r < 225 )
 			{
-				hero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				hero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置を岩の左側までずらす
+				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				objhero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置を岩の左側までずらす
 			}
 
 			//岩の下側が衝突している場合
 			else if (225 < r && r < 315)
 			{
-				hero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				hero->SetPosY(m_py + ROCK_SIZE_HEIGHT);//主人公の位置を岩の下側までずらす
+				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+				objhero->SetPosY(m_py + ROCK_SIZE_HEIGHT);//主人公の位置を岩の下側までずらす
 			}
 		}
 	}
@@ -129,7 +129,7 @@ void CObjRock::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
 	src.m_top = 1.0f;
@@ -138,8 +138,8 @@ void CObjRock::Draw()
 	src.m_bottom = src.m_top + BLOCK_SIZE;
 	
 	//描画位置
-	dst.m_top = m_py - map->GetScrollY()- ROCK_SIZE_WIDTH;
-	dst.m_left = m_px - map->GetScrollX();
+	dst.m_top = m_py - objmap->GetScrollY()- ROCK_SIZE_WIDTH;
+	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + ROCK_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + ROCK_SIZE_HEIGHT;
 

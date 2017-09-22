@@ -40,8 +40,8 @@ void CObjCannon::Action()
 	if (m_rec == 200.0f)
 	{
 		//debug弾丸作成
-		CObjEnemyBullet* Obj_enemy_bullet = new CObjEnemyBullet(m_x + 20.0f, m_y, 0);
-		Objs::InsertObj(Obj_enemy_bullet, OBJ_ENEMY_BULLET, 10);
+		CObjEnemyBullet* objenemy_bullet = new CObjEnemyBullet(m_x + 20.0f, m_y, 0);
+		Objs::InsertObj(objenemy_bullet, OBJ_ENEMY_BULLET, 10);
 
 		m_rec = 0.0f;
 		m_rec++;
@@ -65,7 +65,7 @@ void CObjCannon::Draw()
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
 	src.m_top	 = 0.0f;
@@ -74,8 +74,8 @@ void CObjCannon::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_y - map->GetScrollY();
-	dst.m_left = 0.0f + m_x - map->GetScrollX();
+	dst.m_top = 0.0f + m_y - objmap->GetScrollY();
+	dst.m_left = 0.0f + m_x - objmap->GetScrollX();
 	dst.m_right = dst.m_left + CANNON_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + CANNON_SIZE_HEIGHT;
 

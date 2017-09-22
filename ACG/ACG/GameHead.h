@@ -91,13 +91,13 @@ enum MAP_BER
 	MAP_WATER		 ,	//水
 	MAP_ENEMY		 ,	//敵
 	MAP_BOSS		 ,	//ボス
-	MAP_STAGE3_BOSS  ,
-	MAP_BLOCK2		 ,
-	MAP_THROUGH_BLOCK,
-	MAP_REFLECT_BLOCK,
-	MAP_SIGN		 ,
-	MAP_DOOR		 ,
-	MAP_LEVER_SWICH	 ,
+	MAP_STAGE3_BOSS  ,	//ステージ３のボス
+	MAP_BLOCK2		 ,	//
+	MAP_THROUGH_BLOCK,	//
+	MAP_REFLECT_BLOCK,	//反射ブロック
+	MAP_SIGN		 ,	//
+	MAP_DOOR		 ,	//ドア
+	MAP_LEVER_SWICH	 ,	//レバースイッチ
 	MAP_FALLING_WALLS,  //落下壁
 	
 };
