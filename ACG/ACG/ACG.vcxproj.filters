@@ -314,9 +314,6 @@
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソース ファイル\Main\Hero</Filter>
     </ClCompile>
-    <ClCompile Include="ObjLaggers.cpp">
-      <Filter>ソース ファイル\Main\Ladder</Filter>
-    </ClCompile>
     <ClCompile Include="ObjLift.cpp">
       <Filter>ソース ファイル\Main\Lift</Filter>
     </ClCompile>
@@ -388,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="ObjCannon.cpp">
       <Filter>ソース ファイル\Main\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLadders.cpp">
+      <Filter>ソース ファイル\Main\Ladder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

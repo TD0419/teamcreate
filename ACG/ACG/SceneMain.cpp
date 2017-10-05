@@ -224,6 +224,9 @@ void CSceneMain::ImageDataLoading()
 
 	//testhero
 	Draw::LoadImageW(L"Hero2.png", 19, TEX_SIZE_1024);
+
+	//ボタン
+	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数

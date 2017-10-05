@@ -145,7 +145,7 @@
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="ObjGameClear.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
-    <ClCompile Include="ObjLaggers.cpp" />
+    <ClCompile Include="ObjLadders.cpp" />
     <ClCompile Include="ObjLift.cpp" />
     <ClCompile Include="ObjRope.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
