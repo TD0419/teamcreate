@@ -492,7 +492,7 @@ void CObjHero::Draw()
 	dst.m_bottom = dst.m_top +64.0f;
 	
 	//描画
-	if (m_rope_ani_con == true)//ロープの描画中は
+	if (m_rope_ani_con == true || m_ladder_updown != 0)//ロープの描画中は
 	{
 		;    //何も描画しない
 	}
