@@ -97,6 +97,10 @@ void CSceneMain::InitScene()
 	CObjCannon* objcannon = new CObjCannon(10, 5);
 	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
 
+	//テストボタン
+	CObjButton*objbutton = new CObjButton(5, 3);
+	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
+
 	//背景オブジェクトを作成する
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
