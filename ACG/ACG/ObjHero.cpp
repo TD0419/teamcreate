@@ -191,10 +191,8 @@ void CObjHero::Action()
  		int a = 0;
 
 	//Ž©—R—Ž‰º‰^“®
-	if (m_hit_down == false)//’…’n‚µ‚Ä‚¢‚È‚¯‚ê‚Î
-	{
-		m_vy += 9.8 / (16.0f);
-	}
+	m_vy += 9.8 / (16.0f);
+	
 		
 	if (m_ladder_jump==1)
 	{
@@ -450,6 +448,13 @@ void CObjHero::Draw()
 		src.m_left = 0.0f + m_ani_frame_rope * 64;
 		src.m_right = 64.0f + m_ani_frame_rope * 64;
 		src.m_bottom = 640.0f;
+	}
+	else if (m_ladder_updown == 0 && m_hit_down == false)  //Ž~‚Ü‚Á‚Ä‚¢‚é‚Æ‚«
+	{
+		src.m_top = 128.0f;
+		src.m_left = 256.0f;
+		src.m_right = 320.0f;
+		src.m_bottom = 256.0f;
 	}
 	else if (m_ani_frame_stop_move == 1 && m_ladder_updown == 0)  //Ž~‚Ü‚Á‚Ä‚¢‚é‚Æ‚«
 	{
