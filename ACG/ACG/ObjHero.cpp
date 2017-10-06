@@ -311,7 +311,7 @@ void CObjHero::Action()
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
 					m_rope_control = false;
 				}
-				else if (m_posture == 1.0f)//主人公が右を向いているとき右側から発射
+				else if (m_posture == 1.0f)//主人公が左を向いているとき左側から発射
 				{
 					CObjRope* objrope = new CObjRope(m_px - 16.0f, m_py + 50.0f);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
@@ -422,7 +422,6 @@ void CObjHero::Draw()
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
 	//本体---------------------------------
 	//切り取り位置
 	//止まっている時
@@ -433,6 +432,22 @@ void CObjHero::Draw()
 		src.m_left = 0.0f + m_ani_frame_ladders * 64;
 		src.m_right = 64.0f + m_ani_frame_ladders * 64;
 		src.m_bottom = 384.0f;
+		
+		//主人公の左下、真下、右下にブロックがあると止まっているアニメーションにする
+		for (int i = 0; i <= HERO_SIZE_WIDTH; i+=HERO_SIZE_WIDTH/2)
+		{
+			int x = (m_px + i) / BLOCK_SIZE;
+			int y = (m_py + 1 + HERO_SIZE_HEIGHT) / BLOCK_SIZE;
+			int a = objmap->GetMap(x, y);
+			//左下、真下、右下にブロックがあると止まっているアニメーションにする
+			if (objmap->GetMap(x, y) == MAP_BLOCK)
+			{
+				src.m_top = 0.0f;
+				src.m_left = 0.0f;
+				src.m_right = 64.0f;
+				src.m_bottom = 128.0f;
+			}
+		}
 		
 	}
 	else if (m_ladder_updown == 2)//はしごを上りきるとき
@@ -449,7 +464,7 @@ void CObjHero::Draw()
 		src.m_right = 64.0f + m_ani_frame_rope * 64;
 		src.m_bottom = 640.0f;
 	}
-	else if (m_ladder_updown == 0 && m_hit_down == false)  //止まっているとき
+	else if (m_ladder_updown == 0 && m_hit_down == false)  //ジャンプしている時
 	{
 		src.m_top = 128.0f;
 		src.m_left = 256.0f;
