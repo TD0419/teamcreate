@@ -97,6 +97,10 @@ void CSceneMain::InitScene()
 	CObjCannon* objcannon = new CObjCannon(10, 5);
 	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
 
+	//テストボタン
+	CObjButton*objbutton = new CObjButton(5, 3);
+	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
+
 	//背景オブジェクトを作成する
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
@@ -224,6 +228,9 @@ void CSceneMain::ImageDataLoading()
 
 	//testhero
 	Draw::LoadImageW(L"Hero2.png", 19, TEX_SIZE_1024);
+
+	//ボタン
+	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数
