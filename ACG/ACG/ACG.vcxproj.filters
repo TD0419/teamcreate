@@ -97,9 +97,6 @@
     <Filter Include="ソース ファイル\BackGround">
       <UniqueIdentifier>{477b5c30-202e-44a1-ab03-445b3ea37cc8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\Function">
-      <UniqueIdentifier>{2207111e-4967-4a8d-849b-4f8b61ebc407}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\Cannon">
       <UniqueIdentifier>{e5a59037-b682-4795-a1fd-babcfcd474bb}</UniqueIdentifier>
     </Filter>
@@ -243,11 +240,11 @@
     <ClInclude Include="ObjBackGround.h">
       <Filter>ソース ファイル\BackGround</Filter>
     </ClInclude>
-    <ClInclude Include="Function.h">
-      <Filter>ソース ファイル\Main\Function</Filter>
-    </ClInclude>
     <ClInclude Include="ObjCannon.h">
       <Filter>ソース ファイル\Main\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -380,14 +377,14 @@
     <ClCompile Include="ObjBackGround.cpp">
       <Filter>ソース ファイル\BackGround</Filter>
     </ClCompile>
-    <ClCompile Include="Function.cpp">
-      <Filter>ソース ファイル\Main\Function</Filter>
-    </ClCompile>
     <ClCompile Include="ObjCannon.cpp">
       <Filter>ソース ファイル\Main\Cannon</Filter>
     </ClCompile>
     <ClCompile Include="ObjLadders.cpp">
       <Filter>ソース ファイル\Main\Ladder</Filter>
+    </ClCompile>
+    <ClCompile Include="Function.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

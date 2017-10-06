@@ -18,8 +18,8 @@ CObjBackGround::CObjBackGround()
 //イニシャライズ
 void CObjBackGround::Init()
 {
-	 m_x=0;	// 背景X座標
-	 m_y=0;	// 背景Y座標
+	 m_px=0;	// 背景X座標
+	 m_py=0;	// 背景Y座標
 }
 
 //アクション

@@ -13,21 +13,21 @@ using namespace GameL;
 //コンストラクタ
 CObjCannon::CObjCannon(float x, float y)
 {
-	m_x = x * CANNON_SIZE_HEIGHT;
-	m_y = y * CANNON_SIZE_WIDTH;
+	m_px = x * CANNON_SIZE_HEIGHT;
+	m_py = y * CANNON_SIZE_WIDTH;
 }
 
 //イニシャライズ
 void CObjCannon::Init()
 {
 
-	m_x = 700.0f;
-	m_y = 100.0f;
+	m_px = 700.0f;
+	m_py = 100.0f;
 	m_r = 0.0f;
 	m_rec = 0.0f;
 	
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_x, m_y, CANNON_SIZE_WIDTH, CANNON_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_CANNON, 1);
+	Hits::SetHitBox(this, m_px, m_py, CANNON_SIZE_WIDTH, CANNON_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_CANNON, 1);
 
 }
 
@@ -40,7 +40,7 @@ void CObjCannon::Action()
 	if (m_rec == 200.0f)
 	{
 		//debug弾丸作成
-		CObjEnemyBullet* objenemy_bullet = new CObjEnemyBullet(m_x + 20.0f, m_y, 0);
+		CObjEnemyBullet* objenemy_bullet = new CObjEnemyBullet(m_px + 20.0f, m_py, 0);
 		Objs::InsertObj(objenemy_bullet, OBJ_ENEMY_BULLET, 10);
 
 		m_rec = 0.0f;
@@ -51,7 +51,7 @@ void CObjCannon::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_x, m_y);
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
 
 }
@@ -74,8 +74,8 @@ void CObjCannon::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_y - objmap->GetScrollY();
-	dst.m_left = 0.0f + m_x - objmap->GetScrollX();
+	dst.m_top = 0.0f + m_py - objmap->GetScrollY();
+	dst.m_left = 0.0f + m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + CANNON_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + CANNON_SIZE_HEIGHT;
 

@@ -286,7 +286,7 @@ void CObjBlock::BossHit()
 		{
 			float r = hit_data[i]->r;//ぶつかっている角度をもってくる
 
-									 //ブロックの右側が衝突している場合
+			//ブロックの右側が衝突している場合
 			if (0 < r && r < 45 || 315 < r && r < 360)
 			{
 				objboss->SetVecX(0.0f);//ボスのX方向の移動を０にする

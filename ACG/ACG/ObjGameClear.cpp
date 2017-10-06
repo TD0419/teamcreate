@@ -28,7 +28,7 @@ void CObjGameClear::Action()
 void CObjGameClear::Draw()
 {
 	//タイトル画面
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float color[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src;	//描画先切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -46,6 +46,6 @@ void CObjGameClear::Draw()
 	dst.m_bottom = 600.0f;
 
 	//背景描画
-	Draw::Draw(1, &src, &dst, c, 0.0f);
+	Draw::Draw(1, &src, &dst, color, 0.0f);
 
 }

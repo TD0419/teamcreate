@@ -15,8 +15,8 @@ public:
 	void Draw();					// ƒhƒ[
 
 private:
-	float m_x;	// ”wŒiXÀ•W
-	float m_y;	// ”wŒiYÀ•W
+	float m_px;	// ”wŒiXÀ•W
+	float m_py;	// ”wŒiYÀ•W
 	
 
 };
