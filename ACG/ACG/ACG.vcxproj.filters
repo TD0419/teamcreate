@@ -85,9 +85,6 @@
     <Filter Include="ソース ファイル\Main\LeverSwich">
       <UniqueIdentifier>{1238450d-e6ac-4e91-a418-a53b16b7385a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\door">
-      <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\ThroughBlock">
       <UniqueIdentifier>{77f04e69-178f-4e96-b919-0d0532fefba0}</UniqueIdentifier>
     </Filter>
@@ -105,6 +102,9 @@
     </Filter>
     <Filter Include="ソース ファイル\Main\Cannon">
       <UniqueIdentifier>{e5a59037-b682-4795-a1fd-babcfcd474bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Door">
+      <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -232,7 +232,7 @@
       <Filter>ソース ファイル\Main\Boss</Filter>
     </ClInclude>
     <ClInclude Include="ObjDoor.h">
-      <Filter>ソース ファイル\Main\door</Filter>
+      <Filter>ソース ファイル\Main\Door</Filter>
     </ClInclude>
     <ClInclude Include="ObjThroughBlock.h">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
@@ -372,7 +372,7 @@
       <Filter>ソース ファイル\Main\Boss</Filter>
     </ClCompile>
     <ClCompile Include="ObjDoor.cpp">
-      <Filter>ソース ファイル\Main\door</Filter>
+      <Filter>ソース ファイル\Main\Door</Filter>
     </ClCompile>
     <ClCompile Include="ObjThroughBlock.cpp">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
