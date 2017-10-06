@@ -84,8 +84,8 @@ void CObjCannon::Draw()
 	//主人公が生存している場合、角度の計算を行う
 	if (obj_hero != nullptr)
 	{
-		float hero_x = obj_hero->GetPosX() - m_x;		//主人公の位置情報X取得
-		float hero_y = obj_hero->GetPosY() - m_y;		//主人公の位置情報Y取得
+		float hero_x = obj_hero->GetPosX() - m_px;		//主人公の位置情報X取得
+		float hero_y = obj_hero->GetPosY() - m_py;		//主人公の位置情報Y取得
 		m_r = atan2(-hero_y, hero_x)*180.0f / 3.14f;
 		if (m_r < 0)
 		{
