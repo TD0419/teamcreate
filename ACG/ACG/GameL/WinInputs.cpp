@@ -47,7 +47,7 @@ bool CWinInputs::WmInput(HWND hWnd,UINT* uMsg, LPARAM* lParam)
 
 bool CWinInputs:: GetVKey(int v_key)
 {	
-	if(GetAsyncKeyState(v_key))
+	if(GetAsyncKeyState(v_key) & 0x8000)
 		return true;
 	else
 		return false;

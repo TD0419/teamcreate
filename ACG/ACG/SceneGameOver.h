@@ -11,7 +11,7 @@ class CSceneGameOver : public CScene
 public:
 	CSceneGameOver();
 	~CSceneGameOver();
-	void InitScene();//初期化メソッド
-	void Scene();	 //実行中メソッド
+	void InitScene();	//初期化メソッド
+	void Scene();		//実行中メソッド
 private:
 };

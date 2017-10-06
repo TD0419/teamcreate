@@ -68,6 +68,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ObjBackGround.h" />
+    <ClInclude Include="ObjCannon.h" />
+    <ClInclude Include="ObjFallingWalls.h" />
+    <ClInclude Include="ObjThroughBlock.h" />
+    <ClInclude Include="ObjBossDropKey.h" />
+    <ClInclude Include="Function.h" />
+    <ClInclude Include="ObjDoor.h" />
+    <ClInclude Include="ObjReflectBlock.h" />
+    <ClInclude Include="ObjEndlessSpring.h" />
+    <ClInclude Include="ObjEnemyBullet.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
@@ -82,9 +92,11 @@
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="ObjBlock.h" />
     <ClInclude Include="ObjBullet.h" />
+    <ClInclude Include="ObjLeverswich.h" />
     <ClInclude Include="ObjMap.h" />
-    <ClInclude Include="ObjBossEnemy.h" />
+    <ClInclude Include="ObjBoss.h" />
     <ClInclude Include="ObjEnemy.h" />
+    <ClInclude Include="ObjGameClear.h" />
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="main.h" />
@@ -92,14 +104,27 @@
     <ClInclude Include="ObjLadders.h" />
     <ClInclude Include="ObjLift.h" />
     <ClInclude Include="ObjRock.h" />
+    <ClInclude Include="ObjRope.h" />
+    <ClInclude Include="ObjSign.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjWood.h" />
     <ClInclude Include="ObjRopeSwitch.h" />
+    <ClInclude Include="SceneGameClear.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="ObjWater.h" />
+    <ClInclude Include="ObjStage3Boss.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ObjBackGround.cpp" />
+    <ClCompile Include="ObjCannon.cpp" />
+    <ClCompile Include="ObjFallingWalls.cpp" />
+    <ClCompile Include="ObjBossDropKey.cpp" />
+    <ClCompile Include="Function.cpp" />
+    <ClCompile Include="ObjDoor.cpp" />
+    <ClCompile Include="ObjEndlessSpring.cpp" />
+    <ClCompile Include="ObjEnemyBullet.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
     <ClCompile Include="GameL\DrawFont.cpp" />
@@ -113,22 +138,31 @@
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjBullet.cpp" />
+    <ClCompile Include="ObjLeverswich.cpp" />
     <ClCompile Include="ObjMap.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
-    <ClCompile Include="ObjBossEnemy.cpp" />
+    <ClCompile Include="ObjBoss.cpp" />
     <ClCompile Include="ObjButton.cpp" />
     <ClCompile Include="ObjEnemy.cpp" />
+    <ClCompile Include="ObjGameClear.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
-    <ClCompile Include="ObjLaggers.cpp" />
+    <ClCompile Include="ObjLadders.cpp" />
     <ClCompile Include="ObjLift.cpp" />
+    <ClCompile Include="ObjRope.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjWood.cpp" />
     <ClCompile Include="ObjRopeSwitch.cpp" />
+    <ClCompile Include="SceneGameClear.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjRock.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="ObjWater.cpp" />
+    <ClCompile Include="ObjSign.cpp" />
+    <ClCompile Include="ObjStage3Boss.cpp" />
+    <ClCompile Include="ObjReflectBlock.cpp" />
+    <ClCompile Include="ObjThroughBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />

@@ -9,13 +9,15 @@ using namespace GameL;
 class CObjLadders :public CObj
 {
 public:
-	CObjLadders(float x, float y);
-	~CObjLadders() {};	//デストラクタ
-	void Init();	    //イニシャライズ
-	void Action();	    //アクション
-	void Draw();	    //ドロー
+	CObjLadders(int x,int y);	//コンストラクタ
+	~CObjLadders() {};			//デストラクタ
+	void Init();				//イニシャライズ
+	void Action();				//アクション
+	void Draw();				//ドロー
+	void HeroHit(float px, float py);//プレイヤーがあたったときの処理
 
 private:
-	float m_ladders_x; //ハシゴX座標
-	float m_ladders_y; //ハシゴY座標
+	float m_px;					//ハシゴX座標
+	float m_py;					//ハシゴY座標
+								//マップ上の位置（要素数）
 };

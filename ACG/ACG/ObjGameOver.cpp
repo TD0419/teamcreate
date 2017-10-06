@@ -17,60 +17,12 @@ void CObjGameOver::Init()
 {
 	m_key_flag = false;
 	m_audio_se = 0;//SEの音楽の管理
-	m_time = 0;
-
-	////値交換用
-	//int w;
-
-	////スコアをランキングの最後に入れる
-	//((UserData*)Save::GetData())->m_ranking[RANKING_MAX_COUNT - 1] = ((UserData*)Save::GetData())->m_point;
-
-	////ランキング変動確認
-	////バブルソート
-	//for (int i = 0; i < RANKING_MAX_COUNT - 1; i++)
-	//{
-	//	for (int j = i + 1; j < RANKING_MAX_COUNT; j++)
-	//	{
-	//		if (((UserData*)Save::GetData())->m_ranking[i] < ((UserData*)Save::GetData())->m_ranking[j])
-	//		{
-	//			//値の変更
-	//			w = ((UserData*)Save::GetData())->m_ranking[i];
-	//			((UserData*)Save::GetData())->m_ranking[i] = ((UserData*)Save::GetData())->m_ranking[j];
-	//			((UserData*)Save::GetData())->m_ranking[j] = w;
-	//		}
-	//	}
-	//}
-
-	////ステージ1で初期化する
-	//((UserData*)Save::GetData())->m_stage_count = 1;
-
-	//セーブ
-	Save::Seve();
 }
 
 //アクション
 void CObjGameOver::Action()
 {
-	m_time++;
 
-	//if (m_time > 400)
-	//{
-	//	//Aを押したら、メニュー画面へ
-	//	if (Input::GetVKey('Q') == true)
-	//	{
-	//		if (m_key_flag == true)
-	//		{
-	//			//ランキングに反映したスコアを初期化する
-	//			((UserData*)Save::GetData())->m_point = 0;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		m_key_flag = true;
-	//		Scene::SetScene(new CSceneMenu());//メニュー画面へ
-	//		
-	//	}
-	//}
 }
 
 //ドロー
@@ -81,8 +33,8 @@ void CObjGameOver::Draw()
 	//RECT_F src;	//描画先切り取り位置
 	//RECT_F dst;	//描画先表示位置
 
-	//			//背景--------------------------------
-	//			//切り取り位置設定
+	
+	//切り取り位置設定
 	//src.m_top = 0.0f;
 	//src.m_left = 0.0f;
 	//src.m_right = 512.0f;

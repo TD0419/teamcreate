@@ -37,7 +37,7 @@ void CSceneGameOver::InitScene()
 
 	////音楽情報の読み込み
 	////BGM－－－－
-	//Audio::LoadAudio(0, L"", BACK_MUSIC);	//ゲームオーバー音
+	//Audio::LoadAudio(0, L".wav", BACK_MUSIC);	//ゲームオーバー音
 	//																
 	////０番の音楽スタート
 	//Audio::Start(0);
@@ -47,8 +47,8 @@ void CSceneGameOver::InitScene()
 
 	//																	
 	////ゲームオーバーオブジェクト作成
-	//CObjGameOver* obj = new CObjGameOver();
-	//Objs::InsertObj(obj, OBJ_GAME_OVER, 10);
+	//CObjGameOver* objgame_over = new CObjGameOver();
+	//Objs::InsertObj(objgame_over, OBJ_GAME_OVER, 10);
 }
 
 //実行中メソッド

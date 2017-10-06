@@ -10,13 +10,20 @@ using namespace GameL;
 class CObjLift :public CObj
 {
 public:
-	CObjLift(float x, float y); // コンストラクタ
-	~CObjLift() {};	// デストラクタ
-	void Init();	// イニシャライズ
-	void Action();	// アクション
-	void Draw();	// ドロー
+	CObjLift(int x, int y); // コンストラクタ
+	~CObjLift() {};			// デストラクタ
+	void Init();			// イニシャライズ
+	void Action();			// アクション
+	void Draw();			// ドロー
+	void HeroRide();		//　主人公が乗っているときの処理
+	//アクセサ-----------------------------------------
+	float GetVecX() { return m_vx; }	//移動ベクトルXを返す
+	float GetVecY() { return m_vy; }	//移動ベクトルYを返す
 
 private:
-	float m_lift_x;	// リフトX座標
-	float m_lift_y; // リフトY座標
+	float m_px;		// リフトX座標
+	float m_py;		// リフトY座標
+	float m_vx;		// リフトの移動ベクトルX
+	float m_vy;		// リフトの移動ベクトルY
+
 };

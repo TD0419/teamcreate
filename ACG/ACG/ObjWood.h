@@ -10,14 +10,15 @@ using namespace GameL;
 class CObjWood :public CObj
 {
 public:
-    CObjWood(float x, float y);        //コンストラクタ
-    ~CObjWood() {};	   //デストラクタ
-    void Init();	   //イニシャライズ
-    void Action();	   //アクション
-    void Draw();	   //ドロー
-private:
-    float m_wood_x;	   // 木X座標
-    float m_wood_y;	   // 木Y座標
-   
+    CObjWood(int x, int y);     //コンストラクタ
+    ~CObjWood() {};				//デストラクタ
+    void Init();				//イニシャライズ
+    void Action();				//アクション
+    void Draw();				//ドロー
+	void HeroHit(float px, float py);	//主人公が触れたときの処理
 
+private:
+    float m_px;		//木X座標
+    float m_py;		//木Y座標
+	float m_r;		//回転角度
 };

@@ -4,6 +4,6 @@ void main()
 
 	int i;
 	int a;
-	char* comment = "tuda「トレロの更新にはガノンを使うこと」";
+	char* comment = "tuda「トレロの更新にはじゃんけんして買った場合のみできるd」";
 	char o;
 }

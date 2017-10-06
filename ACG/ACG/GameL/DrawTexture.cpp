@@ -9,6 +9,7 @@ struct DRAW_POLYGON
 {
 	float		   pos[3];	//x-y-z頂点情報
 	unsigned int   id[2];	//ＵＶのＩＤ
+
 };
 
 //Draw2DTex.hlslグローバル
@@ -18,6 +19,7 @@ struct DRAW_2D_TEX
 	float color[4];		//カラー情報
 	float rect_in[4];	//切り取り位置
 	float rect_out[4];	//貼り付け位置
+	float rev_pos[4];	//回転の位置との距離差
 };
 
 
@@ -35,8 +37,14 @@ int CDrawTexture::m_height;
 //取得イメージ最大数
 int CDrawTexture::m_img_max;
 
+//画面全体を固定色にするかどうか
+bool CDrawTexture::m_fill;
+//固定色
+float CDrawTexture::m_color[4];
+
 //シェーダ関係
-ID3D11VertexShader* CDrawTexture::m_pVertexShader;		//バーテックスシェーダー
+ID3D11VertexShader* CDrawTexture::m_pVertexShader;		//バーテックスシェーダー(中央を中心に回転)
+ID3D11VertexShader* CDrawTexture::m_pVertexShader_side;		//バーテックスシェーダー(端を中心に回転)
 ID3D11PixelShader*  CDrawTexture::m_pPixelShader;		//ピクセルシェーダー
 ID3D11SamplerState* CDrawTexture::m_pSampleLinear;		//テクスチャーサンプラー
 ID3D11InputLayout*  CDrawTexture::m_pVertexLayout;		//頂点入力レイアウト
@@ -78,8 +86,21 @@ void C_TEX_DATA::SetTexSize(TEX_SIZE size)
 {
 	m_tex_size=size;
 }
-	
+
 //テクスチャ読み込み・表示クラスメソッド郡-------
+//画面全体を固定色にするかどうか
+void CDrawTexture::SetFill(bool fill)
+{
+	m_fill = fill;
+}
+//固定色を決める
+void CDrawTexture::SetColor(float color[4])
+{
+	m_color[0] = color[0];
+	m_color[1] = color[1];
+	m_color[2] = color[2];
+	m_color[3] = color[3];
+}
 //２D使用設定
 void  CDrawTexture::Set2DDraw()
 {
@@ -113,6 +134,7 @@ void CDrawTexture::DrawHitBox(float x,float y,float h,float w,float col[4])
 {
 	//２D使用設定
 	Set2DDraw();
+
 	//シェーダデータ輸送
 	D3D11_MAPPED_SUBRESOURCE pData;
 	if( SUCCEEDED( m_pDeviceContext->Map( m_pConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &pData ) ) )
@@ -137,18 +159,23 @@ void CDrawTexture::DrawHitBox(float x,float y,float h,float w,float col[4])
 	m_pDeviceContext->DrawIndexed(4, 0, 0);
 }
 
+
 //文字描画
 void CDrawTexture::DrawStr(ID3D11ShaderResourceView* ptex_res_view,float x,float y,float size,float col[4])
 {
 	//２D使用設定
 	Set2DDraw();
+
 	//シェーダデータ輸送
 	D3D11_MAPPED_SUBRESOURCE pData;
 	if( SUCCEEDED( m_pDeviceContext->Map( m_pConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &pData ) ) )
 	{
 		DRAW_2D_TEX  data;
 		data.color[0]=col[0];	data.color[1]=col[1];	data.color[2]=col[2];	data.color[3]=col[3];
-
+		//画面全体を固定色にするならする
+		if (m_fill == true) {
+			data.color[0] += m_color[0];	data.color[1] += m_color[1];	data.color[2] += m_color[2];	data.color[3] += m_color[3];
+		}
 		data.size[0]=1.0f;				data.size[1]=0.0f;
 		data.size[2]=(float)m_width;	data.size[3]=(float)m_height;
 
@@ -169,7 +196,7 @@ void CDrawTexture::DrawStr(ID3D11ShaderResourceView* ptex_res_view,float x,float
 	m_pDeviceContext->DrawIndexed(4, 0, 0);
 }
 
-//描画
+//描画(基本回転)
 void CDrawTexture:: Draw(int id,RECT_F* src,RECT_F* dst,float col[4],float r)
 {
 	if(m_img_max < id ) return ;
@@ -183,8 +210,13 @@ void CDrawTexture:: Draw(int id,RECT_F* src,RECT_F* dst,float col[4],float r)
 	if( SUCCEEDED( m_pDeviceContext->Map( m_pConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &pData ) ) )
 	{
 		DRAW_2D_TEX  data;
-		data.color[0]=col[0];	data.color[1]=col[1];	data.color[2]=col[2];	data.color[3]=col[3];
 
+		data.color[0] = col[0];	data.color[1] = col[1];	data.color[2] = col[2];	data.color[3] = col[3];
+		//画面全体を固定色にするならする
+		if (m_fill == true) {
+			data.color[0] += m_color[0];	data.color[1] += m_color[1];	data.color[2] += m_color[2];	data.color[3] += m_color[3];
+		}
+		
 		data.size[0]=(float)vec_tex_data[id]->GetTexSize();	data.size[1]=r;
 		data.size[2]=(float)m_width;		data.size[3]=(float)m_height;
 
@@ -193,6 +225,7 @@ void CDrawTexture:: Draw(int id,RECT_F* src,RECT_F* dst,float col[4],float r)
 
 		data.rect_in[0]=src->m_left;		data.rect_in[1]=src->m_top;
 		data.rect_in[2]=src->m_right;		data.rect_in[3]=src->m_bottom;
+
 		memcpy_s( pData.pData, pData.RowPitch, (void*)&data, sizeof( DRAW_2D_TEX  ) );
 
 		m_pDeviceContext->Unmap( m_pConstantBuffer, 0 );
@@ -206,6 +239,56 @@ void CDrawTexture:: Draw(int id,RECT_F* src,RECT_F* dst,float col[4],float r)
 
 }
 
+//描画(端中心の回転）
+void CDrawTexture::Draw(int id, RECT_F* src, RECT_F* dst, float col[4], float r,float rev_x,float rev_y)
+{
+	if (m_img_max < id) return;
+	if (vec_tex_data[id]->GetTexData() == nullptr) return;
+
+	//２D使用設定
+	Set2DDraw();
+
+	//使用するシェーダーの登録
+	m_pDeviceContext->VSSetShader(m_pVertexShader_side, NULL, 0);
+	m_pDeviceContext->PSSetShader(m_pPixelShader, NULL, 0);
+
+
+	//シェーダデータ輸送
+	D3D11_MAPPED_SUBRESOURCE pData;
+	if (SUCCEEDED(m_pDeviceContext->Map(m_pConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &pData)))
+	{
+		DRAW_2D_TEX  data;
+
+		data.color[0] = col[0];	data.color[1] = col[1];	data.color[2] = col[2];	data.color[3] = col[3];
+		//画面全体を固定色にするならする
+		if (m_fill == true) {
+			data.color[0] += m_color[0];	data.color[1] += m_color[1];	data.color[2] += m_color[2];	data.color[3] += m_color[3];
+		}
+
+		data.size[0] = (float)vec_tex_data[id]->GetTexSize();	data.size[1] = r;
+		data.size[2] = (float)m_width;		data.size[3] = (float)m_height;
+
+		data.rect_out[0] = dst->m_left;		data.rect_out[1] = dst->m_top;
+		data.rect_out[2] = dst->m_right;		data.rect_out[3] = dst->m_bottom;
+
+		data.rect_in[0] = src->m_left;		data.rect_in[1] = src->m_top;
+		data.rect_in[2] = src->m_right;		data.rect_in[3] = src->m_bottom;
+
+		data.rev_pos[0] = rev_x;			data.rev_pos[1] = rev_y;
+		data.rev_pos[2] = 0.0f;				data.rev_pos[3] = 0.0f;
+
+		memcpy_s(pData.pData, pData.RowPitch, (void*)&data, sizeof(DRAW_2D_TEX));
+
+		m_pDeviceContext->Unmap(m_pConstantBuffer, 0);
+	}
+
+	//テクスチャ設定
+	m_pDeviceContext->PSSetShaderResources(0, 1, vec_tex_data[id].get()->GetTexData());
+
+	//プリミティブをレンダリング
+	m_pDeviceContext->DrawIndexed(4, 0, 0);
+
+}
 
 //描画環境構築する
 void CDrawTexture::InitDraw(ID3D11Device* p_device,ID3D11DeviceContext* p_device_context,int w,int h,int img_max)
@@ -223,6 +306,11 @@ void CDrawTexture::InitDraw(ID3D11Device* p_device,ID3D11DeviceContext* p_device
 	vec_tex_data.reserve(m_img_max);//配列の許容量設定
 	vec_tex_data.resize(m_img_max);	//配列の要素数設定
 	
+	//画面全体を固定色にしない
+	m_fill = false;
+
+	//固定色初期化
+	m_color[0] = 0.0f; m_color[1] = 0.0f; m_color[2] = 0.0f; m_color[3] = 1.0f;
 
 	//取得テクスチャメモリ確保
 	for(int i=0; i<m_img_max;i++)
@@ -251,6 +339,22 @@ void CDrawTexture::InitDraw(ID3D11Device* p_device,ID3D11DeviceContext* p_device
 		SAFE_RELEASE(pCompiledShader);
 		MessageBox(0,L"バーテックスシェーダー作成失敗",NULL,MB_OK);
 		return ;
+	}
+
+	//ブロブからバーテックスシェーダー作成
+	if (FAILED(D3DX11CompileFromFile(hlsl_name, NULL, NULL, "vs_side", "vs_4_0", 0, 0, NULL, &pCompiledShader, &pErrors, NULL)))
+	{
+		wchar_t* c = (wchar_t*)pErrors->GetBufferPointer();
+		MessageBox(0, L"hlsl読み込み失敗", NULL, MB_OK);
+		return;
+	}
+	SAFE_RELEASE(pErrors);
+
+	if (FAILED(m_pDevice->CreateVertexShader(pCompiledShader->GetBufferPointer(), pCompiledShader->GetBufferSize(), NULL, &m_pVertexShader_side)))
+	{
+		SAFE_RELEASE(pCompiledShader);
+		MessageBox(0, L"バーテックスシェーダー作成失敗", NULL, MB_OK);
+		return;
 	}
 	
 	//頂点インプットレイアウトを定義	
