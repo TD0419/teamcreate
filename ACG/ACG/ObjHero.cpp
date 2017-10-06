@@ -464,7 +464,7 @@ void CObjHero::Draw()
 		src.m_right = 64.0f + m_ani_frame_rope * 64;
 		src.m_bottom = 640.0f;
 	}
-	else if (m_ladder_updown == 0 && m_hit_down == false)  //Ž~‚Ü‚Á‚Ä‚¢‚é‚Æ‚«
+	else if (m_ladder_updown == 0 && m_hit_down == false)  //ƒWƒƒƒ“ƒv‚µ‚Ä‚¢‚éŽž
 	{
 		src.m_top = 128.0f;
 		src.m_left = 256.0f;
