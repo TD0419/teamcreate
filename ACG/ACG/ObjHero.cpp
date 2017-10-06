@@ -311,7 +311,7 @@ void CObjHero::Action()
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
 					m_rope_control = false;
 				}
-				else if (m_posture == 1.0f)//主人公が右を向いているとき右側から発射
+				else if (m_posture == 1.0f)//主人公が左を向いているとき左側から発射
 				{
 					CObjRope* objrope = new CObjRope(m_px - 16.0f, m_py + 50.0f);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
