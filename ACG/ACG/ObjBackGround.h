@@ -8,7 +8,7 @@ using namespace GameL;
 class CObjBackGround :public CObj
 {
 public:
-	CObjBackGround();	// コンストラクタ
+	CObjBackGround() {};	// コンストラクタ
 	~CObjBackGround() {};			// デストラクタ
 	void Init();					// イニシャライズ
 	void Action();					// アクション

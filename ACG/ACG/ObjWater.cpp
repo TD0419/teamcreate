@@ -98,8 +98,6 @@ void CObjWater::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-
-
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = AniData[m_ani_frame] * WATER_SIZE_WIDTH;
@@ -113,7 +111,7 @@ void CObjWater::Draw()
 	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
 
 	
-	if(m_ani_start==false)
+	if(m_ani_start == false)
 		Draw::Draw(12, &src, &dst, color, 0);//水（波なしの画像）
 	else
 		Draw::Draw(11, &src, &dst, color, 0);//水（波有の画像　アニメーション付き）

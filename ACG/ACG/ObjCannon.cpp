@@ -20,7 +20,6 @@ CObjCannon::CObjCannon(float x, float y)
 //イニシャライズ
 void CObjCannon::Init()
 {
-
 	m_px = 700.0f;
 	m_py = 100.0f;
 	m_r = 0.0f;
@@ -52,8 +51,6 @@ void CObjCannon::Action()
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-
-
 }
 
 //ドロー

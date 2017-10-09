@@ -25,11 +25,9 @@ void CObjThroughBlock::Init()
 //アクション
 void CObjThroughBlock::Action()
 {
-	
 }
 
 //ドロー
 void CObjThroughBlock::Draw()
 {
-
 }

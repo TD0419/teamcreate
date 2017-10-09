@@ -9,23 +9,16 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
-CObjBackGround::CObjBackGround()
-{
-
-}
-
 //イニシャライズ
 void CObjBackGround::Init()
 {
-	 m_px=0;	// 背景X座標
-	 m_py=0;	// 背景Y座標
+	 m_px=0.0f;	// 背景X座標
+	 m_py=0.0f;	// 背景Y座標
 }
 
 //アクション
 void CObjBackGround::Action()
 {
-	
 }
 
 //ドロー

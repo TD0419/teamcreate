@@ -16,11 +16,10 @@ public:
 	void Action();	        //アクション
 	void Draw();	        //ドロー
 private:
-	float m_x;	 // 第三ボスX座標
-	float m_y;	 // 第三ボスY座標
+	float m_px;	 // 第三ボスX座標
+	float m_py;	 // 第三ボスY座標
 	float m_vx;  // 第三ボスX軸方向のベクトル
 	float m_vy;  // 第三ボスY軸方向のベクトル
 
 	int m_hp;    // 第三ボスのＨＰ
-
 };

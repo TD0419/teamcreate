@@ -40,5 +40,4 @@ void CSceneGameClear::InitScene()
 //実行中メソッド
 void CSceneGameClear::Scene()
 {
-
 }

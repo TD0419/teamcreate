@@ -10,11 +10,10 @@ using namespace GameL;
 class CObjTitle :public CObj
 {
 public:
-	CObjTitle(); 	//コンストラクタ
-	~CObjTitle() {};//デストラクタ
-	void Init();	//イニシャライズ
-	void Action();	//アクション
-	void Draw();	//ドロー
+	CObjTitle() {}; 	//コンストラクタ
+	~CObjTitle() {};	//デストラクタ
+	void Init();		//イニシャライズ
+	void Action();		//アクション
+	void Draw();		//ドロー
 private:
-
 };

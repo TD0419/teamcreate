@@ -61,8 +61,7 @@ void CObjLift::Action()
 
 //ドロー
 void CObjLift::Draw()
-{
-	
+{	
 }
 
 //主人公を乗せる処理をする
@@ -93,8 +92,6 @@ void CObjLift::HeroRide()
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 				objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
 				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT+1.0f);//主人公のポジションをリフトの上にする
-			
-				
 			}
 		}
 	}

@@ -21,10 +21,8 @@ CObjRopeSwitch::CObjRopeSwitch(int x, int y)
 //イニシャライズ
 void CObjRopeSwitch::Init()
 {
-
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, ROPE_SWITCH_SIZE, ROPE_SWITCH_SIZE, ELEMENT_GIMMICK, OBJ_ROPE_SWITCH, 1);
-
 }
 
 //アクション
@@ -45,7 +43,6 @@ void CObjRopeSwitch::Action()
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-
 }
 
 //ドロー
