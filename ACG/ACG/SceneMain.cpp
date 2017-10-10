@@ -87,6 +87,10 @@ void CSceneMain::InitScene()
 	CObjButton*objbutton = new CObjButton(5, 3);
 	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
 
+	//テスト壁
+	CObjLastWall*objla = new CObjLastWall(5, -1);
+	Objs::InsertObj(objla, OBJ_LAST_WALL, 10);
+
 	//背景オブジェクトを作成する
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
@@ -216,6 +220,10 @@ void CSceneMain::ImageDataLoading()
 
 	//ボタン
 	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_64);
+
+	//lastwall(仮)
+	Draw::LoadImageW(L"wall.png", 21, TEX_SIZE_64);//下
+	Draw::LoadImageW(L"wall2.png", 22, TEX_SIZE_64);//上
 }
 
 //音楽データ読み込み関数
