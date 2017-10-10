@@ -103,6 +103,9 @@
     <Filter Include="ソース ファイル\Main\Door">
       <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\LiftMove">
+      <UniqueIdentifier>{a6807d42-5d41-486f-811c-787dd5453038}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -246,6 +249,9 @@
     <ClInclude Include="Function.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="ObjLiftMove.h">
+      <Filter>ソース ファイル\Main\LiftMove</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -385,6 +391,9 @@
     </ClCompile>
     <ClCompile Include="Function.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLiftMove.cpp">
+      <Filter>ソース ファイル\Main\LiftMove</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

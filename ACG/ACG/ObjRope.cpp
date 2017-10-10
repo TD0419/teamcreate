@@ -179,7 +179,7 @@ void CObjRope::Draw()
 		if (deltaY < 0)
 			deltaY *= -1;
 		//主人公の位置に点を打つ
-		Draw::DrawHitBox(nextX, nextY, thick, thick, c);
+		Draw::DrawHitBox(nextX, nextY, thick, thick, color);
 		//ステップを進める
 		step++;
 
@@ -204,7 +204,7 @@ void CObjRope::Draw()
 				//Yの変量を分数に加算する
 				fraction += deltaY;
 				//点を描画
-				Draw::DrawHitBox(nextX, nextY, thick, thick, c);
+				Draw::DrawHitBox(nextX, nextY, thick, thick, color);
 				//ステップを進める
 				step++;
 			}
@@ -230,7 +230,7 @@ void CObjRope::Draw()
 				//Xの変量を分数に加算する
 				fraction += deltaX;
 				//点を描画
-				Draw::DrawHitBox(nextX, nextY, thick, thick, c);
+				Draw::DrawHitBox(nextX, nextY, thick, thick, color);
 				//ステップを進める
 				step++;
 			}

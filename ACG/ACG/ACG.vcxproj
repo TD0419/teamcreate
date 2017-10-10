@@ -20,7 +20,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -71,6 +71,7 @@
     <ClInclude Include="ObjBackGround.h" />
     <ClInclude Include="ObjCannon.h" />
     <ClInclude Include="ObjFallingWalls.h" />
+    <ClInclude Include="ObjLiftMove.h" />
     <ClInclude Include="ObjThroughBlock.h" />
     <ClInclude Include="ObjBossDropKey.h" />
     <ClInclude Include="Function.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjBullet.cpp" />
     <ClCompile Include="ObjLeverswich.cpp" />
+    <ClCompile Include="ObjLiftMove.cpp" />
     <ClCompile Include="ObjMap.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBoss.cpp" />

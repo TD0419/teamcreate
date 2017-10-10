@@ -14,6 +14,7 @@ enum OBJ_NAME
     OBJ_BLOCK,			//ブロック
 	OBJ_REFLECT_BLOCK,	//弾を反射するブロック
 	OBJ_LIFT,			//リフト
+	OBJ_LIFT_MOVE,      //動くリフト
 	OBJ_MAP,			//マップ
     OBJ_WOOD,			//木
 	OBJ_WATER,			//水
@@ -98,31 +99,34 @@ enum MAP_BER
 	MAP_DOOR		 ,	//ドア
 	MAP_LEVER_SWICH	 ,	//レバースイッチ
 	MAP_FALLING_WALLS,  //落下壁
-	
+	MAP_LIFT_MOVE    ,  //動くリフト
 };
 
 //オブジェクトのサイズ
-#define HERO_SIZE_WIDTH   (64.0f)		//主人公の横サイズ	
-#define HERO_SIZE_HEIGHT  (128.0f)		//主人公の縦サイズ	
-#define ENEMY_SIZE	      (64.0f)		//敵のサイズ(仮)
-#define BULLET_SIZE       (20.0f)		//弾丸サイズ（仮）
-#define BLOCK_SIZE	      (64.0f)		//ブロックのサイズ（仮）	
-#define WATER_SIZE_WIDTH  (64.0f)		//水の横サイズ
-#define WATER_SIZE_HEIGHT (64.0f)       //水の縦サイズ
-#define LADDERS_SIZE      (64.0f)		//はしごのサイズ
-#define BUTTON_SIZE	      (64.0f)		//ボタンサイズ（仮）
-#define SIGN_SIZE	      (32.0f)		//看板のサイズ（仮）
-#define LEVER_SWITCH_SIZE (64.0f)	    //レバースイッチのサイズ
-#define ROPE_SWITCH_SIZE  (64.0f)	    //ロープスイッチのサイズ
-#define LIFT_SIZE         (32.0f)		//リフトサイズ(仮)
-#define ROCK_SIZE_WIDTH	  (170.0f)		//岩の横サイズ（仮
-#define ROCK_SIZE_HEIGHT  (240.0f)		//岩の縦サイズ（仮
-#define WOOD_SIZE		  (320.0f)		//木のサイズ(仮)
-#define BOSS_SIZE	      (170.0f)		//BOSSサイズ(仮)
-#define BOSS_DORP_KEY_SIZE (32.0f)	    //ボスドロップキーサイズ(仮)
-#define DOOR_SIZE_WIDTH   (32.0f)		//ドアの横サイズ(仮)
-#define DOOR_SIZE_HEIGHT  (128.0f)		//ドアの縦サイズ(仮)
-#define SIGN_SIZE	      (32.0f)		//看板サイズ(仮)
+#define HERO_SIZE_WIDTH	      (64.0f)		//主人公の横サイズ	
+#define HERO_SIZE_HEIGHT	  (128.0f)		//主人公の縦サイズ	
+#define ENEMY_SIZE			  (64.0f)		//敵のサイズ(仮)
+#define BULLET_SIZE			  (20.0f)		//弾丸サイズ（仮）
+#define BLOCK_SIZE			  (64.0f)		//ブロックのサイズ（仮）	
+#define WATER_SIZE_WIDTH	  (64.0f)		//水の横サイズ
+#define WATER_SIZE_HEIGHT	  (64.0f)       //水の縦サイズ
+#define LADDERS_SIZE		  (64.0f)		//はしごのサイズ
+#define BUTTON_SIZE			  (64.0f)		//ボタンサイズ（仮）
+#define SIGN_SIZE			  (32.0f)		//看板のサイズ（仮）
+#define LEVER_SWITCH_SIZE	  (64.0f)	    //レバースイッチのサイズ
+#define ROPE_SWITCH_SIZE	  (64.0f)	    //ロープスイッチのサイズ
+#define LIFT_SIZE_WIDTH		  (128.0f)		//リフトサイズ横サイズ
+#define LIFT_SIZE_HEIGHT	  (32.0f)		//リフトサイズ縦サイズ
+#define LIFT_MOVE_SIZE_WIDTH  (128.0f)      //動くリフトサイズ横サイズ
+#define LIFT_MOVE_SIZE_HEIGHT (32.0f)       //動くリフトサイズ縦サイズ
+#define ROCK_SIZE_WIDTH		  (170.0f)		//岩の横サイズ（仮
+#define ROCK_SIZE_HEIGHT	  (240.0f)		//岩の縦サイズ（仮
+#define WOOD_SIZE			  (320.0f)		//木のサイズ(仮)
+#define BOSS_SIZE			  (170.0f)		//BOSSサイズ(仮)
+#define BOSS_DORP_KEY_SIZE	  (32.0f)	    //ボスドロップキーサイズ(仮)
+#define DOOR_SIZE_WIDTH		  (32.0f)		//ドアの横サイズ(仮)
+#define DOOR_SIZE_HEIGHT	  (128.0f)		//ドアの縦サイズ(仮)
+#define SIGN_SIZE			  (32.0f)		//看板サイズ(仮)
 //#define BOSS_CORRECTION (90.0f)	    //ボスサイズ補正(仮)
 #define THROUGHT_BLOCK_SIZE	(64.0f)	    //スルーブロックサイズ（仮）
 #define FALLING_WALLS_SAIZE (64.0f)		//落下壁サイズ(仮)
@@ -154,6 +158,7 @@ enum MAP_BER
 #include "ObjBlock.h"			//ブロック
 #include "ObjReflectBlock.h"	//弾を反射するブロック
 #include "ObjLift.h"			//リフト
+#include "ObjLiftMove.h"        //動くリフト
 #include "ObjLadders.h"			//はしご
 #include "ObjMap.h"				//マップ
 #include "ObjWood.h"			//木	

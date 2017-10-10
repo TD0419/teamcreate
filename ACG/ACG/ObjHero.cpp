@@ -573,13 +573,14 @@ void CObjHero::Draw()
 //着地できてるかどうかを調べる関数
 void CObjHero::LandingCheck()
 {
-	bool c1,c2;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+	bool c1,c2,c3;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
 	
-	c1=HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
+	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
-								 
+	c3 = HitUpCheck(OBJ_LIFT_MOVE); //木との着地チェック
+
 	//チェック項目のどれか一つでもtrueなら
-	if (c1 == true||c2 ==true)
+	if (c1 == true || c2 ==true || c3 == true)
 		m_hit_down = true;//着地フラグをオンにする
 
 }
