@@ -30,6 +30,7 @@ void CObjButton::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjButton::Action()
 {
+
 	
 	////’e‚ÆÚG‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð’²‚×‚é
 	//if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
