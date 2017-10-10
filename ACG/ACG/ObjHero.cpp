@@ -120,7 +120,7 @@ void CObjHero::Action()
 	
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-	//Aキーがおされたとき：右移動
+	//Dキーがおされたとき：右移動
 	if (Input::GetVKey('D') == true)
 	{
 		m_vx += 0.5f;
@@ -128,7 +128,7 @@ void CObjHero::Action()
 		m_posture = 0.0f;		    //主人公の向き
 		m_ani_time_move += 1;
 	}
-	//Dキーがおされたとき：左移動
+	//Aキーがおされたとき：左移動
 	else if (Input::GetVKey('A') == true)
 	{
 		m_vx -= 0.5f;

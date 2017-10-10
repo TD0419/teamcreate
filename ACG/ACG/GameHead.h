@@ -108,6 +108,7 @@ enum MAP_BER
 #define HERO_SIZE_HEIGHT	  (128.0f)		//主人公の縦サイズ	
 #define ENEMY_SIZE			  (64.0f)		//敵のサイズ(仮)
 #define BULLET_SIZE			  (20.0f)		//弾丸サイズ（仮）
+#define ROPE_SIZE			  (5.0f)		//ロープサイズ（仮）
 #define BLOCK_SIZE			  (64.0f)		//ブロックのサイズ（仮）	
 #define WATER_SIZE_WIDTH	  (64.0f)		//水の横サイズ
 #define WATER_SIZE_HEIGHT	  (64.0f)       //水の縦サイズ

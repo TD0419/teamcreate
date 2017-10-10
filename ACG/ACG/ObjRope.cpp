@@ -67,8 +67,10 @@ CObjRope::CObjRope(int x, int y)
 //イニシャライズ
 void CObjRope::Init()
 {
+	m_caught_flag = false;//false = フラグOFF true = フラグON
+
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_ROPE, 1);
+	Hits::SetHitBox(this, m_px, m_py, ROPE_SIZE, ROPE_SIZE, ELEMENT_PLAYER, OBJ_ROPE, 1);
 }
 
 //アクション
@@ -89,10 +91,22 @@ void CObjRope::Action()
 	//弾丸のHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//ロープスイッチと衝突したときの処理
+	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
 	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
 	{
-		;
+		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
+		m_px -= m_vx;
+		m_py -= m_vy;
+		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
+	}
+
+	//ロープ引っかかり判定がONの時、Jキーが押されたらロープを削除
+	if (Input::GetVKey('J') == true && m_caught_flag==true)
+	{
+		m_caught_flag = false;		//ロープ引っかかりフラグをOFFにする
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+		return;
 	}
 
 	//移動

@@ -21,6 +21,7 @@ private:
 	float m_vx;			// X軸方向のベクトル
 	float m_vy;			// Y軸方向のベクトル
 	float m_speed;		// 発射速度
-	float m_r;		// ロープの角度			
+	float m_r;			// ロープの角度	
+	bool m_caught_flag; //ロープスイッチに引っかかったかを調べる用
 
 };
