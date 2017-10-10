@@ -70,10 +70,10 @@ void CObjLastWall::Draw()
 	src.m_bottom = 64.0f;
 
 	//•`‰æˆÊ’u
-	dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_top = m_py - objmap->GetScrollY()+21;
 	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + 96;
-	dst.m_bottom = dst.m_top + 512;
+	dst.m_bottom = dst.m_top + 256;
 
 	//•`‰æ(ã‚Ì•”•ª)
 	Draw::Draw(22, &src, &dst, color, 0.0f);
@@ -85,10 +85,10 @@ void CObjLastWall::Draw()
 	src.m_bottom = 64.0f;
 
 	//•`‰æˆÊ’u
-	dst.m_top = m_py - objmap->GetScrollY()+467;
-	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + 96;
-	dst.m_bottom = dst.m_top + 185;
+	dst.m_top = m_py - objmap->GetScrollY()+235;
+	dst.m_left = m_px - objmap->GetScrollX()+30;
+	dst.m_right = dst.m_left + 32;
+	dst.m_bottom = dst.m_top + 512;
 	//•`‰æ(‰º‚Ì•”•ª)
 	Draw::Draw(21, &src, &dst, color, 0.0f);
 }

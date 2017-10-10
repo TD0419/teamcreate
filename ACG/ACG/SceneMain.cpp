@@ -88,7 +88,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
 
 	//テスト壁
-	CObjLastWall*objla = new CObjLastWall(5, -1);
+	CObjLastWall*objla = new CObjLastWall(5, -2);
 	Objs::InsertObj(objla, OBJ_LAST_WALL, 10);
 
 	//背景オブジェクトを作成する
