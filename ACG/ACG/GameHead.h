@@ -35,7 +35,8 @@ enum OBJ_NAME
 	OBJ_THROUGHT_BLOCK,	//スルーブロック
 	OBJ_FALLING_WALLS,  //落下壁
 	OBJ_BACKGROUND,		//バッググラウンド(背景)
-	OBJ_CANNON,			//砲台
+	OBJ_CANNON,		    //砲台
+	OBJ_LAST_WALL,		//最後の壁
 };
 //------------------------------------------------
 
@@ -128,10 +129,11 @@ enum MAP_BER
 #define DOOR_SIZE_HEIGHT	  (128.0f)		//ドアの縦サイズ(仮)
 #define SIGN_SIZE			  (32.0f)		//看板サイズ(仮)
 //#define BOSS_CORRECTION (90.0f)	    //ボスサイズ補正(仮)
-#define THROUGHT_BLOCK_SIZE	(64.0f)	    //スルーブロックサイズ（仮）
-#define FALLING_WALLS_SAIZE (64.0f)		//落下壁サイズ(仮)
-#define CANNON_SIZE_WIDTH	(64.0f)		//砲台の横サイズ(仮)
-#define CANNON_SIZE_HEIGHT	(32.0f)		//砲台の縦サイズ(仮)
+#define THROUGHT_BLOCK_SIZE	 (64.0f)	    //スルーブロックサイズ（仮）
+#define FALLING_WALLS_SAIZE  (64.0f)		//落下壁サイズ(仮)
+#define CANNON_SIZE_WIDTH	 (64.0f)		//砲台の横サイズ(仮)
+#define CANNON_SIZE_HEIGHT	 (32.0f)		//砲台の縦サイズ(仮)
+#define LAST_WALL_SIZE (96.0f)		　　　　//最後の壁のサイズ(仮)
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -180,6 +182,7 @@ enum MAP_BER
 #include "ObjFallingWalls.h"	//落下壁
 #include "ObjBackGround.h"		//バッググラウンド(背景)
 #include "ObjCannon.h"			//砲台
+#include "ObjLastWall.h"		//最後の壁
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
