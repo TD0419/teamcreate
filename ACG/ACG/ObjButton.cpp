@@ -67,5 +67,5 @@ void CObjButton::Draw()
 	dst.m_bottom = dst.m_top + BUTTON_SIZE;
 
 	//•`‰æ
-	Draw::Draw(20, &src, &dst, color, 0);
+	Draw::Draw(20, &src, &dst, color, 0.0f);
 }

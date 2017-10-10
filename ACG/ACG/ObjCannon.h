@@ -17,8 +17,8 @@ public:
 	void Action();				//アクション
 	void Draw();				//ドロー
 private:
-	float m_x;	//X座標
-	float m_y;	//Y座標
+	float m_px;	//X座標
+	float m_py;	//Y座標
 	float m_r;  //砲台の回転角度
 	float m_rec;	//弾丸リキャスト
 };

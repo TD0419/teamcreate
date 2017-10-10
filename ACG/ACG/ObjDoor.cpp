@@ -19,8 +19,8 @@ CObjDoor::CObjDoor(int x, int y)
 //イニシャライズ
 void CObjDoor::Init()
 {
-	m_px = 100;//ドアX座標
-	m_py = 384;//ドアY座標
+	m_px = 100.0f;//ドアX座標
+	m_py = 384.0f;//ドアY座標
 }
 
 //アクション
@@ -52,5 +52,5 @@ void CObjDoor::Draw()
 	dst.m_bottom = dst.m_top + DOOR_SIZE_HEIGHT;
 
 	//描画
-	Draw::Draw(6, &src, &dst, color, 0);
+	Draw::Draw(6, &src, &dst, color, 0.0f);
 }

@@ -16,13 +16,11 @@ CObjLadders::CObjLadders(int x, int y)
 //イニシャライズ
 void CObjLadders::Init()
 {
-	
 }
 
 //アクション
 void CObjLadders::Action()
 {
-
 }
 
 //ドロー
@@ -79,7 +77,6 @@ void CObjLadders::HeroHit(float px, float py)
 	//マップの値がはしごなら
 	if (map_num_up == MAP_LADDERS || map_num_center == MAP_LADDERS || map_num_down == MAP_LADDERS)
 	{
-
 		objhero->SetVecY(0.0f);//yの移動方向を初期化
 		objhero->SetHitDown(true);//着地状態にする
 		objhero->SetLadderJump(1);//1を渡す
@@ -112,7 +109,6 @@ void CObjLadders::HeroHit(float px, float py)
 		{
 			objhero->SetLaddersAniUpdown(0);//アニメーションを止める
 		}
-		
 	}
 	else
 	{
