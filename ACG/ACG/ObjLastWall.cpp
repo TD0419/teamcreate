@@ -25,8 +25,7 @@ void CObjLastWall::Init()
 	m_ani_start = false;
 
 	//当たり判定																
-	Hits::SetHitBox(this, m_px, m_py, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_WATER, 1);
-	m_water_gauge = 0.0f;
+	Hits::SetHitBox(this, m_px, m_py, 32, 450, ELEMENT_GIMMICK, OBJ_LAST_WALL, 1);
 }
 
 //アクション
@@ -50,6 +49,9 @@ void CObjLastWall::Action()
 	//		m_ani_frame = 0;
 	//	}
 	//}
+
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px+30, m_py+255);
 }
 
 //ドロー
