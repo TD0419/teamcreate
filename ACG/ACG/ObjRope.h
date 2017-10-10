@@ -15,13 +15,12 @@ public:
 	void Init();			// イニシャライズ
 	void Action();			// アクション
 	void Draw();			// ドロー
-
 private:
 	float m_px;			// ロープX座標
 	float m_py;			// ロープY座標
 	float m_vx;			// X軸方向のベクトル
 	float m_vy;			// Y軸方向のベクトル
 	float m_speed;		// 発射速度
-	float m_angle;		// ロープの角度			
+	float m_r;		// ロープの角度			
 
 };

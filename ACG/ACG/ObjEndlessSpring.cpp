@@ -8,20 +8,12 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
-CObjEndlessSpring::CObjEndlessSpring()
-{
-
-}
-
 //イニシャライズ
 void CObjEndlessSpring::Init()
 {
-	m_x = 0.0f;
-	m_y = 0.0f;
+	m_px = 0.0f;
+	m_py = 0.0f;
 	m_timelag = 180.0f;//敵生成間隔(180フレーム)
-	
-
 }
 
 //アクション
@@ -33,11 +25,7 @@ void CObjEndlessSpring::Action()
 	if (m_timelag>=180.0f)
 	{
 		m_timelag = 0;
-
 	}
-
-	
-
 }
 
 //ドロー

@@ -10,7 +10,7 @@
 
 //使用するネームスペース
 using namespace GameL;
-bool UnitVec(float* vx, float* vy);
+
 //コンストラクタ
 CObjWood::CObjWood(int x, int y)
 {
@@ -26,7 +26,7 @@ void CObjWood::Init()
 	Hits::SetHitBox(this, m_px, m_py, WOOD_SIZE, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
 	
 	// 角度変数初期化
-	m_r  = 0.0f;
+	m_r = 0.0f;
 }
 
 //アクション
@@ -50,8 +50,6 @@ void CObjWood::Action()
 		//HitBoxの位置を更新する
 		HitBoxUpData(Hits::GetHitBox(this), m_px , m_py);
 	}
-
-	
 }
 
 //ドロー

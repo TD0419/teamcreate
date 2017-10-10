@@ -30,6 +30,7 @@ void CObjButton::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjButton::Action()
 {
+
 	
 	////’e‚ÆÚG‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð’²‚×‚é
 	//if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
@@ -66,5 +67,5 @@ void CObjButton::Draw()
 	dst.m_bottom = dst.m_top + BUTTON_SIZE;
 
 	//•`‰æ
-	Draw::Draw(20, &src, &dst, color, 0);
+	Draw::Draw(20, &src, &dst, color, 0.0f);
 }

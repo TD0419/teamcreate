@@ -8,15 +8,15 @@ using namespace GameL;
 class CObjBackGround :public CObj
 {
 public:
-	CObjBackGround();	// コンストラクタ
+	CObjBackGround() {};	// コンストラクタ
 	~CObjBackGround() {};			// デストラクタ
 	void Init();					// イニシャライズ
 	void Action();					// アクション
 	void Draw();					// ドロー
 
 private:
-	float m_x;	// 背景X座標
-	float m_y;	// 背景Y座標
+	float m_px;	// 背景X座標
+	float m_py;	// 背景Y座標
 	
 
 };

@@ -14,18 +14,6 @@ using namespace GameL;
 #include "SceneGameClear.h"
 #include "GameHead.h"
 
-//コンストラクタ
-CSceneGameClear::CSceneGameClear()
-{
-
-}
-
-//デストラクタ
-CSceneGameClear::~CSceneGameClear()
-{
-
-}
-
 //初期化メソッド
 void CSceneGameClear::InitScene()
 {
@@ -42,7 +30,7 @@ void CSceneGameClear::InitScene()
 	//音楽スタート
 	Audio::Start(0);
 
-	//SE----------------
+	//SE------------------------------
 	Audio::LoadAudio(1, L".wav", EFFECT);			//決定音
 
 	CObjGameClear* objgame_clear = new CObjGameClear();	//クリアオブジェクト作成
@@ -52,5 +40,4 @@ void CSceneGameClear::InitScene()
 //実行中メソッド
 void CSceneGameClear::Scene()
 {
-
 }

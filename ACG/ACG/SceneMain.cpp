@@ -9,7 +9,6 @@
 #include "GameL\UserData.h"
 #include "GameL\Audio.h"
 
-
 //使用するネームスペース
 using namespace GameL;
 
@@ -17,16 +16,6 @@ using namespace GameL;
 #include "SceneMain.h"
 #include "GameHead.h"
 
-//コントラスト
-CSceneMain::CSceneMain()
-{
-
-}
-//デストラスト
-CSceneMain::~CSceneMain()
-{
-
-}
 
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
@@ -34,9 +23,7 @@ void CSceneMain::InitScene()
 	//マップ情報格納用変数テスト用
 	int map[MAP_Y_MAX][MAP_X_MAX] = { 0 };
 
-	//マップ情報を読み込み
-	MapDataLoading(map);
-
+	MapDataLoading(map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
 
@@ -76,7 +63,6 @@ void CSceneMain::InitScene()
 	//CObjWater* objwater = new CObjWater(8, 9);
 	//Objs::InsertObj(objwater, OBJ_WATER, 10);
 
-
 	//ロープスイッチオブジェクトを作成する
 	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
 	Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 10);
@@ -115,10 +101,10 @@ void CSceneMain::Scene()
 {
 
 }
+
 //マップデータ読み込み関数
 void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 {
-	
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
@@ -135,6 +121,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
 		return;
 	}
+
 	//外部のマップ情報ずらすやつ
 	int count = 1;
 
@@ -159,7 +146,6 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			count += 2;
 		}
 	}
-	int a = 0;
 }
 
 //画像データ読み込み関数
@@ -241,7 +227,5 @@ void CSceneMain::AudioDataLoading()
 {
 	//音楽登録ID
 	int id = 0;
-
 	//Audio::LoadAudio(id++, L"", ? ? ? ? );
-	
 }

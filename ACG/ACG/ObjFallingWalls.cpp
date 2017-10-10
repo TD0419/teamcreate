@@ -27,16 +27,8 @@ void CObjFallingWalls::Init()
 //アクション
 void CObjFallingWalls::Action()
 {
-	//ブロック情報を持ってくる
-	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-	//HitBoxの位置の変更
-	CHitBox* hit = Hits::GetHitBox(this);
-
-	
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-
 }
 
 //ドロー

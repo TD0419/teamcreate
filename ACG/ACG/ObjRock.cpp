@@ -20,7 +20,6 @@ CObjRock::CObjRock(int x, int y)
 //イニシャライズ
 void CObjRock::Init()
 {
-	
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 6; //アニメーション間隔幅
@@ -63,7 +62,6 @@ void CObjRock::Action()
 			return;
 		}
 	}
-
 
 	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
@@ -109,6 +107,7 @@ void CObjRock::Action()
 			}
 		}
 	}
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py- ROCK_SIZE_WIDTH);
 
