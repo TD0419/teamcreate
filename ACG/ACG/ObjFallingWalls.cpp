@@ -13,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjFallingWalls::CObjFallingWalls(int x, int y)
 {
-	m_px = x * FALLING_WALLS_SAIZE;
-	m_py = y * FALLING_WALLS_SAIZE;
+	m_px = (float)x * FALLING_WALLS_SAIZE;
+	m_py = (float)y * FALLING_WALLS_SAIZE;
 }
 
 //イニシャライズ

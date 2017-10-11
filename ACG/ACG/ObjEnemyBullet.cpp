@@ -29,8 +29,8 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//主人公との角度の計算を行う
-	double hero_x = objhero->GetPosX();		//主人公の位置情報X取得
-	double hero_y = objhero->GetPosY();		//主人公の位置情報Y取得
+	float hero_x = objhero->GetPosX();		//主人公の位置情報X取得
+	float hero_y = objhero->GetPosY();		//主人公の位置情報Y取得
 
 	//主人公が本来いる位置に変更
 	x -= objmap->GetScrollX();
@@ -44,18 +44,18 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	m_speed = 6.5f;
 
 	//主人公の位置のベクトル情報取得
-	double Hvector_x = hero_x - x ;
-	double Hvector_y = hero_y - y ;
+	float Hvector_x = hero_x - x ;
+	float Hvector_y = hero_y - y ;
 
 	//斜辺取得
-	double hypotenuse = sqrt(Hvector_y * Hvector_y + Hvector_x * Hvector_x);
+	float hypotenuse = sqrt(Hvector_y * Hvector_y + Hvector_x * Hvector_x);
 
 	//角度を求める
 	m_r = acos(Hvector_x / hypotenuse);
 
 	//角度方向に移動
 	m_vx = cos(m_r) * m_speed;
-	m_r = m_r * 180.0 / 3.14;
+	m_r = m_r * 180.0f / 3.14f;
 
 	//マウスのY位置が主人公のY位置より下だったら
 	if (hero_y > y)

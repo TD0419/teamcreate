@@ -9,8 +9,8 @@ using namespace GameL;
 //コンストラクタ
 CObjLadders::CObjLadders(int x, int y)
 {
-	m_px = x * LADDERS_SIZE;
-	m_py = y * LADDERS_SIZE;
+	m_px = (float)x * LADDERS_SIZE;
+	m_py = (float)y * LADDERS_SIZE;
 }
 
 //イニシャライズ

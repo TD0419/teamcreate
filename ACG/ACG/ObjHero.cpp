@@ -13,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjHero::CObjHero(int x, int y)
 {
-	m_px = x * HERO_SIZE_WIDTH;
-	m_py = y * HERO_SIZE_HEIGHT;
+	m_px = (float)x * HERO_SIZE_WIDTH;
+	m_py = (float)y * HERO_SIZE_HEIGHT;
 }
 
 //イニシャライズ
@@ -198,7 +198,7 @@ void CObjHero::Action()
 	{
 		if (m_ladder_updown == 0)
 		{
-			m_vy += 160.0 / (32.0f);
+			m_vy += 160.0f / (32.0f);
 		}
 	}
 	
