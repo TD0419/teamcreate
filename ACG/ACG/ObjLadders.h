@@ -21,4 +21,7 @@ private:
 	float m_py;		//ハシゴY座標
 	int m_map_x;	//マップ要素数X
 	int m_map_y;	//マップ要素数Y
+
+	bool m_side_block_flag;	//横にブロックがあるかどうかを判定するフラグ　
+							//あり：true	なし：false
 };

@@ -43,10 +43,6 @@ void CSceneMain::InitScene()
 	CObjEnemy* objenemy = new CObjEnemy(10,7);
 	Objs::InsertObj(objenemy, OBJ_ENEMY, 11);
 
-	//testボスオブジェクトを作成する
-	//CObjBoss* objboss = new CObjBoss(10,15);
-	//Objs::InsertObj(objboss, OBJ_BOSS, 11);
-
 	//リフトオブジェクトを作成する
 	CObjLift* objlift = new CObjLift(6, 5);
 	Objs::InsertObj(objlift, OBJ_LIFT, 10);
@@ -74,10 +70,6 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objladders2, OBJ_LADDERS, 10);
 	CObjLadders* objladders3 = new CObjLadders(6, 1);
 	Objs::InsertObj(objladders3, OBJ_LADDERS, 10);*/
-
-	//木のテストオブジェクト
-	CObjWood* objwood = new CObjWood(5, 1);
-	Objs::InsertObj(objwood, OBJ_WOOD, 10);
 
 	//test砲台オブジェクトを作成する
 	CObjCannon* objcannon = new CObjCannon(10, 5);
