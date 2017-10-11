@@ -18,7 +18,8 @@ CObjBullet::CObjBullet(float x, float y)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	
+	x -= objmap->GetScrollX();
+	y -= objmap->GetScrollY();
 	//初期位置を決める
 	m_px = x;
 	m_py = y;
@@ -32,8 +33,8 @@ CObjBullet::CObjBullet(float x, float y)
 	float mous_y = Input::GetPosY();
 
 	//主人公の位置からマウスの位置のベクトル情報取得
-	float vector_x = mous_x - (x - objmap->GetScrollX());
-	float vector_y = mous_y - (y - objmap->GetScrollY());
+	float vector_x = mous_x - x;
+	float vector_y = mous_y - y;
 
 	//斜辺取得
 	float hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
@@ -76,8 +77,9 @@ void CObjBullet::Init()
 //アクション
 void CObjBullet::Action()
 {	
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//画面内か調べる
-	m_window_check=WindowCheck(m_px,m_py,BULLET_SIZE,BULLET_SIZE);
+	m_window_check=WindowCheck(m_px+objmap->GetScrollX(),m_py+objmap->GetScrollY(),BULLET_SIZE,BULLET_SIZE);
 
 	//画面外なら消去
 	if(m_window_check==false)
@@ -138,7 +140,7 @@ void CObjBullet::Action()
 	m_py += m_vy;
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(Hits::GetHitBox(this), m_px+objmap->GetScrollX(), m_py+objmap->GetScrollY());
 
 }
 

@@ -19,7 +19,7 @@ CObjLiftMove::CObjLiftMove(int x, int y)
 //イニシャライズ
 void CObjLiftMove::Init()
 {
-	m_vx = 1.0f;
+	m_vx = 2.0f;
 	m_vy = 0.0f;
 
 	//当たり判定
@@ -39,25 +39,19 @@ void CObjLiftMove::Action()
 		HeroRide();//主人公を乗せる処理をする
 	}
 
-	//----------------バグあるので次の時間にやる
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	////マップオブジェクトを持ってくる
-	//CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	//int map_num = objmap->GetMap((m_px + LIFT_MOVE_SIZE_WIDTH), m_map_y + 1);
-	//int map_num2 = objmap->GetMap(m_map_x-1, m_map_y + 1 );
-
-	////左右に動く        
-	//if (map_num == MAP_BLOCK) //m_timeが520より下なら右に動く
-	//{
-	//	m_vx =  -1.0f;
-	//}
-	//else if (map_num2 == MAP_BLOCK)
-	//{
- //		m_vx =   1.0f;
-	//}
-	//
-
+	//動くリフトの左下部分がブロックだった場合右に動く       
+	if (objmap->GetMap(((m_px+64.0f ) / BLOCK_SIZE - 1), (m_py / BLOCK_SIZE + 1)) == MAP_BLOCK)
+	{
+		m_vx =   2.0f;
+	}
+	//動くリフトの右下部分がブロックだった場合右に動く 
+	if (objmap->GetMap(((m_px+64.0f) / BLOCK_SIZE + 1), (m_py / BLOCK_SIZE + 1)) == MAP_BLOCK)
+	{
+ 		m_vx =  -2.0f;
+	}
 
 	//移動
 	m_px += m_vx;
