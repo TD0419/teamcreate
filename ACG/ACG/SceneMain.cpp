@@ -32,7 +32,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objmap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
-	CObjHero* objhero = new CObjHero(3,5);
+	CObjHero* objhero = new CObjHero();
 	Objs::InsertObj(objhero, OBJ_HERO, 10);
 
 	//Doorオブジェクトを作成する

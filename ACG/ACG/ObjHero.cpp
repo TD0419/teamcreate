@@ -10,13 +10,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
-CObjHero::CObjHero(int x, int y)
-{
-	m_px = x * HERO_SIZE_WIDTH;
-	m_py = y * HERO_SIZE_HEIGHT;
-}
-
 //イニシャライズ
 void CObjHero::Init()
 {
