@@ -207,7 +207,7 @@ void CObjHero::Action()
 	{
 		if (m_ladder_updown == 0)
 		{
-			m_vy += 160.0 / (32.0f);
+			m_vy += 160.0f / (32.0f);
 		}
 	}
 	
@@ -478,8 +478,6 @@ void CObjHero::Draw()
 		src.m_bottom = 256.0f;
 	}
 	
-	
-
 	//•`‰æˆÊ’u
 	dst.m_top		= m_py - objmap->GetScrollY();
 	dst.m_left		= (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
@@ -557,7 +555,6 @@ void CObjHero::Draw()
 				}				
 			}
 		}
-
 	}
 	//----------------------------------------------------------------
 }
