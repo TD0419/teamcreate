@@ -76,9 +76,7 @@ void CObjBoss::Action()
 	objblock-> BlockHit(&m_px,&m_py,BOSS_SIZE,BOSS_SIZE,
 	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy
 	);
-
 	
-
 	//’eŠÛ‚Æ‚ ‚½‚Á‚½‚çHP-1
 	if (hit->SearchObjNameHit(OBJ_BULLET) != nullptr)
 	{

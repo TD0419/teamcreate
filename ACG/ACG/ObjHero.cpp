@@ -10,13 +10,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
-CObjHero::CObjHero(int x, int y)
-{
-	m_px = x * HERO_SIZE_WIDTH;
-	m_py = y * HERO_SIZE_HEIGHT;
-}
-
 //イニシャライズ
 void CObjHero::Init()
 {
@@ -120,7 +113,7 @@ void CObjHero::Action()
 	
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-	//Aキーがおされたとき：右移動
+	//Dキーがおされたとき：右移動
 	if (Input::GetVKey('D') == true)
 	{
 		m_vx += 0.5f;
@@ -128,7 +121,7 @@ void CObjHero::Action()
 		m_posture = 0.0f;		    //主人公の向き
 		m_ani_time_move += 1;
 	}
-	//Dキーがおされたとき：左移動
+	//Aキーがおされたとき：左移動
 	else if (Input::GetVKey('A') == true)
 	{
 		m_vx -= 0.5f;
@@ -412,7 +405,7 @@ void CObjHero::Draw()
 	//画像の切り取り配列
 	int AniData[4] =
 	{
-		1  , 0 , 1 ,2
+		1 , 0 , 1 ,2
 	};
 
 	//描画カラー
@@ -571,13 +564,14 @@ void CObjHero::Draw()
 //着地できてるかどうかを調べる関数
 void CObjHero::LandingCheck()
 {
-	bool c1,c2;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+	bool c1,c2,c3;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
 	
-	c1=HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
+	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
-								 
+	c3 = HitUpCheck(OBJ_LIFT_MOVE); //木との着地チェック
+
 	//チェック項目のどれか一つでもtrueなら
-	if (c1 == true||c2 ==true)
+	if (c1 == true || c2 ==true || c3 == true)
 		m_hit_down = true;//着地フラグをオンにする
 
 }

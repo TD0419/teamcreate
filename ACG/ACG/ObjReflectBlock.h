@@ -14,10 +14,7 @@ public:
 	void Init();					//イニシャライズ
 	void Action();					//アクション
 	void Draw();					//ドロー
-
-
 private:
-
-	float m_x;     //ブロック位置X
-	float m_y;     //ブロック位置Y
+	float m_px;     //ブロック位置X
+	float m_py;     //ブロック位置Y
 };

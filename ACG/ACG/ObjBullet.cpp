@@ -76,8 +76,6 @@ void CObjBullet::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjBullet::Action()
 {	
-	
-	
 	//‰æ–Ê“à‚©’²‚×‚é
 	m_window_check=WindowCheck(m_px,m_py,BULLET_SIZE,BULLET_SIZE);
 

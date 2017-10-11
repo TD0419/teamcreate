@@ -9,7 +9,6 @@
 #include "GameL\UserData.h"
 #include "GameL\Audio.h"
 
-
 //使用するネームスペース
 using namespace GameL;
 
@@ -17,16 +16,6 @@ using namespace GameL;
 #include "SceneMain.h"
 #include "GameHead.h"
 
-//コントラスト
-CSceneMain::CSceneMain()
-{
-
-}
-//デストラスト
-CSceneMain::~CSceneMain()
-{
-
-}
 
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
@@ -34,9 +23,7 @@ void CSceneMain::InitScene()
 	//マップ情報格納用変数テスト用
 	int map[MAP_Y_MAX][MAP_X_MAX] = { 0 };
 
-	//マップ情報を読み込み
-	MapDataLoading(map);
-
+	MapDataLoading(map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
 
@@ -45,7 +32,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objmap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
-	CObjHero* objhero = new CObjHero(3,5);
+	CObjHero* objhero = new CObjHero();
 	Objs::InsertObj(objhero, OBJ_HERO, 10);
 
 	//Doorオブジェクトを作成する
@@ -76,7 +63,6 @@ void CSceneMain::InitScene()
 	//CObjWater* objwater = new CObjWater(8, 9);
 	//Objs::InsertObj(objwater, OBJ_WATER, 10);
 
-
 	//ロープスイッチオブジェクトを作成する
 	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
 	Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 10);
@@ -101,6 +87,10 @@ void CSceneMain::InitScene()
 	CObjButton*objbutton = new CObjButton(5, 3);
 	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
 
+	//テスト壁
+	CObjLastWall*objla = new CObjLastWall(5, -2);
+	Objs::InsertObj(objla, OBJ_LAST_WALL, 10);
+
 	//背景オブジェクトを作成する
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
@@ -115,15 +105,18 @@ void CSceneMain::Scene()
 {
 
 }
+
 //マップデータ読み込み関数
 void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 {
-	
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	p = Save::ExternalDataOpen(L"Stage01(proto).csv", &size);//外部データ読み込み
+	//p = Save::ExternalDataOpen(L"Stage01(proto).csv", &size);//外部データ読み込み
+	//Stage02のテストプレイ中のためStage01(proto).csvの読み込みを変更しています
+
+	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
 
 	//p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
@@ -132,6 +125,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
 		return;
 	}
+
 	//外部のマップ情報ずらすやつ
 	int count = 1;
 
@@ -156,7 +150,6 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			count += 2;
 		}
 	}
-	int a = 0;
 }
 
 //画像データ読み込み関数
@@ -231,6 +224,10 @@ void CSceneMain::ImageDataLoading()
 
 	//ボタン
 	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_64);
+
+	//lastwall(仮)
+	Draw::LoadImageW(L"wall.png", 21, TEX_SIZE_64);//下
+	Draw::LoadImageW(L"wall2.png", 22, TEX_SIZE_64);//上
 }
 
 //音楽データ読み込み関数
@@ -238,7 +235,5 @@ void CSceneMain::AudioDataLoading()
 {
 	//音楽登録ID
 	int id = 0;
-
 	//Audio::LoadAudio(id++, L"", ? ? ? ? );
-	
 }

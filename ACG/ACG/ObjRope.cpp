@@ -42,16 +42,16 @@ CObjRope::CObjRope(int x, int y)
 	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
 
 	//角度を求める
-	m_angle = acos(vector_x / hypotenuse);
+	m_r = acos(vector_x / hypotenuse);
 	//角度方向に移動
-	m_vx = cos(m_angle) * m_speed;
-	m_angle = m_angle * 180.0 / 3.14;
+	m_vx = cos(m_r) * m_speed;
+	m_r = m_r * 180.0 / 3.14;
 
 	//マウスのY位置が主人公のY位置より下だったら
 	if (mous_y > y)
 	{
 		//180°～360°の値にする
-		m_angle = 360 - abs(m_angle);
+		m_r = 360 - abs(m_r);
 	}
 	//マウスのY位置が初期Y位置より上
 	if (mous_y < y)
@@ -67,9 +67,10 @@ CObjRope::CObjRope(int x, int y)
 //イニシャライズ
 void CObjRope::Init()
 {
-	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_ROPE, 1);
+	m_caught_flag = false;//false = フラグOFF true = フラグON
 
+	//当たり判定用HitBoxを作成
+	Hits::SetHitBox(this, m_px, m_py, ROPE_SIZE, ROPE_SIZE, ELEMENT_PLAYER, OBJ_ROPE, 1);
 }
 
 //アクション
@@ -90,25 +91,40 @@ void CObjRope::Action()
 	//弾丸のHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//ロープスイッチと衝突したときの処理
+	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
 	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
 	{
-		;
+		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
+		m_px -= m_vx;
+		m_py -= m_vy;
+		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
+	}
+
+	//ロープ引っかかり判定がONの時、Jキーが押されたらロープを削除
+	if (Input::GetVKey('J') == true && m_caught_flag==true)
+	{
+		m_caught_flag = false;		//ロープ引っかかりフラグをOFFにする
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+		return;
 	}
 
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
 
-	hit->SetPos(m_px, m_py);//HitBoxの位置を更新
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
 
 //ドロー
 void CObjRope::Draw()
 {
-	float c[4] = {0.0f,0.0f,0.0f,1.0f};
+	float color[4] = {0.0f,0.0f,0.0f,1.0f};
+
 	//主人公オブジェクト情報を取得
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//マップオブジェクト情報を取得
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//主人公が向いている向きを持ってくる
@@ -177,7 +193,7 @@ void CObjRope::Draw()
 		if (deltaY < 0)
 			deltaY *= -1;
 		//主人公の位置に点を打つ
-		Draw::DrawHitBox(nextX, nextY, thick, thick, c);
+		Draw::DrawHitBox(nextX, nextY, thick, thick, color);
 		//ステップを進める
 		step++;
 
@@ -202,7 +218,7 @@ void CObjRope::Draw()
 				//Yの変量を分数に加算する
 				fraction += deltaY;
 				//点を描画
-				Draw::DrawHitBox(nextX, nextY, thick, thick, c);
+				Draw::DrawHitBox(nextX, nextY, thick, thick, color);
 				//ステップを進める
 				step++;
 			}
@@ -228,7 +244,7 @@ void CObjRope::Draw()
 				//Xの変量を分数に加算する
 				fraction += deltaX;
 				//点を描画
-				Draw::DrawHitBox(nextX, nextY, thick, thick, c);
+				Draw::DrawHitBox(nextX, nextY, thick, thick, color);
 				//ステップを進める
 				step++;
 			}

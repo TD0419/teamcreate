@@ -8,16 +8,9 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
-CObjTitle::CObjTitle()
-{
-
-}
-
 //イニシャライズ
 void CObjTitle::Init()
 {
-
 }
 
 //アクション
@@ -33,5 +26,4 @@ void CObjTitle::Action()
 //ドロー
 void CObjTitle::Draw()
 {
-
 }

@@ -15,13 +15,11 @@ using namespace GameL;
 //イニシャライズ
 void CObjGameClear::Init()
 {
-
 }
 
 //アクション
 void CObjGameClear::Action()
 {
-
 }
 
 //ドロー

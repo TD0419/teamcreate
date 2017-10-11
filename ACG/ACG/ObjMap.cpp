@@ -85,7 +85,6 @@ void CObjMap::ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y)
 				//マップの範囲ないなら
 				if(x >= 0 && y >= 0 && x < MAP_X_MAX && y < MAP_Y_MAX)
 						CreateObj(x, y);//オブジェクトを生成
-
 			}
 		}
 	}
@@ -131,8 +130,8 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_LIFT:		//リフト作成
 		{
-			CObjLift* objlift = new CObjLift(x, y);
-			Objs::InsertObj(objlift, OBJ_LIFT, 9);
+			CObjLiftMove* objlift = new CObjLiftMove(x, y);
+			Objs::InsertObj(objlift, OBJ_LIFT_MOVE, 9);
 			break;
 		}
 		

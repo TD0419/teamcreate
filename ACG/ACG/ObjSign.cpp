@@ -52,10 +52,10 @@ void CObjSign::Action()
 //ドロー
 void CObjSign::Draw()
 {
-	//描画カラー（枠）
-	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+	//描画カラー
+	float color[4] = { 1.0f,1.0f,1.0f,1.0f};
 	//描画カラー(文字)
-	float c[4] = { 0.0f,0.0f,0.0f, 1.0f };
+	float color_str[4] = { 0.0f,0.0f,0.0f,1.0f};
 
 	RECT_F src, dst;
 
@@ -79,7 +79,7 @@ void CObjSign::Draw()
 	{
 		//描画
 		Draw::Draw(17, &src, &dst, color, 0);
-		Font::StrDraw(L"ヘビうなぎ「正確にはヘビうなぎだよ」", dst.m_left, dst.m_top + 32.0f , 32.0f, c);
+		Font::StrDraw(L"ヘビうなぎ「正確にはヘビうなぎだよ」", dst.m_left, dst.m_top + 32.0f , 32.0f, color_str);
 	}
 	
 }
