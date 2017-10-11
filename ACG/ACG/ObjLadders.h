@@ -22,4 +22,5 @@ private:
 	int m_map_x;	//マップ要素数X
 	int m_map_y;	//マップ要素数Y
 	bool  m_obj_look_f;			//ハシゴが見えるかどうか false:見えない true:見える
+	bool  m_side_block_flag;
 };

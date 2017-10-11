@@ -64,12 +64,13 @@ void CObjLadders::Draw()
 		dst.m_right = dst.m_left + LADDERS_SIZE;
 		dst.m_bottom = dst.m_top + LADDERS_SIZE;
 
-	//サイドにブロックがあれば
-	if(m_side_block_flag==true)
-		Draw::Draw(2, &src, &dst, color, 0);//ブロックの描画
+		//サイドにブロックがあれば
+		if (m_side_block_flag == true)
+			Draw::Draw(2, &src, &dst, color, 0);//ブロックの描画
 
-	//梯子の描画
-	Draw::Draw(5, &src, &dst, color, 0);
+		//梯子の描画
+		Draw::Draw(5, &src, &dst, color, 0);
+	}
 }
 
 //プレイヤーがあたったときの処理
@@ -141,4 +142,5 @@ void CObjLadders::HeroHit(float px, float py)
 			objhero->SetLadderJump(0);//ゼロを渡す
 		}
 	}
+	
 }
