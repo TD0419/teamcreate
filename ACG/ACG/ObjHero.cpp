@@ -89,8 +89,26 @@ void CObjHero::Action()
 	//はしごオブジェクトを持ってくる
 	CObjLadders* objladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
 
-	if(objladders != nullptr)
+	if (objladders != nullptr)
+	{
+		//主人公の左下、真下、右下にブロックがあると登っていない判定にする
+		for (int i = 0; i <= HERO_SIZE_WIDTH; i += HERO_SIZE_WIDTH / 2)
+		{
+			int x = (m_px + i) / BLOCK_SIZE;
+			int y = (m_py + 1 + HERO_SIZE_HEIGHT) / BLOCK_SIZE;
+			int a = objmap->GetMap(x, y);
+			
+			//左下、真下、右下にブロックがあると登っていない判定にする
+			if (objmap->GetMap(x, y) == MAP_BLOCK)
+			{
+				//はしごに登っていない
+				m_ladder_updown = 0;
+				
+			}
+		}
+
 		objladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
+	}
 
 	//はしごのアニメーションタイムを進める
 	m_ani_time_ladders += m_ladder_ani_updown;//はしごから取ってくる
@@ -108,6 +126,7 @@ void CObjHero::Action()
 		m_ani_frame_ladders = 0;
 	}
 
+	
 	//はしご終了---------------------------------------------
 
 	
@@ -180,9 +199,6 @@ void CObjHero::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098);
 
-	if (m_hit_down == true)
- 		int a = 0;
-
 	//自由落下運動
 	m_vy += 9.8 / (16.0f);
 	
@@ -191,7 +207,7 @@ void CObjHero::Action()
 	{
 		if (m_ladder_updown == 0)
 		{
-			m_vy += 160.0 / (32.0f);
+			m_vy += 160.0f / (32.0f);
 		}
 	}
 	
@@ -425,23 +441,6 @@ void CObjHero::Draw()
 		src.m_left = 0.0f + m_ani_frame_ladders * 64;
 		src.m_right = 64.0f + m_ani_frame_ladders * 64;
 		src.m_bottom = 384.0f;
-		
-		//主人公の左下、真下、右下にブロックがあると止まっているアニメーションにする
-		for (int i = 0; i <= HERO_SIZE_WIDTH; i+=HERO_SIZE_WIDTH/2)
-		{
-			int x = (m_px + i) / BLOCK_SIZE;
-			int y = (m_py + 1 + HERO_SIZE_HEIGHT) / BLOCK_SIZE;
-			int a = objmap->GetMap(x, y);
-			//左下、真下、右下にブロックがあると止まっているアニメーションにする
-			if (objmap->GetMap(x, y) == MAP_BLOCK)
-			{
-				src.m_top = 0.0f;
-				src.m_left = 0.0f;
-				src.m_right = 64.0f;
-				src.m_bottom = 128.0f;
-			}
-		}
-		
 	}
 	else if (m_ladder_updown == 2)//はしごを上りきるとき
 	{
@@ -479,8 +478,6 @@ void CObjHero::Draw()
 		src.m_bottom = 256.0f;
 	}
 	
-	
-
 	//描画位置
 	dst.m_top		= m_py - objmap->GetScrollY();
 	dst.m_left		= (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
@@ -558,7 +555,6 @@ void CObjHero::Draw()
 				}				
 			}
 		}
-
 	}
 	//----------------------------------------------------------------
 }

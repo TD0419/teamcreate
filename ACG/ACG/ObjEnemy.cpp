@@ -76,7 +76,7 @@ void CObjEnemy::Action()
 		m_ani_time += 1;
 	}
 
-	//アニメーションの感覚管理
+	//アニメーションの間隔管理
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
@@ -90,7 +90,7 @@ void CObjEnemy::Action()
 	}
 	
 	//摩擦
-	m_vx += -(m_vx * 0.098);
+	m_vx += -(m_vx * 0.098f);
 
 	//自由落下運動
 	m_vy += 9.8f / (16.0f);
@@ -119,12 +119,12 @@ void CObjEnemy::Action()
 	//右に衝突判定があったら左方向にする
 	if (m_hit_left == true)
 	{
-		m_posture = 0.0;
+		m_posture = 0.0f;
 	}
 	//左に衝突判定があったら右方向にするです
 	if (m_hit_right == true)
 	{
-		m_posture = 1.0;
+		m_posture = 1.0f;
 	}
 
 	//下に衝突判定がある
@@ -136,14 +136,14 @@ void CObjEnemy::Action()
 		if (m_vx > 0 && objmap->GetMap((m_px / BLOCK_SIZE + 1), (m_py / BLOCK_SIZE + 1)) != MAP_BLOCK)
 		{
 			//方向を左にする
-			m_posture = 0.0;
+			m_posture = 0.0f;
 		}
 		//左に移動していて &&
 		//左下にブロックが無かったら		↓原点調整
 		if (m_vx < 0 && objmap->GetMap(((m_px+ENEMY_SIZE) / BLOCK_SIZE - 1), (m_py / BLOCK_SIZE + 1)) != MAP_BLOCK)
 		{
 			//方向を右にする
-			m_posture = 1.0;
+			m_posture = 1.0f;
 		}
 	}
 

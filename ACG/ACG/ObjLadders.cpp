@@ -11,12 +11,26 @@ CObjLadders::CObjLadders(int x, int y,bool look)
 {
 	m_px = x * LADDERS_SIZE;
 	m_py = y * LADDERS_SIZE;
+	m_map_x = x;
+	m_map_y = y;	
 	m_obj_look_f = look;		//ハシゴが見えるかどうか false:見えない true:見える
 }
 
 //イニシャライズ
 void CObjLadders::Init()
 {
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//左右のマップ数値を持ってくる
+	float map_left_side  = objmap->GetMap(m_map_x - 1, m_map_y);
+	float map_right_side = objmap->GetMap(m_map_x + 1, m_map_y);
+
+	//左右にブロックがあれば
+	if (map_left_side == MAP_BLOCK || map_right_side == MAP_BLOCK)
+		m_side_block_flag = true;
+	else
+		m_side_block_flag = false;
 }
 
 //アクション
@@ -50,9 +64,12 @@ void CObjLadders::Draw()
 		dst.m_right = dst.m_left + LADDERS_SIZE;
 		dst.m_bottom = dst.m_top + LADDERS_SIZE;
 
-		//描画
-		Draw::Draw(5, &src, &dst, color, 0);
-	}
+	//サイドにブロックがあれば
+	if(m_side_block_flag==true)
+		Draw::Draw(2, &src, &dst, color, 0);//ブロックの描画
+
+	//梯子の描画
+	Draw::Draw(5, &src, &dst, color, 0);
 }
 
 //プレイヤーがあたったときの処理

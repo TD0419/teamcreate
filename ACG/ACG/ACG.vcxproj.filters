@@ -85,9 +85,6 @@
     <Filter Include="ソース ファイル\Main\LeverSwich">
       <UniqueIdentifier>{1238450d-e6ac-4e91-a418-a53b16b7385a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\door">
-      <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\ThroughBlock">
       <UniqueIdentifier>{77f04e69-178f-4e96-b919-0d0532fefba0}</UniqueIdentifier>
     </Filter>
@@ -103,11 +100,8 @@
     <Filter Include="ソース ファイル\Main\Cannon">
       <UniqueIdentifier>{e5a59037-b682-4795-a1fd-babcfcd474bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\LastWall">
-      <UniqueIdentifier>{1b904244-6881-478a-a3cf-40c314c36bfa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Main\LiftMove">
-      <UniqueIdentifier>{a6807d42-5d41-486f-811c-787dd5453038}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Main\Door">
+      <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +229,7 @@
       <Filter>ソース ファイル\Main\Boss</Filter>
     </ClInclude>
     <ClInclude Include="ObjDoor.h">
-      <Filter>ソース ファイル\Main\door</Filter>
+      <Filter>ソース ファイル\Main\Door</Filter>
     </ClInclude>
     <ClInclude Include="ObjThroughBlock.h">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
@@ -249,14 +243,14 @@
     <ClInclude Include="ObjCannon.h">
       <Filter>ソース ファイル\Main\Cannon</Filter>
     </ClInclude>
-    <ClInclude Include="ObjLastWall.h">
-      <Filter>ソース ファイル\Main\LastWall</Filter>
-    </ClInclude>
     <ClInclude Include="Function.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="ObjLastWall.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
     <ClInclude Include="ObjLiftMove.h">
-      <Filter>ソース ファイル\Main\LiftMove</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -378,7 +372,7 @@
       <Filter>ソース ファイル\Main\Boss</Filter>
     </ClCompile>
     <ClCompile Include="ObjDoor.cpp">
-      <Filter>ソース ファイル\Main\door</Filter>
+      <Filter>ソース ファイル\Main\Door</Filter>
     </ClCompile>
     <ClCompile Include="ObjThroughBlock.cpp">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
@@ -395,14 +389,14 @@
     <ClCompile Include="ObjLadders.cpp">
       <Filter>ソース ファイル\Main\Ladder</Filter>
     </ClCompile>
-    <ClCompile Include="ObjLastWall.cpp">
-      <Filter>ソース ファイル\Main\LastWall</Filter>
-    </ClCompile>
     <ClCompile Include="Function.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ObjLastWall.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="ObjLiftMove.cpp">
-      <Filter>ソース ファイル\Main\LiftMove</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

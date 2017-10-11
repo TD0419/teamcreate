@@ -74,7 +74,7 @@ void CObjLeverSwich::Draw()
 
 	//êÿÇËéÊÇËà íu
 	src.m_top = 0.0f;
-	src.m_left = 0.0f + AniData[m_ani_frame] * 64;
+	src.m_left = AniData[m_ani_frame] * 64;
 	src.m_right = 64.0f + AniData[m_ani_frame] * 64;
 	src.m_bottom = 64.0f;
 
