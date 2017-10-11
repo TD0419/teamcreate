@@ -186,7 +186,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);
 	
 	//Enemy‰æ‘œ
-	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_128);
+	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_256);
 
 	//Lever‰æ‘œ
 	Draw::LoadImageW(L"Lever.png", 9, TEX_SIZE_128);
