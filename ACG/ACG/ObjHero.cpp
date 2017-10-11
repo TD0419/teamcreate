@@ -191,7 +191,7 @@ void CObjHero::Action()
 	{
 		if (m_ladder_updown == 0)
 		{
-			m_vy += 160.0 / (32.0f);
+			m_vy += 160.0f / (32.0f);
 		}
 	}
 	
