@@ -30,7 +30,7 @@ void CObjEnemy::Init()
 
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
-	m_ani_max_time = 4; //アニメーション間隔幅
+	m_ani_max_time = 6; //アニメーション間隔幅
 
 	m_speed = 0.5f;	//初期スピード
 
@@ -84,7 +84,7 @@ void CObjEnemy::Action()
 	}
 
 	//最後までアニメーションが進むと最初に戻る
-	if (m_ani_frame == 2)
+	if (m_ani_frame == 3)
 	{
 		m_ani_frame = 0;
 	}
@@ -161,9 +161,9 @@ void CObjEnemy::Action()
 void CObjEnemy::Draw()
 {
 	//画像の切り取り配列
-	int AniData[2] =
+	int AniData[3] =
 	{
-		0  , 1 , 
+		0  , 1 , 2
 	};
 
 	//描画カラー
@@ -181,7 +181,7 @@ void CObjEnemy::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_top = m_py + 6.5f - objmap->GetScrollY();
 	dst.m_left = (ENEMY_SIZE * m_posture) + m_px - objmap->GetScrollX();
 	dst.m_right = (ENEMY_SIZE - ENEMY_SIZE * m_posture) + m_px - objmap->GetScrollX();
 	dst.m_bottom = dst.m_top + ENEMY_SIZE;

@@ -16,8 +16,12 @@ public:
 	void Draw();				//ドロー
 	void HeroHit(float px, float py);//プレイヤーがあたったときの処理
 
-private:
-	float m_px;					//ハシゴX座標
-	float m_py;					//ハシゴY座標
-								//マップ上の位置（要素数）
+private:	
+	float m_px;		//ハシゴX座標
+	float m_py;		//ハシゴY座標
+	int m_map_x;	//マップ要素数X
+	int m_map_y;	//マップ要素数Y
+
+	bool m_side_block_flag;	//横にブロックがあるかどうかを判定するフラグ　
+							//あり：true	なし：false
 };

@@ -10,13 +10,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
-CObjHero::CObjHero(int x, int y)
-{
-	m_px = (float)x * HERO_SIZE_WIDTH;
-	m_py = (float)y * HERO_SIZE_HEIGHT;
-}
-
 //イニシャライズ
 void CObjHero::Init()
 {
@@ -486,8 +479,6 @@ void CObjHero::Draw()
 		src.m_bottom = 256.0f;
 	}
 	
-	
-
 	//描画位置
 	dst.m_top		= m_py - objmap->GetScrollY();
 	dst.m_left		= (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
@@ -565,7 +556,6 @@ void CObjHero::Draw()
 				}				
 			}
 		}
-
 	}
 	//----------------------------------------------------------------
 }
