@@ -11,18 +11,18 @@ CObjLadders::CObjLadders(int x, int y)
 {
 	m_px = x * LADDERS_SIZE;
 	m_py = y * LADDERS_SIZE;
+	m_map_x = x;
+	m_map_y = y;	
 }
 
 //イニシャライズ
 void CObjLadders::Init()
 {
-	
 }
 
 //アクション
 void CObjLadders::Action()
 {
-
 }
 
 //ドロー

@@ -103,6 +103,9 @@
     <Filter Include="ソース ファイル\Main\Door">
       <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\RopeBlock">
+      <UniqueIdentifier>{cd2f359f-96b8-4940-9491-3eeac409453f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -246,6 +249,9 @@
     <ClInclude Include="Function.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="ObjRopeBlock.h">
+      <Filter>ソース ファイル\Main\RopeBlock</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -385,6 +391,9 @@
     </ClCompile>
     <ClCompile Include="Function.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRopeBlock.cpp">
+      <Filter>ソース ファイル\Main\RopeBlock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
