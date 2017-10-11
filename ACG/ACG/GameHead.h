@@ -81,26 +81,27 @@ struct UserData
 //マップの番号とオブジェクトの対応　（仮）
 enum MAP_BER
 {
-	MAP_SPACE		 , 	//何もない場所
-	MAP_BLOCK		 ,	//ブロック(ノーマル)
-	MAP_LADDERS		 ,	//はしご
-	MAP_BUTTON		 ,	//ボタン
-	MAP_ROPE_SWITCH	 ,	//ロープスイッチ
-	MAP_LIFT		 ,	//リフト
-	MAP_ROCK		 ,	//岩
-	MAP_WOOD		 ,	//木
-	MAP_WATER		 ,	//水
-	MAP_ENEMY		 ,	//敵
-	MAP_BOSS		 ,	//ボス
-	MAP_STAGE3_BOSS  ,	//ステージ３のボス
-	MAP_BLOCK2		 ,	//
-	MAP_THROUGH_BLOCK,	//
-	MAP_REFLECT_BLOCK,	//反射ブロック
-	MAP_SIGN		 ,	//
-	MAP_DOOR		 ,	//ドア
-	MAP_LEVER_SWICH	 ,	//レバースイッチ
-	MAP_FALLING_WALLS,  //落下壁
-	MAP_LIFT_MOVE    ,  //動くリフト
+	MAP_SPACE		   , 	//何もない場所
+	MAP_BLOCK		   ,	//ブロック(ノーマル)
+	MAP_LADDERS		   ,	//はしご
+	MAP_BUTTON		   ,	//ボタン
+	MAP_ROPE_SWITCH	   ,	//ロープスイッチ
+	MAP_LIFT		   ,	//リフト
+	MAP_ROCK		   ,	//岩
+	MAP_WOOD		   ,	//木
+	MAP_WATER		   ,	//水
+	MAP_ENEMY		   ,	//敵
+	MAP_BOSS		   ,	//ボス
+	MAP_STAGE3_BOSS    ,	//ステージ３のボス
+	MAP_BLOCK2		   ,	//
+	MAP_THROUGH_BLOCK  ,	//
+	MAP_REFLECT_BLOCK  ,	//反射ブロック
+	MAP_SIGN		   ,	//
+	MAP_DOOR		   ,	//ドア
+	MAP_LEVER_SWICH	   ,	//レバースイッチ
+	MAP_FALLING_WALLS  ,  //落下壁
+	MAP_LIFT_MOVE	   ,  //動くリフト
+	MAP_NO_LOOK_LADDERS,  //見えないハシゴ
 };
 
 //オブジェクトのサイズ
