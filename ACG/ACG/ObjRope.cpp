@@ -76,6 +76,10 @@ void CObjRope::Init()
 //アクション
 void CObjRope::Action()
 {
+
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 	//画面外へいったら消去
 	if (m_px < -(BULLET_SIZE + BULLET_SIZE / 2) || //左　回転してるかもなので少し余裕を持たせる
 		m_px > WINDOW_SIZE_W ||   //右
@@ -95,10 +99,11 @@ void CObjRope::Action()
 	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
 	{
 		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
-		m_px -= m_vx;
-		m_py -= m_vy;
+		m_px -= m_vx ;
+		m_py -= m_vy ;
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
 	}
+	
 
 	//ロープ引っかかり判定がONの時、Jキーが押されたらロープを削除
 	if (Input::GetVKey('J') == true && m_caught_flag==true)
@@ -109,12 +114,19 @@ void CObjRope::Action()
 		return;
 	}
 
-	//移動
-	m_px += m_vx;
-	m_py += m_vy;
+	//引っ掛けたまま移動すると、ロープがズレて外れます。
+	//ロープを引っ掛けているときは主人公は動かない(移動できない)仕様が実装で改善予定
 
+	//移動
+	m_px += m_vx ;
+	m_py += m_vy ;
+
+	
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(Hits::GetHitBox(this), m_px+objmap->GetScrollX(), m_py+objmap->GetScrollY());
+
+
+
 }
 
 //ドロー
