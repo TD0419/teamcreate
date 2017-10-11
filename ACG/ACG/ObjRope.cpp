@@ -15,9 +15,6 @@ using namespace GameL;
 //引数2	float y		:初期位置Y
 CObjRope::CObjRope(int x, int y)
 {
-	m_px = x;
-	m_py = y;
-
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//主人公が本来いる位置に変更
@@ -91,6 +88,9 @@ void CObjRope::Action()
 	//弾丸のHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
+	//主人公のオブジェクトを持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
 	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
 	{
@@ -98,6 +98,20 @@ void CObjRope::Action()
 		m_px -= m_vx;
 		m_py -= m_vy;
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
+	
+		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
+		objhero->SetVecX(0.0f);
+
+		//Dキーがおされたとき：右移動をできなくさせる
+		if (Input::GetVKey('D') == true)
+		{
+			objhero->SetVecX(-0.5f);
+		}
+		//Aキーがおされたとき：左移動をできなくさせる
+		else if (Input::GetVKey('A') == true)
+		{
+			objhero->SetVecX(0.5f);
+		}
 	}
 
 	//ロープ引っかかり判定がONの時、Jキーが押されたらロープを削除
