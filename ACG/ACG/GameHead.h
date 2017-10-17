@@ -102,6 +102,8 @@ enum MAP_BER
 	MAP_FALLING_WALLS,  //落下壁
 	MAP_LIFT_MOVE    ,  //動くリフト
 	MAP_NO_LOOK_LADDERS, //見えないハシゴ
+	MAP_CANNON,			//砲台
+	MAP_LAST_WALL,		//次ステージへの入り口(最後の壁)
 };
 
 //オブジェクトのサイズ
