@@ -12,8 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjLift::CObjLift(int x, int y)
 {
-	m_px = x * BLOCK_SIZE;
-	m_py = y * BLOCK_SIZE;
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
 }
 
 //イニシャライズ

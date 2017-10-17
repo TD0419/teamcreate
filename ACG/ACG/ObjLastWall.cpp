@@ -12,8 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjLastWall::CObjLastWall(int x, int y)
 {
-	m_px = x * 64;
-	m_py = y * 64;
+	m_px = (float)x * 64.0f;
+	m_py = (float)y * 64.0f;
 }
 
 //イニシャライズ
@@ -21,7 +21,7 @@ void CObjLastWall::Init()
 {
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
-	m_ani_max_time = 17; //アニメーション間隔幅
+	m_ani_max_time = 17.0f; //アニメーション間隔幅
 	m_ani_start = false;
 
 	//当たり判定																
@@ -49,7 +49,7 @@ void CObjLastWall::Action()
 	//		m_ani_frame = 0;
 	//	}
 	//}
-	
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px+27, m_py+195);
 }
@@ -74,8 +74,8 @@ void CObjLastWall::Draw()
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY()-60;
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + 96;
-	dst.m_bottom = dst.m_top + 256;
+	dst.m_right = dst.m_left + 96.0f;
+	dst.m_bottom = dst.m_top + 256.0f;
 
 	//描画(上の部分)
 	Draw::Draw(22, &src, &dst, color, 0.0f);

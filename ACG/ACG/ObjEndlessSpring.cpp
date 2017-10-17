@@ -24,7 +24,7 @@ void CObjEndlessSpring::Action()
 
 	if (m_timelag>=180.0f)
 	{
-		m_timelag = 0;
+		m_timelag = 0.0f;
 	}
 }
 

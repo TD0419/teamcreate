@@ -109,7 +109,7 @@ void CObjMap::CreateObj(int x, int y)
 		
 		case MAP_LADDERS:	//ÇÕÇµÇ≤çÏê¨
 		{
-			CObjLadders* objladders = new CObjLadders(x, y);
+			CObjLadders* objladders = new CObjLadders(x, y, true);
 			Objs::InsertObj(objladders, OBJ_LADDERS, 9);
 			break;
 		}
@@ -209,6 +209,13 @@ void CObjMap::CreateObj(int x, int y)
 		{
 			CObjLeverSwich* objLeverSwich = new CObjLeverSwich(x, y);
 			Objs::InsertObj(objLeverSwich, OBJ_LEVER_SWICH, 19);
+			break;
+		}
+
+		case MAP_NO_LOOK_LADDERS: // å©Ç¶Ç»Ç¢ÉnÉVÉSçÏê¨
+		{
+			CObjLadders* objladders = new CObjLadders(x, y, false);
+			Objs::InsertObj(objladders, OBJ_LADDERS, 9);
 			break;
 		}
 	}
