@@ -105,10 +105,9 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
-	//p = Save::ExternalDataOpen(L"Stage01(proto).csv", &size);//外部データ読み込み
-	//Stage02のテストプレイ中のためStage01(proto).csvの読み込みを変更しています
+	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
 
-	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
 
 	//p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
 	
