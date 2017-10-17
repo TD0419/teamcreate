@@ -15,6 +15,7 @@ class CObjLastWall :public CObj
 		void Init();				//イニシャライズ
 		void Action();				//アクション
 		void Draw();				//ドロー
+		void HeroHit(float px, float py);	//主人公が触れたときの処理
 	private:
 		float m_px;	//X座標
 		float m_py;	//Y座標
