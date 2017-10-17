@@ -135,7 +135,6 @@ enum MAP_BER
 #define FALLING_WALLS_SAIZE  (64.0f)		//落下壁サイズ(仮)
 #define CANNON_SIZE_WIDTH	 (64.0f)		//砲台の横サイズ(仮)
 #define CANNON_SIZE_HEIGHT	 (32.0f)		//砲台の縦サイズ(仮)
-#define LAST_WALL_SIZE (96.0f)		　　　　//最後の壁のサイズ(仮)
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
