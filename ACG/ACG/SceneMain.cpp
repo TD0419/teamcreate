@@ -218,8 +218,8 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_64);
 
 	//lastwall(仮)
-	Draw::LoadImageW(L"wall.png", 21, TEX_SIZE_1024);//下
-	Draw::LoadImageW(L"wall2.png", 22, TEX_SIZE_640);//上
+	Draw::LoadImageW(L"wall.png", 21, TEX_SIZE_32);//下
+	Draw::LoadImageW(L"wall2.png", 22, TEX_SIZE_256);//上
 }
 
 //音楽データ読み込み関数

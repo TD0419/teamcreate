@@ -51,7 +51,7 @@ void CObjLastWall::Action()
 	//}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px+27, m_py+195);
+	HitBoxUpData(Hits::GetHitBox(this), m_px+29, m_py+195);
 }
 
 //ドロー
@@ -69,10 +69,10 @@ void CObjLastWall::Draw()
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_bottom = 256.0f;
 
 	//描画位置
-	dst.m_top = m_py - objmap->GetScrollY()-60;
+	dst.m_top = m_py - objmap->GetScrollY() - 60;
 	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + 96.0f;
 	dst.m_bottom = dst.m_top + 256.0f;
@@ -83,16 +83,20 @@ void CObjLastWall::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 640.0f;
+	src.m_right = 32.0f;
+	src.m_bottom = 32.0f;
 
 	//描画位置
-	dst.m_top = m_py - objmap->GetScrollY()+195;
-	dst.m_left = m_px - objmap->GetScrollX()+30;
-	dst.m_right = dst.m_left + 32;
-	dst.m_bottom = dst.m_top + 512;
-	//描画(下の部分)
-	Draw::Draw(21, &src, &dst, color, 0.0f);
+	for (int i = 0; i < 16; i++)
+	{
+
+		dst.m_top = m_py - objmap->GetScrollY() + 32*i+195;
+		dst.m_left = m_px - objmap->GetScrollX() + 30;
+		dst.m_right = dst.m_left + 32;
+		dst.m_bottom = dst.m_top + 32;
+		//描画(下の部分)
+		Draw::Draw(21, &src, &dst, color, 0.0f);
+	}
 }
 
 void CObjLastWall::HeroHit(float px,float py)
@@ -136,7 +140,7 @@ void CObjLastWall::HeroHit(float px,float py)
 			else if (225 < r && r < 315)
 			{
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				objhero->SetPosY(py + WOOD_SIZE);//主人公の位置を木の下側までずらす
+				objhero->SetPosY(py + 512.0f);//主人公の位置を木の下側までずらす
 			}
 		}
 	}
