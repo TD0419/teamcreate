@@ -21,34 +21,45 @@ CObjWood::CObjWood(int x, int y)
 //イニシャライズ
 void CObjWood::Init()
 {
-	m_r = 0.0f;
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, WOOD_SIZE, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
 	
 	// 角度変数初期化
 	m_r = 0.0f;
+
+	// 回転フラグ初期化
+	m_rota_flag = false;
 }
 
 //アクション
 void CObjWood::Action()
 {	
-	//90度以上回転していれば
-	if (m_r <= -90.0f)
+	// 回転フラグが立っていれば
+	if (m_rota_flag == true)
 	{
-		HeroHit(m_px + WOOD_SIZE, m_py);//主人公との当たり判定
-	
-		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px + WOOD_SIZE, m_py);
-		return;
+		//90度以上回転していれば
+		if (m_r <= -90.0f)
+		{
+			HeroHit(m_px + WOOD_SIZE, m_py);//主人公との当たり判定
+			//HitBoxの位置を更新する
+			HitBoxUpData(Hits::GetHitBox(this), m_px + WOOD_SIZE, m_py);
+			return;
+		}
+		else
+		{
+			HeroHit(m_px, m_py);//主人公との当たり判定
+			//木をまわす
+			m_r -= 1.0f;
+			HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+			return;
+		}
 	}
 	else
 	{
 		HeroHit(m_px, m_py);//主人公との当たり判定
-		//木をまわす
-		m_r -= 1.0f;
-
 		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px , m_py);
+		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+		return;
 	}
 }
 

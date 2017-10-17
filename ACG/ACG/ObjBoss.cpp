@@ -20,11 +20,10 @@ CObjBoss::CObjBoss(int x,int y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-   
     m_vx = 300.0f;
     m_vy = 200.0f;
 	m_r = 0.0f;
-	m_hp = 10; //ボスのＨＰ(仮にＨＰを[ 10 ]と設定)
+	m_hp = 20; //ボスのＨＰ
 
 	 //当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE , BOSS_SIZE , ELEMENT_ENEMY, OBJ_BOSS, 1);
@@ -35,31 +34,6 @@ void CObjBoss::Action()
 {
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
-
-	//いずれもデバッグ用です。
-	//Aキーがおされたとき：左移動
-	if (Input::GetVKey('J') == true)
-	{
-		m_vx -= 0.5f;
-	}
-
-	//Dキーがおされたとき：右移動
-	if (Input::GetVKey('L') == true)
-	{
-		m_vx += 0.5f;
-	}
-
-	//↑キーがおされたとき：上昇
-	if (Input::GetVKey('I') == true)
-	{
-		m_vy = -10.0f;
-	}
-	//↓キーがおされたとき：下降
-	//if (Input::GetVKey('M') == true)
-	//{
-	//	m_vy = 20.0f;
-	//}
-	//----------------------------------
 
 	//摩擦
 	m_vx += -(m_vx * 0.098f);

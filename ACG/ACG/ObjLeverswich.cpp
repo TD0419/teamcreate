@@ -50,6 +50,17 @@ void CObjLeverSwich::Action()
 		{
 			m_ani_frame = 0;
 		}
+
+		// 木を回転させる----------------------------------
+		
+		// 木オブジェクトを持ってくる
+		CObjWood* obj_wood = (CObjWood*)Objs::GetObj(OBJ_WOOD);
+
+		// 木に回転フラグを立てる
+		if (obj_wood != nullptr)
+			obj_wood->Rotation(true);
+
+		// ------------------------------------------------
 	}
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
