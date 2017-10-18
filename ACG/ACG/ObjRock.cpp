@@ -22,7 +22,7 @@ void CObjRock::Init()
 {
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
-	m_ani_max_time = 6; //アニメーション間隔幅
+	m_ani_max_time = 8; //アニメーション間隔幅
 	m_ani_start_flag = false;//アニメフラグOFF
 
 	//当たり判定用HitBoxを作成                          

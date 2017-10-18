@@ -121,7 +121,7 @@ void CObjLastWall::HeroHit(float px,float py)
 			if (0 < r && r < 45 || 315 < r && r < 360)
 			{
 				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				objhero->SetPosX(px + 32.0f);//主人公の位置を木の右側までずらす
+				objhero->SetPosX(px + WOOD_SIZE);//主人公の位置を木の右側までずらす
 			}
 			//ブロックの上側が衝突している場合
 			else if (45 < r && r < 125)
@@ -140,7 +140,7 @@ void CObjLastWall::HeroHit(float px,float py)
 			else if (225 < r && r < 315)
 			{
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				objhero->SetPosY(py + 512.0f);//主人公の位置を木の下側までずらす
+				objhero->SetPosY(py + WOOD_SIZE);//主人公の位置を木の下側までずらす
 			}
 		}
 	}
