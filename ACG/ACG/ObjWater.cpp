@@ -66,7 +66,6 @@ void CObjWater::Action()
 		// hitboxが小さくなる
         hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge, WATER_SIZE_HEIGHT - m_water_gauge, WATER_SIZE_WIDTH);
 
-
 		//アニメーションの感覚管理
 		if (m_ani_time > m_ani_max_time)
 		{

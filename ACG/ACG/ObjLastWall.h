@@ -15,7 +15,6 @@ class CObjLastWall :public CObj
 		void Init();				//イニシャライズ
 		void Action();				//アクション
 		void Draw();				//ドロー
-		void HeroHit(float px, float py);	//主人公が触れたときの処理
 	private:
 		float m_px;	//X座標
 		float m_py;	//Y座標
@@ -28,6 +27,6 @@ class CObjLastWall :public CObj
 		int m_ani_time; //アニメーションフレーム動作感覚
 		int m_ani_frame;//描画フレーム
 		float m_ani_max_time;   //アニメーション動作間隔最大値
-		float m_water_gauge; // 水位管理
+		int m_wall_gauge; // 壁管理
 		bool m_ani_start;//アニメーションの始まってるかどうかをあらわすフラグ
 };

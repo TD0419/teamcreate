@@ -57,6 +57,13 @@ void CObjBoss::Action()
 		m_hp -= 1;
 	}
 
+	if (m_hp == 0)
+	{
+		Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
+		this->SetStatus(false);		//自身に削除命令を出す
+		return;
+	}
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
