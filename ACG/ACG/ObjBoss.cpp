@@ -13,20 +13,27 @@ using namespace GameL;
 //コンストラクタ
 CObjBoss::CObjBoss(int x,int y)
 {
-	m_px = x * BOSS_SIZE;
-	m_py = y * BOSS_SIZE;
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
 }
 
 //イニシャライズ
 void CObjBoss::Init()
 {
-    m_vx = 300.0f;
-    m_vy = 200.0f;
-	m_r = 0.0f;
+    m_vx = -1.0f; // 移動ベクトル
+    m_vy = 0.0f;
 	m_hp = 20; //ボスのＨＰ
+	m_posture = 1.0f; // 左向き
+	m_speed = 3.0f;   // 速度
+
+	// blockとの衝突確認用
+	m_hit_up = false;
+	m_hit_down = false;
+	m_hit_left = false;
+	m_hit_right = false;
 
 	 //当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE , BOSS_SIZE , ELEMENT_ENEMY, OBJ_BOSS, 1);
+	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
 }
 
 //アクション
@@ -34,6 +41,11 @@ void CObjBoss::Action()
 {
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
+	
+	if (m_posture == 0.0f)		// 右向きなら
+		m_vx = m_speed;			// 右に進む
+	else if (m_posture == 1.0f) // 左向きなら
+		m_vx = -m_speed;		// 左に進む
 
 	//摩擦
 	m_vx += -(m_vx * 0.098f);
@@ -47,19 +59,25 @@ void CObjBoss::Action()
 	
 	//ブロックとの当たり判定実行
 	CObjBlock* objblock = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
-	objblock-> BlockHit(&m_px,&m_py,BOSS_SIZE,BOSS_SIZE,
+	objblock-> BlockHit(&m_px,&m_py,BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT,
 	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy
 	);
 	
+	if (m_hit_right == true)    // ブロックの右側に当たっていたら 
+		m_posture = 0.0f;		// 右向きにする
+	else if (m_hit_left == true)// ブロックの左側に当たっていたら
+		m_posture = 1.0f;		// 左向きにする
+
 	//弾丸とあたったらHP-1
-	if (hit->SearchObjNameHit(OBJ_BULLET) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
 		m_hp -= 1;
 	}
 
-	if (m_hp == 0)
+	// 体力が0以下なら
+	if (m_hp <= 0)
 	{
-		Hits::DeleteHitBox(this);	//岩が所有するHitBoxに削除する
+		Hits::DeleteHitBox(this);	//BOSSが所有するHitBoxに削除する
 		this->SetStatus(false);		//自身に削除命令を出す
 		return;
 	}
@@ -87,12 +105,11 @@ void CObjBoss::Draw()
 	src.m_bottom = 512.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_py - objmap->GetScrollY();
-	dst.m_left = 0.0f + m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left  + BOSS_SIZE;
-	dst.m_bottom = dst.m_top  + BOSS_SIZE;
+	dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_left = BOSS_SIZE_WIDTH * m_posture + m_px - objmap->GetScrollX();
+	dst.m_right = (BOSS_SIZE_WIDTH - BOSS_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
+	dst.m_bottom = dst.m_top  + BOSS_SIZE_HEIGHT;
 
 	//描画
-	Draw::Draw(14, &src, &dst, color, m_r);
-
+	Draw::Draw(14, &src, &dst, color, 0.0f);
 }
