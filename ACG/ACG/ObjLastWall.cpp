@@ -37,7 +37,7 @@ void CObjLastWall::Action()
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	// m_water_gaugeが64を越えたら処理ストップ
+	// m_wall_gaugeが512を越えたら処理ストップ
 
 	if (m_wall_gauge >= 512)
 	{
