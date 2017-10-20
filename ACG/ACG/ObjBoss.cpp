@@ -24,11 +24,11 @@ void CObjBoss::Init()
     m_vy = 0.0f;
 	m_hp = 20; //ボスのＨＰ
 	m_posture = 1.0f; // 左向き
-	m_speed = 3.0f;   // 速度
+	m_speed = 1.0f;   // 速度
 
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
-	m_ani_max_time = 2; //アニメーション間隔幅
+	m_ani_max_time = 3; //アニメーション間隔幅
 	
 	// blockとの衝突確認用
 	m_hit_up = false;
@@ -122,24 +122,20 @@ void CObjBoss::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//切り取り位置
+	//切り取り位置(	いらん奴)
 	src.m_top = 0.0f;
 	src.m_left = AniData[m_ani_frame] * 128.0-128.0;
-	src.m_right = src.m_left-128.0f;
-	src.m_bottom = src.m_top + 128.0f;;
+	src.m_right = src.m_left+128.0f;
+	src.m_bottom = src.m_top + 128.0f;
 
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = BOSS_SIZE_WIDTH * m_posture + m_px - objmap->GetScrollX();
 	dst.m_right = (BOSS_SIZE_WIDTH - BOSS_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
-	dst.m_bottom = dst.m_top  + BOSS_SIZE_HEIGHT;
-	dst.m_top = m_py - objmap->GetScrollY();
-	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left  + BOSS_SIZE;
-	dst.m_bottom = dst.m_top  + BOSS_SIZE+3;
+	dst.m_bottom = dst.m_top  + BOSS_SIZE_HEIGHT+6;
 
-	//描画
-	Draw::Draw(14, &src, &dst, color, 0.0f);
-	Draw::Draw(4, &src, &dst, color, m_r);
+	////描画
+	/*Draw::Draw(14, &src, &dst, color, 0.0f);*/
+	Draw::Draw(4, &src, &dst, color, 0.0f);
 
 }
