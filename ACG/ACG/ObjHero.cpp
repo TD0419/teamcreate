@@ -133,16 +133,16 @@ void CObjHero::Action()
 	
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-	//Dキーがおされたとき：右移動
-	if (Input::GetVKey('D') == true)
+	//Dキーがおされたとき：右移動　　ロープを出している時は動かない
+	if (Input::GetVKey('D') == true && m_rope_ani_con == false)
 	{
 		m_vx += 0.5f;
 		m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
 		m_posture = 0.0f;		    //主人公の向き
 		m_ani_time_move += 1;
 	}
-	//Aキーがおされたとき：左移動
-	else if (Input::GetVKey('A') == true)
+	//Aキーがおされたとき：左移動　　ロープを出している時は動かない
+	else if (Input::GetVKey('A') == true && m_rope_ani_con == false)
 	{
 		m_vx -= 0.5f;
 		m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
@@ -174,8 +174,8 @@ void CObjHero::Action()
 	}
 	
 	//ジャンプ--------------------------------------------------------------------
-
-	if (Input::GetVKey(VK_SPACE) == true && m_ladder_jump == 0)
+	//ロープを出している時は動かない
+	if (Input::GetVKey(VK_SPACE) == true && m_ladder_jump == 0 && m_rope_ani_con == false)
 	{
 		if (m_hit_down == true)
 		{
@@ -259,14 +259,14 @@ void CObjHero::Action()
 				//向いている方向とクリックしている方向が同じなら
 				if (m_posture == mous_way)
 				{
-					if (m_posture == 0.0f)//主人公が右を向いているとき右側から発射
+					if (m_posture == 0.0f && m_ladder_updown == 0)//主人公が右を向いていてはしごに登っていない時とき右側から発射
 					{
 						//弾丸作成
 						CObjBullet* objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
 						Objs::InsertObj(objbullet, OBJ_BULLET, 10);
 						m_bullet_control = false; //弾丸を出ないフラグにする。
 					}
-					else//主人公が左を向いているとき右側から発射
+					else if (m_posture == 1.0f && m_ladder_updown == 0)//主人公が左を向いていてはしごに登っていない時とき右側から発射
 					{
 						//弾丸作成
 						CObjBullet* objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
@@ -310,8 +310,8 @@ void CObjHero::Action()
 		}
 	}
 	
-	//trueならアニメーションを進める
-	if (m_rope_ani_con == true )
+	//trueならアニメーションを進める 　はしごに登っているときは動かない
+	if (m_rope_ani_con == true && m_ladder_updown == 0)
 	{
 		//ロープのアニメーションフレームが2以外ならアニメーションを進める
 		if (m_ani_frame_rope != 2)
@@ -333,7 +333,7 @@ void CObjHero::Action()
 			if (m_rope_control == true)//trueならロープを出せる
 			{
 				//ロープ作成
-				if (m_posture == 0.0f)//主人公が右を向いているとき右側から発射
+				if (m_posture == 0.0f )//主人公が右を向いているとき右側から発射
 				{
 					CObjRope* objrope = new CObjRope(m_px + 64.0f, m_py + 50.0f);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
@@ -355,13 +355,18 @@ void CObjHero::Action()
 					m_ani_frame_rope = 0;//アニメーションのフレームを戻す。
 					m_rope_ani_con = false;
 				}
-			
 			}
 		}
 		else
 			m_rope_control = true;
 
 	}
+	//はしごに登っているときに右クリックしたら上り終わった後に撃っていたのでそれを修正する
+	else if (m_ladder_updown != 0)
+	{
+		m_rope_ani_con = false;
+	}
+
 	//右クリックしていないときfalseにする
 	if (Input::GetMouButtonR() == false)
 		m_rope_delete_ani_con = false;
