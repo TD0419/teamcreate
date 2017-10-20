@@ -65,7 +65,7 @@ CObjRope::CObjRope(int x, int y)
 void CObjRope::Init()
 {
 	m_caught_flag = false;//false = フラグOFF true = フラグON
-
+	m_delete = false;     //false = フラグOFF true = フラグON
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ROPE_SIZE, ROPE_SIZE, ELEMENT_PLAYER, OBJ_ROPE, 1);
 }
@@ -73,6 +73,8 @@ void CObjRope::Init()
 //アクション
 void CObjRope::Action()
 {
+	//主人公のオブジェクトを持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -86,14 +88,14 @@ void CObjRope::Action()
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+		m_delete =true;  //ロープは消えていることを変数に入れる
 		return;
 	}
-
+	else
+		m_delete =false;//ロープは消えていないことを変数に入れる
+	
 	//弾丸のHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
-
-	//主人公のオブジェクトを持ってくる
-	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
 	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
@@ -117,11 +119,13 @@ void CObjRope::Action()
 			objhero->SetVecX(0.5f);
 		}
 	}
-	
+	//ロープが消していいかどうかを調べる
+	bool rope_delete_ani_con = objhero->GetRopeDeleteAniCon();
 
-	//ロープ引っかかり判定がONの時、Jキーが押されたらロープを削除
-	if (Input::GetVKey('J') == true && m_caught_flag==true)
+	//ロープ引っかかり判定がONの時、Rが押されたらロープを削除
+	if (Input::GetMouButtonR() == true && m_caught_flag==true && rope_delete_ani_con ==true)
 	{
+		m_delete = true;			//ロープは消えていることを変数に入れる
 		m_caught_flag = false;		//ロープ引っかかりフラグをOFFにする
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
@@ -168,11 +172,11 @@ void CObjRope::Draw()
 		int nextX;
 		//主人公が右を向いていたら
 		if(hero_postrue == 0.0f)
-			nextX = objhero->GetPosX() + 64.0f - objmap->GetScrollX();
+			nextX = objhero->GetPosX() + 60.0f - objmap->GetScrollX();
 		else//左を向いていたら
-			nextX = objhero->GetPosX() - 10.0f - objmap->GetScrollX();
+			nextX = objhero->GetPosX() + 5.0f - objmap->GetScrollX();
 		//点を描画するY位置
-		int nextY = objhero->GetPosY() + 50.0f - objmap->GetScrollY();
+		int nextY = objhero->GetPosY() + 80.0f - objmap->GetScrollY();
 		//自身から主人公の位置を引いた値X(変量)
 		int deltaX = own_x - nextX;
 		//自身から主人公の位置を引いた値Y(変量)

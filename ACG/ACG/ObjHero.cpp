@@ -19,6 +19,7 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
+	m_rope_delete_ani_con = false;
 
 	m_mous_x = 0.0f;//マウスの位置X
 	m_mous_y = 0.0f;//マウスの位置X
@@ -283,19 +284,37 @@ void CObjHero::Action()
 
 
 	//ロープ射出---------------------------------------------
+
+	//ロープオブジェクトを持ってくる
+	CObjRope* obj_rope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
+	
+	bool rope_caught; //ロープがロープスイッチと当たっているかどうかを確かめる変数
+	bool rope_delete; //ロープが消えてるか同うかを確かめる変数
+
+	if (obj_rope != nullptr)//ロープオブジェクトが出ている場合
+	{
+		rope_caught = obj_rope->GetCaughtFlag();//ロープがロープスイッチに当たっているかの情報をもらう
+		rope_delete = obj_rope->GetDelete();    //ロープが消えているかどうかを調べる
+	}
+	else //ロープオブジェクトが出ていない場合
+	{
+		rope_caught = false;
+		rope_delete = false;
+	}
 	//右クリックを押したら
 	if (Input::GetMouButtonR() == true)
 	{
-		if (m_rope_ani_con == false) //falseならtrueに変える
+		if (m_rope_ani_con == false && m_rope_delete_ani_con == false) //falseならtrueに変える
 		{
 			m_rope_ani_con = true;
 		}
 	}
 	
-	if (m_rope_ani_con == true) 
+	//trueならアニメーションを進める
+	if (m_rope_ani_con == true )
 	{
-		//ロープのアニメーションフレームが3以外ならアニメーションを進める
-		if (m_ani_frame_rope != 3)
+		//ロープのアニメーションフレームが2以外ならアニメーションを進める
+		if (m_ani_frame_rope != 2)
 		{
 			//ロープのアニメーションタイムを進める
 			m_ani_time_rope += 1;
@@ -311,7 +330,7 @@ void CObjHero::Action()
 		//ロープのアニメーションフレームが２ならロープを出す
 		if (m_ani_frame_rope == 2)
 		{
-			if (m_rope_control == true)
+			if (m_rope_control == true)//trueならロープを出せる
 			{
 				//ロープ作成
 				if (m_posture == 0.0f)//主人公が右を向いているとき右側から発射
@@ -327,17 +346,32 @@ void CObjHero::Action()
 					m_rope_control = false;
 				}
 			}
+			if (m_rope_control == false) //ロープを出している時
+			{
+				m_ani_frame_rope = 2;//アニメーションを２で止める
+				if (rope_delete == true)//ロープが消えている場合
+				{
+					m_rope_delete_ani_con = true;
+					m_ani_frame_rope = 0;//アニメーションのフレームを戻す。
+					m_rope_ani_con = false;
+				}
+			
+			}
 		}
 		else
 			m_rope_control = true;
 
-		//ロープのアニメーションフレームが3ならアニメーションフレームを0に戻す
-		if (m_ani_frame_rope == 3)
-		{
-			
-			m_rope_ani_con = false;
-			m_ani_frame_rope = 0;
-		}
+	}
+	//右クリックしていないときfalseにする
+	if (Input::GetMouButtonR() == false)
+		m_rope_delete_ani_con = false;
+
+	//ロープとロープスイッチが当たっているとき
+	if (rope_caught == true)
+	{
+		m_rope_delete_ani_con = false;
+		if (Input::GetMouButtonR() == false)////右クリックしていないときtrueにする
+		m_rope_delete_ani_con = true;
 	}
 
 	//射出終了------------------------------------------------
@@ -431,6 +465,16 @@ void CObjHero::Draw()
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//ロープオブジェクトを持ってくる
+	CObjRope* obj_rope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
+
+	bool rope_caught;
+
+	if (obj_rope != nullptr)//ロープオブジェクトが出ている場合
+		rope_caught = obj_rope->GetCaughtFlag();//ロープがロープスイッチに当たっているかの情報をもらう
+	else
+		rope_caught = false;
 	//本体---------------------------------
 	//切り取り位置
 	//止まっている時
@@ -449,28 +493,28 @@ void CObjHero::Draw()
 		src.m_right = 320.0f;
 		src.m_bottom = 384.0f;
 	}
-	else if (m_rope_ani_con == true) //ロープを投げるとき
+	else if (m_rope_ani_con == true || rope_caught == true) //ロープを投げるとき
 	{
 		src.m_top = 512.0f;
 		src.m_left = 0.0f + m_ani_frame_rope * 64;
 		src.m_right = 64.0f + m_ani_frame_rope * 64;
 		src.m_bottom = 640.0f;
 	}
-	else if (m_ladder_updown == 0 && m_hit_down == false)  //ジャンプしている時
+	else if (m_ladder_updown == 0 && m_hit_down == false && rope_caught == false)  //ジャンプしている時
 	{
 		src.m_top = 128.0f;
 		src.m_left = 256.0f;
 		src.m_right = 320.0f;
 		src.m_bottom = 256.0f;
 	}
-	else if (m_ani_frame_stop_move == 1 && m_ladder_updown == 0)  //止まっているとき
+	else if (m_ani_frame_stop_move == 1 && m_ladder_updown == 0 && rope_caught == false)  //止まっているとき
 	{
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;
 		src.m_bottom = 128.0f;
 	}
-	else if (m_ani_frame_stop_move == 0 && m_ladder_updown == 0)//動いているとき
+	else if (m_ani_frame_stop_move == 0 && m_ladder_updown == 0 && rope_caught == false)//動いているとき
 	{
 		src.m_top = 128.0f;
 		src.m_left = 0.0f + AniData[m_ani_frame_move] * 64;
@@ -502,7 +546,7 @@ void CObjHero::Draw()
 	dst.m_bottom = dst.m_top +64.0f;
 	
 	//描画
-	if (m_rope_ani_con == true || m_ladder_updown != 0)//ロープの描画中は
+	if (m_rope_ani_con == true || m_ladder_updown != 0 || rope_caught == true)//ロープの描画中は
 	{
 		;    //何も描画しない
 	}
