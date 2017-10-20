@@ -223,6 +223,9 @@ void CSceneMain::ImageDataLoading()
 	//lastwall(仮)
 	Draw::LoadImageW(L"Lastwall.png", 21, TEX_SIZE_256);//上
 	Draw::LoadImageW(L"Openwall.png", 22, TEX_SIZE_512);//下
+
+	//zanki(仮)
+	Draw::LoadImageW(L"zanki.png", 23, TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数
