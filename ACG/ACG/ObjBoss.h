@@ -36,4 +36,9 @@ private:
 	bool m_hit_down;
 	bool m_hit_left;
 	bool m_hit_right;
+
+	int m_ani_time; //アニメーションフレーム動作感覚
+	int m_ani_frame;//描画フレーム
+	float m_ani_max_time;   //アニメーション動作間隔最大値
+	bool m_ani_start;//アニメーションの始まってるかどうかをあらわすフラグ
 };

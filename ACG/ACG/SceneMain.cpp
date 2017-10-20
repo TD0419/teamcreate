@@ -80,8 +80,12 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
 
 	//テスト壁
-	CObjLastWall*objla = new CObjLastWall(5, -2);
-	Objs::InsertObj(objla, OBJ_LAST_WALL, 10);
+	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
+	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
+
+	//壁テストのためboss
+	CObjBoss*objboss = new CObjBoss(10, 5);
+	Objs::InsertObj(objboss, OBJ_BOSS, 10);
 
 	//背景オブジェクトを作成する
 	CObjBackGround* objback_ground = new CObjBackGround();
@@ -165,7 +169,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_1024);
 
 	//debug用Boss画像
-	Draw::LoadImageW(L"image3.png", 4, TEX_SIZE_512);
+	Draw::LoadImageW(L"image.png", 4, TEX_SIZE_1024);
 
 	//Ladders画像
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);

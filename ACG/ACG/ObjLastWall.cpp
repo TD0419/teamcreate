@@ -25,6 +25,7 @@ void CObjLastWall::Init()
 	m_ani_start = false;
 
 	m_wall_gauge = 0;
+	GateOpenflag = false;
 	//当たり判定																
 	Hits::SetHitBox(this, m_px, m_py, 32, 512, ELEMENT_GIMMICK, OBJ_LAST_WALL, 1);
 }
@@ -38,33 +39,34 @@ void CObjLastWall::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	// m_wall_gaugeが512を越えたら処理ストップ
-
-	if (m_wall_gauge >= 512)
+	if (GateOpenflag == true)
 	{
-		Hits::DeleteHitBox(this);//hitbox削除
-		
-		return;
+		if (m_wall_gauge >= 512)
+		{
+			Hits::DeleteHitBox(this);//hitbox削除
+
+			return;
+		}
+		else
+		{
+			m_wall_gauge += 1; // 1ずつ増やしていく
+								   // hitboxが小さくなる
+			hit->SetPos(m_px, m_py + m_wall_gauge, 512 - m_wall_gauge, 32);
+
+			////アニメーションの感覚管理
+			//if (m_ani_time > m_ani_max_time)
+			//{
+			//	m_ani_frame += 1;
+			//	m_ani_time = 0;
+			//}
+
+			////最後までアニメーションが進むと最初に戻る
+			//if (m_ani_frame == 2)
+			//{
+			//	m_ani_frame = 0;
+			//}
+		}
 	}
-	else
-	{
-		m_wall_gauge += 1; // 1ずつ増やしていく
-							   // hitboxが小さくなる
-		hit->SetPos(m_px , m_py + m_wall_gauge, 512 - m_wall_gauge, 32);
-
-		////アニメーションの感覚管理
-		//if (m_ani_time > m_ani_max_time)
-		//{
-		//	m_ani_frame += 1;
-		//	m_ani_time = 0;
-		//}
-
-		////最後までアニメーションが進むと最初に戻る
-		//if (m_ani_frame == 2)
-		//{
-		//	m_ani_frame = 0;
-		//}
-	}
-
 	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
 
