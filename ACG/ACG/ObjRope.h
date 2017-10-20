@@ -10,11 +10,13 @@ using namespace GameL;
 class CObjRope :public CObj
 {
 public:
-	CObjRope(int x, int y); // コンストラクタ
-	~CObjRope() {};			// デストラクタ
-	void Init();			// イニシャライズ
-	void Action();			// アクション
-	void Draw();			// ドロー
+	CObjRope(int x, int y);			// コンストラクタ
+	~CObjRope() {};					// デストラクタ
+	void Init();					// イニシャライズ
+	void Action();					// アクション
+	void Draw();					// ドロー
+	bool GetCaughtFlag() { return m_caught_flag; }//ロープスイッチに引っかかったかを調べる用の変数を返す
+	bool GetDelete() { return m_delete; }         //ロープが画面外に行ったかどうかを送る
 private:
 	float m_px;			// ロープX座標
 	float m_py;			// ロープY座標
@@ -23,5 +25,5 @@ private:
 	float m_speed;		// 発射速度
 	float m_r;			// ロープの角度	
 	bool m_caught_flag; //ロープスイッチに引っかかったかを調べる用
-
+	bool m_delete;      //ロープが消えているかどうか調べる変数
 };
