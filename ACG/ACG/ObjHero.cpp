@@ -1,7 +1,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\WinInputs.h"
 #include "GameL\HitBoxManager.h"
-
+#include "GameL\DrawFont.h"
 #include "GameHead.h"
 #include "ObjHero.h"
 #include"Function.h"
@@ -44,6 +44,7 @@ void CObjHero::Init()
 	m_ani_time_rope = 0;
 	m_ani_frame_rope = 0;	//rope静止フレームを初期にする
 
+	m_zanki = 2;//ざんき初期化
 
 	//ブロックとの衝突した状態(場所)確認用
 	m_hit_up	= false;
@@ -606,6 +607,29 @@ void CObjHero::Draw()
 		}
 	}
 	//----------------------------------------------------------------
+	//残機描画----------------------------------------------------------
+
+	//残機数を描画する
+	
+
+	wchar_t str2[128];//描画する用のwchar_t型を宣言
+	swprintf_s(str2, L"×%d", m_zanki);//int型をwcahr_t型に変換
+	Font::StrDraw(str2, 48, 15, 30, color);//描画
+
+										//切り取り位置設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 64.0f;
+	src.m_bottom = 64.0f;
+
+	//表示位置設定
+	dst.m_top = 0.0f;
+	dst.m_left = 0.0f;
+	dst.m_right = 48.0f;
+	dst.m_bottom = 50.0f;
+
+	//描画
+	Draw::Draw(23, &src, &dst, color, 0.0f);
 }
 
 //着地できてるかどうかを調べる関数
