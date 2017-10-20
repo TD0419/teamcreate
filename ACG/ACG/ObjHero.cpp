@@ -44,7 +44,7 @@ void CObjHero::Init()
 	m_ani_time_rope = 0;
 	m_ani_frame_rope = 0;	//ropeÃ~ƒtƒŒ[ƒ€‚ğ‰Šú‚É‚·‚é
 
-	m_zanki = 2;//‚´‚ñ‚«‰Šú‰»
+	m_remaining = 2;//‚´‚ñ‚«‰Šú‰»
 
 	//ƒuƒƒbƒN‚Æ‚ÌÕ“Ë‚µ‚½ó‘Ô(êŠ)Šm”F—p
 	m_hit_up	= false;
@@ -608,7 +608,7 @@ void CObjHero::Draw()
 	
 
 	wchar_t str2[128];//•`‰æ‚·‚é—p‚Ìwchar_tŒ^‚ğéŒ¾
-	swprintf_s(str2, L"~%d", m_zanki);//intŒ^‚ğwcahr_tŒ^‚É•ÏŠ·
+	swprintf_s(str2, L"~%d", m_remaining);//intŒ^‚ğwcahr_tŒ^‚É•ÏŠ·
 	Font::StrDraw(str2, 48, 15, 30, color);//•`‰æ
 
 										//Ø‚èæ‚èˆÊ’uİ’è

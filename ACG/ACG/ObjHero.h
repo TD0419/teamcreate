@@ -70,7 +70,7 @@ private:
 	int m_ani_frame_rope;	    //ロープ描画フレーム
 	int m_ani_max_time_rope;    //ロープアニメーション動作間隔最大値
 
-	int m_zanki;//ざんき管理
+	int m_remaining;//残機管理
 
 	//blockとの衝突確認用
 	bool m_hit_up;
