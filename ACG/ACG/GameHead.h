@@ -127,7 +127,8 @@ enum MAP_BER
 #define ROCK_SIZE_WIDTH		  (170.0f)		//岩の横サイズ（仮
 #define ROCK_SIZE_HEIGHT	  (240.0f)		//岩の縦サイズ（仮
 #define WOOD_SIZE			  (320.0f)		//木のサイズ(仮)
-#define BOSS_SIZE			  (170.0f)		//BOSSサイズ(仮)
+#define BOSS_SIZE_WIDTH		  (192.0f)		//BOSS横幅(仮)
+#define BOSS_SIZE_HEIGHT	  (256.0f)		//BOSS横幅(仮)
 #define BOSS_DORP_KEY_SIZE	  (32.0f)	    //ボスドロップキーサイズ(仮)
 #define DOOR_SIZE_WIDTH		  (32.0f)		//ドアの横サイズ(仮)
 #define DOOR_SIZE_HEIGHT	  (128.0f)		//ドアの縦サイズ(仮)

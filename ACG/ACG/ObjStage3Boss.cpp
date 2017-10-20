@@ -11,8 +11,8 @@ using namespace GameL;
 //コンストラクタ
 CObjStage3Boss::CObjStage3Boss(int x,int y)
 {
-	m_px = x * BOSS_SIZE;
-	m_py = y * BOSS_SIZE;
+	m_px = x * BOSS_SIZE_WIDTH;
+	m_py = y * BOSS_SIZE_HEIGHT;
 }
 
 //イニシャライズ
@@ -24,7 +24,7 @@ void CObjStage3Boss::Init()
 	m_hp = 20; //第三ボスのＨＰ(仮にＨＰを[ 20 ]と設定)
 	
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE, BOSS_SIZE, ELEMENT_ENEMY, OBJ_BOSS, 1);
+	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
 
 }
 
