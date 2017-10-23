@@ -93,7 +93,6 @@ enum MAP_BER
 	MAP_ENEMY		 ,	//敵
 	MAP_BOSS		 ,	//ボス
 	MAP_STAGE3_BOSS  ,	//ステージ３のボス
-	
 	MAP_THROUGH_BLOCK,	//通り抜けれるブロック
 	MAP_REFLECT_BLOCK,	//反射ブロック
 	MAP_SIGN		 ,	//看板

@@ -71,7 +71,7 @@ void CObjBullet::Init()
 	m_window_check = true;
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px- objmap->GetScrollX(), m_py - objmap->GetScrollY(), BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_BULLET, 1);
+	Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_BULLET, 1);
 }
 
 //アクション

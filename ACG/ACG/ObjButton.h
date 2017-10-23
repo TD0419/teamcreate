@@ -21,6 +21,7 @@ class CObjButton : public CObj
 		float m_px;			//ボタンX位置
 		float m_py;			//ボタンY位置
 
-		bool m_trick_flag;	//縄と当たっているかどうかを調べる
+		float m_sink;		// ボタンが沈む高さ
 
+		bool m_trick_flag;	//弾と当たっているかどうかを調べる
 };

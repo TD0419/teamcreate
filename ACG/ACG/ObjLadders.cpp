@@ -36,6 +36,12 @@ void CObjLadders::Init()
 //アクション
 void CObjLadders::Action()
 {
+	// ボタンオブジェクトを持ってくる
+	CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
+
+	// ボタンを押していたら
+	if (objbutton->GetTrickFlag() == true)
+		m_obj_look_f = true;			   // はしごが見えるようにする
 }
 
 //ドロー
@@ -101,7 +107,8 @@ void CObjLadders::HeroHit(float px, float py)
 		int map_num_ladder_up = objmap->GetMap(map_num_x, map_num_ladder);
 
 		//マップの値がはしごなら
-		if (map_num_up == MAP_LADDERS || map_num_center == MAP_LADDERS || map_num_down == MAP_LADDERS)
+		if (map_num_up == MAP_LADDERS || map_num_center == MAP_LADDERS || map_num_down == MAP_LADDERS ||
+			map_num_up == MAP_NO_LOOK_LADDERS || map_num_center == MAP_NO_LOOK_LADDERS || map_num_down == MAP_NO_LOOK_LADDERS)
 		{
 			objhero->SetVecY(0.0f);//yの移動方向を初期化
 			objhero->SetHitDown(true);//着地状態にする
