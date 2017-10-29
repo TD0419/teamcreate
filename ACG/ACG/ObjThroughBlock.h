@@ -15,6 +15,7 @@ public:
 	void Init();						//イニシャライズ
 	void Action();						//アクション
 	void Draw();						//ドロー
+	
 private:
 	float m_px;	//X座標
 	float m_py;	//Y座標

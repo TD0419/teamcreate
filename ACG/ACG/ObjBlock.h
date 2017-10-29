@@ -20,8 +20,15 @@ public:
 	void SetScroll(float s) { m_scroll = s; }
 	float GetScroll() { return m_scroll; }
 
-	//オブジェクト
+	// 通常ブロックとの当たり判定
 	void BlockHit(
+		float* x, float* y, float width, float height,
+		bool*up, bool* down, bool* left, bool* right,
+		float* vx, float*vy
+	);
+
+	// 全てのブロックとの当たり判定
+	void AllBlockHit(
 		float* x, float* y, float width, float height,
 		bool*up, bool* down, bool* left, bool* right,
 		float* vx, float*vy
@@ -32,8 +39,6 @@ public:
 	int m_map_x;//X
 	int m_map_y;//Y
 private:
-	
-	int m_map[10][10];	//マップ情報（仮）
 
 	float m_scroll;		//左右スクリーン用
 	float m_px;			//ブロック位置X
