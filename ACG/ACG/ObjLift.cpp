@@ -62,6 +62,28 @@ void CObjLift::Action()
 //ドロー
 void CObjLift::Draw()
 {	
+	//mapオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//描画色を決める
+	float color[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+	RECT_F src, dst;
+
+	//切り取り位置
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 128.0f;
+	src.m_bottom = 128.0f;
+
+	//描画の位置
+	dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_left = m_px - objmap->GetScrollX();
+	dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
+	dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
+
+	//リフトの描画
+	Draw::Draw(24, &src, &dst, color, 0.0f);
 }
 
 //主人公を乗せる処理をする
@@ -89,7 +111,7 @@ void CObjLift::HeroRide()
 				objhero->SetHitDown(true);//リフトの上に主人公が乗っていたらm_hit_downにtrueを返す
 
 				//リフトに乗せる処理
-				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+				objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
 				objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
 				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT+1.0f);//主人公のポジションをリフトの上にする
 			}
