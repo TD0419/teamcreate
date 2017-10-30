@@ -26,8 +26,6 @@ void CObjLastWall::Init()
 //アクション
 void CObjLastWall::Action()
 {
-	m_ani_time += 4;
-
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
