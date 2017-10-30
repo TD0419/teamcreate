@@ -46,6 +46,8 @@ void CObjHero::Init()
 
 	m_remaining = 2;//ざんき初期化
 
+	m_block_type = 0;//主人公のしたのブロック情報
+
 	//ブロックとの衝突した状態(場所)確認用
 	m_hit_up	= false;
 	m_hit_left  = false;
@@ -62,10 +64,38 @@ void CObjHero::Action()
 	
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
-
+	
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	
+
+	//主人公の左下、真下、右下にあるブロック情報を取得
+	//真下のブロック情報を優先する
+	for (int i = 0; i < 3; i++)
+	{
+		//主人公のX位置(左下 = 0;真下 = HERO_SIZE_WIDTH/2;右下 = HERO_SIZE_WIDTH)
+		int pos_x=0;
+		//右下
+		if (i == 1)
+		{
+			pos_x = HERO_SIZE_WIDTH;
+		}
+		//左下
+		else if(i == 2)
+		{
+			pos_x = HERO_SIZE_WIDTH / 2;
+		}
+		//主人公のX位置(マップの要素数)
+		int x = (m_px + pos_x) / BLOCK_SIZE;
+		//主人公のY位置(マップの要素数)
+		//少し下にする
+		int y = (m_py + 1 + HERO_SIZE_HEIGHT) / BLOCK_SIZE;
+		//ブロック情報が０で無いなら取得
+		if (objmap->GetMap(x, y)!= 0)
+		{
+			//取得
+			m_block_type = objmap->GetMap(x, y);
+		}
+	}
 	//落下にリスタート----------------------------------
 	//m_pyが1000以下ならリスタートする
 	if (m_py > 1000.0f)
@@ -93,22 +123,12 @@ void CObjHero::Action()
 
 	if (objladders != nullptr)
 	{
-		//主人公の左下、真下、右下にブロックがあると登っていない判定にする
-		for (int i = 0; i <= HERO_SIZE_WIDTH; i += HERO_SIZE_WIDTH / 2)
+		//主人公のしたに通常ブロックがあったらはしごに上っていない判定にする
+		if (m_block_type == MAP_BLOCK)
 		{
-			int x = (m_px + i) / BLOCK_SIZE;
-			int y = (m_py + 1 + HERO_SIZE_HEIGHT) / BLOCK_SIZE;
-			int a = objmap->GetMap(x, y);
-			
-			//左下、真下、右下にブロックがあると登っていない判定にする
-			if (objmap->GetMap(x, y) == MAP_BLOCK)
-			{
-				//はしごに登っていない
-				m_ladder_updown = 0;
-				
-			}
+			//はしごに登っていない
+			m_ladder_updown = 0;
 		}
-
 		objladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
 	}
 

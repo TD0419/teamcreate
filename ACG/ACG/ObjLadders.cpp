@@ -133,9 +133,13 @@ void CObjLadders::HeroHit(float px, float py)
 			//Sキーがおされたとき　下るとき
 			else if (Input::GetVKey('S') == true)
 			{
-				objhero->SetVecY(2.0f);
-				objhero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
-				objhero->SetLaddersAniUpdown(1);//アニメーションを進める
+				//下に通常ブロックが無かったら
+				if (objhero->GetBlockType() != MAP_BLOCK)
+				{
+					objhero->SetVecY(2.0f);
+					objhero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
+					objhero->SetLaddersAniUpdown(1);//アニメーションを進める
+				}
 			}
 			//それ以外の時
 			else
