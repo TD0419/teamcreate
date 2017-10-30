@@ -186,7 +186,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
 	
 	//É{É^Éì
-	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_64);
+	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_128);
 
 	//lastwall(âº)
 	Draw::LoadImageW(L"Lastwall.png", 21, TEX_SIZE_256);//è„
