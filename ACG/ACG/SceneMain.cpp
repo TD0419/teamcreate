@@ -20,9 +20,6 @@ using namespace GameL;
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
-	//マップ情報格納用変数テスト用
-	int map[MAP_Y_MAX][MAP_X_MAX] = { 0 };
-
 	MapDataLoading(map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
@@ -39,8 +36,7 @@ void CSceneMain::InitScene()
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
-
-	//デバッグ　”使い終わったら消してください！”----------------
+//デバッグ　”使い終わったら消してください！”----------------
 	//Doorオブジェクトを作成する
 	CObjDoor* objdoor = new CObjDoor(3, 0);
 	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
@@ -70,17 +66,13 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
 
 	//テスト壁
-	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
+	CObjLastWall*objlastwall = new CObjLastWall(15, 2);
 	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
 
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
 	Objs::InsertObj(objboss, OBJ_BOSS, 10);
-	//デバッグ--------------------------------------------
-
-
-	
-
+//デバッグ-----------------------------------------------
 }
 
 //ゲームメイン実行中メソッド
@@ -184,7 +176,7 @@ void CSceneMain::ImageDataLoading()
 	//木画像
 	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
 
-	//看板
+	//看板の枠線
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
 	
 	//ボタン
@@ -199,6 +191,10 @@ void CSceneMain::ImageDataLoading()
 	
 	//リフト
 	Draw::LoadImageW(L"Lift.png", 24, TEX_SIZE_128);
+
+	//看板
+	//Draw::LoadImageW(L"", 25, TEX_SIZE_256);イラスト決まってから読み込んでください
+
 
 }
 

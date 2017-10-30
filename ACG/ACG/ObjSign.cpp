@@ -62,6 +62,7 @@ void CObjSign::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+	//枠線　&　文字　-------------------------------------------------------------
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f ;
@@ -81,5 +82,22 @@ void CObjSign::Draw()
 		Draw::Draw(17, &src, &dst, color, 0);
 		Font::StrDraw(L"ヘビうなぎ「正確にはヘビうなぎだよ」", dst.m_left, dst.m_top + 32.0f , 32.0f, color_str);
 	}
-	
+	//----------------------------------------------------------------------------
+
+	//看板本体--------------------------------------------------------------
+	//切り取り位置
+	/*src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 64.0f;
+	src.m_bottom = 64.0f;
+*/
+	//描画の位置
+	/*dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_left = m_px - objmap->GetScrollX();
+	dst.m_right = dst.m_left + LIFT_SIGN_WIDTH;
+	dst.m_bottom = dst.m_top + LIFT_SIGN_HEIGHT;
+*/
+	//リフトの描画
+//	Draw::Draw(25, &src, &dst, color, 0.0f);
+	//看板本体--------------------------------------------------------------
 }
