@@ -35,6 +35,12 @@ void CSceneMain::InitScene()
 	CObjHero* objhero = new CObjHero();
 	Objs::InsertObj(objhero, OBJ_HERO, 10);
 
+	//背景オブジェクトを作成する
+	CObjBackGround* objback_ground = new CObjBackGround();
+	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
+
+
+	//デバッグ　”使い終わったら消してください！”----------------
 	//Doorオブジェクトを作成する
 	CObjDoor* objdoor = new CObjDoor(3, 0);
 	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
@@ -42,10 +48,6 @@ void CSceneMain::InitScene()
 	//敵オブジェクトを作成する
 	CObjEnemy* objenemy = new CObjEnemy(10,7);
 	Objs::InsertObj(objenemy, OBJ_ENEMY, 11);
-
-	//リフトオブジェクトを作成する
-	CObjLift* objlift = new CObjLift(6, 5);
-	Objs::InsertObj(objlift, OBJ_LIFT, 10);
 
 	//看板オブジェクトを作成する
 	CObjSign* objsign = new CObjSign(14, 7);
@@ -55,21 +57,9 @@ void CSceneMain::InitScene()
 	CObjLeverSwich* objlever_swich = new CObjLeverSwich(7, 7);
 	Objs::InsertObj(objlever_swich, OBJ_LEVER_SWICH, 10);
 
-	////水ブジェクトを作成する
-	//CObjWater* objwater = new CObjWater(8, 9);
-	//Objs::InsertObj(objwater, OBJ_WATER, 10);
-
 	//ロープスイッチオブジェクトを作成する
 	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
 	Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 10);
-
-	//testはしごオブジェクトを作成する（デバック用）
-	/*CObjLadders* objladders = new CObjLadders(6, 3);
-	Objs::InsertObj(objladders, OBJ_LADDERS, 10);
-	CObjLadders* objladders2 = new CObjLadders(6, 2);
-	Objs::InsertObj(objladders2, OBJ_LADDERS, 10);
-	CObjLadders* objladders3 = new CObjLadders(6, 1);
-	Objs::InsertObj(objladders3, OBJ_LADDERS, 10);*/
 
 	//test砲台オブジェクトを作成する
 	CObjCannon* objcannon = new CObjCannon(10, 5);
@@ -86,14 +76,11 @@ void CSceneMain::InitScene()
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
 	Objs::InsertObj(objboss, OBJ_BOSS, 10);
+	//デバッグ--------------------------------------------
 
-	//背景オブジェクトを作成する
-	CObjBackGround* objback_ground = new CObjBackGround();
-	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
-	//debug敵弾丸作成
-	//CObjEnemyBullet* objenemy_bullet = new CObjEnemyBullet(64.0,  50.0, 0);
-	//Objs::InsertObj(objenemy_bullet, OBJ_ENEMY_BULLET, 10);
+	
+
 }
 
 //ゲームメイン実行中メソッド
@@ -153,13 +140,6 @@ void CSceneMain::ImageDataLoading()
 	//グラフィック読み込み
 	//Draw::LoadImageW(L"", id++, TEX_SIZE_???);
 	
-	//debug用hero画像
-	//Draw::LoadImageW(L"image.jpg",0, TEX_SIZE_512);
-	//debug用enemy画像
-	//Draw::LoadImageW(L"image2.jpg", 1, TEX_SIZE_512);
-	// debug用block画像
-	//Draw::LoadImageW(L"testblock.png", 2, TEX_SIZE_512);
-
 	// block画像
 	Draw::LoadImageW(L"block.png", 2, TEX_SIZE_128);
 
@@ -189,11 +169,6 @@ void CSceneMain::ImageDataLoading()
 
 	//Water画像
 	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);
-	//水の下部分
-	//Draw::LoadImageW(L"WaterUnder.png", 12, TEX_SIZE_64);
-
-	//Waterテスト画像
-	Draw::LoadImageW(L"WaterBlock.png", 12, TEX_SIZE_64);
 	
 	//RopeSwitch画像
 	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);
@@ -209,12 +184,7 @@ void CSceneMain::ImageDataLoading()
 
 	//看板
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
-	//debug用敵弾丸画像
-	Draw::LoadImageW(L"bomb.png",18,TEX_SIZE_64);
-
-	//testhero
-	Draw::LoadImageW(L"Hero2.png", 19, TEX_SIZE_1024);
-
+	
 	//ボタン
 	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_64);
 
@@ -224,6 +194,10 @@ void CSceneMain::ImageDataLoading()
 
 	//zanki(仮)
 	Draw::LoadImageW(L"zanki.png", 23, TEX_SIZE_64);
+	
+	//リフト
+	Draw::LoadImageW(L"Lift.png", 24, TEX_SIZE_128);
+
 }
 
 //音楽データ読み込み関数

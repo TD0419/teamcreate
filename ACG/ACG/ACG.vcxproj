@@ -72,7 +72,6 @@
     <ClInclude Include="ObjBackGround.h" />
     <ClInclude Include="ObjCannon.h" />
     <ClInclude Include="ObjFallingWalls.h" />
-    <ClInclude Include="ObjLiftMove.h" />
     <ClInclude Include="ObjThroughBlock.h" />
     <ClInclude Include="ObjBossDropKey.h" />
     <ClInclude Include="Function.h" />
@@ -143,7 +142,6 @@
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjBullet.cpp" />
     <ClCompile Include="ObjLeverswich.cpp" />
-    <ClCompile Include="ObjLiftMove.cpp" />
     <ClCompile Include="ObjMap.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBoss.cpp" />

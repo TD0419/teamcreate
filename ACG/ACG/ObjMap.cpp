@@ -130,8 +130,8 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_LIFT:		//ÉäÉtÉgçÏê¨
 		{
-			CObjLiftMove* objlift = new CObjLiftMove(x, y);
-			Objs::InsertObj(objlift, OBJ_LIFT_MOVE, 9);
+			CObjLift* objlift = new CObjLift(x, y);
+			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
 		
