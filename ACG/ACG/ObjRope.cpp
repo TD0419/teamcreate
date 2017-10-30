@@ -108,16 +108,6 @@ void CObjRope::Action()
 		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
 		objhero->SetVecX(0.0f);
 
-		//Dキーがおされたとき：右移動をできなくさせる
-		if (Input::GetVKey('D') == true)
-		{
-			objhero->SetVecX(-0.5f);
-		}
-		//Aキーがおされたとき：左移動をできなくさせる
-		else if (Input::GetVKey('A') == true)
-		{
-			objhero->SetVecX(0.5f);
-		}
 	}
 	//ロープが消していいかどうかを調べる
 	bool rope_delete_ani_con = objhero->GetRopeDeleteAniCon();
