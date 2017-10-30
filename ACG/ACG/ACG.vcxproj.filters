@@ -103,6 +103,9 @@
     <Filter Include="ソース ファイル\Main\Door">
       <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Lastwall">
+      <UniqueIdentifier>{414c2d43-9500-4e9e-8793-5499db4f53ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -246,11 +249,11 @@
     <ClInclude Include="Function.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjLastWall.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjLiftMove.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLastWall.h">
+      <Filter>ソース ファイル\Lastwall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -392,11 +395,11 @@
     <ClCompile Include="Function.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjLastWall.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjLiftMove.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLastWall.cpp">
+      <Filter>ソース ファイル\Lastwall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
