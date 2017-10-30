@@ -103,6 +103,9 @@
     <Filter Include="ソース ファイル\Main\Door">
       <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Time">
+      <UniqueIdentifier>{5cf13a39-2034-4074-b468-0c603f87158f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -252,6 +255,9 @@
     <ClInclude Include="ObjLiftMove.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="ObjTime.h">
+      <Filter>ソース ファイル\Main\Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -397,6 +403,9 @@
     </ClCompile>
     <ClCompile Include="ObjLiftMove.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTime.cpp">
+      <Filter>ソース ファイル\Main\Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
