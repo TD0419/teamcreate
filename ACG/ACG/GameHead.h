@@ -37,6 +37,7 @@ enum OBJ_NAME
 	OBJ_BACKGROUND,		//バッググラウンド(背景)
 	OBJ_CANNON,		    //砲台
 	OBJ_LAST_WALL,		//最後の壁
+	OBJ_TIME,			//タイム
 };
 //------------------------------------------------
 
@@ -102,6 +103,7 @@ enum MAP_BER
 	MAP_NO_LOOK_LADDERS, //見えないハシゴ
 	MAP_CANNON,			//砲台
 	MAP_LAST_WALL,		//次ステージへの入り口(最後の壁)
+	MAP_OPEN_WALL,		//開閉する扉(最後の壁用)
 };
 
 //オブジェクトのサイズ
@@ -180,6 +182,7 @@ enum MAP_BER
 #include "ObjBackGround.h"		//バッググラウンド(背景)
 #include "ObjCannon.h"			//砲台
 #include "ObjLastWall.h"		//最後の壁
+#include "ObjTime.h"			//タイム
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

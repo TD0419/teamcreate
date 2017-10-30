@@ -90,9 +90,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
 
-	p = Save::ExternalDataOpen(L"Stage01.csv", &size);//外部データ読み込み
-	
-	//p = Save::ExternalDataOpen(L"testwater.csv", &size);//ボス描画を確認したい方は、こちらを読み込んでください
+	p = Save::ExternalDataOpen(L"Stage01a.csv", &size);//外部データ読み込み
 	
 	if (p == nullptr)
 	{
@@ -180,7 +178,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
 	
 	//ボタン
-	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_64);
+	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_128);
 
 	//lastwall(仮)
 	Draw::LoadImageW(L"Lastwall.png", 21, TEX_SIZE_256);//上
