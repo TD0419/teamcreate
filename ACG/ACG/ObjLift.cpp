@@ -1,6 +1,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\WinInputs.h"
 
 #include "GameHead.h"
 #include "ObjLift.h"
@@ -22,6 +23,11 @@ void CObjLift::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
+	//ステージ１のときのリフトの動きの初期位置を右にする
+	m_right_max_x = m_px;
+	//ステージ１のときのリフトの動きの最大左X位置を計算
+	m_lift_max_x = m_px - 640;
+
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
 
@@ -32,10 +38,6 @@ void CObjLift::Action()
 {
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
-
-	//移動
-	m_px += m_vx;
-	m_py += m_vy;
 
 	//主人公が当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
@@ -48,12 +50,29 @@ void CObjLift::Action()
 	
 	if (objrope_switch->GetRopeFlag() == true)//ロープとロープスイッチがあたっているとき
 	{
-		m_vx = -1.0f;
+		if (Input::GetVKey('A'))
+			m_vx = -1.0f;
+		else
+			m_vx = 0.0f;
 	}
 	else//ロープとロープスイッチがあたっていないとき
 	{
 		m_vx = 1.0f;
 	}
+
+	//左に行き過ぎないように
+	if (m_px + m_vx <= m_lift_max_x)
+	{
+		m_vx = 0.0f;
+	}
+	//右に行き過ぎないように
+	if (m_px + m_vx >= m_right_max_x)
+	{
+		m_vx = 0.0f;
+	}
+	//移動
+	m_px += m_vx;
+	m_py += m_vy;
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
