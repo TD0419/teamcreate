@@ -23,7 +23,7 @@ void CObjSign::Init()
 	m_strdrow = false;
 
 	//文字セット
-	Font::SetStrTex(L"ヘビうなぎ「正確にはヘビうなぎだよ」");
+	Font::SetStrTex(L"???「ロープを使うのだ」");
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -79,7 +79,7 @@ void CObjSign::Draw()
 	{
 		//描画
 		Draw::Draw(17, &src, &dst, color, 0);
-		Font::StrDraw(L"ヘビうなぎ「正確にはヘビうなぎだよ」", dst.m_left, dst.m_top + 32.0f , 32.0f, color_str);
+		Font::StrDraw(L"???「ロープを使うのだ」", dst.m_left, dst.m_top + 32.0f , 32.0f, color_str);
 	}
 	
 }

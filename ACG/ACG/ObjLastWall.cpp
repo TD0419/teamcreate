@@ -142,6 +142,8 @@ void CObjLastWall::Draw()
 	//•`‰æ(ã‚Ì•”•ª)
 	Draw::Draw(21, &src, &dst, color, 0.0f);
 
+	//-----------------------------------------------------
+
 	//Ø‚èŽæ‚èˆÊ’u
 	src.m_top = 0.0f + m_wall_gauge;
 	src.m_left = 0.0f;
@@ -153,6 +155,7 @@ void CObjLastWall::Draw()
 	dst.m_left = m_px - objmap->GetScrollX() + 30;
 	dst.m_right = dst.m_left + 32;
 	dst.m_bottom = dst.m_top + 512 - m_wall_gauge;
+
 	//•`‰æ(‰º‚Ì•”•ª)
 	Draw::Draw(22, &src, &dst, color, 0.0f);
 }

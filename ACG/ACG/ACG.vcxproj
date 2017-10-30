@@ -72,7 +72,6 @@
     <ClInclude Include="ObjBackGround.h" />
     <ClInclude Include="ObjCannon.h" />
     <ClInclude Include="ObjFallingWalls.h" />
-    <ClInclude Include="ObjLiftMove.h" />
     <ClInclude Include="ObjThroughBlock.h" />
     <ClInclude Include="ObjBossDropKey.h" />
     <ClInclude Include="Function.h" />
@@ -108,6 +107,7 @@
     <ClInclude Include="ObjRock.h" />
     <ClInclude Include="ObjRope.h" />
     <ClInclude Include="ObjSign.h" />
+    <ClInclude Include="ObjTime.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjWood.h" />
     <ClInclude Include="ObjRopeSwitch.h" />
@@ -142,7 +142,6 @@
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjBullet.cpp" />
     <ClCompile Include="ObjLeverswich.cpp" />
-    <ClCompile Include="ObjLiftMove.cpp" />
     <ClCompile Include="ObjMap.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBoss.cpp" />
@@ -153,6 +152,7 @@
     <ClCompile Include="ObjLadders.cpp" />
     <ClCompile Include="ObjLift.cpp" />
     <ClCompile Include="ObjRope.cpp" />
+    <ClCompile Include="ObjTime.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjWood.cpp" />
     <ClCompile Include="ObjRopeSwitch.cpp" />
