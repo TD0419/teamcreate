@@ -25,5 +25,6 @@ private:
 	float m_py;		// リフトY座標
 	float m_vx;		// リフトの移動ベクトルX
 	float m_vy;		// リフトの移動ベクトルY
-
+	float m_right_max_x;//右の最大X位置
+	float m_lift_max_x;	//左の最大X位置
 };

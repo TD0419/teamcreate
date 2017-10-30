@@ -107,6 +107,7 @@
     <ClInclude Include="ObjRock.h" />
     <ClInclude Include="ObjRope.h" />
     <ClInclude Include="ObjSign.h" />
+    <ClInclude Include="ObjTime.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjWood.h" />
     <ClInclude Include="ObjRopeSwitch.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="ObjLadders.cpp" />
     <ClCompile Include="ObjLift.cpp" />
     <ClCompile Include="ObjRope.cpp" />
+    <ClCompile Include="ObjTime.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjWood.cpp" />
     <ClCompile Include="ObjRopeSwitch.cpp" />

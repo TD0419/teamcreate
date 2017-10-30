@@ -106,6 +106,9 @@
     <Filter Include="ソース ファイル\Main\Lastwall">
       <UniqueIdentifier>{414c2d43-9500-4e9e-8793-5499db4f53ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Time">
+      <UniqueIdentifier>{5cf13a39-2034-4074-b468-0c603f87158f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -252,6 +255,12 @@
     <ClInclude Include="ObjLastWall.h">
       <Filter>ソース ファイル\Main\Lastwall</Filter>
     </ClInclude>
+    <ClInclude Include="ObjLiftMove.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTime.h">
+      <Filter>ソース ファイル\Main\Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -394,6 +403,9 @@
     </ClCompile>
     <ClCompile Include="ObjLastWall.cpp">
       <Filter>ソース ファイル\Main\Lastwall</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTime.cpp">
+      <Filter>ソース ファイル\Main\Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

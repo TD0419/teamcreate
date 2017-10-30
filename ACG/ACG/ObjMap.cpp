@@ -208,7 +208,7 @@ void CObjMap::CreateObj(int x, int y)
 		case MAP_LEVER_SWICH:	//レバースイッチ作成
 		{
 			CObjLeverSwich* objLeverSwich = new CObjLeverSwich(x, y);
-			Objs::InsertObj(objLeverSwich, OBJ_LEVER_SWICH, 19);
+			Objs::InsertObj(objLeverSwich, OBJ_LEVER_SWICH, 9);
 			break;
 		}
 
@@ -218,6 +218,14 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objladders, OBJ_LADDERS, 9);
 			break;
 		}
+
+		case MAP_LAST_WALL:		//壁(次ステージを隔てる壁)
+		{
+			CObjLastWall* objLastWall = new CObjLastWall(x,y);
+			Objs::InsertObj(objLastWall,OBJ_LAST_WALL,10);
+			break;
+		}
+
 	}
 
 	m_map[y][x].create = false;//フラグをオフにする	
