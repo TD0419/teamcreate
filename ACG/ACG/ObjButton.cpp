@@ -67,7 +67,7 @@ void CObjButton::Action()
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px+13, m_py+16);
+	HitBoxUpData(Hits::GetHitBox(this), m_px+13, m_py);
 
 }
 
@@ -94,7 +94,7 @@ void CObjButton::Draw()
 	src.m_bottom = src.m_top + BUTTON_SIZE;
 
 	//描画位置
-	dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_top = m_py - objmap->GetScrollY()-16;
 	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + BUTTON_SIZE;
 	dst.m_bottom = dst.m_top + BUTTON_SIZE;
