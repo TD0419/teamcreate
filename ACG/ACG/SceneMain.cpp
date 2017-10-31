@@ -141,7 +141,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
 
 	//Door & Padlock‰æ‘œ
-	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_128);
+	Draw::LoadImageW(L"Door.png", 6, TEX_SIZE_128);
 
 	//Wood‰æ‘œ
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);
