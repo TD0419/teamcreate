@@ -82,7 +82,8 @@ struct UserData
 //マップの番号とオブジェクトの対応　（仮）
 enum MAP_BER
 {
-	MAP_HERO_START	 ,	//heroのスタート位置
+	// マップが届いたらこのコメントをはずす
+	//MAP_HERO_START	 ,	//heroのスタート位置
 	MAP_SPACE		 , 	//何もない場所
 	MAP_BLOCK		 ,	//ブロック(ノーマル)
 	MAP_LADDERS		 ,	//はしご
@@ -101,7 +102,7 @@ enum MAP_BER
 	MAP_DOOR		 ,	//ドア
 	MAP_LEVER_SWICH	 ,	//レバースイッチ
 	MAP_FALLING_WALLS,  //落下壁
-	MAP_NO_LOOK_LADDERS, //見えないハシゴ
+	MAP_NO_LOOK_LADDERS,//見えないハシゴ
 	MAP_CANNON,			//砲台
 	MAP_LAST_WALL,		//次ステージへの入り口(最後の壁)
 	MAP_OPEN_WALL,		//開閉する扉(最後の壁用)

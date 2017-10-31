@@ -18,7 +18,6 @@ CObjHero::CObjHero(int x, int y)
 	m_py = (float)y * BLOCK_SIZE;
 }
 
-
 //イニシャライズ
 void CObjHero::Init()
 {
