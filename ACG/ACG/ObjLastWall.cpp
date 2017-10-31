@@ -74,7 +74,7 @@ void CObjLastWall::Action()
 		}
 	}
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px+29, m_py+195);
+	HitBoxUpData(Hits::GetHitBox(this), m_px+29, m_py+65);
 }
 
 //ドロー
@@ -95,7 +95,7 @@ void CObjLastWall::Draw()
 	src.m_bottom = 256.0f;
 
 	//描画位置
-	dst.m_top = m_py - objmap->GetScrollY() - 60;
+	dst.m_top = m_py - objmap->GetScrollY() - 190;
 	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + 96.0f;
 	dst.m_bottom = dst.m_top + 256.0f;
@@ -112,7 +112,7 @@ void CObjLastWall::Draw()
 	src.m_bottom = 512.0f;
 
 	//描画位置
-	dst.m_top = m_py - objmap->GetScrollY() + 195;
+	dst.m_top = m_py - objmap->GetScrollY() + 65;
 	dst.m_left = m_px - objmap->GetScrollX() + 30;
 	dst.m_right = dst.m_left + 32;
 	dst.m_bottom = dst.m_top + 512;

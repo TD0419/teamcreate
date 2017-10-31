@@ -65,10 +65,6 @@ void CSceneMain::InitScene()
 	CObjButton*objbutton = new CObjButton(5, 3);
 	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
 
-	//テスト壁
-	CObjLastWall*objlastwall = new CObjLastWall(15, 2);
-	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
-
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
 	Objs::InsertObj(objboss, OBJ_BOSS, 10);
