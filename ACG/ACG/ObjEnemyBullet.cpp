@@ -142,6 +142,13 @@ void CObjEnemyBullet::Action()
 		return;
 	}
 
+	//lastwallと当たったらシ消去
+	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
 }
 
 //ドロー

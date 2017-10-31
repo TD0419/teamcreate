@@ -96,8 +96,7 @@ void CObjBoss::Action()
 	if (m_hp <= 0)
 	{
 		Hits::DeleteHitBox(this);	//BOSSが所有するHitBoxに削除する
-		this->SetStatus(false);		//自身に削除命令を出す
-		objlastwall->GateOpenflag = true;
+		this->SetStatus(false);		//自身に削除命令を出
 		return;
 	}
 

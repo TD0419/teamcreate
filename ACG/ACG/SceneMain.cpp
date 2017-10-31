@@ -53,9 +53,6 @@ void CSceneMain::InitScene()
 	CObjCannon* objcannon = new CObjCannon(10, 5);
 	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
 
-	//テストボタン
-	CObjButton*objbutton = new CObjButton(5, 3);
-	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
 
 //デバッグ-----------------------------------------------
 }
@@ -130,7 +127,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
 
 	//Door & Padlock画像
-	Draw::LoadImageW(L"Door.png", 6, TEX_SIZE_192);
+	Draw::LoadImageW(L"Door.png", 6, TEX_SIZE_128);
 
 	//Wood画像
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);

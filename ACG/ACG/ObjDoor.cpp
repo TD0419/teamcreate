@@ -43,7 +43,7 @@ void CObjDoor::Draw()
 
 	//Ø‚èæ‚èˆÊ’u
 	src.m_top = 0.0f;
-	src.m_left = 64.0f;
+	src.m_left = 0.0f;
 	src.m_right = src.m_left+128.0f;
 	src.m_bottom = src.m_top+128.0f;
 
