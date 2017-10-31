@@ -10,11 +10,18 @@
 //使用するネームスペース
 using namespace GameL;
 
+
+//コンストラクタ
+CObjHero::CObjHero(int x, int y)
+{
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
+}
+
+
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = 10.0f;
-	m_py = 5.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f

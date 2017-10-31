@@ -82,6 +82,7 @@ struct UserData
 //マップの番号とオブジェクトの対応　（仮）
 enum MAP_BER
 {
+	MAP_HERO_START	 ,	//heroのスタート位置
 	MAP_SPACE		 , 	//何もない場所
 	MAP_BLOCK		 ,	//ブロック(ノーマル)
 	MAP_LADDERS		 ,	//はしご
