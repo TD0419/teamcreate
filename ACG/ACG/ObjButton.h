@@ -22,7 +22,6 @@ class CObjButton : public CObj
 		float m_py;			//ボタンY位置
 
 		bool m_trick_flag;	//弾と当たっているかどうかを調べる
-
 		//アニメーション関係
 		int m_ani_time; //アニメーションフレーム動作感覚
 		int m_ani_frame;//描画フレーム
