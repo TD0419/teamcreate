@@ -41,17 +41,9 @@ void CSceneMain::InitScene()
 	CObjDoor* objdoor = new CObjDoor(3, 0);
 	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
 
-	//敵オブジェクトを作成する
-	CObjEnemy* objenemy = new CObjEnemy(10,7);
-	Objs::InsertObj(objenemy, OBJ_ENEMY, 11);
-
 	//看板オブジェクトを作成する
 	CObjSign* objsign = new CObjSign(14, 7);
 	Objs::InsertObj(objsign, OBJ_SIGN, 10);
-
-	//レバースイッチオブジェクトを作成する
-	CObjLeverSwich* objlever_swich = new CObjLeverSwich(7, 7);
-	Objs::InsertObj(objlever_swich, OBJ_LEVER_SWICH, 10);
 
 	//ロープスイッチオブジェクトを作成する
 	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
@@ -65,9 +57,6 @@ void CSceneMain::InitScene()
 	CObjButton*objbutton = new CObjButton(5, 3);
 	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
 
-	//壁テストのためboss
-	CObjBoss*objboss = new CObjBoss(10, 5);
-	Objs::InsertObj(objboss, OBJ_BOSS, 10);
 //デバッグ-----------------------------------------------
 }
 
@@ -157,6 +146,9 @@ void CSceneMain::ImageDataLoading()
 
 	//Water画像
 	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);
+
+	//Water波なし画像  消しちゃだめ。いります！
+	Draw::LoadImageW(L"WaterBlock.png", 12, TEX_SIZE_256);
 	
 	//RopeSwitch画像
 	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);

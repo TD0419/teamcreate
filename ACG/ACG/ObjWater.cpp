@@ -58,24 +58,25 @@ void CObjWater::Action()
 	//アニメーションを開始するのでフラグをオンにする
 	m_ani_start = true;
 
-	//レバースイッチが押されていたら
-	if (lever_swich == true)
+	
+	// m_water_gaugeが64を越えたら処理ストップ
+	if (m_water_gauge >= WATER_SIZE_HEIGHT)
 	{
-		// m_water_gaugeが64を越えたら処理ストップ
-		if (m_water_gauge >= WATER_SIZE_HEIGHT)
-		{
-			Hits::DeleteHitBox(this);//hitbox削除
-			objmap->SetMap(m_map_x, m_map_y, MAP_SPACE);//マップの数値を空にする
-			this->SetStatus(false);//自身
-			return;
-		}
-		else
+		Hits::DeleteHitBox(this);//hitbox削除
+		objmap->SetMap(m_map_x, m_map_y, MAP_SPACE);//マップの数値を空にする
+		this->SetStatus(false);//自身
+		return;
+	}
+	else
+	{//レバースイッチが押されていたら
+		if (lever_swich == true)
 		{
 			m_water_gauge += 0.2f; // 1ずつ増やしていく
-			// hitboxが小さくなる
-			hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge, WATER_SIZE_HEIGHT - m_water_gauge, WATER_SIZE_WIDTH);
 		}
 	}
+
+	// hitboxが小さくなる
+	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge, WATER_SIZE_HEIGHT - m_water_gauge, WATER_SIZE_WIDTH);
 
 	//アニメーションの感覚管理
 	if (m_ani_time > m_ani_max_time)
@@ -84,11 +85,11 @@ void CObjWater::Action()
 		m_ani_time = 0;
 	}
 
-		//最後までアニメーションが進むと最初に戻る
-		if (m_ani_frame == 2)
-		{
-			m_ani_frame = 0;
-		}
+	//最後までアニメーションが進むと最初に戻る
+	if (m_ani_frame == 2)
+	{
+		m_ani_frame = 0;
+	}
 }
 //ドロー
 void CObjWater::Draw()
