@@ -38,7 +38,7 @@ void CSceneMain::InitScene()
 
 //デバッグ　”使い終わったら消してください！”----------------
 	//Doorオブジェクトを作成する
-	CObjDoor* objdoor = new CObjDoor(3, 0);
+	CObjDoor* objdoor = new CObjDoor(3, 3);
 	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
 
 	//看板オブジェクトを作成する
@@ -130,7 +130,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
 
 	//Door & Padlock画像
-	Draw::LoadImageW(L"Door.png", 6, TEX_SIZE_128);
+	Draw::LoadImageW(L"Door.png", 6, TEX_SIZE_192);
 
 	//Wood画像
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);

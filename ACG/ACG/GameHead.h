@@ -130,8 +130,7 @@ enum MAP_BER
 #define BOSS_SIZE_WIDTH		  (192.0f)		//BOSS横幅(仮)
 #define BOSS_SIZE_HEIGHT	  (256.0f)		//BOSS横幅(仮)
 #define BOSS_DORP_KEY_SIZE	  (32.0f)	    //ボスドロップキーサイズ(仮)
-#define DOOR_SIZE_WIDTH		  (32.0f)		//ドアの横サイズ(仮)
-#define DOOR_SIZE_HEIGHT	  (128.0f)		//ドアの縦サイズ(仮)
+#define DOOR_SIZE			  (128.0f)		//ドアのサイズ(仮)
 #define THROUGHT_BLOCK_SIZE	 (64.0f)	    //スルーブロックサイズ（仮）
 #define FALLING_WALLS_SAIZE  (64.0f)		//落下壁サイズ(仮)
 #define CANNON_SIZE_WIDTH	 (64.0f)		//砲台の横サイズ(仮)
