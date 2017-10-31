@@ -255,9 +255,6 @@
     <ClInclude Include="ObjLastWall.h">
       <Filter>ソース ファイル\Main\Lastwall</Filter>
     </ClInclude>
-    <ClInclude Include="ObjLiftMove.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjTime.h">
       <Filter>ソース ファイル\Main\Time</Filter>
     </ClInclude>

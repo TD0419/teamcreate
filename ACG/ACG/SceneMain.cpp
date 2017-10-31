@@ -16,16 +16,15 @@ using namespace GameL;
 #include "SceneMain.h"
 #include "GameHead.h"
 
-
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
-	MapDataLoading(map);//マップ情報を読み込み
+	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
 
     //Mapオブジェクトを作成する
-	CObjMap* objmap = new CObjMap(map);
+	CObjMap* objmap = new CObjMap(m_map);
 	Objs::InsertObj(objmap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
@@ -79,7 +78,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	
 	if (p == nullptr)
 	{
-		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
+		MessageBox(0, L"マップデータが見つかりませんでした。", NULL, MB_OK);
 		return;
 	}
 
@@ -178,7 +177,7 @@ void CSceneMain::ImageDataLoading()
 	//リフト
 	Draw::LoadImageW(L"Lift.png", 24, TEX_SIZE_128);
 
-	//看板
+	//看板(本体)
 	//Draw::LoadImageW(L"", 25, TEX_SIZE_256);イラスト決まってから読み込んでください
 
 
