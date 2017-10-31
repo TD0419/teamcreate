@@ -27,7 +27,7 @@ void CObjButton::Init()
 	m_ani_max_time = 8; //アニメーション間隔幅
 	m_ani_start_flag = false;//アニメフラグOFF
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, BUTTON_SIZE, BUTTON_SIZE, ELEMENT_GIMMICK, OBJ_BUTTON, 1);
+	Hits::SetHitBox(this, m_px, m_py, 36, 32, ELEMENT_GIMMICK, OBJ_BUTTON, 1);
 }
 
 //アクション
@@ -35,14 +35,16 @@ void CObjButton::Action()
 {
 	// ボタンが押されたら
 	if (m_trick_flag == true)
+	{
 		m_ani_start_flag = true; // フラグオン
-
+	}
 	HitBox* hit = Hits::GetHitBox(this);
 	
 	// 弾と接触しているかどうかを調べる
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
 		m_trick_flag = true; //弾とあたっているならtrueを入れる
+
 	}
 
 	//アニメフラグONだと
@@ -65,7 +67,7 @@ void CObjButton::Action()
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(Hits::GetHitBox(this), m_px+13, m_py+16);
 
 }
 
