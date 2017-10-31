@@ -54,8 +54,7 @@ void CObjLastWall::Action()
 			{
 
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				objhero->SetPosY(m_py+68.0f);//主人公の位置をLastWallの上側までずらす
-
+				objhero->SetPosY(m_py-60.0f);//主人公の位置をLastWallの上側までずらす
 			}
 
 			//LastWallの左側が衝突している場合
