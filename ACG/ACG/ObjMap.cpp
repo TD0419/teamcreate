@@ -100,6 +100,15 @@ void CObjMap::CreateObj(int x, int y)
 	
 	switch (m_map[y][x].num)
 	{
+		// プランナーからマップが届いたらコメントをはずす
+		
+		//case MAP_HERO_START:	//ヒーローの作成
+		//{
+		//	CObjHero* objhero = new CObjHero(x, y-1);
+		//	Objs::InsertObj(objhero, OBJ_HERO, 9);
+		//	break;
+		//}
+		
 		case MAP_BLOCK:		//ブロック作成
 		{
 			CObjBlock* objblock = new CObjBlock(x, y);

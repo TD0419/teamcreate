@@ -16,8 +16,8 @@ CObjEnemy::CObjEnemy(int x, int y)
 	//マップの要素数を補間
 	m_map_x = x;
 	m_map_y = y;
-	m_px = x * ENEMY_SIZE;
-	m_py = y * ENEMY_SIZE;
+	m_px = (float)x * ENEMY_SIZE;
+	m_py = (float)y * ENEMY_SIZE;
 }
 
 //イニシャライズ
