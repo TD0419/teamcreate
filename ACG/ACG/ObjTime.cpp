@@ -8,28 +8,38 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
-CObjTime::CObjTime(int x, int y)
-{
-	m_px = x ;
-	m_py = y ;
-}
-
 //イニシャライズ
 void CObjTime::Init()
 {
-	
+	//時間(フレーム数)を０に設定
+	m_time = 0;
+
+	m_px = 950;
+	m_py = 20;
 }
 
 //アクション
 void CObjTime::Action()
 {
-	
+	//時間(フレーム数)
+	m_time++;
+
 }
 
 //ドロー
 void CObjTime::Draw()
 {
-	
+	//色情報　RGB
+	float color[4] = {1.0f,1.0f,1.0f,1.0f};
+	//時間を表示させる文字列
+	wchar_t str[256];
 
+	//秒が10未満なら０を前に付ける
+	if(m_time / 64 % 60 < 10)
+		swprintf(str, L"%d:0%d", m_time / 64 / 60,m_time / 64 % 60);
+	//そのまま
+	else
+		swprintf(str, L"%d:%d", m_time / 64 / 60, m_time / 64 % 60);
+	//時間を表示
+	Font::StrDraw(str, m_px, m_py, 20, color);
 }

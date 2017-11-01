@@ -76,11 +76,11 @@ void CSceneMain::InitScene()
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
 	Objs::InsertObj(objboss, OBJ_BOSS, 10);
+
+	//テストタイム
+	CObjTime* objtime = new CObjTime();
+	Objs::InsertObj(objtime, OBJ_TIME, 100);
 	//デバッグ--------------------------------------------
-
-
-	
-
 }
 
 //ゲームメイン実行中メソッド
