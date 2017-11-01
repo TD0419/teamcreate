@@ -283,8 +283,8 @@ void CObjHero::Action()
 
 			if (m_bullet_control == true)
 			{
-				//向いている方向とクリックしている方向が同じなら
-				if (m_posture == mous_way)
+				//向いている方向とクリックしている方向が同じで尚且つ、ロープのアニメーションのフラグがfalseの場合
+				if (m_posture == mous_way && m_rope_ani_con == false)
 				{
 					if (m_posture == 0.0f && m_ladder_updown == 0)//主人公が右を向いていてはしごに登っていない時とき右側から発射
 					{
