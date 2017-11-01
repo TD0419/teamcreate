@@ -14,7 +14,7 @@ void CObjTime::Init()
 	//ŠÔ(ƒtƒŒ[ƒ€”)‚ğ‚O‚Éİ’è
 	m_time = 0;
 
-	m_px = 950;
+	m_px = 900;
 	m_py = 20;
 }
 
@@ -41,5 +41,5 @@ void CObjTime::Draw()
 	else
 		swprintf(str, L"%d:%d", m_time / 64 / 60, m_time / 64 % 60);
 	//ŠÔ‚ğ•\¦
-	Font::StrDraw(str, m_px, m_py, 20, color);
+	Font::StrDraw(str, m_px, m_py, 50, color);
 }
