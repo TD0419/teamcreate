@@ -145,7 +145,7 @@ void CObjRope::Action()
 //ドロー
 void CObjRope::Draw()
 {
-	float color[4] = {0.0f,0.0f,0.0f,1.0f};
+	float color[4] = {1.0f,0.6f,0.0f,1.0f};
 
 	//主人公オブジェクト情報を取得
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
