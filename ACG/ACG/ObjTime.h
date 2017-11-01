@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjTime :public CObj
 {
 public:
-	CObjTime(int x, int y); // コンストラクタ
+	CObjTime() {}; // コンストラクタ
 	~CObjTime() {};			// デストラクタ
 	void Init();			// イニシャライズ
 	void Action();			// アクション
@@ -19,5 +19,5 @@ public:
 private:
 	float m_px;		//位置X
 	float m_py;		//位置Y
-	
+	int m_time;		//時間(フレーム数)
 };

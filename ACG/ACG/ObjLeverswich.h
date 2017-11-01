@@ -15,12 +15,12 @@ public:
 	void Init();						// イニシャライズ
 	void Action();						// アクション
 	void Draw();						// ドロー
-	bool GetWater() { return m_water; } //レバーとスイッチが当たっているかどうかを入れる変数（Water用）
+	bool GetWater() { return m_water_con; } //レバーとスイッチが当たっているかどうかを入れる変数（Water用）
 
 private:
 	float m_px;				// レバースイッチX座標
 	float m_py;				// レバースイッチY座標
-	bool  m_water;          //　水の判定を入れる変数
+	bool  m_water_con;          //　水の判定を入れる変数
 
 	//アニメーション関係
 	int m_ani_time;         //アニメーションフレーム動作感覚

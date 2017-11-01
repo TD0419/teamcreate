@@ -22,7 +22,7 @@ CObjRopeSwitch::CObjRopeSwitch(int x, int y)
 void CObjRopeSwitch::Init()
 {
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, ROPE_SWITCH_SIZE, ROPE_SWITCH_SIZE, ELEMENT_GIMMICK, OBJ_ROPE_SWITCH, 1);
+	Hits::SetHitBox(this, m_px, m_py, 20, 20, ELEMENT_GIMMICK, OBJ_ROPE_SWITCH, 1);
 }
 
 //アクション
@@ -42,7 +42,7 @@ void CObjRopeSwitch::Action()
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(Hits::GetHitBox(this), m_px+23.0f, m_py+32.0f);
 }
 
 //ドロー
