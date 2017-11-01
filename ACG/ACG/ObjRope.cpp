@@ -17,6 +17,10 @@ CObjRope::CObjRope(int x, int y)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//主人公オブジェクト情報を取得
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//主人公が本来いる位置に変更
 	x -= objmap->GetScrollX();
 	y -= objmap->GetScrollY();
@@ -25,15 +29,14 @@ CObjRope::CObjRope(int x, int y)
 	m_py = y;
 	//速さを決める
 	m_speed = 6.5f;
-
-	//マウスの位置と主人公の位置からマウスの角度を求める
-	//マウスの位置情報取得
-	double mous_x = Input::GetPosX();
-	double mous_y = Input::GetPosY();
+	
+	//マウスの位置情報をheroから持ってくるのでマージする時はこっちを残してください（変数もこっちに変えてください）
+	m_moux = objhero->GetRopeMouX(); //Rを押した時のマウスの位置Xを持ってくる
+	m_mouy = objhero->GetRopeMouY(); //Rを押した時のマウスの位置Yを持ってくる
 
 	//主人公の位置からマウスの位置のベクトル情報取得
-	double vector_x = mous_x - x;
-	double vector_y = mous_y - y;
+	double vector_x = m_moux - x;
+	double vector_y = m_mouy - y;
 
 	//斜辺取得
 	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
@@ -45,13 +48,13 @@ CObjRope::CObjRope(int x, int y)
 	m_r = m_r * 180.0 / 3.14;
 
 	//マウスのY位置が主人公のY位置より下だったら
-	if (mous_y > y)
+	if (m_mouy > y)
 	{
 		//180°～360°の値にする
 		m_r = 360 - abs(m_r);
 	}
 	//マウスのY位置が初期Y位置より上
-	if (mous_y < y)
+	if (m_mouy < y)
 	{
 		m_vy = -sin(acos(vector_x / hypotenuse)) * m_speed;
 	}
@@ -64,6 +67,8 @@ CObjRope::CObjRope(int x, int y)
 //イニシャライズ
 void CObjRope::Init()
 {
+	m_moux = 0.0f;
+	m_mouy = 0.0f;
 	m_caught_flag = false;//false = フラグOFF true = フラグON
 	m_delete = false;     //false = フラグOFF true = フラグON
 	//当たり判定用HitBoxを作成
@@ -94,7 +99,7 @@ void CObjRope::Action()
 	else
 		m_delete =false;//ロープは消えていないことを変数に入れる
 	
-	//弾丸のHitBox更新用ポインター取得
+	//ロープのHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//ロープスイッチと衝突したとき、ロープが引っかかるようにする

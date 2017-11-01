@@ -39,9 +39,9 @@ void CObjLadders::Action()
 	// ボタンオブジェクトを持ってくる
 	CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
 
-	// ボタンを押していたら
-	/*if (objbutton->GetTrickFlag() == true)
-		m_obj_look_f = true;	*/		   // はしごが見えるようにする
+		// ボタンを押していたら
+	if (objbutton != nullptr && objbutton->GetTrickFlag() == true)
+		m_obj_look_f = true;			   // はしごが見えるようにする
 }
 
 //ドロー
