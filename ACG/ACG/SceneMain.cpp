@@ -71,7 +71,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
 
-	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Stage01a.csv", &size);//外部データ読み込み
 	
 	if (p == nullptr)
 	{
@@ -113,13 +113,16 @@ void CSceneMain::ImageDataLoading()
 	//グラフィック読み込み
 	//Draw::LoadImageW(L"", id++, TEX_SIZE_???);
 	
+	//背景画像
+	Draw::LoadImageW(L"background.png", 0, TEX_SIZE_1536);
+
 	// block画像
 	Draw::LoadImageW(L"block.png", 2, TEX_SIZE_128);
 
 	//hero画像
 	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_1024);
 
-	//debug用Boss画像
+	//Boss画像
 	Draw::LoadImageW(L"image.png", 4, TEX_SIZE_1024);
 
 	//Ladders画像
@@ -134,7 +137,7 @@ void CSceneMain::ImageDataLoading()
 	//Enemy画像
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_256);
 
-	//Lever画像
+	//Leverswich画像
 	Draw::LoadImageW(L"Lever.png", 9, TEX_SIZE_128);
 
 	//rock画像
@@ -152,11 +155,10 @@ void CSceneMain::ImageDataLoading()
 	//大砲
 	Draw::LoadImageW(L"image4.png", 14, TEX_SIZE_64);
 	
-	//背景画像
-	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1536);
+	
 
 	//木画像
-	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
+	//Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
 
 	//看板の枠線
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
