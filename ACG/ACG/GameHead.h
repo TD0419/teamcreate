@@ -108,6 +108,19 @@ enum MAP_BER
 	MAP_OPEN_WALL,		//開閉する扉(最後の壁用)
 };
 
+//音楽(BGM)
+enum MUSIC
+{
+//BGM--------------------
+	STAGE1	,//ステージ１
+//SE---------------------
+	FIRING	,//弾の発射
+	ROPE	,//ロープの打ち出し
+	ROCK	,//岩の爆発
+	DOOR	,//扉の開閉
+	TREE	,//木の転倒
+};
+
 //オブジェクトのサイズ
 #define HERO_SIZE_WIDTH	      (64.0f)		//主人公の横サイズ	
 #define HERO_SIZE_HEIGHT	  (128.0f)		//主人公の縦サイズ	

@@ -51,9 +51,12 @@ void CSceneMain::InitScene()
 	//test砲台オブジェクトを作成する
 	CObjCannon* objcannon = new CObjCannon(10, 5);
 	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
-
-
 //デバッグ-----------------------------------------------
+
+
+	//BGM再生
+	Audio::Start(STAGE1);
+
 }
 
 //ゲームメイン実行中メソッド
@@ -176,14 +179,41 @@ void CSceneMain::ImageDataLoading()
 
 	//看板(本体)
 	//Draw::LoadImageW(L"", 25, TEX_SIZE_256);イラスト決まってから読み込んでください
-
-
+	
 }
 
 //音楽データ読み込み関数
 void CSceneMain::AudioDataLoading()
 {
 	//音楽登録ID
-	int id = 0;
+	//int id = 0;
 	//Audio::LoadAudio(id++, L"", ? ? ? ? );
+
+//BGM--------------------------------------------------------
+
+	//ステージ1
+	Audio::LoadAudio(STAGE1, L"Grassland1.wav",SOUND_TYPE::BACK_MUSIC);
+
+//------------------------------------------------------------
+
+//SE--------------------------------------------------------
+	
+	//弾の発射
+	Audio::LoadAudio(FIRING, L"Firing1.wav", SOUND_TYPE::EFFECT);
+
+	//縄の打ち出し
+	Audio::LoadAudio(ROPE, L"Rope1.wav", SOUND_TYPE::EFFECT);
+
+	//岩の爆発
+	Audio::LoadAudio(ROCK, L"Rock1.wav", SOUND_TYPE::EFFECT);
+
+	//扉の開閉
+	Audio::LoadAudio(DOOR, L"Door1.wav", SOUND_TYPE::EFFECT);
+
+	//木の転倒
+	Audio::LoadAudio(TREE, L"Tree1.wav", SOUND_TYPE::EFFECT);
+
+//------------------------------------------------------------
+
+
 }

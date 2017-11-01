@@ -22,3 +22,4 @@ private:
 	void ImageDataLoading();	//画像データ読み込み関数
 	void AudioDataLoading();	//音楽データ読み込み関数
 };
+
