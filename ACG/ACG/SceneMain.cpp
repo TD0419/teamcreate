@@ -52,11 +52,6 @@ void CSceneMain::InitScene()
 	CObjCannon* objcannon = new CObjCannon(10, 5);
 	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
 
-
-	//テスト壁
-	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
-	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
-
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
 	Objs::InsertObj(objboss, OBJ_BOSS, 10);
@@ -66,7 +61,9 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objtime, OBJ_TIME, 100);
 	//デバッグ--------------------------------------------
 
-
+	//テストボタン
+	CObjButton* objbuttn = new CObjButton(5,5);
+	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
 	
 
 }
