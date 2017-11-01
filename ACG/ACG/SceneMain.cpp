@@ -53,7 +53,22 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
 
 
-//デバッグ-----------------------------------------------
+	//テスト壁
+	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
+	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
+
+	//壁テストのためboss
+	CObjBoss*objboss = new CObjBoss(10, 5);
+	Objs::InsertObj(objboss, OBJ_BOSS, 10);
+
+	//テストタイム
+	CObjTime* objtime = new CObjTime();
+	Objs::InsertObj(objtime, OBJ_TIME, 100);
+	//デバッグ--------------------------------------------
+
+
+	
+
 }
 
 //ゲームメイン実行中メソッド
