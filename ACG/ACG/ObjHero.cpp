@@ -27,8 +27,10 @@ void CObjHero::Init()
 	m_r = 0.0f;
 	m_rope_delete_ani_con = false;
 
-	m_mous_x = 0.0f;//マウスの位置X
-	m_mous_y = 0.0f;//マウスの位置X
+	m_mous_x = 0.0f;            //マウスの位置X
+	m_mous_y = 0.0f;		    //マウスの位置X
+	m_rope_moux = 0.0f;			//Rを押したときのマウスの位置X
+	m_rope_mouy = 0.0f;		    //Rを押したときのマウスの位置Y
 	
 	m_bullet_control = false;	//弾丸発射制御用
 	m_rope_control = false;		//ロープ発射制御用
@@ -269,22 +271,22 @@ void CObjHero::Action()
 	{
 		
 		//主人公をクリックしていた場合
-		if (m_px <= m_mous_x && m_mous_x <= (m_px + HERO_SIZE_WIDTH))
+		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
 		{
 			;//ヒーロークリックした場合
 		}
 		else
 		{
 			//マウスの位置がプレイヤーから見てどの方向か調べるための変数
-			float mous_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
+			float mous_bullet_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
 
 			if ((m_mous_x - (m_px - objmap->GetScrollX())) < 0)//主人公より左をクリックしたとき
-				mous_way = 1.0f;
+				mous_bullet_way = 1.0f;
 
 			if (m_bullet_control == true)
 			{
 				//向いている方向とクリックしている方向が同じで尚且つ、ロープのアニメーションのフラグがfalseの場合
-				if (m_posture == mous_way && m_rope_ani_con == false)
+				if (m_posture == mous_bullet_way && m_rope_ani_con == false)
 				{
 					if (m_posture == 0.0f && m_ladder_updown == 0)//主人公が右を向いていてはしごに登っていない時とき右側から発射
 					{
@@ -318,6 +320,29 @@ void CObjHero::Action()
 	bool rope_caught; //ロープがロープスイッチと当たっているかどうかを確かめる変数
 	bool rope_delete; //ロープが消えてるか同うかを確かめる変数
 
+	//マウスの位置がプレイヤーから見てどの方向か調べるための変数
+	float mous_rope_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
+
+	if ((m_mous_x - (m_px - objmap->GetScrollX())) < 0)//主人公より左をクリックしたとき
+		mous_rope_way = 1.0f;
+
+	//右クリックを押したらの部分を上に変更したのでマージする時は元の奴を消してこっちを残してください
+	//右クリックを押したら
+	if (Input::GetMouButtonR() == true)
+	{
+		//主人公をクリックしていた場合
+		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
+		{
+			;//ヒーロークリックした場合
+		}       //マウスの位置が後ろじゃない　ロープアニメのフラグがなし　ロープの削除フラグがなし
+		else if (m_posture == mous_rope_way && m_rope_ani_con == false && m_rope_delete_ani_con == false)
+		{
+			m_rope_moux = Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
+			m_rope_mouy = Input::GetPosY(); //ロープを射出したときのマウスの位置Yを入れる
+			m_rope_ani_con = true;
+		}
+	}
+
 	if (obj_rope != nullptr)//ロープオブジェクトが出ている場合
 	{
 		rope_caught = obj_rope->GetCaughtFlag();//ロープがロープスイッチに当たっているかの情報をもらう
@@ -327,14 +352,6 @@ void CObjHero::Action()
 	{
 		rope_caught = false;
 		rope_delete = false;
-	}
-	//右クリックを押したら
-	if (Input::GetMouButtonR() == true)
-	{
-		if (m_rope_ani_con == false && m_rope_delete_ani_con == false) //falseならtrueに変える
-		{
-			m_rope_ani_con = true;
-		}
 	}
 	
 	//trueならアニメーションを進める 　はしごに登っているときは動かない
@@ -527,7 +544,7 @@ void CObjHero::Draw()
 	}
 	else if (m_rope_ani_con == true || rope_caught == true) //ロープを投げるとき
 	{
-		src.m_top = 512.0f;
+		src.m_top = 515.0f;
 		src.m_left = 0.0f + m_ani_frame_rope * 64;
 		src.m_right = 64.0f + m_ani_frame_rope * 64;
 		src.m_bottom = 640.0f;

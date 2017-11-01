@@ -108,6 +108,31 @@ enum MAP_BER
 	MAP_OPEN_WALL,		//開閉する扉(最後の壁用)
 };
 
+//グラフィックID
+enum GRAPHIC_ID
+{
+	GRA_BACKGROUND,		//背景
+	GRA_BLOCK,			//ブロック
+	GRA_HERO,			//プレイヤー
+	GRA_BOSS,			//ボス
+	GRA_LADDERS,		//はしご
+	GRA_LIFT,			//リフト
+	GRA_DOOR,			//ドア
+	GRA_WOOD,			//木
+	GRA_ENEMY,			//敵
+	GRA_LEVER_SWICH,	//レバースイッチ
+	GRA_ROCK,			//岩
+	GRA_AQUATIC,		//水上(波がある)
+	GRA_UNDER_WATER,	//水中(波がない)
+	GRA_ROPE_SWITCH,	//ロープスイッチ
+	GRA_CANNON,			//砲台
+	GRA_SIGN,			//看板
+	GRA_BUTTON,			//ボタン
+	GRA_LAST_WALL,		//次ステージへの入り口(最後の壁)
+	GRA_OPEN_WALL,		//開閉する扉(最後の壁用)
+
+};
+
 //音楽(BGM)
 enum MUSIC
 {

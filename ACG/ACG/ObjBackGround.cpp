@@ -45,6 +45,6 @@ void CObjBackGround::Draw()
 	dst.m_bottom = WINDOW_SIZE_H - objmap->GetScrollY() + 15.0f;//è≠Çµí≤êÆóp(Å{15)
 
 	//ï`âÊ
-	Draw::Draw(15, &src, &dst, color, 0.0f);
+	Draw::Draw(0, &src, &dst, color, 0.0f);
 	
 }
