@@ -86,7 +86,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
 
-	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Stage01a.csv", &size);//外部データ読み込み
 	
 	if (p == nullptr)
 	{

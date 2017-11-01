@@ -271,7 +271,7 @@ void CObjHero::Action()
 	{
 		
 		//主人公をクリックしていた場合
-		if (m_px <= m_mous_x && m_mous_x <= (m_px + HERO_SIZE_WIDTH))
+		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
 		{
 			;//ヒーロークリックした場合
 		}
@@ -331,7 +331,7 @@ void CObjHero::Action()
 	if (Input::GetMouButtonR() == true)
 	{
 		//主人公をクリックしていた場合
-		if (m_px <= m_mous_x && m_mous_x <= (m_px + HERO_SIZE_WIDTH))
+		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
 		{
 			;//ヒーロークリックした場合
 		}       //マウスの位置が後ろじゃない　ロープアニメのフラグがなし　ロープの削除フラグがなし
@@ -544,7 +544,7 @@ void CObjHero::Draw()
 	}
 	else if (m_rope_ani_con == true || rope_caught == true) //ロープを投げるとき
 	{
-		src.m_top = 512.0f;
+		src.m_top = 515.0f;
 		src.m_left = 0.0f + m_ani_frame_rope * 64;
 		src.m_right = 64.0f + m_ani_frame_rope * 64;
 		src.m_bottom = 640.0f;

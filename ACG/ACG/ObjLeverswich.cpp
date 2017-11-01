@@ -22,7 +22,7 @@ void CObjLeverSwich::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 	m_ani_max_time = 4; //アニメーション間隔幅
-	m_water = false;
+	m_water_con = false;
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, LEVER_SWITCH_SIZE, LEVER_SWITCH_SIZE, ELEMENT_GIMMICK, OBJ_LEVER_SWICH, 1);
 }
@@ -37,7 +37,7 @@ void CObjLeverSwich::Action()
 	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
 	{
 		//水の判定をONにする
-		m_water = true;
+		m_water_con = true;
 
 		m_ani_time += 1;
 
