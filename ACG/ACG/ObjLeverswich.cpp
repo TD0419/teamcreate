@@ -22,9 +22,9 @@ void CObjLeverSwich::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 	m_ani_max_time = 4; //アニメーション間隔幅
-
+	m_water = false;
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, LEVER_SWITCH_SIZE, LEVER_SWITCH_SIZE, ELEMENT_GIMMICK, MAP_ROPE_SWITCH, 1);
+	Hits::SetHitBox(this, m_px, m_py, LEVER_SWITCH_SIZE, LEVER_SWITCH_SIZE, ELEMENT_GIMMICK, OBJ_LEVER_SWICH, 1);
 }
 
 //アクション
@@ -36,6 +36,9 @@ void CObjLeverSwich::Action()
 	//ロープとあたったら描画を進める
 	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
 	{
+		//水の判定をONにする
+		m_water = true;
+
 		m_ani_time += 1;
 
 		//アニメーションの感覚管理
@@ -61,7 +64,11 @@ void CObjLeverSwich::Action()
 			obj_wood->Rotation(true);
 
 		// ------------------------------------------------
+		
 	}
+
+	
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }

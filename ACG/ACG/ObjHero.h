@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjHero:public CObj
 {
 public:
-	CObjHero() {}; 		//コンストラクタ
+	CObjHero(int x, int y); 		//コンストラクタ
 	~CObjHero() {};					//デストラクタ
 	void Init();					//イニシャライズ
 	void Action();					//アクション

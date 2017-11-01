@@ -103,8 +103,8 @@
     <Filter Include="ソース ファイル\Main\Door">
       <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\LastWall">
-      <UniqueIdentifier>{7936bb7e-ae25-43a0-bc58-b3a4316710ae}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Main\Lastwall">
+      <UniqueIdentifier>{414c2d43-9500-4e9e-8793-5499db4f53ac}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Main\Time">
       <UniqueIdentifier>{5cf13a39-2034-4074-b468-0c603f87158f}</UniqueIdentifier>
@@ -253,10 +253,7 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ObjLastWall.h">
-      <Filter>ソース ファイル\Main\LastWall</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjLiftMove.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\Main\Lastwall</Filter>
     </ClInclude>
     <ClInclude Include="ObjTime.h">
       <Filter>ソース ファイル\Main\Time</Filter>
@@ -402,7 +399,7 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ObjLastWall.cpp">
-      <Filter>ソース ファイル\Main\LastWall</Filter>
+      <Filter>ソース ファイル\Main\Lastwall</Filter>
     </ClCompile>
     <ClCompile Include="ObjTime.cpp">
       <Filter>ソース ファイル\Main\Time</Filter>

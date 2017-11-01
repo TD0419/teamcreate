@@ -12,20 +12,22 @@ using namespace GameL;
 //コンストラクタ
 CObjDoor::CObjDoor(int x, int y)
 {
-	m_px = x * DOOR_SIZE_WIDTH;
-	m_py = y * DOOR_SIZE_HEIGHT;
+	m_px = x * DOOR_SIZE;
+	m_py = y * DOOR_SIZE;
 }
 
 //イニシャライズ
 void CObjDoor::Init()
 {
-	m_px = 100.0f;//ドアX座標
-	m_py = 384.0f;//ドアY座標
+	//m_px = 100.0f;//ドアX座標
+	//m_py = 384.0f;//ドアY座標
 }
 
 //アクション
 void CObjDoor::Action()
 {
+	//恐らくボス情報使うので
+	CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 }
 
 //ドロー
@@ -42,14 +44,14 @@ void CObjDoor::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 128.0f;
+	src.m_right = src.m_left+128.0f;
+	src.m_bottom = src.m_top+128.0f;
 
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + DOOR_SIZE_WIDTH;
-	dst.m_bottom = dst.m_top + DOOR_SIZE_HEIGHT;
+	dst.m_right = dst.m_left + DOOR_SIZE;
+	dst.m_bottom = dst.m_top + DOOR_SIZE;
 
 	//描画
 	Draw::Draw(6, &src, &dst, color, 0.0f);

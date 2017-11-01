@@ -10,11 +10,17 @@
 //使用するネームスペース
 using namespace GameL;
 
+
+//コンストラクタ
+CObjHero::CObjHero(int x, int y)
+{
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
+}
+
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = 10.0f;
-	m_py = 5.0f;
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
@@ -277,8 +283,8 @@ void CObjHero::Action()
 
 			if (m_bullet_control == true)
 			{
-				//向いている方向とクリックしている方向が同じなら
-				if (m_posture == mous_way)
+				//向いている方向とクリックしている方向が同じで尚且つ、ロープのアニメーションのフラグがfalseの場合
+				if (m_posture == mous_way && m_rope_ani_con == false)
 				{
 					if (m_posture == 0.0f && m_ladder_updown == 0)//主人公が右を向いていてはしごに登っていない時とき右側から発射
 					{

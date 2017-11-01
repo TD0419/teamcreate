@@ -83,6 +83,8 @@ struct UserData
 enum MAP_BER
 {
 	MAP_SPACE		 , 	//何もない場所
+	// マップが届いたらこのコメントをはずす
+	//MAP_HERO_START	 ,	//heroのスタート位置
 	MAP_BLOCK		 ,	//ブロック(ノーマル)
 	MAP_LADDERS		 ,	//はしご
 	MAP_BUTTON		 ,	//ボタン
@@ -100,7 +102,7 @@ enum MAP_BER
 	MAP_DOOR		 ,	//ドア
 	MAP_LEVER_SWICH	 ,	//レバースイッチ
 	MAP_FALLING_WALLS,  //落下壁
-	MAP_NO_LOOK_LADDERS, //見えないハシゴ
+	MAP_NO_LOOK_LADDERS,//見えないハシゴ
 	MAP_CANNON,			//砲台
 	MAP_LAST_WALL,		//次ステージへの入り口(最後の壁)
 	MAP_OPEN_WALL,		//開閉する扉(最後の壁用)
@@ -128,9 +130,7 @@ enum MAP_BER
 #define BOSS_SIZE_WIDTH		  (192.0f)		//BOSS横幅(仮)
 #define BOSS_SIZE_HEIGHT	  (256.0f)		//BOSS横幅(仮)
 #define BOSS_DORP_KEY_SIZE	  (32.0f)	    //ボスドロップキーサイズ(仮)
-#define DOOR_SIZE_WIDTH		  (32.0f)		//ドアの横サイズ(仮)
-#define DOOR_SIZE_HEIGHT	  (128.0f)		//ドアの縦サイズ(仮)
-#define SIGN_SIZE			  (32.0f)		//看板サイズ(仮)
+#define DOOR_SIZE			  (128.0f)		//ドアのサイズ(仮)
 #define THROUGHT_BLOCK_SIZE	 (64.0f)	    //スルーブロックサイズ（仮）
 #define FALLING_WALLS_SAIZE  (64.0f)		//落下壁サイズ(仮)
 #define CANNON_SIZE_WIDTH	 (64.0f)		//砲台の横サイズ(仮)

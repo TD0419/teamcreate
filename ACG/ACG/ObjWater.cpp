@@ -38,6 +38,13 @@ void CObjWater::Action()
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 
+	//レバースイッチオブジェクトを持ってくる
+	CObjLeverSwich* obj_lever = (CObjLeverSwich*)Objs::GetObj(OBJ_LEVER_SWICH);
+
+	bool lever_swich = false;
+	//レバースイッチオブジェクトが当たっているかどうかを調べる
+	lever_swich = obj_lever->GetWater();
+
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
@@ -48,10 +55,10 @@ void CObjWater::Action()
 	{
 		return;
 	}
-
 	//アニメーションを開始するのでフラグをオンにする
 	m_ani_start = true;
 
+	
 	// m_water_gaugeが64を越えたら処理ストップ
 	if (m_water_gauge >= WATER_SIZE_HEIGHT)
 	{
@@ -61,25 +68,28 @@ void CObjWater::Action()
 		return;
 	}
 	else
-	{
-		m_water_gauge += 0.2f; // 1ずつ増やしていく
-		// hitboxが小さくなる
-        hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge, WATER_SIZE_HEIGHT - m_water_gauge, WATER_SIZE_WIDTH);
-
-		//アニメーションの感覚管理
-		if (m_ani_time > m_ani_max_time)
+	{//レバースイッチが押されていたら
+		if (lever_swich == true)
 		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
-		}
-
-		//最後までアニメーションが進むと最初に戻る
-		if (m_ani_frame == 2)
-		{
-			m_ani_frame = 0;
+			m_water_gauge += 0.2f; // 1ずつ増やしていく
 		}
 	}
-	
+
+	// hitboxが小さくなる
+	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge, WATER_SIZE_HEIGHT - m_water_gauge, WATER_SIZE_WIDTH);
+
+	//アニメーションの感覚管理
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	//最後までアニメーションが進むと最初に戻る
+	if (m_ani_frame == 2)
+	{
+		m_ani_frame = 0;
+	}
 }
 //ドロー
 void CObjWater::Draw()

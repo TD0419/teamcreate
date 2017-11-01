@@ -16,46 +16,33 @@ using namespace GameL;
 #include "SceneMain.h"
 #include "GameHead.h"
 
-
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
-	//マップ情報格納用変数テスト用
-	int map[MAP_Y_MAX][MAP_X_MAX] = { 0 };
-
-	MapDataLoading(map);//マップ情報を読み込み
+	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
 
     //Mapオブジェクトを作成する
-	CObjMap* objmap = new CObjMap(map);
+	CObjMap* objmap = new CObjMap(m_map);
 	Objs::InsertObj(objmap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
-	CObjHero* objhero = new CObjHero();
+	CObjHero* objhero = new CObjHero(0,0);
 	Objs::InsertObj(objhero, OBJ_HERO, 10);
 
 	//背景オブジェクトを作成する
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
-
-	//デバッグ　”使い終わったら消してください！”----------------
+//デバッグ　”使い終わったら消してください！”----------------
 	//Doorオブジェクトを作成する
-	CObjDoor* objdoor = new CObjDoor(3, 0);
+	CObjDoor* objdoor = new CObjDoor(3, 3);
 	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
-
-	//敵オブジェクトを作成する
-	CObjEnemy* objenemy = new CObjEnemy(10,7);
-	Objs::InsertObj(objenemy, OBJ_ENEMY, 11);
 
 	//看板オブジェクトを作成する
 	CObjSign* objsign = new CObjSign(14, 7);
 	Objs::InsertObj(objsign, OBJ_SIGN, 10);
-
-	//レバースイッチオブジェクトを作成する
-	CObjLeverSwich* objlever_swich = new CObjLeverSwich(7, 7);
-	Objs::InsertObj(objlever_swich, OBJ_LEVER_SWICH, 10);
 
 	//ロープスイッチオブジェクトを作成する
 	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
@@ -65,9 +52,6 @@ void CSceneMain::InitScene()
 	CObjCannon* objcannon = new CObjCannon(10, 5);
 	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
 
-	//テストボタン
-	CObjButton*objbutton = new CObjButton(5, 3);
-	Objs::InsertObj(objbutton, OBJ_BUTTON, 10);
 
 	//テスト壁
 	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
@@ -81,6 +65,10 @@ void CSceneMain::InitScene()
 	CObjTime* objtime = new CObjTime();
 	Objs::InsertObj(objtime, OBJ_TIME, 100);
 	//デバッグ--------------------------------------------
+
+
+	
+
 }
 
 //ゲームメイン実行中メソッド
@@ -98,11 +86,11 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
 
-	p = Save::ExternalDataOpen(L"Stage01a.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
 	
 	if (p == nullptr)
 	{
-		MessageBox(0, L"マップデータが見つかりませんでした。", L"エラーコッチャ", MB_OK);
+		MessageBox(0, L"マップデータが見つかりませんでした。", NULL, MB_OK);
 		return;
 	}
 
@@ -153,7 +141,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
 
 	//Door & Padlock画像
-	Draw::LoadImageW(L"Door & Padlock.png", 6, TEX_SIZE_128);
+	Draw::LoadImageW(L"Door.png", 6, TEX_SIZE_128);
 
 	//Wood画像
 	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);
@@ -169,6 +157,9 @@ void CSceneMain::ImageDataLoading()
 
 	//Water画像
 	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);
+
+	//Water波なし画像  消しちゃだめ。いります！
+	Draw::LoadImageW(L"WaterBlock.png", 12, TEX_SIZE_256);
 	
 	//RopeSwitch画像
 	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);
@@ -182,11 +173,11 @@ void CSceneMain::ImageDataLoading()
 	//木画像
 	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
 
-	//看板
+	//看板の枠線
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
 	
 	//ボタン
-	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_64);
+	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_128);
 
 	//lastwall(仮)
 	Draw::LoadImageW(L"Lastwall.png", 21, TEX_SIZE_256);//上
@@ -197,6 +188,10 @@ void CSceneMain::ImageDataLoading()
 	
 	//リフト
 	Draw::LoadImageW(L"Lift.png", 24, TEX_SIZE_128);
+
+	//看板(本体)
+	//Draw::LoadImageW(L"", 25, TEX_SIZE_256);イラスト決まってから読み込んでください
+
 
 }
 
