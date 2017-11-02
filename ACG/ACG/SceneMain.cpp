@@ -129,66 +129,66 @@ void CSceneMain::ImageDataLoading()
 	//グラフィック読み込み
 	//Draw::LoadImageW(L"", id++, TEX_SIZE_???);
 	
-	//背景画像
+	//背景画像読み込み
 	Draw::LoadImageW(L"background.png", GRA_BACKGROUND, TEX_SIZE_1536);
 
-	//hero画像
+	//プレイヤー画像読み込み
 	Draw::LoadImageW(L"Hero.png", GRA_HERO, TEX_SIZE_1024);
 
-	// block画像
+	//ブロック画像読み込み
 	Draw::LoadImageW(L"block.png", GRA_BLOCK, TEX_SIZE_128);
 
-	//Boss画像
+	//リフト画像読み込み
+	Draw::LoadImageW(L"Lift.png", GRA_LIFT, TEX_SIZE_128);
+
+	//ボス画像読み込み
 	Draw::LoadImageW(L"image.png", GRA_BOSS, TEX_SIZE_1024);
 
-	//Ladders画像
+	//ハシゴ画像読み込み
 	Draw::LoadImageW(L"Ladders.png", GRA_LADDERS, TEX_SIZE_64);
 
-	//Door & Padlock画像
+	//ドア & 錠画像読み込み
 	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_128);
 
-	//Wood画像
+	//木(ギミック)画像読み込み
 	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_128);
 	
-	//Enemy画像
+	//敵画像読み込み
 	Draw::LoadImageW(L"Snake.png", GRA_ENEMY, TEX_SIZE_256);
 
-	//Leverswich画像
+	//レバースイッチ画像読み込み
 	Draw::LoadImageW(L"Lever.png", GRA_LEVER_SWICH, TEX_SIZE_128);
 
-	//rock画像
+	//岩画像読み込み
 	Draw::LoadImageW(L"rock.png", GRA_ROCK, TEX_SIZE_256);
 
-	//Water(水上)画像
+	//Water(水上)画像読み込み
 	Draw::LoadImageW(L"Water.png", GRA_AQUATIC, TEX_SIZE_256);
 
-	//Water波なし(水中)画像  消しちゃだめ。いります！
+	//Water波なし(水中)画像読み込み  消去禁止。いります！
 	Draw::LoadImageW(L"WaterBlock.png", GRA_UNDER_WATER, TEX_SIZE_256);
 	
-	//RopeSwitch画像
+	//ロープスイッチ画像読み込み
 	Draw::LoadImageW(L"RopeSwitch.png", GRA_ROPE_SWITCH, TEX_SIZE_64);
 
-	//大砲
+	//大砲画像読み込み
 	Draw::LoadImageW(L"image4.png", GRA_CANNON, TEX_SIZE_64);
 	
-
-	//看板の枠線
+	//看板の枠線画像読み込み
 	Draw::LoadImageW(L"Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
 	
-	//ボタン
+	//ボタン読み込み
 	Draw::LoadImageW(L"button.png", GRA_BUTTON, TEX_SIZE_128);
 
-	//lastwall(仮)
+	//lastwall(仮)画像読み込み
 	Draw::LoadImageW(L"Lastwall.png", GRA_LAST_WALL, TEX_SIZE_256);//上
 	Draw::LoadImageW(L"Openwall.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
 
-	//zanki(仮)
+	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"zanki.png", GRA_LIFE, TEX_SIZE_64);
 	
-	//リフト
-	Draw::LoadImageW(L"Lift.png", GRA_LIFT, TEX_SIZE_128);
 
-	//看板(本体)
+	//看板(本体)画像読み込み
 	//Draw::LoadImageW(L"", GRA_SIGN_MAIN, TEX_SIZE_256);イラスト決まってから読み込んでください
 	
 }
