@@ -102,7 +102,7 @@ void CObjLift::Draw()
 	dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
 
 	//ƒŠƒtƒg‚Ì•`‰æ
-	Draw::Draw(24, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_LIFT, &src, &dst, color, 0.0f);
 }
 
 //ålŒö‚ğæ‚¹‚éˆ—‚ğ‚·‚é

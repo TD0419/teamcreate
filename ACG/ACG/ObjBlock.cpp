@@ -81,7 +81,7 @@ void CObjBlock::Draw()
 	dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
 	//描画
-	Draw::Draw(2, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_BLOCK, &src, &dst, color, 0.0f);
 }
 
 //ブロックとオブジェクトの当たり判定

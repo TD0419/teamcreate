@@ -101,5 +101,5 @@ void CObjButton::Draw()
 
 	
 	//•`‰æ
-	Draw::Draw(20, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_BUTTON, &src, &dst, color, 0.0f);
 }

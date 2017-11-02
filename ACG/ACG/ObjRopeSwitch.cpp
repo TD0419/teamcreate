@@ -69,5 +69,5 @@ void CObjRopeSwitch::Draw()
 	dst.m_bottom = dst.m_top + ROPE_SWITCH_SIZE;
 
 	//•`‰æ
-	Draw::Draw(13, &src, &dst, color, 0);
+	Draw::Draw(GRA_ROPE_SWITCH, &src, &dst, color, 0);
 }

@@ -23,7 +23,7 @@ void CObjSign::Init()
 	m_strdrow = false;
 
 	//文字セット
-	Font::SetStrTex(L"???「ロープを使うのだ」");
+	Font::SetStrTex(L"???「ロープを使うのだよ諸君！」");
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -79,8 +79,8 @@ void CObjSign::Draw()
 	if (m_strdrow == true)
 	{
 		//描画
-		Draw::Draw(17, &src, &dst, color, 0);
-		Font::StrDraw(L"???「ロープを使うのだ」", dst.m_left, dst.m_top + 32.0f , 32.0f, color_str);
+		Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+		Font::StrDraw(L"???「ロープを使うのだよ諸君！」", dst.m_left, dst.m_top + 32.0f , 32.0f, color_str);
 	}
 	//----------------------------------------------------------------------------
 
@@ -97,7 +97,7 @@ void CObjSign::Draw()
 	dst.m_right = dst.m_left + LIFT_SIGN_WIDTH;
 	dst.m_bottom = dst.m_top + LIFT_SIGN_HEIGHT;
 */
-	//リフトの描画
-//	Draw::Draw(25, &src, &dst, color, 0.0f);
+	//描画
+//	Draw::Draw(GRA_SIGN_MAIN, &src, &dst, color, 0.0f);
 	//看板本体--------------------------------------------------------------
 }

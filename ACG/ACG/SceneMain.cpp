@@ -130,70 +130,66 @@ void CSceneMain::ImageDataLoading()
 	//Draw::LoadImageW(L"", id++, TEX_SIZE_???);
 	
 	//背景画像
-	Draw::LoadImageW(L"background.png", 0, TEX_SIZE_1536);
-
-	// block画像
-	Draw::LoadImageW(L"block.png", 2, TEX_SIZE_128);
+	Draw::LoadImageW(L"background.png", GRA_BACKGROUND, TEX_SIZE_1536);
 
 	//hero画像
-	Draw::LoadImageW(L"Hero.png", 3, TEX_SIZE_1024);
+	Draw::LoadImageW(L"Hero.png", GRA_HERO, TEX_SIZE_1024);
+
+	// block画像
+	Draw::LoadImageW(L"block.png", GRA_BLOCK, TEX_SIZE_128);
 
 	//Boss画像
-	Draw::LoadImageW(L"image.png", 4, TEX_SIZE_1024);
+	Draw::LoadImageW(L"image.png", GRA_BOSS, TEX_SIZE_1024);
 
 	//Ladders画像
-	Draw::LoadImageW(L"Ladders.png", 5, TEX_SIZE_64);
+	Draw::LoadImageW(L"Ladders.png", GRA_LADDERS, TEX_SIZE_64);
 
 	//Door & Padlock画像
-	Draw::LoadImageW(L"Door.png", 6, TEX_SIZE_128);
+	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_128);
 
 	//Wood画像
-	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);
+	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_128);
 	
 	//Enemy画像
-	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_256);
+	Draw::LoadImageW(L"Snake.png", GRA_ENEMY, TEX_SIZE_256);
 
 	//Leverswich画像
-	Draw::LoadImageW(L"Lever.png", 9, TEX_SIZE_128);
+	Draw::LoadImageW(L"Lever.png", GRA_LEVER_SWICH, TEX_SIZE_128);
 
 	//rock画像
-	Draw::LoadImageW(L"rock.png", 10, TEX_SIZE_256);
+	Draw::LoadImageW(L"rock.png", GRA_ROCK, TEX_SIZE_256);
 
-	//Water画像
-	Draw::LoadImageW(L"Water.png", 11, TEX_SIZE_256);
+	//Water(水上)画像
+	Draw::LoadImageW(L"Water.png", GRA_AQUATIC, TEX_SIZE_256);
 
-	//Water波なし画像  消しちゃだめ。いります！
-	Draw::LoadImageW(L"WaterBlock.png", 12, TEX_SIZE_256);
+	//Water波なし(水中)画像  消しちゃだめ。いります！
+	Draw::LoadImageW(L"WaterBlock.png", GRA_UNDER_WATER, TEX_SIZE_256);
 	
 	//RopeSwitch画像
-	Draw::LoadImageW(L"RopeSwitch.png", 13, TEX_SIZE_64);
+	Draw::LoadImageW(L"RopeSwitch.png", GRA_ROPE_SWITCH, TEX_SIZE_64);
 
 	//大砲
-	Draw::LoadImageW(L"image4.png", 14, TEX_SIZE_64);
+	Draw::LoadImageW(L"image4.png", GRA_CANNON, TEX_SIZE_64);
 	
-	
-
-	//木画像
-	//Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
 
 	//看板の枠線
-	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);
+	Draw::LoadImageW(L"Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
 	
 	//ボタン
-	Draw::LoadImageW(L"button.png", 20, TEX_SIZE_128);
+	Draw::LoadImageW(L"button.png", GRA_BUTTON, TEX_SIZE_128);
 
 	//lastwall(仮)
-	Draw::LoadImageW(L"Lastwall.png", 21, TEX_SIZE_256);//上
-	Draw::LoadImageW(L"Openwall.png", 22, TEX_SIZE_512);//下
+	Draw::LoadImageW(L"Lastwall.png", GRA_LAST_WALL, TEX_SIZE_256);//上
+	Draw::LoadImageW(L"Openwall.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
 
 	//zanki(仮)
-	Draw::LoadImageW(L"zanki.png", 23, TEX_SIZE_64);
+	Draw::LoadImageW(L"zanki.png", GRA_LIFE, TEX_SIZE_64);
 	
 	//リフト
-	Draw::LoadImageW(L"Lift.png", 24, TEX_SIZE_128);
+	Draw::LoadImageW(L"Lift.png", GRA_LIFT, TEX_SIZE_128);
 
 	//看板(本体)
-	//Draw::LoadImageW(L"", 25, TEX_SIZE_256);イラスト決まってから読み込んでください
+	//Draw::LoadImageW(L"", GRA_SIGN_MAIN, TEX_SIZE_256);イラスト決まってから読み込んでください
 	
 }
 

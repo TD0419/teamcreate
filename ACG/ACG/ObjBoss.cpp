@@ -135,6 +135,6 @@ void CObjBoss::Draw()
 
 	////•`‰æ
 	/*Draw::Draw(14, &src, &dst, color, 0.0f);*/
-	Draw::Draw(4, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_BOSS, &src, &dst, color, 0.0f);
 
 }
