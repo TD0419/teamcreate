@@ -165,14 +165,14 @@ void CObjBullet::Draw()
 	//Ø‚èŽæ‚èˆÊ’u
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 512.0f;
-	src.m_bottom = 512.0f;
-
+	src.m_right = 64.0f;
+	src.m_bottom = 64.0f;
+	
 	//•`‰æˆÊ’u
-	dst.m_top = m_py- objmap->GetScrollY();
-	dst.m_left =  m_px- objmap->GetScrollX();
-	dst.m_right = dst.m_left + BULLET_SIZE;
+	dst.m_top    = m_py;
+	dst.m_left   = m_px;
+	dst.m_right  = dst.m_left + BULLET_SIZE;
 	dst.m_bottom = dst.m_top + BULLET_SIZE;
 
-	Draw::Draw(0, &src, &dst, color, m_r);
+	Draw::Draw(GRA_HERO_BULLET, &src, &dst, color, m_r);
 }

@@ -113,6 +113,7 @@ enum GRAPHIC_ID
 {
 	GRA_BACKGROUND,		//背景
 	GRA_HERO,			//プレイヤー
+	GRA_HERO_BULLET,    //プレイヤーの弾
 	GRA_BLOCK,			//ブロック
 	GRA_BOSS,			//ボス
 	GRA_LADDERS,		//はしご

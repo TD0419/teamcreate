@@ -135,6 +135,9 @@ void CSceneMain::ImageDataLoading()
 	//プレイヤー画像読み込み
 	Draw::LoadImageW(L"Hero.png", GRA_HERO, TEX_SIZE_1024);
 
+	//主人公の弾画像読み込み
+	Draw::LoadImageW(L"Hero_bullet.png", GRA_HERO_BULLET, TEX_SIZE_64);
+
 	//ブロック画像読み込み
 	Draw::LoadImageW(L"block.png", GRA_BLOCK, TEX_SIZE_128);
 
