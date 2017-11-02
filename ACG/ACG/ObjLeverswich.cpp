@@ -103,5 +103,5 @@ void CObjLeverSwich::Draw()
 	dst.m_bottom = dst.m_top + LEVER_SWITCH_SIZE;
 
 	//•`‰æ
-	Draw::Draw(9, &src, &dst, color, 0);
+	Draw::Draw(GRA_LEVER_SWICH, &src, &dst, color, 0);
 }

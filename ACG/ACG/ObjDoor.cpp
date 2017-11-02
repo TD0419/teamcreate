@@ -54,5 +54,5 @@ void CObjDoor::Draw()
 	dst.m_bottom = dst.m_top + DOOR_SIZE;
 
 	//•`‰æ
-	Draw::Draw(6, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_DOOR, &src, &dst, color, 0.0f);
 }

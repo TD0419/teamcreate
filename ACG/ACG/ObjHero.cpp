@@ -632,7 +632,7 @@ void CObjHero::Draw()
 	}
 
 	//ï`âÊ
-	Draw::Draw(3, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_HERO, &src, &dst, color, 0.0f);
 	//ñ{ëÃ-------------------------------------
 
 	//òr---------------------------------------
@@ -654,7 +654,7 @@ void CObjHero::Draw()
 		;    //âΩÇ‡ï`âÊÇµÇ»Ç¢
 	}
 	else
-		Draw::Draw(3, &src, &dst, color, m_r,-0.2f,-0.25f);
+		Draw::Draw(GRA_HERO, &src, &dst, color, m_r,-0.2f,-0.25f);
 	//-----------------------------------------
 
 
@@ -726,7 +726,7 @@ void CObjHero::Draw()
 	dst.m_bottom = 50.0f;
 
 	//ï`âÊ
-	Draw::Draw(23, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_LIFE, &src, &dst, color, 0.0f);
 }
 
 //íÖínÇ≈Ç´ÇƒÇÈÇ©Ç«Ç§Ç©Çí≤Ç◊ÇÈä÷êî
