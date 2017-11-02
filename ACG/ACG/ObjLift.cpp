@@ -6,27 +6,47 @@
 #include "GameHead.h"
 #include "ObjLift.h"
 #include "Function.h"
+#include <math.h>
 
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
-CObjLift::CObjLift(int x, int y)
+//コンストラクタ(移動のベクトルつき）
+//引数1,2	マップの数値(位置)
+//引数3,4	移動するときの速度
+//引数5		移動の最大量（左右）
+//引数6		移動の最大量（上下）
+//引数		移動のためのフラグの配列の要素数	＊後に改造するのでこのままおいといてください
+CObjLift::CObjLift(int px, int py,float vx,float vy,float width_max, float length_max)
 {
-	m_px = (float)x * BLOCK_SIZE;
-	m_py = (float)y * BLOCK_SIZE;
+	//表示すべき位置を入れる
+	m_px = (float)px * BLOCK_SIZE;	
+	m_py = (float)py * BLOCK_SIZE;
+	
+	//移動ベクトルを入れる
+	m_vx = vx;
+	m_vy = vy;
+
+	//移動の最大量を入れる
+	m_width_max = width_max;	
+	m_length_max = length_max;
+}
+
+//コンストラクタ
+CObjLift::CObjLift(int px,int py)
+{
+	m_px = (float)px * BLOCK_SIZE;
+	m_py = (float)py * BLOCK_SIZE;
+	m_vx = 0.0f;
+	m_vy = 0.0f;
+
 }
 
 //イニシャライズ
 void CObjLift::Init()
 {
-	m_vx = 0.0f;
-	m_vy = 0.0f;
-
-	//ステージ１のときのリフトの動きの初期位置を右にする
-	m_right_max_x = m_px;
-	//ステージ１のときのリフトの動きの最大左X位置を計算
-	m_lift_max_x = m_px - 640;
+	m_move_x = 0.0f;
+	m_move_y = 0.0f;
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
@@ -48,31 +68,40 @@ void CObjLift::Action()
 	//ロープオブジェクトを持ってくる
 	CObjRopeSwitch* objrope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
 	
-	if (objrope_switch->GetRopeFlag() == true)//ロープとロープスイッチがあたっているとき
+	//専用的過ぎてパターンわけが必要なのでとりあえずコメント化しています
+	//if (objrope_switch->GetRopeFlag() == true)//ロープとロープスイッチがあたっているとき
+	//{
+	//	if (Input::GetVKey('A'))
+	//		m_vx = -1.0f;
+	//	else
+	//		m_vx = 0.0f;
+	//}
+	//else//ロープとロープスイッチがあたっていないとき
+	//{
+	//	m_vx = 1.0f;
+	//}
+
+	//左右の移動量調整
+	if (m_move_x > m_width_max)	//移動量が最大量を超えると
 	{
-		if (Input::GetVKey('A'))
-			m_vx = -1.0f;
-		else
-			m_vx = 0.0f;
-	}
-	else//ロープとロープスイッチがあたっていないとき
-	{
-		m_vx = 1.0f;
+		m_vx *= (-1);	//移動方向を反転して
+		m_move_x = 0.0f;//移動量の初期化
 	}
 
-	//左に行き過ぎないように
-	if (m_px + m_vx <= m_lift_max_x)
+	//上下の移動量調整
+	if (m_move_y > m_length_max)	//移動量が最大量を超えると
 	{
-		m_vx = 0.0f;
-	}
-	//右に行き過ぎないように
-	if (m_px + m_vx >= m_right_max_x)
-	{
-		m_vx = 0.0f;
-	}
+		m_vy *= (-1);	//移動方向を反転して
+		m_move_y = 0.0f;//移動量の初期化
+	}	
+
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
+
+	//移動量の保存
+	m_move_x += abs(m_vx);
+	m_move_y += abs(m_vy);
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);

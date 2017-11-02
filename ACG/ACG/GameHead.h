@@ -89,7 +89,9 @@ enum MAP_BER
 	MAP_LADDERS		 ,	//はしご
 	MAP_BUTTON		 ,	//ボタン
 	MAP_ROPE_SWITCH	 ,	//ロープスイッチ
-	MAP_LIFT		 ,	//リフト
+	MAP_LIFT_WIDTH	 ,	//リフト(横方向に移動する)
+	//MAP_LIFT_LENGTH	 ,	//リフト(縦方向に移動する)		//マップの番号対応ができたらコメントをはずしてください
+	//MAP_LIFT_ALL	 ,	//リフト(縦と横どちらも移動する)	//マップの番号対応ができたらコメントをはずしてください
 	MAP_ROCK		 ,	//岩
 	MAP_WOOD		 ,	//木
 	MAP_WATER		 ,	//水

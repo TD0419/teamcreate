@@ -51,7 +51,6 @@ void CSceneMain::InitScene()
 	//test砲台オブジェクトを作成する
 	CObjCannon* objcannon = new CObjCannon(10, 5);
 	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
-//デバッグ-----------------------------------------------
 
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
@@ -60,12 +59,12 @@ void CSceneMain::InitScene()
 	//テストタイム
 	CObjTime* objtime = new CObjTime();
 	Objs::InsertObj(objtime, OBJ_TIME, 100);
-	//デバッグ--------------------------------------------
 
 	//テストボタン
-	CObjButton* objbuttn = new CObjButton(5,5);
+	CObjButton* objbuttn = new CObjButton(5, 5);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
-	
+
+//デバッグ-----------------------------------------------
 
 	//BGM再生
 	Audio::Start(STAGE1);
