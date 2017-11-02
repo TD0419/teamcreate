@@ -170,31 +170,35 @@ void CObjHero::Action()
 	
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-	//Dキーがおされたとき：右移動　　ロープを出している時と水に当たった時は動かない
-	if (Input::GetVKey('D') == true && m_rope_ani_con == false && m_hero_water_delete == false)
+	//ロープを出している時と水に当たった時は動かない
+	if (m_rope_ani_con == false && m_hero_water_delete == false)
 	{
-		m_vx += 0.5f;
-		m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
-		m_posture = 0.0f;		    //主人公の向き
-		m_ani_time_move += 1;
-	}
-	//Aキーがおされたとき：左移動　　ロープを出している時と水に当たった時は動かない
-	else if (Input::GetVKey('A') == true && m_rope_ani_con == false && m_hero_water_delete == false)
-	{
-		m_vx -= 0.5f;
-		m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
+		//Dキーがおされたとき：右移動　
+		if (Input::GetVKey('D') == true)
+		{
+			m_vx += 0.5f;
+			m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
+			m_posture = 0.0f;		    //主人公の向き
+			m_ani_time_move += 1;
+		}
+		//Aキーがおされたとき：左移動　
+		else if (Input::GetVKey('A') == true)
+		{
+			m_vx -= 0.5f;
+			m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
 
-		if (m_ladder_updown == 1)   //はしごに登ってるときは向きを変えない
-			m_posture = 0.0f;		//主人公の向き
+			if (m_ladder_updown == 1)   //はしごに登ってるときは向きを変えない
+				m_posture = 0.0f;		//主人公の向き
+			else
+				m_posture = 1.0f;		//主人公の向き
+			m_ani_time_move += 1;
+		}
 		else
-			m_posture = 1.0f;		//主人公の向き
-		m_ani_time_move += 1;
-	}
-	else
-	{
-		m_ani_frame_stop_move = 1;	//キー入力が無い時は1を入れる
-		m_ani_frame_move = 1;		//キー入力が無い場合は静止フレームにする
-		m_ani_time_move = 0;
+		{
+			m_ani_frame_stop_move = 1;	//キー入力が無い時は1を入れる
+			m_ani_frame_move = 1;		//キー入力が無い場合は静止フレームにする
+			m_ani_time_move = 0;
+		}
 	}
 
 	//アニメーションの感覚管理
@@ -452,6 +456,7 @@ void CObjHero::Action()
 	//主人公の水に当たったときの死亡フラグがONなら死亡アニメーションをする
 	if (m_hero_water_delete == true)
 	{
+		//落ちるのをゆっくりにする（自由落下のおかげでゆっくりになる）
 		m_vy = 0.0f;
 		//主人公が水に当たった時のアニメーションタイムを進める
 		m_ani_time_water_die += 1;
