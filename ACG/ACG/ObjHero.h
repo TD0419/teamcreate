@@ -51,17 +51,19 @@ private:
 	float m_mous_y;     //マウスの位置X
 	float m_rope_moux;	//Rを押したときのマウスの位置X
 	float m_rope_mouy;  //Rを押したときのマウスの位置X
-
-	bool  m_bullet_control; //弾丸発射制御用
-	bool  m_rope_control;	//ロープ発射制御用
-	bool  m_rope_ani_con;   //ロープアニメーション制御
-	bool  m_rope_delete;    //ロープが消えたかどうか調べる変数
-	bool  m_rope_delete_ani_con;//アニメーション用ロープが消えたかどうかを管理する 
+	  
+	bool  m_bullet_control;       //弾丸発射制御用
+	bool  m_rope_control;	      //ロープ発射制御用
+	bool  m_rope_ani_con;         //ロープアニメーション制御
+	bool  m_rope_delete;          //ロープが消えたかどうか調べる変数
+	bool  m_rope_delete_ani_con;  //アニメーション用ロープが消えたかどうかを管理する 
+	bool  m_hero_water_delete;    //主人公が水にあたったかどうかを調べる変数
 
 	int m_ladder_updown; //はしごHit管理
 	int m_ladder_ani_updown; //はしごアニメーション管理
 	int m_ladder_jump;			//はしごジャンプ管理
-	//アニメーション関係
+
+	//----------------------アニメーション関係
 	int m_ani_time_move;	    //移動アニメーションフレーム動作感覚
 	int m_ani_frame_move;	    //移動描画フレーム
 	int m_ani_frame_stop_move;  //止まった時の移動描画を調整
@@ -74,6 +76,11 @@ private:
 	int m_ani_time_rope;	    //ロープアニメーションフレーム動作感覚
 	int m_ani_frame_rope;	    //ロープ描画フレーム
 	int m_ani_max_time_rope;    //ロープアニメーション動作間隔最大値
+
+	int m_ani_time_water_die;         //主人公が水にあたった時アニメーションフレーム動作感覚
+	int m_ani_frame_water_die;        //主人公が水にあたった時主人公描画フレーム
+	int m_ani_max_time_water_die;     //主人公が水にあたった時主人公アニメーション動作間隔最大値
+	//------------------------------------------
 
 	int m_remaining;//残機管理
 

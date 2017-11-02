@@ -144,5 +144,5 @@ void CObjRock::Draw()
 
 	
 	//•`‰æ
-	Draw::Draw(10, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_ROCK, &src, &dst, color, 0.0f);
 }

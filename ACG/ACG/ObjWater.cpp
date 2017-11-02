@@ -121,7 +121,7 @@ void CObjWater::Draw()
 
 	
 	if(m_ani_start == false)
-		Draw::Draw(12, &src, &dst, color, 0);//水（波なしの画像）
+		Draw::Draw(GRA_UNDER_WATER, &src, &dst, color, 0);//水（波なしの画像）
 	else
-		Draw::Draw(11, &src, &dst, color, 0);//水（波有の画像　アニメーション付き）
+		Draw::Draw(GRA_AQUATIC, &src, &dst, color, 0);//水（波有の画像　アニメーション付き）
 }
