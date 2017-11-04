@@ -64,7 +64,7 @@ void CSceneMain::InitScene()
 	CObjButton* objbuttn = new CObjButton(5, 5);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
 
-//デバッグ-----------------------------------------------
+	//-------------------------------------------------------
 
 	//BGM再生
 	Audio::Start(STAGE1);
