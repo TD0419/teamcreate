@@ -21,13 +21,44 @@ void CObjDoor::Init()
 {
 	//m_px = 100.0f;//ドアX座標
 	//m_py = 384.0f;//ドアY座標
+	m_ani_door_time = 0;
+	m_ani_door_frame = 1;	//静止フレームを初期化する
+	m_ani_door_time_max = 20;//アニメーション間隔幅
+
+	m_unlock_flag = false;
 }
 
 //アクション
 void CObjDoor::Action()
 {
-	//恐らくボス情報使うので
-	CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+	bool a;
+	if (objboss != nullptr)
+	{
+		a = objboss->GetDieFlag();
+	}
+	else
+	{
+		a = false;
+	}
+	if (a == true)
+		m_unlock_flag = true;
+
+	if (m_unlock_flag==true)
+	{
+		m_ani_door_time += 1;
+	}
+
+	if (m_ani_door_time > m_ani_door_time_max&&m_ani_door_frame != 2)
+	{
+		m_ani_door_frame += 1;
+		m_ani_door_time = 0;
+	}
+	if (m_ani_door_frame == 2)
+	{
+		m_ani_door_frame = 2;
+		return;
+	}
 }
 
 //ドロー
@@ -43,7 +74,7 @@ void CObjDoor::Draw()
 
 	//切り取り位置
 	src.m_top = 0.0f;
-	src.m_left = 0.0f;
+	src.m_left = m_ani_door_frame * 128.0f-128.0f;
 	src.m_right = src.m_left+128.0f;
 	src.m_bottom = src.m_top+128.0f;
 

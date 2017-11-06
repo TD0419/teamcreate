@@ -36,6 +36,7 @@ void CObjBoss::Init()
 	m_hit_left = false;
 	m_hit_right = false;
 
+	m_die_flag = false;
 	 //当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
 }
@@ -85,7 +86,7 @@ void CObjBoss::Action()
 	else if (m_hit_left == true)// ブロックの左側に当たっていたら
 		m_posture = 1.0f;		// 左向きにする
 
-	CObjLastWall* objlastwall = (CObjLastWall*)Objs::GetObj(OBJ_LAST_WALL);
+	CObjDoor* objdoor = (CObjDoor*)Objs::GetObj(OBJ_DOOR);
 	//弾丸とあたったらHP-1
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
@@ -95,8 +96,9 @@ void CObjBoss::Action()
 	// 体力が0以下なら
 	if (m_hp <= 0)
 	{
+		m_die_flag = true;
 		Hits::DeleteHitBox(this);	//BOSSが所有するHitBoxに削除する
-		this->SetStatus(false);		//自身に削除命令を出
+		this->SetStatus(false);		//自身に削除命令を出す
 		return;
 	}
 
@@ -109,10 +111,7 @@ void CObjBoss::Action()
 void CObjBoss::Draw()
 {
 	//画像の切り取り配列
-	int AniData[8] =
-	{
-		0, 1, 2, 3, 4, 5, 6, 7,
-	};
+	
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -123,7 +122,7 @@ void CObjBoss::Draw()
 
 	//切り取り位置(	いらん奴)
 	src.m_top = 0.0f;
-	src.m_left = AniData[m_ani_frame] * 128.0-128.0;
+	src.m_left = m_ani_frame * 128.0-128.0;
 	src.m_right = src.m_left+128.0f;
 	src.m_bottom = src.m_top + 128.0f;
 
