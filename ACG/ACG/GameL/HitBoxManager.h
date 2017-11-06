@@ -42,7 +42,7 @@ namespace GameL
 			CHitBox();
 			~CHitBox();
 			void SetObj(void* t);									//このHitBoxが持つオブジェクトアドレスの設定
-			void SetPos(float x,float y,float h,float w);			//座標・大きさ設定
+			void SetPos(float x,float y,float w,float h);			//座標・大きさ設定
 			void SetPos(float x,float y);							//座標設定
 			void SetStatus(int e,int n,int p);						//属性・オブジェクトネーム・ポイント設定
 			void SetInvincibility(bool i);							//無敵の有無

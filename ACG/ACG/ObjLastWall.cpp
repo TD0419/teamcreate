@@ -21,6 +21,8 @@ void CObjLastWall::Init()
 {
 	//当たり判定																
 	Hits::SetHitBox(this, m_px, m_py, 32, 512, ELEMENT_GIMMICK, OBJ_LAST_WALL, 1);
+	m_wall_gauge = 0.0f;
+	m_look_unlock_flag = false;
 }
 
 //アクション
@@ -34,6 +36,32 @@ void CObjLastWall::Action()
 	//主人公オブジェクトを持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
+	// ボタンオブジェクトを持ってくる
+	CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
+	//ボタンを押してたら扉を開くフラグオン
+	if (objbutton->GetTrickFlag() == true)
+		m_look_unlock_flag = true;
+
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	int map_num = objmap->GetMap(m_map_x, m_map_y);
+
+	// m_wall_gaugeが512を越えたら処理ストップ
+	if (m_wall_gauge >= 512)
+	{
+		
+		return;
+	}
+	else
+	{//レバースイッチが押されていたら
+		if (m_look_unlock_flag == true)
+		{
+			m_wall_gauge += 1; // 1ずつ増やしていく
+		}
+	}
+
+	// hitboxが小さくなる
+	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_wall_gauge, 512 - m_wall_gauge, 32);
 
 	for (int i = 0; i < hit->GetCount(); i++)
 	{
@@ -100,21 +128,22 @@ void CObjLastWall::Draw()
 	dst.m_bottom = dst.m_top + 256.0f;
 
 	//描画(上の部分)
-	Draw::Draw(21, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_LAST_WALL, &src, &dst, color, 0.0f);
 
 	//-----------------------------------------------------
-
-	//切り取り位置
-	src.m_top = 0.0;
-	src.m_left = 0.0f;
-	src.m_right = 32.0f;
-	src.m_bottom = 512.0f;
-
+	if (m_wall_gauge != 512)
+	{
+		//切り取り位置
+		src.m_top = 0.0 + m_wall_gauge;
+		src.m_left = 0.0f;
+		src.m_right = 32.0f;
+		src.m_bottom = 512.0f;
+	}
 	//描画位置
-	dst.m_top = m_py - objmap->GetScrollY() + 65;
+	dst.m_top = m_py  - objmap->GetScrollY() + 65;
 	dst.m_left = m_px - objmap->GetScrollX() + 30;
 	dst.m_right = dst.m_left + 32;
-	dst.m_bottom = dst.m_top + 512;
+	dst.m_bottom = dst.m_top + 512 - m_wall_gauge;
 	//描画(下の部分)
-	Draw::Draw(22, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_OPEN_WALL, &src, &dst, color, 0.0f);
 }

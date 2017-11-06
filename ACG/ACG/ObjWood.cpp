@@ -142,7 +142,7 @@ void CObjWood::Draw()
 	dst.m_bottom = dst.m_top + WOOD_SIZE;
 
 	//描画
-	Draw::Draw(7, &src, &dst, color, m_r,-1.0f,-1.0f);
+	Draw::Draw(GRA_WOOD, &src, &dst, color, m_r,-1.0f,-1.0f);
 }
 
 //ブロックAとブロックBの当たり判定

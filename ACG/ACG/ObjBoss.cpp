@@ -58,7 +58,7 @@ void CObjBoss::Action()
 	}
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
-	
+
 	if (m_posture == 0.0f)		// 右向きなら
 		m_vx = m_speed;			// 右に進む
 	else if (m_posture == 1.0f) // 左向きなら
@@ -73,17 +73,27 @@ void CObjBoss::Action()
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
 	m_py += m_vy;
-	
+
 	//ブロックとの当たり判定実行
-	CObjBlock* objblock = (CObjBlock*) Objs::GetObj(OBJ_BLOCK);
-	objblock-> BlockHit(&m_px,&m_py,BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT,
-	&m_hit_up,&m_hit_down,&m_hit_left,&m_hit_right,&m_vx,&m_vy
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	objblock->BlockHit(&m_px, &m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
-	
+
 	if (m_hit_right == true)    // ブロックの右側に当たっていたら 
+	{
 		m_posture = 0.0f;		// 右向きにする
+		// 敵弾丸作成
+		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
+		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+	}
 	else if (m_hit_left == true)// ブロックの左側に当たっていたら
+	{
 		m_posture = 1.0f;		// 左向きにする
+		// 敵弾丸作成
+		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
+		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+	}
 
 	CObjLastWall* objlastwall = (CObjLastWall*)Objs::GetObj(OBJ_LAST_WALL);
 	//弾丸とあたったらHP-1
@@ -135,6 +145,6 @@ void CObjBoss::Draw()
 
 	////描画
 	/*Draw::Draw(14, &src, &dst, color, 0.0f);*/
-	Draw::Draw(4, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_BOSS, &src, &dst, color, 0.0f);
 
 }

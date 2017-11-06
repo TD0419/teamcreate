@@ -39,8 +39,8 @@ void CObjLadders::Action()
 	// ボタンオブジェクトを持ってくる
 	CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
 
-	// ボタンを押していたら
-	if (objbutton->GetTrickFlag() == true)
+		// ボタンを押していたら
+	if (objbutton != nullptr && objbutton->GetTrickFlag() == true)
 		m_obj_look_f = true;			   // はしごが見えるようにする
 }
 
@@ -72,10 +72,10 @@ void CObjLadders::Draw()
 
 		//サイドにブロックがあれば
 		if (m_side_block_flag == true)
-			Draw::Draw(2, &src, &dst, color, 0);//ブロックの描画
+			Draw::Draw(GRA_BLOCK, &src, &dst, color, 0);//ブロックの描画
 
-		//梯子の描画
-		Draw::Draw(5, &src, &dst, color, 0);
+		//ハシゴの描画
+		Draw::Draw(GRA_LADDERS, &src, &dst, color, 0);
 	}
 }
 

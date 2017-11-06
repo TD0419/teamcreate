@@ -27,12 +27,17 @@ void CObjHero::Init()
 	m_r = 0.0f;
 	m_rope_delete_ani_con = false;
 
-	m_mous_x = 0.0f;//マウスの位置X
-	m_mous_y = 0.0f;//マウスの位置X
+	m_mous_x = 0.0f;            //マウスの位置X
+	m_mous_y = 0.0f;		    //マウスの位置X
+	m_rope_moux = 0.0f;			//Rを押したときのマウスの位置X
+	m_rope_mouy = 0.0f;		    //Rを押したときのマウスの位置Y
 	
 	m_bullet_control = false;	//弾丸発射制御用
 	m_rope_control = false;		//ロープ発射制御用
 	m_rope_ani_con = false;
+	m_rope_delete = false;    //ロープが消えたかどうか調べる変数
+	m_rope_delete_ani_con = false;//アニメーション用ロープが消えたかどうかを管理する 
+	m_hero_water_delete = false;
 
 	m_ladder_updown = 0;
 	m_ladder_ani_updown = 0;
@@ -49,6 +54,11 @@ void CObjHero::Init()
 	m_ani_max_time_rope = 25; //ropeアニメーション間隔幅 
 	m_ani_time_rope = 0;
 	m_ani_frame_rope = 0;	//rope静止フレームを初期にする
+
+	m_ani_max_time_water_die = 25;         //主人公が水に当たった時アニメーション間隔幅 
+	m_ani_time_water_die  = 0;
+	m_ani_frame_water_die = 0;//主人公が水に当たった時静止フレームを初期にする
+
 
 	m_remaining = 2;//ざんき初期化
 
@@ -95,7 +105,7 @@ void CObjHero::Action()
 		//主人公のY位置(マップの要素数)
 		//少し下にする
 		int y = (m_py + 1 + HERO_SIZE_HEIGHT) / BLOCK_SIZE;
-		//ブロック情報が０で無いなら取得
+		//ブロック情報が0で無いなら取得
 		if (objmap->GetMap(x, y)!= 0)
 		{
 			//取得
@@ -160,31 +170,35 @@ void CObjHero::Action()
 	
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-	//Dキーがおされたとき：右移動　　ロープを出している時は動かない
-	if (Input::GetVKey('D') == true && m_rope_ani_con == false)
+	//ロープを出している時と水に当たった時は動かない
+	if (m_rope_ani_con == false && m_hero_water_delete == false)
 	{
-		m_vx += 0.5f;
-		m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
-		m_posture = 0.0f;		    //主人公の向き
-		m_ani_time_move += 1;
-	}
-	//Aキーがおされたとき：左移動　　ロープを出している時は動かない
-	else if (Input::GetVKey('A') == true && m_rope_ani_con == false)
-	{
-		m_vx -= 0.5f;
-		m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
+		//Dキーがおされたとき：右移動　
+		if (Input::GetVKey('D') == true)
+		{
+			m_vx += 0.5f;
+			m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
+			m_posture = 0.0f;		    //主人公の向き
+			m_ani_time_move += 1;
+		}
+		//Aキーがおされたとき：左移動　
+		else if (Input::GetVKey('A') == true)
+		{
+			m_vx -= 0.5f;
+			m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
 
-		if (m_ladder_updown == 1)   //はしごに登ってるときは向きを変えない
-			m_posture = 0.0f;		//主人公の向き
+			if (m_ladder_updown == 1)   //はしごに登ってるときは向きを変えない
+				m_posture = 0.0f;		//主人公の向き
+			else
+				m_posture = 1.0f;		//主人公の向き
+			m_ani_time_move += 1;
+		}
 		else
-			m_posture = 1.0f;		//主人公の向き
-		m_ani_time_move += 1;
-	}
-	else
-	{
-		m_ani_frame_stop_move = 1;	//キー入力が無い時は1を入れる
-		m_ani_frame_move = 1;		//キー入力が無い場合は静止フレームにする
-		m_ani_time_move = 0;
+		{
+			m_ani_frame_stop_move = 1;	//キー入力が無い時は1を入れる
+			m_ani_frame_move = 1;		//キー入力が無い場合は静止フレームにする
+			m_ani_time_move = 0;
+		}
 	}
 
 	//アニメーションの感覚管理
@@ -201,8 +215,8 @@ void CObjHero::Action()
 	}
 	
 	//ジャンプ--------------------------------------------------------------------
-	//ロープを出している時は動かない
-	if (Input::GetVKey(VK_SPACE) == true && m_ladder_jump == 0 && m_rope_ani_con == false)
+	//ロープを出している時は動かない  はしごを上っている時も動かない　　水に当たっているときも動かない
+	if (Input::GetVKey(VK_SPACE) == true && m_ladder_jump == 0 && m_rope_ani_con == false && m_hero_water_delete == false)
 	{
 		if (m_hit_down == true)
 		{
@@ -264,27 +278,27 @@ void CObjHero::Action()
 	
 
 	//発砲---------------------------------------------------
-	//左クリックを押したら
-	if (Input::GetMouButtonL() == true)
+	//左クリックを押したら   水に当たっているときは動かない
+	if (Input::GetMouButtonL() == true && m_hero_water_delete == false)
 	{
 		
 		//主人公をクリックしていた場合
-		if (m_px <= m_mous_x && m_mous_x <= (m_px + HERO_SIZE_WIDTH))
+		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
 		{
 			;//ヒーロークリックした場合
 		}
 		else
 		{
 			//マウスの位置がプレイヤーから見てどの方向か調べるための変数
-			float mous_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
+			float mous_bullet_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
 
 			if ((m_mous_x - (m_px - objmap->GetScrollX())) < 0)//主人公より左をクリックしたとき
-				mous_way = 1.0f;
+				mous_bullet_way = 1.0f;
 
 			if (m_bullet_control == true)
 			{
 				//向いている方向とクリックしている方向が同じで尚且つ、ロープのアニメーションのフラグがfalseの場合
-				if (m_posture == mous_way && m_rope_ani_con == false)
+				if (m_posture == mous_bullet_way && m_rope_ani_con == false)
 				{
 					if (m_posture == 0.0f && m_ladder_updown == 0)//主人公が右を向いていてはしごに登っていない時とき右側から発射
 					{
@@ -310,13 +324,36 @@ void CObjHero::Action()
 	//発砲終了-----------------------------------------------
 
 
-	//ロープ射出---------------------------------------------
+//ロープ射出---------------------------------------------
 
 	//ロープオブジェクトを持ってくる
 	CObjRope* obj_rope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
 	
 	bool rope_caught; //ロープがロープスイッチと当たっているかどうかを確かめる変数
 	bool rope_delete; //ロープが消えてるか同うかを確かめる変数
+
+	//マウスの位置がプレイヤーから見てどの方向か調べるための変数
+	float mous_rope_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
+
+	if ((m_mous_x - (m_px - objmap->GetScrollX())) < 0)//主人公より左をクリックしたとき
+		mous_rope_way = 1.0f;
+
+	//右クリックを押したらの部分を上に変更したのでマージする時は元の奴を消してこっちを残してください
+	//右クリックを押したら   水に当たっているときは動かない
+	if (Input::GetMouButtonR() == true && m_hero_water_delete == false)
+	{
+		//主人公をクリックしていた場合
+		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
+		{
+			;//ヒーロークリックした場合
+		}       //マウスの位置が後ろじゃない　ロープアニメのフラグがなし　ロープの削除フラグがなし
+		else if (m_posture == mous_rope_way && m_rope_ani_con == false && m_rope_delete_ani_con == false)
+		{
+			m_rope_moux = Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
+			m_rope_mouy = Input::GetPosY(); //ロープを射出したときのマウスの位置Yを入れる
+			m_rope_ani_con = true;
+		}
+	}
 
 	if (obj_rope != nullptr)//ロープオブジェクトが出ている場合
 	{
@@ -327,14 +364,6 @@ void CObjHero::Action()
 	{
 		rope_caught = false;
 		rope_delete = false;
-	}
-	//右クリックを押したら
-	if (Input::GetMouButtonR() == true)
-	{
-		if (m_rope_ani_con == false && m_rope_delete_ani_con == false) //falseならtrueに変える
-		{
-			m_rope_ani_con = true;
-		}
 	}
 	
 	//trueならアニメーションを進める 　はしごに登っているときは動かない
@@ -411,12 +440,7 @@ void CObjHero::Action()
 	//水オブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
 	{
-		this->SetStatus(false);		//自身を削除
-		Hits::DeleteHitBox(this);	//ヒットボックスを削除
-
-		//メインへ移行
-		Scene::SetScene(new CSceneMain());
-		return;
+		m_hero_water_delete = true; //主人公の水にあたったときの死亡フラグをONにする
 	}
 
 	//敵オブジェクトと衝突していれば
@@ -429,7 +453,31 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneMain());
 		return;
 	}
+	//主人公の水に当たったときの死亡フラグがONなら死亡アニメーションをする
+	if (m_hero_water_delete == true)
+	{
+		//落ちるのをゆっくりにする（自由落下のおかげでゆっくりになる）
+		m_vy = 0.0f;
+		//主人公が水に当たった時のアニメーションタイムを進める
+		m_ani_time_water_die += 1;
+		//アニメーションの感覚管理
+		if (m_ani_time_water_die > m_ani_max_time_water_die)
+		{
+			m_ani_frame_water_die += 1;
+			m_ani_time_water_die = 0;
+		}
 
+		//最後までアニメーションが進むと最初に戻る
+		if (m_ani_frame_water_die == 3)
+		{
+			this->SetStatus(false);		//自身を削除
+			Hits::DeleteHitBox(this);	//ヒットボックスを削除
+			//メインへ移行
+			Scene::SetScene(new CSceneMain());
+			return;
+		}
+
+	}
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
@@ -509,9 +557,27 @@ void CObjHero::Draw()
 		rope_caught = false;
 	//本体---------------------------------
 	//切り取り位置
-	//止まっている時
-	
-	if (m_ladder_updown == 1)//はしごに上っている時
+
+	//水にあたった時
+	if ( m_hero_water_delete == true )
+	{
+		//フレームが0か1ならもがくアニメーション
+		if (m_ani_frame_water_die == 0 || m_ani_frame_water_die == 1)
+		{
+			src.m_top = 640.0f;
+			src.m_left = 0.0f + m_ani_frame_water_die * 64;
+			src.m_right = 64.0f + m_ani_frame_water_die * 64;
+			src.m_bottom = 768.0f;
+		}
+		else if (m_ani_frame_water_die == 2) //フレームが2なら倒れるアニメーション
+		{
+			src.m_top = 769.0f;
+			src.m_left = 0.0f;
+			src.m_right = 128.0f;
+			src.m_bottom = 826.0f;
+		}
+	}
+	else if (m_ladder_updown == 1)//はしごに上っている時
 	{
 		src.m_top = 256.0f;
 		src.m_left = 0.0f + m_ani_frame_ladders * 64;
@@ -527,7 +593,7 @@ void CObjHero::Draw()
 	}
 	else if (m_rope_ani_con == true || rope_caught == true) //ロープを投げるとき
 	{
-		src.m_top = 512.0f;
+		src.m_top = 515.0f;
 		src.m_left = 0.0f + m_ani_frame_rope * 64;
 		src.m_right = 64.0f + m_ani_frame_rope * 64;
 		src.m_bottom = 640.0f;
@@ -555,13 +621,23 @@ void CObjHero::Draw()
 	}
 	
 	//描画位置
-	dst.m_top		= m_py - objmap->GetScrollY();
-	dst.m_left		= (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
-	dst.m_right	    = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
-	dst.m_bottom	= dst.m_top  + HERO_SIZE_HEIGHT;
+	if (m_ani_frame_water_die != 2)//水に当たった時の横に倒れるアニメーション以外はこっちを通す
+	{
+		dst.m_top = m_py - objmap->GetScrollY();
+		dst.m_left = (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
+		dst.m_right = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
+		dst.m_bottom = dst.m_top + HERO_SIZE_HEIGHT;
+	}
+	else if (m_ani_frame_water_die == 2)  //水にあたった時のアニメーションで横に倒れるフレーム用
+	{
+		dst.m_top = 64.0f + m_py - objmap->GetScrollY();
+		dst.m_left = (128.0f * m_posture) + m_px - objmap->GetScrollX();
+		dst.m_right = (128.0f - 128.0f * m_posture) + m_px - objmap->GetScrollX();
+		dst.m_bottom = dst.m_top + 64.0f;
+	}
 
 	//描画
-	Draw::Draw(3, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_HERO, &src, &dst, color, 0.0f);
 	//本体-------------------------------------
 
 	//腕---------------------------------------
@@ -577,13 +653,13 @@ void CObjHero::Draw()
 	dst.m_right +=33.0f - (HERO_SIZE_WIDTH * m_posture);
 	dst.m_bottom = dst.m_top +64.0f;
 	
-	//描画
-	if (m_rope_ani_con == true || m_ladder_updown != 0 || rope_caught == true)//ロープの描画中は
+	//描画    ロープが出てる時、はしごに登ってる時、ロープとロープスイッチが当たっている時  主人公が水に当たった時
+	if (m_rope_ani_con == true || m_ladder_updown != 0 || rope_caught == true || m_hero_water_delete == true)
 	{
 		;    //何も描画しない
 	}
 	else
-		Draw::Draw(3, &src, &dst, color, m_r,-0.2f,-0.25f);
+		Draw::Draw(GRA_HERO, &src, &dst, color, m_r,-0.2f,-0.25f);
 	//-----------------------------------------
 
 
@@ -655,7 +731,7 @@ void CObjHero::Draw()
 	dst.m_bottom = 50.0f;
 
 	//描画
-	Draw::Draw(23, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_LIFE, &src, &dst, color, 0.0f);
 }
 
 //着地できてるかどうかを調べる関数

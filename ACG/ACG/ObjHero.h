@@ -32,7 +32,9 @@ public:
 	float GetPosY() { return m_py; }								//ポジションXを返す
 	float GetVecX() { return m_vx; }								//ベクトルXを渡す
 	float GetVecY() { return m_vy; }								//ベクトルYを渡す
-	float GetPosture() { return m_posture; }						//今の主人公の姿勢を渡す
+	float GetPosture() { return m_posture; }						//ロープを出したとき（Rを押した時）のマウスの位置Xを渡す
+	float GetRopeMouX() { return m_rope_moux; }						//ロープを出したとき（Rを押した時）のマウスの位置Yを渡す
+	float GetRopeMouY() { return m_rope_mouy; }						//今の主人公の姿勢を渡す
 	float GetRopeDeleteAniCon() { return m_rope_delete_ani_con; }   //アニメーション用ロープが消えたかどうかを管理する変数を渡す
 	int GetBlockType() { return m_block_type; }						//下のブロック(踏んでいる)情報を渡す
 
@@ -45,19 +47,23 @@ private:
 	float m_r;		//主人公の回転角度
 	int m_block_type;//踏んでるブロックの値を保存する
 
-	float m_mous_x;	//マウスの位置X
-	float m_mous_y; //マウスの位置X
-
-	bool  m_bullet_control; //弾丸発射制御用
-	bool  m_rope_control;	//ロープ発射制御用
-	bool  m_rope_ani_con;   //ロープアニメーション制御
-	bool  m_rope_delete;    //ロープが消えたかどうか調べる変数
-	bool  m_rope_delete_ani_con;//アニメーション用ロープが消えたかどうかを管理する 
+	float m_mous_x;	    //マウスの位置X
+	float m_mous_y;     //マウスの位置X
+	float m_rope_moux;	//Rを押したときのマウスの位置X
+	float m_rope_mouy;  //Rを押したときのマウスの位置X
+	  
+	bool  m_bullet_control;       //弾丸発射制御用
+	bool  m_rope_control;	      //ロープ発射制御用
+	bool  m_rope_ani_con;         //ロープアニメーション制御
+	bool  m_rope_delete;          //ロープが消えたかどうか調べる変数
+	bool  m_rope_delete_ani_con;  //アニメーション用ロープが消えたかどうかを管理する 
+	bool  m_hero_water_delete;    //主人公が水にあたったかどうかを調べる変数
 
 	int m_ladder_updown; //はしごHit管理
 	int m_ladder_ani_updown; //はしごアニメーション管理
 	int m_ladder_jump;			//はしごジャンプ管理
-	//アニメーション関係
+
+	//----------------------アニメーション関係
 	int m_ani_time_move;	    //移動アニメーションフレーム動作感覚
 	int m_ani_frame_move;	    //移動描画フレーム
 	int m_ani_frame_stop_move;  //止まった時の移動描画を調整
@@ -70,6 +76,11 @@ private:
 	int m_ani_time_rope;	    //ロープアニメーションフレーム動作感覚
 	int m_ani_frame_rope;	    //ロープ描画フレーム
 	int m_ani_max_time_rope;    //ロープアニメーション動作間隔最大値
+
+	int m_ani_time_water_die;         //主人公が水にあたった時アニメーションフレーム動作感覚
+	int m_ani_frame_water_die;        //主人公が水にあたった時主人公描画フレーム
+	int m_ani_max_time_water_die;     //主人公が水にあたった時主人公アニメーション動作間隔最大値
+	//------------------------------------------
 
 	int m_remaining;//残機管理
 

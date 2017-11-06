@@ -81,7 +81,7 @@ void CObjBlock::Draw()
 	dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
 	//描画
-	Draw::Draw(2, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_BLOCK, &src, &dst, color, 0.0f);
 }
 
 //ブロックとオブジェクトの当たり判定
@@ -306,13 +306,6 @@ void CObjBlock::AllBlockHit(
 								if (map->GetMap(i, map_b_y) == MAP_BLOCK || map->GetMap(i, map_b_y) == MAP_THROUGH_BLOCK)
 								{
 									*vy = 0.0f; 
-									*y = map_b_y * BLOCK_SIZE - height;
-									*down = true;
-								}
-								//進む先がブロックの上側が衝突している場合(はしご(2))
-								if (map->GetMap(i, map_b_y) == MAP_LADDERS)
-								{
-									*vy = 0.0f;
 									*y = map_b_y * BLOCK_SIZE - height;
 									*down = true;
 								}
