@@ -72,6 +72,12 @@ void CObjBullet::Init()
 
 	m_window_check = true;
 
+	m_hit_up	= false;
+	m_hit_down	= false;
+	m_hit_left	= false;
+	m_hit_right = false;
+
+
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_PLAYER, OBJ_BULLET, 1);
 }
@@ -125,6 +131,15 @@ void CObjBullet::Action()
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
+
+	//リフトとあたったら消去
+	if (hit->CheckObjNameHit(OBJ_LIFT) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
 	
 	//反射するブロックとあたった場合
 	if (hit->CheckObjNameHit(OBJ_REFLECT_BLOCK) != nullptr)
@@ -143,6 +158,21 @@ void CObjBullet::Action()
 		{
 			m_vx *= (-1);//移動ベクトルの左右を反転する
 		}
+	}
+
+	// ブロックオブジェクトを持ってくる
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	
+	//ブロックとの当たり判定
+	objblock->AllBlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+
+	//ブロックとあたっていれば削除する
+	if (m_hit_up == true || m_hit_down == true || m_hit_right == true || m_hit_left == true)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
 	}
 	
 	//移動
