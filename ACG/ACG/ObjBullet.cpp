@@ -18,11 +18,13 @@ CObjBullet::CObjBullet(float x, float y)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	x -= objmap->GetScrollX();
-	y -= objmap->GetScrollY();
+	
 	//初期位置を決める
 	m_px = x;
 	m_py = y;
+
+	x -= objmap->GetScrollX();
+	y -= objmap->GetScrollY();
 
 	//速さを決める
 	m_speed = 6.5f;
@@ -79,7 +81,7 @@ void CObjBullet::Action()
 {	
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//画面内か調べる
-	m_window_check=WindowCheck(m_px+objmap->GetScrollX(),m_py+objmap->GetScrollY(),BULLET_SIZE,BULLET_SIZE);
+	m_window_check=WindowCheck(m_px,m_py,BULLET_SIZE,BULLET_SIZE);
 
 	//画面外なら消去
 	if(m_window_check==false)
@@ -148,7 +150,7 @@ void CObjBullet::Action()
 	m_py += m_vy;
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px+objmap->GetScrollX(), m_py+objmap->GetScrollY());
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
 }
 
@@ -165,14 +167,14 @@ void CObjBullet::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 512.0f;
-	src.m_bottom = 512.0f;
-
+	src.m_right = 64.0f;
+	src.m_bottom = 64.0f;
+	
 	//描画位置
-	dst.m_top = m_py- objmap->GetScrollY();
-	dst.m_left =  m_px- objmap->GetScrollX();
-	dst.m_right = dst.m_left + BULLET_SIZE;
+	dst.m_top    = m_py - objmap->GetScrollY();
+	dst.m_left   = m_px - objmap->GetScrollX();
+	dst.m_right  = dst.m_left + BULLET_SIZE;
 	dst.m_bottom = dst.m_top + BULLET_SIZE;
 
-	Draw::Draw(0, &src, &dst, color, m_r);
+	Draw::Draw(GRA_HERO_BULLET, &src, &dst, color, m_r);
 }

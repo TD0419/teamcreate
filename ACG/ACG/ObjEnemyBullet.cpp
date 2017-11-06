@@ -13,7 +13,6 @@ using namespace GameL;
 //コンストラクタ
 CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 {
-	
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
@@ -23,25 +22,18 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	m_r = rad;
 
 	//速さを決める
-	m_speed = 2.5f;
-
-	//主人公機と敵用弾丸で角度を取る
-	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-	//主人公との角度の計算を行う
-	float hero_x = objhero->GetPosX();		//主人公の位置情報X取得
-	float hero_y = objhero->GetPosY();		//主人公の位置情報Y取得
+	m_speed = 6.5f;
 
 	//主人公が本来いる位置に変更
 	x -= objmap->GetScrollX();
 	y -= objmap->GetScrollY();
 
-	//初期位置を決める
-	m_px = x;
-	m_py = y;
+	//主人公機と敵用弾丸で角度を取る
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	//速さを決める
-	m_speed = 6.5f;
+	//主人公との角度の計算を行う
+	float hero_x = objhero->GetPosX() - objmap->GetScrollX();		//主人公の位置情報X取得
+	float hero_y = objhero->GetPosY() - objmap->GetScrollY();		//主人公の位置情報Y取得
 
 	//主人公の位置のベクトル情報取得
 	float Hvector_x = hero_x - x ;
@@ -87,6 +79,8 @@ void CObjEnemyBullet::Init()
 	m_angle = m_angle * 180.0 / 3.14;
 	*/
 
+	m_window_check = true;
+
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
 }
@@ -98,22 +92,16 @@ void CObjEnemyBullet::Action()
 	m_px += m_vx*1.0f;
 	m_py += m_vy*1.0f;
 
-	//Scroll();	//スクロール処理をおこなう
+	//画面内か調べる
+	m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
 
-	//画面外へいったら消去
-	if (m_px < -(BULLET_SIZE + BULLET_SIZE / 2) ||	//左　
-		m_px > WINDOW_SIZE_W ||						//右
-		m_py < -(BULLET_SIZE + BULLET_SIZE / 2) ||	//上　
-		m_py > WINDOW_SIZE_H							//下
-		)
+	//画面外なら消去
+	if (m_window_check == false)
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-
 
 	//弾丸のHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -142,18 +130,24 @@ void CObjEnemyBullet::Action()
 		return;
 	}
 
-	//lastwallと当たったらシ消去
+	//lastwallと当たったら消去
 	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
+
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
 
 //ドロー
 void CObjEnemyBullet::Draw()
 {
+	// マップ情報を持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 	RECT_F src, dst;
@@ -165,8 +159,8 @@ void CObjEnemyBullet::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = m_py;
-	dst.m_left = m_px;
+	dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + BULLET_SIZE;
 	dst.m_bottom = dst.m_top + BULLET_SIZE;
 

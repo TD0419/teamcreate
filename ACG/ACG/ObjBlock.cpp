@@ -309,13 +309,6 @@ void CObjBlock::AllBlockHit(
 									*y = map_b_y * BLOCK_SIZE - height;
 									*down = true;
 								}
-								//進む先がブロックの上側が衝突している場合(はしご(2))
-								if (map->GetMap(i, map_b_y) == MAP_LADDERS)
-								{
-									*vy = 0.0f;
-									*y = map_b_y * BLOCK_SIZE - height;
-									*down = true;
-								}
 							}
 						}
 						//上に移動している

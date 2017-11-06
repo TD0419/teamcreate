@@ -51,7 +51,6 @@ void CSceneMain::InitScene()
 	//test砲台オブジェクトを作成する
 	CObjCannon* objcannon = new CObjCannon(10, 5);
 	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
-//デバッグ-----------------------------------------------
 
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
@@ -60,12 +59,12 @@ void CSceneMain::InitScene()
 	//テストタイム
 	CObjTime* objtime = new CObjTime();
 	Objs::InsertObj(objtime, OBJ_TIME, 100);
-	//デバッグ--------------------------------------------
 
 	//テストボタン
-	CObjButton* objbuttn = new CObjButton(5,5);
+	CObjButton* objbuttn = new CObjButton(5, 5);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
-	
+
+	//-------------------------------------------------------
 
 	//BGM再生
 	Audio::Start(STAGE1);
@@ -134,6 +133,9 @@ void CSceneMain::ImageDataLoading()
 
 	//プレイヤー画像読み込み
 	Draw::LoadImageW(L"Hero.png", GRA_HERO, TEX_SIZE_1024);
+
+	//主人公の弾画像読み込み
+	Draw::LoadImageW(L"Hero_bullet.png", GRA_HERO_BULLET, TEX_SIZE_64);
 
 	//ブロック画像読み込み
 	Draw::LoadImageW(L"block.png", GRA_BLOCK, TEX_SIZE_128);
