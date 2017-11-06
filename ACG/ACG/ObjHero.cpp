@@ -105,7 +105,7 @@ void CObjHero::Action()
 		//主人公のY位置(マップの要素数)
 		//少し下にする
 		int y = (m_py + 1 + HERO_SIZE_HEIGHT) / BLOCK_SIZE;
-		//ブロック情報が０で無いなら取得
+		//ブロック情報が0で無いなら取得
 		if (objmap->GetMap(x, y)!= 0)
 		{
 			//取得
