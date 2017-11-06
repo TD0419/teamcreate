@@ -17,8 +17,8 @@ void HitBoxUpData(CHitBox* hit,float m_px,float m_py)
 //引数1 更新するHitBoxポインタ
 //引数2 現在のHitBoxの位置X
 //引数3 現在のHitBoxの位置Y
-//引数4	現在のHitBoxの幅
-//引数5	現在のHitBoxの高さ
+//引数4	現在のHitBoxの高さ
+//引数5	現在のHitBoxの幅
 void HitBoxUpData(CHitBox* hit, float m_px, float m_py, float w, float h)
 {
 	//マップオブジェクトを持ってくる
