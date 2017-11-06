@@ -22,11 +22,11 @@ CObjRope::CObjRope(int x, int y)
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//主人公が本来いる位置に変更
-	x -= objmap->GetScrollX();
-	y -= objmap->GetScrollY();
+	x -= (int)objmap->GetScrollX();
+	y -= (int)objmap->GetScrollY();
 	//初期位置を決める
-	m_px = x;
-	m_py = y;
+	m_px = (float)x;
+	m_py = (float)y;
 	//速さを決める
 	m_speed = 6.5f;
 	
@@ -35,8 +35,8 @@ CObjRope::CObjRope(int x, int y)
 	m_mouy = objhero->GetRopeMouY(); //Rを押した時のマウスの位置Yを持ってくる
 
 	//主人公の位置からマウスの位置のベクトル情報取得
-	float vector_x = m_moux - x;
-	float vector_y = m_mouy - y;
+	float vector_x = m_moux - (float)x;
+	float vector_y = m_mouy - (float)y;
 
 	//斜辺取得
 	float hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
@@ -45,13 +45,13 @@ CObjRope::CObjRope(int x, int y)
 	m_r = acos(vector_x / hypotenuse);
 	//角度方向に移動
 	m_vx = cos(m_r) * m_speed;
-	m_r = m_r * 180.0 / 3.14;
+	m_r = m_r * 180.0f / 3.14;
 
 	//マウスのY位置が主人公のY位置より下だったら
 	if (m_mouy > y)
 	{
 		//180°～360°の値にする
-		m_r = 360 - abs(m_r);
+		m_r = 360.0f - abs(m_r);
 	}
 	//マウスのY位置が初期Y位置より上
 	if (m_mouy < y)
