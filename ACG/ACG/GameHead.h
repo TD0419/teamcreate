@@ -75,7 +75,7 @@ struct UserData
 
 //マップサイズ
 #define MAP_X_MAX (100)	//mapの最大値X
-#define MAP_Y_MAX (10)	//mapの最大値Y
+#define MAP_Y_MAX (12)	//mapの最大値Y
 #define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X
 #define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y
 
@@ -83,8 +83,8 @@ struct UserData
 enum MAP_BER
 {
 	MAP_SPACE		 , 	//何もない場所
-	// マップが届いたら↓のコメントをはずす
-	//MAP_HERO_START	 ,	//heroのスタート位置
+	// マップが届いたらこのコメントをはずす
+	MAP_HERO_START	 ,	//heroのスタート位置
 	MAP_BLOCK		 ,	//ブロック(ノーマル)
 	MAP_LADDERS		 ,	//はしご
 	MAP_BUTTON		 ,	//ボタン
