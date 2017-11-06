@@ -33,7 +33,7 @@ void CHitBox::SetObj(void* t)
 {
 	m_my_obj=t;
 }
-void CHitBox::SetPos(float x,float y,float h,float w)
+void CHitBox::SetPos(float x,float y,float w,float h)
 {
 	m_hit_box.x=x;
 	m_hit_box.y=y;
@@ -250,7 +250,7 @@ CHitBox* CHitBoxManager::GetHitBox(void* t)
 void CHitBoxManager::SetHitBox(void* t,float x,float y,float w,float h,int e,int n,int p)
 {
 	shared_ptr<CHitBox> ptr_box(new CHitBox());
-	ptr_box->SetPos(x,y,h,w);
+	ptr_box->SetPos(x,y,w,h);
 	ptr_box->SetStatus(e,n,p);
 	ptr_box->SetObj(t);
 	ptr_box->SetInvincibility(false);
