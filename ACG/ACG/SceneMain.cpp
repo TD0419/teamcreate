@@ -36,34 +36,15 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
 //デバッグ　”使い終わったら消してください！”----------------
-	//Doorオブジェクトを作成する
-	CObjDoor* objdoor = new CObjDoor(3, 3);
-	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
 
-	//看板オブジェクトを作成する
-	CObjSign* objsign = new CObjSign(14, 7);
-	Objs::InsertObj(objsign, OBJ_SIGN, 10);
-
-	//ロープスイッチオブジェクトを作成する
-	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
-	Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 10);
-
-	//test砲台オブジェクトを作成する
-	CObjCannon* objcannon = new CObjCannon(10, 5);
-	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
-
-
-	//テスト壁
-	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
-	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
-
-	//壁テストのためboss
-	CObjBoss*objboss = new CObjBoss(10, 5);
-	Objs::InsertObj(objboss, OBJ_BOSS, 10);
 
 	//テストタイム
 	CObjTime* objtime = new CObjTime();
 	Objs::InsertObj(objtime, OBJ_TIME, 100);
+
+	//テスト用レバースイッチ
+	CObjLeverSwich* objlever_swich = new CObjLeverSwich(5,1);
+	Objs::InsertObj(objlever_swich, OBJ_LEVER_SWICH, 10);
 	//デバッグ--------------------------------------------
 
 
@@ -143,9 +124,9 @@ void CSceneMain::ImageDataLoading()
 	//Door & Padlock画像
 	Draw::LoadImageW(L"Door.png", 6, TEX_SIZE_128);
 
-	//Wood画像
-	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_128);
-	
+	//WOOD画像
+	Draw::LoadImageW(L"Wood.png", 7, TEX_SIZE_512);
+
 	//Enemy画像
 	Draw::LoadImageW(L"Snake.png", 8, TEX_SIZE_256);
 
@@ -170,8 +151,9 @@ void CSceneMain::ImageDataLoading()
 	//背景画像
 	Draw::LoadImageW(L"background.png" ,15, TEX_SIZE_1536);
 
-	//木画像
-	Draw::LoadImageW(L"woodtst.png", 16, TEX_SIZE_128);
+	//画像　木の画像が２つあったので一つ消しました
+	//消してもいいけど16だけ抜けるのでコメント化して残しときます
+	//Draw::LoadImageW(L"", 16, TEX_SIZE_);
 
 	//看板の枠線
 	Draw::LoadImageW(L"Sign.png", 17, TEX_SIZE_256);

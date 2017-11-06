@@ -21,44 +21,98 @@ CObjWood::CObjWood(int x, int y)
 //イニシャライズ
 void CObjWood::Init()
 {
-	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, WOOD_SIZE, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
+	
 	
 	// 角度変数初期化
 	m_r = 0.0f;
 
 	// 回転フラグ初期化
 	m_rota_flag = false;
+
+	//初期の木の画像の位置
+	m_wood_x = m_px + (WOOD_SIZE - 64.0000f);
+	m_wood_y = m_py;
+
+	//当たり判定
+	Hits::SetHitBox(this, m_wood_x, m_wood_y, 64, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
 }
 
 //アクション
 void CObjWood::Action()
 {	
+	//主人公オブジェクト情報を持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	float hero_x = objhero->GetPosX();
+	float hero_y = objhero->GetPosY();
+	float hero_vx = objhero->GetVecX();
+	float hero_vy = objhero->GetVecY();
+
 	// 回転フラグが立っていれば
 	if (m_rota_flag == true)
 	{
 		//90度以上回転していれば
 		if (m_r <= -90.0f)
 		{
-			HeroHit(m_px + WOOD_SIZE, m_py);//主人公との当たり判定
+			//木の画像の位置を更新
+			m_wood_x = m_px + WOOD_SIZE;
+			m_wood_y = m_py + (WOOD_SIZE - 64.0000f);
+			//主人公との当たり判定
+			if (HeroHit(m_wood_x, m_wood_y, WOOD_SIZE, 64.0000f,
+				&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)
+				)
+			{
+				//主人公の位置を更新
+				objhero->SetPosX(hero_x);
+				objhero->SetPosY(hero_y);
+				objhero->SetVecX(hero_vx);
+				objhero->SetVecY(hero_vy);
+			}
+			
 			//HitBoxの位置を更新する
-			HitBoxUpData(Hits::GetHitBox(this), m_px + WOOD_SIZE, m_py);
+			HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y, 64.0f, WOOD_SIZE);
+			
 			return;
 		}
 		else
 		{
-			HeroHit(m_px, m_py);//主人公との当たり判定
+			//木の画像の位置更新
+			m_wood_x = m_px + (WOOD_SIZE - 64.0000f);
+			m_wood_y = m_py;
+			//主人公との当たり判定
+			if (HeroHit(m_wood_x, m_wood_y, 64.0000f, WOOD_SIZE,
+				&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)
+				)
+			{
+				//主人公の位置を更新
+				objhero->SetPosX(hero_x);
+				objhero->SetPosY(hero_y);
+				objhero->SetVecX(hero_vx);
+				objhero->SetVecY(hero_vy);
+			}
 			//木をまわす
 			m_r -= 1.0f;
-			HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+			HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y);
 			return;
 		}
 	}
 	else
 	{
-		HeroHit(m_px, m_py);//主人公との当たり判定
+		//木の画像の位置更新
+		m_wood_x = m_px + (WOOD_SIZE - 64.0000f);
+		m_wood_y = m_py;
+		//主人公との当たり判定
+		if (int hit = HeroHit(m_wood_x, m_wood_y, 64.0000f, WOOD_SIZE,
+			&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)
+			)
+		{
+			//主人公の位置を更新
+			objhero->SetPosX(hero_x);
+			objhero->SetPosY(hero_y);
+			objhero->SetVecX(hero_vx);
+			objhero->SetVecY(hero_vy);
+		}
 		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+		HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y);
 		return;
 	}
 }
@@ -75,14 +129,15 @@ void CObjWood::Draw()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
+	//左に木を持っていきたいので左右反転させる
 	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_left = 320.0f;
+	src.m_right = 0.0f;
+	src.m_bottom = 320.0f;
 
 	//描画位置
 	dst.m_top = 0.0f + m_py - objmap->GetScrollY();
-	dst.m_left = 0.0f + m_px - objmap->GetScrollX();
+	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + WOOD_SIZE;
 	dst.m_bottom = dst.m_top + WOOD_SIZE;
 
@@ -90,51 +145,77 @@ void CObjWood::Draw()
 	Draw::Draw(7, &src, &dst, color, m_r,-1.0f,-1.0f);
 }
 
-//主人公が触れたときの処理
-//引数1,2 木のポジション
-void CObjWood::HeroHit(float px, float py)
+//ブロックAとブロックBの当たり判定
+//ブロックA＝移動しないブロック
+//ブロックB＝あたった場合移動するブロック
+//引数1  float  ax		:ブロックAのX位置
+//引数2  float  ay		:ブロックAのY位置
+//引数3  float  aw		:ブロックAの幅
+//引数4  float  ah		:ブロックAの高さ
+//引数5  float* bx		:ブロックBのX位置 ポインタ
+//引数6  float* by		:ブロックBのY位置 ポインタ
+//引数7  float  bw		:ブロックBの幅
+//引数8  float  bh		:ブロックBの高さ
+//引数9  float* bvx		:ブロックBのX移動量 ポインタ
+//引数10 float* bvy		:ブロックBのY移動量 ポインタ
+//戻り値	int			:当たったかどうか||どこに当たったか　0=当たり無し：1=Bから見て上：2=Bから見て下：3=Bから見て右:4=Bから見て左
+int CObjWood::HeroHit(float ax,float ay,float aw,float ah,
+						float* bx,float* by,float bw,float bh,
+						float* bvx,float* bvy)
 {
-	//自身のHitBoxをもってくる
-	CHitBox*hit = Hits::GetHitBox(this);
+	float ax_min = ax;			//ブロックAのX座標最小
+	float ay_min = ay;			//ブロックAのY座標最小
+	float ax_max = ax_min + aw;	//ブロックAのX座標最大
+	float ay_max = ay_min + ah;	//ブロックAのY座標最大
 
-	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
-	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
+	float bx_min = *bx;			//ブロックBのX座標最小
+	float by_min = *by;			//ブロックBのY座標最小
+	float bx_max = bx_min + bw;	//ブロックBのX座標最大
+	float by_max = by_min + bh;	//ブロックBのY座標最大
 
-	 //主人公オブジェクトを持ってくる
-	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//はみ出し許容範囲
+	float bleed_x = 5.0f;
+	float bleed_y = 20.0f;
 
-	for (int i = 0; i < hit->GetCount(); i++)
+	//当たり判定チェック
+	if (ax_max < bx_min);//AよりBが右
+	else if (bx_max < ax_min);//AよりBが左
+	else if (ay_max < by_min);//AよりBが下
+	else if (by_max < ay_min);//AよりBが上
+	else	//当たりあり。
 	{
-		//データがあれば
-		if (hit_data[i] != nullptr)
+		//ブロックAの上
+		if (by_max - ay_min < bleed_y)
 		{
-			float r = hit_data[i]->r;//あたっている角度をもってくる
-
-			//ブロックの右側が衝突している場合
-			if (0 < r && r < 45 || 315 < r && r < 360)
-			{
-				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				objhero->SetPosX(px + WOOD_SIZE);//主人公の位置を木の右側までずらす
-			}
-			//ブロックの上側が衝突している場合
-			else if (45 < r && r < 125)
-			{
-
-				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				objhero->SetPosY(py - HERO_SIZE_HEIGHT);//主人公の位置を木の上側までずらす
-			}
-			//ブロックの左側が衝突している場合
-			else if (125 < r && r < 225)
-			{
-				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				objhero->SetPosX(px - HERO_SIZE_WIDTH);//主人公の位置を木の左側までずらす
-			}
-			//ブロックの下側が衝突している場合
-			else if (225 < r && r < 315)
-			{
-				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				objhero->SetPosY(py + WOOD_SIZE);//主人公の位置を木の下側までずらす
-			}
+			if(*bvy > 0.0f)
+   				*bvy = 0.00000f;//Y移動量を0にする
+			*by -= by_max - ay_min;
+			return 2;
+		}
+		//ブロックAの下
+		if (ay_max - by_min < bleed_y)
+		{
+   			if(*bvy < 0.0f)
+				*bvy = 0.00000f;//Y移動量を0にする
+			*by += ay_max - by_min;
+			return 1;
+		}
+		//ブロックAの左
+		if (bx_max - ax_min < bleed_x)
+		{
+			if(*bvx > 0.0f)
+				*bvx = 0.00000f;//X移動量を0にする
+			*bx -= bx_max - ax_min;
+			return 3;
+		}
+		//ブロックAの右
+		if (ax_max - bx_min < bleed_x)
+		{
+			if(*bvx < 0.0f)
+				*bvx = 0.00000f;//X移動量を0にする
+			*bx += ax_max - bx_min;
+			return 4;
 		}
 	}
+	return 0;
 }
