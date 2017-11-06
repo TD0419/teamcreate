@@ -35,11 +35,11 @@ CObjRope::CObjRope(int x, int y)
 	m_mouy = objhero->GetRopeMouY(); //Rを押した時のマウスの位置Yを持ってくる
 
 	//主人公の位置からマウスの位置のベクトル情報取得
-	double vector_x = m_moux - x;
-	double vector_y = m_mouy - y;
+	float vector_x = m_moux - x;
+	float vector_y = m_mouy - y;
 
 	//斜辺取得
-	double hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
+	float hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
 
 	//角度を求める
 	m_r = acos(vector_x / hypotenuse);
