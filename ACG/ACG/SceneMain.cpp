@@ -148,7 +148,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Ladders.png", GRA_LADDERS, TEX_SIZE_64);
 
 	//ドア & 錠画像読み込み
-	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_128);
+	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_256);
 
 	//木(ギミック)画像読み込み
 	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_128);
