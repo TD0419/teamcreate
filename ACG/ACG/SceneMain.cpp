@@ -48,11 +48,6 @@ void CSceneMain::InitScene()
 	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
 	Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 10);
 
-	//test砲台オブジェクトを作成する
-	CObjCannon* objcannon = new CObjCannon(10, 5);
-	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
-
-
 	//テスト壁
 	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
 	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
@@ -92,7 +87,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
 
-	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"ステージ1.csv", &size);//外部データ読み込み
 	
 	if (p == nullptr)
 	{
