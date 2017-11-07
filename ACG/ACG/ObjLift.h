@@ -11,6 +11,7 @@ class CObjLift :public CObj
 {
 public:
 	CObjLift(int x, int y); // コンストラクタ
+	CObjLift(int px, int py, float vx, float vy, float width_max, float length_max);//コンストラクタ
 	~CObjLift() {};			// デストラクタ
 	void Init();			// イニシャライズ
 	void Action();			// アクション
@@ -25,6 +26,10 @@ private:
 	float m_py;		// リフトY座標
 	float m_vx;		// リフトの移動ベクトルX
 	float m_vy;		// リフトの移動ベクトルY
-	float m_right_max_x;//右の最大X位置
-	float m_lift_max_x;	//左の最大X位置
+	float m_width_max;	//左右の最大移動量
+	float m_length_max;	//上下の最大移動量
+
+	float m_move_x;//動いた距離X
+	float m_move_y;//動いた距離Y
+
 };

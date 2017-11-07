@@ -22,7 +22,9 @@ void CObjLeverSwich::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 	m_ani_max_time = 4; //アニメーション間隔幅
-	m_water = false;
+	m_ani_flag = false;
+	m_ani_flag2 = false;
+	m_water_con = false;
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, LEVER_SWITCH_SIZE, LEVER_SWITCH_SIZE, ELEMENT_GIMMICK, OBJ_LEVER_SWICH, 1);
 }
@@ -37,21 +39,25 @@ void CObjLeverSwich::Action()
 	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
 	{
 		//水の判定をONにする
-		m_water = true;
+		m_water_con = true;
 
 		m_ani_time += 1;
 
 		//アニメーションの感覚管理
-		if (m_ani_time > m_ani_max_time)
+		//　レバースイッチの描画が押していない状態のとき
+		if (m_ani_flag2 == false && m_ani_flag == false && m_ani_time > m_ani_max_time)
 		{
 			m_ani_frame += 1;
 			m_ani_time = 0;
+			m_ani_flag = true;
 		}
 
-		//最後までアニメーションが進むと最初に戻る
-		if (m_ani_frame == 2)
+		//　レバースイッチの描画が押している状態のとき
+		else if (m_ani_flag2 == true && m_ani_flag == true && m_ani_time > m_ani_max_time)
 		{
-			m_ani_frame = 0;
+			m_ani_frame -= 1;
+			m_ani_time = 0;
+			m_ani_flag = false;
 		}
 
 		// 木を回転させる----------------------------------
@@ -66,8 +72,16 @@ void CObjLeverSwich::Action()
 		// ------------------------------------------------
 		
 	}
+	else
+	{
+		//レバースイッチの描画が押していない状態のとき
+		if (m_ani_flag == true && m_ani_frame == 1)
+			m_ani_flag2 = true;
+		//レバースイッチの描画が押している状態のとき
+		else if (m_ani_flag == false && m_ani_frame == 0)
+			m_ani_flag2 = false;
+	}
 
-	
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
@@ -103,5 +117,5 @@ void CObjLeverSwich::Draw()
 	dst.m_bottom = dst.m_top + LEVER_SWITCH_SIZE;
 
 	//描画
-	Draw::Draw(9, &src, &dst, color, 0);
+	Draw::Draw(GRA_LEVER_SWICH, &src, &dst, color, 0);
 }

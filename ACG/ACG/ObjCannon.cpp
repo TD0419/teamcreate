@@ -91,6 +91,6 @@ void CObjCannon::Draw()
 	}
 
 	//•`‰æ
-	Draw::Draw(14, &src, &dst, color, m_r);
+	Draw::Draw(GRA_CANNON, &src, &dst, color, m_r);
 
 }

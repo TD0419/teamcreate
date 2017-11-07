@@ -137,12 +137,28 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
-		case MAP_LIFT:		//リフト作成
+		case MAP_LIFT_WIDTH:		//リフト(横移動)作成
 		{
 			CObjLift* objlift = new CObjLift(x, y);
 			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
+		
+		//マップの番号対応、及び処理ができたらコメントはずしてください-----------
+		//case MAP_LIFT_LENGTH:		//リフト(縦移動)作成
+		//{
+		//	CObjLift* objlift = new CObjLift(x, y);
+		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
+		//	break;
+		//}
+
+		//case MAP_LIFT_ALL:		//リフト(縦と横移動)作成
+		//{
+		//	CObjLift* objlift = new CObjLift(x, y);
+		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
+		//	break;
+		//}
+		//マップの番号対応ができたらコメントはずしてください-----------
 		
 		case MAP_ROCK:		//岩作成
 		{

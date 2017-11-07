@@ -60,7 +60,7 @@ void CObjLastWall::Action()
 	}
 
 	// hitboxÇ™è¨Ç≥Ç≠Ç»ÇÈ
-	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_wall_gauge, 512 - m_wall_gauge, 32);
+	HitBoxUpData(hit,m_px, m_py + m_wall_gauge, 32, 512 - m_wall_gauge);
 
 	for (int i = 0; i < hit->GetCount(); i++)
 	{
@@ -127,7 +127,7 @@ void CObjLastWall::Draw()
 	dst.m_bottom = dst.m_top + 256.0f;
 
 	//ï`âÊ(è„ÇÃïîï™)
-	Draw::Draw(21, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_LAST_WALL, &src, &dst, color, 0.0f);
 
 	//-----------------------------------------------------
 	if (m_wall_gauge != 512)
@@ -144,5 +144,5 @@ void CObjLastWall::Draw()
 	dst.m_right = dst.m_left + 32;
 	dst.m_bottom = dst.m_top + 512 - m_wall_gauge;
 	//ï`âÊ(â∫ÇÃïîï™)
-	Draw::Draw(22, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_OPEN_WALL, &src, &dst, color, 0.0f);
 }
