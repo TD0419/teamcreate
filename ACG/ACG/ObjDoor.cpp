@@ -22,7 +22,7 @@ void CObjDoor::Init()
 	//m_px = 100.0f;//ドアX座標
 	//m_py = 384.0f;//ドアY座標
 	m_ani_door_time = 0;
-	m_ani_door_frame = 1;	//静止フレームを初期化する
+	m_ani_door_frame = 1;	 //静止フレームを初期化する
 	m_ani_door_time_max = 20;//アニメーション間隔幅
 
 	m_unlock_flag = false;
@@ -32,17 +32,20 @@ void CObjDoor::Init()
 void CObjDoor::Action()
 {
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-	bool a;
+	bool boss_delete;
 	if (objboss != nullptr)
 	{
-		a = objboss->GetDieFlag();
+		boss_delete = objboss->GetDieFlag();
 	}
 	else
 	{
-		a = false;
+		boss_delete = false;
 	}
-	if (a == true)
+
+	if (boss_delete == true)
+	{
 		m_unlock_flag = true;
+	}
 
 	if (m_unlock_flag==true)
 	{
