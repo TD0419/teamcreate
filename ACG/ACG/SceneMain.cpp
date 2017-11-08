@@ -151,7 +151,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_256);
 
 	//–Ø(ƒMƒ~ƒbƒN)‰æ‘œ“Ç‚İ‚İ
-	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_128);
+	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_512);
 	
 	//“G‰æ‘œ“Ç‚İ‚İ
 	Draw::LoadImageW(L"Snake.png", GRA_ENEMY, TEX_SIZE_256);
