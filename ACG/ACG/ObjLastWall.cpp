@@ -49,7 +49,6 @@ void CObjLastWall::Action()
 	// m_wall_gaugeが512を越えたら処理ストップ
 	if (m_wall_gauge >= 512)
 	{
-		
 		return;
 	}
 	else
