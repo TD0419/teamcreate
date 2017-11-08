@@ -646,7 +646,7 @@ void CObjHero::Draw()
 	src.m_right = 128.0f;
 	src.m_bottom = 64.0f;
 
-	//描画位置
+	//描画位置 
 	dst.m_top += 48.0f;
 	dst.m_left += 33.0f - (HERO_SIZE_WIDTH * m_posture);
 	dst.m_right +=33.0f - (HERO_SIZE_WIDTH * m_posture);
@@ -740,7 +740,7 @@ void CObjHero::LandingCheck()
 	
 	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
-	c3 = HitUpCheck(OBJ_LIFT_MOVE); //木との着地チェック
+	c3 = HitUpCheck(OBJ_LIFT_MOVE); //動くリフトとの着地チェック
 
 	//チェック項目のどれか一つでもtrueなら
 	if (c1 == true || c2 ==true || c3 == true)
@@ -768,13 +768,24 @@ bool CObjHero::HitUpCheck(int obj_name)
 			//データがあれば
   			if (hit_data[i] != nullptr)
 			{
-				float r = hit_data[i]->r;//あたっている角度をもってくる
+				//衝突した相手の位置、幅、高さ情報を取得
+				HIT_BOX* hit = Hits::GetHitBox(hit_data[i]->o)->GetHitBox();
+				//マップオブジェクトを持ってくる
+				CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-				 //Heroの下側があたっていれば
-				if (225.0f < r && r < 315.0f)
-				{
-					return true;//着地している
-				}
+				//HitTestOfAB関数を使うと変更されてしまうので仮変数作成
+				float hero_x = m_px;
+				float hero_y = m_py;
+				float hero_vx = m_vx;
+				float hero_vy = m_vy;
+				//衝突した方向を取得
+				int collision = HitTestOfAB(hit->x+objmap->GetScrollX(), hit->y+objmap->GetScrollY(), hit->w, hit->h,
+					&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
+					&hero_vx, &hero_vy
+				);
+				//主人公から見て下に衝突したら着地している
+				if (collision == 2)
+					return true;
 			}
 		}
 	}
