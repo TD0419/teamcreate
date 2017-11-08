@@ -178,7 +178,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
 	
 	//ä≈î¬ÇÃì«Ç›çûÇ›
-	Draw::LoadImageW(L"Billboard_stage1", GRA_SIGN, TEX_SIZE_64);
+	Draw::LoadImageW(L"Billboard_stage1.png", GRA_SIGN, TEX_SIZE_64);
 
 	//É{É^Éìì«Ç›çûÇ›
 	Draw::LoadImageW(L"button.png", GRA_BUTTON, TEX_SIZE_128);
