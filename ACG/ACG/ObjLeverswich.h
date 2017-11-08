@@ -20,7 +20,9 @@ public:
 private:
 	float m_px;				// レバースイッチX座標
 	float m_py;				// レバースイッチY座標
-	bool  m_water_con;          //　水の判定を入れる変数
+	bool  m_water_con;      // 水の判定を入れる変数
+	bool m_ani_flag;        // アニメーションを連続でさせないフラグ変数
+	bool m_ani_flag2;       // アニメーションを連続でさせないフラグ変数の二つ目
 
 	//アニメーション関係
 	int m_ani_time;         //アニメーションフレーム動作感覚

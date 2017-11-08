@@ -49,7 +49,6 @@ void CObjLastWall::Action()
 	// m_wall_gaugeが512を越えたら処理ストップ
 	if (m_wall_gauge >= 512)
 	{
-		
 		return;
 	}
 	else
@@ -61,7 +60,7 @@ void CObjLastWall::Action()
 	}
 
 	// hitboxが小さくなる
-	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_wall_gauge, 512 - m_wall_gauge, 32);
+	HitBoxUpData(hit,m_px, m_py + m_wall_gauge, 32, 512 - m_wall_gauge);
 
 	for (int i = 0; i < hit->GetCount(); i++)
 	{

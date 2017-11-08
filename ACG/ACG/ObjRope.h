@@ -22,8 +22,8 @@ private:
 	float m_py;			// ロープY座標
 	float m_vx;			// X軸方向のベクトル
 	float m_vy;			// Y軸方向のベクトル
-	double m_moux;      //R押したときのマウスの位置Xを入れる変数
-	double m_mouy;      //R押したときのマウスの位置Yを入れる変数
+	float m_moux;      //R押したときのマウスの位置Xを入れる変数
+	float m_mouy;      //R押したときのマウスの位置Yを入れる変数
 	float m_speed;		// 発射速度
 	float m_r;			// ロープの角度	
 	bool m_caught_flag; //ロープスイッチに引っかかったかを調べる用

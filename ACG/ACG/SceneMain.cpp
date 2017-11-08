@@ -35,7 +35,7 @@ void CSceneMain::InitScene()
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
-//デバッグ　”使い終わったら消してください！”----------------
+	//デバッグ　”使い終わったら消してください！”----------------
 	//Doorオブジェクトを作成する
 	CObjDoor* objdoor = new CObjDoor(3, 3);
 	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
@@ -48,9 +48,9 @@ void CSceneMain::InitScene()
 	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
 	Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 10);
 
-	//test砲台オブジェクトを作成する
-	CObjCannon* objcannon = new CObjCannon(10, 5);
-	Objs::InsertObj(objcannon, OBJ_CANNON, 10);
+	//テスト壁
+	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
+	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
 
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
@@ -63,8 +63,9 @@ void CSceneMain::InitScene()
 	//テストボタン
 	CObjButton* objbuttn = new CObjButton(5, 5);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
+	//デバッグ--------------------------------------------
 
-	//-------------------------------------------------------
+
 
 	//BGM再生
 	//Audio::Start(STAGE1);
@@ -86,7 +87,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
 
-	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"ステージ1.csv", &size);//外部データ読み込み
 	
 	if (p == nullptr)
 	{
@@ -123,10 +124,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 //画像データ読み込み関数
 void CSceneMain::ImageDataLoading()
 {
-	//画像登録ID
-	//int id = 0;
-	//グラフィック読み込み
-	//Draw::LoadImageW(L"", id++, TEX_SIZE_???);
+
 	
 	//背景画像読み込み
 	Draw::LoadImageW(L"background.png", GRA_BACKGROUND, TEX_SIZE_1536);
@@ -150,7 +148,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Ladders.png", GRA_LADDERS, TEX_SIZE_64);
 
 	//ドア & 錠画像読み込み
-	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_128);
+	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_256);
 
 	//木(ギミック)画像読み込み
 	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_128);
@@ -198,9 +196,7 @@ void CSceneMain::ImageDataLoading()
 //音楽データ読み込み関数
 void CSceneMain::AudioDataLoading()
 {
-	//音楽登録ID
-	//int id = 0;
-	//Audio::LoadAudio(id++, L"", ? ? ? ? );
+
 
 //BGM--------------------------------------------------------
 

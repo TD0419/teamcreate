@@ -15,11 +15,12 @@ class CObjWood :public CObj
 		void Init();						//イニシャライズ
 		void Action();						//アクション
 		void Draw();						//ドロー
-		void HeroHit(float px, float py);	//主人公が触れたときの処理
 		void Rotation(bool flag) { m_rota_flag = flag; } // 木を回転させるかどうかの管理をする関数
 	private:
-		float m_px;			//木X座標
-		float m_py;			//木Y座標
+		float m_px;			//X座標(空気画像を含む)
+		float m_py;			//Y座標(空気画像を含む)
+		float m_wood_x;	//木の画像(左上)のX位置
+		float m_wood_y;	//木の画像(左上)のY位置
 		float m_r;			//回転角度
 		bool  m_rota_flag;  //回転フラグ false:回転しない true:回転する
 };

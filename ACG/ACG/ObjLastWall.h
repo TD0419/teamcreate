@@ -16,7 +16,6 @@ class CObjLastWall :public CObj
 		void Action();				//アクション
 		void Draw();				//ドロー
 
-		bool GateOpenflag;
 	private:
 		float m_px;	//X座標
 		float m_py;	//Y座標
