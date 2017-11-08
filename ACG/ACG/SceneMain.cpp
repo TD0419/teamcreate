@@ -87,7 +87,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
 
-	p = Save::ExternalDataOpen(L"ステージ1.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
 	
 	if (p == nullptr)
 	{
@@ -154,7 +154,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_256);
 
 	//木(ギミック)画像読み込み
-	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_128);
+	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_512);
 	
 	//敵画像読み込み
 	Draw::LoadImageW(L"Snake.png", GRA_ENEMY, TEX_SIZE_256);
@@ -180,6 +180,9 @@ void CSceneMain::ImageDataLoading()
 	//看板の枠線画像読み込み
 	Draw::LoadImageW(L"Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
 	
+	//看板の読み込み
+	Draw::LoadImageW(L"Billboard_stage1.png", GRA_SIGN, TEX_SIZE_64);
+
 	//ボタン読み込み
 	Draw::LoadImageW(L"button.png", GRA_BUTTON, TEX_SIZE_128);
 
