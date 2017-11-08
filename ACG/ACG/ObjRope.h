@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjRope :public CObj
 {
 public:
-	CObjRope(int x, int y);			// コンストラクタ
+	CObjRope(float x, float y);		// コンストラクタ
 	~CObjRope() {};					// デストラクタ
 	void Init();					// イニシャライズ
 	void Action();					// アクション

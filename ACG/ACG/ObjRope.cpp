@@ -11,9 +11,9 @@
 using namespace GameL;
 
 //コンストラクタ
-//引数1	float x		:初期位置X
-//引数2	float y		:初期位置Y
-CObjRope::CObjRope(int x, int y)
+//引数1	float x		:主人公の腕の位置X
+//引数2	float y		:主人公の腕の位置Y
+CObjRope::CObjRope(float x, float y)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -21,12 +21,10 @@ CObjRope::CObjRope(int x, int y)
 	//主人公オブジェクト情報を取得
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	//主人公が本来いる位置に変更
-	x -= (int)objmap->GetScrollX();
-	y -= (int)objmap->GetScrollY();
 	//初期位置を決める
-	m_px = (float)x;
-	m_py = (float)y;
+	m_px = x;
+	m_py = y;
+
 	//速さを決める
 	m_speed = 6.5f;
 	
@@ -34,18 +32,22 @@ CObjRope::CObjRope(int x, int y)
 	m_moux = objhero->GetRopeMouX(); //Rを押した時のマウスの位置Xを持ってくる
 	m_mouy = objhero->GetRopeMouY(); //Rを押した時のマウスの位置Yを持ってくる
 
+	//主人公が本来いる位置に変更
+	x -= objmap->GetScrollX();
+	y -= objmap->GetScrollY();
+	
 	//主人公の位置からマウスの位置のベクトル情報取得
-	float vector_x = m_moux - (float)x;
-	float vector_y = m_mouy - (float)y;
+	float vector_x = m_moux - x;
+	float vector_y = m_mouy - y;
 
 	//斜辺取得
 	float hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
 
 	//角度を求める
 	m_r = acos(vector_x / hypotenuse);
+	
 	//角度方向に移動
 	m_vx = cos(m_r) * m_speed;
-	m_r = m_r * 180.0f / 3.14;
 
 	//マウスのY位置が主人公のY位置より下だったら
 	if (m_mouy > y)
@@ -56,19 +58,17 @@ CObjRope::CObjRope(int x, int y)
 	//マウスのY位置が初期Y位置より上
 	if (m_mouy < y)
 	{
-		m_vy = -sin(acos(vector_x / hypotenuse)) * m_speed;
+		m_vy = -sin(m_r) * m_speed;
 	}
 	else
 	{
-		m_vy = sin(acos(vector_x / hypotenuse)) * m_speed;
+		m_vy = sin(m_r) * m_speed;
 	}
 }
 
 //イニシャライズ
 void CObjRope::Init()
 {
-	m_moux = 0.0f;
-	m_mouy = 0.0f;
 	m_caught_flag = false;//false = フラグOFF true = フラグON
 	m_delete = false;     //false = フラグOFF true = フラグON
 	
@@ -91,12 +91,8 @@ void CObjRope::Action()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//画面外へいったら消去
-	if (m_px < -(BULLET_SIZE + BULLET_SIZE / 2) || //左　回転してるかもなので少し余裕を持たせる
-		m_px > WINDOW_SIZE_W ||   //右
-		m_py < -(BULLET_SIZE + BULLET_SIZE / 2) || //上　回転してるかもなので少し余裕を持たせる
-		m_py > WINDOW_SIZE_H     //下
-		)
+	//画面外にいれば
+	if(WindowCheck(m_px,m_py,ROPE_SIZE, ROPE_SIZE) == false)
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
@@ -157,7 +153,7 @@ void CObjRope::Action()
 	m_py += m_vy ;
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(hit, m_px+objmap->GetScrollX(), m_py+objmap->GetScrollY());
+	HitBoxUpData(hit, m_px, m_py);
 }
 
 //ドロー
@@ -173,79 +169,72 @@ void CObjRope::Draw()
 	//主人公が向いている向きを持ってくる
 	float hero_postrue = objhero->GetPosture();
 
-	//主人公が存在していたら主人公と自身を結ぶ線を描画(仮)
+	//主人公が存在していたら主人公とロープを結ぶ線を描画(仮)
 	if (objhero != nullptr)
 	{
-		//太、厚さ
-		int thick = 2;
-		//自身の位置
+		int thick = 2;	//太、厚さ
+		
+		//ロープの位置
 		int own_x = m_px;
 		int own_y = m_py;
-		//点を描画するX位置
-		int nextX;
+		
+		int nextX;	//点を描画するX位置
+
 		//主人公が右を向いていたら
-		if(hero_postrue == 0.0f)
+		if (hero_postrue == 0.0f)
 			nextX = objhero->GetPosX() + 60.0f - objmap->GetScrollX();
-		else//左を向いていたら
+
+		//左を向いていたら
+		else			
 			nextX = objhero->GetPosX() + 5.0f - objmap->GetScrollX();
+		
 		//点を描画するY位置
 		int nextY = objhero->GetPosY() + 80.0f - objmap->GetScrollY();
-		//自身から主人公の位置を引いた値X(変量)
+		
+		//ロープから主人公の位置を引いた値(位置の差分)
 		int deltaX = own_x - nextX;
-		//自身から主人公の位置を引いた値Y(変量)
 		int deltaY = own_y - nextY;
-		//どの方向に線を描画するか
-		int stepX, stepY;
-		//ステップ
-		int step = 0;
-		//分数
-		int fraction;
+		
+		int stepX, stepY;	//どの方向に線を描画するか
+		int step = 0;	//ステップ
+		int fraction;	//線を引く方向（y成分/x成分)　または（y成分/x成分)
+				
+		if (deltaX < 0)	//Xの変量がマイナスなら	
+			stepX = -1;	//X方向を-1にする
+		
+		else			//Xの変量がプラスなら	
+			stepX = 1;	//X方向を＋1にする
+		
+		if (deltaY < 0)	//Yの変量がマイナスなら		
+			stepY = -1;	//Y方向を-1にする
+		
+		else			//Yの変量がプラスなら	
+			stepY = 1;	//Y方向を+1にする
 
-		//Xの変量がマイナスなら
-		if (deltaX < 0)
-		{
-			//X方向を-1にする
-			stepX = -1;
-		}
-		//Xの変量がプラスなら
-		else
-		{
-			//X方向を＋1にする
-			stepX = 1;
-		}
-		//Yの変量がマイナスなら
-		if (deltaY < 0)
-		{
-			//Y方向を-1にする
-			stepY = -1;
-		}
-		//Yの変量がプラスなら
-		else
-		{
-			//Y方向を+1にする
-			stepY = 1;
-		}
-		//Xの変量を*2する
+
+		//位置の差分を*2する
 		deltaX = deltaX * 2;
-		//符号を＋にする
-		if (deltaX < 0)
-			deltaX *= -1;
-		//Yの変量を*2する
 		deltaY = deltaY * 2;
-		//符号を＋にする
+		
+		if (deltaX < 0)
+			deltaX *= -1;	//符号を＋にする
+
 		if (deltaY < 0)
-			deltaY *= -1;
+			deltaY *= -1;	//符号を＋にする
+		
+
 		//主人公の位置に点を打つ
 		Draw::DrawHitBox(nextX, nextY, thick, thick, color);
-		//ステップを進める
-		step++;
-
-		//変量がXのほうが大きかったら
-		if (deltaX > deltaY)
+		
+		step++;//ステップを進める
+		
+		//位置の差分の絶対値がXのほうが大きかったら
+		if ( abs(deltaX) > abs(deltaY) )
 		{
-			//Yの変量ーXの変量/2
-			fraction = deltaY - deltaX / 2;
-			//点を打とうとしているX位置が自身のX位置になるまで点を描く
+			//Yの変量 - Xの変量/2
+			fraction = (deltaY - deltaX) / 2;
+
+			//点を打とうとしているX位置がロープのX位置になるまで点を描く
 			while (nextX != own_x)
 			{
 				//分数が＋値
@@ -256,22 +245,25 @@ void CObjRope::Draw()
 					//Xの変量を分数に引き算する
 					fraction -= deltaX;
 				}
+
 				//点を描画するX位置を進める
 				nextX += stepX;
-				//Yの変量を分数に加算する
-				fraction += deltaY;
+				
+				fraction += deltaY;	//Yの変量を分数に加算する
+								
 				//点を描画
 				Draw::DrawHitBox(nextX, nextY, thick, thick, color);
-				//ステップを進める
-				step++;
+				
+				step++;	//ステップを進める
+				
 			}
 		}
-		//変量がYのほうが大きかったら｜｜同じ
+		//変量がYのほうが大きかったら
 		else
 		{
 			//Xの変量ーYの変量/2
 			fraction = deltaX - deltaY / 2;
-			//点を打とうとしているY位置が自身のY位置になるまで点を描く
+			//点を打とうとしているY位置がロープのY位置になるまで点を描く
 			while (nextY != own_y)
 			{
 				//分数が＋値

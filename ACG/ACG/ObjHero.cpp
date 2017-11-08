@@ -344,7 +344,8 @@ void CObjHero::Action()
 		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
 		{
 			;//ヒーロークリックした場合
-		}       //マウスの位置が後ろじゃない　ロープアニメのフラグがなし　ロープの削除フラグがなし
+		}
+		//マウスの位置が後ろじゃない　ロープアニメのフラグがなし　ロープの削除フラグがなし
 		else if (m_posture == mous_rope_way && m_rope_ani_con == false && m_rope_delete_ani_con == false)
 		{
 			m_rope_moux = Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
