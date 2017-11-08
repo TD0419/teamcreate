@@ -91,34 +91,42 @@ int HitTestOfAB(float ax, float ay, float aw, float ah,
 		//ブロックAの上
 		if (by_max - ay_min < bleed_y)
 		{
-			if (*bvy > 0.0f)
+			if (*bvy >= 0.0f)
+			{
 				*bvy = 0.00000f;//Y移動量を0にする
-			*by -= by_max - ay_min;
-			return 2;
+				*by -= by_max - ay_min;
+				return 2;
+			}
 		}
 		//ブロックAの下
 		if (ay_max - by_min < bleed_y)
 		{
-			if (*bvy < 0.0f)
+			if (*bvy <= 0.0f)
+			{
 				*bvy = 0.00000f;//Y移動量を0にする
-			*by += ay_max - by_min;
-			return 1;
+				*by += ay_max - by_min;
+				return 1;
+			}
 		}
 		//ブロックAの左
 		if (bx_max - ax_min < bleed_x)
 		{
-			if (*bvx > 0.0f)
+			if (*bvx >= 0.0f)
+			{
 				*bvx = 0.00000f;//X移動量を0にする
-			*bx -= bx_max - ax_min;
-			return 3;
+				*bx -= bx_max - ax_min;
+				return 3;
+			}
 		}
 		//ブロックAの右
 		if (ax_max - bx_min < bleed_x)
 		{
-			if (*bvx < 0.0f)
+			if (*bvx <= 0.0f)
+			{
 				*bvx = 0.00000f;//X移動量を0にする
-			*bx += ax_max - bx_min;
-			return 4;
+				*bx += ax_max - bx_min;
+				return 4;
+			}
 		}
 	}
 	return 0;
