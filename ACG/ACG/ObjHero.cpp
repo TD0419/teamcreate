@@ -647,7 +647,7 @@ void CObjHero::Draw()
 	src.m_right = 128.0f;
 	src.m_bottom = 64.0f;
 
-	//•`‰æˆÊ’u
+	//•`‰æˆÊ’u 
 	dst.m_top += 48.0f;
 	dst.m_left += 33.0f - (HERO_SIZE_WIDTH * m_posture);
 	dst.m_right +=33.0f - (HERO_SIZE_WIDTH * m_posture);

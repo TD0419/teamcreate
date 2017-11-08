@@ -84,7 +84,7 @@ enum MAP_BER
 {
 	MAP_SPACE		 , 	//何もない場所
 	// マップが届いたらこのコメントをはずす
-	MAP_HERO_START	 ,	//heroのスタート位置
+	//MAP_HERO_START	 ,	//heroのスタート位置
 	MAP_BLOCK		 ,	//ブロック(ノーマル)
 	MAP_LADDERS		 ,	//はしご
 	MAP_BUTTON		 ,	//ボタン
@@ -117,6 +117,7 @@ enum GRAPHIC_ID
 	GRA_HERO,			//プレイヤー
 	GRA_HERO_BULLET,    //プレイヤーの弾
 	GRA_BLOCK,			//ブロック
+	GRA_THROUGH_BLOCK,  //すり抜けるブロック
 	GRA_BOSS,			//ボス
 	GRA_LADDERS,		//はしご
 	GRA_LIFT,			//リフト

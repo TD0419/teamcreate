@@ -138,6 +138,9 @@ void CSceneMain::ImageDataLoading()
 	//ブロック画像読み込み
 	Draw::LoadImageW(L"block.png", GRA_BLOCK, TEX_SIZE_128);
 
+	//すり抜けるブロック画像読み込み
+	Draw::LoadImageW(L"Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
+
 	//リフト画像読み込み
 	Draw::LoadImageW(L"Lift.png", GRA_LIFT, TEX_SIZE_128);
 
