@@ -86,18 +86,18 @@ void CObjSign::Draw()
 
 	//ŠÅ”Â–{‘Ì--------------------------------------------------------------
 	//Ø‚èŽæ‚èˆÊ’u
-	/*src.m_top = 0.0f;
+	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 64.0f;
 	src.m_bottom = 64.0f;
-*/
+
 	//•`‰æ‚ÌˆÊ’u
-	/*dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + LIFT_SIGN_WIDTH;
-	dst.m_bottom = dst.m_top + LIFT_SIGN_HEIGHT;
-*/
+	dst.m_right = dst.m_left + 64;
+	dst.m_bottom = dst.m_top + 64;
+
 	//•`‰æ
-//	Draw::Draw(GRA_SIGN_MAIN, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_SIGN, &src, &dst, color, 0.0f);
 	//ŠÅ”Â–{‘Ì--------------------------------------------------------------
 }
