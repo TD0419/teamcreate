@@ -24,9 +24,11 @@ CObjRope::CObjRope(int x, int y)
 	//主人公が本来いる位置に変更
 	x -= objmap->GetScrollX();
 	y -= objmap->GetScrollY();
+
 	//初期位置を決める
 	m_px = x;
 	m_py = y;
+	
 	//速さを決める
 	m_speed = 6.5f;
 	
@@ -71,6 +73,13 @@ void CObjRope::Init()
 	m_mouy = 0.0f;
 	m_caught_flag = false;//false = フラグOFF true = フラグON
 	m_delete = false;     //false = フラグOFF true = フラグON
+	
+	//ブロックとの当たり判定フラグの初期化
+	m_hit_up = false;
+	m_hit_down = false;
+	m_hit_left = false;
+	m_hit_right = false;
+						  
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, ROPE_SIZE, ROPE_SIZE, ELEMENT_PLAYER, OBJ_ROPE, 1);
 }
@@ -102,6 +111,22 @@ void CObjRope::Action()
 	//ロープのHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
+	// ブロックオブジェクトを持ってくる
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	//ブロックとの当たり判定
+	objblock->AllBlockHit(&m_px, &m_py, ROPE_SIZE, ROPE_SIZE,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+
+	//ブロックとあたっていれば削除する
+	if (m_hit_up == true || m_hit_down == true || m_hit_right == true || m_hit_left == true)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		m_delete = true;  //ロープの削除フラグをオンにする
+		return;
+	}
+
 	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
 	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
 	{
@@ -112,7 +137,6 @@ void CObjRope::Action()
 	
 		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
 		objhero->SetVecX(0.0f);
-
 	}
 	//ロープが消していいかどうかを調べる
 	bool rope_delete_ani_con = objhero->GetRopeDeleteAniCon();
@@ -134,12 +158,8 @@ void CObjRope::Action()
 	m_px += m_vx ;
 	m_py += m_vy ;
 
-	
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px+objmap->GetScrollX(), m_py+objmap->GetScrollY());
-
-
-
+	HitBoxUpData(hit, m_px+objmap->GetScrollX(), m_py+objmap->GetScrollY());
 }
 
 //ドロー

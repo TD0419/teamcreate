@@ -72,6 +72,7 @@ void CObjBullet::Init()
 
 	m_window_check = true;
 
+	//ブロックとの当たり判定フラグの初期化
 	m_hit_up	= false;
 	m_hit_down	= false;
 	m_hit_left	= false;
@@ -140,7 +141,6 @@ void CObjBullet::Action()
 		return;
 	}
 
-	
 	//反射するブロックとあたった場合
 	if (hit->CheckObjNameHit(OBJ_REFLECT_BLOCK) != nullptr)
 	{

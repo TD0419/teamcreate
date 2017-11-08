@@ -28,4 +28,10 @@ private:
 	float m_r;			// ロープの角度	
 	bool m_caught_flag; //ロープスイッチに引っかかったかを調べる用
 	bool m_delete;      //ロープが消えているかどうか調べる変数
+
+	//ブロックとの当たり判定用フラグ
+	bool m_hit_left;
+	bool m_hit_right;
+	bool m_hit_up;
+	bool m_hit_down;
 };
