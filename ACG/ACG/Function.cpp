@@ -94,7 +94,7 @@ int HitTestOfAB(float ax, float ay, float aw, float ah,
 			if (*bvy >= 0.0f)
 			{
 				*bvy = 0.00000f;//YˆÚ“®—Ê‚ð0‚É‚·‚é
-				*by -= by_max - ay_min;
+				*by -= by_max - ay_min-0.0001f;//‚Ô‚é‚Ô‚é‚·‚é‚Ì‚Å-0.0001‚µ‚Ä‚¢‚é
 				return 2;
 			}
 		}
