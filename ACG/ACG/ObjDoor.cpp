@@ -12,8 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjDoor::CObjDoor(int x, int y)
 {
-	m_px = x * DOOR_SIZE;
-	m_py = y * DOOR_SIZE;
+	m_px = x * BLOCK_SIZE;
+	m_py = y * BLOCK_SIZE;
 }
 
 //イニシャライズ
