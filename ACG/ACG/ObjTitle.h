@@ -6,6 +6,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define CHAR_SIZE (32.0f)	//文字のサイズ
+
 //オブジェクト：タイトル
 class CObjTitle :public CObj
 {
@@ -16,4 +18,6 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 private:
+	int m_mode;				//モードの選択用変数(0～2)
+	bool m_keypush_flag;	//キーのトリガー処理用フラグ
 };
