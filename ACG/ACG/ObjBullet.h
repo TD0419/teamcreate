@@ -26,8 +26,9 @@ private:
 	float m_scroll_y;	// スクロールの値Y
 	bool m_window_check;//画面内かどうかのチェック用 true:画面内 false:画面外
 
-	bool m_hit_left;	//ブロックとの当たり判定用フラグ
-	bool m_hit_right;	//ブロックとの当たり判定用フラグ
-	bool m_hit_up;		//ブロックとの当たり判定用フラグ
-	bool m_hit_down;	//ブロックとの当たり判定用フラグ
+	//ブロックとの当たり判定用フラグ
+	bool m_hit_left;	
+	bool m_hit_right;	
+	bool m_hit_up;		
+	bool m_hit_down;	
 };

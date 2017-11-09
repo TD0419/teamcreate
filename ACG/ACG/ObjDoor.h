@@ -16,10 +16,10 @@ public:
 	void Action();			// アクション
 	void Draw();			// ドロー
 
-	bool m_unlock_flag;		//ボス死亡フラグ
 private:
 	float m_px;	// ドアX座標
 	float m_py; // ドアY座標
+	bool m_unlock_flag;		//ボス死亡フラグ
 
 	//アニメーション関連
 	int m_ani_door_time; //アニメーションフレーム動作感覚
