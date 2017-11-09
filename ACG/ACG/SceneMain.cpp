@@ -65,8 +65,6 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
 	//デバッグ--------------------------------------------
 
-
-
 	//BGM再生
 	//Audio::Start(STAGE1);
 
@@ -84,10 +82,26 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
+	
+	//初期化をどこかでしないといけないけど初期化の場所を指定されていなかったので一応ここで初期化をする
+	((UserData*)Save::GetData())->stagenum = 1;
 
-	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
-
-	p = Save::ExternalDataOpen(L"ステージ1.csv", &size);//外部データ読み込み
+	//ステージ番号ごとにステージ読み込み
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+	case 1:
+		p = Save::ExternalDataOpen(L"ステージ1.csv", &size);//外部データ読み込み
+		break;
+	case 2:
+		p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
+		break;
+	case 3:
+		p = Save::ExternalDataOpen(L"Stage03.csv", &size);//外部データ読み込み
+		break;
+	default:
+		break;
+	}
+	
 	
 	if (p == nullptr)
 	{
