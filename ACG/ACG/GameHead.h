@@ -84,7 +84,7 @@ enum MAP_BER
 {
 	MAP_SPACE		 , 	//何もない場所
 	// マップが届いたらこのコメントをはずす
-	//MAP_HERO_START	 ,	//heroのスタート位置
+	MAP_HERO_START	 ,	//heroのスタート位置
 	MAP_BLOCK		 ,	//ブロック(ノーマル)
 	MAP_LADDERS		 ,	//はしご
 	MAP_BUTTON		 ,	//ボタン
@@ -109,6 +109,7 @@ enum MAP_BER
 	MAP_LAST_WALL,		//次ステージへの入り口(最後の壁)
 	MAP_OPEN_WALL,		//開閉する扉(最後の壁用)
 	MAP_NEEDLE,			//トゲ
+	MAP_DIFFUSION_GIMMICK,//拡散弾発射装置
 };
 
 //グラフィックID
@@ -229,6 +230,7 @@ enum MUSIC
 #include "ObjLastWall.h"		//最後の壁
 #include "ObjTime.h"			//タイム
 #include "ObjNeedle.h"			//トゲ
+#include "ObjDiffusionGimmick.h"//拡散弾発射装置
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

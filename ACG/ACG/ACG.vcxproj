@@ -68,6 +68,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ObjDiffusionGimmick.h" />
     <ClInclude Include="ObjLastWall.h" />
     <ClInclude Include="ObjBackGround.h" />
     <ClInclude Include="ObjCannon.h" />
@@ -120,6 +121,7 @@
     <ClInclude Include="ObjStage3Boss.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ObjDiffusionGimmick.cpp" />
     <ClCompile Include="ObjLastWall.cpp" />
     <ClCompile Include="ObjBackGround.cpp" />
     <ClCompile Include="ObjCannon.cpp" />
