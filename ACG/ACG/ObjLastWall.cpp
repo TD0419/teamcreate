@@ -130,14 +130,12 @@ void CObjLastWall::Draw()
 	Draw::Draw(GRA_LAST_WALL, &src, &dst, color, 0.0f);
 
 	//-----------------------------------------------------
-	if (m_wall_gauge != 512)
-	{
-		//Ø‚èŽæ‚èˆÊ’u
-		src.m_top = 0.0 + m_wall_gauge;
-		src.m_left = 0.0f;
-		src.m_right = 32.0f;
-		src.m_bottom = 512.0f;
-	}
+	//Ø‚èŽæ‚èˆÊ’u
+	src.m_top = 0.0 + m_wall_gauge;
+	src.m_left = 0.0f;
+	src.m_right = 32.0f;
+	src.m_bottom = 512.0f;
+	
 	//•`‰æˆÊ’u
 	dst.m_top = m_py  - objmap->GetScrollY() + 65;
 	dst.m_left = m_px - objmap->GetScrollX() + 30;
