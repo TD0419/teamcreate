@@ -26,6 +26,7 @@ void CObjHero::Init()
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
 	m_rope_delete_ani_con = false;
+	m_black_radius = 768;
 
 	m_mous_x = 0.0f;            //マウスの位置X
 	m_mous_y = 0.0f;		    //マウスの位置X
@@ -58,7 +59,6 @@ void CObjHero::Init()
 	m_ani_max_time_water_die = 25;         //主人公が水に当たった時アニメーション間隔幅 
 	m_ani_time_water_die  = 0;
 	m_ani_frame_water_die = 0;//主人公が水に当たった時静止フレームを初期にする
-
 
 	m_remaining = 2;//ざんき初期化
 
@@ -673,15 +673,16 @@ void CObjHero::Draw()
 	//Draw::SetColor(col);
 
 	//画面全体をだんだん暗くする処理----------------------------------
-	if (false)
+	//死んだことが確定した場合
+	if (m_hero_water_delete == true)
 	{
-		//中央位置設定
-		static int ball_x = WINDOW_SIZE_W / 2;
-		static int ball_y = WINDOW_SIZE_H / 2;
+		//中央位置設定       
+		int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX()); 
+		 int ball_y = (int)(m_py + HERO_SIZE_HEIGHT /1.5f  - objmap->GetScrollY());
 		//半径初期
-		static int ball_r = 768 ;
+		
 		//半径をだんだん短くする
-		ball_r -= 3;
+		 m_black_radius -= 10;
 		//カラー
 		float c[4] = {0.0f,0.0f,0.0f,1.0f};
 		//正四角形の１辺の長さ
@@ -695,7 +696,7 @@ void CObjHero::Draw()
 			for (int x = 0; x < WINDOW_SIZE_W; x+= one_side)
 			{
 				//円の中
-				if ((x - ball_x)*(x - ball_x) + (y - ball_y)*(y - ball_y) <= ball_r * ball_r)
+				if ((x - ball_x)*(x - ball_x) + (y - ball_y)*(y - ball_y) <= m_black_radius * m_black_radius)
 				{
 
 				}
