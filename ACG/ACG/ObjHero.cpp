@@ -677,7 +677,7 @@ void CObjHero::Draw()
 	if (m_hero_water_delete == true)
 	{
 		//’†‰›ˆÊ’uİ’è       
-		 int ball_x = (int)(m_px + HERO_SIZE_WIDTH  / 2.f - objmap->GetScrollX());
+		int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX()); 
 		 int ball_y = (int)(m_py + HERO_SIZE_HEIGHT /1.5f  - objmap->GetScrollY());
 		//”¼Œa‰Šú
 		
