@@ -41,7 +41,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
 
 	//看板オブジェクトを作成する
-	CObjSign* objsign = new CObjSign(14, 7);
+	CObjSign* objsign = new CObjSign(14, 10);
 	Objs::InsertObj(objsign, OBJ_SIGN, 10);
 
 	//ロープスイッチオブジェクトを作成する
@@ -87,7 +87,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
 
-	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"ステージ1.csv", &size);//外部データ読み込み
 	
 	if (p == nullptr)
 	{
@@ -160,7 +160,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Lever.png", GRA_LEVER_SWICH, TEX_SIZE_128);
 
 	//岩画像読み込み
-	Draw::LoadImageW(L"rock.png", GRA_ROCK, TEX_SIZE_256);
+	Draw::LoadImageW(L"rock.png", GRA_ROCK, TEX_SIZE_512);
 
 	//Water(水上)画像読み込み
 	Draw::LoadImageW(L"Water.png", GRA_AQUATIC, TEX_SIZE_256);
@@ -178,7 +178,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
 	
 	//看板の読み込み
-	Draw::LoadImageW(L"Billboard_stage1", GRA_SIGN, TEX_SIZE_64);
+	Draw::LoadImageW(L"Billboard_stage1.png", GRA_SIGN, TEX_SIZE_64);
 
 	//ボタン読み込み
 	Draw::LoadImageW(L"button.png", GRA_BUTTON, TEX_SIZE_128);
