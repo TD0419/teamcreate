@@ -87,7 +87,6 @@ enum MAP_BER
 	MAP_HERO_START	 ,	//heroのスタート位置
 	MAP_BLOCK		 ,	//ブロック(ノーマル)
 	MAP_LADDERS		 ,	//はしご
-	MAP_BLOCK,	//ブロック(ノーマル)
 	MAP_BUTTON		 ,	//ボタン
 	MAP_ROPE_SWITCH	 ,	//ロープスイッチ
 	MAP_LIFT_WIDTH	 ,	//リフト(横方向に移動する)
