@@ -60,6 +60,7 @@ enum HIT_ELEMENTS
 struct UserData
 {
 	int mSeveData;	//サンプルセーブデータ
+	int stagenum;	//ステージ番号
 };
 //------------------------------------------------
 
