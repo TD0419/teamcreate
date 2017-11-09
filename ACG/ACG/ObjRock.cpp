@@ -22,7 +22,7 @@ void CObjRock::Init()
 {
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
-	m_ani_max_time = 8; //アニメーション間隔幅
+	m_ani_max_time = 5; //アニメーション間隔幅
 	m_ani_start_flag = false;//アニメフラグOFF
 
 	//当たり判定用HitBoxを作成                          
@@ -132,9 +132,9 @@ void CObjRock::Draw()
 
 	//切り取り位置
 	src.m_top = 1.0f;
-	src.m_left = AniData[m_ani_frame] * BLOCK_SIZE - BLOCK_SIZE;
-	src.m_right = src.m_left + BLOCK_SIZE;
-	src.m_bottom = src.m_top + BLOCK_SIZE;
+	src.m_left = AniData[m_ani_frame] * 128.0f - 128.0f;
+	src.m_right = src.m_left + 128.0f;
+	src.m_bottom = src.m_top + 198.0f;
 	
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY()- ROCK_SIZE_WIDTH;
