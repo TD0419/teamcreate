@@ -167,8 +167,6 @@ void CObjHero::Action()
 	
 	//はしご終了---------------------------------------------
 
-	
-
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 	//ロープを出している時と水に当たった時は動かない
 	if (m_rope_ani_con == false && m_hero_water_delete == false)
@@ -346,7 +344,8 @@ void CObjHero::Action()
 		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
 		{
 			;//ヒーロークリックした場合
-		}       //マウスの位置が後ろじゃない　ロープアニメのフラグがなし　ロープの削除フラグがなし
+		}
+		//マウスの位置が後ろじゃない　ロープアニメのフラグがなし　ロープの削除フラグがなし
 		else if (m_posture == mous_rope_way && m_rope_ani_con == false && m_rope_delete_ani_con == false)
 		{
 			m_rope_moux = Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
@@ -647,7 +646,7 @@ void CObjHero::Draw()
 	src.m_right = 128.0f;
 	src.m_bottom = 64.0f;
 
-	//描画位置
+	//描画位置 
 	dst.m_top += 48.0f;
 	dst.m_left += 33.0f - (HERO_SIZE_WIDTH * m_posture);
 	dst.m_right +=33.0f - (HERO_SIZE_WIDTH * m_posture);

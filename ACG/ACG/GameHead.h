@@ -109,6 +109,7 @@ enum MAP_BER
 	MAP_CANNON,			//砲台
 	MAP_LAST_WALL,		//次ステージへの入り口(最後の壁)
 	MAP_OPEN_WALL,		//開閉する扉(最後の壁用)
+	MAP_NEEDLE,			//トゲ
 };
 
 //グラフィックID
@@ -118,6 +119,7 @@ enum GRAPHIC_ID
 	GRA_HERO,			//プレイヤー
 	GRA_HERO_BULLET,    //プレイヤーの弾
 	GRA_BLOCK,			//ブロック
+	GRA_THROUGH_BLOCK,  //すり抜けるブロック
 	GRA_BOSS,			//ボス
 	GRA_LADDERS,		//はしご
 	GRA_LIFT,			//リフト
@@ -227,6 +229,7 @@ enum MUSIC
 #include "ObjCannon.h"			//砲台
 #include "ObjLastWall.h"		//最後の壁
 #include "ObjTime.h"			//タイム
+#include "ObjNeedle.h"			//トゲ
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

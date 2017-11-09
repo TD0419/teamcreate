@@ -52,5 +52,5 @@ void CObjThroughBlock::Draw()
 	dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
 	//•`‰æ
-	Draw::Draw(2, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_THROUGH_BLOCK, &src, &dst, color, 0.0f);
 }

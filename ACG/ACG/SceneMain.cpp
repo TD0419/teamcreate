@@ -138,6 +138,9 @@ void CSceneMain::ImageDataLoading()
 	//ブロック画像読み込み
 	Draw::LoadImageW(L"block.png", GRA_BLOCK, TEX_SIZE_128);
 
+	//すり抜けるブロック画像読み込み
+	Draw::LoadImageW(L"Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
+
 	//リフト画像読み込み
 	Draw::LoadImageW(L"Lift.png", GRA_LIFT, TEX_SIZE_128);
 
@@ -151,7 +154,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_256);
 
 	//木(ギミック)画像読み込み
-	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_128);
+	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_512);
 	
 	//敵画像読み込み
 	Draw::LoadImageW(L"Snake.png", GRA_ENEMY, TEX_SIZE_256);

@@ -27,6 +27,7 @@ void HitBoxUpData(CHitBox* hit, float m_px, float m_py, float w, float h)
 	//HitBoxの位置情報の変更
 	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY(),w,h);
 }
+
 //画面の外に出ているか判定する関数
 //引数1,2 :オブジェクトのポジション
 //引数3,4 :オブジェクトのサイズ
