@@ -28,8 +28,7 @@ namespace GameL
 		TEX_SIZE_512 = 512,
 		TEX_SIZE_640 = 640,
 		TEX_SIZE_1024 = 1024,
-
-		TEX_SIZE_1536 = 1536,
+		TEX_SIZE_1536 = 1536,	//í«â¡
 	};
 
 	//ÇQÇcï`âÊêÍópRECTÇÃFLOATå^

@@ -19,8 +19,8 @@ class CObjWood :public CObj
 	private:
 		float m_px;			//X座標(空気画像を含む)
 		float m_py;			//Y座標(空気画像を含む)
-		float m_wood_x;	//木の画像(左上)のX位置
-		float m_wood_y;	//木の画像(左上)のY位置
+		float m_wood_image_x;//木の画像(左上)のX位置
+		float m_wood_image_y;//木の画像(左上)のY位置
 		float m_r;			//回転角度
 		bool  m_rota_flag;  //回転フラグ false:回転しない true:回転する
 };

@@ -12,10 +12,14 @@ using namespace GameL;
 
 
 //コンストラクタ
-CObjHero::CObjHero(int x, int y)
+//引数1,2　初期ぽじしょん
+//引数3	残機数
+CObjHero::CObjHero(int x, int y, int remaining)
 {
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
+	//残機数の初期化
+	m_remaining = remaining;	
 }
 
 //イニシャライズ
@@ -122,7 +126,7 @@ void CObjHero::Action()
 	if (m_py > 1000.0f)
 	{
 		//場外に出たらリスタート
-		Scene::SetScene(new CSceneMain());
+		Scene::SetScene(new CSceneMain(-1));
 	}
 	
 	//マウスの位置情報取得
@@ -498,10 +502,9 @@ void CObjHero::Action()
 			Hits::DeleteHitBox(this);	//ヒットボックスを削除
 
 			//メインへ移行
-			Scene::SetScene(new CSceneMain());
+			Scene::SetScene(new CSceneMain(-1));
 			return;
 		}
-
 	}
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
@@ -772,13 +775,11 @@ void CObjHero::Draw()
 	//残機描画----------------------------------------------------------
 
 	//残機数を描画する
-	
-
 	wchar_t str2[128];//描画する用のwchar_t型を宣言
 	swprintf_s(str2, L"×%d", m_remaining);//int型をwcahr_t型に変換
 	Font::StrDraw(str2, 48, 15, 30, color);//描画
 
-										//切り取り位置設定
+	//切り取り位置設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 64.0f;

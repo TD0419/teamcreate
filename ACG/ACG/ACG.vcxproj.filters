@@ -270,6 +270,9 @@
     <ClInclude Include="ObjDiffusionGimmick.h">
       <Filter>ソース ファイル\Main\DiffusionGimmick</Filter>
     </ClInclude>
+    <ClInclude Include="ObjRollBlock.h">
+      <Filter>ソース ファイル\Main\RollBlock</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -421,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="ObjDiffusionGimmick.cpp">
       <Filter>ソース ファイル\Main\DiffusionGimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRollBlock.cpp">
+      <Filter>ソース ファイル\Main\RollBlock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
