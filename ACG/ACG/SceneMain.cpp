@@ -115,7 +115,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
 		//注意！！11/09にてオブジェクト番号順を整理したため、
-		//これまでのcsvデータではまともにデバッグできません。(番号が違うため)
+		//これまでのcsvデータではまともにステージを進めません。(番号が違うため)
 		//そのため、番号修正仮データ(StageA.csv)で作業を行ってください。
 
 	case 1:
