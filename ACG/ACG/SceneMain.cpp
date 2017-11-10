@@ -34,6 +34,12 @@ CSceneMain::CSceneMain(int n)
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
+	//残機が０未満になったらGameOver画面へ移動する
+	if (g_remaining < 0)
+	{
+		Scene::SetScene(new CSceneGameOver());
+		return;
+	}
 	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
