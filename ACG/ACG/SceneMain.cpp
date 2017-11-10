@@ -68,7 +68,7 @@ void CSceneMain::InitScene()
 
 
 	//BGM再生
-	//Audio::Start(STAGE1);
+	Audio::Start(STAGE1);
 
 }
 
@@ -208,11 +208,17 @@ void CSceneMain::AudioDataLoading()
 
 	//ステージ1
 	Audio::LoadAudio(STAGE1, L"Grassland1.wav",SOUND_TYPE::BACK_MUSIC);
+	//ステージ2
+	Audio::LoadAudio(STAGE2, L"Jangle1.wav", SOUND_TYPE::BACK_MUSIC);
 
+	//ステージ2_BOSS
+	Audio::LoadAudio(STAGE2_BOSS, L"BOSS1.wav", SOUND_TYPE::BACK_MUSIC);
+
+	//ステージ5
+	Audio::LoadAudio(STAGE5, L"Temple1.wav", SOUND_TYPE::BACK_MUSIC);
 //------------------------------------------------------------
 
 //SE--------------------------------------------------------
-	
 	//弾の発射
 	Audio::LoadAudio(FIRING, L"Firing1.wav", SOUND_TYPE::EFFECT);
 
@@ -222,13 +228,27 @@ void CSceneMain::AudioDataLoading()
 	//岩の爆発
 	Audio::LoadAudio(ROCK, L"Rock1.wav", SOUND_TYPE::EFFECT);
 
-	//扉の開閉
-	Audio::LoadAudio(DOOR, L"Door1.wav", SOUND_TYPE::EFFECT);
+	//最後の壁の開閉
+	Audio::LoadAudio(WALL, L"Door1.wav", SOUND_TYPE::EFFECT);
 
 	//木の転倒
 	Audio::LoadAudio(TREE, L"Tree1.wav", SOUND_TYPE::EFFECT);
 
-//------------------------------------------------------------
+	//ドアの開錠
+	Audio::LoadAudio(DOOR, L"Firing1.wav", SOUND_TYPE::EFFECT);
 
+	//敵に着弾
+	Audio::LoadAudio(LANDING, L"Landing1.wav", SOUND_TYPE::EFFECT);
+
+	//レバースイッチ
+	Audio::LoadAudio(LEVER, L"Lever1.wav", SOUND_TYPE::EFFECT);
+
+	//ボタン
+	Audio::LoadAudio(BUTTON, L"Switch1.wav", SOUND_TYPE::EFFECT);
+
+	//木の転倒
+	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir1.wav", SOUND_TYPE::EFFECT);
+
+//------------------------------------------------------------
 
 }

@@ -1,8 +1,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
-#include "GameL\WinInputs.h"
-#include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjWood.h"
@@ -67,15 +66,17 @@ void CObjWood::Action()
 	{
 		// 回転フラグが立っていれば
 		if (m_rota_flag == true)
+		{
+			Audio::Start(TREE);//音楽スタート
 			m_r -= 1.0f;//木をまわす
-						
-		//木の画像の位置更新
-		m_wood_x = m_px + (WOOD_SIZE - 64.0000f);
-		m_wood_y = m_py;
+		}
+			//木の画像の位置更新
+			m_wood_x = m_px + (WOOD_SIZE - 64.0000f);
+			m_wood_y = m_py;
 
-		//HitBoxの幅、高さ設定
-		hit_w = 64.0f;
-		hit_h = WOOD_SIZE;
+			//HitBoxの幅、高さ設定
+			hit_w = 64.0f;
+			hit_h = WOOD_SIZE;
 
 	}
 
