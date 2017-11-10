@@ -16,7 +16,7 @@ using namespace GameL;
 #include "SceneMain.h"
 #include "GameHead.h"
 
-static int g_remaining;//残機管理用変数
+int g_remaining;//残機管理用変数
 
 //コンストラクタ
 CSceneMain::CSceneMain()
@@ -34,6 +34,12 @@ CSceneMain::CSceneMain(int n)
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
+	//残機が０未満になったらGameOver画面へ移動する
+	if (g_remaining < 0)
+	{
+		Scene::SetScene(new CSceneGameOver());
+		return;
+	}
 	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
@@ -105,7 +111,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
 		//注意！！11/09にてオブジェクト番号順を整理したため、
-		//これまでのcsvデータではまともにデバッグできません。(番号が違うため)
+		//これまでのcsvデータではまともにステージを進めません。(番号が違うため)
 		//そのため、番号修正仮データ(StageA.csv)で作業を行ってください。
 
 	case 1:
