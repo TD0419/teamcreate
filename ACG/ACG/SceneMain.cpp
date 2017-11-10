@@ -16,6 +16,12 @@ using namespace GameL;
 #include "SceneMain.h"
 #include "GameHead.h"
 
+//コンストラクタ
+CSceneMain::CSceneMain()
+{
+
+}
+
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
@@ -41,7 +47,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
 
 	//看板オブジェクトを作成する
-	CObjSign* objsign = new CObjSign(14, 7);
+	CObjSign* objsign = new CObjSign(14, 10);
 	Objs::InsertObj(objsign, OBJ_SIGN, 10);
 
 	//ロープスイッチオブジェクトを作成する
@@ -49,12 +55,12 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 10);
 
 	//テスト壁
-	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
-	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
+	//CObjLastWall*objlastwall = new CObjLastWall(15, -2);
+	//Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
 
 	//壁テストのためboss
-	CObjBoss*objboss = new CObjBoss(10, 5);
-	Objs::InsertObj(objboss, OBJ_BOSS, 10);
+	//CObjBoss*objboss = new CObjBoss(10, 5);
+	//Objs::InsertObj(objboss, OBJ_BOSS, 10);
 
 	//テストタイム
 	CObjTime* objtime = new CObjTime();
@@ -64,8 +70,6 @@ void CSceneMain::InitScene()
 	CObjButton* objbuttn = new CObjButton(5, 5);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
 	//デバッグ--------------------------------------------
-
-
 
 	//BGM再生
 	//Audio::Start(STAGE1);
@@ -84,10 +88,29 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
+	
+	//初期化をどこかでしないといけないけど初期化の場所を指定されていなかったので一応ここで初期化をする
+	((UserData*)Save::GetData())->stagenum = 1;
 
-	//Stage01のテストプレイ中のためStage02.csvの読み込みを変更しています
+	//ステージ番号ごとにステージ読み込み
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		//注意！！11/09にてオブジェクト番号順を整理したため、
+		//これまでのcsvデータではまともにデバッグできません。(番号が違うため)
+		//そのため、番号修正仮データ(StageA.csv)で作業を行ってください。
 
-	p = Save::ExternalDataOpen(L"Stage02.csv", &size);//外部データ読み込み
+	case 1:
+		p = Save::ExternalDataOpen(L"StageA.csv", &size);//外部データ読み込み
+		break;
+	case 2:
+		p = Save::ExternalDataOpen(L"StageA.csv", &size);//外部データ読み込み
+		break;
+	case 3:
+		p = Save::ExternalDataOpen(L"StageA.csv", &size);//外部データ読み込み
+		break;
+	default:
+		break;
+	}
 	
 	if (p == nullptr)
 	{
@@ -161,7 +184,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Lever.png", GRA_LEVER_SWICH, TEX_SIZE_128);
 
 	//岩画像読み込み
-	Draw::LoadImageW(L"rock.png", GRA_ROCK, TEX_SIZE_256);
+	Draw::LoadImageW(L"rock.png", GRA_ROCK, TEX_SIZE_512);
 
 	//Water(水上)画像読み込み
 	Draw::LoadImageW(L"Water.png", GRA_AQUATIC, TEX_SIZE_256);

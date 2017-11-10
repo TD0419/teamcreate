@@ -16,13 +16,15 @@ CObjWood::CObjWood(int x, int y)
 {
 	m_px = x * BLOCK_SIZE;
 	m_py = y * BLOCK_SIZE;
+
+	//マップ情報の木の位置が木の下を指していたので調整
+	m_px -= WOOD_SIZE - 64.0f;
+	m_py -= WOOD_SIZE - 64.0f;
 }
 
 //イニシャライズ
 void CObjWood::Init()
-{
-	
-	
+{	
 	// 角度変数初期化
 	m_r = 0.0f;
 
@@ -96,26 +98,22 @@ void CObjWood::Action()
 			return;
 		}
 	}
-	else
+
+	//主人公との当たり判定
+	//衝突したら主人公の位置を更新する
+	if (HitTestOfAB(m_wood_x, m_wood_y, hit_w, hit_h,
+		&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)
+		)
 	{
-		//木の画像の位置更新
-		m_wood_x = m_px + (WOOD_SIZE - 64.0000f);
-		m_wood_y = m_py;
-		//主人公との当たり判定
-		if (int hit = HitTestOfAB(m_wood_x, m_wood_y, 64.0000f, WOOD_SIZE,
-			&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)
-			)
-		{
-			//主人公の位置を更新
-			objhero->SetPosX(hero_x);
-			objhero->SetPosY(hero_y);
-			objhero->SetVecX(hero_vx);
-			objhero->SetVecY(hero_vy);
-		}
-		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y);
-		return;
+		//主人公の位置を更新
+		objhero->SetPosX(hero_x);
+		objhero->SetPosY(hero_y);
+		objhero->SetVecX(hero_vx);
+		objhero->SetVecY(hero_vy);
 	}
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y, hit_w, hit_h);
+	
 }
 
 //ドロー

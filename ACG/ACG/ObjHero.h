@@ -45,7 +45,8 @@ private:
 	float m_vy;		//Y軸方向のベクトル
 	float m_posture;//姿勢 //右：0.0ｆ　左：1.0ｆ
 	float m_r;		//主人公の回転角度
-	int m_block_type;//踏んでるブロックの値を保存する
+	int   m_block_type;//踏んでるブロックの値を保存する
+	int   m_black_radius; //主人公が死んだ時、周りから黒くする半径の変数
 
 	float m_mous_x;	    //マウスの位置X
 	float m_mous_y;     //マウスの位置X

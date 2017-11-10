@@ -26,7 +26,7 @@ void CObjSign::Init()
 	Font::SetStrTex(L"???「ロープを使うのだよ諸君！」");
 
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
+	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE+32, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
 }
 
 //アクション
@@ -94,8 +94,8 @@ void CObjSign::Draw()
 	//描画の位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + 64;
-	dst.m_bottom = dst.m_top + 64;
+	dst.m_right = dst.m_left + 64.0f;
+	dst.m_bottom = dst.m_top + 64.0f;
 
 	//描画
 	Draw::Draw(GRA_SIGN, &src, &dst, color, 0.0f);

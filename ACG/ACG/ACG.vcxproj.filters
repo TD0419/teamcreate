@@ -5,19 +5,8 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="ソース ファイル\Main">
       <UniqueIdentifier>{b34ebc1d-67b9-4b76-aba6-c4a9108cffe0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Title">
-      <UniqueIdentifier>{82100ff4-7f6b-4131-a72c-29415e5309b2}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\GameOver">
       <UniqueIdentifier>{fe99c31b-e2da-4cb5-83ac-c221d1ada5e2}</UniqueIdentifier>
@@ -109,8 +98,22 @@
     <Filter Include="ソース ファイル\Main\Time">
       <UniqueIdentifier>{5cf13a39-2034-4074-b468-0c603f87158f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\RollBlock">
-      <UniqueIdentifier>{083ae909-42be-45ec-ad6e-febd750e51b0}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Main\Needle">
+      <UniqueIdentifier>{230ba973-e57e-4643-8637-354442c26e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\DiffusionGimmick">
+      <UniqueIdentifier>{80252c72-6513-4b03-a027-1d7bd337f358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Title">
+      <UniqueIdentifier>{82100ff4-7f6b-4131-a72c-29415e5309b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +264,12 @@
     <ClInclude Include="ObjTime.h">
       <Filter>ソース ファイル\Main\Time</Filter>
     </ClInclude>
+    <ClInclude Include="ObjNeedle.h">
+      <Filter>ソース ファイル\Main\Needle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjDiffusionGimmick.h">
+      <Filter>ソース ファイル\Main\DiffusionGimmick</Filter>
+    </ClInclude>
     <ClInclude Include="ObjRollBlock.h">
       <Filter>ソース ファイル\Main\RollBlock</Filter>
     </ClInclude>
@@ -409,6 +418,12 @@
     </ClCompile>
     <ClCompile Include="ObjTime.cpp">
       <Filter>ソース ファイル\Main\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjNeedle.cpp">
+      <Filter>ソース ファイル\Main\Needle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjDiffusionGimmick.cpp">
+      <Filter>ソース ファイル\Main\DiffusionGimmick</Filter>
     </ClCompile>
     <ClCompile Include="ObjRollBlock.cpp">
       <Filter>ソース ファイル\Main\RollBlock</Filter>

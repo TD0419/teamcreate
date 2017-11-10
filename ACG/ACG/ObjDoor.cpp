@@ -12,8 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjDoor::CObjDoor(int x, int y)
 {
-	m_px = x * DOOR_SIZE;
-	m_py = y * DOOR_SIZE;
+	m_px = x * BLOCK_SIZE;
+	m_py = y * BLOCK_SIZE;
 }
 
 //イニシャライズ
@@ -31,35 +31,40 @@ void CObjDoor::Init()
 //アクション
 void CObjDoor::Action()
 {
+	//ボスの情報を呼ぶの
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 	bool boss_delete;
+	//ボスがいなくなったら。
 	if (objboss != nullptr)
 	{
-		boss_delete = objboss->GetDieFlag();
+		boss_delete = objboss->GetDieFlag();//boss_deleteに情報を入れる。
 	}
 	else
 	{
-		boss_delete = false;
+		boss_delete = false;//ボスはいます
 	}
-
+	//ボスが消滅したとき
 	if (boss_delete == true)
 	{
-		m_unlock_flag = true;
+		m_unlock_flag = true;//施錠解除フラグをonにします
 	}
 
+	//施錠解除フラグオンのとき
 	if (m_unlock_flag==true)
 	{
-		m_ani_door_time += 1;
+		m_ani_door_time += 1;//アニメーションタイム+１
 	}
-
+	//ドアアニメタイムがマックスタイムより少なく、フレームが2じゃないとき
 	if (m_ani_door_time > m_ani_door_time_max&&m_ani_door_frame != 2)
 	{
-		m_ani_door_frame += 1;
-		m_ani_door_time = 0;
+		m_ani_door_frame += 1;//ドアのフレームを+1します。
+		m_ani_door_time = 0;  //ドアタイムを0にします。
 	}
+	//ドアフレームが2のとき
 	if (m_ani_door_frame == 2)
+		
 	{
-		m_ani_door_frame = 2;
+		m_ani_door_frame = 2;//フレームを2に固定
 		return;
 	}
 }
