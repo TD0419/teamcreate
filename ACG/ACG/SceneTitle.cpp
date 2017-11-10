@@ -5,7 +5,6 @@
 //GameLで使用するヘッダー
 #include "GameL\SceneObjManager.h"
 #include "GameL\DrawFont.h"
-#include "GameL\UserData.h"
 #include "GameL\Audio.h"
 
 //使用するネームスペース
@@ -18,14 +17,15 @@ using namespace GameL;
 //初期化メソッド
 void CSceneTitle::InitScene()
 {
+	//オブジェクトを作成する
+	CObjTitle* objtitle = new CObjTitle();
+	Objs::InsertObj(objtitle, OBJ_TITLE, 10);
 }
 
 //実行中メソッド
 void CSceneTitle::Scene()
 {
-	//オブジェクトを作成する
-	CObjTitle* objtitle = new CObjTitle();
-	Objs::InsertObj(objtitle, OBJ_TITLE, 10);
+	
 }
 
 //画像データ読み込み関数

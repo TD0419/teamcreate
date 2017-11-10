@@ -471,6 +471,7 @@ void CObjHero::Action()
 		{
 			this->SetStatus(false);		//自身を削除
 			Hits::DeleteHitBox(this);	//ヒットボックスを削除
+
 			//メインへ移行
 			Scene::SetScene(new CSceneMain());
 			return;

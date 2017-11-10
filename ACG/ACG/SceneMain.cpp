@@ -16,6 +16,12 @@ using namespace GameL;
 #include "SceneMain.h"
 #include "GameHead.h"
 
+//コンストラクタ
+CSceneMain::CSceneMain()
+{
+
+}
+
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
@@ -105,7 +111,6 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	default:
 		break;
 	}
-	
 	
 	if (p == nullptr)
 	{
