@@ -113,6 +113,7 @@ void CObjWood::Action()
 	}
 	//HitBox‚ÌˆÊ’u‚ğXV‚·‚é
 	HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y, hit_w, hit_h);
+
 	
 }
 
