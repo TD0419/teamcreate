@@ -38,7 +38,7 @@ enum OBJ_NAME
 	OBJ_CANNON,		    //砲台
 	OBJ_LAST_WALL,		//最後の壁
 	OBJ_TIME,			//タイム
-	OBJ_ROLL_BLOCK,		//回転するブロック
+	//OBJ_ROLL_BLOCK,		//回転するブロック
 };
 //------------------------------------------------
 
@@ -109,7 +109,7 @@ enum MAP_BER
 	MAP_CANNON,			//砲台
 	MAP_LAST_WALL,		//次ステージへの入り口(最後の壁)
 	MAP_OPEN_WALL,		//開閉する扉(最後の壁用)
-	MAP_ROLL_BLOCK,		//回転するブロック
+	//MAP_ROLL_BLOCK,		//回転するブロック
 };
 
 //グラフィックID
@@ -138,7 +138,7 @@ enum GRAPHIC_ID
 	GRA_LAST_WALL,		//次ステージへの入り口(上部分の鉄部分)
 	GRA_OPEN_WALL,		//開閉するシャッター(最後の壁用)
 	GRA_LIFE,			//ライフ
-	GRA_ROLL_BLOCK,		//回転ブロック
+	//GRA_ROLL_BLOCK,		//回転ブロック
 };
 
 //音楽(BGM)
@@ -181,8 +181,8 @@ enum MUSIC
 #define FALLING_WALLS_SAIZE  (64.0f)		//落下壁サイズ(仮)
 #define CANNON_SIZE_WIDTH	 (64.0f)		//砲台の横サイズ(仮)
 #define CANNON_SIZE_HEIGHT	 (32.0f)		//砲台の縦サイズ(仮)
-#define ROLL_BLOCK_SIZE_WIDTH	(192.0f)	//回転するブロックの横サイズ
-#define ROLL_BLOCK_SIZE_HEIGHT	(64.0f)		//回転するブロックの縦サイズ
+//#define ROLL_BLOCK_SIZE_WIDTH	(192.0f)	//回転するブロックの横サイズ
+//#define ROLL_BLOCK_SIZE_HEIGHT	(64.0f)		//回転するブロックの縦サイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -232,7 +232,7 @@ enum MUSIC
 #include "ObjCannon.h"			//砲台
 #include "ObjLastWall.h"		//最後の壁
 #include "ObjTime.h"			//タイム
-#include "ObjRollBlock.h"		//回転するブロック
+//#include "ObjRollBlock.h"		//回転するブロック
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
