@@ -31,11 +31,11 @@ void CObjWood::Init()
 	m_rota_flag = false;
 
 	//初期の木の画像の位置
-	m_wood_x = m_px + (WOOD_SIZE - 64.0000f);
-	m_wood_y = m_py;
+	m_wood_image_x = m_px + (WOOD_SIZE - 64.0000f);
+	m_wood_image_y = m_py;
 
 	//当たり判定
-	Hits::SetHitBox(this, m_wood_x, m_wood_y, 64, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
+	Hits::SetHitBox(this, m_wood_image_x, m_wood_image_y, 64, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
 }
 
 //アクション
@@ -55,8 +55,8 @@ void CObjWood::Action()
 	if (m_r <= -90.0f)
 	{
 		//木の画像の位置を更新
-		m_wood_x = m_px + WOOD_SIZE;
-		m_wood_y = m_py + (WOOD_SIZE - 64.0000f);
+		m_wood_image_x = m_px + WOOD_SIZE;
+		m_wood_image_y = m_py + (WOOD_SIZE - 64.0000f);
 
 		//HitBoxの幅、高さ設定
 		hit_w = WOOD_SIZE;
@@ -82,7 +82,7 @@ void CObjWood::Action()
 
 	//主人公との当たり判定
 	//衝突したら主人公の位置を更新する
-	if (HitTestOfAB(m_wood_x, m_wood_y, hit_w, hit_h,
+	if (HitTestOfAB(m_wood_image_x, m_wood_image_y, hit_w, hit_h,
 		&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)
 		)
 	{
@@ -93,7 +93,9 @@ void CObjWood::Action()
 		objhero->SetVecY(hero_vy);
 	}
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y, hit_w, hit_h);
+	HitBoxUpData(Hits::GetHitBox(this), m_wood_image_x, m_wood_image_y, hit_w, hit_h);
+
+
 	
 }
 

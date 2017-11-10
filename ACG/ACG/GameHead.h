@@ -38,6 +38,7 @@ enum OBJ_NAME
 	OBJ_CANNON,		    //砲台
 	OBJ_LAST_WALL,		//最後の壁
 	OBJ_TIME,			//タイム
+	//OBJ_ROLL_BLOCK,		//回転するブロック
 };
 //------------------------------------------------
 
@@ -60,6 +61,7 @@ enum HIT_ELEMENTS
 struct UserData
 {
 	int mSeveData;	//サンプルセーブデータ
+	int stagenum;	//ステージ番号
 };
 //------------------------------------------------
 
@@ -82,34 +84,45 @@ struct UserData
 //マップの番号とオブジェクトの対応　（仮）
 enum MAP_BER
 {
-	MAP_SPACE		 , 	//何もない場所
-	// マップが届いたらこのコメントをはずす
-	//MAP_HERO_START	 ,	//heroのスタート位置
+	//全ステージ共通オブジェクト描画番号
+	MAP_SPACE				, 			//何もない場所
+	MAP_HERO_START			,			//heroのスタート位置(マップが届いたらこのコメントをはずす)
+	MAP_BLOCK				,			//ブロック(ノーマル)
+
+	//複数のステージで使用されるオブジェクト描画番号
+	MAP_LADDERS				,			//はしご
+	MAP_ROPE_SWITCH			,			//ロープスイッチ
+	MAP_LEVER_SWICH			,			//レバースイッチ
+	MAP_ROCK				,			//岩
+	MAP_SIGN				,			//看板
+	MAP_DOOR				,			//ドア
+	MAP_LIFT_TYPE_MANUAL	,			//手動リフト(通常時は動かない。ギミックの過程で引っ張ると動かせる)
+    MAP_LIFT_TYPE_AUTO_WIDTH	 ,		//自動横移動リフト(自動で左右に動く)	//マップの番号対応ができたらコメントをはずしてください
+	MAP_LIFT_TYPE_AUTO_LENGTH	 ,		//自動縦移動リフト(自動で縦方向に動く)	//マップの番号対応ができたらコメントをはずしてください
+	MAP_ENEMY				,			//敵
+	MAP_LAST_WALL			,			//次ステージへの入り口(最後の壁)
 	
-	MAP_LADDERS		 ,	//はしご
-	MAP_BLOCK,	//ブロック(ノーマル)
-	MAP_BUTTON		 ,	//ボタン
-	MAP_ROPE_SWITCH	 ,	//ロープスイッチ
-	MAP_LIFT_WIDTH	 ,	//リフト(横方向に移動する)
-	//MAP_LIFT_LENGTH	 ,	//リフト(縦方向に移動する)		//マップの番号対応ができたらコメントをはずしてください
-	//MAP_LIFT_ALL	 ,	//リフト(縦と横どちらも移動する)	//マップの番号対応ができたらコメントをはずしてください
-	MAP_ROCK		 ,	//岩
-	MAP_WOOD		 ,	//木
-	MAP_WATER		 ,	//水
-	MAP_ENEMY		 ,	//敵
-	MAP_BOSS		 ,	//ボス
-	MAP_STAGE3_BOSS  ,	//ステージ３のボス
-	MAP_THROUGH_BLOCK,	//通り抜けれるブロック
-	MAP_REFLECT_BLOCK,	//反射ブロック
-	MAP_SIGN		 ,	//看板
-	MAP_DOOR		 ,	//ドア
-	MAP_LEVER_SWICH	 ,	//レバースイッチ
-	MAP_FALLING_WALLS,  //落下壁
-	MAP_NO_LOOK_LADDERS,//見えないハシゴ
-	MAP_CANNON,			//砲台
-	MAP_LAST_WALL,		//次ステージへの入り口(最後の壁)
-	MAP_OPEN_WALL,		//開閉する扉(最後の壁用)
-	MAP_NEEDLE,			//トゲ
+	//ステージ1のみに使用するオブジェクト描画番号
+	MAP_WOOD				,			//木
+
+	//ステージ2のみに使用するオブジェクト描画番号
+	MAP_NO_LOOK_LADDERS		,			//見えないハシゴ
+	MAP_BUTTON				,			//ボタン
+	MAP_WATER				,			//水
+	MAP_THROUGH_BLOCK		,			//通り抜けれるブロック
+	MAP_BOSS				,			//ステージ２のボス
+
+	//ステージ3のみに使用するオブジェクト描画番号
+	MAP_FALLING_WALLS		,			//落下壁
+	MAP_CANNON				,			//砲台
+	MAP_REFLECT_BLOCK		,			//反射ブロック
+	MAP_STAGE3_BOSS			,			//ステージ３のボス
+
+	//ステージ4のみに使用するオブジェクト描画番号
+
+	//ステージ5のみに使用するオブジェクト描画番号
+	
+
 };
 
 //グラフィックID
@@ -137,7 +150,8 @@ enum GRAPHIC_ID
 	GRA_LAST_WALL,		//次ステージへの入り口(上部分の鉄部分)
 	GRA_OPEN_WALL,		//開閉するシャッター(最後の壁用)
 	GRA_LIFE,			//ライフ
-	GRA_SIGN,           //看板
+	GRA_SIGN,			//看板
+	//GRA_ROLL_BLOCK,		//回転ブロック
 };
 
 //音楽(BGM)
@@ -189,6 +203,8 @@ enum MUSIC
 #define FALLING_WALLS_SAIZE  (64.0f)		//落下壁サイズ(仮)
 #define CANNON_SIZE_WIDTH	 (64.0f)		//砲台の横サイズ(仮)
 #define CANNON_SIZE_HEIGHT	 (32.0f)		//砲台の縦サイズ(仮)
+//#define ROLL_BLOCK_SIZE_WIDTH	(192.0f)	//回転するブロックの横サイズ
+//#define ROLL_BLOCK_SIZE_HEIGHT	(64.0f)		//回転するブロックの縦サイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -239,6 +255,7 @@ enum MUSIC
 #include "ObjLastWall.h"		//最後の壁
 #include "ObjTime.h"			//タイム
 #include "ObjNeedle.h"			//トゲ
+#include "ObjDiffusionGimmick.h"//拡散弾発射装置
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

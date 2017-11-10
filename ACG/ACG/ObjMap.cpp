@@ -123,110 +123,10 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 		
-		case MAP_BUTTON:	//ボタン作成
-		{
-			CObjButton* objbutton = new CObjButton(x, y);
-			Objs::InsertObj(objbutton, OBJ_BUTTON, 9);
-			break;
-		}
-		
 		case MAP_ROPE_SWITCH:	//ロープスイッチ作成
 		{
 			CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(x, y);
 			Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 9);
-			break;
-		}
-
-		case MAP_LIFT_WIDTH:		//リフト(横移動)作成
-		{
-			CObjLift* objlift = new CObjLift(x, y);
-			Objs::InsertObj(objlift, OBJ_LIFT, 9);
-			break;
-		}
-		
-		//マップの番号対応、及び処理ができたらコメントはずしてください-----------
-		//case MAP_LIFT_LENGTH:		//リフト(縦移動)作成
-		//{
-		//	CObjLift* objlift = new CObjLift(x, y);
-		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
-		//	break;
-		//}
-
-		//case MAP_LIFT_ALL:		//リフト(縦と横移動)作成
-		//{
-		//	CObjLift* objlift = new CObjLift(x, y);
-		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
-		//	break;
-		//}
-		//マップの番号対応ができたらコメントはずしてください-----------
-		
-		case MAP_ROCK:		//岩作成
-		{
-			CObjRock* objrock = new CObjRock(x, y);
-			Objs::InsertObj(objrock, OBJ_ROCK, 9);
-			break;
-		}
-	
-		case MAP_WOOD:	//木作成
-		{
-			CObjWood* objwood = new CObjWood(x, y);
-			Objs::InsertObj(objwood, OBJ_WOOD, 9);
-			break;
-		}
-
-		case MAP_WATER: //水作成
-		{
-			CObjWater* objwater = new CObjWater(x, y);
-			Objs::InsertObj(objwater, OBJ_WATER, 9);
-			break;
-		}
-
-		case MAP_ENEMY://敵作成
-		{
-			CObjEnemy* objenemy = new CObjEnemy(x, y);
-			Objs::InsertObj(objenemy, OBJ_ENEMY, 9);
-			break;
-		}
-
-		case MAP_BOSS://ボス作成
-		{
-			CObjBoss* objboss = new CObjBoss(x, y);
-			Objs::InsertObj(objboss, OBJ_BOSS, 9);
-			break;
-		}
-		
-		case MAP_STAGE3_BOSS:		//第三ボス作成
-		{
-			CObjStage3Boss* objstage3_boss = new CObjStage3Boss(x, y);
-			Objs::InsertObj(objstage3_boss, OBJ_STAGE3_BOSS, 9);
-			break;
-		}
-
-		case MAP_THROUGH_BLOCK://スルーブロック作成
-		{
-			CObjThroughBlock* objthrough_block = new CObjThroughBlock(x, y);
-			Objs::InsertObj(objthrough_block, OBJ_THROUGHT_BLOCK, 9);
-			break;
-		}
-
-		case MAP_REFLECT_BLOCK:	//反射用ブロック作成
-		{
-			CObjReflectBlock* objreflec_block = new CObjReflectBlock(x, y);
-			Objs::InsertObj(objreflec_block, OBJ_REFLECT_BLOCK, 9);
-			break;
-		}
-		
-		case MAP_SIGN :	//看板作成
-		{
-			CObjSign* objsign = new CObjSign(x, y);
-			Objs::InsertObj(objsign, OBJ_SIGN, 9);
-			break;
-		}
-		
-		case MAP_DOOR:	//ドア作成
-		{
-			CObjDoor* objDoor = new CObjDoor(x, y);
-			Objs::InsertObj(objDoor, OBJ_DOOR, 9);
 			break;
 		}
 
@@ -237,6 +137,71 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
+		case MAP_ROCK:		//岩作成
+		{
+			CObjRock* objrock = new CObjRock(x, y);
+			Objs::InsertObj(objrock, OBJ_ROCK, 9);
+			break;
+		}
+
+		case MAP_SIGN:	//看板作成
+		{
+			CObjSign* objsign = new CObjSign(x, y);
+			Objs::InsertObj(objsign, OBJ_SIGN, 9);
+			break;
+		}
+
+		case MAP_DOOR:	//ドア作成
+		{
+			CObjDoor* objDoor = new CObjDoor(x, y);
+			Objs::InsertObj(objDoor, OBJ_DOOR, 9);
+			break;
+		}
+
+		case MAP_LIFT_TYPE_MANUAL:		//手動リフト(横移動)作成
+		{
+			CObjLift* objlift = new CObjLift(x, y);
+			Objs::InsertObj(objlift, OBJ_LIFT, 9);
+			break;
+		}
+		
+		//マップの番号対応、及び処理ができたらコメントはずしてください-----------
+		//case MAP_LIFT_TYPE_AUTO_WIDTH:		//自動横移動リフト作成
+		//{
+		//	CObjLift* objlift = new CObjLift(x, y);
+		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
+		//	break;
+		//}
+
+		//case MAP_LIFT_TYPE_AUTO_LENGTH:		//自動縦移動リフト作成
+		//{
+		//	CObjLift* objlift = new CObjLift(x, y);
+		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
+		//	break;
+		//}
+		//マップの番号対応ができたらコメントはずしてください-----------
+		
+		case MAP_ENEMY://敵作成
+		{
+			CObjEnemy* objenemy = new CObjEnemy(x, y);
+			Objs::InsertObj(objenemy, OBJ_ENEMY, 9);
+			break;
+		}
+
+		case MAP_LAST_WALL:		//壁(次ステージを隔てる壁)
+		{
+			CObjLastWall* objLastWall = new CObjLastWall(x, y);
+			Objs::InsertObj(objLastWall, OBJ_LAST_WALL, 10);
+			break;
+		}
+	
+		case MAP_WOOD:	//木作成
+		{
+			CObjWood* objwood = new CObjWood(x, y);
+			Objs::InsertObj(objwood, OBJ_WOOD, 9);
+			break;
+		}
+
 		case MAP_NO_LOOK_LADDERS: // 見えないハシゴ作成
 		{
 			CObjLadders* objladders = new CObjLadders(x, y, false);
@@ -244,10 +209,45 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
-		case MAP_LAST_WALL:		//壁(次ステージを隔てる壁)
+		case MAP_BUTTON:	//ボタン作成
 		{
-			CObjLastWall* objLastWall = new CObjLastWall(x,y);
-			Objs::InsertObj(objLastWall,OBJ_LAST_WALL,10);
+			CObjButton* objbutton = new CObjButton(x, y);
+			Objs::InsertObj(objbutton, OBJ_BUTTON, 9);
+			break;
+		}
+
+		case MAP_WATER: //水作成
+		{
+			CObjWater* objwater = new CObjWater(x, y);
+			Objs::InsertObj(objwater, OBJ_WATER, 9);
+			break;
+		}
+
+		case MAP_THROUGH_BLOCK://スルーブロック作成
+		{
+			CObjThroughBlock* objthrough_block = new CObjThroughBlock(x, y);
+			Objs::InsertObj(objthrough_block, OBJ_THROUGHT_BLOCK, 9);
+			break;
+		}
+
+		case MAP_BOSS://ボス作成
+		{
+			CObjBoss* objboss = new CObjBoss(x, y);
+			Objs::InsertObj(objboss, OBJ_BOSS, 9);
+			break;
+		}
+
+		case MAP_REFLECT_BLOCK:	//反射用ブロック作成
+		{
+			CObjReflectBlock* objreflec_block = new CObjReflectBlock(x, y);
+			Objs::InsertObj(objreflec_block, OBJ_REFLECT_BLOCK, 9);
+			break;
+		}
+		
+		case MAP_STAGE3_BOSS:		//第三ボス作成
+		{
+			CObjStage3Boss* objstage3_boss = new CObjStage3Boss(x, y);
+			Objs::InsertObj(objstage3_boss, OBJ_STAGE3_BOSS, 9);
 			break;
 		}
 
