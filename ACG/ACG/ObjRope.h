@@ -20,6 +20,8 @@ public:
 private:
 	float m_px;			// ロープX座標
 	float m_py;			// ロープY座標
+	float m_hero_arm_x;	//主人公の腕の位置X
+	float m_hero_arm_y;	//主人公の腕の位置Y
 	float m_vx;			// X軸方向のベクトル
 	float m_vy;			// Y軸方向のベクトル
 	float m_moux;      //R押したときのマウスの位置Xを入れる変数
