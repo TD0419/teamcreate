@@ -49,54 +49,34 @@ void CObjWood::Action()
 	float hero_vx = objhero->GetVecX();
 	float hero_vy = objhero->GetVecY();
 
-	// 回転フラグが立っていれば
-	if (m_rota_flag == true)
+	//HitBoxの幅、高さ
+	float hit_w, hit_h;
+
+	//90度以上回転していれば
+	if (m_r <= -90.0f)
 	{
-		//90度以上回転していれば
-		if (m_r <= -90.0f)
-		{
-			//木の画像の位置を更新
-			m_wood_x = m_px + WOOD_SIZE;
-			m_wood_y = m_py + (WOOD_SIZE - 64.0000f);
-		
-			//主人公との当たり判定
-			if (HitTestOfAB(m_wood_x, m_wood_y, WOOD_SIZE, 64.0000f,
-				&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)
-				)
-			{
-				//主人公の位置を更新
-				objhero->SetPosX(hero_x);
-				objhero->SetPosY(hero_y);
-				objhero->SetVecX(hero_vx);
-				objhero->SetVecY(hero_vy);
-			}
-			
-			//HitBoxの位置を更新する
-			HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y, 64.0f, WOOD_SIZE);
-			
-			return;
-		}
-		else
-		{
-			//木の画像の位置更新
-			m_wood_x = m_px + (WOOD_SIZE - 64.0000f);
-			m_wood_y = m_py;
-			//主人公との当たり判定
-			if (HitTestOfAB(m_wood_x, m_wood_y, 64.0000f, WOOD_SIZE,
-				&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)
-				)
-			{
-				//主人公の位置を更新
-				objhero->SetPosX(hero_x);
-				objhero->SetPosY(hero_y);
-				objhero->SetVecX(hero_vx);
-				objhero->SetVecY(hero_vy);
-			}
-			//木をまわす
-			m_r -= 1.0f;
-			HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y);
-			return;
-		}
+		//木の画像の位置を更新
+		m_wood_x = m_px + WOOD_SIZE;
+		m_wood_y = m_py + (WOOD_SIZE - 64.0000f);
+
+		//HitBoxの幅、高さ設定
+		hit_w = WOOD_SIZE;
+		hit_h = 64.0f;
+	}
+	else
+	{
+		// 回転フラグが立っていれば
+		if (m_rota_flag == true)
+			m_r -= 1.0f;//木をまわす
+
+						//木の画像の位置更新
+		m_wood_x = m_px + (WOOD_SIZE - 64.0000f);
+		m_wood_y = m_py;
+
+		//HitBoxの幅、高さ設定
+		hit_w = 64.0f;
+		hit_h = WOOD_SIZE;
+
 	}
 
 	//主人公との当たり判定
@@ -113,6 +93,7 @@ void CObjWood::Action()
 	}
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_wood_x, m_wood_y, hit_w, hit_h);
+
 
 	
 }
