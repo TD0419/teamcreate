@@ -56,6 +56,7 @@ void CObjWood::Action()
 			//木の画像の位置を更新
 			m_wood_x = m_px + WOOD_SIZE;
 			m_wood_y = m_py + (WOOD_SIZE - 64.0000f);
+		
 			//主人公との当たり判定
 			if (HitTestOfAB(m_wood_x, m_wood_y, WOOD_SIZE, 64.0000f,
 				&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)

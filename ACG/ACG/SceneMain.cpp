@@ -124,8 +124,6 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 //画像データ読み込み関数
 void CSceneMain::ImageDataLoading()
 {
-
-	
 	//背景画像読み込み
 	Draw::LoadImageW(L"background.png", GRA_BACKGROUND, TEX_SIZE_1536);
 
@@ -193,10 +191,12 @@ void CSceneMain::ImageDataLoading()
 	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"zanki.png", GRA_LIFE, TEX_SIZE_64);
 	
-
 	//看板(本体)画像読み込み
 	//Draw::LoadImageW(L"", GRA_SIGN_MAIN, TEX_SIZE_256);イラスト決まってから読み込んでください
-	
+
+	//回転ブロックの画像読み込み
+	//Draw::LoadImageW(L"RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+
 }
 
 //音楽データ読み込み関数

@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjThroughBlock :public CObj
 {
 public:
-	CObjThroughBlock(int x, int y); 	//コンストラクタ
+	CObjThroughBlock(int x, int y, int pattan); 	//コンストラクタ
 	~CObjThroughBlock() {};				//デストラクタ
 	void Init();						//イニシャライズ
 	void Action();						//アクション

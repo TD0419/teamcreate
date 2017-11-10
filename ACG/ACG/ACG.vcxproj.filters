@@ -109,6 +109,9 @@
     <Filter Include="ソース ファイル\Main\Time">
       <UniqueIdentifier>{5cf13a39-2034-4074-b468-0c603f87158f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\RollBlock">
+      <UniqueIdentifier>{083ae909-42be-45ec-ad6e-febd750e51b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -258,6 +261,9 @@
     <ClInclude Include="ObjTime.h">
       <Filter>ソース ファイル\Main\Time</Filter>
     </ClInclude>
+    <ClInclude Include="ObjRollBlock.h">
+      <Filter>ソース ファイル\Main\RollBlock</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -403,6 +409,9 @@
     </ClCompile>
     <ClCompile Include="ObjTime.cpp">
       <Filter>ソース ファイル\Main\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRollBlock.cpp">
+      <Filter>ソース ファイル\Main\RollBlock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
