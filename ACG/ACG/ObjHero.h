@@ -58,7 +58,8 @@ private:
 	bool  m_rope_ani_con;         //ロープアニメーション制御
 	bool  m_rope_delete;          //ロープが消えたかどうか調べる変数
 	bool  m_rope_delete_ani_con;  //アニメーション用ロープが消えたかどうかを管理する 
-	bool  m_hero_water_delete;    //主人公が水にあたったかどうかを調べる変数
+	bool  m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）
+	bool  m_hero_die_enemy;		  //主人公が敵にあたったかどうかを調べる変数（死）
 
 	int m_ladder_updown; //はしごHit管理
 	int m_ladder_ani_updown; //はしごアニメーション管理
@@ -81,6 +82,11 @@ private:
 	int m_ani_time_water_die;         //主人公が水にあたった時アニメーションフレーム動作感覚
 	int m_ani_frame_water_die;        //主人公が水にあたった時主人公描画フレーム
 	int m_ani_max_time_water_die;     //主人公が水にあたった時主人公アニメーション動作間隔最大値
+	
+	int m_ani_time_enemy_die;         //主人公が敵にあたった時アニメーションフレーム動作感覚
+	int m_ani_frame_enemy_die;        //主人公が敵にあたった時主人公描画フレーム
+	int m_ani_max_time_enemy_die;     //主人公が敵にあたった時主人公アニメーション動作間隔最大値
+
 	//------------------------------------------
 
 	int m_remaining;//残機管理
