@@ -117,7 +117,7 @@ void CObjHero::Action()
 	if (m_py > 1000.0f)
 	{
 		//場外に出たらリスタート
-		Scene::SetScene(new CSceneMain());
+		Scene::SetScene(new CSceneMain(-1));
 	}
 	
 	//マウスの位置情報取得

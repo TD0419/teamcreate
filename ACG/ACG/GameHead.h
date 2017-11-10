@@ -150,6 +150,7 @@ enum GRAPHIC_ID
 	GRA_LAST_WALL,		//次ステージへの入り口(上部分の鉄部分)
 	GRA_OPEN_WALL,		//開閉するシャッター(最後の壁用)
 	GRA_LIFE,			//ライフ
+	GRA_SIGN,			//看板
 	//GRA_ROLL_BLOCK,		//回転ブロック
 };
 
