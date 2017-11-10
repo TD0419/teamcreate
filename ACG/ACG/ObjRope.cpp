@@ -252,7 +252,7 @@ void CObjRope::Draw()
 				fraction += deltaY;	//Yの変量を分数に加算する
 								
 				//点を描画
-				Draw::DrawHitBox();
+				Draw::DrawHitBox(nextX, nextY, thick, thick, color);
 				
 				step++;	//ステップを進める
 				

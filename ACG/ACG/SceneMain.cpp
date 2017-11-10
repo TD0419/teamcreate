@@ -16,7 +16,7 @@ using namespace GameL;
 #include "SceneMain.h"
 #include "GameHead.h"
 
-static int g_remaining;//残機管理用変数
+int g_remaining;//残機管理用変数
 
 //コンストラクタ
 CSceneMain::CSceneMain()
