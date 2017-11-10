@@ -173,6 +173,7 @@ enum MUSIC
 	LEVER   ,//レバー
 	BUTTON  ,//ボタン
 	ENEMYFIR,//敵の弾発射
+	LIFT	,//リフト
 
 };
 

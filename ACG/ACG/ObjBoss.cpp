@@ -19,6 +19,9 @@ CObjBoss::CObjBoss(int x,int y)
 //イニシャライズ
 void CObjBoss::Init()
 {
+	Audio::Stop(STAGE1);//メイン音楽ストップ
+	Audio::Start(STAGE2_BOSS);//弾丸音楽スタート
+
     m_vx = -1.0f; // 移動ベクトル
     m_vy = 0.0f;
 	m_hp = 20; //ボスのＨＰ
@@ -84,6 +87,7 @@ void CObjBoss::Action()
 	{
 		m_posture = 0.0f;		// 右向きにする
 		// 敵弾丸作成
+		Audio::Start(ENEMYFIR);//弾丸音楽スタート
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
 	}
@@ -91,6 +95,7 @@ void CObjBoss::Action()
 	{
 		m_posture = 1.0f;		// 左向きにする
 		// 敵弾丸作成
+		Audio::Start(ENEMYFIR);//弾丸音楽スタート
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
 	}
@@ -100,7 +105,9 @@ void CObjBoss::Action()
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
 		m_hp -= 1;
+		Audio::Start(LANDING);
 	}
+
 
 	// 体力が0以下なら
 	if (m_hp <= 0)

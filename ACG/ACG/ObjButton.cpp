@@ -65,6 +65,7 @@ void CObjButton::Action()
 			m_ani_frame = 1;
 			return;
 		}
+		Audio::Start(BUTTON);
 	}
 
 	//HitBox‚ÌˆÊ’u‚ğXV‚·‚é

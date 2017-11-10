@@ -74,8 +74,8 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
 
 	//壁テストのためboss
-	//CObjBoss*objboss = new CObjBoss(10, 5);
-	//Objs::InsertObj(objboss, OBJ_BOSS, 10);
+	CObjBoss*objboss = new CObjBoss(10, 5);
+	Objs::InsertObj(objboss, OBJ_BOSS, 10);
 
 	//テストタイム
 	CObjTime* objtime = new CObjTime();
@@ -84,10 +84,14 @@ void CSceneMain::InitScene()
 	//テストボタン
 	CObjButton* objbuttn = new CObjButton(5, 5);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
+
+
 	//デバッグ--------------------------------------------
 
 	//BGM再生
 	Audio::Start(STAGE1);
+	/*Audio::Start(STAGE2);
+	Audio::Start(STAGE5);*/
 
 }
 
@@ -271,7 +275,7 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(TREE, L"Tree1.wav", SOUND_TYPE::EFFECT);
 
 	//ドアの開錠
-	Audio::LoadAudio(DOOR, L"Firing1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(DOOR, L"Wood Door.wav", SOUND_TYPE::EFFECT);
 
 	//敵に着弾
 	Audio::LoadAudio(LANDING, L"Landing1.wav", SOUND_TYPE::EFFECT);
@@ -284,6 +288,9 @@ void CSceneMain::AudioDataLoading()
 
 	//木の転倒
 	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir1.wav", SOUND_TYPE::EFFECT);
+
+	//リフト
+	Audio::LoadAudio(LIFT, L"Lift Trick Pull", SOUND_TYPE::EFFECT);
 
 //------------------------------------------------------------
 
