@@ -10,13 +10,15 @@ using namespace GameL;
 class CObjRope :public CObj
 {
 public:
-	CObjRope(float x, float y);		// コンストラクタ
+	CObjRope(float arm_x, float arm_y, float mous_x, float mous_y);		// コンストラクタ
 	~CObjRope() {};					// デストラクタ
 	void Init();					// イニシャライズ
 	void Action();					// アクション
 	void Draw();					// ドロー
+	void RopeDraw(float color[]);				// ロープの描画関数
 	bool GetCaughtFlag() { return m_caught_flag; }//ロープスイッチに引っかかったかを調べる用の変数を返す
 	bool GetDelete() { return m_delete; }         //ロープが画面外に行ったかどうかを送る
+
 private:
 	float m_px;			// ロープX座標
 	float m_py;			// ロープY座標
