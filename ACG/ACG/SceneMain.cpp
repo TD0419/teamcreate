@@ -57,6 +57,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
 	//デバッグ　”使い終わったら消してください！”----------------
+
 	//Doorオブジェクトを作成する
 	CObjDoor* objdoor = new CObjDoor(3, 3);
 	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
@@ -84,6 +85,7 @@ void CSceneMain::InitScene()
 	//テストボタン
 	CObjButton* objbuttn = new CObjButton(5, 5);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
+
 	//デバッグ--------------------------------------------
 
 	//BGM再生
@@ -233,8 +235,7 @@ void CSceneMain::ImageDataLoading()
 	//Draw::LoadImageW(L"", GRA_SIGN_MAIN, TEX_SIZE_256);イラスト決まってから読み込んでください
 
 	//回転ブロックの画像読み込み
-	//Draw::LoadImageW(L"RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
-
+	Draw::LoadImageW(L"RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 }
 
 //音楽データ読み込み関数
