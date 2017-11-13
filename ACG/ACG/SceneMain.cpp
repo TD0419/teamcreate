@@ -74,8 +74,8 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
 
 	//壁テストのためboss
-	//CObjBoss*objboss = new CObjBoss(10, 5);
-	//Objs::InsertObj(objboss, OBJ_BOSS, 10);
+	CObjBoss*objboss = new CObjBoss(10, 5);
+	Objs::InsertObj(objboss, OBJ_BOSS, 10);
 
 	//テストタイム
 	CObjTime* objtime = new CObjTime();
@@ -84,10 +84,14 @@ void CSceneMain::InitScene()
 	//テストボタン
 	CObjButton* objbuttn = new CObjButton(5, 5);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
+
+
 	//デバッグ--------------------------------------------
 
 	//BGM再生
-	//Audio::Start(STAGE1);
+	Audio::Start(STAGE1);
+	/*Audio::Start(STAGE2);
+	Audio::Start(STAGE5);*/
 
 }
 
@@ -159,72 +163,100 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 //画像データ読み込み関数
 void CSceneMain::ImageDataLoading()
 {
-	//背景画像読み込み
-	Draw::LoadImageW(L"background.png", GRA_BACKGROUND, TEX_SIZE_1536);
+	//ステージ別の画像読み込み
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+	//ステージ１
+	case 1:
+		//背景画像読み込み
+		Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
+		//リフト画像読み込み
+		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 
+		break;
+	//ステージ２
+	case 2:
+		//背景画像読み込み
+		Draw::LoadImageW(L"Image\\BackGround\\Stage2.png", GRA_BACKGROUND, TEX_SIZE_1536);
+		//リフト画像読み込み
+		Draw::LoadImageW(L"Image\\Lift\\Stage2.png", GRA_LIFT, TEX_SIZE_128);
+
+		break;
+	//ステージ３
+	case 3:
+	//ステージ４
+	case 4:
+	//ステージ５
+	case 5:
+	//画像が用意されていない場合
+	default:
+		//背景画像読み込み
+		Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
+		//リフト画像読み込み
+		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
+		break;
+	}
+	
 	//プレイヤー画像読み込み
-	Draw::LoadImageW(L"Hero.png", GRA_HERO, TEX_SIZE_1024);
+	Draw::LoadImageW(L"Image\\Hero.png", GRA_HERO, TEX_SIZE_1024);
 
 	//主人公の弾画像読み込み
-	Draw::LoadImageW(L"Hero_bullet.png", GRA_HERO_BULLET, TEX_SIZE_64);
+	Draw::LoadImageW(L"Image\\Hero_bullet.png", GRA_HERO_BULLET, TEX_SIZE_64);
 
 	//ブロック画像読み込み
-	Draw::LoadImageW(L"block.png", GRA_BLOCK, TEX_SIZE_128);
+	Draw::LoadImageW(L"Image\\block.png", GRA_BLOCK, TEX_SIZE_128);
 
 	//すり抜けるブロック画像読み込み
-	Draw::LoadImageW(L"Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
-
-	//リフト画像読み込み
-	Draw::LoadImageW(L"Lift.png", GRA_LIFT, TEX_SIZE_128);
+	Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
 
 	//ボス画像読み込み
-	Draw::LoadImageW(L"image.png", GRA_BOSS, TEX_SIZE_1024);
+	Draw::LoadImageW(L"Image\\image.png", GRA_BOSS, TEX_SIZE_1024);
 
 	//ハシゴ画像読み込み
-	Draw::LoadImageW(L"Ladders.png", GRA_LADDERS, TEX_SIZE_64);
+	Draw::LoadImageW(L"Image\\Ladders.png", GRA_LADDERS, TEX_SIZE_64);
 
 	//ドア & 錠画像読み込み
-	Draw::LoadImageW(L"Door.png", GRA_DOOR, TEX_SIZE_256);
+	Draw::LoadImageW(L"Image\\Door.png", GRA_DOOR, TEX_SIZE_256);
 
 	//木(ギミック)画像読み込み
-	Draw::LoadImageW(L"Wood.png", GRA_WOOD, TEX_SIZE_512);
+	Draw::LoadImageW(L"Image\\Wood.png", GRA_WOOD, TEX_SIZE_512);
 	
 	//敵画像読み込み
-	Draw::LoadImageW(L"Snake.png", GRA_ENEMY, TEX_SIZE_256);
+	Draw::LoadImageW(L"Image\\Snake.png", GRA_ENEMY, TEX_SIZE_256);
 
 	//レバースイッチ画像読み込み
-	Draw::LoadImageW(L"Lever.png", GRA_LEVER_SWICH, TEX_SIZE_128);
+	Draw::LoadImageW(L"Image\\Lever.png", GRA_LEVER_SWICH, TEX_SIZE_128);
 
 	//岩画像読み込み
-	Draw::LoadImageW(L"rock.png", GRA_ROCK, TEX_SIZE_512);
+	Draw::LoadImageW(L"Image\\rock.png", GRA_ROCK, TEX_SIZE_512);
 
 	//Water(水上)画像読み込み
-	Draw::LoadImageW(L"Water.png", GRA_AQUATIC, TEX_SIZE_256);
+	Draw::LoadImageW(L"Image\\Water.png", GRA_AQUATIC, TEX_SIZE_256);
 
 	//Water波なし(水中)画像読み込み  消去禁止。いります！
-	Draw::LoadImageW(L"WaterBlock.png", GRA_UNDER_WATER, TEX_SIZE_256);
+	Draw::LoadImageW(L"Image\\WaterBlock.png", GRA_UNDER_WATER, TEX_SIZE_256);
 	
 	//ロープスイッチ画像読み込み
-	Draw::LoadImageW(L"RopeSwitch.png", GRA_ROPE_SWITCH, TEX_SIZE_64);
+	Draw::LoadImageW(L"Image\\RopeSwitch.png", GRA_ROPE_SWITCH, TEX_SIZE_64);
 
 	//大砲画像読み込み
-	Draw::LoadImageW(L"image4.png", GRA_CANNON, TEX_SIZE_64);
+	Draw::LoadImageW(L"Image\\image4.png", GRA_CANNON, TEX_SIZE_64);
 	
 	//看板の枠線画像読み込み
-	Draw::LoadImageW(L"Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
+	Draw::LoadImageW(L"Image\\Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
 	
 	//看板の読み込み
-	Draw::LoadImageW(L"Billboard_stage1.png", GRA_SIGN, TEX_SIZE_64);
+	Draw::LoadImageW(L"Image\\Billboard_stage1.png", GRA_SIGN, TEX_SIZE_64);
 
 	//ボタン読み込み
-	Draw::LoadImageW(L"button.png", GRA_BUTTON, TEX_SIZE_128);
+	Draw::LoadImageW(L"Image\\button.png", GRA_BUTTON, TEX_SIZE_128);
 
 	//lastwall(仮)画像読み込み
-	Draw::LoadImageW(L"Lastwall.png", GRA_LAST_WALL, TEX_SIZE_256);//上
-	Draw::LoadImageW(L"Openwall.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
+	Draw::LoadImageW(L"Image\\Lastwall.png", GRA_LAST_WALL, TEX_SIZE_256);//上
+	Draw::LoadImageW(L"Image\\Openwall.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
 
 	//ライフ(仮)画像読み込み
-	Draw::LoadImageW(L"zanki.png", GRA_LIFE, TEX_SIZE_64);
+	Draw::LoadImageW(L"Image\\zanki.png", GRA_LIFE, TEX_SIZE_64);
 	
 	//看板(本体)画像読み込み
 	//Draw::LoadImageW(L"", GRA_SIGN_MAIN, TEX_SIZE_256);イラスト決まってから読み込んでください
@@ -241,11 +273,17 @@ void CSceneMain::AudioDataLoading()
 
 	//ステージ1
 	Audio::LoadAudio(STAGE1, L"Grassland1.wav",SOUND_TYPE::BACK_MUSIC);
+	//ステージ2
+	Audio::LoadAudio(STAGE2, L"Jangle1.wav", SOUND_TYPE::BACK_MUSIC);
 
+	//ステージ2_BOSS
+	Audio::LoadAudio(STAGE2_BOSS, L"BOSS1.wav", SOUND_TYPE::BACK_MUSIC);
+
+	//ステージ5
+	Audio::LoadAudio(STAGE5, L"Temple1.wav", SOUND_TYPE::BACK_MUSIC);
 //------------------------------------------------------------
 
 //SE--------------------------------------------------------
-	
 	//弾の発射
 	Audio::LoadAudio(FIRING, L"Firing1.wav", SOUND_TYPE::EFFECT);
 
@@ -255,13 +293,30 @@ void CSceneMain::AudioDataLoading()
 	//岩の爆発
 	Audio::LoadAudio(ROCK, L"Rock1.wav", SOUND_TYPE::EFFECT);
 
-	//扉の開閉
-	Audio::LoadAudio(DOOR, L"Door1.wav", SOUND_TYPE::EFFECT);
+	//最後の壁の開閉
+	Audio::LoadAudio(WALL, L"Door1.wav", SOUND_TYPE::EFFECT);
 
 	//木の転倒
 	Audio::LoadAudio(TREE, L"Tree1.wav", SOUND_TYPE::EFFECT);
 
-//------------------------------------------------------------
+	//ドアの開錠
+	Audio::LoadAudio(DOOR, L"Wood Door.wav", SOUND_TYPE::EFFECT);
 
+	//敵に着弾
+	Audio::LoadAudio(LANDING, L"Landing1.wav", SOUND_TYPE::EFFECT);
+
+	//レバースイッチ
+	Audio::LoadAudio(LEVER, L"Lever1.wav", SOUND_TYPE::EFFECT);
+
+	//ボタン
+	Audio::LoadAudio(BUTTON, L"Switch1.wav", SOUND_TYPE::EFFECT);
+
+	//木の転倒
+	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir1.wav", SOUND_TYPE::EFFECT);
+
+	//リフト
+	Audio::LoadAudio(LIFT, L"Lift Trick Pull", SOUND_TYPE::EFFECT);
+
+//------------------------------------------------------------
 
 }

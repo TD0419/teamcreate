@@ -74,6 +74,7 @@
     <ClInclude Include="ObjCannon.h" />
     <ClInclude Include="ObjFallingWalls.h" />
     <ClInclude Include="ObjNeedle.h" />
+    <ClInclude Include="ObjStage5Boss.h" />
     <ClInclude Include="ObjThroughBlock.h" />
     <ClInclude Include="ObjBossDropKey.h" />
     <ClInclude Include="Function.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="ObjStage3Boss.cpp" />
     <ClCompile Include="ObjReflectBlock.cpp" />
     <ClCompile Include="ObjThroughBlock.cpp" />
+    <ClCompile Include="ObjStage5Boss.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />

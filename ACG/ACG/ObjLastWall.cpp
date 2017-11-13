@@ -1,6 +1,6 @@
 #include "GameL\DrawTexture.h"
-#include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjLastWall.h"
@@ -38,10 +38,26 @@ void CObjLastWall::Action()
 
 	// ボタンオブジェクトを持ってくる
 	CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
+
+	//ボスの情報を呼ぶの
+	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+	bool Boss_Added;//ボス登場
+
+	//if (objboss == nullptr)
+	//{
+	//	Boss_Added = true;//ボスはいます。
+	//}
+	//else
+	//{
+	//	Boss_Added = false;//ボスはいません。
+	//}
+
+	//if(Boss_Added==true)
 	//ボタンを押してたら扉を開くフラグオン
 	if (objbutton->GetTrickFlag() == true)
+	{
 		m_look_unlock_flag = true;
-
+	}
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	int map_num = objmap->GetMap(m_map_x, m_map_y);
@@ -56,6 +72,7 @@ void CObjLastWall::Action()
 		if (m_look_unlock_flag == true)
 		{
 			m_wall_gauge += 1; // 1ずつ増やしていく
+			Audio::Start(WALL);//開門の音楽スタート
 		}
 	}
 

@@ -2,6 +2,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 #include "GameHead.h"
 #include "ObjHero.h"
 #include"Function.h"
@@ -307,6 +308,7 @@ void CObjHero::Action()
 					if (m_posture == 0.0f && m_ladder_updown == 0)//主人公が右を向いていてはしごに登っていない時とき右側から発射
 					{
 						//弾丸作成
+						Audio::Start(FIRING);//音楽スタート
 						CObjBullet* objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
 						Objs::InsertObj(objbullet, OBJ_BULLET, 10);
 						m_bullet_control = false; //弾丸を出ないフラグにする。
@@ -314,6 +316,7 @@ void CObjHero::Action()
 					else if (m_posture == 1.0f && m_ladder_updown == 0)//主人公が左を向いていてはしごに登っていない時とき右側から発射
 					{
 						//弾丸作成
+						Audio::Start(FIRING);//音楽スタート
 						CObjBullet* objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
 						Objs::InsertObj(objbullet, OBJ_BULLET, 10);
 						m_bullet_control = false; //弾丸を出ないフラグにする。
@@ -357,6 +360,7 @@ void CObjHero::Action()
 			m_rope_moux = Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
 			m_rope_mouy = Input::GetPosY(); //ロープを射出したときのマウスの位置Yを入れる
 			m_rope_ani_con = true;
+			
 		}
 	}
 
@@ -396,15 +400,17 @@ void CObjHero::Action()
 				//ロープ作成
 				if (m_posture == 0.0f )//主人公が右を向いているとき右側から発射
 				{
-					CObjRope* objrope = new CObjRope(m_px + 64.0f, m_py + 50.0f,m_rope_moux, m_rope_mouy);
+					CObjRope* objrope = new CObjRope(m_px + 64.0f, m_py + 80.0f,m_rope_moux, m_rope_mouy);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
 					m_rope_control = false;
+					Audio::Start(ROPE);//ロープの音楽スタート
 				}
 				else if (m_posture == 1.0f)//主人公が左を向いているとき左側から発射
 				{
-					CObjRope* objrope = new CObjRope(m_px - 16.0f, m_py + 50.0f,m_rope_moux, m_rope_mouy);
+					CObjRope* objrope = new CObjRope(m_px , m_py + 80.0f,m_rope_moux, m_rope_mouy);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
 					m_rope_control = false;
+					Audio::Start(ROPE);//ロープの音楽スタート
 				}
 			}
 			if (m_rope_control == false) //ロープを出している時
@@ -600,7 +606,7 @@ void CObjHero::Draw()
 		;    // 何も描画しない
 	}
 	else
-		Draw::Draw(GRA_HERO, &src, &dst, color, m_r, -0.2f, -0.30f);
+		Draw::Draw(GRA_HERO, &src, &dst, color, m_r, -0.25f, -0.25f);
 	//-----------------------------------------
 
 
