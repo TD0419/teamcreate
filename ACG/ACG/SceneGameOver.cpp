@@ -45,10 +45,10 @@ void CSceneGameOver::InitScene()
 	////SE－－－－－
 	//Audio::LoadAudio(1, L".wav", EFFECT);			//決定音
 
-	//																	
-	////ゲームオーバーオブジェクト作成
-	//CObjGameOver* objgame_over = new CObjGameOver();
-	//Objs::InsertObj(objgame_over, OBJ_GAME_OVER, 10);
+																		
+	//ゲームオーバーオブジェクト作成
+	CObjGameOver* objgame_over = new CObjGameOver();
+	Objs::InsertObj(objgame_over, OBJ_GAME_OVER, 10);
 }
 
 //実行中メソッド

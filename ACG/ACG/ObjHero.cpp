@@ -268,16 +268,22 @@ void CObjHero::Action()
 	//腕の角度を求める-----------------------
 	
 	//マウスポインタとの距離を求める
-	float x = m_mous_x - (m_px - objmap->GetScrollX());	//X
-	float y = m_mous_y  - (m_py - objmap->GetScrollY());	//Y
+
+	float x = m_mous_x  - (m_px - objmap->GetScrollX() + (HERO_SIZE_WIDTH / 2.0f));	//X
+	float y = m_mous_y  - (m_py - objmap->GetScrollY() + (HERO_SIZE_HEIGHT / 2.0f));//Y
 	float inclination = sqrt(x * x + y * y);				//斜辺
 
-	//角度を求める	
-	float rad = acosf(x / inclination);
-	m_r = rad* 180.0f / 3.14f;
+	////角度を求める
+	//float rad = acosf(x / inclination);
+	//m_r = rad* 180.0f / 3.14f;
 
 	if (y > 0.0f)	//yの値が0より大きいなら角度を正しい値に修正
-		m_r = 360.0f - m_r;
+		m_r = 360.0f - m_r;	
+
+	//ラジアン値を求める
+	float rad = asinf(-y / inclination);
+		//角度を求める
+		m_r = rad * 180.0f / 3.14f;
 	//--------------------------------------------------------
 	
 
@@ -307,7 +313,7 @@ void CObjHero::Action()
 					if (m_posture == 0.0f && m_ladder_updown == 0)//主人公が右を向いていてはしごに登っていない時とき右側から発射
 					{
 						//弾丸作成
-						CObjBullet* objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
+						CObjBullet* objbullet = new CObjBullet(m_px + 90.0f, m_py + 50.0f);
 						Objs::InsertObj(objbullet, OBJ_BULLET, 10);
 						m_bullet_control = false; //弾丸を出ないフラグにする。
 					}
@@ -601,7 +607,7 @@ void CObjHero::Draw()
 		;    // 何も描画しない
 	}
 	else
-		Draw::Draw(GRA_HERO, &src, &dst, color, m_r, -0.25f, -0.25f);
+		Draw::Draw(GRA_HERO, &src, &dst, color, m_r, -0.2f, -0.4f);
 	//-----------------------------------------
 
 
