@@ -166,9 +166,40 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 //画像データ読み込み関数
 void CSceneMain::ImageDataLoading()
 {
-	//背景画像読み込み
-	Draw::LoadImageW(L"Image\\background.png", GRA_BACKGROUND, TEX_SIZE_1536);
+	//ステージ別の画像読み込み
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+	//ステージ１
+	case 1:
+		//背景画像読み込み
+		Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
+		//リフト画像読み込み
+		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 
+		break;
+	//ステージ２
+	case 2:
+		//背景画像読み込み
+		Draw::LoadImageW(L"Image\\BackGround\\Stage2.png", GRA_BACKGROUND, TEX_SIZE_1536);
+		//リフト画像読み込み
+		Draw::LoadImageW(L"Image\\Lift\\Stage2.png", GRA_LIFT, TEX_SIZE_128);
+
+		break;
+	//ステージ３
+	case 3:
+	//ステージ４
+	case 4:
+	//ステージ５
+	case 5:
+	//画像が用意されていない場合
+	default:
+		//背景画像読み込み
+		Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
+		//リフト画像読み込み
+		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
+		break;
+	}
+	
 	//プレイヤー画像読み込み
 	Draw::LoadImageW(L"Image\\Hero.png", GRA_HERO, TEX_SIZE_1024);
 
@@ -180,9 +211,6 @@ void CSceneMain::ImageDataLoading()
 
 	//すり抜けるブロック画像読み込み
 	Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
-
-	//リフト画像読み込み
-	Draw::LoadImageW(L"Image\\Lift.png", GRA_LIFT, TEX_SIZE_128);
 
 	//ボス画像読み込み
 	Draw::LoadImageW(L"Image\\image.png", GRA_BOSS, TEX_SIZE_1024);
