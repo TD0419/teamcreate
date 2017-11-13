@@ -175,7 +175,8 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
 		//リフト画像読み込み
 		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
-
+		//ブロック画像読み込み
+		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
 		break;
 	//ステージ２
 	case 2:
@@ -183,7 +184,8 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\BackGround\\Stage2.png", GRA_BACKGROUND, TEX_SIZE_1536);
 		//リフト画像読み込み
 		Draw::LoadImageW(L"Image\\Lift\\Stage2.png", GRA_LIFT, TEX_SIZE_128);
-
+		//ブロック画像読み込み
+		Draw::LoadImageW(L"Image\\Block\\Stage2.png", GRA_BLOCK, TEX_SIZE_128);
 		break;
 	//ステージ３
 	case 3:
@@ -197,6 +199,8 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
 		//リフト画像読み込み
 		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
+		//ブロック画像読み込み
+		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
 		break;
 	}
 	
@@ -205,9 +209,6 @@ void CSceneMain::ImageDataLoading()
 
 	//主人公の弾画像読み込み
 	Draw::LoadImageW(L"Image\\Hero_bullet.png", GRA_HERO_BULLET, TEX_SIZE_64);
-
-	//ブロック画像読み込み
-	Draw::LoadImageW(L"Image\\block.png", GRA_BLOCK, TEX_SIZE_128);
 
 	//すり抜けるブロック画像読み込み
 	Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
