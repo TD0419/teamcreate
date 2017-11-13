@@ -33,7 +33,7 @@ void CObjWood::Init()
 	//初期の木の画像の位置
 	m_wood_image_x = m_px + (WOOD_SIZE - 64.0000f);
 	m_wood_image_y = m_py;
-
+	a = false;
 	//当たり判定
 	Hits::SetHitBox(this, m_wood_image_x, m_wood_image_y, 64, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
 }
@@ -67,8 +67,15 @@ void CObjWood::Action()
 		// 回転フラグが立っていれば
 		if (m_rota_flag == true)
 		{
+			if (a == false)
+			{
+				Audio::Start(TREE);
+				a = true;
+			}
 			m_r -= 1.0f;//木をまわす
 		}
+		
+
 			//木の画像の位置更新
 		m_wood_image_x = m_px + (WOOD_SIZE - 64.0000f);
 		m_wood_image_y = m_py;
@@ -76,7 +83,6 @@ void CObjWood::Action()
 		//HitBoxの幅、高さ設定
 		hit_w = 64.0f;
 		hit_h = WOOD_SIZE;
-
 	}
 
 	//主人公との当たり判定

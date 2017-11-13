@@ -2,6 +2,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjBoss.h"
@@ -44,7 +45,7 @@ void CObjBoss::Init()
 //アクション
 void CObjBoss::Action()
 {
-	m_ani_time++;//アニメーションは遊びなので消してもらってもおｋです
+	m_ani_time++;
 				 //アニメーションの感覚管理
 	if (m_ani_time > m_ani_max_time)
 	{
@@ -100,7 +101,9 @@ void CObjBoss::Action()
 	//弾丸とあたったらHP-1
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
+		Audio::Start(LANDING);
 		m_hp -= 1;
+		
 	}
 
 	// 体力が0以下なら
@@ -130,7 +133,7 @@ void CObjBoss::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//切り取り位置(	いらん奴)
+	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = m_ani_frame * 96.0f - 96.0f;
 	src.m_right = src.m_left + 96.0f;

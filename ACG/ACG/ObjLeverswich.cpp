@@ -40,6 +40,7 @@ void CObjLeverSwich::Action()
 	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
 	{
 		Audio::Start(LEVER);
+		
 		//水の判定をONにする
 		m_water_con = true;
 
@@ -57,6 +58,7 @@ void CObjLeverSwich::Action()
 		//　レバースイッチの描画が押している状態のとき
 		else if (m_ani_flag2 == true && m_ani_flag == true && m_ani_time > m_ani_max_time)
 		{
+			
 			m_ani_frame -= 1;
 			m_ani_time = 0;
 			m_ani_flag = false;

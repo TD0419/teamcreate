@@ -23,4 +23,5 @@ class CObjWood :public CObj
 		float m_wood_image_y;//–Ø‚Ì‰æ‘œ(¶ã)‚ÌYˆÊ’u
 		float m_r;			//‰ñ“]Šp“x
 		bool  m_rota_flag;  //‰ñ“]ƒtƒ‰ƒO false:‰ñ“]‚µ‚È‚¢ true:‰ñ“]‚·‚é
+		bool a;
 };

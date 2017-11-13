@@ -57,22 +57,14 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
 	//デバッグ　”使い終わったら消してください！”----------------
-	//Doorオブジェクトを作成する
-	CObjDoor* objdoor = new CObjDoor(3, 3);
-	Objs::InsertObj(objdoor, OBJ_DOOR, 10);
+	//要らんの
 
-	//看板オブジェクトを作成する
-	CObjSign* objsign = new CObjSign(14, 10);
-	Objs::InsertObj(objsign, OBJ_SIGN, 10);
 
-	//ロープスイッチオブジェクトを作成する
-	CObjRopeSwitch* objrope_switch = new CObjRopeSwitch(7, 5);
-	Objs::InsertObj(objrope_switch, OBJ_ROPE_SWITCH, 10);
 
+	//要るの
 	//テスト壁
-	//CObjLastWall*objlastwall = new CObjLastWall(15, -2);
-	//Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
-
+	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
+	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
 	Objs::InsertObj(objboss, OBJ_BOSS, 10);
@@ -247,7 +239,7 @@ void CSceneMain::AudioDataLoading()
 //BGM--------------------------------------------------------
 
 	//ステージ1
-	Audio::LoadAudio(STAGE1, L"Grassland1.wav",SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(STAGE1, L"Grassland2.wav",SOUND_TYPE::BACK_MUSIC);
 	//ステージ2
 	Audio::LoadAudio(STAGE2, L"Jangle1.wav", SOUND_TYPE::BACK_MUSIC);
 
@@ -263,7 +255,7 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(FIRING, L"Firing1.wav", SOUND_TYPE::EFFECT);
 
 	//縄の打ち出し
-	Audio::LoadAudio(ROPE, L"Rope1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(ROPE, L"Rope2.wav", SOUND_TYPE::EFFECT);
 
 	//岩の爆発
 	Audio::LoadAudio(ROCK, L"Rock1.wav", SOUND_TYPE::EFFECT);
@@ -284,7 +276,7 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(LEVER, L"Lever1.wav", SOUND_TYPE::EFFECT);
 
 	//ボタン
-	Audio::LoadAudio(BUTTON, L"Switch1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(BUTTON, L"Switch3.wav", SOUND_TYPE::EFFECT);
 
 	//木の転倒
 	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir1.wav", SOUND_TYPE::EFFECT);
