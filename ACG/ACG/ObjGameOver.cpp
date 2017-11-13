@@ -17,23 +17,26 @@ void CObjGameOver::Init()
 {
 	m_key_flag = false;
 	m_audio_se = 0;//SEの音楽の管理
+	//文字のグラフィック作成
+	Font::SetStrTex(L"GAMEOVER（仮）");	//スタート
 }
 
 //アクション
 void CObjGameOver::Action()
 {
-
+	
 }
 
 //ドロー
 void CObjGameOver::Draw()
 {
-	//float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float color[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	//RECT_F src;	//描画先切り取り位置
 	//RECT_F dst;	//描画先表示位置
+	//メニュー描画
+	Font::StrDraw(L"☆ G ☆ A ☆ M ☆ E ☆ O ☆ V ☆ E ☆ R ☆", 0, WINDOW_SIZE_H / 2.0f, 50.0f, color);
 
-	
 	//切り取り位置設定
 	//src.m_top = 0.0f;
 	//src.m_left = 0.0f;

@@ -47,7 +47,6 @@ CObjRope::CObjRope(float arm_x, float arm_y,float mous_x,float mous_y)
 	//スピードをかけて移動ベクトルを設定する
 	m_vx = vector_x * m_speed;
 	m_vy = vector_y * m_speed;
-
 }
 
 //イニシャライズ

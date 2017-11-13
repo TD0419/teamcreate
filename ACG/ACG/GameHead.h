@@ -39,7 +39,7 @@ enum OBJ_NAME
 	OBJ_CANNON,		    //砲台
 	OBJ_LAST_WALL,		//最後の壁
 	OBJ_TIME,			//タイム
-	//OBJ_ROLL_BLOCK,		//回転するブロック
+	OBJ_ROLL_BLOCK,		//回転するブロック
 };
 //------------------------------------------------
 
@@ -78,7 +78,7 @@ struct UserData
 
 //マップサイズ
 #define MAP_X_MAX (100)	//mapの最大値X
-#define MAP_Y_MAX (12)	//mapの最大値Y
+#define MAP_Y_MAX (24)	//mapの最大値Y
 #define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X
 #define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y
 
@@ -152,7 +152,7 @@ enum GRAPHIC_ID
 	GRA_OPEN_WALL,		//開閉するシャッター(最後の壁用)
 	GRA_LIFE,			//ライフ
 	GRA_SIGN,			//看板
-	//GRA_ROLL_BLOCK,		//回転ブロック
+	GRA_ROLL_BLOCK,		//回転ブロック
 };
 
 //音楽(BGM)
@@ -205,8 +205,8 @@ enum MUSIC
 #define FALLING_WALLS_SAIZE  (64.0f)		//落下壁サイズ(仮)
 #define CANNON_SIZE_WIDTH	 (64.0f)		//砲台の横サイズ(仮)
 #define CANNON_SIZE_HEIGHT	 (32.0f)		//砲台の縦サイズ(仮)
-//#define ROLL_BLOCK_SIZE_WIDTH	(192.0f)	//回転するブロックの横サイズ
-//#define ROLL_BLOCK_SIZE_HEIGHT	(64.0f)		//回転するブロックの縦サイズ
+#define ROLL_BLOCK_SIZE_WIDTH	(192.0f)	//回転するブロックの横サイズ
+#define ROLL_BLOCK_SIZE_HEIGHT	(64.0f)		//回転するブロックの縦サイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -259,6 +259,7 @@ enum MUSIC
 #include "ObjTime.h"			//タイム
 #include "ObjNeedle.h"			//トゲ
 #include "ObjDiffusionGimmick.h"//拡散弾発射装置
+#include "ObjRollBlock.h"		//回転ブロック
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
