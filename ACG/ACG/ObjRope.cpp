@@ -11,59 +11,43 @@
 using namespace GameL;
 
 //コンストラクタ
-//引数1	float x		:主人公の腕の位置X
-//引数2	float y		:主人公の腕の位置Y
-CObjRope::CObjRope(float x, float y)
+//引数1,2	:主人公の腕の位置
+//引数3,4	:マウスの位置
+CObjRope::CObjRope(float arm_x, float arm_y,float mous_x,float mous_y)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//主人公オブジェクト情報を取得
-	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-	//初期位置を決める
-	m_px = x;
-	m_py = y;
+	//ロープの初期位置を決める
+	m_px = arm_x;
+	m_py = arm_y;
 
 	//速さを決める
 	m_speed = 6.5f;
 	
-	//マウスの位置情報をheroから持ってくるのでマージする時はこっちを残してください（変数もこっちに変えてください）
-	m_moux = objhero->GetRopeMouX(); //Rを押した時のマウスの位置Xを持ってくる
-	m_mouy = objhero->GetRopeMouY(); //Rを押した時のマウスの位置Yを持ってくる
+	//Rを押した時のマウスの位置を保存
+	m_moux = mous_x; 
+	m_mouy = mous_y; 
 
-	//主人公が本来いる位置に変更
-	x -= objmap->GetScrollX();
-	y -= objmap->GetScrollY();
-	
-	//主人公の位置からマウスの位置のベクトル情報取得
-	float vector_x = m_moux - x;
-	float vector_y = m_mouy - y;
+	//主人公の腕の(スクロールを考慮した画面上での)位置を保存
+	m_hero_arm_x = arm_x - objmap->GetScrollX();
+	m_hero_arm_y = arm_y - objmap->GetScrollY();
+
+	//主人公の腕からマウスへのベクトル情報取得
+	float vector_x = m_moux - m_hero_arm_x;
+	float vector_y = m_mouy - m_hero_arm_y;
 
 	//斜辺取得
 	float hypotenuse = sqrt(vector_y * vector_y + vector_x * vector_x);
 
-	//角度を求める
-	m_r = acos(vector_x / hypotenuse);
-	
-	//角度方向に移動
-	m_vx = cos(m_r) * m_speed;
+	//斜辺の大きさを1にした時のベクトルを求める
+	vector_x /= hypotenuse;
+	vector_y /= hypotenuse;
 
-	//マウスのY位置が主人公のY位置より下だったら
-	if (m_mouy > y)
-	{
-		//180°～360°の値にする
-		m_r = 360.0f - abs(m_r);
-	}
-	//マウスのY位置が初期Y位置より上
-	if (m_mouy < y)
-	{
-		m_vy = -sin(m_r) * m_speed;
-	}
-	else
-	{
-		m_vy = sin(m_r) * m_speed;
-	}
+	//スピードをかけて移動ベクトルを設定する
+	m_vx = vector_x * m_speed;
+	m_vy = vector_y * m_speed;
+
 }
 
 //イニシャライズ
@@ -88,9 +72,6 @@ void CObjRope::Action()
 	//主人公のオブジェクトを持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	//マップオブジェクトを持ってくる
-	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
 	//画面外にいれば
 	if(WindowCheck(m_px,m_py,ROPE_SIZE, ROPE_SIZE) == false)
 	{
@@ -102,7 +83,7 @@ void CObjRope::Action()
 	else
 		m_delete =false;//ロープは消えていないことを変数に入れる
 	
-	//ロープのHitBox更新用ポインター取得
+	//HitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	// ブロックオブジェクトを持ってくる
@@ -163,126 +144,123 @@ void CObjRope::Draw()
 
 	//主人公オブジェクト情報を取得
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+	//主人公が存在していたら
+	if (objhero != nullptr)
+	{
+		RopeDraw(color);//ロープの描画
+	}
+}
+
+// ロープの描画関数
+//引数1	描画色の配列
+void CObjRope::RopeDraw(float color[])				
+{
 	//マップオブジェクト情報を取得
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//主人公が向いている向きを持ってくる
-	float hero_postrue = objhero->GetPosture();
+	//描画の太さ
+	float drow_size = 2.0f;
 
-	//主人公が存在していたら主人公とロープを結ぶ線を描画(仮)
-	if (objhero != nullptr)
+	//点を打つ位置と主人公の腕の距離
+	float drow_px = 0.0f;
+	float drow_py = 0.0f;
+
+	//点を打つ位置の移動量用変数
+	float drow_vx;
+	float drow_vy;
+
+	//変化量を求める	(ロープの先端 - 主人公の腕の位置)
+	float change_x = (m_px - objmap->GetScrollX()) - m_hero_arm_x;
+	float change_y = (m_py - objmap->GetScrollY()) - m_hero_arm_y;
+
+	//描画の方向を調べる-------------------------------------------
+	int pattan;//描画方向の保存用変数（1右上:2右下:3左上:4左下）
+
+	if (change_x >= 0.0f)//Xの変化量が正
 	{
-		int thick = 2;	//太、厚さ
-		
-		//ロープの位置
-		int own_x = m_px;
-		int own_y = m_py;
-		
-		int nextX;	//点を描画するX位置
+		if (change_y >= 0.0f)	//Yの変化量が正
+			pattan = 2;//右下
+		else					//Yの変化量が負
+			pattan = 1;//右上
+	}
+	else //Xの変化量が負
+	{
+		if (change_y >= 0.0f)	//Yの変化量が正
+			pattan = 4;//左下
+		else					//Yの変化量が負
+			pattan = 3;//左上
+	}
+	//描画の方向を調べる 終わり-------------------------------------------
 
-		//主人公が右を向いていたら
-		if (hero_postrue == 0.0f)
-			nextX = objhero->GetPosX() + 60.0f - objmap->GetScrollX();
+	//Xの変化量がYの変化量より大きい場合
+	if (abs(change_x) > abs(change_y))
+	{
+		//Xを基準に線を引く
 
-		//左を向いていたら
-		else			
-			nextX = objhero->GetPosX() + 5.0f - objmap->GetScrollX();
-		
-		//点を描画するY位置
-		int nextY = objhero->GetPosY() + 80.0f - objmap->GetScrollY();
-		
-		//ロープから主人公の位置を引いた値(位置の差分)
-		int deltaX = own_x - nextX;
-		int deltaY = own_y - nextY;
-		
-		int stepX, stepY;	//どの方向に線を描画するか
-		int step = 0;	//ステップ
-		int fraction;	//線を引く方向（y成分/x成分)　または（y成分/x成分)
-				
-		if (deltaX < 0)	//Xの変量がマイナスなら	
-			stepX = -1;	//X方向を-1にする
-		
-		else			//Xの変量がプラスなら	
-			stepX = 1;	//X方向を＋1にする
-		
-		if (deltaY < 0)	//Yの変量がマイナスなら		
-			stepY = -1;	//Y方向を-1にする
-		
-		else			//Yの変量がプラスなら	
-			stepY = 1;	//Y方向を+1にする
-
-
-		//位置の差分を*2する
-		deltaX = deltaX * 2;
-		deltaY = deltaY * 2;
-		
-		if (deltaX < 0)
-			deltaX *= -1;	//符号を＋にする
-
-		if (deltaY < 0)
-			deltaY *= -1;	//符号を＋にする
-		
-
-		//主人公の位置に点を打つ
-		Draw::DrawHitBox(nextX, nextY, thick, thick, color);
-		
-		step++;//ステップを進める
-		
-		//位置の差分の絶対値がXのほうが大きかったら
-		if ( abs(deltaX) > abs(deltaY) )
+		//描画方向をもとに点を打つ位置の移動量を求める----------------------
+		switch (pattan)
 		{
-			//Yの変量 - Xの変量/2
-			fraction = (deltaY - deltaX) / 2;
-
-			//点を打とうとしているX位置がロープのX位置になるまで点を描く
-			while (nextX != own_x)
+			case 1://右上
+			case 2://右下
 			{
-				//分数が＋値
-				if (fraction >= 0)
-				{
-					//点を描画するY位置を進める
-					nextY += stepY;
-					//Xの変量を分数に引き算する
-					fraction -= deltaX;
-				}
-
-				//点を描画するX位置を進める
-				nextX += stepX;
-				
-				fraction += deltaY;	//Yの変量を分数に加算する
-								
-				//点を描画
-				Draw::DrawHitBox(nextX, nextY, thick, thick, color);
-				
-				step++;	//ステップを進める
-				
+				drow_vx = 1.0f;							//Xは右に１ずつ動かす
+				drow_vy = change_y / change_x;			//Yは傾き分ずつ動かす
+				break;
+			}
+			case 3://左上
+			case 4://左下
+			{
+				drow_vx = -1.0f;						//Xは左に１ずつ動かす
+				drow_vy = -1.0f*(change_y / change_x);	//Yは(-1*傾き)分ずつ動かす
+				break;
 			}
 		}
-		//変量がYのほうが大きかったら
-		else
+		//描画方向をもとに点を打つ位置の移動量を求める 終わり----------------------
+
+		while (abs(drow_px) <= abs(change_x)) //点を打つ位置と主人公の腕の距離X　が　変化量Xになるまでループ
 		{
-			//Xの変量ーYの変量/2
-			fraction = deltaX - deltaY / 2;
-			//点を打とうとしているY位置がロープのY位置になるまで点を描く
-			while (nextY != own_y)
+			//点を描画する
+			Draw::DrawHitBox(m_hero_arm_x + drow_px, m_hero_arm_y + drow_py, drow_size, drow_size, color);
+
+			//点の打つ位置の更新
+			drow_px += drow_vx;
+			drow_py += drow_vy;
+		}
+	}
+	//Yの変化量がXの変化量より大きい場合
+	else
+	{
+		//Yを基準に線を引く
+
+		//描画方向をもとに点を打つ位置の移動量を求める----------------------
+		switch (pattan)
+		{
+			case 1://右上
+			case 3://左上
 			{
-				//分数が＋値
-				if (fraction >= 0)
-				{
-					//点を描画するX位置を進める
-					nextX += stepX;
-					//Yの変量を分数に引き算する
-					fraction -= deltaY;
-				}
-				//点を描画するY位置を進める
-				nextY += stepY;
-				//Xの変量を分数に加算する
-				fraction += deltaX;
-				//点を描画
-				Draw::DrawHitBox(nextX, nextY, thick, thick, color);
-				//ステップを進める
-				step++;
+				drow_vy = -1.0f;						//Yは上に１ずつ動かす
+				drow_vx = -1.0f*(change_x / change_y);	//Xは(-1*傾き)分ずつ動かす
+				break;
 			}
+			case 2://右下
+			case 4://左下
+			{
+				drow_vy = 1.0f;							//Yは下に１ずつ動かす
+				drow_vx = change_x / change_y;			//Xは傾き分ずつ動かす
+				break;
+			}
+		}
+		//描画方向をもとに点を打つ位置の移動量を求める 終わり----------------------
+
+		while (abs(drow_py) <= abs(change_y)) //点を打つ位置と主人公の腕の距離Y　が　変化量Yになるまでループ
+		{
+			//点を描画する
+			Draw::DrawHitBox(m_hero_arm_x + drow_px, m_hero_arm_y + drow_py, drow_size, drow_size, color);
+
+			//点の打つ位置の更新
+			drow_px += drow_vx;
+			drow_py += drow_vy;
 		}
 	}
 }

@@ -70,8 +70,6 @@ void CObjHero::Init()
 	m_ani_time_enemy_die = 0;
 	m_ani_frame_enemy_die = 0;//主人公が敵に当たった時静止フレームを初期にする
 
-	m_remaining = 2;//ざんき初期化
-
 	m_block_type = 0;//主人公のしたのブロック情報
 
 	//ブロックとの衝突した状態(場所)確認用
@@ -118,7 +116,6 @@ void CObjHero::Action()
 		//ブロック情報が0で無いなら取得
 		if (objmap->GetMap(x, y)!= 0)
 		{
-			//取得
 			m_block_type = objmap->GetMap(x, y);
 		}
 	}
@@ -260,7 +257,6 @@ void CObjHero::Action()
 			m_vy += 160.0f / (32.0f);
 		}
 	}
-	
 
 	Scroll();	//スクロール処理をおこなう
 	
@@ -277,11 +273,12 @@ void CObjHero::Action()
 	float y = m_mous_y  - (m_py - objmap->GetScrollY());	//Y
 	float inclination = sqrt(x * x + y * y);				//斜辺
 
-	//ラジアン値を求める
-	float rad = asin( - y / inclination);
-	//角度を求める
-	m_r = rad * 180.0f / 3.14f;
-	
+	//角度を求める	
+	float rad = acosf(x / inclination);
+	m_r = rad* 180.0f / 3.14f;
+
+	if (y > 0.0f)	//yの値が0より大きいなら角度を正しい値に修正
+		m_r = 360.0f - m_r;
 	//--------------------------------------------------------
 	
 
@@ -403,14 +400,14 @@ void CObjHero::Action()
 				//ロープ作成
 				if (m_posture == 0.0f )//主人公が右を向いているとき右側から発射
 				{
-					CObjRope* objrope = new CObjRope(m_px + 64.0f, m_py + 50.0f);
+					CObjRope* objrope = new CObjRope(m_px + 64.0f, m_py + 80.0f,m_rope_moux, m_rope_mouy);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
 					m_rope_control = false;
 					Audio::Start(ROPE);//ロープの音楽スタート
 				}
 				else if (m_posture == 1.0f)//主人公が左を向いているとき左側から発射
 				{
-					CObjRope* objrope = new CObjRope(m_px - 16.0f, m_py + 50.0f);
+					CObjRope* objrope = new CObjRope(m_px , m_py + 80.0f,m_rope_moux, m_rope_mouy);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
 					m_rope_control = false;
 					Audio::Start(ROPE);//ロープの音楽スタート
@@ -610,7 +607,7 @@ void CObjHero::Draw()
 		;    // 何も描画しない
 	}
 	else
-		Draw::Draw(GRA_HERO, &src, &dst, color, m_r, -0.2f, -0.30f);
+		Draw::Draw(GRA_HERO, &src, &dst, color, m_r, -0.25f, -0.25f);
 	//-----------------------------------------
 
 
