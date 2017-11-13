@@ -25,6 +25,7 @@ enum OBJ_NAME
 	OBJ_ENEMY,			//敵
 	OBJ_BOSS,			//ボス
 	OBJ_STAGE3_BOSS,	//第三ステージボス
+	OBJ_STAGE5_BOSS,	//第五ステージボス
 	OBJ_BOSS_DROP_KEY,	//ボスが落とす鍵
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
@@ -230,6 +231,7 @@ enum MUSIC
 #include "ObjEnemy.h"			//敵
 #include "ObjBoss.h"			//ボス
 #include "ObjStage3Boss.h"		//第三ステージボス
+#include "ObjStage5Boss.h"		//第五ステージボス
 #include "ObjBossDropKey.h"		//ボスが落とす鍵
 #include "ObjTitle.h"			//タイトル
 #include "ObjSign.h"			//看板
