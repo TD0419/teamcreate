@@ -2,6 +2,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjRock.h"
@@ -41,6 +42,7 @@ void CObjRock::Action()
 	//弾と接触しているかどうかを調べる
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
+		Audio::Start(ROCK);//岩の音楽スタート
 		m_ani_start_flag = true;//アニメフラグON
 	}
 	//アニメフラグONだと

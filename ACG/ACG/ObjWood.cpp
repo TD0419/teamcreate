@@ -1,8 +1,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
-#include "GameL\WinInputs.h"
-#include "GameL\DrawFont.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjWood.h"
@@ -67,9 +66,10 @@ void CObjWood::Action()
 	{
 		// 回転フラグが立っていれば
 		if (m_rota_flag == true)
+		{
 			m_r -= 1.0f;//木をまわす
-						
-		//木の画像の位置更新
+		}
+			//木の画像の位置更新
 		m_wood_image_x = m_px + (WOOD_SIZE - 64.0000f);
 		m_wood_image_y = m_py;
 

@@ -1,6 +1,7 @@
 //使用するヘッダーファイル　
 #include "GameL\HitBoxManager.h"
 #include "GameL\WinInputs.h"
+#include "GameL\Audio.h"
 #include "GameHead.h"
 #include "ObjWater.h"
 #include "Function.h"

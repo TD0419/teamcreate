@@ -1,6 +1,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjStage3Boss.h"

@@ -25,6 +25,7 @@ enum OBJ_NAME
 	OBJ_ENEMY,			//敵
 	OBJ_BOSS,			//ボス
 	OBJ_STAGE3_BOSS,	//第三ステージボス
+	OBJ_STAGE5_BOSS,	//第五ステージボス
 	OBJ_BOSS_DROP_KEY,	//ボスが落とす鍵
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
@@ -158,13 +159,23 @@ enum GRAPHIC_ID
 enum MUSIC
 {
 //BGM--------------------
-	STAGE1	,//ステージ１
+	STAGE1	,	//ステージ1
+	STAGE2  ,	//ステージ2
+	STAGE2_BOSS,//ステージ2ボス
+	STAGE5  ,	//ステージ5
 //SE---------------------
 	FIRING	,//弾の発射
 	ROPE	,//ロープの打ち出し
 	ROCK	,//岩の爆発
-	DOOR	,//扉の開閉
+	WALL	,//壁の開閉
 	TREE	,//木の転倒
+	DOOR	,//出口開閉
+	LANDING ,//敵に着弾
+	LEVER   ,//レバー
+	BUTTON  ,//ボタン
+	ENEMYFIR,//敵の弾発射
+	LIFT	,//リフト
+
 };
 
 //オブジェクトのサイズ
@@ -230,6 +241,7 @@ enum MUSIC
 #include "ObjEnemy.h"			//敵
 #include "ObjBoss.h"			//ボス
 #include "ObjStage3Boss.h"		//第三ステージボス
+#include "ObjStage5Boss.h"		//第五ステージボス
 #include "ObjBossDropKey.h"		//ボスが落とす鍵
 #include "ObjTitle.h"			//タイトル
 #include "ObjSign.h"			//看板

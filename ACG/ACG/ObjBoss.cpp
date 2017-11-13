@@ -11,7 +11,7 @@
 using namespace GameL;
 
 //コンストラクタ
-CObjBoss::CObjBoss(int x,int y)
+CObjBoss::CObjBoss(int x, int y)
 {
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
@@ -20,24 +20,24 @@ CObjBoss::CObjBoss(int x,int y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-    m_vx = -1.0f; // 移動ベクトル
-    m_vy = 0.0f;
+	m_vx = -1.0f; // 移動ベクトル
+	m_vy = 0.0f;
 	m_hp = 20; //ボスのＨＰ
 	m_posture = 1.0f; // 左向き
 	m_speed = 1.0f;   // 速度
 
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
-	m_ani_max_time = 3; //アニメーション間隔幅
-	
-	// blockとの衝突確認用
+	m_ani_max_time = 10; //アニメーション間隔幅
+
+						 // blockとの衝突確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
 
 	m_die_flag = false;
-	 //当たり判定用HitBoxを作成
+	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
 }
 
@@ -45,7 +45,7 @@ void CObjBoss::Init()
 void CObjBoss::Action()
 {
 	m_ani_time++;//アニメーションは遊びなので消してもらってもおｋです
-	//アニメーションの感覚管理
+				 //アニメーションの感覚管理
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
@@ -53,9 +53,9 @@ void CObjBoss::Action()
 	}
 
 	//最後までアニメーションが進むと最初にいく
-	if (m_ani_frame == 8)
+	if (m_ani_frame == 10)
 	{
-		m_ani_frame = 0;
+		m_ani_frame = 1;
 	}
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -65,7 +65,7 @@ void CObjBoss::Action()
 	else if (m_posture == 1.0f) // 左向きなら
 		m_vx = -m_speed;		// 左に進む
 
-	//摩擦
+								//摩擦
 	m_vx += -(m_vx * 0.098f);
 
 	//自由落下運動
@@ -84,14 +84,14 @@ void CObjBoss::Action()
 	if (m_hit_right == true)    // ブロックの右側に当たっていたら 
 	{
 		m_posture = 0.0f;		// 右向きにする
-		// 敵弾丸作成
+								// 敵弾丸作成
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
 	}
 	else if (m_hit_left == true)// ブロックの左側に当たっていたら
 	{
 		m_posture = 1.0f;		// 左向きにする
-		// 敵弾丸作成
+								// 敵弾丸作成
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
 	}
@@ -121,7 +121,7 @@ void CObjBoss::Action()
 void CObjBoss::Draw()
 {
 	//画像の切り取り配列
-	
+
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -132,15 +132,15 @@ void CObjBoss::Draw()
 
 	//切り取り位置(	いらん奴)
 	src.m_top = 0.0f;
-	src.m_left = m_ani_frame * 128.0-128.0;
-	src.m_right = src.m_left+128.0f;
-	src.m_bottom = src.m_top + 128.0f;
+	src.m_left = m_ani_frame * 96.0f - 96.0f;
+	src.m_right = src.m_left + 96.0f;
+	src.m_bottom = src.m_top + 72.0f;
 
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = BOSS_SIZE_WIDTH * m_posture + m_px - objmap->GetScrollX();
 	dst.m_right = (BOSS_SIZE_WIDTH - BOSS_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
-	dst.m_bottom = dst.m_top  + BOSS_SIZE_HEIGHT+6;
+	dst.m_bottom = dst.m_top + BOSS_SIZE_HEIGHT + 6;
 
 	////描画
 	/*Draw::Draw(14, &src, &dst, color, 0.0f);*/

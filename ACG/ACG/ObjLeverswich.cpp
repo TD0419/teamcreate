@@ -1,6 +1,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjLeverSwich.h"
@@ -38,6 +39,7 @@ void CObjLeverSwich::Action()
 	//ƒ[ƒv‚Æ‚ ‚½‚Á‚½‚ç•`‰æ‚ği‚ß‚é
 	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
 	{
+		Audio::Start(LEVER);
 		//…‚Ì”»’è‚ğON‚É‚·‚é
 		m_water_con = true;
 
