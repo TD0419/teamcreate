@@ -56,6 +56,10 @@ void CSceneMain::InitScene()
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
+	//タイム
+	CObjTime* objtime = new CObjTime();
+	Objs::InsertObj(objtime, OBJ_TIME, 100);
+
 	//デバッグ　”使い終わったら消してください！”----------------
 	//Doorオブジェクトを作成する
 	CObjDoor* objdoor = new CObjDoor(3, 3);
@@ -76,10 +80,6 @@ void CSceneMain::InitScene()
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
 	Objs::InsertObj(objboss, OBJ_BOSS, 10);
-
-	//テストタイム
-	CObjTime* objtime = new CObjTime();
-	Objs::InsertObj(objtime, OBJ_TIME, 100);
 
 	//テストボタン
 	CObjButton* objbuttn = new CObjButton(5, 5);
