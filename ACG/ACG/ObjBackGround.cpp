@@ -40,9 +40,9 @@ void CObjBackGround::Draw()
 
 	//描画位置
 	dst.m_top =  WINDOW_SIZE_H - src.m_bottom - src.m_top - objmap->GetScrollY() + 15.0f;//少し調整用(+15)
-	dst.m_left = 1536 - src.m_right - src.m_left;
-	dst.m_right = 1536;
-	dst.m_bottom = WINDOW_SIZE_H - objmap->GetScrollY() + 15.0f;//少し調整用(＋15)
+	dst.m_left = 1536.0f - src.m_right - src.m_left;
+	dst.m_right = 1536.0f;
+	dst.m_bottom = WINDOW_SIZE_H - objmap->GetScrollY() + 900.0f;//調整用(＋900.0f)
 
 	//描画
 	Draw::Draw(GRA_BACKGROUND, &src, &dst, color, 0.0f);

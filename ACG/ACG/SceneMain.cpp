@@ -114,15 +114,12 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
-		//注意！！11/09にてオブジェクト番号順を整理したため、
-		//これまでのcsvデータではまともにステージを進めません。(番号が違うため)
-		//そのため、番号修正仮データ(StageA.csv)で作業を行ってください。
-
+		
 	case 1:
-		p = Save::ExternalDataOpen(L"StageA.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"ステージ1.csv", &size);//外部データ読み込み
 		break;
 	case 2:
-		p = Save::ExternalDataOpen(L"StageA.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"ステージ2.csv", &size);//外部データ読み込み
 		break;
 	case 3:
 		p = Save::ExternalDataOpen(L"StageA.csv", &size);//外部データ読み込み

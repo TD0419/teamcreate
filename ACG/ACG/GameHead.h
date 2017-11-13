@@ -78,7 +78,7 @@ struct UserData
 
 //マップサイズ
 #define MAP_X_MAX (100)	//mapの最大値X
-#define MAP_Y_MAX (12)	//mapの最大値Y
+#define MAP_Y_MAX (24)	//mapの最大値Y
 #define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X
 #define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y
 
