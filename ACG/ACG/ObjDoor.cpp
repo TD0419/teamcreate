@@ -1,6 +1,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjDoor.h"
@@ -58,7 +59,8 @@ void CObjDoor::Action()
 	if (m_ani_door_time > m_ani_door_time_max&&m_ani_door_frame != 2)
 	{
 		m_ani_door_frame += 1;//ドアのフレームを+1します。
-		m_ani_door_time = 0;  //ドアタイムを0にします。
+		m_ani_door_time = 0;  //ドアタイムを0にします
+		Audio::Start(DOOR);//ドア音楽スタート
 	}
 	//ドアフレームが2のとき
 	if (m_ani_door_frame == 2)

@@ -118,6 +118,9 @@
     <Filter Include="ソース ファイル\Main\RollBlock">
       <UniqueIdentifier>{a56c7ff6-5c42-47da-ac47-9d840a4ed354}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Stage5Boss">
+      <UniqueIdentifier>{ea05cd55-27ad-4f91-842d-56dd4c413128}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -274,7 +277,10 @@
       <Filter>ソース ファイル\Main\DiffusionGimmick</Filter>
     </ClInclude>
     <ClInclude Include="ObjRollBlock.h">
-      <Filter>ソース ファイル\Main\RollBlock</Filter>
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStage5Boss.h">
+      <Filter>ソース ファイル\Main\Stage5Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -429,7 +435,10 @@
       <Filter>ソース ファイル\Main\DiffusionGimmick</Filter>
     </ClCompile>
     <ClCompile Include="ObjRollBlock.cpp">
-      <Filter>ソース ファイル\Main\RollBlock</Filter>
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStage5Boss.cpp">
+      <Filter>ソース ファイル\Main\Stage5Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
