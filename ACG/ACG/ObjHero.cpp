@@ -120,7 +120,7 @@ void CObjHero::Action()
 	}
 	//落下にリスタート----------------------------------
 	//m_pyが1000以下ならリスタートする
-	if (m_py > 1000.0f)
+	if (m_py > 2000.0f)
 	{
 		//場外に出たらリスタート
 		Scene::SetScene(new CSceneMain(-1));
@@ -544,8 +544,7 @@ void CObjHero::Scroll()
 	
 	//下にスクロールです
 	//原点を下にする
-	if ((m_py + HERO_SIZE_HEIGHT) - objmap->GetScrollY() > SCROLL_LINE_DOWN &&
-		objmap->GetScrollY() < 0)
+	if ((m_py + HERO_SIZE_HEIGHT) - objmap->GetScrollY() > SCROLL_LINE_DOWN&& objmap->GetScrollY() < 770)
 	{
 		//差分を調べる
 		float scroll = SCROLL_LINE_DOWN - ((m_py + HERO_SIZE_HEIGHT) - objmap->GetScrollY());
