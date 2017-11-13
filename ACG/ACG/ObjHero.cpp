@@ -396,13 +396,13 @@ void CObjHero::Action()
 				//ロープ作成
 				if (m_posture == 0.0f )//主人公が右を向いているとき右側から発射
 				{
-					CObjRope* objrope = new CObjRope(m_px + 64.0f, m_py + 50.0f,m_rope_moux, m_rope_mouy);
+					CObjRope* objrope = new CObjRope(m_px + 64.0f, m_py + 80.0f,m_rope_moux, m_rope_mouy);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
 					m_rope_control = false;
 				}
 				else if (m_posture == 1.0f)//主人公が左を向いているとき左側から発射
 				{
-					CObjRope* objrope = new CObjRope(m_px - 16.0f, m_py + 50.0f,m_rope_moux, m_rope_mouy);
+					CObjRope* objrope = new CObjRope(m_px , m_py + 80.0f,m_rope_moux, m_rope_mouy);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
 					m_rope_control = false;
 				}
@@ -601,7 +601,7 @@ void CObjHero::Draw()
 		;    // 何も描画しない
 	}
 	else
-		Draw::Draw(GRA_HERO, &src, &dst, color, m_r, -0.2f, -0.30f);
+		Draw::Draw(GRA_HERO, &src, &dst, color, m_r, -0.25f, -0.25f);
 	//-----------------------------------------
 
 
