@@ -254,7 +254,7 @@ void CSceneMain::ImageDataLoading()
 	//Draw::LoadImageW(L"", GRA_SIGN_MAIN, TEX_SIZE_256);イラスト決まってから読み込んでください
 
 	//回転ブロックの画像読み込み
-	Draw::LoadImageW(L"RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+	Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 }
 
 //音楽データ読み込み関数
