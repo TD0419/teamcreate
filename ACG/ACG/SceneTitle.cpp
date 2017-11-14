@@ -17,6 +17,7 @@ using namespace GameL;
 //初期化メソッド
 void CSceneTitle::InitScene()
 {
+	InageDataLoading();
 	//オブジェクトを作成する
 	CObjTitle* objtitle = new CObjTitle();
 	Objs::InsertObj(objtitle, OBJ_TITLE, 10);
@@ -31,6 +32,8 @@ void CSceneTitle::Scene()
 //画像データ読み込み関数
 void CSceneTitle::InageDataLoading()
 {
+	//タイトル画像読み込み
+	Draw::LoadImageW(L"Image\\BackGround\\Scene_Title.png", GRA_TITLE, TEX_SIZE_1024);
 }
 
 //音楽データ読み込み関数

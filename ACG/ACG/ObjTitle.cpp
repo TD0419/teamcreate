@@ -80,7 +80,21 @@ void CObjTitle::Action()
 void CObjTitle::Draw()
 {
 	float color[4] = { 1.0f,1.0f,1.0f,1.0f };	//描画の色
+	RECT_F src, dst;
 
+	//切り取り位置
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 1024.0f;
+	src.m_bottom = 767.0f;
+
+	//描画位置
+	dst.m_top = 0.0f;
+	dst.m_left = 0.0f;
+	dst.m_right = 1024.0f;
+	dst.m_bottom = 767.0f;
+	//描画
+	Draw::Draw(GRA_TITLE, &src, &dst, color, 0.0f);
 	//メニュー描画
 	Font::StrDraw(L"Start"	, WINDOW_SIZE_W - 300.0f, WINDOW_SIZE_H/2.0f			, CHAR_SIZE, color);
 	Font::StrDraw(L"Option"	, WINDOW_SIZE_W - 300.0f, WINDOW_SIZE_H/2.0f +  80.0f	, CHAR_SIZE, color);
@@ -89,4 +103,6 @@ void CObjTitle::Draw()
 
 	//デバッグ用に→を表示
 	Font::StrDraw(L"→"		, WINDOW_SIZE_W - 350.0f, WINDOW_SIZE_H / 2.0f + 80.0f * m_mode , CHAR_SIZE, color);
+
+	
 }

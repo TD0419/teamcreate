@@ -153,6 +153,8 @@ enum GRAPHIC_ID
 	GRA_LIFE,			//ライフ
 	GRA_SIGN,			//看板
 	GRA_ROLL_BLOCK,		//回転ブロック
+	GRA_TITLE,			//タイトル
+	GRA_GAME_OVER,		//ゲームオーバー
 };
 
 //音楽(BGM)
@@ -271,5 +273,5 @@ enum MUSIC
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneMain
+#define SET_GAME_START CSceneTitle
 //-----------------------------------------------

@@ -308,6 +308,7 @@ void CSceneMain::AudioDataLoading()
 	//ƒŠƒtƒg
 	Audio::LoadAudio(LIFT, L"Lift Trick Pull", SOUND_TYPE::EFFECT);
 
+	
 //------------------------------------------------------------
 
 }

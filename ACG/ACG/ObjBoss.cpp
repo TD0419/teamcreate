@@ -143,7 +143,7 @@ void CObjBoss::Draw()
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = BOSS_SIZE_WIDTH * m_posture + m_px - objmap->GetScrollX();
 	dst.m_right = (BOSS_SIZE_WIDTH - BOSS_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
-	dst.m_bottom = dst.m_top + BOSS_SIZE_HEIGHT + 6;
+	dst.m_bottom = dst.m_top + BOSS_SIZE_HEIGHT + 2;
 
 	////•`‰æ
 	/*Draw::Draw(14, &src, &dst, color, 0.0f);*/

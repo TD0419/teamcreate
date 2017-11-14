@@ -30,10 +30,9 @@ CSceneGameOver::~CSceneGameOver()
 //初期化メソッド
 void CSceneGameOver::InitScene()
 {
-	//外部グラフィックファイルを読み込み0番に登録(1024×1024ピクセル)
-	//Draw::LoadImageW(L"", 0, TEX_SIZE_1024);
-
-	//png",10, TEX_SIZE_512);
+	
+	//ゲームオーバー画像読み込み
+	Draw::LoadImageW(L"Image\\BackGround\\Scene_Game_Over.png", GRA_GAME_OVER, TEX_SIZE_1024);
 
 	////音楽情報の読み込み
 	////BGM－－－－
