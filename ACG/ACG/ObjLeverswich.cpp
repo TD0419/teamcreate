@@ -44,6 +44,10 @@ void CObjLeverSwich::Action()
 		//水の判定をONにする
 		m_water_con = true;
 
+		// 木を回転させる----------------------------------
+		m_wood_con = true;
+		// ------------------------------------------------
+
 		m_ani_time += 1;
 
 		//アニメーションの感覚管理
@@ -62,19 +66,7 @@ void CObjLeverSwich::Action()
 			m_ani_frame -= 1;
 			m_ani_time = 0;
 			m_ani_flag = false;
-		}
-
-		// 木を回転させる----------------------------------
-		
-		// 木オブジェクトを持ってくる
-		CObjWood* obj_wood = (CObjWood*)Objs::GetObj(OBJ_WOOD);
-
-		// 木に回転フラグを立てる
-		if (obj_wood != nullptr)
-			obj_wood->Rotation(true);
-
-		// ------------------------------------------------
-		
+		}		
 	}
 	else
 	{

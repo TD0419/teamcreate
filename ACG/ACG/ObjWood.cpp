@@ -27,9 +27,6 @@ void CObjWood::Init()
 	// Šp“x•Ï”‰Šú‰»
 	m_r = 0.0f;
 
-	// ‰ñ“]ƒtƒ‰ƒO‰Šú‰»
-	m_rota_flag = false;
-
 	//‰Šú‚Ì–Ø‚Ì‰æ‘œ‚ÌˆÊ’u
 	m_wood_image_x = m_px + (WOOD_SIZE - 64.0000f);
 	m_wood_image_y = m_py;
@@ -64,8 +61,9 @@ void CObjWood::Action()
 	}
 	else
 	{
+		CObjLeverSwich* objlever_swich = (CObjLeverSwich*)Objs::GetObj(OBJ_LEVER_SWICH);
 		// ‰ñ“]ƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚ê‚Î
-		if (m_rota_flag == true)
+		if (objlever_swich->GetWood() == true)
 		{
 			if (a == false)
 			{
