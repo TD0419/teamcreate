@@ -21,8 +21,6 @@ CObjDoor::CObjDoor(int x, int y)
 //イニシャライズ
 void CObjDoor::Init()
 {
-	//m_px = 100.0f;//ドアX座標
-	//m_py = 384.0f;//ドアY座標
 	m_ani_door_time = 0;
 	m_ani_door_frame = 1;	 //静止フレームを初期化する
 	m_ani_door_time_max = 20;//アニメーション間隔幅
