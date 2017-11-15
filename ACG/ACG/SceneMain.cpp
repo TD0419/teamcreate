@@ -49,8 +49,8 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objmap, OBJ_MAP, 10);
 
 	//主人公オブジェクトを作成する
-	CObjHero* objhero = new CObjHero(0,0,g_remaining);
-	Objs::InsertObj(objhero, OBJ_HERO, 10);
+	//CObjHero* objhero = new CObjHero(0,0,g_remaining);
+	//Objs::InsertObj(objhero, OBJ_HERO, 10);
 
 	//背景オブジェクトを作成する
 	CObjBackGround* objback_ground = new CObjBackGround();
@@ -76,6 +76,10 @@ void CSceneMain::InitScene()
 	//テストボタン
 	CObjButton* objbuttn = new CObjButton(5, 5);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
+	//テストボタン
+	CObjDoor* objbuttn2 = new CObjDoor(5, 15);
+	Objs::InsertObj(objbuttn2, OBJ_DOOR, 10);
+
 
 	//デバッグ--------------------------------------------
 

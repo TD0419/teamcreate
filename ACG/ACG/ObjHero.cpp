@@ -30,7 +30,6 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
-	m_rope_delete_ani_con = false;
 	m_black_radius = 768;
 
 	m_mous_x = 0.0f;            //マウスの位置X
@@ -42,7 +41,7 @@ void CObjHero::Init()
 	m_rope_control = false;		//ロープ発射制御用
 	m_rope_ani_con = false;
 	m_rope_delete = false;    //ロープが消えたかどうか調べる変数
-	m_rope_delete_ani_con = false;//アニメーション用ロープが消えたかどうかを管理する 
+	m_rope_delete_r_kye = false;//アニメーション用ロープが消えたかどうかを管理する 
 	m_hero_die_water = false;
 	m_hero_die_enemy = false;
 
@@ -53,7 +52,7 @@ void CObjHero::Init()
 	m_ani_max_time_move = 6;	//moveアニメーション間隔幅
 	m_ani_time_move = 0;
 	m_ani_frame_move = 1;		//move静止フレームを初期にする
-
+	m_rope_delete_control = false;
 	m_ani_max_time_ladders = 9; //laddersアニメーション間隔幅 
 	m_ani_time_ladders = 0;
 	m_ani_frame_ladders = 0;	//ladders静止フレームを初期にする
@@ -342,8 +341,8 @@ void CObjHero::Action()
 	//ロープオブジェクトを持ってくる
 	CObjRope* obj_rope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
 	
-	bool rope_caught; //ロープがロープスイッチと当たっているかどうかを確かめる変数
-	bool rope_delete; //ロープが消えてるか同うかを確かめる変数
+	bool rope_caught = false; //ロープがロープスイッチと当たっているかどうかを確かめる変数
+	bool rope_delete = false; //ロープが消えてるか同うかを確かめる変数
 
 	//マウスの位置がプレイヤーから見てどの方向か調べるための変数
 	float mous_rope_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
@@ -361,7 +360,7 @@ void CObjHero::Action()
 			;//ヒーロークリックした場合
 		}
 		//マウスの位置が後ろじゃない　ロープアニメのフラグがなし　ロープの削除フラグがなし
-		else if (m_posture == mous_rope_way && m_rope_ani_con == false && m_rope_delete_ani_con == false)
+		else if (m_posture == mous_rope_way && m_rope_ani_con == false && m_rope_delete_r_kye == false)
 		{
 			m_rope_moux = Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
 			m_rope_mouy = Input::GetPosY(); //ロープを射出したときのマウスの位置Yを入れる
@@ -373,14 +372,19 @@ void CObjHero::Action()
 	if (obj_rope != nullptr)//ロープオブジェクトが出ている場合
 	{
 		rope_caught = obj_rope->GetCaughtFlag();//ロープがロープスイッチに当たっているかの情報をもらう
-		rope_delete = obj_rope->GetDelete();    //ロープが消えているかどうかを調べる
+		rope_delete = false;
+		m_rope_delete_control = true;
 	}
 	else //ロープオブジェクトが出ていない場合
 	{
 		rope_caught = false;
-		rope_delete = false;
+		if (m_rope_delete_control == true)
+		{
+			rope_delete = true;
+			m_rope_delete_control = false;
+		}
 	}
-	
+
 	//trueならアニメーションを進める 　はしごに登っているときは動かない
 	if (m_rope_ani_con == true && m_ladder_updown == 0)
 	{
@@ -424,7 +428,7 @@ void CObjHero::Action()
 				m_ani_frame_rope = 2;//アニメーションを２で止める
 				if (rope_delete == true)//ロープが消えている場合
 				{
-					m_rope_delete_ani_con = true;
+					m_rope_delete_r_kye = true;
 					m_ani_frame_rope = 0;//アニメーションのフレームを戻す。
 					m_rope_ani_con = false;
 				}
@@ -442,14 +446,17 @@ void CObjHero::Action()
 
 	//右クリックしていないときfalseにする
 	if (Input::GetMouButtonR() == false)
-		m_rope_delete_ani_con = false;
+		m_rope_delete_r_kye = false;
 
 	//ロープとロープスイッチが当たっているとき
 	if (rope_caught == true)
 	{
-		m_rope_delete_ani_con = false;
+		m_rope_delete_r_kye = false;
+
 		if (Input::GetMouButtonR() == false)////右クリックしていないときtrueにする
-		m_rope_delete_ani_con = true;
+		{
+			m_rope_delete_r_kye = true;
+		}
 	}
 
 	//射出終了------------------------------------------------

@@ -55,7 +55,9 @@ private:
 	bool  m_rope_control;	      //ロープ発射制御用
 	bool  m_rope_ani_con;         //ロープアニメーション制御
 	bool  m_rope_delete;          //ロープが消えたかどうか調べる変数
-	bool  m_rope_delete_ani_con;  //アニメーション用ロープが消えたかどうかを管理する 
+	bool  m_rope_delete_r_kye;    //アニメーション用ロープが消えたかどうかを管理する 
+	bool  m_rope_delete_control;  //ロープが消えた時の判定を制御する変数
+	
 	bool  m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）
 	bool  m_hero_die_enemy;		  //主人公が敵にあたったかどうかを調べる変数（死）
 
