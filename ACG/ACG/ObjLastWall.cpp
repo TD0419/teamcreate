@@ -68,7 +68,7 @@ void CObjLastWall::Action()
 		return;
 	}
 	else
-	{//レバースイッチが押されていたら
+	{	//ボタンが押されていたら
 		if (m_look_unlock_flag == true)
 		{
 			m_wall_gauge += 1; // 1ずつ増やしていく
