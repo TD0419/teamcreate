@@ -40,6 +40,7 @@ void CSceneMain::InitScene()
 		Scene::SetScene(new CSceneGameOver());
 		return;
 	}
+
 	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
@@ -76,8 +77,15 @@ void CSceneMain::InitScene()
 	//テストボタン
 	CObjButton* objbuttn = new CObjButton(5, 20);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
+	//テストボタン
+	CObjDoor* objbuttn2 = new CObjDoor(5, 15);
+	Objs::InsertObj(objbuttn2, OBJ_DOOR, 10);
 
+	//テスト用回転床パターン1
+	CObjRollBlock* p = new CObjRollBlock(10, 20,1);
+	Objs::InsertObj(p, OBJ_ROLL_BLOCK, 10);
 
+	//テストドア
 	CObjDoor* door = new CObjDoor(15, 20);
 	Objs::InsertObj(door, OBJ_DOOR, 10);
 	//デバッグ--------------------------------------------
