@@ -61,22 +61,25 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objtime, OBJ_TIME, 100);
 
 	//デバッグ　”使い終わったら消してください！”----------------
-	//要らんの
+	//要らんの--------------------------------------------------
 
 
 
-	//要るの
+	//要るの-----------------------------------------------
 	//テスト壁
-	CObjLastWall*objlastwall = new CObjLastWall(15, -2);
+	CObjLastWall*objlastwall = new CObjLastWall(15, 14);
 	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
 	//壁テストのためboss
 	CObjBoss*objboss = new CObjBoss(10, 5);
 	Objs::InsertObj(objboss, OBJ_BOSS, 10);
 
 	//テストボタン
-	CObjButton* objbuttn = new CObjButton(5, 5);
+	CObjButton* objbuttn = new CObjButton(5, 20);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
 
+	//テストドア
+	CObjDoor* door = new CObjDoor(15, 20);
+	Objs::InsertObj(door, OBJ_DOOR, 10);
 	//デバッグ--------------------------------------------
 
 	//BGM再生
@@ -255,6 +258,9 @@ void CSceneMain::ImageDataLoading()
 
 	//回転ブロックの画像読み込み
 	Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+
+	//ゴリラの投擲物読み込み
+	Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
 }
 
 //音楽データ読み込み関数

@@ -155,8 +155,8 @@ void CObjEnemyBullet::Draw()
 	//Ø‚èŽæ‚èˆÊ’u
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 32.0f;
+	src.m_bottom = 32.0f;
 
 	//•`‰æˆÊ’u
 	dst.m_top = m_py - objmap->GetScrollY();
@@ -164,6 +164,6 @@ void CObjEnemyBullet::Draw()
 	dst.m_right = dst.m_left + BULLET_SIZE;
 	dst.m_bottom = dst.m_top + BULLET_SIZE;
 
-	Draw::Draw(18, &src, &dst, color, m_r);
+	Draw::Draw(GRA_COCONUT, &src, &dst, color, m_r);
 
 }

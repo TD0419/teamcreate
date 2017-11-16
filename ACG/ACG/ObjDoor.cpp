@@ -1,4 +1,5 @@
 #include "GameL\DrawTexture.h"
+#include "GameL\UserData.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\Audio.h"
@@ -20,21 +21,24 @@ CObjDoor::CObjDoor(int x, int y)
 //イニシャライズ
 void CObjDoor::Init()
 {
-	//m_px = 100.0f;//ドアX座標
-	//m_py = 384.0f;//ドアY座標
 	m_ani_door_time = 0;
 	m_ani_door_frame = 1;	 //静止フレームを初期化する
 	m_ani_door_time_max = 20;//アニメーション間隔幅
 
 	m_unlock_flag = false;
+	//当たり判定用HitBoxを作成
+	Hits::SetHitBox(this, m_px, m_py, DOOR_SIZE, DOOR_SIZE, ELEMENT_GIMMICK, OBJ_DOOR, 1);
 }
 
 //アクション
 void CObjDoor::Action()
 {
+	//ドアのHitBox更新用ポインター取得
+	CHitBox* hit = Hits::GetHitBox(this);
+
 	//ボスの情報を呼ぶの
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-	bool boss_delete;
+	bool boss_delete = false;
 	//ボスがいなくなったら。
 	if (objboss != nullptr)
 	{
@@ -64,11 +68,19 @@ void CObjDoor::Action()
 	}
 	//ドアフレームが2のとき
 	if (m_ani_door_frame == 2)
-		
 	{
 		m_ani_door_frame = 2;//フレームを2に固定
+
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+		{
+			//ステージカウントを増やして次のステージにする
+			((UserData*)Save::GetData())->stagenum += 1;
+		}
+
 		return;
 	}
+	//HitBoxの位置を更新する
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
 
 //ドロー

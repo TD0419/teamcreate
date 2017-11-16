@@ -33,7 +33,7 @@ public:
 	float GetVecX() { return m_vx; }								//ベクトルXを渡す
 	float GetVecY() { return m_vy; }								//ベクトルYを渡す
 	float GetPosture() { return m_posture; }						//今の主人公の姿勢を渡す
-	float GetRopeDeleteAniCon() { return m_rope_delete_ani_con; }   //アニメーション用ロープが消えたかどうかを管理する変数を渡す
+	float GetRopeDeleteAniCon() { return m_rope_delete_r_kye; }   //アニメーション用ロープが消えたかどうかを管理する変数を渡す
 	int GetBlockType() { return m_block_type; }						//下のブロック(踏んでいる)情報を渡す
 
 private:
@@ -55,7 +55,9 @@ private:
 	bool  m_rope_control;	      //ロープ発射制御用
 	bool  m_rope_ani_con;         //ロープアニメーション制御
 	bool  m_rope_delete;          //ロープが消えたかどうか調べる変数
-	bool  m_rope_delete_ani_con;  //アニメーション用ロープが消えたかどうかを管理する 
+	bool  m_rope_delete_r_kye;    //アニメーション用ロープが消えたかどうかを管理する 
+	bool  m_rope_delete_control;  //ロープが消えた時の判定を制御する変数
+	
 	bool  m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）
 	bool  m_hero_die_enemy;		  //主人公が敵にあたったかどうかを調べる変数（死）
 
