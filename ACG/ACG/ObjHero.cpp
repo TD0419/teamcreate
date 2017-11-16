@@ -282,8 +282,8 @@ void CObjHero::Action()
 
 	//ラジアン値を求める
 	float rad = asinf(-y / inclination);
-		//角度を求める
-		m_r = rad * 180.0f / 3.14f;
+	//角度を求める
+	m_r = rad * 180.0f / 3.14f;
 	//--------------------------------------------------------
 	
 
@@ -400,7 +400,6 @@ void CObjHero::Action()
 				m_ani_frame_rope += 1;
 				m_ani_time_rope = 0;
 			}
-			
 		}
 		//ロープのアニメーションフレームが２ならロープを出す
 		if (m_ani_frame_rope == 2)
@@ -436,7 +435,6 @@ void CObjHero::Action()
 		}
 		else
 			m_rope_control = true;
-
 	}
 	//はしごに登っているときに右クリックしたら上り終わった後に撃っていたのでそれを修正する
 	else if (m_ladder_updown != 0)
@@ -453,7 +451,7 @@ void CObjHero::Action()
 	{
 		m_rope_delete_r_kye = false;
 
-		if (Input::GetMouButtonR() == false)////右クリックしていないときtrueにする
+		if (Input::GetMouButtonR() == false)//右クリックしていないときtrueにする
 		{
 			m_rope_delete_r_kye = true;
 		}
@@ -470,7 +468,7 @@ void CObjHero::Action()
 	//敵オブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr) //仮です。敵が多いようならElementに変えます
 	{
-		m_hero_die_enemy = true; ////主人公の敵にあたったときの死亡フラグをONにする
+		m_hero_die_enemy = true; //主人公の敵にあたったときの死亡フラグをONにする
 	}
 
 	//主人公の敵に当たったときの死亡フラグがONなら死亡アニメーションをする
@@ -492,7 +490,7 @@ void CObjHero::Action()
 			Hits::DeleteHitBox(this);	//ヒットボックスを削除
 
 			//メインへ移行
-			Scene::SetScene(new CSceneMain());
+			Scene::SetScene(new CSceneMain(-1));
 			return;
 		}
 	}
@@ -813,14 +811,15 @@ void CObjHero::Draw()
 //着地できてるかどうかを調べる関数
 void CObjHero::LandingCheck()
 {
-	bool c1,c2,c3;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+	bool c1,c2,c3,c4;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
 	
 	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
 	c3 = HitUpCheck(OBJ_LIFT_MOVE); //動くリフトとの着地チェック
+	c4 = HitUpCheck(OBJ_ROLL_BLOCK);//回転するブロック
 
 	//チェック項目のどれか一つでもtrueなら
-	if (c1 == true || c2 ==true || c3 == true)
+	if (c1 == true || c2 ==true || c3 == true||c4 ==true)
 		m_hit_down = true;//着地フラグをオンにする
 
 }

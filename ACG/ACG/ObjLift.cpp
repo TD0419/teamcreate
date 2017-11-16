@@ -104,7 +104,7 @@ void CObjLift::Action()
 	m_move_y += abs(m_vy);
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(hit, m_px, m_py);
 }
 
 //ドロー

@@ -36,7 +36,6 @@ void CObjMap::Init()
 			m_map[y][x].create = true;
 		}
 	}
-
 }
 
 //ƒAƒNƒVƒ‡ƒ“

@@ -78,7 +78,7 @@ int HitTestOfAB(float ax, float ay, float aw, float ah,
 	float bx_max = bx_min + bw;	//ブロックBのX座標最大
 	float by_max = by_min + bh;	//ブロックBのY座標最大
 
-								//はみ出し許容範囲
+	//はみ出し許容範囲
 	float bleed_x = 5.0f;
 	float bleed_y = 20.0f;
 
