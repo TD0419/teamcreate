@@ -38,19 +38,10 @@ void CObjDoor::Action()
 
 	//ボスの情報を呼ぶの
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-	bool boss_delete = false;
 
-	//ボスがいたら。
-	if (objboss != nullptr)
-	{
-		boss_delete = objboss->GetDieFlag();//boss_deleteに情報を入れる。
-	}
-	else
-	{
-		boss_delete = false;//ボスは死んでない。
-	}
+
 	//ボスが消滅したとき
-	if (boss_delete == true)
+	if (objboss==nullptr)
 	{
 		m_unlock_flag = true;//施錠解除フラグをonにします
 	}

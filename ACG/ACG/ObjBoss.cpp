@@ -36,7 +36,7 @@ void CObjBoss::Init()
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
-	m_die_flag = false;
+	m_die_flag =true;
 	//“–‚½‚è”»’è—pHitBox‚ðì¬
 	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
 }
@@ -89,6 +89,7 @@ void CObjBoss::Action()
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
 	}
+
 	else if (m_hit_left == true)// ƒuƒƒbƒN‚Ì¶‘¤‚É“–‚½‚Á‚Ä‚¢‚½‚ç
 	{
 		m_posture = 1.0f;		// ¶Œü‚«‚É‚·‚é
@@ -144,8 +145,7 @@ void CObjBoss::Draw()
 	dst.m_right = (BOSS_SIZE_WIDTH - BOSS_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
 	dst.m_bottom = dst.m_top + BOSS_SIZE_HEIGHT + 2;
 
-	////•`‰æ
-	/*Draw::Draw(14, &src, &dst, color, 0.0f);*/
+	//•`‰æ
 	Draw::Draw(GRA_BOSS, &src, &dst, color, 0.0f);
 
 }
