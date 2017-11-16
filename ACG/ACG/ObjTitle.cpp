@@ -1,5 +1,6 @@
 #include "GameL\WinInputs.h"
 #include "GameL\DrawFont.h"
+#include "GameL\UserData.h"
 
 #include "GameHead.h"
 #include "ObjTitle.h"
@@ -20,6 +21,8 @@ void CObjTitle::Init()
 
 	//デバッグ用
 	Font::SetStrTex(L"→");	//→
+
+	((UserData*)Save::GetData())->stagenum = 1;
 }
 
 //アクション

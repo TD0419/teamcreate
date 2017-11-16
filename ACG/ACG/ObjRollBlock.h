@@ -16,6 +16,10 @@ public:
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー
+	
+	void HeroHit();	//ヒーローが当たったときの処理
+
+
 private:
 	//オブジェクトの位置
 	float m_px;		
