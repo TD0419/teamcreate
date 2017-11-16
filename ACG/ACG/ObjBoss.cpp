@@ -108,6 +108,10 @@ void CObjBoss::Action()
 	// ‘Ì—Í‚ª0ˆÈ‰º‚È‚ç
 	if (m_hp <= 0)
 	{
+		m_die_flag = true;
+	}
+	if (m_die_flag == true)
+	{
 		Hits::DeleteHitBox(this);	//BOSS‚ªŠ—L‚·‚éHitBox‚Éíœ‚·‚é
 		this->SetStatus(false);		//©g‚Éíœ–½—ß‚ğo‚·
 		return;

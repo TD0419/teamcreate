@@ -76,6 +76,10 @@ void CSceneMain::InitScene()
 	//テストボタン
 	CObjButton* objbuttn = new CObjButton(5, 20);
 	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
+	//テストボタン
+	CObjDoor* objbuttn2 = new CObjDoor(5, 15);
+	Objs::InsertObj(objbuttn2, OBJ_DOOR, 10);
+
 
 	CObjDoor* door = new CObjDoor(15, 20);
 	Objs::InsertObj(door, OBJ_DOOR, 10);

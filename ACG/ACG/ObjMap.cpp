@@ -26,14 +26,14 @@ CObjMap::CObjMap(int map[MAP_Y_MAX][MAP_X_MAX])
 void CObjMap::Init()
 {
 	m_scroll_x = 0.0f;
-	m_scroll_y = 0.0f;
+	m_scroll_y = 790.0f;
 
 	//フラグの初期化
-	for (int i = 0; i < MAP_Y_MAX; i++)
+	for (int y = 0; y < MAP_Y_MAX; y++)
 	{
-		for (int j = 0; j < MAP_X_MAX; j++)
+		for (int x = 0; x < MAP_X_MAX; x++)
 		{
-			m_map[i][j].create = true;
+			m_map[y][x].create = true;
 		}
 	}
 
@@ -102,13 +102,14 @@ void CObjMap::CreateObj(int x, int y)
 	{
 		// プランナーからマップが届いたらコメントをはずす
 		
-		//case MAP_HERO_START:	//ヒーローの作成
-		//{
-		//	CObjHero* objhero = new CObjHero(x, y-1);
-		//	Objs::InsertObj(objhero, OBJ_HERO, 9);
-		//	break;
-		//}
-		
+		/*
+		case MAP_HERO_START:	//ヒーローの作成
+		{
+			CObjHero* objhero = new CObjHero(x, y-1 ,3);
+			Objs::InsertObj(objhero, OBJ_HERO, 9);
+			break;
+		}
+		*/
 		case MAP_BLOCK:		//ブロック作成
 		{
 			CObjBlock* objblock = new CObjBlock(x, y);
@@ -151,7 +152,7 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
-		case MAP_DOOR:	//ドア作成
+		case MAP_GOAL_DOOR:	//ゴール用ドア作成
 		{
 			CObjDoor* objDoor = new CObjDoor(x, y);
 			Objs::InsertObj(objDoor, OBJ_DOOR, 9);

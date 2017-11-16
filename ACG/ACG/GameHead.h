@@ -96,7 +96,7 @@ enum MAP_BER
 	MAP_LEVER_SWICH			,			//レバースイッチ
 	MAP_ROCK				,			//岩
 	MAP_SIGN				,			//看板
-	MAP_DOOR				,			//ドア
+	MAP_GOAL_DOOR			,			//ゴール用ドア
 	MAP_LIFT_TYPE_MANUAL	,			//手動リフト(通常時は動かない。ギミックの過程で引っ張ると動かせる)
     MAP_LIFT_TYPE_AUTO_WIDTH	 ,		//自動横移動リフト(自動で左右に動く)	//マップの番号対応ができたらコメントをはずしてください
 	MAP_LIFT_TYPE_AUTO_LENGTH	 ,		//自動縦移動リフト(自動で縦方向に動く)	//マップの番号対応ができたらコメントをはずしてください
