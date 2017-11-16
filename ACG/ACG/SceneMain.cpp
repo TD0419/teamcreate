@@ -110,10 +110,10 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	{
 		
 	case 1:
-		p = Save::ExternalDataOpen(L"ステージ1.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"stage1.csv", &size);//外部データ読み込み
 		break;
 	case 2:
-		p = Save::ExternalDataOpen(L"ステージ2.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"stage2.csv", &size);//外部データ読み込み
 		break;
 	case 3:
 		p = Save::ExternalDataOpen(L"StageA.csv", &size);//外部データ読み込み
