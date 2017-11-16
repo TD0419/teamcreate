@@ -23,7 +23,7 @@ void CObjBoss::Init()
 {
 	m_vx = -1.0f; // 移動ベクトル
 	m_vy = 0.0f;
-	m_hp = 20; //ボスのＨＰ
+	m_hp = 2; //ボスのＨＰ
 	m_posture = 1.0f; // 左向き
 	m_speed = 1.0f;   // 速度
 
@@ -36,8 +36,7 @@ void CObjBoss::Init()
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
-
-	m_die_flag = false;
+	m_die_flag = true;
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
 }
@@ -64,8 +63,9 @@ void CObjBoss::Action()
 	if (m_posture == 0.0f)		// 右向きなら
 		m_vx = m_speed;			// 右に進む
 	else if (m_posture == 1.0f) // 左向きなら
+	{
 		m_vx = -m_speed;		// 左に進む
-
+	}
 								//摩擦
 	m_vx += -(m_vx * 0.098f);
 
@@ -103,7 +103,6 @@ void CObjBoss::Action()
 	{
 		Audio::Start(LANDING);
 		m_hp -= 1;
-		
 	}
 
 	// 体力が0以下なら

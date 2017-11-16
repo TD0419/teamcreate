@@ -23,6 +23,7 @@ class CObjBoss :public CObj
 		float GetPosX() { return m_px; }			//ポジションXを返す
 		float GetPosY() { return m_py; }			//ポジションYを返す
 		bool GetDieFlag(){ return m_die_flag; }		//死んだか返す
+
 	private:
 		float m_px;		 // ボスX座標
 		float m_py;		 // ボスY座標
