@@ -103,7 +103,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 	
 	//初期化をどこかでしないといけないけど初期化の場所を指定されていなかったので一応ここで初期化をする
-	((UserData*)Save::GetData())->stagenum = 1;
+	
 
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum)

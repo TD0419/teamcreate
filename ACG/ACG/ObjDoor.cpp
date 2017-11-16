@@ -67,18 +67,20 @@ void CObjDoor::Action()
 		Audio::Start(DOOR);//ドア音楽スタート
 	}
 	//ドアフレームが2のとき
-	if (m_ani_door_frame == 2)
+	if (m_ani_door_frame == 1)
 	{
-		m_ani_door_frame = 2;//フレームを2に固定
+		m_ani_door_frame = 1;//フレームを2に固定
 
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-		{
-			//ステージカウントを増やして次のステージにする
-			((UserData*)Save::GetData())->stagenum += 1;
-		}
-
+		
 		return;
 	}
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		//ステージカウントを増やして次のステージにする
+		((UserData*)Save::GetData())->stagenum += 1;
+		Scene::SetScene(new CSceneMain());
+	}
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }

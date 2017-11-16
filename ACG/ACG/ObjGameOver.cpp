@@ -18,7 +18,7 @@ void CObjGameOver::Init()
 	m_key_flag = false;
 	m_audio_se = 0;//SEの音楽の管理
 	//文字のグラフィック作成
-	Font::SetStrTex(L"GAMEOVER（仮）");	//スタート
+	Font::SetStrTex(L"GAMEOVER");	//
 }
 
 //アクション
@@ -51,5 +51,5 @@ void CObjGameOver::Draw()
 	//描画
 	Draw::Draw(GRA_GAME_OVER, &src, &dst, color, 0.0f);
 	//メニュー描画
-	Font::StrDraw(L"☆ G ☆ A ☆ M ☆ E ☆ O ☆ V ☆ E ☆ R ☆", 2.f, WINDOW_SIZE_H / 3.f, 45.0f, color);
+	Font::StrDraw(L"GAMEOVER", 2.f, WINDOW_SIZE_H / 3.f, 45.0f, color);
 }
