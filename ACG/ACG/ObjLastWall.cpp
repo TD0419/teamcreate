@@ -21,8 +21,10 @@ void CObjLastWall::Init()
 {
 	//当たり判定																
 	Hits::SetHitBox(this, m_px, m_py, 32, 512, ELEMENT_GIMMICK, OBJ_LAST_WALL, 1);
-	m_wall_gauge = 0.0f;
+	m_wall_gauge = 0;
+	m_wall_gauge2 = 0;
 	m_look_unlock_flag = false;
+	a = false;
 }
 
 //アクション
@@ -39,19 +41,6 @@ void CObjLastWall::Action()
 	// ボタンオブジェクトを持ってくる
 	CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
 
-	//ボスの情報を呼ぶの
-	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-	bool Boss_Added;//ボス登場
-
-	//if (objboss == nullptr)
-	//{
-	//	Boss_Added = true;//ボスはいます。
-	//}
-	//else
-	//{
-	//	Boss_Added = false;//ボスはいません。
-	//}
-
 	//if(Boss_Added==true)
 	//ボタンを押してたら扉を開くフラグオン
 	if (objbutton->GetTrickFlag() == true)
@@ -65,20 +54,44 @@ void CObjLastWall::Action()
 	// m_wall_gaugeが512を越えたら処理ストップ
 	if (m_wall_gauge >= 512)
 	{
-		return;
+		a = true;
+		Audio::Stop(WALL);//音楽ストップ
+		m_wall_gauge = 0;
 	}
 	else
-	{	//ボタンが押されていたら
-		if (m_look_unlock_flag == true)
+	{
+		//buttonが押されていたら
+		if (m_look_unlock_flag == true&&a==false)
 		{
-			m_wall_gauge += 1; // 1ずつ増やしていく
+			m_wall_gauge +=3; // 3ずつ増やしていく
 			Audio::Start(WALL);//開門の音楽スタート
 		}
 	}
+	
+	if (a == false)
+	{
+		// hitboxが小さくなる
+		HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32, 512 - m_wall_gauge);
+	}
 
-	// hitboxが小さくなる
-	HitBoxUpData(hit,m_px, m_py + m_wall_gauge, 32, 512 - m_wall_gauge);
+	if (m_wall_gauge2 >= 512)
+	{
+		Audio::Stop(WALL);//音楽ストップ
+	}
+	else
+	{
+		if (a == true)
+		{
+			m_wall_gauge2 += 8;
+			// hitboxが小さくなる
+			Audio::Start(WALL);//開門の音楽スタート
+			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32, 0 + m_wall_gauge2);
+			
+		}
+	}
 
+
+	//当たり判定-----------------------------------------------
 	for (int i = 0; i < hit->GetCount(); i++)
 	{
 		//データがあれば
@@ -147,17 +160,33 @@ void CObjLastWall::Draw()
 	Draw::Draw(GRA_LAST_WALL, &src, &dst, color, 0.0f);
 
 	//-----------------------------------------------------
-	//切り取り位置
-	src.m_top = 0.0 + m_wall_gauge;
-	src.m_left = 0.0f;
-	src.m_right = 32.0f;
-	src.m_bottom = 512.0f;
+	if (a == false)
+	{
+		//切り取り位置
+		src.m_top = 0.0 + m_wall_gauge;
+		src.m_left = 0.0f;
+		src.m_right = 32.0f;
+		src.m_bottom = 512.0f;
 	
-	//描画位置
-	dst.m_top = m_py  - objmap->GetScrollY() + 65;
-	dst.m_left = m_px - objmap->GetScrollX() + 30;
-	dst.m_right = dst.m_left + 32;
-	dst.m_bottom = dst.m_top + 512 - m_wall_gauge;
+		//描画位置
+		dst.m_top = m_py - objmap->GetScrollY() + 65;
+		dst.m_left = m_px - objmap->GetScrollX() + 30;
+		dst.m_right = dst.m_left + 32;
+		dst.m_bottom = dst.m_top + 512 - m_wall_gauge;
+	}
+	else
+	{
+		//切り取り位置
+		src.m_top = 0.0;
+		src.m_left = 0.0f;
+		src.m_right = 32.0f;
+		src.m_bottom = 0.0f+m_wall_gauge2;
+		//描画位置
+		dst.m_top = m_py - objmap->GetScrollY() + 65;
+		dst.m_left = m_px - objmap->GetScrollX() + 30;
+		dst.m_right = dst.m_left + 32;
+		dst.m_bottom = dst.m_top +  m_wall_gauge2;
+	}
 	//描画(下の部分)
 	Draw::Draw(GRA_OPEN_WALL, &src, &dst, color, 0.0f);
 }

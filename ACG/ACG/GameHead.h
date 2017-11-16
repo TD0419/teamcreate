@@ -155,6 +155,7 @@ enum GRAPHIC_ID
 	GRA_ROLL_BLOCK,		//回転ブロック
 	GRA_TITLE,			//タイトル
 	GRA_GAME_OVER,		//ゲームオーバー
+	GRA_COCONUT,		//ココナッツ
 };
 
 //音楽(BGM)

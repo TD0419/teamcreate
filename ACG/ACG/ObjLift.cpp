@@ -2,6 +2,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\WinInputs.h"
+#include "GameL\UserData.h"
 
 #include "GameHead.h"
 #include "ObjLift.h"
@@ -48,6 +49,49 @@ void CObjLift::Init()
 	m_move_x = 0.0f;
 	m_move_y = 0.0f;
 
+	//ステージごとに
+	//初期移動方向、
+	//左右の最大移動量、
+	//上下の最大移動量、
+	//移動モード
+	//を決める
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		//ステージ１
+	case 1:
+		m_move_direction = 0;
+		m_width_max = 640.0f;
+		m_length_max = 0.0f;
+		m_move_mode = 0;
+		break;
+		//ステージ２
+	case 2:
+		m_move_direction = 0;
+		m_width_max = 640.0f;
+		m_length_max = 0.0f;
+		m_move_mode = 1;
+		break;
+		//ステージ３
+	case 3:
+		//後で
+		//m_move_direction = 
+		break;
+		//ステージ４
+	case 4:
+		m_move_direction = 2;
+		m_width_max = 0.0f;
+		m_length_max = 0.0f;
+		m_move_mode = 2;
+		break;
+		//ステージ５
+	case 5:
+		//後で
+		//m_move_direction
+		break;
+	default:
+
+		break;
+	}
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
 
@@ -59,49 +103,137 @@ void CObjLift::Action()
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
+	//ロープオブジェクトを持ってくる
+	CObjRopeSwitch* objrope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
+
 	//主人公が当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		HeroRide();//主人公を乗せる処理をする
 	}
 
-	//ロープオブジェクトを持ってくる
-	CObjRopeSwitch* objrope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
-	
-	//専用的過ぎてパターンわけが必要なのでとりあえずコメント化しています
-	//if (objrope_switch->GetRopeFlag() == true)//ロープとロープスイッチがあたっているとき
-	//{
-	//	if (Input::GetVKey('A'))
-	//		m_vx = -1.0f;
-	//	else
-	//		m_vx = 0.0f;
-	//}
-	//else//ロープとロープスイッチがあたっていないとき
-	//{
-	//	m_vx = 1.0f;
-	//}
-
-	//左右の移動量調整
-	if (m_move_x > m_width_max)	//移動量が最大量を超えると
+	switch (m_move_mode)
 	{
-		m_vx *= (-1);	//移動方向を反転して
-		m_move_x = 0.0f;//移動量の初期化
+		//------------------------------縄を紐スイッチに当てて移動するモード------------------------------
+	case 0:
+		//ロープスイッチ情報があるかつ
+		//ロープとロープスイッチがあたっているとき
+		if (objrope_switch != nullptr && objrope_switch->GetRopeFlag() == true)
+		{
+			//Aキーが押されたら
+			if (Input::GetVKey('A'))
+			{
+				//初期位置から動いた距離がMAX未満だったら移動
+				if (m_move_x < m_width_max)
+				{
+					//初期位置から動いた距離を増やす
+					m_move_x += SPEED;
+					//初期の移動方向が右のとき
+					if (m_move_direction == 0)
+					{
+						//左に進む
+						m_vx = -SPEED;
+					}
+					//初期の移動方向が左のとき
+					else
+					{
+						//右に進む
+						m_vx = SPEED;
+					}
+				}
+			}
+			//Aキーが押されていないならX移動０
+			else
+			{
+				m_vx = 0.0f;
+			}
+		}
+		else//ロープとロープスイッチがあたっていないとき
+		{
+			//初期位置から動いた距離が０を超えていたら移動
+			if (m_move_x > 0)
+			{
+				//初期位置に近づくので減算
+				m_move_x -= SPEED;
+
+				//初期の移動方向が右だったら
+				if (m_move_direction == 0)
+				{
+					//右に移動
+					m_vx = SPEED;
+				}
+				//初期の移動方向は左だったら
+				else
+				{
+					//左に移動
+					m_vx = -SPEED;
+				}
+			}
+		}
+
+		//初期位置から動いた距離が最大量を超えると
+		if (m_move_x > m_width_max)	
+		{
+			//移動ベクトルXを0にする
+			m_vx = 0.0f;
+			
+			//初期の移動方向が右だったら
+			if (m_move_direction == 0)
+			{
+				//行き過ぎた分を計算
+				m_px += m_move_x - m_width_max;
+			}
+			//初期の移動方向が左だったら
+			else
+			{
+				//行き過ぎた分を計算
+				m_px -= m_move_x - m_width_max;
+			}
+			m_move_x = m_width_max;//移動量の初期化
+		}
+		//初期位置から動いた距離が０未満だったら
+		if (m_move_x < 0)
+		{
+			//移動ベクトルXを０にする
+			m_vx = 0.0f;
+
+			//初期の移動方向が右だったら
+			if (m_move_direction == 0)
+			{
+				//行き過ぎた分を計算
+				m_px += m_move_x;
+			}
+			//初期の移動方向が左だったら
+			else
+			{
+				//行き過ぎた分を計算
+				m_px -= m_move_x;
+			}
+			m_move_x = 0;
+		}
+		break;
+		//------------------------------自由移動モード(最大右X位置から最大値左X位置の間を自動移動)---------------
+	case 1:
+		
+		break;
+	default:
+		break;
 	}
+	
 
-	//上下の移動量調整
-	if (m_move_y > m_length_max)	//移動量が最大量を超えると
-	{
-		m_vy *= (-1);	//移動方向を反転して
-		m_move_y = 0.0f;//移動量の初期化
-	}	
-
-	//移動
+	//位置情報を更新
 	m_px += m_vx;
 	m_py += m_vy;
 
+	//初期位置から動いた距離が０またはMAXなら移動ベクトルを０にする
+	if(m_move_x == 0 || m_move_x == m_width_max)
+		m_vx = 0.0f;
+	if(m_move_y == 0 || m_move_y == m_length_max)
+		m_vy = 0.0f;
+
 	//移動量の保存
-	m_move_x += abs(m_vx);
-	m_move_y += abs(m_vy);
+	/*m_move_x += m_vx;
+	m_move_y += m_vy;*/
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
@@ -148,7 +280,7 @@ void CObjLift::HeroRide()
 		if (hit_data[i] != nullptr)
 		{
 			float r = hit_data[i]->r;//あたっている角度を持ってくる
-
+			
 			//上側があたっていればで
 			if (45.0f <= r && r <= 135.0f)
 			{
