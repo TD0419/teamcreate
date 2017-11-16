@@ -64,7 +64,6 @@ void CObjDoor::Action()
 	}
 	//ドアフレームが2のとき
 	if (m_ani_door_frame == 2)
-		
 	{
 		m_ani_door_frame = 2;//フレームを2に固定
 		return;

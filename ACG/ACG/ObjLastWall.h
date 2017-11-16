@@ -24,6 +24,9 @@ class CObjLastWall :public CObj
 		int m_map_x;//X
 		int m_map_y;//Y
 		int m_wall_gauge;//壁の高さ管理
+		int m_wall_gauge2;
 		bool m_look_unlock_flag;//ボタンがおされたかのフラグ
+		bool a;
+
 
 };
