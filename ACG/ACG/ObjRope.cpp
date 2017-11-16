@@ -116,7 +116,7 @@ void CObjRope::Action()
 	bool rope_delete_ani_con = objhero->GetRopeDeleteAniCon();
 
 	//ロープ引っかかり判定がONの時、Rが押されたらロープを削除
-	if (Input::GetMouButtonR() == true && m_caught_flag==true)
+	if (Input::GetMouButtonR() == true && m_caught_flag==true && rope_delete_ani_con == true)
 	{
 		m_delete = true;			//ロープは消えていることを変数に入れる
 		m_caught_flag = false;		//ロープ引っかかりフラグをOFFにする

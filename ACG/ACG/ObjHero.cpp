@@ -451,12 +451,7 @@ void CObjHero::Action()
 	//ロープとロープスイッチが当たっているとき
 	if (rope_caught == true)
 	{
-		m_rope_delete_r_kye = false;
-
-		if (Input::GetMouButtonR() == false)////右クリックしていないときtrueにする
-		{
-			m_rope_delete_r_kye = true;
-		}
+		m_rope_delete_r_kye = true; //ロープを消せるようにする（ロープ側で処理）
 	}
 
 	//射出終了------------------------------------------------
