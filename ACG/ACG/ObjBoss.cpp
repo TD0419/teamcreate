@@ -36,7 +36,7 @@ void CObjBoss::Init()
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
-	m_die_flag = true;
+	m_die_flag = false;
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
 }
@@ -109,9 +109,6 @@ void CObjBoss::Action()
 	if (m_hp <= 0)
 	{
 		m_die_flag = true;
-	}
-	if (m_die_flag == true)
-	{
 		Hits::DeleteHitBox(this);	//BOSSが所有するHitBoxに削除する
 		this->SetStatus(false);		//自身に削除命令を出す
 		return;

@@ -39,14 +39,15 @@ void CObjDoor::Action()
 	//ボスの情報を呼ぶの
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 	bool boss_delete = false;
-	//ボスがいなくなったら。
+
+	//ボスがいたら。
 	if (objboss != nullptr)
 	{
 		boss_delete = objboss->GetDieFlag();//boss_deleteに情報を入れる。
 	}
 	else
 	{
-		boss_delete = false;//ボスはいます
+		boss_delete = false;//ボスは死んでない。
 	}
 	//ボスが消滅したとき
 	if (boss_delete == true)
@@ -59,6 +60,7 @@ void CObjDoor::Action()
 	{
 		m_ani_door_time += 1;//アニメーションタイム+１
 	}
+
 	//ドアアニメタイムがマックスタイムより少なく、フレームが2じゃないとき
 	if (m_ani_door_time > m_ani_door_time_max&&m_ani_door_frame != 2)
 	{
@@ -67,20 +69,16 @@ void CObjDoor::Action()
 		Audio::Start(DOOR);//ドア音楽スタート
 	}
 	//ドアフレームが2のとき
-	if (m_ani_door_frame == 1)
+	if (m_ani_door_frame == 2)
 	{
-		m_ani_door_frame = 1;//フレームを2に固定
-
-		
-		return;
+		m_ani_door_frame = 2;//フレームを2に固定
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+		{
+			//ステージカウントを増やして次のステージにする
+			((UserData*)Save::GetData())->stagenum += 1;
+			Scene::SetScene(new CSceneMain());
+		}
 	}
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		//ステージカウントを増やして次のステージにする
-		((UserData*)Save::GetData())->stagenum += 1;
-		Scene::SetScene(new CSceneMain());
-	}
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
