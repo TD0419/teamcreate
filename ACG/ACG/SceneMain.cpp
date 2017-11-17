@@ -261,9 +261,6 @@ void CSceneMain::ImageDataLoading()
 	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"Image\\zanki.png", GRA_LIFE, TEX_SIZE_64);
 	
-	//看板(本体)画像読み込み
-	//Draw::LoadImageW(L"", GRA_SIGN_MAIN, TEX_SIZE_256);イラスト決まってから読み込んでください
-
 	//回転ブロックの画像読み込み
 	Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 

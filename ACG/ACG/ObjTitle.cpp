@@ -13,6 +13,7 @@ void CObjTitle::Init()
 {
 	m_mode = 0;				//モード選択変数の初期化
 	m_keypush_flag = true;	//キーフラグの初期化
+	m_time = 0;
 
 	//文字のグラフィック作成
 	Font::SetStrTex(L"Start");	//スタート
@@ -28,7 +29,7 @@ void CObjTitle::Init()
 //アクション
 void CObjTitle::Action()
 {
-
+	m_time++;
 	//↑キーが押された時
 	if (Input::GetVKey(VK_UP) == true)
 	{
@@ -53,11 +54,13 @@ void CObjTitle::Action()
 	else
 		m_keypush_flag = true;//キーフラグをオンにする
 		
-	//エンターキーが押された時
-	if (Input::GetVKey(VK_RETURN) == true)
+	if (m_time >= 60) // ゲームオーバーからすぐにメインに飛んでしまうので60フレーム立たないと動かないように
 	{
-		switch (m_mode)
+		//エンターキーが押された時
+		if (Input::GetVKey(VK_RETURN) == true)
 		{
+			switch (m_mode)
+			{
 			case 0:
 			{
 				//シーンメインに移動
@@ -74,9 +77,9 @@ void CObjTitle::Action()
 				//ゲーム終了
 				break;
 			}
+			}
 		}
 	}
-
 }
 
 //ドロー

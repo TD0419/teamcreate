@@ -20,4 +20,5 @@ public:
 private:
 	int m_mode;				//モードの選択用変数(0～2)
 	bool m_keypush_flag;	//キーのトリガー処理用フラグ
+	int m_time;             //ゲームオーバーからくるとすぐに飛んでしまうんでそれを制御する変数
 };
