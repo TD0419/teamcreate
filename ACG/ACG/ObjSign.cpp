@@ -12,6 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjSign::CObjSign(int x, int y)
 {
+	m_map_x = x;
+	m_map_y = y;
 	m_px = x * BLOCK_SIZE;
 	m_py = y * BLOCK_SIZE;
 }
@@ -22,8 +24,14 @@ void CObjSign::Init()
 	//フラグ初期化
 	m_strdrow = false;
 
-	//文字セット
-	Font::SetStrTex(L"???「ロープを使うのだよ諸君！」");
+	//ステージ1の二個目の看板のテキスト
+	if (m_map_x == 68 && m_map_y == 22)
+	{
+		//文字セット
+		Font::SetStrTex(L"「岩は銃で壊れるぞ」");
+	}
+	else
+	Font::SetStrTex(L"???「ロープを使うのだよ諸君！」"); //一個目の看板のテキスト
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE+32, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -80,7 +88,15 @@ void CObjSign::Draw()
 	{
 		//描画
 		Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
-		Font::StrDraw(L"???「ロープを使うのだよ諸君！」", dst.m_left, dst.m_top + 32.0f , 32.0f, color_str);
+
+		//ステージ1の二個目の看板のテキスト
+		if (m_map_x == 68 && m_map_y == 22)
+		{
+			//文字セット
+			Font::StrDraw(L"「岩は銃で壊れるぞ」", dst.m_left + 28.0f, dst.m_top + 48.0f, 32.0f, color_str);
+		}
+		else
+		Font::StrDraw(L"???「ロープを使うのだよ諸君！」", dst.m_left, dst.m_top + 32.0f , 32.0f, color_str); //一個目の看板のテキスト
 	}
 	//----------------------------------------------------------------------------
 

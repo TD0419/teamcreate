@@ -63,14 +63,17 @@ void CObjWood::Action()
 	{
 		CObjLeverSwich* objlever_swich = (CObjLeverSwich*)Objs::GetObj(OBJ_LEVER_SWICH);
 		// 回転フラグが立っていれば
-		if (objlever_swich->GetWood() == true)
+		if (objlever_swich != nullptr)
 		{
-			if (a == false)
+			if (objlever_swich->GetWood() == true)
 			{
-				Audio::Start(TREE);
-				a = true;
+				if (a == false)
+				{
+					Audio::Start(TREE);
+					a = true;
+				}
+				m_r -= 1.0f;//木をまわす
 			}
-			m_r -= 1.0f;//木をまわす
 		}
 		
 		//木の画像の位置更新
