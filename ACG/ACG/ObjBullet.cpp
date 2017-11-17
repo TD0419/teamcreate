@@ -147,16 +147,22 @@ void CObjBullet::Action()
 		HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 		hit_data = hit->SearchObjNameHit(OBJ_BLOCK);//衝突の情報をhit_dataに入れる
 
-		float r = hit_data[0]->r;
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				float r = hit_data[i]->r;
 
-		//上　または　下で衝突している場合
-		if (45 <= r && r < 135 || 225 <= r && r < 315)
-		{
-			m_vy *= (-1);//移動ベクトルの上下を反転する
-		}
-		else //左または右で衝突している場合
-		{
-			m_vx *= (-1);//移動ベクトルの左右を反転する
+				//上　または　下で衝突している場合
+				if (45 <= r && r < 135 || 225 <= r && r < 315)
+				{
+					m_vy *= (-1);//移動ベクトルの上下を反転する
+				}
+				else //左または右で衝突している場合
+				{
+					m_vx *= (-1);//移動ベクトルの左右を反転する
+				}
+			}
 		}
 	}
 

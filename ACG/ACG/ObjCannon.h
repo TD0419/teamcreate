@@ -11,7 +11,7 @@ using namespace GameL;
 class CObjCannon :public CObj
 {
 public:
-	CObjCannon(float x,float y); 	//コンストラクタ
+	CObjCannon(int x,int y); 	//コンストラクタ
 	~CObjCannon() {};			//デストラクタ
 	void Init();				//イニシャライズ
 	void Action();				//アクション
