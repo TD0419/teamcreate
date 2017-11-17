@@ -30,7 +30,8 @@ void CObjWood::Init()
 	//初期の木の画像の位置
 	m_wood_image_x = m_px + (WOOD_SIZE - 64.0000f);
 	m_wood_image_y = m_py;
-	a = false;
+	m_audio_start_flag = false;//木の音を鳴らすフラグ
+
 	//当たり判定
 	Hits::SetHitBox(this, m_wood_image_x, m_wood_image_y, 64, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
 }
@@ -63,17 +64,14 @@ void CObjWood::Action()
 	{
 		CObjLeverSwich* objlever_swich = (CObjLeverSwich*)Objs::GetObj(OBJ_LEVER_SWICH);
 		// 回転フラグが立っていれば
-		if (objlever_swich != nullptr)
+		if (objlever_swich->GetWood() == true)
 		{
-			if (objlever_swich->GetWood() == true)
+			if (m_audio_start_flag == false)
 			{
-				if (a == false)
-				{
-					Audio::Start(TREE);
-					a = true;
-				}
-				m_r -= 1.0f;//木をまわす
+				Audio::Start(TREE);
+				m_audio_start_flag = true;
 			}
+			m_r -= 1.0f;//木をまわす
 		}
 		
 		//木の画像の位置更新

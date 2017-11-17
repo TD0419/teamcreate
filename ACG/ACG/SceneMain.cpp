@@ -305,7 +305,7 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", SOUND_TYPE::EFFECT);
 
 	//ƒŠƒtƒg
-	Audio::LoadAudio(LIFT, L"Lift Trick Pull", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(LIFT, L"LiftTrickRelease", SOUND_TYPE::EFFECT);
 
 	
 //------------------------------------------------------------

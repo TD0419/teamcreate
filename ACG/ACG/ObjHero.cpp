@@ -366,7 +366,6 @@ void CObjHero::Action()
 			m_rope_moux = Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
 			m_rope_mouy = Input::GetPosY(); //ロープを射出したときのマウスの位置Yを入れる
 			m_rope_ani_con = true;
-			
 		}
 	}
 
