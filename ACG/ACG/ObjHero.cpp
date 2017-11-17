@@ -750,13 +750,16 @@ void CObjHero::Draw()
 	if (m_hero_die_water == true | m_hero_die_enemy == true | m_py > 2000.0f)
 	{
 		int ball_y = 0;
+		//落下時の中央位置
 		static float screen_out = m_py;
+
 		//中央位置設定       
 		int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX()); 
 		
+		//落下時の半径の中央位置
 		if(m_py > 2000.0f)
 			 ball_y = (int)(screen_out - 1450.0f + HERO_SIZE_HEIGHT /1.5f  );
-		
+		//落下時以外の半径の中央位置
 		else
 			 ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
 			
