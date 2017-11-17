@@ -197,7 +197,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
 
 	//ボス画像読み込み
-	Draw::LoadImageW(L"Image\\image.png", GRA_BOSS, TEX_SIZE_1024);
+	Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1024);
 
 	//ハシゴ画像読み込み
 	Draw::LoadImageW(L"Image\\Ladders.png", GRA_LADDERS, TEX_SIZE_64);
@@ -225,9 +225,6 @@ void CSceneMain::ImageDataLoading()
 	
 	//ロープスイッチ画像読み込み
 	Draw::LoadImageW(L"Image\\RopeSwitch.png", GRA_ROPE_SWITCH, TEX_SIZE_64);
-
-	//大砲画像読み込み
-	Draw::LoadImageW(L"Image\\image4.png", GRA_CANNON, TEX_SIZE_64);
 	
 	//看板の枠線画像読み込み
 	Draw::LoadImageW(L"Image\\Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
@@ -301,11 +298,11 @@ void CSceneMain::AudioDataLoading()
 	//ボタン
 	Audio::LoadAudio(BUTTON, L"Switch2.wav", SOUND_TYPE::EFFECT);
 
-	//木の転倒
+	//敵の弾丸
 	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", SOUND_TYPE::EFFECT);
 
 	//リフト
-	Audio::LoadAudio(LIFT, L"LiftTrickRelease", SOUND_TYPE::EFFECT);
+	//Audio::LoadAudio(LIFT, L"LiftTrickRelease", SOUND_TYPE::EFFECT);
 
 	
 //------------------------------------------------------------
