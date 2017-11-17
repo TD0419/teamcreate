@@ -55,17 +55,100 @@ void CObjLastWall::Init()
 //アクション
 void CObjLastWall::Action()
 {
+	
 	//HitBoxの位置の変更
+	//引数で持ってきたオブジェクトとあたっているか調べる
 	CHitBox* hit = Hits::GetHitBox(this);
-	HIT_DATA** hit_data;		//主人公の衝突の情報を入れる構造体
-	HIT_DATA** hit_data_enemy;	//敵の衝突の情報を入れる構造体
-
-	hit_data = hit->SearchObjNameHit(OBJ_HERO);//主人公の衝突の情報をhit_dataに入れる
-	hit_data_enemy = hit->SearchObjNameHit(OBJ_ENEMY);//敵の衝突の情報をhit_dataに入れる
 
 	//主人公オブジェクトを持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//敵オブジェクと持ってくる
+	CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		HIT_DATA** hit_data;		//主人公の衝突の情報を入れる構造体
+		hit_data = hit->SearchObjNameHit(OBJ_HERO);//主人公の衝突の情報をhit_dataに入れる
+		for (int i=0;i < hit->GetCount();i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				float r=0.0f;
+				
+				r=hit_data[i]->r;
+				if (0 < r && r < 85 || 275 < r && r < 360)
+				{
+					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+					objhero->SetPosX(m_px + 62.0f);//主人公の位置をLastWallの右側までずらす
+				}
+
+				//LastWallの上側が衝突している場合
+				else if (85 < r && r < 94)
+				{
+
+					objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+					objhero->SetPosY(m_py - 60.0f);//主人公の位置をLastWallの上側までずらす
+				}
+
+				//LastWallの左側が衝突している場合
+				else if (94 < r && r < 266)
+				{
+					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+										   //objhero->SetPosX(m_px - HERO_SIZE_WIDTH+28.0f);//主人公の位置をLastWallの左側までずらす
+					m_hero_hit_flag = true;
+
+
+				}
+
+				//LastWallの下側が衝突している場合
+				else if (266 < r && r < 275)
+				{
+					objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
+					objhero->SetPosY(m_py + 512.0f);//主人公の位置をLastWallの下側までずらす
+					
+				}
+
+			}
+		}
+	}
+	else if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
+	{
+		HIT_DATA** hit_data_enemy;	//敵の衝突の情報を入れる構造体
+		hit_data_enemy = hit->SearchObjNameHit(OBJ_ENEMY);//敵の衝突の情報をhit_dataに入れる
+
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			if (hit_data_enemy[i] != nullptr)
+			{
+				float r = 0.0f;
+				r = hit_data_enemy[i]->r;
+
+
+				//LastWallの右側が衝突している場合
+				if (0 < r && r < 85 || 275 < r && r < 360)
+				{
+					objenemy->SetVX(2.0f);//主人公のX方向の移動を０にする
+					objenemy->SetPosture(1.0f);
+				}
+				else if (94 < r && r < 266)
+				{
+					objenemy->SetVX(-2.0f);//主人公のX方向の移動を０にする
+					objenemy->SetPosture(0.0f);//主人公の位置をLastWallの左側までずらす
+				}
+
+			}
+		}
+	}
+	
+	
+
+	
+
+	
+	
+
+	
+	
 	//// ボタンオブジェクトを持ってくる
 	//CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
 	
@@ -75,7 +158,7 @@ void CObjLastWall::Action()
 
 	//ボスの情報を呼ぶの
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-	CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	
 
 
 		////ボタンを押してたら扉を開くフラグオン
@@ -123,7 +206,7 @@ void CObjLastWall::Action()
 			}
 		}
 
-
+/*
 	//当たり判定-----------------------------------------------
 	for (int i = 0; i < hit->GetCount(); i++)
 	{
@@ -151,13 +234,10 @@ void CObjLastWall::Action()
 			else if (94 < r && r < 266)
 			{
 				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				objhero->SetPosX(m_px - HERO_SIZE_WIDTH+28.0f);//主人公の位置をLastWallの左側までずらす
+				//objhero->SetPosX(m_px - HERO_SIZE_WIDTH+28.0f);//主人公の位置をLastWallの左側までずらす
 				m_hero_hit_flag = true;
 
-				if (objenemy != nullptr)
-				{
-					objenemy->SetVX(-1.0f);
-				}
+				
 			}
 
 			//LastWallの下側が衝突している場合
@@ -167,10 +247,58 @@ void CObjLastWall::Action()
 				objhero->SetPosY(m_py + 512.0f);//主人公の位置をLastWallの下側までずらす
 			}
 		}
+		
+		
+		
 	}
+	*/
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px+29, m_py+65);
 }
+//指定したオブジェクトの上側に当たっているかしらべる
+//引数　調べたいオブジェクトネーム
+//戻り値　着地していれば:true　していなければ:false
+//bool CObjHero::HitUpCheck(int obj_name)
+//{
+//	//自身のHitBoxをもってくる
+//	CHitBox*hit = Hits::GetHitBox(this);
+//
+//	//引数で持ってきたオブジェクトとあたっているか調べる
+//	if (hit->CheckObjNameHit(obj_name) != nullptr)
+//	{
+//		HIT_DATA** hit_data;	//衝突の情報を入れる構造体
+//		hit_data = hit->SearchObjNameHit(obj_name);//衝突の情報をhit_dataに入れる
+//
+//												   //あたっている数分調べる
+//		for (int i = 0; i < hit->GetCount(); i++)
+//		{
+//			//データがあれば
+//			if (hit_data[i] != nullptr)
+//			{
+//				//衝突した相手の位置、幅、高さ情報を取得
+//				HIT_BOX* hit = Hits::GetHitBox(hit_data[i]->o)->GetHitBox();
+//				//マップオブジェクトを持ってくる
+//				CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+//
+//				//HitTestOfAB関数を使うと変更されてしまうので仮変数作成
+//				float hero_x = m_px;
+//				float hero_y = m_py;
+//				float hero_vx = m_vx;
+//				float hero_vy = m_vy;
+//				//衝突した方向を取得
+//				int collision = HitTestOfAB(hit->x + objmap->GetScrollX(), hit->y + objmap->GetScrollY(), hit->w, hit->h,
+//					&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
+//					&hero_vx, &hero_vy
+//				);
+//				//主人公から見て下に衝突したら着地している
+//				if (collision == 2)
+//					return true;
+//			}
+//		}
+//	}
+//	return false;//着地していない
+//}
+
 
 //ドロー
 void CObjLastWall::Draw()

@@ -184,7 +184,7 @@ void CObjMap::CreateObj(int x, int y)
 		case MAP_ENEMY://ìGçÏê¨
 		{
 			CObjEnemy* objenemy = new CObjEnemy(x, y);
-			Objs::InsertObj(objenemy, OBJ_ENEMY, 9);
+			Objs::InsertObj(objenemy, OBJ_ENEMY, 10);
 			break;
 		}
 

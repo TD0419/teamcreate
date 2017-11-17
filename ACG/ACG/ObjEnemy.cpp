@@ -146,7 +146,14 @@ void CObjEnemy::Action()
 			m_posture = 1.0f;
 		}
 	}
+	/*
+	float enemy_x = m_px;
+	float enemy_y = m_py;
+	float enemy_vx = m_vx;
+	float enemy_vy = m_vy;
 
+	HitTestOfAB();
+*/
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
 	m_py += m_vy;
