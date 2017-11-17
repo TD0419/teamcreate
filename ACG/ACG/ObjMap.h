@@ -26,7 +26,7 @@ public:
 	int  GetMap(int x, int y);
 
 	//マップのフラグを更新する
-	void SetMapCreate(int x, int y, int f) { m_map[y][x].create = f; }
+	void SetMapCreate(int x, int y, bool f) { m_map[y][x].create = f; }
 
 	//マップをもとにしたオブジェクトの生成関連----------------------------------
 	void CreateObj(int x, int y);//オブジェクトの生成を行う

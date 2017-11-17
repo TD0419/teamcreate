@@ -124,6 +124,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ObjDiffusionGimmick.cpp" />
+    <ClCompile Include="ObjHeroAction.cpp" />
+    <ClCompile Include="ObjHeroInit.cpp" />
     <ClCompile Include="ObjLastWall.cpp" />
     <ClCompile Include="ObjBackGround.cpp" />
     <ClCompile Include="ObjCannon.cpp" />

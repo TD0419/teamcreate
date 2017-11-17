@@ -101,7 +101,7 @@ void CObjLastWall::Action()
 		if (a == false)
 		{
 			// hitboxが小さくなる
-			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32, 512 - m_wall_gauge);
+			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 512.0f - m_wall_gauge);
 		}
 
 		if (m_wall_gauge2 >= 512)
@@ -115,7 +115,7 @@ void CObjLastWall::Action()
 				m_wall_gauge2 += 8;
 				// hitboxが小さくなる
 				Audio::Start(WALL);//開門の音楽スタート
-				HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32, 0 + m_wall_gauge2);
+				HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 0.0f + m_wall_gauge2);
 
 			}
 		}
@@ -194,16 +194,16 @@ void CObjLastWall::Draw()
 		Draw::Draw(GRA_LAST_WALL, &src, &dst, color, 0.0f);
 
 		//切り取り位置
-		src.m_top = 0.0 + m_wall_gauge;
+		src.m_top = 0.0f + m_wall_gauge;
 		src.m_left = 0.0f;
 		src.m_right = 32.0f;
 		src.m_bottom = 512.0f;
 
 		//描画位置
-		dst.m_top = m_py - objmap->GetScrollY() + 65;
-		dst.m_left = m_px - objmap->GetScrollX() + 30;
-		dst.m_right = dst.m_left + 32;
-		dst.m_bottom = dst.m_top + 512-m_wall_gauge;
+		dst.m_top = m_py - objmap->GetScrollY() + 65.0f;
+		dst.m_left = m_px - objmap->GetScrollX() + 30.0f;
+		dst.m_right = dst.m_left + 32.0f;
+		dst.m_bottom = dst.m_top + 512.0f - m_wall_gauge;
 
 		//描画(下の部分)
 		Draw::Draw(GRA_OPEN_WALL, &src, &dst, color, 0.0f);
@@ -226,7 +226,7 @@ void CObjLastWall::Draw()
 		Draw::Draw(GRA_LAST_WALL3, &src, &dst, color, 0.0f);
 
 		//切り取り位置
-		src.m_top = 0.0 + m_wall_gauge;
+		src.m_top = 0.0f + m_wall_gauge;
 		src.m_left = 0.0f;
 		src.m_right = 32.0f;
 		src.m_bottom = 512.0f;
