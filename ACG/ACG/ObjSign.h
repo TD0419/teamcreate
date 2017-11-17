@@ -20,4 +20,8 @@ private:
 	float m_px;		//位置X
 	float m_py;		//位置Y
 	bool m_strdrow;	//文字を表示させるかのフラグ
+
+	//マップ上の位置（要素数）
+	int m_map_x;//X
+	int m_map_y;//Y
 };

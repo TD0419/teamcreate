@@ -30,7 +30,7 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
-	m_black_radius = 768;
+	m_black_radius = 770;
 
 	m_mous_x = 0.0f;            //マウスの位置X
 	m_mous_y = 0.0f;		    //マウスの位置X
@@ -44,6 +44,7 @@ void CObjHero::Init()
 	m_rope_delete_r_kye = false;//アニメーション用ロープが消えたかどうかを管理する 
 	m_hero_die_water = false;
 	m_hero_die_enemy = false;
+	m_hero_die_screen_out = false;
 
 	m_ladder_updown = 0;
 	m_ladder_ani_updown = 0;
@@ -119,8 +120,8 @@ void CObjHero::Action()
 		}
 	}
 	//落下にリスタート----------------------------------
-	//m_pyが1000以下ならリスタートする
-	if (m_py > 2000.0f)
+	//m_pyが2000以下ならリスタートする
+	if (m_hero_die_screen_out == true)
 	{
 		//場外に出たらリスタート
 		Scene::SetScene(new CSceneMain(-1));
@@ -745,11 +746,22 @@ void CObjHero::Draw()
 
 	//画面全体をだんだん暗くする処理----------------------------------
 	//死んだことが確定した場合
-	if (m_hero_die_water == true | m_hero_die_enemy == true)
+	if (m_hero_die_water == true | m_hero_die_enemy == true | m_py > 2000.0f)
 	{
+		int ball_y = 0;
+		//落下時の中央位置
+		static float screen_out = m_py;
+
 		//中央位置設定       
 		int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX()); 
-		 int ball_y = (int)(m_py + HERO_SIZE_HEIGHT /1.5f  - objmap->GetScrollY());
+		
+		//落下時の半径の中央位置
+		if(m_py > 2000.0f)
+			 ball_y = (int)(screen_out - 1450.0f + HERO_SIZE_HEIGHT /1.5f  );
+		//落下時以外の半径の中央位置
+		else
+			 ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
+			
 		//半径初期
 		
 		//半径をだんだん短くする
@@ -760,6 +772,10 @@ void CObjHero::Draw()
 		//長ければ長いほど軽く
 		//短ければ短いほど重いよ
 		int one_side = 6;
+
+		//半径が最小になったらシーン移行する（上のほうにある）
+		if (m_black_radius == 0)
+			Scene::SetScene(new CSceneMain(-1));
 
 		//円外を四角形で埋め尽くす
 		for (int y = 0; y < WINDOW_SIZE_H; y+= one_side)

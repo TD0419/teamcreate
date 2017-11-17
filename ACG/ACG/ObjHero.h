@@ -60,6 +60,7 @@ private:
 	
 	bool  m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）
 	bool  m_hero_die_enemy;		  //主人公が敵にあたったかどうかを調べる変数（死）
+	bool  m_hero_die_screen_out;  //主人公が画面外（落ちた時）に行ったかどうか調べる変数（死）（シーン移行用）
 
 	int m_ladder_updown; //はしごHit管理
 	int m_ladder_ani_updown; //はしごアニメーション管理
