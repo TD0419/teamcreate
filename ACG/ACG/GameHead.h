@@ -118,11 +118,16 @@ enum MAP_BER
 	MAP_CANNON				,			//砲台
 	MAP_REFLECT_BLOCK		,			//反射ブロック
 	MAP_STAGE3_BOSS			,			//ステージ３のボス
-
-	//ステージ4のみに使用するオブジェクト描画番号
+	MAP_ENDLESS_SPRING		,			//敵自動生成ギミック
+	MAP_OPEN_DOOR_SWITCH    ,			//シャッター開く用スイッチ	
 
 	//ステージ5のみに使用するオブジェクト描画番号
-	
+	MAP_ROLL_BROCK_TYPE_AUTO	,		//自動式回転するブロック
+	MAP_ROLL_BROCK_TYPE_MANUAL	,		//手動式90度回転するブロック
+	MAP_HOOK_GIMMICK			,		//ロープでぶら下がれるギミック
+	MAP_NEEDLE					,		//トゲ
+	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
+	MAP_STAGE5_BOSS				,		//ステージ5のボス
 
 };
 

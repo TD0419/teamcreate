@@ -62,21 +62,15 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objtime, OBJ_TIME, 100);
 
 	//デバッグ　”使い終わったら消してください！”----------------
+	
 	//要らんの--------------------------------------------------
-
-
-
-	//要るの-----------------------------------------------
-
-	//テスト用回転床パターン1
-	CObjRollBlock* p = new CObjRollBlock(10, 20,1);
-	Objs::InsertObj(p, OBJ_ROLL_BLOCK, 10);
-
-	//デバッグ--------------------------------------------
+	//要るの--------------------------------------------------
+	
+	//デバッグ--------------------------------------------------
 
 	//BGM再生
-	Audio::Start(STAGE1);
-	/*Audio::Start(STAGE2);
+	/*Audio::Start(STAGE1);
+	Audio::Start(STAGE2);
 	Audio::Start(STAGE5);*/
 
 }
@@ -108,7 +102,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 		p = Save::ExternalDataOpen(L"stage2.csv", &size);//外部データ読み込み
 		break;
 	case 3:
-		p = Save::ExternalDataOpen(L"StageA.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"Stage3.csv", &size);//外部データ読み込み
 		break;
 	default:
 		break;
@@ -259,41 +253,41 @@ void CSceneMain::AudioDataLoading()
 //BGM--------------------------------------------------------
 
 	//ステージ1
-	Audio::LoadAudio(STAGE1, L"Grassland6.wav",SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(STAGE1, L"Grassland2.wav",BACK_MUSIC);
 	//ステージ2
-	Audio::LoadAudio(STAGE2, L"Jangle1.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(STAGE2, L"Jangle1.wav", BACK_MUSIC);
 
 	//ステージ2_BOSS
-	Audio::LoadAudio(STAGE2_BOSS, L"BOSS1.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(STAGE2_BOSS, L"BOSS1.wav", BACK_MUSIC);
 
 	//ステージ5
-	Audio::LoadAudio(STAGE5, L"Temple1.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(STAGE5, L"Temple1.wav", BACK_MUSIC);
 //------------------------------------------------------------
 
 //SE--------------------------------------------------------
 	//弾の発射
-	Audio::LoadAudio(FIRING, L"Firing1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(FIRING, L"Firing1.wav", EFFECT);
 
 	//縄の打ち出し
-	Audio::LoadAudio(ROPE, L"Rope2.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(ROPE, L"Rope2.wav", EFFECT);
 
 	//岩の爆発
 	Audio::LoadAudio(ROCK, L"Rock2.wav", SOUND_TYPE::EFFECT);
 
 	//最後の壁の開閉
-	Audio::LoadAudio(WALL, L"Door1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(WALL, L"Door1.wav", EFFECT);
 
 	//木の転倒
 	Audio::LoadAudio(TREE, L"Tree3.wav", SOUND_TYPE::EFFECT);
 
 	//ドアの開錠
-	Audio::LoadAudio(DOOR, L"Wood Door.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(DOOR, L"Wood Door.wav",EFFECT);
 
 	//敵に着弾
-	Audio::LoadAudio(LANDING, L"Landing1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(LANDING, L"Landing1.wav", EFFECT);
 
 	//レバースイッチ
-	Audio::LoadAudio(LEVER, L"Lever1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(LEVER, L"Lever1.wav", EFFECT);
 
 	//ボタン
 	Audio::LoadAudio(BUTTON, L"Switch2.wav", SOUND_TYPE::EFFECT);

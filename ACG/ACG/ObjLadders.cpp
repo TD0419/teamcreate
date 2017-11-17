@@ -110,13 +110,13 @@ void CObjLadders::HeroHit(float px, float py)
 		if (map_num_up == MAP_LADDERS || map_num_center == MAP_LADDERS || map_num_down == MAP_LADDERS ||
 			map_num_up == MAP_NO_LOOK_LADDERS || map_num_center == MAP_NO_LOOK_LADDERS || map_num_down == MAP_NO_LOOK_LADDERS)
 		{
-			objhero->SetVecY(0.0f);//yの移動方向を初期化
-			objhero->SetHitDown(true);//着地状態にする
-			objhero->SetLadderJump(1);//1を渡す
+			objhero->SetLadderJump(1);	//1を渡す
+			objhero->SetHitDown(true);	//着地状態にする
+			objhero->SetVecY(0.0f);		//
 			//Wキーがおされたとき 上るとき
 			if (Input::GetVKey('W') == true)
 			{
-				objhero->SetVecY(-2.0f);
+				objhero->SetVecY(-2.0f);//上方向への移動ベクトルをセットする
 
 				//はしごを上りきる時に2を渡す
 				if (map_num_ladder_up == MAP_SPACE)
@@ -129,14 +129,14 @@ void CObjLadders::HeroHit(float px, float py)
 				}
 				objhero->SetLaddersAniUpdown(1);//アニメーションを進める
 			}
-
 			//Sキーがおされたとき　下るとき
 			else if (Input::GetVKey('S') == true)
 			{
+				objhero->SetVecY(2.0f);//下方向への移動ベクトルをセットする
+
 				//下に通常ブロックが無かったら
 				if (objhero->GetBlockType() != MAP_BLOCK)
 				{
-					objhero->SetVecY(2.0f);
 					objhero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
 					objhero->SetLaddersAniUpdown(1);//アニメーションを進める
 				}
@@ -145,6 +145,7 @@ void CObjLadders::HeroHit(float px, float py)
 			else
 			{
 				objhero->SetLaddersAniUpdown(0);//アニメーションを止める
+
 			}
 		}
 		else
@@ -155,3 +156,4 @@ void CObjLadders::HeroHit(float px, float py)
 	}
 	
 }
+
