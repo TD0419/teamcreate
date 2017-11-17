@@ -57,8 +57,11 @@ void CObjLastWall::Action()
 {
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
-	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
-	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
+	HIT_DATA** hit_data;		//主人公の衝突の情報を入れる構造体
+	HIT_DATA** hit_data_enemy;	//敵の衝突の情報を入れる構造体
+
+	hit_data = hit->SearchObjNameHit(OBJ_HERO);//主人公の衝突の情報をhit_dataに入れる
+	hit_data_enemy = hit->SearchObjNameHit(OBJ_ENEMY);//敵の衝突の情報をhit_dataに入れる
 
 	//主人公オブジェクトを持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -129,7 +132,7 @@ void CObjLastWall::Action()
 		{
 			float r = hit_data[i]->r;//あたっている角度をもってくる
 
-									 //LastWallの右側が衝突している場合
+			//LastWallの右側が衝突している場合
 			if (0 < r && r < 85 || 275 < r && r < 360)
 			{
 				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
@@ -150,6 +153,11 @@ void CObjLastWall::Action()
 				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 				objhero->SetPosX(m_px - HERO_SIZE_WIDTH+28.0f);//主人公の位置をLastWallの左側までずらす
 				m_hero_hit_flag = true;
+
+				if (objenemy != nullptr)
+				{
+					objenemy->SetVX(-1.0f);
+				}
 			}
 
 			//LastWallの下側が衝突している場合

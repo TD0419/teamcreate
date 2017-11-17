@@ -262,7 +262,7 @@ void CSceneMain::AudioDataLoading()
 //BGM--------------------------------------------------------
 
 	//ステージ1
-	Audio::LoadAudio(STAGE1, L"Grassland2.wav",SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(STAGE1, L"Grassland6.wav",SOUND_TYPE::BACK_MUSIC);
 	//ステージ2
 	Audio::LoadAudio(STAGE2, L"Jangle1.wav", SOUND_TYPE::BACK_MUSIC);
 
@@ -281,13 +281,13 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(ROPE, L"Rope2.wav", SOUND_TYPE::EFFECT);
 
 	//岩の爆発
-	Audio::LoadAudio(ROCK, L"Rock1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(ROCK, L"Rock2.wav", SOUND_TYPE::EFFECT);
 
 	//最後の壁の開閉
 	Audio::LoadAudio(WALL, L"Door1.wav", SOUND_TYPE::EFFECT);
 
 	//木の転倒
-	Audio::LoadAudio(TREE, L"Tree1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(TREE, L"Tree3.wav", SOUND_TYPE::EFFECT);
 
 	//ドアの開錠
 	Audio::LoadAudio(DOOR, L"Wood Door.wav", SOUND_TYPE::EFFECT);
@@ -299,10 +299,10 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(LEVER, L"Lever1.wav", SOUND_TYPE::EFFECT);
 
 	//ボタン
-	Audio::LoadAudio(BUTTON, L"Switch3.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(BUTTON, L"Switch2.wav", SOUND_TYPE::EFFECT);
 
 	//木の転倒
-	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", SOUND_TYPE::EFFECT);
 
 	//リフト
 	Audio::LoadAudio(LIFT, L"Lift Trick Pull", SOUND_TYPE::EFFECT);
