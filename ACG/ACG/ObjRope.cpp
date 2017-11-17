@@ -53,7 +53,7 @@ CObjRope::CObjRope(float arm_x, float arm_y,float mous_x,float mous_y)
 void CObjRope::Init()
 {
 	m_caught_flag = false;//false = フラグOFF true = フラグON
-	m_delete = false;     //false = フラグOFF true = フラグON
+	m_r_key_flag = false;
 	
 	//ブロックとの当たり判定フラグの初期化
 	m_hit_up = false;
@@ -76,29 +76,22 @@ void CObjRope::Action()
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
-		m_delete =true;  //ロープは消えていることを変数に入れる
 		return;
 	}
-	else
-		m_delete =false;//ロープは消えていないことを変数に入れる
 	
 	//HitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	// ブロックオブジェクトを持ってくる
-	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//ロープの削除条件を調べる
+	RopeDelete();
 
-	//ブロックとの当たり判定
-	objblock->AllBlockHit(&m_px, &m_py, ROPE_SIZE, ROPE_SIZE,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
-
-	//ブロックとあたっていれば削除する
-	if (m_hit_up == true || m_hit_down == true || m_hit_right == true || m_hit_left == true)
+	//ロープスイッチと当たってないならRキーを押せる
+	if (m_caught_flag == false)
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
-		m_delete = true;  //ロープの削除フラグをオンにする
-		return;
+		if (Input::GetMouButtonR() == true)
+		{
+			m_r_key_flag = true; //ロープをRキーで消せないようにする
+		}
 	}
 
 	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
@@ -109,21 +102,16 @@ void CObjRope::Action()
 		m_py -= m_vy ;
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
 	
+		//　Rキーを押してないならロープをRキーで消せるようにする
+		if (Input::GetMouButtonR() == false)
+		{
+			m_r_key_flag = false;
+		}
+
 		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
 		objhero->SetVecX(0.0f);
 	}
-	//ロープが消していいかどうかを調べる
-	bool rope_delete_ani_con = objhero->GetRopeDeleteAniCon();
-
-	//ロープ引っかかり判定がONの時、Rが押されたらロープを削除
-	if (Input::GetMouButtonR() == true && m_caught_flag==true && rope_delete_ani_con == true)
-	{
-		m_delete = true;			//ロープは消えていることを変数に入れる
-		m_caught_flag = false;		//ロープ引っかかりフラグをOFFにする
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
-		return;
-	}
+	
 
 	//引っ掛けたまま移動すると、ロープがズレて外れます。
 	//ロープを引っ掛けているときは主人公は動かない(移動できない)仕様が実装で改善予定
@@ -261,5 +249,50 @@ void CObjRope::RopeDraw(float color[])
 			drow_px += drow_vx;
 			drow_py += drow_vy;
 		}
+	}
+}
+
+//ロープの消える条件を調べる
+void CObjRope::RopeDelete()
+{
+	//HitBoxの情報を持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	//主人公のオブジェクトを持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+	// ブロックオブジェクトを持ってくる
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	//ブロックとの当たり判定
+	objblock->AllBlockHit(&m_px, &m_py, ROPE_SIZE, ROPE_SIZE,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+
+	//ブロックとあたっていれば削除する
+	if (m_hit_up == true || m_hit_down == true || m_hit_right == true || m_hit_left == true)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
+	//岩に当たった場合ロープを消す
+	if (hit->CheckObjNameHit(OBJ_ROCK) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
+	//ロープが消していいかどうかを調べる
+	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();
+
+	//ロープ引っかかり判定がONの時、Rが押されたらロープを削除
+	if (Input::GetMouButtonR() == true && m_r_key_flag == false && m_caught_flag == true && rope_delete_r_key == true)
+	{
+		m_caught_flag = false;		//ロープ引っかかりフラグをOFFにする
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+		return;
 	}
 }

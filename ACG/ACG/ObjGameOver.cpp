@@ -24,7 +24,13 @@ void CObjGameOver::Init()
 //アクション
 void CObjGameOver::Action()
 {
-	
+	//エンターキーが押された時
+	if (Input::GetVKey(VK_RETURN) == true)
+	{
+		//シーンメインに移動
+		Scene::SetScene(new CSceneTitle());
+		return;
+	}
 }
 
 //ドロー

@@ -372,15 +372,16 @@ void CObjHero::Action()
 	if (obj_rope != nullptr)//ロープオブジェクトが出ている場合
 	{
 		rope_caught = obj_rope->GetCaughtFlag();//ロープがロープスイッチに当たっているかの情報をもらう
-		rope_delete = false;
+		rope_delete = false; //ロープは消えていない
 		m_rope_delete_control = true;
 	}
 	else //ロープオブジェクトが出ていない場合
 	{
 		rope_caught = false;
+		//ロープを消せるようにする
 		if (m_rope_delete_control == true)
 		{
-			rope_delete = true;
+			rope_delete = true; //ロープが消える
 			m_rope_delete_control = false;
 		}
 	}
@@ -449,12 +450,7 @@ void CObjHero::Action()
 	//ロープとロープスイッチが当たっているとき
 	if (rope_caught == true)
 	{
-		m_rope_delete_r_kye = false;
-
-		if (Input::GetMouButtonR() == false)//右クリックしていないときtrueにする
-		{
-			m_rope_delete_r_kye = true;
-		}
+		m_rope_delete_r_kye = true; //ロープを消せるようにする（ロープ側で処理）
 	}
 
 	//射出終了------------------------------------------------
