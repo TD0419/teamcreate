@@ -31,7 +31,7 @@ void CObjSign::Init()
 		Font::SetStrTex(L"「岩は銃で壊れるぞ」");
 	}
 	else
-	Font::SetStrTex(L"???「ロープを使うのだよ諸君！」"); //一個目の看板のテキスト
+	Font::SetStrTex(L"「縄で引っ張ると･･･」"); //一個目の看板のテキスト
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE+32, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -93,10 +93,10 @@ void CObjSign::Draw()
 		if (m_map_x == 68 && m_map_y == 22)
 		{
 			//文字セット
-			Font::StrDraw(L"「岩は銃で壊れるぞ」", dst.m_left + 28.0f, dst.m_top + 48.0f, 32.0f, color_str);
+			Font::StrDraw(L"岩は銃で壊れるぞ", dst.m_left + 65.0f, dst.m_top + 48.0f, 32.0f, color_str);
 		}
 		else
-		Font::StrDraw(L"???「ロープを使うのだよ諸君！」", dst.m_left, dst.m_top + 32.0f , 32.0f, color_str); //一個目の看板のテキスト
+		Font::StrDraw(L"縄で引っ張ると･･･", dst.m_left + 65.0f, dst.m_top + 48.0f , 32.0f, color_str); //一個目の看板のテキスト
 	}
 	//----------------------------------------------------------------------------
 
