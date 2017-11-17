@@ -251,6 +251,13 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
+		case MAP_CANNON:		//砲台
+		{
+			CObjCannon* objcannon = new CObjCannon(x, y);
+			Objs::InsertObj(objcannon, OBJ_CANNON, 9);
+			break;
+		}
+
 	}
 
 	m_map[y][x].create = false;//フラグをオフにする	

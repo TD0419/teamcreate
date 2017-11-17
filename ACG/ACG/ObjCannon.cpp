@@ -11,17 +11,16 @@
 using namespace GameL;
 
 //コンストラクタ
-CObjCannon::CObjCannon(float x, float y)
+CObjCannon::CObjCannon(int x, int y)
 {
-	m_px = x * CANNON_SIZE_HEIGHT;
-	m_py = y * CANNON_SIZE_WIDTH;
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
 }
 
 //イニシャライズ
 void CObjCannon::Init()
 {
-	m_px = 700.0f;
-	m_py = 100.0f;
+	
 	m_r = 0.0f;
 	m_rec = 0.0f;
 	
