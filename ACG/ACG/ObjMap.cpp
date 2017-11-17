@@ -36,7 +36,6 @@ void CObjMap::Init()
 			m_map[y][x].create = true;
 		}
 	}
-
 }
 
 //ƒAƒNƒVƒ‡ƒ“
@@ -185,7 +184,7 @@ void CObjMap::CreateObj(int x, int y)
 		case MAP_ENEMY://“Gì¬
 		{
 			CObjEnemy* objenemy = new CObjEnemy(x, y);
-			Objs::InsertObj(objenemy, OBJ_ENEMY, 9);
+			Objs::InsertObj(objenemy, OBJ_ENEMY, 10);
 			break;
 		}
 

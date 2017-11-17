@@ -26,6 +26,30 @@ void CObjDoor::Init()
 	m_ani_door_time_max = 20;//アニメーション間隔幅
 
 	m_unlock_flag = false;
+
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		//ステージ１
+	case 1:
+		m_door_type = 1;
+		break;
+		//ステージ２
+	case 2:
+		m_door_type = 2;
+		break;
+		//ステージ３
+	case 3:
+		m_door_type = 3;
+		break;
+		//ステージ５
+	case 5:
+		m_door_type = 5;
+		break;
+	default:
+
+		break;
+	}
+
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, DOOR_SIZE, DOOR_SIZE, ELEMENT_GIMMICK, OBJ_DOOR, 1);
 }
@@ -38,27 +62,33 @@ void CObjDoor::Action()
 
 	//ボスの情報を呼ぶの
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-	bool boss_delete = false;
-	//ボスがいなくなったら。
-	if (objboss != nullptr)
+	CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	
+	switch (m_door_type)
 	{
-		boss_delete = objboss->GetDieFlag();//boss_deleteに情報を入れる。
+	case 1:
+		if (objenemy == nullptr)
+		{
+			m_unlock_flag = true;
+		}
+		break;
+	case 2:
+	case 5:
+		//ボスが消滅したとき
+		if (objboss == nullptr)
+		{
+			m_unlock_flag = true;//施錠解除フラグをonにします
+		}
+		break;
 	}
-	else
-	{
-		boss_delete = false;//ボスはいます
-	}
-	//ボスが消滅したとき
-	if (boss_delete == true)
-	{
-		m_unlock_flag = true;//施錠解除フラグをonにします
-	}
+	
 
 	//施錠解除フラグオンのとき
 	if (m_unlock_flag==true)
 	{
 		m_ani_door_time += 1;//アニメーションタイム+１
 	}
+
 	//ドアアニメタイムがマックスタイムより少なく、フレームが2じゃないとき
 	if (m_ani_door_time > m_ani_door_time_max&&m_ani_door_frame != 2)
 	{
@@ -70,14 +100,12 @@ void CObjDoor::Action()
 	if (m_ani_door_frame == 2)
 	{
 		m_ani_door_frame = 2;//フレームを2に固定
-
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
 			//ステージカウントを増やして次のステージにする
 			((UserData*)Save::GetData())->stagenum += 1;
+			Scene::SetScene(new CSceneMain());
 		}
-
-		return;
 	}
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);

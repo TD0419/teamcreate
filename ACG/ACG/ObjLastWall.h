@@ -26,7 +26,12 @@ class CObjLastWall :public CObj
 		int m_wall_gauge;//壁の高さ管理
 		int m_wall_gauge2;
 		bool m_look_unlock_flag;//ボタンがおされたかのフラグ
+		bool m_hero_hit_flag;   //壁の左側にheroが当たったときのフラグ
 		bool a;
+
+		//壁のステージごとの種類。
+		//1,2＝動かない　3＝スイッチであける　5=主人公が当たったら開く
+		int m_wall_type;
 
 
 };

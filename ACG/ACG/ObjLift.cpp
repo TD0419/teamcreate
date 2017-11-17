@@ -3,6 +3,7 @@
 #include "GameL\HitBoxManager.h"
 #include "GameL\WinInputs.h"
 #include "GameL\UserData.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjLift.h"
@@ -102,11 +103,16 @@ void CObjLift::Init()
 //アクション
 void CObjLift::Action()
 {
+	
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	//ロープオブジェクトを持ってくる
 	CObjRopeSwitch* objrope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
+
+	
+	
+	
 
 	//主人公が当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
@@ -142,6 +148,7 @@ void CObjLift::Action()
 						//右に進む
 						m_vx = SPEED;
 					}
+					
 				}
 			}
 			//Aキーが押されていないならX移動０
@@ -306,7 +313,7 @@ void CObjLift::Action()
 	m_move_y += m_vy;*/
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(hit, m_px, m_py);
 }
 
 //ドロー

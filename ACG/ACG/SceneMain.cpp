@@ -40,6 +40,7 @@ void CSceneMain::InitScene()
 		Scene::SetScene(new CSceneGameOver());
 		return;
 	}
+
 	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
 	AudioDataLoading();//音楽データ読み込み関数
@@ -66,20 +67,11 @@ void CSceneMain::InitScene()
 
 
 	//要るの-----------------------------------------------
-	//テスト壁
-	CObjLastWall*objlastwall = new CObjLastWall(15, 14);
-	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
-	//壁テストのためboss
-	CObjBoss*objboss = new CObjBoss(10, 5);
-	Objs::InsertObj(objboss, OBJ_BOSS, 10);
 
-	//テストボタン
-	CObjButton* objbuttn = new CObjButton(5, 20);
-	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
+	//テスト用回転床パターン1
+	CObjRollBlock* p = new CObjRollBlock(10, 20,1);
+	Objs::InsertObj(p, OBJ_ROLL_BLOCK, 10);
 
-	//テストドア
-	CObjDoor* door = new CObjDoor(15, 20);
-	Objs::InsertObj(door, OBJ_DOOR, 10);
 	//デバッグ--------------------------------------------
 
 	//BGM再生
@@ -103,17 +95,17 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 	
 	//初期化をどこかでしないといけないけど初期化の場所を指定されていなかったので一応ここで初期化をする
-	((UserData*)Save::GetData())->stagenum = 1;
+	
 
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
 		
 	case 1:
-		p = Save::ExternalDataOpen(L"ステージ1.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"stage1.csv", &size);//外部データ読み込み
 		break;
 	case 2:
-		p = Save::ExternalDataOpen(L"ステージ2.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"stage2.csv", &size);//外部データ読み込み
 		break;
 	case 3:
 		p = Save::ExternalDataOpen(L"StageA.csv", &size);//外部データ読み込み
@@ -246,16 +238,17 @@ void CSceneMain::ImageDataLoading()
 	//ボタン読み込み
 	Draw::LoadImageW(L"Image\\button.png", GRA_BUTTON, TEX_SIZE_128);
 
-	//lastwall(仮)画像読み込み
+	//lastwall画像読み込み
 	Draw::LoadImageW(L"Image\\Lastwall.png", GRA_LAST_WALL, TEX_SIZE_256);//上
 	Draw::LoadImageW(L"Image\\Openwall.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
+
+	//lastwall3画像の読み込み
+	Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL3, TEX_SIZE_256);//上
+	Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL3, TEX_SIZE_512);//下
 
 	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"Image\\zanki.png", GRA_LIFE, TEX_SIZE_64);
 	
-	//看板(本体)画像読み込み
-	//Draw::LoadImageW(L"", GRA_SIGN_MAIN, TEX_SIZE_256);イラスト決まってから読み込んでください
-
 	//回転ブロックの画像読み込み
 	Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 
@@ -269,7 +262,7 @@ void CSceneMain::AudioDataLoading()
 //BGM--------------------------------------------------------
 
 	//ステージ1
-	Audio::LoadAudio(STAGE1, L"Grassland2.wav",SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(STAGE1, L"Grassland6.wav",SOUND_TYPE::BACK_MUSIC);
 	//ステージ2
 	Audio::LoadAudio(STAGE2, L"Jangle1.wav", SOUND_TYPE::BACK_MUSIC);
 
@@ -288,13 +281,13 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(ROPE, L"Rope2.wav", SOUND_TYPE::EFFECT);
 
 	//岩の爆発
-	Audio::LoadAudio(ROCK, L"Rock1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(ROCK, L"Rock2.wav", SOUND_TYPE::EFFECT);
 
 	//最後の壁の開閉
 	Audio::LoadAudio(WALL, L"Door1.wav", SOUND_TYPE::EFFECT);
 
 	//木の転倒
-	Audio::LoadAudio(TREE, L"Tree1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(TREE, L"Tree3.wav", SOUND_TYPE::EFFECT);
 
 	//ドアの開錠
 	Audio::LoadAudio(DOOR, L"Wood Door.wav", SOUND_TYPE::EFFECT);
@@ -306,13 +299,13 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(LEVER, L"Lever1.wav", SOUND_TYPE::EFFECT);
 
 	//ボタン
-	Audio::LoadAudio(BUTTON, L"Switch3.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(BUTTON, L"Switch2.wav", SOUND_TYPE::EFFECT);
 
 	//木の転倒
-	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir1.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", SOUND_TYPE::EFFECT);
 
 	//リフト
-	Audio::LoadAudio(LIFT, L"Lift Trick Pull", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(LIFT, L"LiftTrickRelease", SOUND_TYPE::EFFECT);
 
 	
 //------------------------------------------------------------

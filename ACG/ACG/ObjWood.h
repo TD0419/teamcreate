@@ -22,5 +22,5 @@ class CObjWood :public CObj
 		float m_wood_image_x;//木の画像(左上)のX位置
 		float m_wood_image_y;//木の画像(左上)のY位置
 		float m_r;			//回転角度
-		bool a;
+		bool m_audio_start_flag;//木の音を鳴らすためのフラグ変数
 };

@@ -30,7 +30,7 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
-	m_black_radius = 768;
+	m_black_radius = 770;
 
 	m_mous_x = 0.0f;            //マウスの位置X
 	m_mous_y = 0.0f;		    //マウスの位置X
@@ -44,6 +44,7 @@ void CObjHero::Init()
 	m_rope_delete_r_kye = false;//アニメーション用ロープが消えたかどうかを管理する 
 	m_hero_die_water = false;
 	m_hero_die_enemy = false;
+	m_hero_die_screen_out = false;
 
 	m_ladder_updown = 0;
 	m_ladder_ani_updown = 0;
@@ -119,8 +120,8 @@ void CObjHero::Action()
 		}
 	}
 	//落下にリスタート----------------------------------
-	//m_pyが1000以下ならリスタートする
-	if (m_py > 2000.0f)
+	//m_pyが2000以下ならリスタートする
+	if (m_hero_die_screen_out == true)
 	{
 		//場外に出たらリスタート
 		Scene::SetScene(new CSceneMain(-1));
@@ -224,7 +225,7 @@ void CObjHero::Action()
 	{
 		if (m_hit_down == true)
 		{
-			m_vy = -18.0f;
+			m_vy = -15.0f;
 		}
 	}
 
@@ -282,8 +283,8 @@ void CObjHero::Action()
 
 	//ラジアン値を求める
 	float rad = asinf(-y / inclination);
-		//角度を求める
-		m_r = rad * 180.0f / 3.14f;
+	//角度を求める
+	m_r = rad * 180.0f / 3.14f;
 	//--------------------------------------------------------
 	
 
@@ -365,22 +366,22 @@ void CObjHero::Action()
 			m_rope_moux = Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
 			m_rope_mouy = Input::GetPosY(); //ロープを射出したときのマウスの位置Yを入れる
 			m_rope_ani_con = true;
-			
 		}
 	}
 
 	if (obj_rope != nullptr)//ロープオブジェクトが出ている場合
 	{
 		rope_caught = obj_rope->GetCaughtFlag();//ロープがロープスイッチに当たっているかの情報をもらう
-		rope_delete = false;
+		rope_delete = false; //ロープは消えていない
 		m_rope_delete_control = true;
 	}
 	else //ロープオブジェクトが出ていない場合
 	{
 		rope_caught = false;
+		//ロープを消せるようにする
 		if (m_rope_delete_control == true)
 		{
-			rope_delete = true;
+			rope_delete = true; //ロープが消える
 			m_rope_delete_control = false;
 		}
 	}
@@ -400,7 +401,6 @@ void CObjHero::Action()
 				m_ani_frame_rope += 1;
 				m_ani_time_rope = 0;
 			}
-			
 		}
 		//ロープのアニメーションフレームが２ならロープを出す
 		if (m_ani_frame_rope == 2)
@@ -436,7 +436,6 @@ void CObjHero::Action()
 		}
 		else
 			m_rope_control = true;
-
 	}
 	//はしごに登っているときに右クリックしたら上り終わった後に撃っていたのでそれを修正する
 	else if (m_ladder_updown != 0)
@@ -465,7 +464,7 @@ void CObjHero::Action()
 	//敵オブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr) //仮です。敵が多いようならElementに変えます
 	{
-		m_hero_die_enemy = true; ////主人公の敵にあたったときの死亡フラグをONにする
+		m_hero_die_enemy = true; //主人公の敵にあたったときの死亡フラグをONにする
 	}
 
 	//主人公の敵に当たったときの死亡フラグがONなら死亡アニメーションをする
@@ -487,7 +486,7 @@ void CObjHero::Action()
 			Hits::DeleteHitBox(this);	//ヒットボックスを削除
 
 			//メインへ移行
-			Scene::SetScene(new CSceneMain());
+			Scene::SetScene(new CSceneMain(-1));
 			return;
 		}
 	}
@@ -747,11 +746,22 @@ void CObjHero::Draw()
 
 	//画面全体をだんだん暗くする処理----------------------------------
 	//死んだことが確定した場合
-	if (m_hero_die_water == true | m_hero_die_enemy == true)
+	if (m_hero_die_water == true | m_hero_die_enemy == true | m_py > 2000.0f)
 	{
+		int ball_y = 0;
+		//落下時の中央位置
+		static float screen_out = m_py;
+
 		//中央位置設定       
 		int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX()); 
-		 int ball_y = (int)(m_py + HERO_SIZE_HEIGHT /1.5f  - objmap->GetScrollY());
+		
+		//落下時の半径の中央位置
+		if(m_py > 2000.0f)
+			 ball_y = (int)(screen_out - 1450.0f + HERO_SIZE_HEIGHT /1.5f  );
+		//落下時以外の半径の中央位置
+		else
+			 ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
+			
 		//半径初期
 		
 		//半径をだんだん短くする
@@ -762,6 +772,10 @@ void CObjHero::Draw()
 		//長ければ長いほど軽く
 		//短ければ短いほど重いよ
 		int one_side = 6;
+
+		//半径が最小になったらシーン移行する（上のほうにある）
+		if (m_black_radius == 0)
+			Scene::SetScene(new CSceneMain(-1));
 
 		//円外を四角形で埋め尽くす
 		for (int y = 0; y < WINDOW_SIZE_H; y+= one_side)
@@ -808,14 +822,15 @@ void CObjHero::Draw()
 //着地できてるかどうかを調べる関数
 void CObjHero::LandingCheck()
 {
-	bool c1,c2,c3;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+	bool c1,c2,c3,c4;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
 	
 	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
 	c3 = HitUpCheck(OBJ_LIFT_MOVE); //動くリフトとの着地チェック
+	c4 = HitUpCheck(OBJ_ROLL_BLOCK);//回転するブロック
 
 	//チェック項目のどれか一つでもtrueなら
-	if (c1 == true || c2 ==true || c3 == true)
+	if (c1 == true || c2 ==true || c3 == true||c4 ==true)
 		m_hit_down = true;//着地フラグをオンにする
 
 }

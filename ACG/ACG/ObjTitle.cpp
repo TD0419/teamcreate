@@ -1,5 +1,6 @@
 #include "GameL\WinInputs.h"
 #include "GameL\DrawFont.h"
+#include "GameL\UserData.h"
 
 #include "GameHead.h"
 #include "ObjTitle.h"
@@ -12,6 +13,7 @@ void CObjTitle::Init()
 {
 	m_mode = 0;				//モード選択変数の初期化
 	m_keypush_flag = true;	//キーフラグの初期化
+	m_enter_key_flag = true;
 
 	//文字のグラフィック作成
 	Font::SetStrTex(L"Start");	//スタート
@@ -20,12 +22,13 @@ void CObjTitle::Init()
 
 	//デバッグ用
 	Font::SetStrTex(L"→");	//→
+
+	((UserData*)Save::GetData())->stagenum = 1;
 }
 
 //アクション
 void CObjTitle::Action()
 {
-
 	//↑キーが押された時
 	if (Input::GetVKey(VK_UP) == true)
 	{
@@ -49,12 +52,19 @@ void CObjTitle::Action()
 	//↑と↓が押されてないとき
 	else
 		m_keypush_flag = true;//キーフラグをオンにする
-		
-	//エンターキーが押された時
-	if (Input::GetVKey(VK_RETURN) == true)
+
+	if (Input::GetVKey(VK_RETURN) == false) //　Enterキーが押されてなかったらメインに移行できるようにする
 	{
-		switch (m_mode)
+		m_enter_key_flag = false;
+	}
+
+	if (m_enter_key_flag == false) // ゲームオーバーからすぐにメインに飛んでしまうので長押ししてもメインに飛ばされないようにした。
+	{
+		//エンターキーが押された時
+		if (Input::GetVKey(VK_RETURN) == true)
 		{
+			switch (m_mode)
+			{
 			case 0:
 			{
 				//シーンメインに移動
@@ -71,9 +81,9 @@ void CObjTitle::Action()
 				//ゲーム終了
 				break;
 			}
+			}
 		}
 	}
-
 }
 
 //ドロー

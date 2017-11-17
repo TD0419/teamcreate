@@ -148,8 +148,10 @@ enum GRAPHIC_ID
 	GRA_CANNON,			//砲台
 	GRA_SIGN_FRAME,		//看板の枠組み
 	GRA_BUTTON,			//ボタン
-	GRA_LAST_WALL,		//次ステージへの入り口(上部分の鉄部分)
+	GRA_LAST_WALL,		//壁(上部分の鉄部分)
 	GRA_OPEN_WALL,		//開閉するシャッター(最後の壁用)
+	GRA_LAST_WALL3,		//壁(上部分の鉄部分)
+	GRA_OPEN_WALL3,		//開閉するシャッター(最後の壁用)
 	GRA_LIFE,			//ライフ
 	GRA_SIGN,			//看板
 	GRA_ROLL_BLOCK,		//回転ブロック

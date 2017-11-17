@@ -23,7 +23,7 @@ void CObjBoss::Init()
 {
 	m_vx = -1.0f; // 移動ベクトル
 	m_vy = 0.0f;
-	m_hp = 2; //ボスのＨＰ
+	m_hp = 20; //ボスのＨＰ
 	m_posture = 1.0f; // 左向き
 	m_speed = 1.0f;   // 速度
 
@@ -36,7 +36,6 @@ void CObjBoss::Init()
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
-	m_die_flag = true;
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
 }
@@ -89,6 +88,7 @@ void CObjBoss::Action()
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
 	}
+
 	else if (m_hit_left == true)// ブロックの左側に当たっていたら
 	{
 		m_posture = 1.0f;		// 左向きにする
@@ -107,10 +107,6 @@ void CObjBoss::Action()
 
 	// 体力が0以下なら
 	if (m_hp <= 0)
-	{
-		m_die_flag = true;
-	}
-	if (m_die_flag == true)
 	{
 		Hits::DeleteHitBox(this);	//BOSSが所有するHitBoxに削除する
 		this->SetStatus(false);		//自身に削除命令を出す
@@ -147,8 +143,7 @@ void CObjBoss::Draw()
 	dst.m_right = (BOSS_SIZE_WIDTH - BOSS_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
 	dst.m_bottom = dst.m_top + BOSS_SIZE_HEIGHT + 2;
 
-	////描画
-	/*Draw::Draw(14, &src, &dst, color, 0.0f);*/
+	//描画
 	Draw::Draw(GRA_BOSS, &src, &dst, color, 0.0f);
 
 }
