@@ -30,7 +30,7 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
-	m_black_radius = 768;
+	m_black_radius = 770;
 
 	m_mous_x = 0.0f;            //マウスの位置X
 	m_mous_y = 0.0f;		    //マウスの位置X
@@ -775,7 +775,7 @@ void CObjHero::Draw()
 		int one_side = 6;
 
 		//半径が最小になったらシーン移行する（上のほうにある）
-		if (m_black_radius == 8)
+		if (m_black_radius == 0)
 			Scene::SetScene(new CSceneMain(-1));
 
 		//円外を四角形で埋め尽くす
