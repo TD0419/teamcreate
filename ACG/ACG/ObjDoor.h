@@ -26,4 +26,8 @@ private:
 	int m_ani_door_frame;//描画フレーム
 	float m_ani_door_time_max;//アニメーション動作間隔最大値
 	
+	//ステージによってのドアの種類変更
+	//1=エネミー撃破で開錠　2,5＝ボス撃破で開錠
+	int m_door_type;
+	
 };

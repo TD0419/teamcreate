@@ -67,27 +67,11 @@ void CSceneMain::InitScene()
 
 
 	//要るの-----------------------------------------------
-	//テスト壁
-	CObjLastWall*objlastwall = new CObjLastWall(15, 14);
-	Objs::InsertObj(objlastwall, OBJ_LAST_WALL, 10);
-	//壁テストのためboss
-	CObjBoss*objboss = new CObjBoss(10, 5);
-	Objs::InsertObj(objboss, OBJ_BOSS, 10);
-
-	//テストボタン
-	CObjButton* objbuttn = new CObjButton(5, 20);
-	Objs::InsertObj(objbuttn, OBJ_BUTTON, 10);
-	//テストボタン
-	CObjDoor* objbuttn2 = new CObjDoor(5, 15);
-	Objs::InsertObj(objbuttn2, OBJ_DOOR, 10);
 
 	//テスト用回転床パターン1
 	CObjRollBlock* p = new CObjRollBlock(10, 20,1);
 	Objs::InsertObj(p, OBJ_ROLL_BLOCK, 10);
 
-	//テストドア
-	CObjDoor* door = new CObjDoor(15, 20);
-	Objs::InsertObj(door, OBJ_DOOR, 10);
 	//デバッグ--------------------------------------------
 
 	//BGM再生
@@ -254,9 +238,13 @@ void CSceneMain::ImageDataLoading()
 	//ボタン読み込み
 	Draw::LoadImageW(L"Image\\button.png", GRA_BUTTON, TEX_SIZE_128);
 
-	//lastwall(仮)画像読み込み
+	//lastwall画像読み込み
 	Draw::LoadImageW(L"Image\\Lastwall.png", GRA_LAST_WALL, TEX_SIZE_256);//上
 	Draw::LoadImageW(L"Image\\Openwall.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
+
+	//lastwall3画像の読み込み
+	Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL3, TEX_SIZE_256);//上
+	Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL3, TEX_SIZE_512);//下
 
 	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"Image\\zanki.png", GRA_LIFE, TEX_SIZE_64);

@@ -26,6 +26,30 @@ void CObjDoor::Init()
 	m_ani_door_time_max = 20;//アニメーション間隔幅
 
 	m_unlock_flag = false;
+
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		//ステージ１
+	case 1:
+		m_door_type = 1;
+		break;
+		//ステージ２
+	case 2:
+		m_door_type = 2;
+		break;
+		//ステージ３
+	case 3:
+		m_door_type = 3;
+		break;
+		//ステージ５
+	case 5:
+		m_door_type = 5;
+		break;
+	default:
+
+		break;
+	}
+
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, DOOR_SIZE, DOOR_SIZE, ELEMENT_GIMMICK, OBJ_DOOR, 1);
 }
@@ -38,13 +62,26 @@ void CObjDoor::Action()
 
 	//ボスの情報を呼ぶの
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-
-
-	//ボスが消滅したとき
-	if (objboss==nullptr)
+	CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	
+	switch (m_door_type)
 	{
-		m_unlock_flag = true;//施錠解除フラグをonにします
+	case 1:
+		if (objenemy == nullptr)
+		{
+			m_unlock_flag = true;
+		}
+		break;
+	case 2:
+	case 5:
+		//ボスが消滅したとき
+		if (objboss == nullptr)
+		{
+			m_unlock_flag = true;//施錠解除フラグをonにします
+		}
+		break;
 	}
+	
 
 	//施錠解除フラグオンのとき
 	if (m_unlock_flag==true)
