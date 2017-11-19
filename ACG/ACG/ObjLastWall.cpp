@@ -194,6 +194,14 @@ void CObjLastWall::Action()
 			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 512.0f - m_wall_gauge);
 		}
 
+		// ボスが出てきたら強制的に閉める処理
+		if (objboss != nullptr || objenemy != nullptr)
+		{
+			a = true;			// 切り替えフラグオン
+			m_wall_gauge = 0;	// wall初期化
+			Audio::Stop(WALL);//音楽ストップ
+		}
+
 		if (m_wall_gauge2 >= 512)
 		{
 			Audio::Stop(WALL);//音楽ストップ
