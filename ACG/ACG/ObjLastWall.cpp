@@ -3,7 +3,6 @@
 #include "GameL\Audio.h"
 #include "GameL\UserData.h"
 
-
 #include "GameHead.h"
 #include "ObjLastWall.h"
 #include "Function.h"
@@ -14,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjLastWall::CObjLastWall(int x, int y)
 {
-	m_px = (float)x * 64.0f;
-	m_py = (float)y * 64.0f;
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
 }
 
 //イニシャライズ
@@ -79,7 +78,7 @@ void CObjLastWall::Action()
 				if (0 < r && r < 85 || 275 < r && r < 360)
 				{
 					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-					objhero->SetPosX(m_px + 62.0f);//主人公の位置をLastWallの右側までずらす
+					objhero->SetPosX(m_px + HERO_SIZE_WIDTH);//主人公の位置をLastWallの右側までずらす
 				}
 
 				//LastWallの上側が衝突している場合
@@ -94,7 +93,7 @@ void CObjLastWall::Action()
 				else if (94 < r && r < 266)
 				{
 					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-										   //objhero->SetPosX(m_px - HERO_SIZE_WIDTH+28.0f);//主人公の位置をLastWallの左側までずらす
+					objhero->SetPosX(m_px - HERO_SIZE_WIDTH+28.0f);//主人公の位置をLastWallの左側までずらす
 					m_hero_hit_flag = true;
 
 
@@ -157,7 +156,7 @@ void CObjLastWall::Action()
 	int map_num = objmap->GetMap(m_map_x, m_map_y);
 
 	//ボスの情報を呼ぶの
-	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+	CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 	
 
 
@@ -170,14 +169,19 @@ void CObjLastWall::Action()
 		// m_wall_gaugeが512を越えたら処理ストップ
 		if (m_wall_gauge >= 512)
 		{
-			a = true;
+			// 主人公が壁の右側にいないと壁がしまらないようにする
+			if (objhero->GetPosX() > m_px + BLOCK_SIZE)
+			{
+				a = true;
+				m_wall_gauge = 0;
+			}
+				
 			Audio::Stop(WALL);//音楽ストップ
-			m_wall_gauge = 0;
 		}
 		else
 		{
 			//heroが左側に振れてたら押されていたら
-			if (m_hero_hit_flag == true && a == false&&objenemy==nullptr)
+			if (m_hero_hit_flag == true && a == false)
 			{
 				m_wall_gauge += 3; // 3ずつ増やしていく
 				Audio::Start(WALL);//開門の音楽スタート
@@ -198,7 +202,7 @@ void CObjLastWall::Action()
 		{
 			if (a == true)
 			{
-				m_wall_gauge2 += 8;
+				m_wall_gauge2 += 512; // 一番下まで下がる
 				// hitboxが小さくなる
 				Audio::Start(WALL);//開門の音楽スタート
 				HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 0.0f + m_wall_gauge2);

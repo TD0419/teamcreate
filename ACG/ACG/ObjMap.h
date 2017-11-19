@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjMap :public CObj
 {
 public:
-	CObjMap(int map[MAP_Y_MAX][MAP_X_MAX]); 	//コンストラクタ
+	CObjMap(int map[MAP_Y_MAX][MAP_X_MAX],int remaining); 	//コンストラクタ
 	~CObjMap() {};	//デストラクタ
 	void Init();	//イニシャライズ
 	void Action();	//アクション
@@ -50,6 +50,5 @@ private:
 	};
 
 	Map m_map[MAP_Y_MAX][MAP_X_MAX];	//マップ用配列	←マップができたらこの配列に入れる
-
-	
+	int m_remaining;					// プレイヤーの残機数
 };

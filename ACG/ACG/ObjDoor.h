@@ -1,12 +1,11 @@
 #pragma once
 //使用するヘッダー
-#include "GameL\DrawTexture.h"
 #include "GameL\SceneObjManager.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：ドアという名の
+//オブジェクト：ドア
 class CObjDoor :public CObj
 {
 public:
@@ -30,4 +29,5 @@ private:
 	//1=エネミー撃破で開錠　2,5＝ボス撃破で開錠
 	int m_door_type;
 	
+	bool m_goal_flag; // ゴールフラグ(ゴールの初期化を一回だけにする用) true:ゴールした false:ゴールしていない
 };

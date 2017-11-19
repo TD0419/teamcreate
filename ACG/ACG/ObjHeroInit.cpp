@@ -9,7 +9,9 @@ void CObjHero::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f;			 //右向き0.0f 左向き1.0f
 	m_r = 0.0f;
-	m_black_radius = 768;
+	m_radius = 768.0f;
+	m_gravity_flag = true;		// true:重力あり false:重力なし
+	m_goal_flag = false;		// true:ゴールした false:ゴールしていない
 
 	m_mous_x = 0.0f;            //マウスの位置X
 	m_mous_y = 0.0f;		    //マウスの位置X
@@ -23,10 +25,9 @@ void CObjHero::Init()
 	m_rope_delete_r_kye = false;//アニメーション用ロープが消えたかどうかを管理する 
 	m_hero_die_water = false;
 	m_hero_die_enemy = false;
-
+	
 	m_ladder_updown = 0;
 	m_ladder_ani_updown = 0;
-	m_ladder_jump = 0;
 
 	m_ani_max_time_move = 6;	//moveアニメーション間隔幅
 	m_ani_time_move = 0;

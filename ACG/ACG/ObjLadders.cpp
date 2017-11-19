@@ -110,48 +110,80 @@ void CObjLadders::HeroHit(float px, float py)
 		if (map_num_up == MAP_LADDERS || map_num_center == MAP_LADDERS || map_num_down == MAP_LADDERS ||
 			map_num_up == MAP_NO_LOOK_LADDERS || map_num_center == MAP_NO_LOOK_LADDERS || map_num_down == MAP_NO_LOOK_LADDERS)
 		{
-			objhero->SetLadderJump(1);	//1を渡す
-			objhero->SetHitDown(true);	//着地状態にする
-			objhero->SetVecY(0.0f);		//
 			//Wキーがおされたとき 上るとき
 			if (Input::GetVKey('W') == true)
 			{
-				objhero->SetVecY(-2.0f);//上方向への移動ベクトルをセットする
-
-				//はしごを上りきる時に2を渡す
-				if (map_num_ladder_up == MAP_SPACE)
+				// はしごに掴まっていない(アニメーション中ではない) 調整の余地あり
+				if (objhero->GetLadderUpdown() == 0 && map_num_center != MAP_LADDERS && map_num_center != MAP_NO_LOOK_LADDERS)
 				{
-					objhero->SetLaddersUpdown(2);
+					objhero->SetVecY(0.0f);				// 下に落ちないようにする
+					objhero->SetGravityFlag(false);		// 重力がかからないようにする
+					objhero->SetHitDown(true);			// 着地フラグを立てジャンプできるようにする
 				}
 				else
 				{
-					objhero->SetLaddersUpdown(1);//はしごを上っているときは1を渡す
+					objhero->SetVecY(-2.0f);//上方向への移動ベクトルをセットする
+					//はしごを上りきる時に2を渡す
+					if (map_num_ladder_up == MAP_SPACE)
+					{
+						objhero->SetLaddersUpdown(2);
+					}
+					else
+					{
+						objhero->SetLaddersUpdown(1);//はしごを上っているときは1を渡す
+					}
+					objhero->SetLaddersAniUpdown(1);//アニメーションを進める
 				}
-				objhero->SetLaddersAniUpdown(1);//アニメーションを進める
 			}
 			//Sキーがおされたとき　下るとき
 			else if (Input::GetVKey('S') == true)
 			{
-				objhero->SetVecY(2.0f);//下方向への移動ベクトルをセットする
-
 				//下に通常ブロックが無かったら
 				if (objhero->GetBlockType() != MAP_BLOCK)
 				{
+					objhero->SetVecY(2.0f);//下方向への移動ベクトルをセットする
 					objhero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
 					objhero->SetLaddersAniUpdown(1);//アニメーションを進める
+				}
+				else
+				{
+					objhero->SetLaddersUpdown(0);//主人公がはしごを下り終えたらアニメーション終了
 				}
 			}
 			//それ以外の時
 			else
 			{
+				// はしごにつかまっていない場合(はしごを上るアニメーション中ではない)
+				if (objhero->GetLadderUpdown() == 0)
+				{
+					// 一番下にしかはしごがなかったらブロックのように落ちないようにする(一応動いているが判定の仕方に問題あり)
+					if(map_num_down == MAP_LADDERS && map_num_up != MAP_LADDERS && map_num_center != MAP_LADDERS ||
+						map_num_down == MAP_NO_LOOK_LADDERS && map_num_up != MAP_NO_LOOK_LADDERS && map_num_center != MAP_NO_LOOK_LADDERS)
+					{
+      					objhero->SetVecY(0.0f);			// 下に落ちないようにする	
+						objhero->SetGravityFlag(false); // 重力がかからないようにする
+    					objhero->SetHitDown(true);		// 着地フラグを立てジャンプできるようにする
+					}
+					// それ以外ならはしごに当たってもすり抜けるようにする
+					else
+					{
+						objhero->SetGravityFlag(true);	// はしごにつかまっていない時は重力がかかるようにする
+					}
+				}
+				// はしごに掴まっている場合(はしごを上るアニメーション中)
+				else
+				{
+					objhero->SetVecY(0.0f);			// 下に落ちないようにする	
+					objhero->SetGravityFlag(false);	// 重力がかからないようにする
+				}
+					
 				objhero->SetLaddersAniUpdown(0);//アニメーションを止める
-
 			}
 		}
 		else
 		{
+			objhero->SetGravityFlag(true); // はしごに当たっていないときは重力がかかるようにする
 			objhero->SetLaddersUpdown(0);//主人公がはしごに当たってないときは0を渡す
-			objhero->SetLadderJump(0);//ゼロを渡す
 		}
 	}
 	
