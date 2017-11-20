@@ -226,7 +226,7 @@ void CObjMap::CreateObj(int x, int y)
 		case MAP_WATER: //êÖçÏê¨
 		{
 			CObjWater* objwater = new CObjWater(x, y);
-			Objs::InsertObj(objwater, OBJ_WATER, 9);
+			Objs::InsertObj(objwater, OBJ_WATER, 8);
 			break;
 		}
 

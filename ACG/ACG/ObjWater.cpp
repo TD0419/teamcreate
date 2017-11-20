@@ -12,6 +12,8 @@ using namespace GameL;
 //コンストラクタ
 CObjWater::CObjWater(int x, int y)
 {
+	m_map_x = x;
+	m_map_y = y;
 	m_px = x * BLOCK_SIZE;
 	m_py = y * BLOCK_SIZE;
 }
@@ -52,7 +54,6 @@ void CObjWater::Action()
 
 	//アニメーションを開始するのでフラグをオンにする
 	m_ani_start = true;
-
 	
 	// m_water_gaugeが192を越えたら処理ストップ
 	if (m_water_gauge >= WATER_SIZE_HEIGHT)
