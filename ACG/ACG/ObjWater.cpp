@@ -24,7 +24,7 @@ void CObjWater::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;  //静止フレームを初期にする
 	m_ani_max_time = 17; //アニメーション間隔幅
-	m_water_audio_count = 0.0f; //水の音楽制御のカウント初期化
+	m_water_audio_count = 0; //水の音楽制御のカウント初期化
 	m_ani_start = false;
 
 	//当たり判定																
