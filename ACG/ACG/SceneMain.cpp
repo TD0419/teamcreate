@@ -289,8 +289,11 @@ void CSceneMain::AudioDataLoading()
 	//敵の弾丸
 	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", EFFECT);
 
-	//リフト
-	Audio::LoadAudio(LIFT, L"LiftTrickRelease.wav", SOUND_TYPE::EFFECT);
+	//リフト(引っ張る)
+	Audio::LoadAudio(PLIFT, L"LiftTrickPull.wav", SOUND_TYPE::EFFECT);
+
+	//リフト(離す)
+	Audio::LoadAudio(RLIFT, L"LiftTrickRelease.wav", SOUND_TYPE::EFFECT);
 
 	//水の流れる音
 	Audio::LoadAudio(WAVE, L"Wave.wav", SOUND_TYPE::EFFECT);
