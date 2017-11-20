@@ -60,17 +60,19 @@ void CObjLift::Init()
 	{
 		//ステージ１
 	case 1:
-		m_move_direction = 0;
-		m_width_max = 640.0f;
-		m_length_max = 0.0f;
-		m_move_mode = 0;
+		m_initial_direction = 0;//初期の移動方向
+		m_direction = 0;		//現在の移動方向
+		m_width_max = 640.0f;	//最大移動量X
+		m_length_max = 0.0f;	//最大移動量Y
+		m_move_mode = 0;		//移動モード
 		break;
 		//ステージ２
 	case 2:
-		m_move_direction = 0;
-		m_width_max = 640.0f;
-		m_length_max = 0.0f;
-		m_move_mode = 1;
+		m_initial_direction = 0;//初期の移動方向
+		m_direction = 0;		//現在の移動方向
+		m_width_max = 640.0f;	//最大移動量X
+		m_length_max = 0.0f;	//最大移動量Y
+		m_move_mode = 1;		//移動モード
 		break;
 		//ステージ３
 	case 3:
@@ -79,7 +81,7 @@ void CObjLift::Init()
 		break;
 		//ステージ４
 	case 4:
-		m_move_direction = 2;
+		m_initial_direction = 2;
 		m_width_max = 0.0f;
 		m_length_max = 0.0f;
 		m_move_mode = 2;
@@ -136,7 +138,7 @@ void CObjLift::Action()
 					//初期位置から動いた距離を増やす
 					m_move_x += SPEED;
 					//初期の移動方向が右のとき
-					if (m_move_direction == 0)
+					if (m_initial_direction == 0)
 					{
 						//左に進む
 						m_vx = -SPEED;
@@ -176,7 +178,7 @@ void CObjLift::Action()
 				m_move_x -= SPEED;
 
 				//初期の移動方向が右だったら
-				if (m_move_direction == 0)
+				if (m_initial_direction == 0)
 				{
 					//右に移動
 					m_vx = SPEED;
@@ -197,7 +199,7 @@ void CObjLift::Action()
 			m_vx = 0.0f;
 			
 			//初期の移動方向が右だったら
-			if (m_move_direction == 0)
+			if (m_initial_direction == 0)
 			{
 				//行き過ぎた分を計算
 				m_px += m_move_x - m_width_max;
@@ -217,7 +219,7 @@ void CObjLift::Action()
 			m_vx = 0.0f;
 
 			//初期の移動方向が右だったら
-			if (m_move_direction == 0)
+			if (m_initial_direction == 0)
 			{
 				//行き過ぎた分を計算
 				m_px += m_move_x;
@@ -230,11 +232,85 @@ void CObjLift::Action()
 			}
 			m_move_x = 0;
 		}
+
+		//初期位置から動いた距離が０またはMAXなら移動ベクトルを０にする
+		if (m_move_x == 0 || m_move_x == m_width_max)
+			m_vx = 0.0f;
 		break;
 		//------------------------------自由移動モード(最大右X位置から最大値左X位置の間を自動移動)---------------
 	case 1:
+		//移動方向が右の時
+		if (m_direction == 0)
+		{
+			//移動ベクトルXを加算
+			m_vx = SPEED;
+			//初期移動方向が右なら
+			if (m_initial_direction == 0)
+				m_move_x += SPEED;//初期位置に近づくので加算
+			//初期移動方向が左なら
+			else
+				m_move_x -= SPEED;//初期位置から離れるので減算
+		}
+		//移動方向が左の時
+		else
+		{
+			//移動ベクトルXを減算
+			m_vx = -SPEED;
+			//初期移動方向が右なら
+			if (m_initial_direction == 0)
+				m_move_x -= SPEED;//初期位置から離れるので減算
+			//初期移動方向が左なら
+			else
+				m_move_x += SPEED;//初期位置に近づくので加算
+		}
+
+		//初期位置から動いた距離が０またはMAX値だったら
+		//現座員の移動奉公を左右逆にする
+		if (m_move_x == 0 || m_move_x == m_width_max)
+		{
+			if (m_direction == 0)
+				m_direction = 1;
+			else
+				m_direction = 0;
+		}
+
+		//初期位置から動いた距離がMAX以上または０以下だったら
+		//行き過ぎた分を調整して現在の移動方向を左右逆にする
+		else if (m_move_x > m_width_max || m_move_x < 0)
+		{
+			//行き過ぎた分
+			float overdo;
+			if (m_move_x > m_width_max)
+			{
+				
+				if (m_direction == 0)
+				{
+					//まずMAX位置まで進める
+					m_px += m_width_max - (m_move_x - SPEED);
+					m_px -= m_move_x - m_width_max;
+				}
+				else
+				{
+					m_px -= m_width_max - (m_move_x - SPEED);
+					m_px += m_move_x - m_width_max;
+				}
+
+			}
+			//現在の移動方向を左右逆にする
+			if (m_direction == 0)
+			{
+				m_direction = 1;
+			}
+			else
+			{
+				m_direction = 0;
+			}
+			m_vx=0.0;
+		}
+
 		
 		break;
+	case 2:
 	default:
 		break;
 	}
@@ -243,12 +319,6 @@ void CObjLift::Action()
 	//位置情報を更新
 	m_px += m_vx;
 	m_py += m_vy;
-
-	//初期位置から動いた距離が０またはMAXなら移動ベクトルを０にする
-	if(m_move_x == 0 || m_move_x == m_width_max)
-		m_vx = 0.0f;
-	if(m_move_y == 0 || m_move_y == m_length_max)
-		m_vy = 0.0f;
 
 	//移動量の保存
 	/*m_move_x += m_vx;
