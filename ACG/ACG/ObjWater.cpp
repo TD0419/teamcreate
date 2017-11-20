@@ -24,6 +24,7 @@ void CObjWater::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;  //静止フレームを初期にする
 	m_ani_max_time = 17; //アニメーション間隔幅
+	m_water_audio_count = 0.0f; //水の音楽制御のカウント初期化
 	m_ani_start = false;
 
 	//当たり判定																
@@ -58,17 +59,23 @@ void CObjWater::Action()
 	// m_water_gaugeが192を越えたら処理ストップ
 	if (m_water_gauge >= WATER_SIZE_HEIGHT)
 	{
+		Audio::Stop(WAVE);
 		Hits::DeleteHitBox(this);//hitbox削除
 		objmap->SetMap(m_map_x, m_map_y, MAP_SPACE);//マップの数値を空にする
 		this->SetStatus(false);//自身
 		return;
+		
 	}
 	else
 	{
+		if(m_water_audio_count % 192==0)
+		Audio::Start(WAVE);
 		//レバースイッチが押されていたら
 		if (lever_swich == true)
 		{
-			m_water_gauge += 0.2f; // 1ずつ増やしていく
+			m_water_gauge += 0.2f; //0.2ずつ増やしていく
+			m_water_audio_count += 1; //4ずつ増やしていく
+
 		}
 	}
 
