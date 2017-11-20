@@ -95,14 +95,15 @@ void CObjTitle::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 1024.0f;
-	src.m_bottom = 767.0f;
+	src.m_right = src.m_left+1024.0f;
+	src.m_bottom = src.m_top+767.0f;
 
 	//描画位置
 	dst.m_top = 0.0f;
 	dst.m_left = 0.0f;
-	dst.m_right = 1024.0f;
-	dst.m_bottom = 767.0f;
+	dst.m_right = dst.m_left+1024.0f;
+	dst.m_bottom = dst.m_top+767.0f;
+
 	//描画
 	Draw::Draw(GRA_TITLE, &src, &dst, color, 0.0f);
 	//メニュー描画
