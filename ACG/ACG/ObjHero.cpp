@@ -195,6 +195,7 @@ void CObjHero::Action()
 	m_vx += -(m_vx * 0.098f);
 
 	//自由落下運動
+	// フラグがたっていたら重力をかける
 	if(m_gravity_flag == true)
 		m_vy += 9.8f / (16.0f);
 
