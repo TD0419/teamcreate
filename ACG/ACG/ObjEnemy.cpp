@@ -46,6 +46,7 @@ void CObjEnemy::Action()
 	//マップ情報を取ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
+	//ーーーーーーーーーーー取っといてください、ステージ３くらいで使います。
 	////画面内か調べる
 	//m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
 
@@ -60,7 +61,7 @@ void CObjEnemy::Action()
 	//	
 	//	return;
 	//}
-	
+	//－－－－－－－－－－－－－－－－－－－－－－－
 	//移動----------------------------------------------
 
 	//左に向いているなら左へ移動する
@@ -147,14 +148,7 @@ void CObjEnemy::Action()
 			m_posture = 1.0f;
 		}
 	}
-	/*
-	float enemy_x = m_px;
-	float enemy_y = m_py;
-	float enemy_vx = m_vx;
-	float enemy_vy = m_vy;
-
-	HitTestOfAB();
-*/
+	
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
 	m_py += m_vy;

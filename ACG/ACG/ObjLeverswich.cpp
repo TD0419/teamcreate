@@ -11,10 +11,10 @@
 using namespace GameL;
 
 //コンストラクタ
-CObjLeverSwich::CObjLeverSwich(float x, float y)
+CObjLeverSwich::CObjLeverSwich(int x, int y)
 {
-	m_px = x * LEVER_SWITCH_SIZE;
-	m_py = y * LEVER_SWITCH_SIZE;
+	m_px = (float)x * LEVER_SWITCH_SIZE;
+	m_py = (float)y * LEVER_SWITCH_SIZE;
 }
 
 //イニシャライズ

@@ -43,18 +43,18 @@ void CObjHero::Action()
 		//右下
 		if (i == 1)
 		{
-			pos_x = HERO_SIZE_WIDTH;
+			pos_x = (int)HERO_SIZE_WIDTH;
 		}
 		//左下
 		else if(i == 2)
 		{
-			pos_x = HERO_SIZE_WIDTH / 2;
+			pos_x = (int)HERO_SIZE_WIDTH / 2;
 		}
 		//主人公のX位置(マップの要素数)
-		int x = (m_px + pos_x) / BLOCK_SIZE;
+		int x = ((int)m_px + pos_x) / (int)BLOCK_SIZE;
 		//主人公のY位置(マップの要素数)
 		//少し下にする
-		int y = (m_py + 1 + HERO_SIZE_HEIGHT) / BLOCK_SIZE;
+		int y = ((int)m_py + 1 + (int)HERO_SIZE_HEIGHT) / (int)BLOCK_SIZE;
 		//ブロック情報が0で無いなら取得
 		if (objmap->GetMap(x, y)!= 0)
 		{
@@ -175,8 +175,6 @@ void CObjHero::Action()
 		}
 	}
 
-	
-
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
 
@@ -198,6 +196,10 @@ void CObjHero::Action()
 	// フラグがたっていたら重力をかける
 	if(m_gravity_flag == true)
 		m_vy += 9.8f / (16.0f);
+
+	//最大落下スピードを超えないようにする
+	if (m_gravity_flag == true && m_vy > m_fall_speed_max)
+		m_vy = m_fall_speed_max;
 
 	Scroll();	//スクロール処理をおこなう
 

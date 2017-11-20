@@ -90,7 +90,7 @@ void CObjRock::Action()
 			{
 
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				objhero->SetPosY(m_py - ROCK_SIZE_HEIGHT-57.0);//主人公の位置を岩の上側までずらす
+				objhero->SetPosY(m_py - ROCK_SIZE_HEIGHT-57.0f);//主人公の位置を岩の上側までずらす
 				
 			}
 
