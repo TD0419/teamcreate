@@ -31,7 +31,7 @@ void CObjBoss::Init()
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 10; //アニメーション間隔幅
 
-						 // blockとの衝突確認用
+	// blockとの衝突確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
