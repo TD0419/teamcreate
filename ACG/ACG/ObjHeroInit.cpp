@@ -23,8 +23,12 @@ void CObjHero::Init()
 	m_rope_ani_con = false;
 	m_rope_delete = false;    //ロープが消えたかどうか調べる変数
 	m_rope_delete_r_kye = false;//アニメーション用ロープが消えたかどうかを管理する 
+	m_hero_die_flag = false;
+
 	m_hero_die_water = false;
 	m_hero_die_enemy = false;
+	m_hero_die_screen_out = false;
+	m_screen_out = 0.0f;
 	
 	m_ladder_updown = 0;
 	m_ladder_ani_updown = 0;
