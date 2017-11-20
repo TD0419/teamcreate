@@ -52,16 +52,12 @@ void CObjWater::Action()
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	//アニメーションを開始するのでフラグをオンにする
-	m_ani_start = true;
 	
 	// m_water_gaugeが192を越えたら処理ストップ
 	if (m_water_gauge >= WATER_SIZE_HEIGHT)
 	{
 		Audio::Stop(WAVE);
 		Hits::DeleteHitBox(this);//hitbox削除
-		objmap->SetMap(m_map_x, m_map_y, MAP_SPACE);//マップの数値を空にする
 		this->SetStatus(false);//自身
 		return;
 		
