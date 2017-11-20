@@ -24,7 +24,6 @@ void CObjWater::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;  //静止フレームを初期にする
 	m_ani_max_time = 17; //アニメーション間隔幅
-	m_ani_start = false;
 
 	//当たり判定																
 	Hits::SetHitBox(this, m_px, m_py, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_WATER, 1);
@@ -51,15 +50,11 @@ void CObjWater::Action()
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	//アニメーションを開始するのでフラグをオンにする
-	m_ani_start = true;
 	
 	// m_water_gaugeが192を越えたら処理ストップ
 	if (m_water_gauge >= WATER_SIZE_HEIGHT)
 	{
 		Hits::DeleteHitBox(this);//hitbox削除
-		objmap->SetMap(m_map_x, m_map_y, MAP_SPACE);//マップの数値を空にする
 		this->SetStatus(false);//自身
 		return;
 	}
