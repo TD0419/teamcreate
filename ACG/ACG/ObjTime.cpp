@@ -36,10 +36,10 @@ void CObjTime::Draw()
 
 	//•b‚ª10–¢–ž‚È‚ç‚O‚ð‘O‚É•t‚¯‚é
 	if(m_time / 64 % 60 < 10)
-		swprintf(str, L"%d:0%d", m_time / 64 / 60,m_time / 64 % 60);
+		swprintf_s(str, L"%d:0%d", m_time / 64 / 60,m_time / 64 % 60);
 	//‚»‚Ì‚Ü‚Ü
 	else
-		swprintf(str, L"%d:%d", m_time / 64 / 60, m_time / 64 % 60);
+		swprintf_s(str, L"%d:%d", m_time / 64 / 60, m_time / 64 % 60);
 	//ŽžŠÔ‚ð•\Ž¦
 	Font::StrDraw(str, m_px, m_py, 50, color);
 }

@@ -198,8 +198,8 @@ enum MUSIC
 #define BULLET_SIZE			  (20.0f)		//弾丸サイズ（仮）
 #define ROPE_SIZE			  (5.0f)		//ロープサイズ（仮）
 #define BLOCK_SIZE			  (64.0f)		//ブロックのサイズ（仮）	
-#define WATER_SIZE_WIDTH	  (64.0f)		//水の横サイズ
-#define WATER_SIZE_HEIGHT	  (64.0f)       //水の縦サイズ
+#define WATER_SIZE_WIDTH	  (640.0f)		//水の横サイズ
+#define WATER_SIZE_HEIGHT	  (192.0f)       //水の縦サイズ
 #define LADDERS_SIZE		  (64.0f)		//はしごのサイズ
 #define BUTTON_SIZE			  (64.0f)		//ボタンサイズ（仮）
 #define SIGN_SIZE			  (32.0f)		//看板のサイズ（仮）

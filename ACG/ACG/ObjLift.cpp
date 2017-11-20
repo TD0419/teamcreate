@@ -281,6 +281,7 @@ void CObjLift::Action()
 		//行き過ぎた分を調整して現在の移動方向を左右逆にする
 		else if (m_move_x > m_width_max || m_move_x < 0)
 		{
+			//行き過ぎた分
 			//初期位置から動いた距離がMAX越えなら
 			if (m_move_x > m_width_max)
 			{
@@ -338,7 +339,6 @@ void CObjLift::Action()
 		break;
 	}
 	
-
 	//位置情報を更新
 	m_px += m_vx;
 	m_py += m_vy;
