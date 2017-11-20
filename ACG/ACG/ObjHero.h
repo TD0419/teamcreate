@@ -45,7 +45,7 @@ public:
 	int GetBlockType() { return m_block_type; }						//下のブロック(踏んでいる)情報を渡す
 	int GetLadderUpdown() { return m_ladder_updown; }				//主人公がはしごのどのアニメーション中かを返す
 
-	void HeroGoal() { m_goal_flag = true; m_radius = 0.0f; }		//主人公のゴール処理切り替え関数(ゴールフラグを立てる)
+	void HeroGoal() { m_goal_flag = true; m_radius = 0; }		//主人公のゴール処理切り替え関数(ゴールフラグを立てる)
 
 private:
 	void CircleDraw(float add_radius,float color[4],int type);		// 死亡時とゴール時用の円を描画する関数
