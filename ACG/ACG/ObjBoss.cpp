@@ -40,6 +40,7 @@ void CObjBoss::Init()
 	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
 
 	Audio::Start(STAGE2_BOSS);
+	Audio::Stop(STAGE2);
 }
 
 //ƒAƒNƒVƒ‡ƒ“
