@@ -47,4 +47,7 @@ private:
 	//２＝無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)
 	int m_move_mode;	
 
+	//音を制御するためのフラグ　true:鳴る　false:鳴らさない
+	bool m_lift_audio_flag;
+
 };

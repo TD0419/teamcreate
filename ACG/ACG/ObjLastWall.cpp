@@ -164,7 +164,10 @@ void CObjLastWall::Action()
 			// 主人公が壁の右側にいないと壁がしまらないようにする
 			if (objhero->GetPosX() > m_px + BLOCK_SIZE)
 			{
+				//主人公が右側にいったので、壁が下がるフラグをtrueにする
 				m_wall_down_flag = true;
+
+				//壁のゲージを0にする
 				m_wall_gauge = 0;
 			}
 				
@@ -180,33 +183,36 @@ void CObjLastWall::Action()
 			}
 		}
 
+		//壁のしまるフラグがfalseのとき
 		if (m_wall_down_flag == false)
 		{
-			// hitboxが小さくなる
+			// 壁のhitboxを小さくする
 			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 512.0f - m_wall_gauge);
 		}
 
 		// ボスが出てきたら強制的に閉める処理
 		if (objboss != nullptr || objenemy != nullptr)
 		{
-			m_wall_down_flag = true;			// 切り替えフラグオン
-			m_wall_gauge = 0;	// wall初期化
-			Audio::Stop(WALL);//音楽ストップ
+			m_wall_down_flag = true;//切り替えフラグオン
+			m_wall_gauge = 0;		//wall初期化
+			Audio::Stop(WALL);		//音楽ストップ
 		}
-
+		//壁がしまった時
 		if (m_wall_gauge2 >= 512)
 		{
 			Audio::Stop(WALL);//音楽ストップ
 		}
+		//壁が開いているとき
 		else
 		{
+			//壁が下がるフラグオン
 			if (m_wall_down_flag == true)
 			{
-				m_wall_gauge2 += 512; // 一番下まで下がる
-				// hitboxが小さくなる
-				Audio::Start(WALL);//開門の音楽スタート
-				HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 0.0f + m_wall_gauge2);
+				m_wall_gauge2 += 512;	//一番下まで下がる
+				Audio::Start(WALL);		//開門の音楽スタート
 
+				//hitboxが小さくなる
+				HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 0.0f + m_wall_gauge2);
 			}
 		}
 
@@ -224,6 +230,8 @@ void CObjLastWall::Draw()
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//ステージの種類によって描画をかえる
 	switch (m_wall_type)
 	{
 	case 1:
@@ -297,33 +305,4 @@ void CObjLastWall::Draw()
 	
 
 	//-----------------------------------------------------
-	//if (a == false)
-	//{
-	//	//切り取り位置
-	//	src.m_top = 0.0 + m_wall_gauge;
-	//	src.m_left = 0.0f;
-	//	src.m_right = 32.0f;
-	//	src.m_bottom = 512.0f;
-	//
-	//	//描画位置
-	//	dst.m_top = m_py - objmap->GetScrollY() + 65;
-	//	dst.m_left = m_px - objmap->GetScrollX() + 30;
-	//	dst.m_right = dst.m_left + 32;
-	//	dst.m_bottom = dst.m_top + 512 - m_wall_gauge;
-	//}
-	//else
-	//{
-	//	//切り取り位置
-	//	src.m_top = 0.0;
-	//	src.m_left = 0.0f;
-	//	src.m_right = 32.0f;
-	//	src.m_bottom = 0.0f+m_wall_gauge2;
-	//	//描画位置
-	//	dst.m_top = m_py - objmap->GetScrollY() + 65;
-	//	dst.m_left = m_px - objmap->GetScrollX() + 30;
-	//	dst.m_right = dst.m_left + 32;
-	//	dst.m_bottom = dst.m_top +  m_wall_gauge2;
-	//}
-	////描画(下の部分)
-	//Draw::Draw(GRA_OPEN_WALL, &src, &dst, color, 0.0f);
 }

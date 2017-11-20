@@ -93,6 +93,7 @@ void CObjLift::Init()
 
 		break;
 	}
+	m_lift_audio_flag = true;
 	//“–‚½‚è”»’è
 	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
 
@@ -139,12 +140,23 @@ void CObjLift::Action()
 					{
 						//¶‚Éi‚Ş
 						m_vx = -SPEED;
+						if (m_lift_audio_flag==true)
+						{
+							Audio::Start(LIFT);
+							m_lift_audio_flag = false;
+						}
+						
 					}
 					//‰Šú‚ÌˆÚ“®•ûŒü‚ª¶‚Ì‚Æ‚«
 					else
 					{
 						//‰E‚Éi‚Ş
 						m_vx = SPEED;
+						if (m_lift_audio_flag==true)
+						{
+							Audio::Start(LIFT);
+							m_lift_audio_flag = false;
+						}
 					}
 					
 				}
