@@ -211,7 +211,7 @@ enum MUSIC
 #define ROCK_SIZE_HEIGHT	  (240.0f)		//岩の縦サイズ（仮
 #define WOOD_SIZE			  (320.0f)		//木のサイズ(仮)
 #define BOSS_SIZE_WIDTH		  (192.0f)		//BOSS横幅(仮)
-#define BOSS_SIZE_HEIGHT	  (256.0f)		//BOSS横幅(仮)
+#define BOSS_SIZE_HEIGHT	  (256.0f)		//BOSS縦幅(仮)
 #define BOSS_DORP_KEY_SIZE	  (32.0f)	    //ボスドロップキーサイズ(仮)
 #define DOOR_SIZE			  (128.0f)		//ドアのサイズ(仮)
 #define THROUGHT_BLOCK_SIZE	 (64.0f)	    //スルーブロックサイズ（仮）

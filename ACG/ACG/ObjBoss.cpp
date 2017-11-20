@@ -25,7 +25,7 @@ void CObjBoss::Init()
 	m_vy = 0.0f;
 	m_hp = 20; //ボスのＨＰ
 	m_posture = 1.0f; // 左向き
-	m_speed = 6.0f;   // 速度
+	m_speed = 3.0f;   // 速度
 
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする

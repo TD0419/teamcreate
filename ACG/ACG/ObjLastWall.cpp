@@ -63,6 +63,8 @@ void CObjLastWall::Action()
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	//敵オブジェクと持ってくる
 	CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	//BOSSオブジェクトと持ってくる
+	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
@@ -126,13 +128,34 @@ void CObjLastWall::Action()
 				//LastWallの右側が衝突している場合
 				if (0 < r && r < 85 || 275 < r && r < 360)
 				{
-					objenemy->SetVX(2.0f);//主人公のX方向の移動を０にする
-					objenemy->SetPosture(1.0f);
+					objenemy->SetVX(2.0f);//敵のX方向の移動を2にする
+					objenemy->SetPosture(1.0f);//向き変更
 				}
 				else if (94 < r && r < 266)
 				{
-					objenemy->SetVX(-2.0f);//主人公のX方向の移動を０にする
-					objenemy->SetPosture(0.0f);//主人公の位置をLastWallの左側までずらす
+					objenemy->SetVX(-2.0f);//敵のX方向の移動を-2にする
+					objenemy->SetPosture(0.0f);//向き変更
+				}
+
+			}
+		}
+	}
+	else if (hit->CheckObjNameHit(OBJ_BOSS) != nullptr)
+	{
+		HIT_DATA** hit_data_boss;	//敵の衝突の情報を入れる構造体
+		hit_data_boss = hit->SearchObjNameHit(OBJ_BOSS);//敵の衝突の情報をhit_dataに入れる
+
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			if (hit_data_boss[i] != nullptr)
+			{
+				float r = 0.0f;
+				r = hit_data_boss[i]->r;
+
+				if (94 < r && r < 266)
+				{
+					objboss->SetVX(-4.0f);//BOSSのX方向の移動を-2にする
+					objboss->SetPosture(1.0f);//BOSSの向き変更
 				}
 
 			}
@@ -154,9 +177,6 @@ void CObjLastWall::Action()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	int map_num = objmap->GetMap(m_map_x, m_map_y);
-
-	//ボスの情報を持ってくる
-	CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 
 		// m_wall_gaugeが512を越えたら処理ストップ
 		if (m_wall_gauge >= 512)
