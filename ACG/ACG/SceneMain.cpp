@@ -85,7 +85,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//ステージ番号ごとにステージ読み込み
-	switch (((UserData*)Save::GetData())->stagenum)
+	switch (((UserData*)Save::GetData())->stagenum )
 	{
 		
 	case 1:
@@ -208,12 +208,9 @@ void CSceneMain::ImageDataLoading()
 	//岩画像読み込み
 	Draw::LoadImageW(L"Image\\rock.png", GRA_ROCK, TEX_SIZE_512);
 
-	//Water(水上)画像読み込み
-	Draw::LoadImageW(L"Image\\Water.png", GRA_AQUATIC, TEX_SIZE_256);
+	//Water画像読み込み
+	Draw::LoadImageW(L"Image\\Water.png", GRA_AQUATIC, TEX_SIZE_1024);
 
-	//Water波なし(水中)画像読み込み  消去禁止。いります！
-	Draw::LoadImageW(L"Image\\WaterBlock.png", GRA_UNDER_WATER, TEX_SIZE_256);
-	
 	//ロープスイッチ画像読み込み
 	Draw::LoadImageW(L"Image\\RopeSwitch.png", GRA_ROPE_SWITCH, TEX_SIZE_64);
 	
