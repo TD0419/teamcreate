@@ -65,17 +65,21 @@ private:
 	float m_rope_moux;	//Rを押したときのマウスの位置X
 	float m_rope_mouy;  //Rを押したときのマウスの位置Y
 	
+	//ーーーー制御系---------
 	bool  m_bullet_control;       //弾丸発射制御用
 	bool  m_rope_control;	      //ロープ発射制御用
 	bool  m_rope_ani_con;         //ロープアニメーション制御
 	bool  m_rope_delete;          //ロープが消えたかどうか調べる変数
 	bool  m_rope_delete_r_kye;    //アニメーション用ロープが消えたかどうかを管理する 
 	bool  m_rope_delete_control;  //ロープが消えた時の判定を制御する変数
-	
-	bool  m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）
-	bool  m_hero_die_enemy;		  //主人公が敵にあたったかどうかを調べる変数（死）
-	bool  m_hero_die_screen_out;  //主人公が画面外（落ちた時）に行ったかどうか調べる変数（死）（シーン移行用）
-
+	bool  m_hero_die_flag;        //主人公が死んだ時の高さを制御するためのフラグ
+	//-----------
+	//-------Heroが死ぬ系---------
+	bool   m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）
+	bool   m_hero_die_enemy;	   //主人公が敵にあたったかどうかを調べる変数（死）
+	bool   m_hero_die_screen_out;  //主人公が画面外（落ちた時）に行ったかどうか調べる変数（死）（シーン移行用）
+	float  m_screen_out;           //主人公が死んだ時のｙ位置を記憶するための変数
+	//-----------------
 	int m_ladder_updown; //はしごHit管理
 	int m_ladder_ani_updown; //はしごアニメーション管理
 
