@@ -32,7 +32,7 @@ void CObjLadders::Init()
 	else
 		m_side_block_flag = false;
 
-	m_up_and_down_ladders = 6.0f;//ハシゴ上り下り時の速度
+	m_up_and_down_speed = 6.0f;//ハシゴ上り下り時の速度
 }
 
 //アクション
@@ -124,7 +124,7 @@ void CObjLadders::HeroHit(float px, float py)
 				}
 				else
 				{
-					objhero->SetVecY(-m_up_and_down_ladders);//上方向への移動ベクトルをセットする
+					objhero->SetVecY(-m_up_and_down_speed);//上方向への移動ベクトルをセットする
 					//はしごを上りきる時に2を渡す
 					if (map_num_ladder_up == MAP_SPACE)
 					{
@@ -143,7 +143,7 @@ void CObjLadders::HeroHit(float px, float py)
 				//下に通常ブロックが無かったら
 				if (objhero->GetBlockType() != MAP_BLOCK)
 				{
-					objhero->SetVecY(m_up_and_down_ladders);//下方向への移動ベクトルをセットする
+					objhero->SetVecY(m_up_and_down_speed);//下方向への移動ベクトルをセットする
 					objhero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
 					objhero->SetLaddersAniUpdown(1);//アニメーションを進める
 				}

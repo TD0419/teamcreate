@@ -21,7 +21,7 @@ private:
 	float m_py;					//ハシゴY座標
 	int m_map_x;				//マップ要素数X
 	int m_map_y;				//マップ要素数Y
-	float m_up_and_down_ladders;//ハシゴの上り下り時の速度
+	float m_up_and_down_speed;//ハシゴの上り下り時の速度
 	bool  m_obj_look_f;			//ハシゴが見えるかどうか false:見えない true:見える
 	bool  m_side_block_flag;	//サイドにブロックがあるかを確認する
 };

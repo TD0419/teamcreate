@@ -104,6 +104,7 @@ void CObjEnemy::Action()
 	//弾丸とあたったら消去
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
+		Audio::Start(LANDING);		//敵に着弾したときの音をスタート
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
 	
