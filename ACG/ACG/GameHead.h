@@ -174,17 +174,19 @@ enum MUSIC
 	STAGE2_BOSS,//ステージ2ボス
 	STAGE5  ,	//ステージ5
 //SE---------------------
-	FIRING	,//弾の発射
-	ROPE	,//ロープの打ち出し
-	ROCK	,//岩の爆発
-	WALL	,//壁の開閉
-	TREE	,//木の転倒
-	DOOR	,//出口開閉
-	LANDING ,//敵に着弾
-	LEVER   ,//レバー
-	BUTTON  ,//ボタン
-	ENEMYFIR,//敵の弾発射
-	LIFT	,//リフト
+	FIRING		,//弾の発射
+	ROPE		,//ロープの打ち出し
+	ROCK		,//岩の爆発
+	WALL		,//壁の開閉
+	TREE		,//木の転倒
+	DOOR		,//出口開閉
+	LANDING		,//敵に着弾
+	LEVER		,//レバー
+	BUTTON		,//ボタン
+	ENEMYFIR	,//敵の弾発射
+	LIFT		,//リフト
+	WAVE		,//水の流れ
+	GORILLATHROW,//ゴリラの投擲音
 
 };
 
