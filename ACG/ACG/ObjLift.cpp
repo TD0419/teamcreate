@@ -83,7 +83,6 @@ void CObjLift::Init()
 	case 4:
 		m_initial_direction = 2;
 		m_width_max = 0.0f;
-		m_length_max = 0.0f;
 		m_move_mode = 2;
 		break;
 		//ステージ５
@@ -95,7 +94,8 @@ void CObjLift::Init()
 
 		break;
 	}
-	m_lift_audio_flag = true;
+	//リフトのカウント初期化
+	m_lift_audio_count = 47;
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
 
@@ -142,10 +142,10 @@ void CObjLift::Action()
 					{
 						//左に進む
 						m_vx = -SPEED;
-						if (m_lift_audio_flag==true)
+						m_lift_audio_count++;
+						if (m_lift_audio_count % 50 == 0)
 						{
 							Audio::Start(LIFT);
-							m_lift_audio_flag = false;
 						}
 						
 					}
@@ -154,11 +154,7 @@ void CObjLift::Action()
 					{
 						//右に進む
 						m_vx = SPEED;
-						if (m_lift_audio_flag==true)
-						{
-							Audio::Start(LIFT);
-							m_lift_audio_flag = false;
-						}
+						
 					}
 					
 				}
@@ -182,6 +178,11 @@ void CObjLift::Action()
 				{
 					//右に移動
 					m_vx = SPEED;
+					m_lift_audio_count++;
+					if (m_lift_audio_count % 50 == 0)
+					{
+						Audio::Start(LIFT);
+					}
 				}
 				//初期の移動方向は左だったら
 				else
