@@ -145,7 +145,7 @@ void CObjLift::Action()
 						m_lift_audio_count++;
 						if (m_lift_audio_count % 50 == 0)
 						{
-							Audio::Start(LIFT);
+							Audio::Start(PLIFT);
 						}
 						
 					}
@@ -181,7 +181,7 @@ void CObjLift::Action()
 					m_lift_audio_count++;
 					if (m_lift_audio_count % 50 == 0)
 					{
-						Audio::Start(LIFT);
+						Audio::Start(RLIFT);
 					}
 				}
 				//‰Šú‚ÌˆÚ“®•ûŒü‚Í¶‚¾‚Á‚½‚ç

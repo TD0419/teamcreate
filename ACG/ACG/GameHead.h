@@ -184,7 +184,8 @@ enum MUSIC
 	LEVER		,//レバー
 	BUTTON		,//ボタン
 	ENEMYFIR	,//敵の弾発射
-	LIFT		,//リフト
+	PLIFT		,//リフト(引っ張る)
+	RLIFT		,//リフト(離れる)
 	WAVE		,//水の流れ
 	GORILLATHROW,//ゴリラの投擲音
 
