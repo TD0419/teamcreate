@@ -295,7 +295,12 @@ void CSceneMain::AudioDataLoading()
 	//ÉäÉtÉg
 	Audio::LoadAudio(LIFT, L"LiftTrickRelease.wav", SOUND_TYPE::EFFECT);
 
-	
+	//êÖÇÃó¨ÇÍÇÈâπ
+	Audio::LoadAudio(WAVE, L"Wave.wav", SOUND_TYPE::EFFECT);
+
+	//êÖÇÃó¨ÇÍÇÈâπ
+	Audio::LoadAudio(GORILLATHROW, L"Gorilla Throw.wav", SOUND_TYPE::EFFECT);
+
 //------------------------------------------------------------
 
 }
