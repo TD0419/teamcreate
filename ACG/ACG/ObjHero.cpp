@@ -532,7 +532,7 @@ void CObjHero::Draw()
 		// •F
 		float radius_color[4] = { 0.f, 0.f, 0.f, 1.f };
 		// ‰~•`‰æ
-		CircleDraw(-20.0f, radius_color, HeroState::Die);
+		CircleDraw(-20.0f, radius_color, Die);
 	}
 	//----------------------------------------------------------------
 
@@ -543,7 +543,7 @@ void CObjHero::Draw()
 		// ”’F
 		float radius_color[4] = { 1.f, 1.f, 1.f, 1.f };
 		// ‰~•`‰æ
-		CircleDraw(20.0f, radius_color, HeroState::Clear);
+		CircleDraw(20.0f, radius_color, Clear);
 	}
 	//-----------------------------------------------------------------
 
@@ -584,7 +584,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	//’†‰›ˆÊ’uİ’è       
 	int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX());
 
-	if (type == HeroState::Die)
+	if (type == Die)
 	{
 		//—‰º‚Ì’†‰›ˆÊ’u
 		static float screen_out = m_py;
@@ -596,7 +596,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 		else
 			ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
 	}
-	else if (type == HeroState::Clear)
+	else if (type == Clear)
 	{
 		ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
 	}
@@ -610,7 +610,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	int one_side = 6;
 
 	//”¼Œa‚ªÅ¬‚É‚È‚Á‚½‚çƒV[ƒ“ˆÚs‚·‚éiã‚Ì‚Ù‚¤‚É‚ ‚éj
-	if (type == HeroState::Die)
+	if (type == Die)
 	{
 		if (m_radius <= 0.0f)
 		{
@@ -618,7 +618,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 			Scene::SetScene(new CSceneMain(-1)); // ƒŠƒXƒ^[ƒg
 		}
 	}
-	else if (type == HeroState::Clear)
+	else if (type == Clear)
 	{
 		if (m_radius >= 768.0f)
 		{
@@ -637,13 +637,13 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 			//‰~‚Ì’†
 			if ((x - ball_x)*(x - ball_x) + (y - ball_y)*(y - ball_y) <= m_radius * m_radius)
 			{
-				if (type == HeroState::Clear) // ‰~‚Ì’†‚ğ“h‚é
+				if (type == Clear) // ‰~‚Ì’†‚ğ“h‚é
 					Draw::DrawHitBox(x, y, one_side, one_side, color);
 			}
 			//‰~ŠO
 			else
 			{
-				if (type == HeroState::Die)	// ‰~‚ÌŠO‚ğ“h‚é
+				if (type == Die)	// ‰~‚ÌŠO‚ğ“h‚é
 					Draw::DrawHitBox(x, y, one_side, one_side, color);
 			}
 		}
