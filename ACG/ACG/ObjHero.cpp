@@ -175,8 +175,6 @@ void CObjHero::Action()
 		}
 	}
 
-	
-
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
 
@@ -197,6 +195,10 @@ void CObjHero::Action()
 	//自由落下運動
 	if(m_gravity_flag == true)
 		m_vy += 9.8f / (16.0f);
+
+	//最大落下スピードを超えないようにする
+	if (m_gravity_flag == true && m_vy > m_fall_speed_max)
+		m_vy = m_fall_speed_max;
 
 	Scroll();	//スクロール処理をおこなう
 

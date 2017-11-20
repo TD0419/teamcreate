@@ -18,13 +18,10 @@ public:
 	void RopeThrow();			//Rope スロー関数
 
 
-
-
 	void Draw();					//ドロー
 	void Scroll();					//スクロール処理の関数
 	void LandingCheck();			//着地できてるかどうかを調べる関数
 	bool HitUpCheck(int obj_name);	//指定したオブジェクトの上側と当たっているかしらべる関数
-
 
 
 	//アクセサ------------------------------------------
@@ -58,6 +55,7 @@ private:
 	float m_posture;//姿勢 //右：0.0ｆ　左：1.0ｆ
 	float m_r;		//主人公の回転角度
 	int   m_block_type;//踏んでるブロックの値を保存する
+	int	  m_fall_speed_max;//主人公の落下スピード最大速度
 	int   m_radius; //主人公が死んだ時、周りから黒くする半径の変数
 	bool  m_gravity_flag; // 主人公の重力落下フラグ true:重力あり false:重力なし
 	bool  m_goal_flag;	  // ゴールフラグ true:ゴールした false:ゴールしていない
