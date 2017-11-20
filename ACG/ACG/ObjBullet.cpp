@@ -31,8 +31,8 @@ CObjBullet::CObjBullet(float x, float y)
 
 	//マウスの位置と主人公の位置からマウスの角度を求める
 	//マウスの位置情報取得
-	float mous_x = Input::GetPosX();
-	float mous_y = Input::GetPosY();
+	float mous_x = (float)Input::GetPosX();
+	float mous_y = (float)Input::GetPosY();
 
 	//主人公の位置からマウスの位置のベクトル情報取得
 	float vector_x = mous_x - x;
@@ -51,7 +51,7 @@ CObjBullet::CObjBullet(float x, float y)
 	if (mous_y > y )
 	{
 		//180°～360°の値にする
-		m_r = 360 - abs(m_r);
+		m_r = 360.0f - abs(m_r);
 	}
 	//マウスのY位置が初期Y位置より上
 	if (mous_y < y)
@@ -154,13 +154,13 @@ void CObjBullet::Action()
 				float r = hit_data[i]->r;
 
 				//上　または　下で衝突している場合
-				if (45 <= r && r < 135 || 225 <= r && r < 315)
+				if (45.0f <= r && r < 135.0f || 225.0f <= r && r < 315.0f)
 				{
-					m_vy *= (-1);//移動ベクトルの上下を反転する
+					m_vy *= (-1.0f);//移動ベクトルの上下を反転する
 				}
 				else //左または右で衝突している場合
 				{
-					m_vx *= (-1);//移動ベクトルの左右を反転する
+					m_vx *= (-1.0f);//移動ベクトルの左右を反転する
 				}
 			}
 		}
