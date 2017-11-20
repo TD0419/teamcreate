@@ -8,7 +8,7 @@ using namespace GameL;
 
 //リフトのスピードマクロ
 //テスト用
-#define SPEED (1.0f)
+#define SPEED (1.5f)
 
 //オブジェクト：リフト
 class CObjLift :public CObj
