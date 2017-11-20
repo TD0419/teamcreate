@@ -14,15 +14,15 @@ CObjWater::CObjWater(int x, int y)
 {
 	m_map_x = x;
 	m_map_y = y;
-	m_px = x *  WATER_SIZE_WIDTH;
-	m_py = y * WATER_SIZE_HEIGHT;
+	m_px = x * BLOCK_SIZE;
+	m_py = y * BLOCK_SIZE;
 }
 
 //イニシャライズ
 void CObjWater::Init()
 {
 	m_ani_time = 0;
-	m_ani_frame = 1;  //静止フレームを初期にする
+	m_ani_frame = 0;  //静止フレームを初期にする
 	m_ani_max_time = 17; //アニメーション間隔幅
 	m_ani_start = false;
 
@@ -51,19 +51,11 @@ void CObjWater::Action()
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	
-	int map_num= objmap->GetMap(m_map_x , m_map_y - 1);
-	
-	//1つ上のマスが水なら
- 	if( map_num == MAP_WATER)
-	{
-		return;
-	}
+
 	//アニメーションを開始するのでフラグをオンにする
 	m_ani_start = true;
-
 	
-	// m_water_gaugeが64を越えたら処理ストップ
+	// m_water_gaugeが192を越えたら処理ストップ
 	if (m_water_gauge >= WATER_SIZE_HEIGHT)
 	{
 		Hits::DeleteHitBox(this);//hitbox削除
@@ -72,7 +64,8 @@ void CObjWater::Action()
 		return;
 	}
 	else
-	{//レバースイッチが押されていたら
+	{
+		//レバースイッチが押されていたら
 		if (lever_swich == true)
 		{
 			m_water_gauge += 0.2f; // 1ずつ増やしていく
@@ -80,7 +73,7 @@ void CObjWater::Action()
 	}
 
 	// hitboxが小さくなる
-	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge, WATER_SIZE_HEIGHT - m_water_gauge, WATER_SIZE_WIDTH);
+	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT - m_water_gauge);
 
 	//アニメーションの感覚管理
 	if (m_ani_time > m_ani_max_time)
@@ -98,11 +91,6 @@ void CObjWater::Action()
 //ドロー
 void CObjWater::Draw()
 {
-	//画像の切り取り配列
-	int AniData[2] =
-	{
-		0  , 1 ,
-	};
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -112,20 +100,16 @@ void CObjWater::Draw()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
-	src.m_top = 0.0f;
-	src.m_left = AniData[m_ani_frame] * WATER_SIZE_WIDTH;
+	src.m_top = 0.0f + WATER_SIZE_HEIGHT * m_ani_frame;
+	src.m_left =0.0f;
 	src.m_right = src.m_left+WATER_SIZE_WIDTH;
-	src.m_bottom = src.m_top+WATER_SIZE_HEIGHT;
+	src.m_bottom =src.m_top+WATER_SIZE_HEIGHT;
 
 	//描画位置
 	dst.m_top = m_py + m_water_gauge - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + BLOCK_SIZE;
+	dst.m_right = dst.m_left + WATER_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
 
-	//
-	if(m_ani_start == false)
-		Draw::Draw(GRA_UNDER_WATER, &src, &dst, color, 0);//水（波なしの画像）
-	else
-		Draw::Draw(GRA_AQUATIC, &src, &dst, color, 0);//水（波有の画像　アニメーション付き）
+	Draw::Draw(GRA_AQUATIC, &src, &dst, color, 0);//水
 }
