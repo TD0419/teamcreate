@@ -18,13 +18,10 @@ public:
 	void RopeThrow();			//Rope スロー関数
 
 
-
-
 	void Draw();					//ドロー
 	void Scroll();					//スクロール処理の関数
 	void LandingCheck();			//着地できてるかどうかを調べる関数
 	bool HitUpCheck(int obj_name);	//指定したオブジェクトの上側と当たっているかしらべる関数
-
 
 
 	//アクセサ------------------------------------------
@@ -45,7 +42,7 @@ public:
 	int GetBlockType() { return m_block_type; }						//下のブロック(踏んでいる)情報を渡す
 	int GetLadderUpdown() { return m_ladder_updown; }				//主人公がはしごのどのアニメーション中かを返す
 
-	void HeroGoal() { m_goal_flag = true; m_radius = 0.0f; }		//主人公のゴール処理切り替え関数(ゴールフラグを立てる)
+	void HeroGoal() { m_goal_flag = true; m_radius = 0; }		//主人公のゴール処理切り替え関数(ゴールフラグを立てる)
 
 private:
 	void CircleDraw(float add_radius,float color[4],int type);		// 死亡時とゴール時用の円を描画する関数
@@ -58,6 +55,7 @@ private:
 	float m_posture;//姿勢 //右：0.0ｆ　左：1.0ｆ
 	float m_r;		//主人公の回転角度
 	int   m_block_type;//踏んでるブロックの値を保存する
+	int	  m_fall_speed_max;//主人公の落下スピード最大速度
 	int   m_radius; //主人公が死んだ時、周りから黒くする半径の変数
 	bool  m_gravity_flag; // 主人公の重力落下フラグ true:重力あり false:重力なし
 	bool  m_goal_flag;	  // ゴールフラグ true:ゴールした false:ゴールしていない
@@ -67,17 +65,21 @@ private:
 	float m_rope_moux;	//Rを押したときのマウスの位置X
 	float m_rope_mouy;  //Rを押したときのマウスの位置Y
 	
+	//ーーーー制御系---------
 	bool  m_bullet_control;       //弾丸発射制御用
 	bool  m_rope_control;	      //ロープ発射制御用
 	bool  m_rope_ani_con;         //ロープアニメーション制御
 	bool  m_rope_delete;          //ロープが消えたかどうか調べる変数
 	bool  m_rope_delete_r_kye;    //アニメーション用ロープが消えたかどうかを管理する 
 	bool  m_rope_delete_control;  //ロープが消えた時の判定を制御する変数
-	
-	bool  m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）
-	bool  m_hero_die_enemy;		  //主人公が敵にあたったかどうかを調べる変数（死）
-	bool  m_hero_die_screen_out;  //主人公が画面外（落ちた時）に行ったかどうか調べる変数（死）（シーン移行用）
-
+	bool  m_hero_die_flag;        //主人公が死んだ時の高さを制御するためのフラグ
+	//-----------
+	//-------Heroが死ぬ系---------
+	bool   m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）
+	bool   m_hero_die_enemy;	   //主人公が敵にあたったかどうかを調べる変数（死）
+	bool   m_hero_die_screen_out;  //主人公が画面外（落ちた時）に行ったかどうか調べる変数（死）（シーン移行用）
+	float  m_screen_out;           //主人公が死んだ時のｙ位置を記憶するための変数
+	//-----------------
 	int m_ladder_updown; //はしごHit管理
 	int m_ladder_ani_updown; //はしごアニメーション管理
 

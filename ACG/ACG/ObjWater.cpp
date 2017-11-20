@@ -123,7 +123,7 @@ void CObjWater::Draw()
 	dst.m_right = dst.m_left + BLOCK_SIZE;
 	dst.m_bottom = dst.m_top + WATER_SIZE_HEIGHT - m_water_gauge;
 
-	
+	//
 	if(m_ani_start == false)
 		Draw::Draw(GRA_UNDER_WATER, &src, &dst, color, 0);//…i”g‚È‚µ‚Ì‰æ‘œj
 	else

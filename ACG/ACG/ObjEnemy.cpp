@@ -46,6 +46,7 @@ void CObjEnemy::Action()
 	//ƒ}ƒbƒvî•ñ‚ğæ‚Á‚Ä‚­‚é
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
+	//[[[[[[[[[[[æ‚Á‚Æ‚¢‚Ä‚­‚¾‚³‚¢AƒXƒe[ƒW‚R‚­‚ç‚¢‚Åg‚¢‚Ü‚·B
 	////‰æ–Ê“à‚©’²‚×‚é
 	//m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
 
@@ -60,7 +61,7 @@ void CObjEnemy::Action()
 	//	
 	//	return;
 	//}
-	
+	//|||||||||||||||||||||||
 	//ˆÚ“®----------------------------------------------
 
 	//¶‚ÉŒü‚¢‚Ä‚¢‚é‚È‚ç¶‚ÖˆÚ“®‚·‚é
@@ -103,6 +104,7 @@ void CObjEnemy::Action()
 	//’eŠÛ‚Æ‚ ‚½‚Á‚½‚çÁ‹
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
+		Audio::Start(LANDING);		//“G‚É’…’e‚µ‚½‚Æ‚«‚Ì‰¹‚ğƒXƒ^[ƒg
 		this->SetStatus(false);		//©g‚ÉÁ‹–½—ß‚ğo‚·B
 		Hits::DeleteHitBox(this);	//“G‚ªŠ‚·‚éHitBox‚ğœ‹B
 	
@@ -146,14 +148,7 @@ void CObjEnemy::Action()
 			m_posture = 1.0f;
 		}
 	}
-	/*
-	float enemy_x = m_px;
-	float enemy_y = m_py;
-	float enemy_vx = m_vx;
-	float enemy_vy = m_vy;
-
-	HitTestOfAB();
-*/
+	
 	//ˆÚ“®ƒxƒNƒgƒ‹‚ğƒ|ƒWƒVƒ‡ƒ“‚É‰ÁZ
 	m_px += m_vx;
 	m_py += m_vy;

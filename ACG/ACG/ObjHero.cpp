@@ -43,18 +43,18 @@ void CObjHero::Action()
 		//右下
 		if (i == 1)
 		{
-			pos_x = HERO_SIZE_WIDTH;
+			pos_x = (int)HERO_SIZE_WIDTH;
 		}
 		//左下
 		else if(i == 2)
 		{
-			pos_x = HERO_SIZE_WIDTH / 2;
+			pos_x = (int)HERO_SIZE_WIDTH / 2;
 		}
 		//主人公のX位置(マップの要素数)
-		int x = (m_px + pos_x) / BLOCK_SIZE;
+		int x = ((int)m_px + pos_x) / (int)BLOCK_SIZE;
 		//主人公のY位置(マップの要素数)
 		//少し下にする
-		int y = (m_py + 1 + HERO_SIZE_HEIGHT) / BLOCK_SIZE;
+		int y = ((int)m_py + 1 + (int)HERO_SIZE_HEIGHT) / (int)BLOCK_SIZE;
 		//ブロック情報が0で無いなら取得
 		if (objmap->GetMap(x, y)!= 0)
 		{
@@ -175,8 +175,6 @@ void CObjHero::Action()
 		}
 	}
 
-	
-
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
 
@@ -195,8 +193,13 @@ void CObjHero::Action()
 	m_vx += -(m_vx * 0.098f);
 
 	//自由落下運動
+	// フラグがたっていたら重力をかける
 	if(m_gravity_flag == true)
 		m_vy += 9.8f / (16.0f);
+
+	//最大落下スピードを超えないようにする
+	if (m_gravity_flag == true && m_vy > m_fall_speed_max)
+		m_vy = m_fall_speed_max;
 
 	Scroll();	//スクロール処理をおこなう
 
@@ -266,8 +269,6 @@ void CObjHero::Action()
 			this->SetStatus(false);		//自身を削除
 			Hits::DeleteHitBox(this);	//ヒットボックスを削除
 
-			//メインへ移行
-			Scene::SetScene(new CSceneMain(-1));
 			return;
 		}
 	}
@@ -292,8 +293,6 @@ void CObjHero::Action()
 			this->SetStatus(false);		//自身を削除
 			Hits::DeleteHitBox(this);	//ヒットボックスを削除
 
-			//メインへ移行
-			Scene::SetScene(new CSceneMain(-1));
 			return;
 		}
 	}
@@ -367,6 +366,7 @@ void CObjHero::Draw()
 	//ロープオブジェクトを持ってくる
 	CObjRope* obj_rope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
 
+	// ロープとロープスイッチが当たっているかどうかを入れる変数
 	bool rope_caught;
 
 	if (obj_rope != nullptr)//ロープオブジェクトが出ている場合
@@ -527,12 +527,12 @@ void CObjHero::Draw()
 
 	//画面全体をだんだん暗くする処理----------------------------------
 	//死んだことが確定した場合
-	if (m_hero_die_water == true | m_hero_die_enemy == true | m_py > 2000.0f)
+	if (m_hero_die_water == true || m_hero_die_enemy == true || m_py > 2000.0f)
 	{
 		// 黒色
 		float radius_color[4] = { 0.f, 0.f, 0.f, 1.f };
 		// 円描画
-		CircleDraw(-20.0f, radius_color, Die);
+		CircleDraw(-11.0f, radius_color, Die);
 	}
 	//----------------------------------------------------------------
 
@@ -578,24 +578,30 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 {
 	// マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
+	// 中央のｙ位置の初期化
 	int ball_y = 0;
 
 	//中央位置設定       
 	int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX());
 
+	// Heroが死んでいたら
 	if (type == Die)
 	{
-		//落下時の中央位置
-		static float screen_out = m_py;
+		//落下時の中央位置 
+		if (m_hero_die_flag == false)
+		{
+			m_screen_out = m_py; //暗くなる中央の位置が主人公を追わなくするため
+			m_hero_die_flag = true;
+		}
 
 		//落下時の半径の中央位置
 		if (m_py > 2000.0f)
-			ball_y = (int)(screen_out - 1450.0f + HERO_SIZE_HEIGHT / 1.5f);
+			ball_y = (int)(m_screen_out - 1450.0f + HERO_SIZE_HEIGHT / 1.5f);
 		//落下時以外の半径の中央位置
-		else
+		else if (m_py < 2000.0f)
 			ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
 	}
+	// Heroがステージをクリアしている状態なら
 	else if (type == Clear)
 	{
 		ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
@@ -610,16 +616,20 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	int one_side = 6;
 
 	//半径が最小になったらシーン移行する（上のほうにある）
+	// Heroが死んでいたら
 	if (type == Die)
 	{
+		// 半径が0以下ならリスタート
 		if (m_radius <= 0.0f)
 		{
 			m_radius = 0.0f;
 			Scene::SetScene(new CSceneMain(-1)); // リスタート
 		}
 	}
+	// Heroがステージをクリアしている状態なら
 	else if (type == Clear)
 	{
+		// 半径が一定値を超えたらシーン移行
 		if (m_radius >= 768.0f)
 		{
 			//ステージカウントを増やして次のステージにする

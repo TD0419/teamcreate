@@ -77,10 +77,10 @@ struct UserData
 #define PIXEL_SIZE_H	(768)	//縦
 
 //マップサイズ
-#define MAP_X_MAX (100)	//mapの最大値X
+#define MAP_X_MAX (100)	//mapの最大値X←ステージによって変動するようにする必要がある
 #define MAP_Y_MAX (24)	//mapの最大値Y
-#define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X
-#define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y
+#define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X(16)
+#define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y(12)
 
 //マップの番号とオブジェクトの対応　（仮）
 enum MAP_BER
@@ -225,10 +225,10 @@ enum MUSIC
 #define SCROLL_LINE_DOWN	(400.0f)	//下
 
 //オブジェクトの生成ライン（要調整）
-#define CREATE_LINE_LEFT	(1)														//左
-#define CREATE_LINE_RIGHT	( (int)(WINDOW_SIZE_W / BLOCK_SIZE) - CREATE_LINE_LEFT)	//右
-#define CREATE_LINE_UP		(1)														//上	
-#define CREATE_LINE_DOWN	( (int)(WINDOW_SIZE_H / BLOCK_SIZE) - CREATE_LINE_UP)	//下
+#define CREATE_LINE_LEFT	(1)						//左
+#define CREATE_LINE_RIGHT	( MAP_WINDOW_MAX_X )	//右
+#define CREATE_LINE_UP		(1)						//上	
+#define CREATE_LINE_DOWN	( MAP_WINDOW_MAX_Y )	//下
 //------------------------------------------------
 
 //ゲーム内で使用するクラスヘッダ------------------

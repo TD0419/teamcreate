@@ -19,7 +19,7 @@ private:
 	float m_px;				//岩X座標
 	float m_py;				//岩Y座標
 
-	int m_ani_start_flag;//アニメーションのフラグを立てるための変数
+	bool m_ani_start_flag;//アニメーションのフラグを立てるための変数
 
 	int m_ani_time; //アニメーションフレーム動作感覚
 	int m_ani_frame;//描画フレーム

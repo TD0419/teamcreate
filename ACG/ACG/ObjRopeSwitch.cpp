@@ -16,12 +16,13 @@ CObjRopeSwitch::CObjRopeSwitch(int x, int y)
 	m_px = x * ROPE_SWITCH_SIZE;
 	m_py = y * ROPE_SWITCH_SIZE;
 
-	m_rope_flag = false;
+	
 }
 
 //イニシャライズ
 void CObjRopeSwitch::Init()
 {
+	m_rope_flag = false;
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, 20, 20, ELEMENT_GIMMICK, OBJ_ROPE_SWITCH, 1);
 }
