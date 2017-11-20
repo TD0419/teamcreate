@@ -1,6 +1,5 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\HitBoxManager.h"
-#include "GameL\DrawFont.h"
 
 #include "GameHead.h"
 #include "ObjDiffusionGimmick.h"

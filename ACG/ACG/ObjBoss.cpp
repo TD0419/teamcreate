@@ -25,13 +25,13 @@ void CObjBoss::Init()
 	m_vy = 0.0f;
 	m_hp = 20; //ボスのＨＰ
 	m_posture = 1.0f; // 左向き
-	m_speed = 1.0f;   // 速度
+	m_speed = 6.0f;   // 速度
 
 	m_ani_time = 0;
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 10; //アニメーション間隔幅
 
-						 // blockとの衝突確認用
+	// blockとの衝突確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
@@ -91,6 +91,8 @@ void CObjBoss::Action()
 								// 敵弾丸作成
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+
+		Audio::Start(GORILLATHROW);
 	}
 
 	else if (m_hit_left == true)// ブロックの左側に当たっていたら
@@ -99,6 +101,8 @@ void CObjBoss::Action()
 								// 敵弾丸作成
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+
+		Audio::Start(GORILLATHROW);
 	}
 
 	CObjDoor* objdoor = (CObjDoor*)Objs::GetObj(OBJ_DOOR);
