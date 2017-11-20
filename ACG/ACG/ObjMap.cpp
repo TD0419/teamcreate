@@ -47,10 +47,10 @@ void CObjMap::Action()
 
 	//マップを元にオブジェクトを生成--------------------------------------
 	
-	//iが　画面に収まる最大値　または　マップの最大値になるまでまわす
+	//yが　画面に収まる最大値　または　マップの最大値になるまでまわす
 	for (int y = 0; y < MAP_WINDOW_MAX_Y && y<MAP_Y_MAX; y++)
 	{
-		//jが　画面に収まる最大値　または　マップの最大値になるまでまわす
+		//xが　画面に収まる最大値　または　マップの最大値になるまでまわす
 		for (int x = 0; x < MAP_WINDOW_MAX_X && x<MAP_X_MAX;x++)
 		{
 			CreateObj(x, y);//オブジェクトの生成	
@@ -69,25 +69,26 @@ void CObjMap::Draw()
 }
 
 //スクロール量をもとにオブジェクトの生成をする関数
-//	scroll_block_num_x:	X軸の現在のスクロール量がブロック何個分か
-//	scroll_block_num_y:	Y軸の現在のスクロール量がブロック何個分か
+//引数1	scroll_block_num_x:	X軸の現在のスクロール量がブロック何個分か
+//引数2	scroll_block_num_y:	Y軸の現在のスクロール量がブロック何個分か
 // *この関数内のコメントのスクロール量はすべて引数で渡ってきたブロック数で換算した物のことを指す
 void CObjMap::ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y)
 {
 	//yの値がスクロール量Y　から　ウィンドウ内に収まる最大値＋スクロール量Y　または　マップの最大値　に達するまで回す
-	for (int y = scroll_block_num_y ; y < MAP_Y_MAX && y < scroll_block_num_y + MAP_WINDOW_MAX_Y; y++)
+	for (int y = scroll_block_num_y ; y < MAP_Y_MAX && y <= scroll_block_num_y + MAP_WINDOW_MAX_Y; y++)
 	{
-		//xの値がスクロール量X　から　ウィンドウ内に収まる最大値＋スクロール量X　または　マップの最大値　に達するまで回す
-		for (int x = scroll_block_num_x; x < MAP_X_MAX && x < scroll_block_num_x + MAP_WINDOW_MAX_X; x++)
+		//xの値がスクロール量X　から　マップの最大値　または　ウィンドウ内に収まる最大値＋スクロール量X　　に達するまで回す
+		for (int x = scroll_block_num_x;
+			x < MAP_X_MAX && x <= scroll_block_num_x + MAP_WINDOW_MAX_X ; x++)
 		{			
-			//yの値が（クリエイトラインの上下＋スクロール量Y）と同じ または　xの値が（クリエイトラインの左右＋スクロール量X）と同じ なら
-			if (	y == (CREATE_LINE_UP	+ scroll_block_num_y)	|| y == ( CREATE_LINE_DOWN	+ scroll_block_num_y) ||
-					x == (CREATE_LINE_LEFT	+ scroll_block_num_x)	|| x == ( CREATE_LINE_RIGHT + scroll_block_num_x)
-				)
+			//マップの範囲ないなら
+			if ((x >= 0 && x < MAP_X_MAX))
 			{
-				//マップの範囲ないなら
-				if(x >= 0 && y >= 0 && x < MAP_X_MAX && y < MAP_Y_MAX)
-						CreateObj(x, y);//オブジェクトを生成
+				if (y >= 0 && y < MAP_Y_MAX)
+				{
+
+					CreateObj(x, y);//オブジェクトを生成
+				}
 			}
 		}
 	}

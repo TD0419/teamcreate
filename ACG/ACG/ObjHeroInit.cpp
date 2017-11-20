@@ -12,6 +12,7 @@ void CObjHero::Init()
 	m_radius = 768.0f;
 	m_gravity_flag = true;		// true:重力あり false:重力なし
 	m_goal_flag = false;		// true:ゴールした false:ゴールしていない
+	m_fall_speed_max = 26.0f;	// 主人公の最大落下スピード
 
 	m_mous_x = 0.0f;            //マウスの位置X
 	m_mous_y = 0.0f;		    //マウスの位置X

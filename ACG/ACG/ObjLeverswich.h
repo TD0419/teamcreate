@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjLeverSwich :public CObj
 {
 public:
-	CObjLeverSwich(float x, float y);	// コンストラクタ
+	CObjLeverSwich(int x, int y);	// コンストラクタ
 	~CObjLeverSwich() {};				// デストラクタ
 	void Init();						// イニシャライズ
 	void Action();						// アクション

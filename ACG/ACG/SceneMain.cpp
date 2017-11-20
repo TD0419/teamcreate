@@ -40,10 +40,10 @@ void CSceneMain::InitScene()
 		Scene::SetScene(new CSceneGameOver());
 		return;
 	}
-
+	AudioDataLoading();//音楽データ読み込み関数
 	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
-	AudioDataLoading();//音楽データ読み込み関数
+	
 	
     //Mapオブジェクトを作成する
 	CObjMap* objmap = new CObjMap(m_map,g_remaining);
@@ -65,8 +65,8 @@ void CSceneMain::InitScene()
 	//デバッグ--------------------------------------------------
 
 	//BGM再生
-	/*Audio::Start(STAGE1);
-	Audio::Start(STAGE2);
+	/*
+	
 	Audio::Start(STAGE5);*/
 
 }
@@ -89,13 +89,16 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	{
 		
 	case 1:
+		//
+		Audio::Start(STAGE1);
 		p = Save::ExternalDataOpen(L"stage1.csv", &size);//外部データ読み込み
 		break;
 	case 2:
+		Audio::Start(STAGE2);
 		p = Save::ExternalDataOpen(L"stage2.csv", &size);//外部データ読み込み
 		break;
 	case 3:
-		p = Save::ExternalDataOpen(L"Stage3.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"stage3.csv", &size);//外部データ読み込み
 		break;
 	default:
 		break;
@@ -247,7 +250,7 @@ void CSceneMain::AudioDataLoading()
 //BGM--------------------------------------------------------
 
 	//ステージ1
-	Audio::LoadAudio(STAGE1, L"Grassland2.wav",BACK_MUSIC);
+	Audio::LoadAudio(STAGE1, L"Grassland6.wav",BACK_MUSIC);
 	//ステージ2
 	Audio::LoadAudio(STAGE2, L"Jangle1.wav", BACK_MUSIC);
 

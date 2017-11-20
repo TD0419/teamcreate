@@ -38,11 +38,15 @@ void CObjBoss::Init()
 	m_hit_right = false;
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
+
+	Audio::Start(STAGE2_BOSS);
+	Audio::Stop(STAGE2);
 }
 
 //アクション
 void CObjBoss::Action()
 {
+
 	m_ani_time++;
 				 //アニメーションの感覚管理
 	if (m_ani_time > m_ani_max_time)
