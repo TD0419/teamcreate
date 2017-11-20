@@ -24,8 +24,8 @@ void CObjLastWall::Init()
 	Hits::SetHitBox(this, m_px, m_py, 32, 512, ELEMENT_GIMMICK, OBJ_LAST_WALL, 1);
 	m_wall_gauge = 0;
 	m_wall_gauge2 = 0;
-	m_look_unlock_flag = false;
-	a = false;
+	m_wall_unlock_flag = false;
+	m_wall_down_flag = false;
 	m_hero_hit_flag = false;
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
@@ -155,16 +155,8 @@ void CObjLastWall::Action()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	int map_num = objmap->GetMap(m_map_x, m_map_y);
 
-	//ボスの情報を呼ぶの
+	//ボスの情報を持ってくる
 	CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-	
-
-
-		////ボタンを押してたら扉を開くフラグオン
-		//if (objbutton->GetTrickFlag() == true)
-		//{
-		//	m_look_unlock_flag = true;
-		//}
 
 		// m_wall_gaugeが512を越えたら処理ストップ
 		if (m_wall_gauge >= 512)
@@ -172,7 +164,7 @@ void CObjLastWall::Action()
 			// 主人公が壁の右側にいないと壁がしまらないようにする
 			if (objhero->GetPosX() > m_px + BLOCK_SIZE)
 			{
-				a = true;
+				m_wall_down_flag = true;
 				m_wall_gauge = 0;
 			}
 				
@@ -181,14 +173,14 @@ void CObjLastWall::Action()
 		else
 		{
 			//heroが左側に振れてたら押されていたら
-			if (m_hero_hit_flag == true && a == false)
+			if (m_hero_hit_flag == true && m_wall_down_flag == false)
 			{
 				m_wall_gauge += 3; // 3ずつ増やしていく
 				Audio::Start(WALL);//開門の音楽スタート
 			}
 		}
 
-		if (a == false)
+		if (m_wall_down_flag == false)
 		{
 			// hitboxが小さくなる
 			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 512.0f - m_wall_gauge);
@@ -197,7 +189,7 @@ void CObjLastWall::Action()
 		// ボスが出てきたら強制的に閉める処理
 		if (objboss != nullptr || objenemy != nullptr)
 		{
-			a = true;			// 切り替えフラグオン
+			m_wall_down_flag = true;			// 切り替えフラグオン
 			m_wall_gauge = 0;	// wall初期化
 			Audio::Stop(WALL);//音楽ストップ
 		}
@@ -208,7 +200,7 @@ void CObjLastWall::Action()
 		}
 		else
 		{
-			if (a == true)
+			if (m_wall_down_flag == true)
 			{
 				m_wall_gauge2 += 512; // 一番下まで下がる
 				// hitboxが小さくなる
