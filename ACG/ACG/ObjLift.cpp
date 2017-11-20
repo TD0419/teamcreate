@@ -266,50 +266,72 @@ void CObjLift::Action()
 		}
 
 		//初期位置から動いた距離が０またはMAX値だったら
-		//現座員の移動奉公を左右逆にする
+		//現在の移動方向を左右逆にする
 		if (m_move_x == 0 || m_move_x == m_width_max)
 		{
+			//現在の移動方向が右なら左に
 			if (m_direction == 0)
 				m_direction = 1;
+			//左なら右にする
 			else
 				m_direction = 0;
 		}
 
-		//初期位置から動いた距離がMAX以上または０以下だったら
+		//初期位置から動いた距離がMAX越えまたは０以下だったら
 		//行き過ぎた分を調整して現在の移動方向を左右逆にする
 		else if (m_move_x > m_width_max || m_move_x < 0)
 		{
-			//行き過ぎた分
-			float overdo;
+			//初期位置から動いた距離がMAX越えなら
 			if (m_move_x > m_width_max)
 			{
-				
+				//現在の移動方向が右
 				if (m_direction == 0)
 				{
-					//まずMAX位置まで進める
-					m_px += m_width_max - (m_move_x - SPEED);
-					m_px -= m_move_x - m_width_max;
+					//まず初期位置から動いた距離がMAXになる位置まで進める
+					m_vx = m_width_max - (m_move_x - SPEED);
+					//超えた分を移動させる
+					m_vx -= m_move_x - m_width_max;
 				}
+				//現在の移動方向が左
 				else
 				{
-					m_px -= m_width_max - (m_move_x - SPEED);
-					m_px += m_move_x - m_width_max;
+					//まず初期位置から動いた距離がMAXになる位置まで進める
+					m_vx = (m_width_max - (m_move_x - SPEED))*-1;
+					//超えた分を移動させる
+					m_vx += m_move_x - m_width_max;
+					
 				}
-
+				//初期位置から動いた距離を計算
+				m_move_x -= (m_move_x - m_width_max)*2;
+			}
+			//初期位置から動いた距離が０未満なら
+			else
+			{
+				//現在の移動方向が右
+				if (m_direction == 0)
+				{
+					//まず初期位置から動いた距離が０のときの位置まで進める
+					m_vx = m_move_x + SPEED;
+					//超えた分を移動させる
+					m_vx += m_move_x;
+				}
+				//現在の移動方向が左
+				else
+				{
+					//まず初期位置から動いた距離が０のときの位置まで進める
+					m_vx = (m_move_x + SPEED)*-1;
+					//超えた分を移動させる
+					m_vx += m_move_x*-1;
+				}
+				////初期位置から動いた距離を計算
+				m_move_x *= -1;
 			}
 			//現在の移動方向を左右逆にする
 			if (m_direction == 0)
-			{
 				m_direction = 1;
-			}
 			else
-			{
 				m_direction = 0;
-			}
-			m_vx=0.0;
 		}
-
-		
 		break;
 	case 2:
 	default:
