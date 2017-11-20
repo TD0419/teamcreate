@@ -266,13 +266,13 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(ROPE, L"Rope2.wav", EFFECT);
 
 	//岩の爆発
-	Audio::LoadAudio(ROCK, L"Rock2.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(ROCK, L"Rock2.wav", EFFECT);
 
 	//最後の壁の開閉
 	Audio::LoadAudio(WALL, L"Door1.wav", EFFECT);
 
 	//木の転倒
-	Audio::LoadAudio(TREE, L"Tree3.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(TREE, L"Tree3.wav", EFFECT);
 
 	//ドアの開錠
 	Audio::LoadAudio(DOOR, L"Wood Door.wav",EFFECT);
@@ -284,15 +284,14 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(LEVER, L"Lever1.wav", EFFECT);
 
 	//ボタン
-	Audio::LoadAudio(BUTTON, L"Switch2.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(BUTTON, L"Switch2.wav", EFFECT);
 
 	//敵の弾丸
-	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", EFFECT);
 
 	//リフト
-	Audio::LoadAudio(LIFT, L"LiftTrickRelease.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(LIFT, L"LiftTrickRelease.wav", EFFECT);
 
-	
 //------------------------------------------------------------
 
 }

@@ -280,7 +280,6 @@ void CObjLift::Action()
 		else if (m_move_x > m_width_max || m_move_x < 0)
 		{
 			//行き過ぎた分
-			float overdo;
 			if (m_move_x > m_width_max)
 			{
 				
@@ -309,14 +308,12 @@ void CObjLift::Action()
 			m_vx=0.0;
 		}
 
-		
 		break;
 	case 2:
 	default:
 		break;
 	}
 	
-
 	//位置情報を更新
 	m_px += m_vx;
 	m_py += m_vy;

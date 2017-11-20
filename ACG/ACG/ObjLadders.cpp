@@ -23,8 +23,8 @@ void CObjLadders::Init()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//左右のマップ数値を持ってくる
-	float map_left_side  = objmap->GetMap(m_map_x - 1, m_map_y);
-	float map_right_side = objmap->GetMap(m_map_x + 1, m_map_y);
+	int map_left_side  = objmap->GetMap(m_map_x - 1, m_map_y);
+	int map_right_side = objmap->GetMap(m_map_x + 1, m_map_y);
 
 	//左右にブロックがあれば
 	if (map_left_side == MAP_BLOCK || map_right_side == MAP_BLOCK)

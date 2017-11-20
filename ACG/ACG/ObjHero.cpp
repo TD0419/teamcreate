@@ -70,8 +70,8 @@ void CObjHero::Action()
 	}
 	
 	//マウスの位置情報取得
-	m_mous_x = Input::GetPosX();
-	m_mous_y = Input::GetPosY();
+	m_mous_x = (float)Input::GetPosX();
+	m_mous_y = (float)Input::GetPosY();
 
 	//ブロックオブジェクトを持ってくる
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -579,10 +579,10 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	// マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	// 中央のｙ位置の初期化
-	int ball_y = 0;
+	float ball_y = 0.0f;
 
 	//中央位置設定       
-	int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX());
+	float ball_x = m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX();
 
 	// Heroが死んでいたら
 	if (type == Die)
@@ -596,15 +596,15 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 
 		//落下時の半径の中央位置
 		if (m_py > 2000.0f)
-			ball_y = (int)(m_screen_out - 1450.0f + HERO_SIZE_HEIGHT / 1.5f);
+			ball_y = m_screen_out - 1450.0f + HERO_SIZE_HEIGHT / 1.5f;
 		//落下時以外の半径の中央位置
 		else if (m_py < 2000.0f)
-			ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
+			ball_y = m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY();
 	}
 	// Heroがステージをクリアしている状態なら
 	else if (type == Clear)
 	{
-		ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
+		ball_y = m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY();
 	}
 
 	//半径をだんだん短くする
@@ -613,7 +613,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	//正四角形の１辺の長さ
 	//長ければ長いほど軽く
 	//短ければ短いほど重いよ
-	int one_side = 6;
+	float one_side = 6.0f;
 
 	//半径が最小になったらシーン移行する（上のほうにある）
 	// Heroが死んでいたら
@@ -640,9 +640,9 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 
 
 	//円外を四角形で埋め尽くす
-	for (int y = 0; y < WINDOW_SIZE_H; y += one_side)
+	for (float y = 0.0f; y < (float)WINDOW_SIZE_H; y += one_side)
 	{
-		for (int x = 0; x < WINDOW_SIZE_W; x += one_side)
+		for (float x = 0.0f; x < (float)WINDOW_SIZE_W; x += one_side)
 		{
 			//円の中
 			if ((x - ball_x)*(x - ball_x) + (y - ball_y)*(y - ball_y) <= m_radius * m_radius)

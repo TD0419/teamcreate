@@ -140,7 +140,7 @@ void CObjBlock::BlockHit(
 							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
 								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
+								int map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
 								//進む先がブロックの右側が衝突している場合(当たっているのが0以外)
 								if (map->GetMap(map_b_x, i) == MAP_BLOCK)
 								{
@@ -157,7 +157,7 @@ void CObjBlock::BlockHit(
 							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
 								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
+								int map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
 								//進む先がブロックの左側が衝突している場合(当たっているのが0以外)
 								if (map->GetMap(map_b_x, i) == MAP_BLOCK)
 								{
@@ -175,7 +175,7 @@ void CObjBlock::BlockHit(
 							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
 								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
+								int map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
 								//進む先がブロックの上側が衝突している場合(ブロック(1))
 								if (map->GetMap(i, map_b_y) == MAP_BLOCK)
 								{
@@ -192,7 +192,7 @@ void CObjBlock::BlockHit(
 							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
 								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
+								int map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
 								//進む先がブロックの下側が衝突している場合(ブロック(1))
 								if (map->GetMap(i, map_b_y) == MAP_BLOCK)
 								{
@@ -266,7 +266,7 @@ void CObjBlock::AllBlockHit(
 							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
 								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
+								int map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
 								//進む先がブロックの右側が衝突している場合(当たっているのが0以外)
 								if (map->GetMap(map_b_x, i) == MAP_BLOCK || map->GetMap(map_b_x, i) == MAP_THROUGH_BLOCK)
 								{
@@ -283,7 +283,7 @@ void CObjBlock::AllBlockHit(
 							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
 								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
+								int map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
 								//進む先がブロックの左側が衝突している場合(当たっているのが0以外)
 								if (map->GetMap(map_b_x, i) == MAP_BLOCK || map->GetMap(map_b_x, i) == MAP_THROUGH_BLOCK)
 								{
@@ -301,7 +301,7 @@ void CObjBlock::AllBlockHit(
 							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
 								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
+								int map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
 								//進む先がブロックの上側が衝突している場合(ブロック(1)とスルーブロック(12))
 								if (map->GetMap(i, map_b_y) == MAP_BLOCK || map->GetMap(i, map_b_y) == MAP_THROUGH_BLOCK)
 								{
@@ -318,7 +318,7 @@ void CObjBlock::AllBlockHit(
 							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
 								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
+								int map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
 								//進む先がブロックの下側が衝突している場合(ブロック(1))
 								if (map->GetMap(i, map_b_y) == MAP_BLOCK || map->GetMap(i, map_b_y) == MAP_THROUGH_BLOCK)
 								{
