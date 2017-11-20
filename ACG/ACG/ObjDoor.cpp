@@ -27,6 +27,8 @@ void CObjDoor::Init()
 
 	m_unlock_flag = false;
 
+	m_goal_flag = false;	// true:ゴールした false:ゴールしていない
+
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
 		//ステージ１
@@ -102,9 +104,14 @@ void CObjDoor::Action()
 		m_ani_door_frame = 2;//フレームを2に固定
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
-			//ステージカウントを増やして次のステージにする
-			((UserData*)Save::GetData())->stagenum += 1;
-			Scene::SetScene(new CSceneMain());
+			if (m_goal_flag == false)// まだゴールフラグが立っていない場合
+			{
+				// 主人公オブジェクトを持ってくる
+				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+				// ゴールフラグを立てる
+				objhero->HeroGoal();
+				m_goal_flag = true;
+			}
 		}
 	}
 	//HitBoxの位置を更新する

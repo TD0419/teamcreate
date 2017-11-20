@@ -15,7 +15,7 @@ public:
 	void Init();			//イニシャライズ
 	void Action();			//アクション
 	void Draw();			//ドロー
-	void HeroHit();			//主人公との当たり判定を処理する
+	//void HeroHit();			//主人公との当たり判定を処理する
 	
 	void SetScroll(float s) { m_scroll = s; }
 	float GetScroll() { return m_scroll; }

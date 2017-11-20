@@ -21,6 +21,8 @@ namespace GameL
 		BACK_MUSIC,		//バックミュージック (ループ)
 	};
 
+	//enum SOUND_TYPE sndtype;
+
 
 	//サウンドデータ
 	struct AudioData

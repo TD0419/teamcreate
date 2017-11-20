@@ -63,17 +63,21 @@ void CObjWood::Action()
 	else
 	{
 		CObjLeverSwich* objlever_swich = (CObjLeverSwich*)Objs::GetObj(OBJ_LEVER_SWICH);
-		// 回転フラグが立っていれば
-		if (objlever_swich->GetWood() == true)
-		{
-			if (m_audio_start_flag == false)
-			{
-				Audio::Start(TREE);
-				m_audio_start_flag = true;
-			}
-			m_r -= 1.0f;//木をまわす
-		}
 		
+		// レバースイッチがあれば
+		if (objlever_swich != nullptr)
+		{
+			// 回転フラグが立っていれば
+			if (objlever_swich->GetWood() == true)
+			{
+				if (m_audio_start_flag == false)
+				{
+					Audio::Start(TREE);
+					m_audio_start_flag = true;
+				}
+				m_r -= 1.0f;//木をまわす
+			}
+		}
 		//木の画像の位置更新
 		m_wood_image_x = m_px + (WOOD_SIZE - 64.0000f);
 		m_wood_image_y = m_py;

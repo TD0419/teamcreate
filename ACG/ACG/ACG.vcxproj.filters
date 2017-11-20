@@ -440,6 +440,12 @@
     <ClCompile Include="ObjRollBlock.cpp">
       <Filter>ソース ファイル\Main\RollBlock</Filter>
     </ClCompile>
+    <ClCompile Include="ObjHeroInit.cpp">
+      <Filter>ソース ファイル\Main\Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHeroAction.cpp">
+      <Filter>ソース ファイル\Main\Hero</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl">
