@@ -46,12 +46,8 @@ void CSceneMain::InitScene()
 	AudioDataLoading();//音楽データ読み込み関数
 	
     //Mapオブジェクトを作成する
-	CObjMap* objmap = new CObjMap(m_map);
+	CObjMap* objmap = new CObjMap(m_map,g_remaining);
 	Objs::InsertObj(objmap, OBJ_MAP, 10);
-
-	//主人公オブジェクトを作成する
-	CObjHero* objhero = new CObjHero(0,0,g_remaining);
-	Objs::InsertObj(objhero, OBJ_HERO, 10);
 
 	//背景オブジェクトを作成する
 	CObjBackGround* objback_ground = new CObjBackGround();
@@ -87,9 +83,6 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
-	
-	//初期化をどこかでしないといけないけど初期化の場所を指定されていなかったので一応ここで初期化をする
-	
 
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum)
@@ -128,6 +121,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			
 			//マップ情報を代入
 			map[i][j] = w;
+
 
 			//-1桁数分ずらす
 			while (w/10 != 0)
@@ -191,7 +185,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
 
 	//ボス画像読み込み
-	Draw::LoadImageW(L"Image\\image.png", GRA_BOSS, TEX_SIZE_1024);
+	Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1024);
 
 	//ハシゴ画像読み込み
 	Draw::LoadImageW(L"Image\\Ladders.png", GRA_LADDERS, TEX_SIZE_64);
@@ -219,9 +213,6 @@ void CSceneMain::ImageDataLoading()
 	
 	//ロープスイッチ画像読み込み
 	Draw::LoadImageW(L"Image\\RopeSwitch.png", GRA_ROPE_SWITCH, TEX_SIZE_64);
-
-	//大砲画像読み込み
-	Draw::LoadImageW(L"Image\\image4.png", GRA_CANNON, TEX_SIZE_64);
 	
 	//看板の枠線画像読み込み
 	Draw::LoadImageW(L"Image\\Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
@@ -295,11 +286,11 @@ void CSceneMain::AudioDataLoading()
 	//ボタン
 	Audio::LoadAudio(BUTTON, L"Switch2.wav", SOUND_TYPE::EFFECT);
 
-	//木の転倒
+	//敵の弾丸
 	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", SOUND_TYPE::EFFECT);
 
 	//リフト
-	Audio::LoadAudio(LIFT, L"LiftTrickRelease", SOUND_TYPE::EFFECT);
+	//Audio::LoadAudio(LIFT, L"LiftTrickRelease", SOUND_TYPE::EFFECT);
 
 	
 //------------------------------------------------------------

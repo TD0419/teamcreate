@@ -46,20 +46,20 @@ void CObjEnemy::Action()
 	//マップ情報を取ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
-	//画面内か調べる
-	m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
+	////画面内か調べる
+	//m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
 
-	//画面外なら消去
-	if (m_window_check == false)
-	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+	////画面外なら消去
+	//if (m_window_check == false)
+	//{
+	//	this->SetStatus(false);		//自身に消去命令を出す。
+	//	Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 
-		//戻ってきたときに復活するようにする
-		objmap->SetMapCreate(m_map_x, m_map_y, true);
-		
-		return;
-	}
+	//	//戻ってきたときに復活するようにする
+	//	objmap->SetMapCreate(m_map_x, m_map_y, true);
+	//	
+	//	return;
+	//}
 	
 	//移動----------------------------------------------
 

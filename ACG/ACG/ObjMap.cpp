@@ -1,16 +1,12 @@
-#include "GameL\DrawTexture.h"
-#include "GameL\WinInputs.h"
-#include "GameL\SceneManager.h"
-#include "GameL\HitBoxManager.h"
-
 #include "GameHead.h"
 #include "ObjMap.h"
 
 //使用するネームスペース
 using namespace GameL;
 
+
 //コンストラクタ
-CObjMap::CObjMap(int map[MAP_Y_MAX][MAP_X_MAX])
+CObjMap::CObjMap(int map[MAP_Y_MAX][MAP_X_MAX], int remaining)
 {
 	//マップデータをコピー
 	for (int i = 0; i < MAP_Y_MAX; i++)
@@ -20,20 +16,24 @@ CObjMap::CObjMap(int map[MAP_Y_MAX][MAP_X_MAX])
 			m_map[i][j].num = map[i][j];//数値のコピー
 		}
 	}
+	m_remaining = remaining; // 残機数情報を入れる
 }
 
 //イニシャライズ
 void CObjMap::Init()
 {
 	m_scroll_x = 0.0f;
-	m_scroll_y = 790.0f;
-
-	//フラグの初期化
+	
 	for (int y = 0; y < MAP_Y_MAX; y++)
 	{
 		for (int x = 0; x < MAP_X_MAX; x++)
 		{
-			m_map[y][x].create = true;
+			// 主人公のマップ位置から初期のスクロール値を決める
+			if (m_map[y][x].num == MAP_HERO_START)
+			{
+				m_scroll_y = y * BLOCK_SIZE - 700.0f; // 調整いるかも
+			}
+			m_map[y][x].create = true; //フラグの初期化
 		}
 	}
 }
@@ -41,6 +41,10 @@ void CObjMap::Init()
 //アクション
 void CObjMap::Action()
 {
+	// 一定のスクロール値を超えないようする
+	if (m_scroll_y > WINDOW_SIZE_H)
+		m_scroll_y = WINDOW_SIZE_H;
+
 	//マップを元にオブジェクトを生成--------------------------------------
 	
 	//iが　画面に収まる最大値　または　マップの最大値になるまでまわす
@@ -102,12 +106,14 @@ void CObjMap::CreateObj(int x, int y)
 		// プランナーからマップが届いたらコメントをはずす
 		
 	
-		//case MAP_HERO_START:	//ヒーローの作成
-		//{
-		//	CObjHero* objhero = new CObjHero(x, y-1 ,3);
-		//	Objs::InsertObj(objhero, OBJ_HERO, 9);
-		//	break;
-		//}
+		case MAP_HERO_START:	//ヒーローの作成
+		{
+
+			//主人公オブジェクトを作成する
+			CObjHero* objhero = new CObjHero(x, y, m_remaining);
+			Objs::InsertObj(objhero, OBJ_HERO, 10);
+			break;
+		}
 		
 		case MAP_BLOCK:		//ブロック作成
 		{

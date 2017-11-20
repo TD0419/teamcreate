@@ -3,6 +3,8 @@
 #include "GameL\HitBoxManager.h"
 #include "GameL\DrawFont.h"
 #include "GameL\Audio.h"
+#include "GameL\UserData.h"
+
 #include "GameHead.h"
 #include "ObjHero.h"
 #include"Function.h"
@@ -10,7 +12,6 @@
 
 //使用するネームスペース
 using namespace GameL;
-
 
 //コンストラクタ
 //引数1,2　初期ぽじしょん
@@ -82,13 +83,6 @@ void CObjHero::Action()
 	LandingCheck();//着地フラグの更新
 
 
-   //摩擦
-	m_vx += -(m_vx * 0.098f);
-
-	//自由落下運動
-	m_vy += 9.8f / (16.0f);
-
-
 	//はしご-------------------------------------------------LadderScene()
 	//はしごオブジェクトを持ってくる
 	CObjLadders* objladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
@@ -101,6 +95,7 @@ void CObjHero::Action()
 			//はしごに登っていない
 			m_ladder_updown = 0;
 		}
+		
 		objladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
 	}
 
@@ -170,15 +165,17 @@ void CObjHero::Action()
 	
 	//ジャンプ--------------------------------------------------------------------
 	//ロープを出している時は動かない  はしごを上っている時も動かない　　水に当たっているときと敵と当たった時も動かない
-	if (Input::GetVKey(VK_SPACE) == true && m_ladder_jump == 0 && 
+	if (Input::GetVKey(VK_SPACE) == true &&  
 		m_rope_ani_con == false && m_hero_die_water == false &&
 		m_ani_frame_enemy_die == false)
 	{
 		if (m_hit_down == true)
 		{
-			m_vy = -18.0f;
+			m_vy = -15.0f;
 		}
 	}
+
+	
 
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
@@ -194,16 +191,15 @@ void CObjHero::Action()
 		m_vy = -20.0f;
 	}
 
-	if (m_ladder_jump==1)
-	{
-		if (m_ladder_updown == 0)
-		{
-			m_vy += 160.0f / (32.0f);
-		}
-	}
+	//摩擦
+	m_vx += -(m_vx * 0.098f);
+
+	//自由落下運動
+	if(m_gravity_flag == true)
+		m_vy += 9.8f / (16.0f);
 
 	Scroll();	//スクロール処理をおこなう
-	
+
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
@@ -236,8 +232,8 @@ void CObjHero::Action()
 	//発砲---------------------------------------------------Shot()
 	Shot();
 
-//ロープ射出---------------------------------------------RopeThrow
-RopeThrow();
+	//ロープ射出---------------------------------------------RopeThrow
+	RopeThrow();
 
 	//-------HitScene()
 	//水オブジェクトと衝突していれば
@@ -247,7 +243,7 @@ RopeThrow();
 	}
 
 	//敵オブジェクトと衝突していれば
-	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr) //仮です。敵が多いようならElementに変えます
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	{
 		m_hero_die_enemy = true; //主人公の敵にあたったときの死亡フラグをONにする
 	}
@@ -342,7 +338,7 @@ void CObjHero::Scroll()
 	
 	//下にスクロールです
 	//原点を下にする
-	if ((m_py + HERO_SIZE_HEIGHT) - objmap->GetScrollY() > SCROLL_LINE_DOWN&& objmap->GetScrollY() < 770)
+	if ((m_py + HERO_SIZE_HEIGHT) - objmap->GetScrollY() > SCROLL_LINE_DOWN&& objmap->GetScrollY() < WINDOW_SIZE_H)
 	{
 		//差分を調べる
 		float scroll = SCROLL_LINE_DOWN - ((m_py + HERO_SIZE_HEIGHT) - objmap->GetScrollY());
@@ -533,54 +529,24 @@ void CObjHero::Draw()
 	//死んだことが確定した場合
 	if (m_hero_die_water == true | m_hero_die_enemy == true | m_py > 2000.0f)
 	{
-		int ball_y = 0;
-		//落下時の中央位置
-		static float screen_out = m_py;
-
-		//中央位置設定       
-		int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX()); 
-		
-		//落下時の半径の中央位置
-		if(m_py > 2000.0f)
-			 ball_y = (int)(screen_out - 1450.0f + HERO_SIZE_HEIGHT /1.5f  );
-		//落下時以外の半径の中央位置
-		else
-			 ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
-			
-		//半径初期
-		
-		//半径をだんだん短くする
-		 m_black_radius -= 10;
-		//カラー
-		float c[4] = {0.0f,0.0f,0.0f,1.0f};
-		//正四角形の１辺の長さ
-		//長ければ長いほど軽く
-		//短ければ短いほど重いよ
-		int one_side = 6;
-
-		//半径が最小になったらシーン移行する（上のほうにある）
-		if (m_black_radius == 0)
-			Scene::SetScene(new CSceneMain(-1));
-
-		//円外を四角形で埋め尽くす
-		for (int y = 0; y < WINDOW_SIZE_H; y+= one_side)
-		{
-			for (int x = 0; x < WINDOW_SIZE_W; x+= one_side)
-			{
-				//円の中
-				if ((x - ball_x)*(x - ball_x) + (y - ball_y)*(y - ball_y) <= m_black_radius * m_black_radius)
-				{
-
-				}
-				//円外
-				else
-				{
-					Draw::DrawHitBox(x, y, one_side, one_side, c);
-				}				
-			}
-		}
+		// 黒色
+		float radius_color[4] = { 0.f, 0.f, 0.f, 1.f };
+		// 円描画
+		CircleDraw(-20.0f, radius_color, Die);
 	}
 	//----------------------------------------------------------------
+
+	//---円の中から白くする処理----------------------------------------
+	// ゴールした時
+	if (m_goal_flag == true)
+	{
+		// 白色
+		float radius_color[4] = { 1.f, 1.f, 1.f, 1.f };
+		// 円描画
+		CircleDraw(20.0f, radius_color, Clear);
+	}
+	//-----------------------------------------------------------------
+
 	//残機描画----------------------------------------------------------
 
 	//残機数を描画する
@@ -602,6 +568,86 @@ void CObjHero::Draw()
 
 	//描画
 	Draw::Draw(GRA_LIFE, &src, &dst, color, 0.0f);
+}
+
+// 引数1 float : 円の1フレームごとの半径の変化量
+// 引数2 color : 円の色
+// 引数3 type  : 円の処理別
+// 死亡時とゴール時用の円を描画する関数
+void CObjHero::CircleDraw(float add_radius, float color[4], int type)
+{
+	// マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	int ball_y = 0;
+
+	//中央位置設定       
+	int ball_x = (int)(m_px + HERO_SIZE_WIDTH / 2.f - objmap->GetScrollX());
+
+	if (type == Die)
+	{
+		//落下時の中央位置
+		static float screen_out = m_py;
+
+		//落下時の半径の中央位置
+		if (m_py > 2000.0f)
+			ball_y = (int)(screen_out - 1450.0f + HERO_SIZE_HEIGHT / 1.5f);
+		//落下時以外の半径の中央位置
+		else
+			ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
+	}
+	else if (type == Clear)
+	{
+		ball_y = (int)(m_py + HERO_SIZE_HEIGHT / 1.5f - objmap->GetScrollY());
+	}
+
+	//半径をだんだん短くする
+	m_radius += add_radius;
+	
+	//正四角形の１辺の長さ
+	//長ければ長いほど軽く
+	//短ければ短いほど重いよ
+	int one_side = 6;
+
+	//半径が最小になったらシーン移行する（上のほうにある）
+	if (type == Die)
+	{
+		if (m_radius <= 0.0f)
+		{
+			m_radius = 0.0f;
+			Scene::SetScene(new CSceneMain(-1)); // リスタート
+		}
+	}
+	else if (type == Clear)
+	{
+		if (m_radius >= 768.0f)
+		{
+			//ステージカウントを増やして次のステージにする
+			((UserData*)Save::GetData())->stagenum += 1;
+			Scene::SetScene(new CSceneMain());
+		}
+	}
+
+
+	//円外を四角形で埋め尽くす
+	for (int y = 0; y < WINDOW_SIZE_H; y += one_side)
+	{
+		for (int x = 0; x < WINDOW_SIZE_W; x += one_side)
+		{
+			//円の中
+			if ((x - ball_x)*(x - ball_x) + (y - ball_y)*(y - ball_y) <= m_radius * m_radius)
+			{
+				if (type == Clear) // 円の中を塗る
+					Draw::DrawHitBox(x, y, one_side, one_side, color);
+			}
+			//円外
+			else
+			{
+				if (type == Die)	// 円の外を塗る
+					Draw::DrawHitBox(x, y, one_side, one_side, color);
+			}
+		}
+	}
 }
 
 //着地できてるかどうかを調べる関数
