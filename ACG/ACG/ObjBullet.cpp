@@ -133,11 +133,12 @@ void CObjBullet::Action()
 		return;
 	}
 
-
+	// リフト当たったら消去
 	if (DeleteCheckObjNameHit(hit, this, OBJ_LIFT))
 	{
 		return;
 	}
+
 	//木と当たったら消去
 	if(hit->CheckObjNameHit(OBJ_WOOD)!=nullptr)
 	{
@@ -145,6 +146,7 @@ void CObjBullet::Action()
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
+
 	//反射するブロックとあたった場合
 	if (hit->CheckObjNameHit(OBJ_REFLECT_BLOCK) != nullptr)
 	{

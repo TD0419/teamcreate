@@ -91,7 +91,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	case 1:
 		//
 		Audio::Start(STAGE1);
-		p = Save::ExternalDataOpen(L"stage1.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"stage3.csv", &size);//外部データ読み込み
 		break;
 	case 2:
 		Audio::Start(STAGE2);
@@ -163,6 +163,9 @@ void CSceneMain::ImageDataLoading()
 		break;
 	//ステージ３
 	case 3:
+		//リフト画像読み込み
+		Draw::LoadImageW(L"Image\\Lift\\Stage3.png", GRA_LIFT, TEX_SIZE_128);
+		break;
 	//ステージ４
 	case 4:
 	//ステージ５
@@ -239,6 +242,9 @@ void CSceneMain::ImageDataLoading()
 
 	//ゴリラの投擲物読み込み
 	Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
+
+	//キャノンの読み込み
+	Draw::LoadImageW(L"Image\\Cannon.png", GRA_CANNON, TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数

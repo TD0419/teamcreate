@@ -2,7 +2,7 @@
 #include "GameHead.h"
 //オブジェクト同士が衝突したときに消失する関数
 //引数1　HitBoxポインタ
-//引数2　オブジェクトポインタ
+//引数2　判定したいオブジェクトポインタ
 //引数3　オブジェクトネーム
 //戻り値 bool 　当たってるか、当たってないか
 bool DeleteCheckObjNameHit(CHitBox* hit, CObj* cobj, OBJ_NAME objname)
