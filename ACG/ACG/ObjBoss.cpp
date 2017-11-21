@@ -92,19 +92,22 @@ void CObjBoss::Action()
 								// 敵弾丸作成
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
-
+		//音楽スタート
 		Audio::Start(GORILLATHROW);
 	}
 
 	else if (m_hit_left == true||m_wall_hit_flag==true)// ブロックの左側に当たっていたら
 	{
+		//右向きの時に
 		if (m_posture == 0.0f)
 		{
-			m_posture = 1.0f;		// 左向きにする
-									// 敵弾丸作成
+			m_posture = 1.0f;//左向きにする
+			// 敵弾丸作成
 			CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 			Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+			//壁ヒットフラグをfalseにする。
 			m_wall_hit_flag = false;
+			//音楽スタート
 			Audio::Start(GORILLATHROW);
 		}
 	}

@@ -160,28 +160,13 @@ void CObjLastWall::Action()
 				//LastWallの左側が衝突している場合
 				else if (94.0f < r && r < 266.0f)
 				{
-					objboss->SetPosX(m_px-BOSS_SIZE_WIDTH);
-					objboss->SetVX(-2.0f);//BOSSのX方向の移動を-2にする
-					objboss->SetPosture(1.0f);//BOSSの向き変更
+					objboss->SetPosX(m_px-BOSS_SIZE_WIDTH);//ボスの位置を壁の左側にずらす。
 					objboss->SetHitF(true);//投擲のフラグを立てる
 				}
-
 			}
 		}
 	}
-	
-	
 
-	
-
-	
-	
-
-	
-	
-	//// ボタンオブジェクトを持ってくる
-	//CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
-	
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	int map_num = objmap->GetMap(m_map_x, m_map_y);
