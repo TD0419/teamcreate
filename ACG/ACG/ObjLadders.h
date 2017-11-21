@@ -15,7 +15,6 @@ public:
 	void Action();						//アクション
 	void Draw();						//ドロー
 	void HeroHit(float px, float py);//プレイヤーがあたったときの処理
-
 private:
 	float m_px;					//ハシゴX座標
 	float m_py;					//ハシゴY座標

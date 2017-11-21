@@ -290,17 +290,15 @@ void CSceneMain::AudioDataLoading()
 	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", EFFECT);
 
 	//リフト(引っ張る)
-	Audio::LoadAudio(PLIFT, L"LiftTrickPull.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(PLIFT, L"LiftTrickPull.wav", EFFECT);
 
 	//リフト(離す)
-	Audio::LoadAudio(RLIFT, L"LiftTrickRelease.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(RLIFT, L"LiftTrickRelease.wav", EFFECT);
 
 	//水の流れる音
-	Audio::LoadAudio(WAVE, L"Wave.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(WAVE, L"Wave.wav", EFFECT);
 
 	//ゴリラの投擲音
-	Audio::LoadAudio(GORILLATHROW, L"Gorilla Throw.wav", SOUND_TYPE::EFFECT);
-
+	Audio::LoadAudio(GORILLATHROW, L"Gorilla Throw.wav", EFFECT);
 //------------------------------------------------------------
-
 }
