@@ -140,7 +140,7 @@ void CObjBlock::BlockHit(
 							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
 								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
+								int map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
 								//進む先がブロックの右側が衝突している場合(当たっているのが0以外)
 								if (map->GetMap(map_b_x, i) == MAP_BLOCK)
 								{
@@ -157,7 +157,7 @@ void CObjBlock::BlockHit(
 							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
 								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
+								int map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
 								//進む先がブロックの左側が衝突している場合(当たっているのが0以外)
 								if (map->GetMap(map_b_x, i) == MAP_BLOCK)
 								{
@@ -175,7 +175,7 @@ void CObjBlock::BlockHit(
 							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
 								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
+								int map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
 								//進む先がブロックの上側が衝突している場合(ブロック(1))
 								if (map->GetMap(i, map_b_y) == MAP_BLOCK)
 								{
@@ -192,7 +192,7 @@ void CObjBlock::BlockHit(
 							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
 								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
+								int map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
 								//進む先がブロックの下側が衝突している場合(ブロック(1))
 								if (map->GetMap(i, map_b_y) == MAP_BLOCK)
 								{
@@ -218,7 +218,7 @@ void CObjBlock::AllBlockHit(
 )
 {
 	//マップ情報を持ってくる
-	CObjMap* map = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//衝突情報初期化
 	*up = false;
@@ -242,14 +242,44 @@ void CObjBlock::AllBlockHit(
 	float bleed_x = 5.0f;
 	float bleed_y = 20.0f;
 
+	int block_type;//ブロックの種類
+
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < MAP_Y_MAX; i++)
 	{
 		for (int j = 0; j < MAP_X_MAX; j++)
 		{
+			//ブロックの種類を持ってくる
+			block_type = objmap->GetMap(j, i);
+
 			//判定したいブロック
-			if (map->GetMap(j, i) == MAP_BLOCK || map->GetMap(j, i) == MAP_THROUGH_BLOCK)
+			if (block_type == MAP_BLOCK || block_type == MAP_THROUGH_BLOCK|| block_type ==MAP_LADDERS)
 			{
+				if (block_type == MAP_LADDERS)//梯子なら
+				{
+					//梯子情報を持ってくる
+					CObjLadders* objladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
+
+					if (objladders != nullptr)//梯子があれば
+					{
+						//左右のマップ数値を持ってくる
+						int map_left_side = objmap->GetMap(j - 1, i);
+						int map_right_side = objmap->GetMap(j + 1, i);
+
+						//左右にブロックがあれば
+						if (map_left_side == MAP_BLOCK || map_right_side == MAP_BLOCK)
+						{
+							;//何もしない
+						}
+						else //ブロックがなければ
+						{
+							break;//処理せずにループを抜ける
+						}
+					}
+					else //梯子がなければループを抜ける
+						break;
+				}
+					
 				//要素番号を座標に変更
 				float bx = j*BLOCK_SIZE;
 				float by = i*BLOCK_SIZE;
@@ -266,12 +296,17 @@ void CObjBlock::AllBlockHit(
 							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
 								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
+								int map_b_x = (int)((*x + *vx) / BLOCK_SIZE);
 								//進む先がブロックの右側が衝突している場合(当たっているのが0以外)
-								if (map->GetMap(map_b_x, i) == MAP_BLOCK || map->GetMap(map_b_x, i) == MAP_THROUGH_BLOCK)
+								if (objmap->GetMap(map_b_x, i) == MAP_BLOCK || objmap->GetMap(map_b_x, i) == MAP_THROUGH_BLOCK) 
 								{
 									*vx = 0.0f;
 									*x = map_b_x * BLOCK_SIZE + BLOCK_SIZE;
+									*right = true;
+								}
+								//梯子の場合
+								else if (objmap->GetMap(map_b_x, i) == MAP_LADDERS)
+								{
 									*right = true;
 								}
 							}
@@ -283,12 +318,17 @@ void CObjBlock::AllBlockHit(
 							for (int i = (int)((*y + bleed_y) / BLOCK_SIZE);
 								i <= (int)((*y + height - bleed_y) / BLOCK_SIZE); i++)
 							{
-								float map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
+								int map_b_x = (int)((*x + width + *vx) / BLOCK_SIZE);
 								//進む先がブロックの左側が衝突している場合(当たっているのが0以外)
-								if (map->GetMap(map_b_x, i) == MAP_BLOCK || map->GetMap(map_b_x, i) == MAP_THROUGH_BLOCK)
+								if (objmap->GetMap(map_b_x, i) == MAP_BLOCK || objmap->GetMap(map_b_x, i) == MAP_THROUGH_BLOCK)
 								{
 									*vx = 0.0f;
 									*x = map_b_x * BLOCK_SIZE - width;
+									*left = true;
+								}
+								//梯子の場合
+								else if (objmap->GetMap(map_b_x, i) == MAP_LADDERS)
+								{
 									*left = true;
 								}
 							}
@@ -301,12 +341,17 @@ void CObjBlock::AllBlockHit(
 							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
 								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
+								int map_b_y = (int)((*y + height + *vy) / BLOCK_SIZE);
 								//進む先がブロックの上側が衝突している場合(ブロック(1)とスルーブロック(12))
-								if (map->GetMap(i, map_b_y) == MAP_BLOCK || map->GetMap(i, map_b_y) == MAP_THROUGH_BLOCK)
+								if (objmap->GetMap(i, map_b_y) == MAP_BLOCK || objmap->GetMap(i, map_b_y) == MAP_THROUGH_BLOCK )
 								{
 									*vy = 0.0f; 
 									*y = map_b_y * BLOCK_SIZE - height;
+									*down = true;
+								}
+								//梯子なら
+								else if (objmap->GetMap(i, map_b_y) == MAP_LADDERS)
+								{
 									*down = true;
 								}
 							}
@@ -318,12 +363,17 @@ void CObjBlock::AllBlockHit(
 							for (int i = (int)((*x + bleed_x) / BLOCK_SIZE);
 								i <= (int)((*x + width - bleed_x) / BLOCK_SIZE); i++)
 							{
-								float map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
+								int map_b_y = (int)((*y + *vy) / BLOCK_SIZE);
 								//進む先がブロックの下側が衝突している場合(ブロック(1))
-								if (map->GetMap(i, map_b_y) == MAP_BLOCK || map->GetMap(i, map_b_y) == MAP_THROUGH_BLOCK)
+								if (objmap->GetMap(i, map_b_y) == MAP_BLOCK || objmap->GetMap(i, map_b_y) == MAP_THROUGH_BLOCK)
 								{
 									*vy = 0.0f;
 									*y = map_b_y * BLOCK_SIZE + BLOCK_SIZE;
+									*up = true;
+								}
+								//梯子なら
+								else if (objmap->GetMap(i, map_b_y) == MAP_LADDERS)
+								{
 									*up = true;
 								}
 							}
@@ -335,52 +385,3 @@ void CObjBlock::AllBlockHit(
 		}
 	}
 }
-
-
-////Heroオブジェクトとあたったときの処理
-//void CObjBlock::HeroHit()
-//{
-//	//自身のHitBoxをもってくる
-//	CHitBox*hit = Hits::GetHitBox(this);
-//
-//	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
-//	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
-//
-//	//主人公オブジェクトを持ってくる
-//	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-//
-//	//あたっている数分まわす。
-//	for (int i = 0; i < hit->GetCount(); i++)
-//	{
-//		//データがあれば
-//		if (hit_data[i] != nullptr)
-//		{
-//			float r = hit_data[i]->r;//あたっている角度をもってくる
-//
-//			//ブロックの右側が衝突している場合
-//			if (0.0f < r && r < 45.0f || 315.0f < r && r < 360.0f)
-//			{
-//				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-//				objhero->SetPosX(m_px + BLOCK_SIZE);//主人公の位置をブロックの右側までずらす
-//			}
-//			//ブロックの上側が衝突している場合
-//			else if (45.0f < r && r < 125.0f)
-//			{
-//				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT);//主人公の位置をブロックの上側までずらす
-//				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-//			}
-//			//ブロックの左側が衝突している場合
-//			else if (125.0f < r && r < 225.0f)
-//			{
-//				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-//				objhero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置をブロックの左側までずらす
-//			}
-//			//ブロックの下側が衝突している場合
-//			else if (225.0f < r && r < 315.0f)
-//			{
-//				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-//				objhero->SetPosY(m_py + BLOCK_SIZE);//主人公の位置をブロックの上側までずらす
-//			}
-//		}
-//	}
-//}

@@ -38,8 +38,8 @@ void CObjHero::RopeThrow() {
 		//マウスの位置が後ろじゃない　ロープアニメのフラグがなし　ロープの削除フラグがなし
 		else if (m_posture == mous_rope_way && m_rope_ani_con == false && m_rope_delete_r_kye == false)
 		{
-			m_rope_moux = Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
-			m_rope_mouy = Input::GetPosY(); //ロープを射出したときのマウスの位置Yを入れる
+			m_rope_moux = (float)Input::GetPosX(); //ロープを射出したときのマウスの位置Xを入れる
+			m_rope_mouy = (float)Input::GetPosY(); //ロープを射出したときのマウスの位置Yを入れる
 			m_rope_ani_con = true;
 
 		}

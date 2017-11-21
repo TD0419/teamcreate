@@ -174,17 +174,20 @@ enum MUSIC
 	STAGE2_BOSS,//ステージ2ボス
 	STAGE5  ,	//ステージ5
 //SE---------------------
-	FIRING	,//弾の発射
-	ROPE	,//ロープの打ち出し
-	ROCK	,//岩の爆発
-	WALL	,//壁の開閉
-	TREE	,//木の転倒
-	DOOR	,//出口開閉
-	LANDING ,//敵に着弾
-	LEVER   ,//レバー
-	BUTTON  ,//ボタン
-	ENEMYFIR,//敵の弾発射
-	LIFT	,//リフト
+	FIRING		,//弾の発射
+	ROPE		,//ロープの打ち出し
+	ROCK		,//岩の爆発
+	WALL		,//壁の開閉
+	TREE		,//木の転倒
+	DOOR		,//出口開閉
+	LANDING		,//敵に着弾
+	LEVER		,//レバー
+	BUTTON		,//ボタン
+	ENEMYFIR	,//敵の弾発射
+	PLIFT		,//リフト(引っ張る)
+	RLIFT		,//リフト(離れる)
+	WAVE		,//水の流れ
+	GORILLATHROW,//ゴリラの投擲音
 
 };
 
@@ -195,8 +198,8 @@ enum MUSIC
 #define BULLET_SIZE			  (20.0f)		//弾丸サイズ（仮）
 #define ROPE_SIZE			  (5.0f)		//ロープサイズ（仮）
 #define BLOCK_SIZE			  (64.0f)		//ブロックのサイズ（仮）	
-#define WATER_SIZE_WIDTH	  (64.0f)		//水の横サイズ
-#define WATER_SIZE_HEIGHT	  (64.0f)       //水の縦サイズ
+#define WATER_SIZE_WIDTH	  (640.0f)		//水の横サイズ
+#define WATER_SIZE_HEIGHT	  (192.0f)       //水の縦サイズ
 #define LADDERS_SIZE		  (64.0f)		//はしごのサイズ
 #define BUTTON_SIZE			  (64.0f)		//ボタンサイズ（仮）
 #define SIGN_SIZE			  (32.0f)		//看板のサイズ（仮）
@@ -208,7 +211,7 @@ enum MUSIC
 #define ROCK_SIZE_HEIGHT	  (240.0f)		//岩の縦サイズ（仮
 #define WOOD_SIZE			  (320.0f)		//木のサイズ(仮)
 #define BOSS_SIZE_WIDTH		  (192.0f)		//BOSS横幅(仮)
-#define BOSS_SIZE_HEIGHT	  (256.0f)		//BOSS横幅(仮)
+#define BOSS_SIZE_HEIGHT	  (256.0f)		//BOSS縦幅(仮)
 #define BOSS_DORP_KEY_SIZE	  (32.0f)	    //ボスドロップキーサイズ(仮)
 #define DOOR_SIZE			  (128.0f)		//ドアのサイズ(仮)
 #define THROUGHT_BLOCK_SIZE	 (64.0f)	    //スルーブロックサイズ（仮）

@@ -38,11 +38,11 @@ public:
 	float GetVecX() { return m_vx; }								//ベクトルXを渡す
 	float GetVecY() { return m_vy; }								//ベクトルYを渡す
 	float GetPosture() { return m_posture; }						//今の主人公の姿勢を渡す
-	float GetRopeDeleteRKey() { return m_rope_delete_r_kye; }		//アニメーション用ロープが消えたかどうかを管理する変数を渡す
+	bool GetRopeDeleteRKey() { return m_rope_delete_r_kye; }		//アニメーション用ロープが消えたかどうかを管理するフラグを渡す
 	int GetBlockType() { return m_block_type; }						//下のブロック(踏んでいる)情報を渡す
 	int GetLadderUpdown() { return m_ladder_updown; }				//主人公がはしごのどのアニメーション中かを返す
 
-	void HeroGoal() { m_goal_flag = true; m_radius = 0; }		//主人公のゴール処理切り替え関数(ゴールフラグを立てる)
+	void HeroGoal() { m_goal_flag = true; m_radius = 0.0f; }		//主人公のゴール処理切り替え関数(ゴールフラグを立てる)
 
 private:
 	void CircleDraw(float add_radius,float color[4],int type);		// 死亡時とゴール時用の円を描画する関数
@@ -55,8 +55,8 @@ private:
 	float m_posture;//姿勢 //右：0.0ｆ　左：1.0ｆ
 	float m_r;		//主人公の回転角度
 	int   m_block_type;//踏んでるブロックの値を保存する
-	int	  m_fall_speed_max;//主人公の落下スピード最大速度
-	int   m_radius; //主人公が死んだ時、周りから黒くする半径の変数
+	float m_fall_speed_max;//主人公の落下スピード最大速度
+	float m_radius; //主人公が死んだ時、周りから黒くする半径の変数
 	bool  m_gravity_flag; // 主人公の重力落下フラグ true:重力あり false:重力なし
 	bool  m_goal_flag;	  // ゴールフラグ true:ゴールした false:ゴールしていない
 

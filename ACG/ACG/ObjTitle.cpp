@@ -79,6 +79,7 @@ void CObjTitle::Action()
 			case 2:
 			{
 				//ƒQ[ƒ€I—¹
+				exit(0);
 				break;
 			}
 			}

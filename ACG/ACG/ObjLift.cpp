@@ -145,7 +145,7 @@ void CObjLift::Action()
 						m_lift_audio_count++;
 						if (m_lift_audio_count % 50 == 0)
 						{
-							Audio::Start(LIFT);
+							Audio::Start(PLIFT);
 						}
 					}
 					//初期の移動方向が左のとき
@@ -180,7 +180,7 @@ void CObjLift::Action()
 					m_lift_audio_count++;
 					if (m_lift_audio_count % 50 == 0)
 					{
-						Audio::Start(LIFT);
+						Audio::Start(RLIFT);
 					}
 				}
 				//初期の移動方向は左だったら
@@ -280,6 +280,7 @@ void CObjLift::Action()
 		//行き過ぎた分を調整して現在の移動方向を左右逆にする
 		else if (m_move_x > m_width_max || m_move_x < 0)
 		{
+			//行き過ぎた分
 			//初期位置から動いた距離がMAX越えなら
 			if (m_move_x > m_width_max)
 			{
@@ -382,7 +383,6 @@ void CObjLift::Action()
 		break;
 	}
 	
-
 	//位置情報を更新
 	m_px += m_vx;
 	m_py += m_vy;
@@ -427,6 +427,9 @@ void CObjLift::HeroRide()
 {
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
+	//主人公オブジェクトを持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	float h_px = objhero->GetPosX();//主人公の位置Xを持ってくる
 
 	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
 	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
@@ -438,18 +441,26 @@ void CObjLift::HeroRide()
 			float r = hit_data[i]->r;//あたっている角度を持ってくる
 			
 			//上側があたっていればで
-			if (45.0f <= r && r <= 135.0f)
+			if (29.0f <= r && r <= 155.0f)
 			{
-				//主人公オブジェクトを持ってくる
-				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-				float h_px = objhero->GetPosX();//主人公の位置Xを持ってくる
-
 				objhero->SetHitDown(true);//リフトの上に主人公が乗っていたらm_hit_downにtrueを返す
 
 				//リフトに乗せる処理
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
 				objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
 				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT+1.0f);//主人公のポジションをリフトの上にする
+			}
+			//右側があたっていればで
+			if (0.0f <= r && r <= 30.0f)
+			{
+				//リフトにのめりこまないようにする処理
+				objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+			}
+			//左側があたっていればで
+			if (155.0f <= r && r <= 180.0f)
+			{
+				//リフトにのめりこまないようにする処理
+				objhero->SetPosX(m_px-64.0f);//主人公をリフトの左に行くようにする
 			}
 		}
 	}
