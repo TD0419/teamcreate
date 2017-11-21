@@ -384,8 +384,17 @@ void CObjHero::Draw()
 
 	//描画位置 
 	dst.m_top = m_py - objmap->GetScrollY() + 48.0f;
-	dst.m_left = (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX() + 20.0f - (HERO_SIZE_WIDTH * m_posture);
-	dst.m_right = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX() + 33.0f - (HERO_SIZE_WIDTH * m_posture);
+	//　主人公が右を向いている時の腕の描画位置
+	if(m_posture == 0.0f)
+		dst.m_left = (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX() + 20.0f - (HERO_SIZE_WIDTH * m_posture);
+	else
+		dst.m_left = (HERO_SIZE_WIDTH * m_posture) + m_px + 12.0f - objmap->GetScrollX() + 20.0f - (HERO_SIZE_WIDTH * m_posture);
+	//　主人公が右を向いている時の腕の描画位置
+	if (m_posture == 0.0f)
+		dst.m_right = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX() + 33.0f - (HERO_SIZE_WIDTH * m_posture);
+	else
+		dst.m_right = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px + 12.0f - objmap->GetScrollX() + 33.0f - (HERO_SIZE_WIDTH * m_posture);
+
 	dst.m_bottom = dst.m_top + 64.0f;
 
 	//描画    ロープが出てる時、はしごに登ってる時、ロープとロープスイッチが当たっている時  主人公が水に当たった時

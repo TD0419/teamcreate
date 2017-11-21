@@ -31,6 +31,7 @@ void CObjBoss::Init()
 	m_ani_frame = 1;  //静止フレームを初期にする
 	m_ani_max_time = 10; //アニメーション間隔幅
 
+	m_wall_hit_flag = false;
 	// blockとの衝突確認用
 	m_hit_up = false;
 	m_hit_down = false;
@@ -91,18 +92,24 @@ void CObjBoss::Action()
 								// 敵弾丸作成
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
-
+		//音楽スタート
 		Audio::Start(GORILLATHROW);
 	}
 
-	else if (m_hit_left == true)// ブロックの左側に当たっていたら
+	else if (m_hit_left == true||m_wall_hit_flag==true)// ブロックの左側に当たっていたら
 	{
-		m_posture = 1.0f;		// 左向きにする
-								// 敵弾丸作成
-		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
-		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
-
-		Audio::Start(GORILLATHROW);
+		//右向きの時に
+		if (m_posture == 0.0f)
+		{
+			m_posture = 1.0f;//左向きにする
+			// 敵弾丸作成
+			CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
+			Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+			//壁ヒットフラグをfalseにする。
+			m_wall_hit_flag = false;
+			//音楽スタート
+			Audio::Start(GORILLATHROW);
+		}
 	}
 
 	CObjDoor* objdoor = (CObjDoor*)Objs::GetObj(OBJ_DOOR);
