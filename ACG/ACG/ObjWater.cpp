@@ -64,11 +64,12 @@ void CObjWater::Action()
 	}
 	else
 	{
-		if(m_water_audio_count % 192==0)
-		Audio::Start(WAVE);
+		
 		//レバースイッチが押されていたら
 		if (lever_swich == true)
 		{
+			if (m_water_audio_count % 192 == 0)
+				Audio::Start(WAVE);
 			m_water_gauge += 0.2f; //0.2ずつ増やしていく
 			m_water_audio_count += 1; //4ずつ増やしていく
 
