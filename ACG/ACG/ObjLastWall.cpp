@@ -151,10 +151,16 @@ void CObjLastWall::Action()
 			{
 				float r = 0.0f;
 				r = hit_data_boss[i]->r;
-
-				if (94 < r && r < 266)
+				//LastWall‚Ì‰E‘¤‚ªÕ“Ë‚µ‚Ä‚¢‚éê‡
+				if (0 < r && r < 85 || 275 < r && r < 360)
 				{
-					objboss->SetVX(-4.0f);//BOSS‚ÌX•ûŒü‚ÌˆÚ“®‚ğ-2‚É‚·‚é
+					objenemy->SetVX(2.0f);//BOSS‚ÌX•ûŒü‚ÌˆÚ“®‚ğ2‚É‚·‚é
+					objenemy->SetPosture(1.0f);//BOSSŒü‚«•ÏX
+				}
+				//LastWall‚Ì¶‘¤‚ªÕ“Ë‚µ‚Ä‚¢‚éê‡
+				else if (94 < r && r < 266)
+				{
+					objboss->SetVX(-2.0f);//BOSS‚ÌX•ûŒü‚ÌˆÚ“®‚ğ-2‚É‚·‚é
 					objboss->SetPosture(1.0f);//BOSS‚ÌŒü‚«•ÏX
 				}
 

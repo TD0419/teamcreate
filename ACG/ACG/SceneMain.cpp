@@ -298,7 +298,7 @@ void CSceneMain::AudioDataLoading()
 	//…‚Ì—¬‚ê‚é‰¹
 	Audio::LoadAudio(WAVE, L"Wave.wav", SOUND_TYPE::EFFECT);
 
-	//ƒSƒŠƒ‰‚Ì“Š‚°‚é‰¹
+	//ƒSƒŠƒ‰‚Ì“Š±‰¹
 	Audio::LoadAudio(GORILLATHROW, L"Gorilla Throw.wav", SOUND_TYPE::EFFECT);
 
 //------------------------------------------------------------

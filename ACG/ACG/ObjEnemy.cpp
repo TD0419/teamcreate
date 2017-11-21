@@ -134,7 +134,7 @@ void CObjEnemy::Action()
 	{
 		//移動しようとしているところが崖なら方向転換
 		//右に動いていて && 
-		int block_num = objmap->GetMap( (int)m_px / ((int)BLOCK_SIZE + 1), ((int)m_py / ((int)BLOCK_SIZE + 1)) );
+		int block_num = objmap->GetMap( (int)m_px / ((int)BLOCK_SIZE)+1, ((int)m_py / ((int)BLOCK_SIZE))+1 );
 		
 		//右下にブロックが無かったら
 		if (m_vx > 0.0f && block_num != MAP_BLOCK)
@@ -144,7 +144,7 @@ void CObjEnemy::Action()
 		}
 		//左に移動していて &&
 		//左下にブロックが無かったら		↓原点調整
-		block_num = objmap->GetMap( ( (int)(m_px + ENEMY_SIZE ) / ( (int)BLOCK_SIZE - 1) ), ( (int)m_py / ((int)BLOCK_SIZE + 1) ) );
+		block_num = objmap->GetMap( ( (int)(m_px + ENEMY_SIZE ) / ( (int)BLOCK_SIZE) )-1, ( (int)m_py / ((int)BLOCK_SIZE) )+1 );
 		if (m_vx < 0.0f && block_num != MAP_BLOCK)
 		{
 			//方向を右にする
