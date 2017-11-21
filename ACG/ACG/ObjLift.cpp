@@ -76,8 +76,11 @@ void CObjLift::Init()
 		break;
 		//ステージ３
 	case 3:
-		//後で
-		//m_move_direction = 
+		m_initial_direction = 3;//初期の移動方向
+		m_direction = 3;	//現在の移動方向
+		m_width_max = 0.0f;	//最大移動量X
+		m_length_max = WINDOW_SIZE_H+ BLOCK_SIZE;	//最大移動量Y
+		m_move_mode = 2;		//移動モード
 		break;
 		//ステージ４
 	case 4:
@@ -111,9 +114,6 @@ void CObjLift::Action()
 	//ロープオブジェクトを持ってくる
 	CObjRopeSwitch* objrope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
 
-	
-	
-	
 
 	//主人公が当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
@@ -147,7 +147,6 @@ void CObjLift::Action()
 						{
 							Audio::Start(LIFT);
 						}
-						
 					}
 					//初期の移動方向が左のとき
 					else
@@ -333,7 +332,52 @@ void CObjLift::Action()
 				m_direction = 0;
 		}
 		break;
+		//--------------------無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)--------
 	case 2:
+		//上の限界Y位置
+		//この値より上に行ったら下の限界Y位置から出てくる
+		float up_limti ;
+		up_limti = (MAP_Y_MAX - 12)*BLOCK_SIZE - LIFT_SIZE_HEIGHT;
+		//下の限界Y位置
+		//この値より下に行ったら上の限界Y位置から出てくる
+		float down_limti;
+		down_limti = MAP_Y_MAX*BLOCK_SIZE;
+		//現在の移動方向による移動
+		if (m_direction == 2)
+		{
+			m_vy = -SPEED;
+		}
+		else
+		{
+			m_vy = SPEED;
+		}
+		//上の限界Y位置より上だったら
+		if (m_py < up_limti)
+		{
+			//現在の移動方向が上だったら
+			//意味無いかもだけど一応条件文をはさむ
+			if (m_direction == 2)
+			{
+				//行き過ぎた分をvyに入れる
+				m_vy = m_py - up_limti;
+				//Y位置を下の限界Y位置にする
+				m_py = down_limti;
+			}
+		}
+		//下の限界Y位置より下だったら
+		if (m_py > down_limti)
+		{
+			//現在の移動方向が下だったら
+			//意味無いかもだけど一応条件文をはさむ
+			if (m_direction == 3)
+			{
+				//行き過ぎた分をvyに入れる
+				m_vy = m_py - down_limti;
+				//Y位置を上の限界Y位置にする
+				m_py = up_limti;
+			}
+		}
+		break;
 	default:
 		break;
 	}
