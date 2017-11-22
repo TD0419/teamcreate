@@ -120,7 +120,7 @@ void CObjHero::Action()
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーーMoveScene
 	//ロープを出している時と水に当たった時と敵に当たった時は動かない
-	if (m_rope_ani_con == false && m_hero_die_water == false && m_ani_frame_enemy_die == false)
+	if (m_rope_ani_con == false && m_hero_die_water == false && m_ani_frame_enemy_die == false && m_py < 2000.0f)
 	{
 		//Dキーがおされたとき：右移動　
 		if (Input::GetVKey('D') == true)
