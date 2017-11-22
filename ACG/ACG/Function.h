@@ -1,6 +1,10 @@
 #pragma once
 #include "GameL\HitBoxManager.h"
+#include "GameL\SceneObjManager.h"
+#include "GameHead.h"
 using namespace GameL;
+
+bool DeleteCheckObjNameHit(CHitBox* hit,CObj* cobj,OBJ_NAME objname);//オブジェクトの消失する関数
 
 void HitBoxUpData(CHitBox* hit,float m_px,float m_py);//HitBoxの位置を更新する関数
 
