@@ -7,11 +7,11 @@
 using namespace GameL;
 
 //オブジェクト：トゲ
-class CObjNeedle:public CObj
+class CObjNeedleStand :public CObj
 {
 public:
-	CObjNeedle(float x, float y);	// コンストラクタ
-	~CObjNeedle() {};			// デストラクタ
+	CObjNeedleStand(float x, float y);	// コンストラクタ
+	~CObjNeedleStand() {};			// デストラクタ
 	void Init();				// イニシャライズ
 	void Action();				// アクション
 	void Draw();				// ドロー
@@ -19,7 +19,4 @@ public:
 private:
 	float m_px;		//位置X
 	float m_py;		//位置Y
-	
-	float m_needle_gauge; //針の沈む速度
-	int   m_time;         //針の沈んだあとのタイム
 };
