@@ -21,15 +21,21 @@ CObjBoss::CObjBoss(int x, int y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	m_vx = -1.0f; // 移動ベクトル
+	m_vx = -1.0f;		// 移動ベクトル
 	m_vy = 0.0f;
-	m_hp = 20; //ボスのＨＰ
-	m_posture = 1.0f; // 左向き
-	m_speed = 3.0f;   // 速度
+	m_hp = 20;			//ボスのＨＰ
+	m_posture = 1.0f;	// 左向き
+	m_speed = 3.0f;		// 速度
 
-	m_ani_time = 0;
-	m_ani_frame = 1;  //静止フレームを初期にする
-	m_ani_max_time = 10; //アニメーション間隔幅
+	m_ani_time_walk = 0;
+	m_ani_time_throw = 0;
+
+	m_ani_frame_walk = 1;		//静止フレームを初期にする(歩くモーション)
+	m_ani_frame_throw = 1;		//静止フレームを初期にする(投げるモーション)
+	m_ani_walk_max_time = 10;	//歩くアニメーション間隔幅
+	m_ani_throw_max_time = 3;	//投げるアニメーション間隔幅
+
+	m_ani_throw_start_flag = false;//投げるアニメーション開始フラグ false=オフ ture=オン
 
 	m_wall_hit_flag = false;
 	// blockとの衝突確認用
@@ -48,19 +54,38 @@ void CObjBoss::Init()
 void CObjBoss::Action()
 {
 
-	m_ani_time++;
-				 //アニメーションの感覚管理
-	if (m_ani_time > m_ani_max_time)
+	m_ani_time_walk++;
+	m_ani_time_throw++;
+
+	//歩くアニメーションの間隔管理(投げるアニメーションフラグがＯＦＦのとき)
+	if (m_ani_throw_start_flag == false && (m_ani_time_walk > m_ani_walk_max_time))
 	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
+		m_ani_frame_walk += 1;
+		m_ani_time_walk = 0;
+	}
+	//投げるアニメーションの間隔管理(投げるアニメーションフラグがＯＮのとき)
+	else if (m_ani_throw_start_flag == true && (m_ani_time_throw > m_ani_throw_max_time))
+	{
+		m_ani_frame_throw += 1;
+		m_ani_time_throw = 0;
 	}
 
-	//最後までアニメーションが進むと最初にいく
-	if (m_ani_frame == 10)
+	//(歩くアニメーション)最後までアニメーションが進むと最初にいく
+	if (m_ani_frame_walk == 10)
 	{
-		m_ani_frame = 1;
+		m_ani_frame_walk = 1;
 	}
+
+	//(アニメーション)最後までアニメーションが進むと最初にいく
+	if (m_ani_frame_throw == 4)
+	{
+		m_ani_throw_start_flag = false;
+		m_ani_frame_throw = 1;
+		
+	}
+
+	
+
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -89,9 +114,12 @@ void CObjBoss::Action()
 	if (m_hit_right == true)    // ブロックの右側に当たっていたら 
 	{
 		m_posture = 0.0f;		// 右向きにする
-								// 敵弾丸作成
+		// 敵弾丸作成
 		CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 		Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+		//投げるアニメーション開始フラグをＯＮにする
+		m_ani_throw_start_flag = true;
+
 		//音楽スタート
 		Audio::Start(GORILLATHROW);
 	}
@@ -107,6 +135,9 @@ void CObjBoss::Action()
 			Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
 			//壁ヒットフラグをfalseにする。
 			m_wall_hit_flag = false;
+			//投げるアニメーション開始フラグをＯＮにする
+			m_ani_throw_start_flag = true;
+
 			//音楽スタート
 			Audio::Start(GORILLATHROW);
 		}
@@ -136,8 +167,7 @@ void CObjBoss::Action()
 //ドロー
 void CObjBoss::Draw()
 {
-	//画像の切り取り配列
-
+	
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -147,10 +177,22 @@ void CObjBoss::Draw()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
-	src.m_top = 0.0f;
-	src.m_left = m_ani_frame * 96.0f - 96.0f;
-	src.m_right = src.m_left + 96.0f;
-	src.m_bottom = src.m_top + 72.0f;
+	//歩くアニメーション
+	if (m_ani_throw_start_flag == false)
+	{
+		src.m_top = 0.0f;
+		src.m_left = m_ani_frame_walk * 96.0f - 96.0f;
+		src.m_right = src.m_left + 96.0f;
+		src.m_bottom = src.m_top + 72.0f;
+	}
+	//投げるアニメーション
+	else if (m_ani_throw_start_flag == true)
+	{
+		src.m_top = 82.0f;
+		src.m_left = m_ani_frame_throw * 96.0f - 96.0f;
+		src.m_right = src.m_left + 96.0f;
+		src.m_bottom = src.m_top + 72.0f;
+	}
 
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
