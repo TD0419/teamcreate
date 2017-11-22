@@ -35,73 +35,47 @@ CObjLift::CObjLift(int px, int py,float vx,float vy,float width_max, float lengt
 }
 
 //コンストラクタ
-CObjLift::CObjLift(int px,int py)
+//引数1,2	マップの数値(位置)
+//引数3		移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
+//引数4		X方向への最大移動量(初期位置～最大移動量分動きます。移動モードが２の場合値は関係ありません)
+//引数5		リフトの動きモード
+//			０＝手動モード(縄を紐スイッチに当てて移動するモード)
+//			１＝自由移動モード(初期位置Xから最大X位置の間を自動移動)
+//			２＝無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)
+CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 {
+	//初期位置を決める
 	m_px = (float)px * BLOCK_SIZE;
 	m_py = (float)py * BLOCK_SIZE;
-	m_vx = 0.0f;
-	m_vy = 0.0f;
+	
+	//移動方向と初期移動方向を決める
+	m_direction = direction;
+	m_initial_direction = direction;
 
+	//最大移動量を決める
+	//値が負の数なら正の数にする
+	if (width_max < 0)
+		width_max *= -1;
+	m_width_max = width_max;
+	m_length_max = 0.0f;//今のところ使っていない2017/11/22
+
+	//移動モードを決める
+	m_move_mode = mode;
 }
 
 //イニシャライズ
 void CObjLift::Init()
 {
+	//移動量を０にする
 	m_move_x = 0.0f;
 	m_move_y = 0.0f;
-
-	//ステージごとに
-	//初期移動方向、
-	//左右の最大移動量、
-	//上下の最大移動量、
-	//移動モード
-	//を決める
-	switch (((UserData*)Save::GetData())->stagenum)
-	{
-		//ステージ１
-	case 1:
-		m_initial_direction = 0;//初期の移動方向
-		m_direction = 0;		//現在の移動方向
-		m_width_max = 640.0f;	//最大移動量X
-		m_length_max = 0.0f;	//最大移動量Y
-		m_move_mode = 0;		//移動モード
-		break;
-		//ステージ２
-	case 2:
-		m_initial_direction = 0;//初期の移動方向
-		m_direction = 0;		//現在の移動方向
-		m_width_max = 640.0f;	//最大移動量X
-		m_length_max = 0.0f;	//最大移動量Y
-		m_move_mode = 1;		//移動モード
-		break;
-		//ステージ３
-	case 3:
-		m_initial_direction = 3;//初期の移動方向
-		m_direction = 3;	//現在の移動方向
-		m_width_max = 0.0f;	//最大移動量X
-		m_length_max = WINDOW_SIZE_H+ BLOCK_SIZE;	//最大移動量Y
-		m_move_mode = 2;		//移動モード
-		break;
-		//ステージ４
-	case 4:
-		m_initial_direction = 2;
-		m_width_max = 0.0f;
-		m_move_mode = 2;
-		break;
-		//ステージ５
-	case 5:
-		//後で
-		//m_move_direction
-		break;
-	default:
-
-		break;
-	}
+	m_vx = 0.0f;
+	m_vy = 0.0f;
+	
 	//リフトのカウント初期化
 	m_lift_audio_count = 47;
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
-
 }
 
 //アクション
