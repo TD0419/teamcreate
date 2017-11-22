@@ -54,4 +54,6 @@ private:
 	//音を制御するための変数 移動する時にカウントを増やし、一秒ごとに音を鳴らす
 	int m_lift_audio_count;
 
+	//各移動モード(m_move_mode)による移動関数
+	void ModeMove();
 };
