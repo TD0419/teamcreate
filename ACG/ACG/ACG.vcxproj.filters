@@ -282,6 +282,9 @@
     <ClInclude Include="ObjRollBlock.h">
       <Filter>ソース ファイル\Main\RollBlock</Filter>
     </ClInclude>
+    <ClInclude Include="ObjNeedleStand.h">
+      <Filter>ソース ファイル\Main\Needle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -445,6 +448,9 @@
     </ClCompile>
     <ClCompile Include="ObjHeroAction.cpp">
       <Filter>ソース ファイル\Main\Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjNeedleStand.cpp">
+      <Filter>ソース ファイル\Main\Needle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

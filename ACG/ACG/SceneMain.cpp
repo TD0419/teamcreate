@@ -61,7 +61,6 @@ void CSceneMain::InitScene()
 	
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
-	
 	//デバッグ--------------------------------------------------
 
 	//BGM再生
@@ -245,6 +244,12 @@ void CSceneMain::ImageDataLoading()
 
 	//キャノンの読み込み
 	Draw::LoadImageW(L"Image\\Cannon.png", GRA_CANNON, TEX_SIZE_64);
+
+	//針の読み込み
+	Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_32);
+
+	//針の土台の読み込み
+	Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数

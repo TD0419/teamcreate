@@ -239,6 +239,11 @@ void CObjHero::Action()
 	RopeThrow();
 
 	//-------HitScene()
+	//針オブジェクトと衝突していれば
+	if (hit->CheckObjNameHit(OBJ_NEEDLE) != nullptr)
+	{
+		m_hero_die_enemy = true; //主人公の針にあたったときの死亡フラグをONにする
+	}
 	//水オブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
 	{
@@ -388,12 +393,12 @@ void CObjHero::Draw()
 	if(m_posture == 0.0f)
 		dst.m_left = (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX() + 20.0f - (HERO_SIZE_WIDTH * m_posture);
 	else
-		dst.m_left = (HERO_SIZE_WIDTH * m_posture) + m_px + 12.0f - objmap->GetScrollX() + 20.0f - (HERO_SIZE_WIDTH * m_posture);
+		dst.m_left = (HERO_SIZE_WIDTH * m_posture) + m_px + 16.0f - objmap->GetScrollX() + 20.0f - (HERO_SIZE_WIDTH * m_posture);
 	//　主人公が右を向いている時の腕の描画位置
 	if (m_posture == 0.0f)
 		dst.m_right = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX() + 33.0f - (HERO_SIZE_WIDTH * m_posture);
 	else
-		dst.m_right = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px + 12.0f - objmap->GetScrollX() + 33.0f - (HERO_SIZE_WIDTH * m_posture);
+		dst.m_right = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px + 16.0f - objmap->GetScrollX() + 33.0f - (HERO_SIZE_WIDTH * m_posture);
 
 	dst.m_bottom = dst.m_top + 64.0f;
 
