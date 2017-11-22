@@ -30,7 +30,7 @@ void CObjTitle::Init()
 void CObjTitle::Action()
 {
 	//↑キーが押された時
-	if (Input::GetVKey(VK_UP) == true)
+	if (Input::GetVKey('W') == true)
 	{
 		//1以上　且つ　キーフラグがtrue　なら
 		if (m_mode >= 1 && m_keypush_flag == true)
@@ -40,7 +40,7 @@ void CObjTitle::Action()
 		}
 	}
 	//↓キーが押された時
-	else if (Input::GetVKey(VK_DOWN) == true)
+	else if (Input::GetVKey('S') == true)
 	{
 		//1以下　且つ　キーフラグがtrue　なら
 		if (m_mode <= 1 && m_keypush_flag == true)
