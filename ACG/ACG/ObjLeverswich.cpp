@@ -101,10 +101,10 @@ void CObjLeverSwich::Draw()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//Ø‚èŽæ‚èˆÊ’u
-	src.m_top = 0.0f;
+	src.m_top = 64.0f;
 	src.m_left = (float)AniData[m_ani_frame] * 64.0f;
 	src.m_right = src.m_left+64.0f;
-	src.m_bottom = 64.0f;
+	src.m_bottom = 128.0f;
 
 	//•`‰æˆÊ’u
 	dst.m_top = 0.0f + m_py - objmap->GetScrollY();
