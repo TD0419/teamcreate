@@ -111,9 +111,6 @@ void CObjLift::Action()
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	//ロープオブジェクトを持ってくる
-	CObjRopeSwitch* objrope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
-
 
 	//主人公が当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
@@ -121,267 +118,8 @@ void CObjLift::Action()
 		HeroRide();//主人公を乗せる処理をする
 	}
 
-	switch (m_move_mode)
-	{
-		//------------------------------縄を紐スイッチに当てて移動するモード------------------------------
-	case 0:
-		//ロープスイッチ情報があるかつ
-		//ロープとロープスイッチがあたっているとき
-		if (objrope_switch != nullptr && objrope_switch->GetRopeFlag() == true)
-		{
-			//Aキーが押されたら
-			if (Input::GetVKey('A'))
-			{
-				//初期位置から動いた距離がMAX未満だったら移動
-				if (m_move_x < m_width_max)
-				{
-					//初期位置から動いた距離を増やす
-					m_move_x += SPEED;
-					//初期の移動方向が右のとき
-					if (m_initial_direction == 0)
-					{
-						//左に進む
-						m_vx = -SPEED;
-						m_lift_audio_count++;
-						if (m_lift_audio_count % 50 == 0)
-						{
-							Audio::Start(PLIFT);
-						}
-					}
-					//初期の移動方向が左のとき
-					else
-					{
-						//右に進む
-						m_vx = SPEED;
-						
-					}
-					
-				}
-			}
-			//Aキーが押されていないならX移動０
-			else
-			{
-				m_vx = 0.0f;
-			}
-		}
-		else//ロープとロープスイッチがあたっていないとき
-		{
-			//初期位置から動いた距離が０を超えていたら移動
-			if (m_move_x > 0)
-			{
-				//初期位置に近づくので減算
-				m_move_x -= SPEED;
-
-				//初期の移動方向が右だったら
-				if (m_initial_direction == 0)
-				{
-					//右に移動
-					m_vx = SPEED;
-					m_lift_audio_count++;
-					if (m_lift_audio_count % 50 == 0)
-					{
-						Audio::Start(RLIFT);
-					}
-				}
-				//初期の移動方向は左だったら
-				else
-				{
-					//左に移動
-					m_vx = -SPEED;
-				}
-			}
-		}
-
-		//初期位置から動いた距離が最大量を超えると
-		if (m_move_x > m_width_max)	
-		{
-			//移動ベクトルXを0にする
-			m_vx = 0.0f;
-			
-			//初期の移動方向が右だったら
-			if (m_initial_direction == 0)
-			{
-				//行き過ぎた分を計算
-				m_px += m_move_x - m_width_max;
-			}
-			//初期の移動方向が左だったら
-			else
-			{
-				//行き過ぎた分を計算
-				m_px -= m_move_x - m_width_max;
-			}
-			m_move_x = m_width_max;//移動量の初期化
-		}
-		//初期位置から動いた距離が０未満だったら
-		if (m_move_x < 0)
-		{
-			//移動ベクトルXを０にする
-			m_vx = 0.0f;
-
-			//初期の移動方向が右だったら
-			if (m_initial_direction == 0)
-			{
-				//行き過ぎた分を計算
-				m_px += m_move_x;
-			}
-			//初期の移動方向が左だったら
-			else
-			{
-				//行き過ぎた分を計算
-				m_px -= m_move_x;
-			}
-			m_move_x = 0;
-		}
-
-		//初期位置から動いた距離が０またはMAXなら移動ベクトルを０にする
-		if (m_move_x == 0 || m_move_x == m_width_max)
-			m_vx = 0.0f;
-		break;
-		//------------------------------自由移動モード(最大右X位置から最大値左X位置の間を自動移動)---------------
-	case 1:
-		//移動方向が右の時
-		if (m_direction == 0)
-		{
-			//移動ベクトルXを加算
-			m_vx = SPEED;
-			//初期移動方向が右なら
-			if (m_initial_direction == 0)
-				m_move_x += SPEED;//初期位置に近づくので加算
-			//初期移動方向が左なら
-			else
-				m_move_x -= SPEED;//初期位置から離れるので減算
-		}
-		//移動方向が左の時
-		else
-		{
-			//移動ベクトルXを減算
-			m_vx = -SPEED;
-			//初期移動方向が右なら
-			if (m_initial_direction == 0)
-				m_move_x -= SPEED;//初期位置から離れるので減算
-			//初期移動方向が左なら
-			else
-				m_move_x += SPEED;//初期位置に近づくので加算
-		}
-
-		//初期位置から動いた距離が０またはMAX値だったら
-		//現在の移動方向を左右逆にする
-		if (m_move_x == 0 || m_move_x == m_width_max)
-		{
-			//現在の移動方向が右なら左に
-			if (m_direction == 0)
-				m_direction = 1;
-			//左なら右にする
-			else
-				m_direction = 0;
-		}
-
-		//初期位置から動いた距離がMAX越えまたは０以下だったら
-		//行き過ぎた分を調整して現在の移動方向を左右逆にする
-		else if (m_move_x > m_width_max || m_move_x < 0)
-		{
-			//行き過ぎた分
-			//初期位置から動いた距離がMAX越えなら
-			if (m_move_x > m_width_max)
-			{
-				//現在の移動方向が右
-				if (m_direction == 0)
-				{
-					//まず初期位置から動いた距離がMAXになる位置まで進める
-					m_vx = m_width_max - (m_move_x - SPEED);
-					//超えた分を移動させる
-					m_vx -= m_move_x - m_width_max;
-				}
-				//現在の移動方向が左
-				else
-				{
-					//まず初期位置から動いた距離がMAXになる位置まで進める
-					m_vx = (m_width_max - (m_move_x - SPEED))*-1;
-					//超えた分を移動させる
-					m_vx += m_move_x - m_width_max;
-					
-				}
-				//初期位置から動いた距離を計算
-				m_move_x -= (m_move_x - m_width_max)*2;
-			}
-			//初期位置から動いた距離が０未満なら
-			else
-			{
-				//現在の移動方向が右
-				if (m_direction == 0)
-				{
-					//まず初期位置から動いた距離が０のときの位置まで進める
-					m_vx = m_move_x + SPEED;
-					//超えた分を移動させる
-					m_vx += m_move_x;
-				}
-				//現在の移動方向が左
-				else
-				{
-					//まず初期位置から動いた距離が０のときの位置まで進める
-					m_vx = (m_move_x + SPEED)*-1;
-					//超えた分を移動させる
-					m_vx += m_move_x*-1;
-				}
-				////初期位置から動いた距離を計算
-				m_move_x *= -1;
-			}
-			//現在の移動方向を左右逆にする
-			if (m_direction == 0)
-				m_direction = 1;
-			else
-				m_direction = 0;
-		}
-		break;
-		//--------------------無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)--------
-	case 2:
-		//上の限界Y位置
-		//この値より上に行ったら下の限界Y位置から出てくる
-		float up_limti ;
-		up_limti = (MAP_Y_MAX - 12)*BLOCK_SIZE - LIFT_SIZE_HEIGHT;
-		//下の限界Y位置
-		//この値より下に行ったら上の限界Y位置から出てくる
-		float down_limti;
-		down_limti = MAP_Y_MAX*BLOCK_SIZE;
-		//現在の移動方向による移動
-		if (m_direction == 2)
-		{
-			m_vy = -SPEED;
-		}
-		else
-		{
-			m_vy = SPEED;
-		}
-		//上の限界Y位置より上だったら
-		if (m_py < up_limti)
-		{
-			//現在の移動方向が上だったら
-			//意味無いかもだけど一応条件文をはさむ
-			if (m_direction == 2)
-			{
-				//行き過ぎた分をvyに入れる
-				m_vy = m_py - up_limti;
-				//Y位置を下の限界Y位置にする
-				m_py = down_limti;
-			}
-		}
-		//下の限界Y位置より下だったら
-		if (m_py > down_limti)
-		{
-			//現在の移動方向が下だったら
-			//意味無いかもだけど一応条件文をはさむ
-			if (m_direction == 3)
-			{
-				//行き過ぎた分をvyに入れる
-				m_vy = m_py - down_limti;
-				//Y位置を上の限界Y位置にする
-				m_py = up_limti;
-			}
-		}
-		break;
-	default:
-		break;
-	}
+	//各移動モード(m_move_mode)による移動
+	ModeMove();
 	
 	//位置情報を更新
 	m_px += m_vx;
@@ -463,5 +201,275 @@ void CObjLift::HeroRide()
 				objhero->SetPosX(m_px-64.0f);//主人公をリフトの左に行くようにする
 			}
 		}
+	}
+}
+
+//各移動モード(m_move_mode)による移動関数
+void CObjLift::ModeMove()
+{
+	//各移動モードによる移動
+	switch (m_move_mode)
+	{
+		//------------------------------縄を紐スイッチに当てて移動するモード------------------------------
+	case 0:
+		//ロープオブジェクトを持ってくる
+		CObjRopeSwitch* objrope_switch;
+		objrope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
+		//ロープスイッチ情報があるかつ
+		//ロープとロープスイッチがあたっているとき
+		if (objrope_switch != nullptr && objrope_switch->GetRopeFlag() == true)
+		{
+			//Aキーが押されたら
+			if (Input::GetVKey('A'))
+			{
+				//初期位置から動いた距離がMAX未満だったら移動
+				if (m_move_x < m_width_max)
+				{
+					//初期位置から動いた距離を増やす
+					m_move_x += SPEED;
+					//初期の移動方向が右のとき
+					if (m_initial_direction == 0)
+					{
+						//左に進む
+						m_vx = -SPEED;
+						m_lift_audio_count++;
+						if (m_lift_audio_count % 50 == 0)
+						{
+							Audio::Start(PLIFT);
+						}
+					}
+					//初期の移動方向が左のとき
+					else
+					{
+						//右に進む
+						m_vx = SPEED;
+
+					}
+
+				}
+			}
+			//Aキーが押されていないならX移動０
+			else
+			{
+				m_vx = 0.0f;
+			}
+		}
+		else//ロープとロープスイッチがあたっていないとき
+		{
+			//初期位置から動いた距離が０を超えていたら移動
+			if (m_move_x > 0)
+			{
+				//初期位置に近づくので減算
+				m_move_x -= SPEED;
+
+				//初期の移動方向が右だったら
+				if (m_initial_direction == 0)
+				{
+					//右に移動
+					m_vx = SPEED;
+					m_lift_audio_count++;
+					if (m_lift_audio_count % 50 == 0)
+					{
+						Audio::Start(RLIFT);
+					}
+				}
+				//初期の移動方向は左だったら
+				else
+				{
+					//左に移動
+					m_vx = -SPEED;
+				}
+			}
+		}
+
+		//初期位置から動いた距離が最大量を超えると
+		if (m_move_x > m_width_max)
+		{
+			//移動ベクトルXを0にする
+			m_vx = 0.0f;
+
+			//初期の移動方向が右だったら
+			if (m_initial_direction == 0)
+			{
+				//行き過ぎた分を計算
+				m_px += m_move_x - m_width_max;
+			}
+			//初期の移動方向が左だったら
+			else
+			{
+				//行き過ぎた分を計算
+				m_px -= m_move_x - m_width_max;
+			}
+			m_move_x = m_width_max;//移動量の初期化
+		}
+		//初期位置から動いた距離が０未満だったら
+		if (m_move_x < 0)
+		{
+			//移動ベクトルXを０にする
+			m_vx = 0.0f;
+
+			//初期の移動方向が右だったら
+			if (m_initial_direction == 0)
+			{
+				//行き過ぎた分を計算
+				m_px += m_move_x;
+			}
+			//初期の移動方向が左だったら
+			else
+			{
+				//行き過ぎた分を計算
+				m_px -= m_move_x;
+			}
+			m_move_x = 0;
+		}
+
+		//初期位置から動いた距離が０またはMAXなら移動ベクトルを０にする
+		if (m_move_x == 0 || m_move_x == m_width_max)
+			m_vx = 0.0f;
+		break;
+		//------------------------------自由移動モード(最大右X位置から最大値左X位置の間を自動移動)---------------
+	case 1:
+		//移動方向が右の時
+		if (m_direction == 0)
+		{
+			//移動ベクトルXを加算
+			m_vx = SPEED;
+			//初期移動方向が右なら
+			if (m_initial_direction == 0)
+				m_move_x += SPEED;//初期位置に近づくので加算
+								  //初期移動方向が左なら
+			else
+				m_move_x -= SPEED;//初期位置から離れるので減算
+		}
+		//移動方向が左の時
+		else
+		{
+			//移動ベクトルXを減算
+			m_vx = -SPEED;
+			//初期移動方向が右なら
+			if (m_initial_direction == 0)
+				m_move_x -= SPEED;//初期位置から離れるので減算
+								  //初期移動方向が左なら
+			else
+				m_move_x += SPEED;//初期位置に近づくので加算
+		}
+
+		//初期位置から動いた距離が０またはMAX値だったら
+		//現在の移動方向を左右逆にする
+		if (m_move_x == 0 || m_move_x == m_width_max)
+		{
+			//現在の移動方向が右なら左に
+			if (m_direction == 0)
+				m_direction = 1;
+			//左なら右にする
+			else
+				m_direction = 0;
+		}
+
+		//初期位置から動いた距離がMAX越えまたは０以下だったら
+		//行き過ぎた分を調整して現在の移動方向を左右逆にする
+		else if (m_move_x > m_width_max || m_move_x < 0)
+		{
+			//行き過ぎた分
+			//初期位置から動いた距離がMAX越えなら
+			if (m_move_x > m_width_max)
+			{
+				//現在の移動方向が右
+				if (m_direction == 0)
+				{
+					//まず初期位置から動いた距離がMAXになる位置まで進める
+					m_vx = m_width_max - (m_move_x - SPEED);
+					//超えた分を移動させる
+					m_vx -= m_move_x - m_width_max;
+				}
+				//現在の移動方向が左
+				else
+				{
+					//まず初期位置から動いた距離がMAXになる位置まで進める
+					m_vx = (m_width_max - (m_move_x - SPEED))*-1;
+					//超えた分を移動させる
+					m_vx += m_move_x - m_width_max;
+
+				}
+				//初期位置から動いた距離を計算
+				m_move_x -= (m_move_x - m_width_max) * 2;
+			}
+			//初期位置から動いた距離が０未満なら
+			else
+			{
+				//現在の移動方向が右
+				if (m_direction == 0)
+				{
+					//まず初期位置から動いた距離が０のときの位置まで進める
+					m_vx = m_move_x + SPEED;
+					//超えた分を移動させる
+					m_vx += m_move_x;
+				}
+				//現在の移動方向が左
+				else
+				{
+					//まず初期位置から動いた距離が０のときの位置まで進める
+					m_vx = (m_move_x + SPEED)*-1;
+					//超えた分を移動させる
+					m_vx += m_move_x*-1;
+				}
+				////初期位置から動いた距離を計算
+				m_move_x *= -1;
+			}
+			//現在の移動方向を左右逆にする
+			if (m_direction == 0)
+				m_direction = 1;
+			else
+				m_direction = 0;
+		}
+		break;
+		//--------------------無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)--------
+	case 2:
+		//上の限界Y位置
+		//この値より上に行ったら下の限界Y位置から出てくる
+		float up_limti;
+		up_limti = (MAP_Y_MAX - 12)*BLOCK_SIZE - LIFT_SIZE_HEIGHT;
+		//下の限界Y位置
+		//この値より下に行ったら上の限界Y位置から出てくる
+		float down_limti;
+		down_limti = MAP_Y_MAX*BLOCK_SIZE;
+		//現在の移動方向による移動
+		if (m_direction == 2)
+		{
+			m_vy = -SPEED;
+		}
+		else
+		{
+			m_vy = SPEED;
+		}
+		//上の限界Y位置より上だったら
+		if (m_py < up_limti)
+		{
+			//現在の移動方向が上だったら
+			//意味無いかもだけど一応条件文をはさむ
+			if (m_direction == 2)
+			{
+				//行き過ぎた分をvyに入れる
+				m_vy = m_py - up_limti;
+				//Y位置を下の限界Y位置にする
+				m_py = down_limti;
+			}
+		}
+		//下の限界Y位置より下だったら
+		if (m_py > down_limti)
+		{
+			//現在の移動方向が下だったら
+			//意味無いかもだけど一応条件文をはさむ
+			if (m_direction == 3)
+			{
+				//行き過ぎた分をvyに入れる
+				m_vy = m_py - down_limti;
+				//Y位置を上の限界Y位置にする
+				m_py = up_limti;
+			}
+		}
+		break;
+	default:
+		break;
 	}
 }
