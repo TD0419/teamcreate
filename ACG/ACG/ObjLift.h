@@ -14,7 +14,15 @@ using namespace GameL;
 class CObjLift :public CObj
 {
 public:
-	CObjLift(int x, int y); // コンストラクタ
+	//コンストラクタ
+	//引数1,2	マップの数値(位置)
+	//引数3		移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
+	//引数4		X方向への最大移動量(初期位置～最大移動量分動きます。移動モードが２の場合値は関係ありません)
+	//引数5		リフトの動きモード
+	//			０＝手動モード(縄を紐スイッチに当てて移動するモード)
+	//			１＝自由移動モード(初期位置Xから最大X位置の間を自動移動)
+	//			２＝無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)
+	CObjLift(int px, int py, int direction, float width_max, int mode);
 	CObjLift(int px, int py, float vx, float vy, float width_max, float length_max);//コンストラクタ
 	~CObjLift() {};			// デストラクタ
 	void Init();			// イニシャライズ
@@ -46,7 +54,7 @@ private:
 	float m_move_y;//初期位置から動いた距離Y
 
 	//リフトの動きモード
-	//０＝縄を紐スイッチに当てて移動するモード
+	//０＝手動モード(縄を紐スイッチに当てて移動するモード)
 	//１＝自由移動モード(初期位置Xから最大X位置の間を自動移動)
 	//２＝無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)
 	int m_move_mode;	

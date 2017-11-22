@@ -167,26 +167,25 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_LIFT_TYPE_MANUAL:		//手動リフト(横移動)作成
 		{
-			CObjLift* objlift = new CObjLift(x, y);
+			CObjLift* objlift = new CObjLift(x, y,0,640.0f,0);
 			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
 		
-		//マップの番号対応、及び処理ができたらコメントはずしてください-----------
-		//case MAP_LIFT_TYPE_AUTO_WIDTH:		//自動横移動リフト作成
-		//{
-		//	CObjLift* objlift = new CObjLift(x, y);
-		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
-		//	break;
-		//}
+		
+		case MAP_LIFT_TYPE_AUTO_WIDTH:		//自動横移動リフト作成
+		{
+			CObjLift* objlift = new CObjLift(x, y,0,640.0f,1);
+			Objs::InsertObj(objlift, OBJ_LIFT, 9);
+			break;
+		}
 
-		//case MAP_LIFT_TYPE_AUTO_LENGTH:		//自動縦移動リフト作成
-		//{
-		//	CObjLift* objlift = new CObjLift(x, y);
-		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
-		//	break;
-		//}
-		//マップの番号対応ができたらコメントはずしてください-----------
+		case MAP_LIFT_TYPE_AUTO_LENGTH:		//自動縦移動リフト作成
+		{
+			CObjLift* objlift = new CObjLift(x, y,2,0.0f,2);
+			Objs::InsertObj(objlift, OBJ_LIFT, 9);
+			break;
+		}
 		
 		case MAP_ENEMY://敵作成
 		{
