@@ -284,6 +284,30 @@ void CObjRope::RopeDelete()
 		return;
 	}
 
+	//リフトに当たった場合ロープを消す
+	if (hit->CheckObjNameHit(OBJ_LIFT) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
+	//木に当たった場合ロープを消す
+	if (hit->CheckObjNameHit(OBJ_WOOD) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
+	//水に当たった場合ロープを消す
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
 	//ロープが消していいかどうかを調べる
 	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();
 
