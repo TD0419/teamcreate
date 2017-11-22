@@ -192,6 +192,10 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_64);
 		//回転ブロックの仕掛けのスイッチの画像読み込み
 		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_CANNON, TEX_SIZE_16);
+		//針の読み込み
+		Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_32);
+		//針の土台の読み込み
+		Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
 	//画像が用意されていない場合
 	default:
 		//背景画像読み込み
@@ -247,12 +251,6 @@ void CSceneMain::ImageDataLoading()
 
 	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"Image\\zanki.png", GRA_LIFE, TEX_SIZE_64);
-	
-	//針の読み込み
-	Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_32);
-
-	//針の土台の読み込み
-	Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
 }
 
 //音楽データ読み込み関数
