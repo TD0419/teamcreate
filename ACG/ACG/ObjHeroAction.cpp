@@ -7,20 +7,17 @@
 
 void CObjHero::RopeThrow() {
 
-	//Scene　開店準備
+	//Scene　開店準備 ←？？？??
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//ロープオブジェクトを持ってくる
 	CObjRope* obj_rope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
 
-
-
-
 	bool rope_caught = false; //ロープがロープスイッチと当たっているかどうかを確かめる変数
 	bool rope_delete = false; //ロープが消えてるか同うかを確かめる変数
 
-							  //マウスの位置がプレイヤーから見てどの方向か調べるための変数
+	//マウスの位置がプレイヤーから見てどの方向か調べるための変数
 	float mous_rope_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
 
 	if ((m_mous_x - (m_px - objmap->GetScrollX())) < 0)//主人公より左をクリックしたとき
@@ -28,7 +25,7 @@ void CObjHero::RopeThrow() {
 
 	//右クリックを押したらの部分を上に変更したのでマージする時は元の奴を消してこっちを残してください
 	//右クリックを押したら   水に当たっているときと敵に当たっているときは動かない
-	if (Input::GetMouButtonR() == true && m_hero_die_water == false && m_ani_frame_enemy_die == false)
+	if ( Input::GetMouButtonR() == true && m_hero_die_water == false && m_ani_frame_enemy_die == false)
 	{
 		//主人公をクリックしていた場合
 		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))

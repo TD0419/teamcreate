@@ -118,38 +118,47 @@ void CObjLadders::HeroHit(float px, float py)
 				// はしごに掴まっていない(アニメーション中ではない) 調整の余地あり
 				if (objhero->GetLadderUpdown() == 0 && map_num_center != MAP_LADDERS && map_num_center != MAP_NO_LOOK_LADDERS)
 				{
+					// はしごブロックの上にいるので下に落ちないようにする
 					objhero->SetVecY(0.0f);				// 下に落ちないようにする
 					objhero->SetGravityFlag(false);		// 重力がかからないようにする
 					objhero->SetHitDown(true);			// 着地フラグを立てジャンプできるようにする
 				}
 				else
 				{
-					objhero->SetVecY(-m_up_and_down_speed);//上方向への移動ベクトルをセットする
-					//はしごを上りきる時に2を渡す
-					if (map_num_ladder_up == MAP_SPACE)
+					//ロープ出している時ははしごに上れない
+					if (objhero->GetRopeAniCon() == false)
 					{
-						objhero->SetLaddersUpdown(2);
+						objhero->SetVecY(-m_up_and_down_speed);//上方向への移動ベクトルをセットする
+						//はしごを上りきる時に2を渡す
+						if (map_num_ladder_up == MAP_SPACE)
+						{
+							objhero->SetLaddersUpdown(2);
+						}
+						else
+						{
+							objhero->SetLaddersUpdown(1);//はしごを上っているときは1を渡す
+						}
+						objhero->SetLaddersAniUpdown(1);//アニメーションを進める
 					}
-					else
-					{
-						objhero->SetLaddersUpdown(1);//はしごを上っているときは1を渡す
-					}
-					objhero->SetLaddersAniUpdown(1);//アニメーションを進める
 				}
 			}
 			//Sキーがおされたとき　下るとき
 			else if (Input::GetVKey('S') == true)
 			{
-				//下に通常ブロックが無かったら
-				if (objhero->GetBlockType() != MAP_BLOCK)
+				//ロープ出している時ははしごに降りれない
+				if (objhero->GetRopeAniCon() == false)
 				{
-					objhero->SetVecY(m_up_and_down_speed);//下方向への移動ベクトルをセットする
-					objhero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
-					objhero->SetLaddersAniUpdown(1);//アニメーションを進める
-				}
-				else
-				{
-					objhero->SetLaddersUpdown(0);//主人公がはしごを下り終えたらアニメーション終了
+					//下に通常ブロックが無かったら
+					if (objhero->GetBlockType() != MAP_BLOCK)
+					{
+						objhero->SetVecY(m_up_and_down_speed);//下方向への移動ベクトルをセットする
+						objhero->SetLaddersUpdown(1);//はしごを下りるているときは1を渡す
+						objhero->SetLaddersAniUpdown(1);//アニメーションを進める
+					}
+					else
+					{
+						objhero->SetLaddersUpdown(0);//主人公がはしごを下り終えたらアニメーション終了
+					}
 				}
 			}
 			//それ以外の時
