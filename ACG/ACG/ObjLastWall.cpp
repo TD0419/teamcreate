@@ -244,78 +244,35 @@ void CObjLastWall::Draw()
 	//ƒ}ƒbƒvƒIƒuƒWƒFƒNƒg‚ðŽ‚Á‚Ä‚­‚é
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//ƒXƒe[ƒW‚ÌŽí—Þ‚É‚æ‚Á‚Ä•`‰æ‚ð‚©‚¦‚é
-	switch (m_wall_type)
-	{
-	case 1:
-	case 2:
-		//Ø‚èŽæ‚èˆÊ’u
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 256.0f;
+	//Ø‚èŽæ‚èˆÊ’u
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 64.0f;
+	src.m_bottom = 256.0f;
 
-		//•`‰æˆÊ’u
-		dst.m_top = m_py - objmap->GetScrollY() - 190;
-		dst.m_left = m_px - objmap->GetScrollX();
-		dst.m_right = dst.m_left + 96.0f;
-		dst.m_bottom = dst.m_top + 256.0f;
+	//•`‰æˆÊ’u
+	dst.m_top = m_py - objmap->GetScrollY() - 190;
+	dst.m_left = m_px - objmap->GetScrollX();
+	dst.m_right = dst.m_left + 96.0f;
+	dst.m_bottom = dst.m_top + 256.0f;
 
-		//•`‰æ(ã‚Ì•”•ª)
-		Draw::Draw(GRA_LAST_WALL, &src, &dst, color, 0.0f);
+	//•`‰æ(ã‚Ì•”•ª)
+	Draw::Draw(GRA_LAST_WALL, &src, &dst, color, 0.0f);
 
-		//Ø‚èŽæ‚èˆÊ’u
-		src.m_top = 0.0f + m_wall_gauge;
-		src.m_left = 0.0f;
-		src.m_right = 32.0f;
-		src.m_bottom = 512.0f;
+	//Ø‚èŽæ‚èˆÊ’u
+	src.m_top = 0.0f + m_wall_gauge;
+	src.m_left = 0.0f;
+	src.m_right = 32.0f;
+	src.m_bottom = 512.0f;
 
-		//•`‰æˆÊ’u
-		dst.m_top = m_py - objmap->GetScrollY() + 65.0f;
-		dst.m_left = m_px - objmap->GetScrollX() + 30.0f;
-		dst.m_right = dst.m_left + 32.0f;
-		dst.m_bottom = dst.m_top + 512.0f - m_wall_gauge;
+	//•`‰æˆÊ’u
+	dst.m_top = m_py - objmap->GetScrollY() + 65.0f;
+	dst.m_left = m_px - objmap->GetScrollX() + 30.0f;
+	dst.m_right = dst.m_left + 32.0f;
+	dst.m_bottom = dst.m_top + 512.0f - m_wall_gauge;
 
-		//•`‰æ(‰º‚Ì•”•ª)
-		Draw::Draw(GRA_OPEN_WALL, &src, &dst, color, 0.0f);
-		break;
-
-	case 3:
-		//Ø‚èŽæ‚èˆÊ’u
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 256.0f;
-
-		//•`‰æˆÊ’u
-		dst.m_top = m_py - objmap->GetScrollY() - 190;
-		dst.m_left = m_px - objmap->GetScrollX();
-		dst.m_right = dst.m_left + 96.0f;
-		dst.m_bottom = dst.m_top + 256.0f;
-
-		//•`‰æ(ã‚Ì•”•ª)
-		Draw::Draw(GRA_LAST_WALL3, &src, &dst, color, 0.0f);
-
-		//Ø‚èŽæ‚èˆÊ’u
-		src.m_top = 0.0f + m_wall_gauge;
-		src.m_left = 0.0f;
-		src.m_right = 32.0f;
-		src.m_bottom = 512.0f;
-		//•`‰æˆÊ’u
-		dst.m_top = m_py - objmap->GetScrollY() + 65;
-		dst.m_left = m_px - objmap->GetScrollX() + 30;
-		dst.m_right = dst.m_left + 32;
-		dst.m_bottom = dst.m_top + 512;
-
-		//•`‰æ(‰º‚Ì•”•ª)
-		Draw::Draw(GRA_OPEN_WALL3, &src, &dst, color, 0.0f);
-		break;
-	
-
-	case 5:
-		break;
-	}
-	
+	//•`‰æ(‰º‚Ì•”•ª)
+	Draw::Draw(GRA_OPEN_WALL, &src, &dst, color, 0.0f);
 
 	//-----------------------------------------------------
 }
