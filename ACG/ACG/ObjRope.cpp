@@ -68,6 +68,9 @@ void CObjRope::Init()
 //アクション
 void CObjRope::Action()
 {
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	
 	//主人公のオブジェクトを持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
@@ -135,10 +138,6 @@ void CObjRope::Action()
 			}
 		}
 	}
-	
-
-	//引っ掛けたまま移動すると、ロープがズレて外れます。
-	//ロープを引っ掛けているときは主人公は動かない(移動できない)仕様が実装で改善予定
 
 	//移動
 	m_px += m_vx ;
@@ -146,6 +145,20 @@ void CObjRope::Action()
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
+
+	//主人公の腕の位置を更新
+	//主人公が右を向いているときの位置
+	if (objhero->GetPosture() == 0.0f)
+	{
+		m_hero_arm_x = objhero->GetPosX() + 64.0f - objmap->GetScrollX();
+		m_hero_arm_y = objhero->GetPosY() + 80.0f - objmap->GetScrollY();
+	}
+	//主人公が左と向いているときの位置
+	else
+	{
+		m_hero_arm_x = objhero->GetPosX() - objmap->GetScrollX();
+		m_hero_arm_y = objhero->GetPosY() + 80.0f - objmap->GetScrollY();
+	}
 }
 
 //ドロー
@@ -171,7 +184,7 @@ void CObjRope::RopeDraw(float color[])
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//描画の太さ
-	float drow_size = 2.0f;
+	float drow_size = 2;
 
 	//点を打つ位置と主人公の腕の距離
 	float drow_px = 0.0f;
@@ -307,6 +320,39 @@ void CObjRope::RopeDelete()
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
+
+	//リフトに当たった場合ロープを消す
+	if (hit->CheckObjNameHit(OBJ_LIFT) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
+	//木に当たった場合ロープを消す
+	if (hit->CheckObjNameHit(OBJ_WOOD) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
+	//水に当たった場合ロープを消す
+	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
+	//Lastwall(壁)にあたったら消去
+	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
+
 
 	//ロープが消していいかどうかを調べる
 	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();

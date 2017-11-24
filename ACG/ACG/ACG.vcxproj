@@ -77,6 +77,7 @@
     <ClInclude Include="ObjFallingWalls.h" />
     <ClInclude Include="ObjNeedle.h" />
     <ClInclude Include="ObjRollBlockSwitch.h" />
+    <ClInclude Include="ObjNeedleStand.h" />
     <ClInclude Include="ObjStage5Boss.h" />
     <ClInclude Include="ObjThroughBlock.h" />
     <ClInclude Include="ObjBossDropKey.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjWater.h" />
     <ClInclude Include="ObjStage3Boss.h" />
+    <ClInclude Include="ObjTarzanPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ObjDiffusionGimmick.cpp" />
@@ -164,11 +166,13 @@
     <ClCompile Include="ObjNeedle.cpp" />
     <ClCompile Include="ObjRollBlockSwitch.cpp" />
     <ClCompile Include="ObjRope.cpp" />
+    <ClCompile Include="ObjTarzanPoint.cpp" />
     <ClCompile Include="ObjTime.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjWood.cpp" />
     <ClCompile Include="ObjRopeSwitch.cpp" />
     <ClCompile Include="ObjRollBlock.cpp" />
+    <ClCompile Include="ObjNeedleStand.cpp" />
     <ClCompile Include="SceneGameClear.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMain.cpp" />

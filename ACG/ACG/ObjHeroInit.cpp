@@ -63,5 +63,5 @@ void CObjHero::Init()
 	m_hit_down = false;
 
 	//“–‚½‚è”»’è
-	Hits::SetHitBox(this, m_px, m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, m_px, m_py, 64, 112, ELEMENT_PLAYER, OBJ_HERO, 1);
 }

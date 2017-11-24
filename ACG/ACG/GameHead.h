@@ -41,6 +41,9 @@ enum OBJ_NAME
 	OBJ_TIME,			//タイム
 	OBJ_ROLL_BLOCK,		//回転するブロック
 	OBJ_ROLL_BLOCK_SWITCH,//回転するブロック用のスイッチ
+	OBJ_NEEDLE,			//針
+	OBJ_NEEDLE_STAND,	//針の土台
+	OBJ_TARZAN_POINT,	//ロープでぶら下がることができるギミック
 };
 //------------------------------------------------
 
@@ -125,11 +128,11 @@ enum MAP_BER
 	//ステージ5のみに使用するオブジェクト描画番号
 	MAP_ROLL_BROCK_TYPE_AUTO	,		//自動式回転するブロック
 	MAP_ROLL_BROCK_TYPE_MANUAL	,		//手動式90度回転するブロック
-	MAP_HOOK_GIMMICK			,		//ロープでぶら下がれるギミック
-	MAP_NEEDLE					,		//トゲ
+	MAP_TARZAN_POINT			,		//ロープでぶら下がれるギミック
+	MAP_NEEDLE					,		//針
 	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
 	MAP_STAGE5_BOSS				,		//ステージ5のボス
-
+	MAP_NEEDLE_STAND			,		//針の土台
 };
 
 //グラフィックID
@@ -165,6 +168,10 @@ enum GRAPHIC_ID
 	GRA_TITLE,			//タイトル
 	GRA_GAME_OVER,		//ゲームオーバー
 	GRA_COCONUT,		//ココナッツ
+	GRA_NEEDLE,         //針
+	GRA_NEEDLE_STAND,   //針の土台
+	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
+
 	GRA_ROLL_BLOCK_SWITCH,//回転床用のスイッチ
 };
 
@@ -223,6 +230,11 @@ enum MUSIC
 #define CANNON_SIZE_HEIGHT	 (32.0f)		//砲台の縦サイズ(仮)
 #define ROLL_BLOCK_SIZE_WIDTH	(192.0f)	//回転するブロックの横サイズ
 #define ROLL_BLOCK_SIZE_HEIGHT	(64.0f)		//回転するブロックの縦サイズ
+#define NEEDLE_SIZE_WIDTH     (64.0f)		//針の横のサイズ
+#define NEEDLE_SIZE_HEIGHT    (32.0f)		//針の縦のサイズ
+#define NEEDLE_STAND_SIZE     (64.0f)		//針の土台のサイズ
+#define TARZAN_POINT_WIDTH		(16.0f)		//ロープでぶら下がれるギミック横サイズ
+#define TARZAN_POINT_HEIGHT		(16.0f)		//ロープでぶら下がれるギミック縦サイズ
 #define ROLL_BLOCK_SWITCH_SIZE_WIDTH (16.0f)		//回転するブロックをまわすスイッチの横サイズ
 #define ROLL_BLOCK_SWITCH_SIZE_HEIGHT (16.0f)	//回転するブロックをまわすスイッチの縦サイズ
 
@@ -275,9 +287,11 @@ enum MUSIC
 #include "ObjCannon.h"			//砲台
 #include "ObjLastWall.h"		//最後の壁
 #include "ObjTime.h"			//タイム
-#include "ObjNeedle.h"			//トゲ
+#include "ObjNeedle.h"			//針
+#include "ObjNeedleStand.h"     //針の土台
 #include "ObjDiffusionGimmick.h"//拡散弾発射装置
 #include "ObjRollBlock.h"		//回転ブロック
+#include "ObjTarzanPoint.h"		//ロープでぶら下がることができるギミック
 #include "ObjRollBlockSwitch.h"	//回転ブロック用のスイッチ
 //------------------------------------------------
 

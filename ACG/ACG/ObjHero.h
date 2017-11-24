@@ -38,6 +38,7 @@ public:
 	float GetVecX() { return m_vx; }								//ベクトルXを渡す
 	float GetVecY() { return m_vy; }								//ベクトルYを渡す
 	float GetPosture() { return m_posture; }						//今の主人公の姿勢を渡す
+	bool GetRopeAniCon() { return m_rope_ani_con; }					//ロープのアニメーションが始まっているかどうかを返す
 	bool GetRopeDeleteRKey() { return m_rope_delete_r_kye; }		//アニメーション用ロープが消えたかどうかを管理するフラグを渡す
 	int GetBlockType() { return m_block_type; }						//下のブロック(踏んでいる)情報を渡す
 	int GetLadderUpdown() { return m_ladder_updown; }				//主人公がはしごのどのアニメーション中かを返す

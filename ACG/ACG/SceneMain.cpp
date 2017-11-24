@@ -72,6 +72,9 @@ void CSceneMain::InitScene()
 	
 	//デバッグ--------------------------------------------------
 
+	CObjLastWall* objwall = new CObjLastWall(10, 13);
+	Objs::InsertObj(objwall, OBJ_LAST_WALL, 10);
+
 	//BGM再生
 	/*
 	
@@ -159,6 +162,7 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
+		
 		break;
 	//ステージ２
 	case 2:
@@ -168,13 +172,48 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Stage2.png", GRA_LIFT, TEX_SIZE_128);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage2.png", GRA_BLOCK, TEX_SIZE_128);
+		//すり抜けるブロック画像読み込み
+		Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
+		//ボス画像読み込み
+		Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1024);
+		//ゴリラの投擲物読み込み
+		Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
 		break;
 	//ステージ３
 	case 3:
+		//リフト画像読み込み
+		Draw::LoadImageW(L"Image\\Lift\\Stage3.png", GRA_LIFT, TEX_SIZE_128);
+		//ブロック画像読み込み
+		Draw::LoadImageW(L"Image\\Block\\Stage3.png", GRA_BLOCK, TEX_SIZE_128);
+		//キャノンの読み込み
+		Draw::LoadImageW(L"Image\\Cannon.png", GRA_CANNON, TEX_SIZE_64);
+		//lastwall3画像の読み込み
+		Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL, TEX_SIZE_256);//上
+		Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
+		break;
 	//ステージ４
 	case 4:
 	//ステージ５
 	case 5:
+		//ブロック画像読み込み
+		Draw::LoadImageW(L"Image\\Block\\Stage5.png", GRA_BLOCK, TEX_SIZE_128);
+		//回転ブロックの画像読み込み
+		Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+		//金網ブロックの読み込み
+		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+		//Stage5大砲の読み込み
+		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_64);
+		//回転ブロックの仕掛けのスイッチの画像読み込み
+		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_CANNON, TEX_SIZE_16);
+		//針の読み込み
+		Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_32);
+		//針の土台の読み込み
+		Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
+		//ロープでぶら下がることができるギミック
+		Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
+
+		break;
+
 	//画像が用意されていない場合
 	default:
 		//背景画像読み込み
@@ -191,13 +230,6 @@ void CSceneMain::ImageDataLoading()
 
 	//主人公の弾画像読み込み
 	Draw::LoadImageW(L"Image\\Hero_bullet.png", GRA_HERO_BULLET, TEX_SIZE_64);
-
-	//すり抜けるブロック画像読み込み
-	Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
-
-	//ボス画像読み込み
-	Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1024);
-
 	//ハシゴ画像読み込み
 	Draw::LoadImageW(L"Image\\Ladders.png", GRA_LADDERS, TEX_SIZE_64);
 
@@ -234,10 +266,6 @@ void CSceneMain::ImageDataLoading()
 	//lastwall画像読み込み
 	Draw::LoadImageW(L"Image\\Lastwall.png", GRA_LAST_WALL, TEX_SIZE_256);//上
 	Draw::LoadImageW(L"Image\\Openwall.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
-
-	//lastwall3画像の読み込み
-	Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL3, TEX_SIZE_256);//上
-	Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL3, TEX_SIZE_512);//下
 
 	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"Image\\zanki.png", GRA_LIFE, TEX_SIZE_64);

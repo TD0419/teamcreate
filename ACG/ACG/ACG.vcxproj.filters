@@ -121,6 +121,9 @@
     <Filter Include="ソース ファイル\Main\Title">
       <UniqueIdentifier>{82100ff4-7f6b-4131-a72c-29415e5309b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\TarzanPoint">
+      <UniqueIdentifier>{a1b9eec0-0431-430d-9855-66823231a9a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -281,6 +284,12 @@
     </ClInclude>
     <ClInclude Include="ObjRollBlock.h">
       <Filter>ソース ファイル\Main\RollBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjNeedleStand.h">
+      <Filter>ソース ファイル\Main\Needle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTarzanPoint.h">
+      <Filter>ソース ファイル\Main\TarzanPoint</Filter>
     </ClInclude>
     <ClInclude Include="ObjRollBlockSwitch.h">
       <Filter>ソース ファイル\Main\RollBlock</Filter>
@@ -448,6 +457,12 @@
     </ClCompile>
     <ClCompile Include="ObjHeroAction.cpp">
       <Filter>ソース ファイル\Main\Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjNeedleStand.cpp">
+      <Filter>ソース ファイル\Main\Needle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTarzanPoint.cpp">
+      <Filter>ソース ファイル\Main\TarzanPoint</Filter>
     </ClCompile>
     <ClCompile Include="ObjRollBlockSwitch.cpp">
       <Filter>ソース ファイル\Main\RollBlock</Filter>

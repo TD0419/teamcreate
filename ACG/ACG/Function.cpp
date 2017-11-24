@@ -1,5 +1,21 @@
 #include "Function.h"
 #include "GameHead.h"
+//オブジェクト同士が衝突したときに消失する関数
+//引数1　HitBoxポインタ
+//引数2　判定したいオブジェクトポインタ
+//引数3　オブジェクトネーム
+//戻り値 bool 　当たってるか、当たってないか
+bool DeleteCheckObjNameHit(CHitBox* hit, CObj* cobj, OBJ_NAME objname)
+{
+	//指定したオブジェクトとネームが設定されてるオブジェクトがあたったら消去
+	if (hit->CheckObjNameHit(objname) != nullptr)
+	{
+		cobj->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(cobj);	//所持するHitBoxを除去。
+		return true;				//当たってる
+	}
+	return false;					//当たってない
+}
 
 //HitBoxの位置を更新する関数
 //引数1 更新するHitBoxポインタ
@@ -115,7 +131,7 @@ int HitTestOfAB(float ax, float ay, float aw, float ah,
 			if (*bvx >= 0.0f)
 			{
 				*bvx = 0.00000f;//X移動量を0にする
-				*bx -= bx_max - ax_min;
+				*bx -= bx_max - ax_min + 0.001f;//密着してジャンプるると上に乗ってしまうので＋0.001している
 				return 3;
 			}
 		}
@@ -125,7 +141,7 @@ int HitTestOfAB(float ax, float ay, float aw, float ah,
 			if (*bvx <= 0.0f)
 			{
 				*bvx = 0.00000f;//X移動量を0にする
-				*bx += ax_max - bx_min;
+				*bx += ax_max - bx_min + 0.001f;//密着してジャンプるると上に乗ってしまうので＋0.001している
 				return 4;
 			}
 		}

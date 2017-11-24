@@ -45,9 +45,13 @@ class CObjBoss :public CObj
 	bool m_hit_left;
 	bool m_hit_right;
 
-	bool m_wall_hit_flag;	//ボスが壁に当たったときのフラグ
-	int m_ani_time;			//アニメーションフレーム動作感覚
-	int m_ani_frame;		//描画フレーム
-	float m_ani_max_time;   //アニメーション動作間隔最大値
-	bool m_ani_start;		//アニメーションの始まってるかどうかをあらわすフラグ
+	bool m_wall_hit_flag;		//ボスが壁に当たったときのフラグ
+	int m_ani_time_walk;		//歩くアニメーションフレーム動作感覚
+	int m_ani_time_throw;		//投げるアニメーションフレーム動作感覚
+	int m_ani_frame_walk;		//描画フレーム歩く用(歩くモーション)
+	int m_ani_frame_throw;		//描画フレーム投げる用(投げるモーション)
+
+	int m_ani_walk_max_time;	//アニメーション歩く動作間隔最大値
+	int m_ani_throw_max_time;	//アニメーション投げる動作間隔最大値
+	bool m_ani_throw_start_flag;//投げるアニメーション開始フラグ
 };

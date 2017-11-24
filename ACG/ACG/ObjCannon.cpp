@@ -35,7 +35,7 @@ void CObjCannon::Action()
 	
 	m_rec++;//弾丸発射カウント開始
 
-	if (m_rec == 200.0f)
+	if (m_rec == 90.0f)
 	{
 		//debug弾丸作成
 		CObjEnemyBullet* objenemy_bullet = new CObjEnemyBullet(m_px + 20.0f, m_py, 0);
