@@ -58,9 +58,6 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objtime, OBJ_TIME, 100);
 
 	//デバッグ　”使い終わったら消してください！”----------------
-	
-	CObjLastWall* objwall = new CObjLastWall(10, 13);
-	Objs::InsertObj(objwall, OBJ_LAST_WALL, 10);
 
 	//BGM再生
 	/*
