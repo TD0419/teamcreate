@@ -102,8 +102,8 @@ void CObjRope::Action()
 		hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH)!=nullptr)
 	{
 		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
-		m_px -= m_vx ;
-		m_py -= m_vy ;
+		/*m_px -= m_vx ;
+		m_py -= m_vy */;
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
 	
 		//　Rキーを押してないならロープをRキーで消せるようにする
@@ -114,38 +114,16 @@ void CObjRope::Action()
 
 		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
 		objhero->SetVecX(0.0f);
-
-		//回転床用のスイッチなら
-		if (hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH) != nullptr)
-		{
-			//左移動していれば
-			if (Input::GetVKey('A') == true)
-			{
-				//スイッチオブジェクトを持ってくる
-				CObjRollBlockSwitch* objrollblockswitch = (CObjRollBlockSwitch*)Objs::GetObj(OBJ_ROLL_BLOCK_SWITCH);
-
-				//スイッチのポジションを持ってくる
-				float block_px = objrollblockswitch->GetX();
-				float block_py = objrollblockswitch->GetY();
-
-				//角度を元に位置を調節する
-				m_px = block_px ;
-				m_py = block_py ;
-
-				//移動ベクトルを0にする
-				m_vx = 0.0f;
-				m_vy = 0.0f;
-			}
-		}
+	}	
+	else
+	{
+		//移動
+		m_px += m_vx;
+		m_py += m_vy;
 	}
-
-	//移動
-	m_px += m_vx ;
-	m_py += m_vy ;
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
-
+	
 	//主人公の腕の位置を更新
 	//主人公が右を向いているときの位置
 	if (objhero->GetPosture() == 0.0f)

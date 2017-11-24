@@ -52,13 +52,20 @@ void CObjRollBlockSwitch::Action()
 			m_r += 2.0f;//角度の加算
 
 			//sin値　cos値を求める
-			float m_sin = sinf(m_r * 3.14f / 180.0f);
-			float m_cos = cosf(m_r * 3.14f / 180.0f);
+			float sin = sinf(m_r * 3.14f / 180.0f);
+			float cos = cosf(m_r * 3.14f / 180.0f);
 
 			//角度を元に位置を調節する
-			m_px = m_base_block_px - m_sin * ROLL_BLOCK_SIZE_WIDTH;
-			m_py = m_base_block_py + ROLL_BLOCK_SIZE_WIDTH - m_cos * ROLL_BLOCK_SIZE_WIDTH;
+			m_px = m_base_block_px - sin * ROLL_BLOCK_SIZE_WIDTH;
+			m_py = m_base_block_py + ROLL_BLOCK_SIZE_WIDTH - cos * ROLL_BLOCK_SIZE_WIDTH;
+
+			//ロープオブジェクトを持ってくる
+			CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
 			
+			//ロープの位置をこのオブジェクトの位置に合わせる
+			objrope->SetPosX(m_px);
+			objrope->SetPosY(m_py);
+
 			//引っ張りのフラグをオンにする
 			m_pull_flag=true;
 		}

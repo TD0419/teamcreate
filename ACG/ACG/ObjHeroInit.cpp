@@ -56,7 +56,7 @@ void CObjHero::Init()
 
 	m_block_type = 0;//主人公のしたのブロック情報
 
-					 //ブロックとの衝突した状態(場所)確認用
+	//ブロックとの衝突した状態(場所)確認用
 	m_hit_up = false;
 	m_hit_left = false;
 	m_hit_right = false;

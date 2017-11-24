@@ -27,6 +27,9 @@ void CObjRollBlock::Init()
 	{
 		case 1:	//90fごとに回転
 		{	
+			//横向きからスタート
+			m_situation_width_flag = true;
+
 			//回転の中心位置を求める
 			m_center_x = m_px + ROLL_BLOCK_SIZE_WIDTH / 2.0f;
 			m_center_y = m_py + ROLL_BLOCK_SIZE_HEIGHT / 2.0f;
@@ -41,6 +44,9 @@ void CObjRollBlock::Init()
 		}
 		case 2:	//引っ張ったときに一度のみ回転
 		{
+			//縦向きからスタート
+			m_situation_width_flag = false;
+
 			//回転用のスイッチを作成
 			CObjRollBlockSwitch* objrollblockswitch = new CObjRollBlockSwitch(m_px - ROLL_BLOCK_SWITCH_SIZE_WIDTH, m_py,(CObjRollBlock*)this);
 			Objs::InsertObj(objrollblockswitch, OBJ_ROLL_BLOCK_SWITCH,10);
@@ -78,6 +84,9 @@ void CObjRollBlock::Action()
 			{
 				m_r += 90.0f;	//角度を加算
 
+				//向きを変える
+				m_situation_width_flag = !(m_situation_width_flag);
+
 				if (m_r >= 360.0f)	//360度以上にならないようにする
 					m_r = 0.0f;
 
@@ -101,8 +110,10 @@ void CObjRollBlock::Action()
 				m_r += 2.0f;//まわす
 
 			if (m_r > 90.0f)
+			{
 				m_r = 90.0f;//90を超えないようにする
-
+				m_situation_width_flag = true; //横向きにする
+			}
 			break;
 		}
 	}
@@ -118,7 +129,7 @@ void CObjRollBlock::Action()
 	{
 		case 1:
 		{
-			if (((int)m_r % 180) == 0)	//横向きなら
+			if ( m_situation_width_flag == true)	//横向きなら
 			{
 				//高さと幅をそのままで当たり判定の更新
 				HitBoxUpData(hit, m_px, m_py, ROLL_BLOCK_SIZE_WIDTH,ROLL_BLOCK_SIZE_HEIGHT);
@@ -132,7 +143,7 @@ void CObjRollBlock::Action()
 		}
 		case 2:
 		{
-			if (m_r== 90.0f)	//回転終了後
+			if (m_situation_width_flag == true)	//横向き（回転終了後
 			{
 				//最初の一度のみ位置の更新をする
 				if (m_pos_adjustment_flag == false)
@@ -182,7 +193,7 @@ void CObjRollBlock::Draw()
 			src.m_right = ROLL_BLOCK_SIZE_WIDTH;
 			src.m_bottom = ROLL_BLOCK_SIZE_HEIGHT;
 
-			if (((int)m_r % 180) == 0)	//横向き
+			if ( m_situation_width_flag == true)	//横向き
 			{
 				//描画位置の設定
 				dst.m_right = dst.m_left + ROLL_BLOCK_SIZE_WIDTH;
@@ -201,7 +212,7 @@ void CObjRollBlock::Draw()
 		}
 		case 2:
 		{
-			if (m_r== 90.0f) //回転終了後なら
+			if (m_situation_width_flag == true) //横向き（回転終了後なら）
 			{
 				// 切り取り位置の設定
 				src.m_right = ROLL_BLOCK_SIZE_HEIGHT;
@@ -227,7 +238,6 @@ void CObjRollBlock::Draw()
 				//描画
 				Draw::Draw(GRA_ROLL_BLOCK2, &src, &dst, color, m_r,0.0f,-1.0f);
 			}
-
 			break;
 		}
 	}
@@ -274,18 +284,19 @@ void CObjRollBlock::HeroHit()
 			else if (0.0f <= r && r <= 45.0f || 315.0f <= r && r < 360.0f)
 			{
 				//右に反発する処理
-				if((int)m_r%180==0)		//横向きなら
+				if( m_situation_width_flag == true )		//横向きなら
 					objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_WIDTH);//主人公の位置をブロックの右にする
 				else					//縦向きなら
 					objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの右にする
 
 				objhero->SetVecX(-1 * objhero->GetVecX());//主人公のX方向の移動量を反転する
 			}
+
 			//下側があたっていれば
 			if (225.0f < r && r < 315.0f)
 			{
 				//下に反発する処理
-				if ((int)m_r % 180 == 0)//横向きなら
+				if ( m_situation_width_flag == true )//横向きなら
 					objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの下にする
 				else					//縦向きなら
 					objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_WIDTH);//主人公の位置をブロックの下にする
