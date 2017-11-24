@@ -86,7 +86,7 @@ void CObjRock::Action()
 			}
 			
 			//岩の上側が衝突している場合
-			else if (65 < r && r < 125)
+			else if (65 < r && r < 115)
 			{
 
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
@@ -95,7 +95,7 @@ void CObjRock::Action()
 			}
 
 			//岩の左側が衝突している場合
-			else if (125 < r && r < 225 )
+			else if (115 < r && r < 225 )
 			{
 				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 				objhero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置を岩の左側までずらす

@@ -95,7 +95,7 @@ void CObjWood::Action()
 	{
 		//主人公の位置を更新
 		objhero->SetPosX(hero_x);
-		objhero->SetPosY(hero_y);
+		objhero->SetPosY(hero_y+2.0f);
 		objhero->SetVecX(hero_vx);
 		objhero->SetVecY(hero_vy);
 	}
