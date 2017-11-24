@@ -259,40 +259,34 @@ void CObjLift::ModeMove()
 		//初期位置から動いた距離が最大量を超えると
 		if (m_move_x > m_width_max)
 		{
-			//移動ベクトルXを0にする
-			m_vx = 0.0f;
-
 			//初期の移動方向が右だったら
 			if (m_initial_direction == 0)
 			{
 				//行き過ぎた分を計算
-				m_px += m_move_x - m_width_max;
+				m_vx = m_move_x - m_width_max;
 			}
 			//初期の移動方向が左だったら
 			else
 			{
 				//行き過ぎた分を計算
-				m_px -= m_move_x - m_width_max;
+				m_vx = m_move_x - m_width_max;
 			}
 			m_move_x = m_width_max;//移動量の初期化
 		}
 		//初期位置から動いた距離が０未満だったら
 		if (m_move_x < 0)
 		{
-			//移動ベクトルXを０にする
-			m_vx = 0.0f;
-
 			//初期の移動方向が右だったら
 			if (m_initial_direction == 0)
 			{
 				//行き過ぎた分を計算
-				m_px += m_move_x;
+				m_vx = m_move_x;
 			}
 			//初期の移動方向が左だったら
 			else
 			{
 				//行き過ぎた分を計算
-				m_px -= m_move_x;
+				m_vx = m_move_x;
 			}
 			m_move_x = 0;
 		}
