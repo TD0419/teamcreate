@@ -94,8 +94,9 @@ void CObjRope::Action()
 		}
 	}
 
-	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
-	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
+	//ロープスイッチ　または　回転床用のスイッチ　と衝突したとき、ロープが引っかかるようにする
+	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr||
+		hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH)!=nullptr)
 	{
 		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
 		m_px -= m_vx ;
@@ -110,6 +111,29 @@ void CObjRope::Action()
 
 		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
 		objhero->SetVecX(0.0f);
+
+		//回転床用のスイッチなら
+		if (hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH) != nullptr)
+		{
+			//左移動していれば
+			if (Input::GetVKey('A') == true)
+			{
+				//スイッチオブジェクトを持ってくる
+				CObjRollBlockSwitch* objrollblockswitch = (CObjRollBlockSwitch*)Objs::GetObj(OBJ_ROLL_BLOCK_SWITCH);
+
+				//スイッチのポジションを持ってくる
+				float block_px = objrollblockswitch->GetX();
+				float block_py = objrollblockswitch->GetY();
+
+				//角度を元に位置を調節する
+				m_px = block_px ;
+				m_py = block_py ;
+
+				//移動ベクトルを0にする
+				m_vx = 0.0f;
+				m_vy = 0.0f;
+			}
+		}
 	}
 	
 

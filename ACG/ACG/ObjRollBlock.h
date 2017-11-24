@@ -18,7 +18,7 @@ public:
 	void Draw();	//ドロー
 	
 	void HeroHit();	//ヒーローが当たったときの処理
-
+	void SetRollFlag(bool f) { m_roll_flag = f; }//回転のフラグを入れる関数
 
 private:
 	//オブジェクトの位置
@@ -37,4 +37,6 @@ private:
 	int m_count;	//回転の制御用カウンター
 	int m_pattan;	//タイプ(1:一定時間で回転,2：ロープで引っ張って)
 	bool m_roll_flag;//回転するかどうかのフラグ
+	bool m_pos_adjustment_flag;//ポジションの調節済を調べるフラグ
+
 };

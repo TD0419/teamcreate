@@ -61,6 +61,14 @@ void CSceneMain::InitScene()
 	
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
+
+	//回転床テスト用
+	CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
+	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+
+	 objrollblock = new CObjRollBlock(10, 15, 1);
+	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+
 	
 	//デバッグ--------------------------------------------------
 
@@ -236,9 +244,13 @@ void CSceneMain::ImageDataLoading()
 	
 	//回転ブロックの画像読み込み
 	Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
-
+	Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
+	
 	//ゴリラの投擲物読み込み
 	Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
+	
+	//回転ブロックのスイッチ
+	Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_ROLL_BLOCK_SWITCH, TEX_SIZE_16);
 }
 
 //音楽データ読み込み関数

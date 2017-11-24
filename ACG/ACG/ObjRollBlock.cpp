@@ -17,15 +17,16 @@ CObjRollBlock::CObjRollBlock(int x,int y,int pattan)
 //イニシャライズ
 void CObjRollBlock::Init()
 {
-	m_r = 0.0f;	//角度初期化
 	m_count = 0;//カウンターの初期化
+	m_r = 0.0f;	//角度初期化
 
 	m_roll_flag = false;//回転のフラグを初期化
-	
+	m_pos_adjustment_flag = false;
+
 	switch (m_pattan)
 	{
 		case 1:	//90fごとに回転
-		{
+		{	
 			//回転の中心位置を求める
 			m_center_x = m_px + ROLL_BLOCK_SIZE_WIDTH / 2.0f;
 			m_center_y = m_py + ROLL_BLOCK_SIZE_HEIGHT / 2.0f;
@@ -34,24 +35,28 @@ void CObjRollBlock::Init()
 			m_difference_x = ROLL_BLOCK_SIZE_HEIGHT / 2.0f;
 			m_difference_y = ROLL_BLOCK_SIZE_WIDTH / 2.0f;
 
+			//当たり判定セット
+			Hits::SetHitBox(this, m_px, m_py, ROLL_BLOCK_SIZE_WIDTH, ROLL_BLOCK_SIZE_HEIGHT, ELEMENT_BLOCK, OBJ_ROLL_BLOCK, 1);
 			break;
 		}
 		case 2:	//引っ張ったときに一度のみ回転
 		{
+			//回転用のスイッチを作成
+			CObjRollBlockSwitch* objrollblockswitch = new CObjRollBlockSwitch(m_px - ROLL_BLOCK_SWITCH_SIZE_WIDTH, m_py,(CObjRollBlock*)this);
+			Objs::InsertObj(objrollblockswitch, OBJ_ROLL_BLOCK_SWITCH,10);
+
+			//縦と横を入れ替えて当たり判定セット
+			Hits::SetHitBox(this, m_px, m_py, ROLL_BLOCK_SIZE_HEIGHT, ROLL_BLOCK_SIZE_WIDTH, ELEMENT_BLOCK, OBJ_ROLL_BLOCK, 1);
 			break;
 		}
 	}
 
-	//当たり判定セット
-	Hits::SetHitBox(this,m_px, m_py,ROLL_BLOCK_SIZE_WIDTH, ROLL_BLOCK_SIZE_HEIGHT, ELEMENT_BLOCK, OBJ_ROLL_BLOCK, 1);
+	
 }
 
 //アクション
 void CObjRollBlock::Action()
 {
-	if(m_count<=90)//90以下なら
-		m_count++;//カウントを増やす
-
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 	
@@ -59,6 +64,10 @@ void CObjRollBlock::Action()
 	{
 		case 1:	//90fごとに回転
 		{
+
+			if (m_count <= 90)//90以下なら
+				m_count++;//カウントを増やす
+
 			//90fになったら
 			if (m_count == 90)
 			{
@@ -88,6 +97,12 @@ void CObjRollBlock::Action()
 		}
 		case 2:	//引っ張ったときに一度のみ回転
 		{
+			if (m_roll_flag == true)//回転のフラグがオンになっていれば
+				m_r += 2.0f;//まわす
+
+			if (m_r > 90.0f)
+				m_r = 90.0f;//90を超えないようにする
+
 			break;
 		}
 	}
@@ -99,16 +114,43 @@ void CObjRollBlock::Action()
 		HeroHit();//衝突処理をするをする
 	}
 
+	switch (m_pattan)
+	{
+		case 1:
+		{
+			if (((int)m_r % 180) == 0)	//横向きなら
+			{
+				//高さと幅をそのままで当たり判定の更新
+				HitBoxUpData(hit, m_px, m_py, ROLL_BLOCK_SIZE_WIDTH,ROLL_BLOCK_SIZE_HEIGHT);
+			}
+			else 	//縦向きなら
+			{
+				//高さと幅を逆にしてあたり判定の更新
+				HitBoxUpData(hit, m_px, m_py, ROLL_BLOCK_SIZE_HEIGHT, ROLL_BLOCK_SIZE_WIDTH);
+			}
+			break;
+		}
+		case 2:
+		{
+			if (m_r== 90.0f)	//回転終了後
+			{
+				//最初の一度のみ位置の更新をする
+				if (m_pos_adjustment_flag == false)
+				{
+					m_px -= ROLL_BLOCK_SIZE_WIDTH;
+					m_py += (ROLL_BLOCK_SIZE_WIDTH - ROLL_BLOCK_SIZE_HEIGHT);
+					m_pos_adjustment_flag = true;
+				}
+				//高さと幅をそのままで当たり判定の更新
+				HitBoxUpData(hit, m_px , m_py , ROLL_BLOCK_SIZE_WIDTH, ROLL_BLOCK_SIZE_HEIGHT);
+			}
+			else 	//縦向きなら
+			{
+				//高さと幅を逆にしてあたり判定の更新
+				HitBoxUpData(hit, m_px, m_py, ROLL_BLOCK_SIZE_HEIGHT, ROLL_BLOCK_SIZE_WIDTH);
+			}
 
-	if( ((int)m_r % 180) ==0)	//横向きなら
-	{
-		//高さと幅をそのままで当たり判定の更新
-		HitBoxUpData(hit, m_px, m_py, ROLL_BLOCK_SIZE_WIDTH, ROLL_BLOCK_SIZE_HEIGHT);
-	}
-	else 	//縦向きなら
-	{
-		//高さと幅を逆にしてあたり判定の更新
-		HitBoxUpData(hit, m_px, m_py, ROLL_BLOCK_SIZE_HEIGHT, ROLL_BLOCK_SIZE_WIDTH);
+		}
 	}
 }
 
@@ -123,29 +165,72 @@ void CObjRollBlock::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = ROLL_BLOCK_SIZE_WIDTH;
-	src.m_bottom = ROLL_BLOCK_SIZE_HEIGHT;
-
+	
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
-	dst.m_left =m_px - objmap->GetScrollX();
+	dst.m_left= m_px - objmap->GetScrollX();
 
-	if (((int)m_r % 180) == 0)	//横向き
+	switch (m_pattan)
 	{
-		dst.m_right = dst.m_left + ROLL_BLOCK_SIZE_WIDTH;
-		dst.m_bottom = dst.m_top + ROLL_BLOCK_SIZE_HEIGHT;
-	}
-	else//縦向き
-	{
-		dst.m_right = dst.m_left + ROLL_BLOCK_SIZE_HEIGHT;
-		dst.m_bottom = dst.m_top + ROLL_BLOCK_SIZE_WIDTH;
-	}
+		case 1:
+		{
+			//切り取り位置の設定
+			src.m_right = ROLL_BLOCK_SIZE_WIDTH;
+			src.m_bottom = ROLL_BLOCK_SIZE_HEIGHT;
 
-	//描画
-	Draw::Draw(GRA_ROLL_BLOCK, &src, &dst, color, m_r,-0.5f,-0.5f);
+			if (((int)m_r % 180) == 0)	//横向き
+			{
+				//描画位置の設定
+				dst.m_right = dst.m_left + ROLL_BLOCK_SIZE_WIDTH;
+				dst.m_bottom = dst.m_top + ROLL_BLOCK_SIZE_HEIGHT;
+			}
+			else//縦向き
+			{
+				//描画位置の設定
+				dst.m_right = dst.m_left + ROLL_BLOCK_SIZE_HEIGHT;
+				dst.m_bottom = dst.m_top + ROLL_BLOCK_SIZE_WIDTH;
+			}
+
+			//描画
+			Draw::Draw(GRA_ROLL_BLOCK, &src, &dst, color, m_r,-0.5f,-0.5f);
+			break;
+		}
+		case 2:
+		{
+			if (m_r== 90.0f) //回転終了後なら
+			{
+				// 切り取り位置の設定
+				src.m_right = ROLL_BLOCK_SIZE_HEIGHT;
+				src.m_bottom = ROLL_BLOCK_SIZE_WIDTH;
+
+				//描画位置の設定
+				dst.m_right = dst.m_left + ROLL_BLOCK_SIZE_WIDTH;
+				dst.m_bottom = dst.m_top + ROLL_BLOCK_SIZE_HEIGHT;
+
+				//描画
+				Draw::Draw(GRA_ROLL_BLOCK2, &src, &dst, color, m_r);
+			}
+			else 
+			{
+				 //切り取り位置の設定
+				src.m_right = ROLL_BLOCK_SIZE_WIDTH;
+				src.m_bottom = ROLL_BLOCK_SIZE_WIDTH;
+
+				//描画位置の設定
+				dst.m_right = dst.m_left + ROLL_BLOCK_SIZE_WIDTH;
+				dst.m_bottom = dst.m_top + ROLL_BLOCK_SIZE_WIDTH;
+
+				//描画
+				Draw::Draw(GRA_ROLL_BLOCK2, &src, &dst, color, m_r,0.0f,-1.0f);
+			}
+
+			break;
+		}
+	}
 }
 
 //ヒーローが当たったときの処理
@@ -173,7 +258,10 @@ void CObjRollBlock::HeroHit()
 
 				 //乗せる処理
 				objhero->SetPosY(m_py-HERO_SIZE_HEIGHT);//ブロックの上側に調節する
-				objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
+
+				//主人公の移動ベクトルが下向きなら
+				if(objhero->GetVecY()>0.0f)
+					objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
 			}
 			//左側が当たっていれば
 			else if (135.0f <= r && r <= 225.0f)
@@ -202,7 +290,7 @@ void CObjRollBlock::HeroHit()
 				else					//縦向きなら
 					objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_WIDTH);//主人公の位置をブロックの下にする
 
-				objhero->SetVecY( -1*objhero->GetVecY());//主人公のY方向の移動量を反転する
+				objhero->SetVecY( -1 * objhero->GetVecY());//主人公のY方向の移動量を反転する
 			}
 		}
 	}
