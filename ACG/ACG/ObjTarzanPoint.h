@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjTarzanPoint :public CObj
 {
 public:
-	CObjTarzanPoint(float x,float y); 	//コンストラクタ
+	CObjTarzanPoint(int x,int y); 	//コンストラクタ
 	~CObjTarzanPoint() {};				//デストラクタ
 	void Init();						//イニシャライズ
 	void Action();						//アクション
