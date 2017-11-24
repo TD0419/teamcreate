@@ -150,6 +150,7 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
+		
 		break;
 	//ステージ２
 	case 2:
@@ -196,6 +197,11 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_32);
 		//針の土台の読み込み
 		Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
+		//ロープでぶら下がることができるギミック
+		Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
+
+		break;
+
 	//画像が用意されていない場合
 	default:
 		//背景画像読み込み
