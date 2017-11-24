@@ -40,6 +40,7 @@ enum OBJ_NAME
 	OBJ_LAST_WALL,		//最後の壁
 	OBJ_TIME,			//タイム
 	OBJ_ROLL_BLOCK,		//回転するブロック
+	OBJ_ROLL_BLOCK_SWITCH,//回転するブロック用のスイッチ
 	OBJ_NEEDLE,			//針
 	OBJ_NEEDLE_STAND,	//針の土台
 	OBJ_TARZAN_POINT,	//ロープでぶら下がることができるギミック
@@ -163,6 +164,7 @@ enum GRAPHIC_ID
 	GRA_LIFE,			//ライフ
 	GRA_SIGN,			//看板
 	GRA_ROLL_BLOCK,		//回転ブロック
+	GRA_ROLL_BLOCK2,	//回転ブロック（パターン2）
 	GRA_TITLE,			//タイトル
 	GRA_GAME_OVER,		//ゲームオーバー
 	GRA_COCONUT,		//ココナッツ
@@ -170,6 +172,7 @@ enum GRAPHIC_ID
 	GRA_NEEDLE_STAND,   //針の土台
 	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
 
+	GRA_ROLL_BLOCK_SWITCH,//回転床用のスイッチ
 };
 
 //音楽(BGM)
@@ -232,6 +235,8 @@ enum MUSIC
 #define NEEDLE_STAND_SIZE     (64.0f)		//針の土台のサイズ
 #define TARZAN_POINT_WIDTH		(16.0f)		//ロープでぶら下がれるギミック横サイズ
 #define TARZAN_POINT_HEIGHT		(16.0f)		//ロープでぶら下がれるギミック縦サイズ
+#define ROLL_BLOCK_SWITCH_SIZE_WIDTH (16.0f)		//回転するブロックをまわすスイッチの横サイズ
+#define ROLL_BLOCK_SWITCH_SIZE_HEIGHT (16.0f)	//回転するブロックをまわすスイッチの縦サイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -287,6 +292,7 @@ enum MUSIC
 #include "ObjDiffusionGimmick.h"//拡散弾発射装置
 #include "ObjRollBlock.h"		//回転ブロック
 #include "ObjTarzanPoint.h"		//ロープでぶら下がることができるギミック
+#include "ObjRollBlockSwitch.h"	//回転ブロック用のスイッチ
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
