@@ -175,7 +175,7 @@ void CObjMap::CreateObj(int x, int y)
 		
 		case MAP_LIFT_TYPE_AUTO_WIDTH:		//©“®‰¡ˆÚ“®ƒŠƒtƒgì¬
 		{
-			CObjLift* objlift = new CObjLift(x, y,0,640.0f,1);
+			CObjLift* objlift = new CObjLift(x, y,0,300.0f,1);
 			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
