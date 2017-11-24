@@ -27,10 +27,10 @@ CObjHero::CObjHero(int x, int y, int remaining)
 //アクション
 void CObjHero::Action()
 {
-	
+
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
-	
+
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
@@ -39,14 +39,14 @@ void CObjHero::Action()
 	for (int i = 0; i < 3; i++)
 	{
 		//主人公のX位置(左下 = 0;真下 = HERO_SIZE_WIDTH/2;右下 = HERO_SIZE_WIDTH)
-		int pos_x=0;
+		int pos_x = 0;
 		//右下
 		if (i == 1)
 		{
 			pos_x = (int)HERO_SIZE_WIDTH;
 		}
 		//左下
-		else if(i == 2)
+		else if (i == 2)
 		{
 			pos_x = (int)HERO_SIZE_WIDTH / 2;
 		}
@@ -56,7 +56,7 @@ void CObjHero::Action()
 		//少し下にする
 		int y = ((int)m_py + 1 + (int)HERO_SIZE_HEIGHT) / (int)BLOCK_SIZE;
 		//ブロック情報が0で無いなら取得
-		if (objmap->GetMap(x, y)!= 0)
+		if (objmap->GetMap(x, y) != 0)
 		{
 			m_block_type = objmap->GetMap(x, y);
 		}
@@ -68,7 +68,7 @@ void CObjHero::Action()
 		//場外に出たらリスタート
 		Scene::SetScene(new CSceneMain(-1));
 	}
-	
+
 	//マウスの位置情報取得
 	m_mous_x = (float)Input::GetPosX();
 	m_mous_y = (float)Input::GetPosY();
@@ -95,7 +95,7 @@ void CObjHero::Action()
 			//はしごに登っていない
 			m_ladder_updown = 0;
 		}
-		
+
 		objladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
 	}
 
@@ -115,7 +115,7 @@ void CObjHero::Action()
 		m_ani_frame_ladders = 0;
 	}
 
-	
+
 	//はしご終了---------------------------------------------
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーーMoveScene
@@ -162,10 +162,10 @@ void CObjHero::Action()
 	{
 		m_ani_frame_move = 0;
 	}
-	
+
 	//ジャンプ--------------------------------------------------------------------
 	//ロープを出している時は動かない  はしごを上っている時も動かない　　水に当たっているときと敵と当たった時も動かない
-	if (Input::GetVKey(VK_SPACE) == true &&  
+	if (Input::GetVKey(VK_SPACE) == true &&
 		m_rope_ani_con == false && m_hero_die_water == false &&
 		m_ani_frame_enemy_die == false)
 	{
@@ -194,7 +194,7 @@ void CObjHero::Action()
 
 	//自由落下運動
 	// フラグがたっていたら重力をかける
-	if(m_gravity_flag == true)
+	if (m_gravity_flag == true)
 		m_vy += 9.8f / (16.0f);
 
 	//最大落下スピードを超えないようにする
@@ -211,11 +211,11 @@ void CObjHero::Action()
 
 
 	//腕の角度を求める-----------------------
-	
+
 	//マウスポインタとの距離を求める
 
-	float x = m_mous_x  - (m_px - objmap->GetScrollX() + (HERO_SIZE_WIDTH / 2.0f));	//X
-	float y = m_mous_y  - (m_py - objmap->GetScrollY() + (HERO_SIZE_HEIGHT / 2.0f));//Y
+	float x = m_mous_x - (m_px - objmap->GetScrollX() + (HERO_SIZE_WIDTH / 2.0f));	//X
+	float y = m_mous_y - (m_py - objmap->GetScrollY() + (HERO_SIZE_HEIGHT / 2.0f));//Y
 	float inclination = sqrt(x * x + y * y);				//斜辺
 
 	////角度を求める
@@ -223,14 +223,14 @@ void CObjHero::Action()
 	//m_r = rad* 180.0f / 3.14f;
 
 	if (y > 0.0f)	//yの値が0より大きいなら角度を正しい値に修正
-		m_r = 360.0f - m_r;	
+		m_r = 360.0f - m_r;
 
 	//ラジアン値を求める
 	float rad = asinf(-y / inclination);
 	//角度を求める
 	m_r = rad * 180.0f / 3.14f;
 	//--------------------------------------------------------
-	
+
 
 	//発砲---------------------------------------------------Shot()
 	Shot();
@@ -301,9 +301,9 @@ void CObjHero::Action()
 			return;
 		}
 	}
+	
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py + 14);
 }
 
 //スクロール処理の関数
@@ -501,7 +501,7 @@ void CObjHero::Draw()
 	}
 	else if (m_ani_frame_stop_move == 0 && m_ladder_updown == 0 && rope_caught == false)//動いているとき
 	{
-		src.m_top = 128.0f;
+		src.m_top = 129.0f;
 		src.m_left = 0.0f + AniData[m_ani_frame_move] * 64;
 		src.m_right = 64.0f + AniData[m_ani_frame_move] * 64;
 		src.m_bottom = 256.0f;

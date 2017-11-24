@@ -71,13 +71,13 @@ void CObjWater::Action()
 			if (m_water_audio_count % 192 == 0)
 				Audio::Start(WAVE);
 			m_water_gauge += 0.2f; //0.2ずつ増やしていく
-			m_water_audio_count += 1; //4ずつ増やしていく
+			m_water_audio_count += 1; //1ずつ増やしていく
 
 		}
 	}
 
 	// hitboxが小さくなる
-	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT - m_water_gauge);
+	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge+15, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT - m_water_gauge);
 
 	//アニメーションの感覚管理
 	if (m_ani_time > m_ani_max_time)
