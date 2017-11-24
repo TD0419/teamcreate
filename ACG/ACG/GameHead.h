@@ -42,6 +42,7 @@ enum OBJ_NAME
 	OBJ_ROLL_BLOCK,		//回転するブロック
 	OBJ_NEEDLE,			//針
 	OBJ_NEEDLE_STAND,	//針の土台
+	OBJ_TARZAN_POINT,	//ロープでぶら下がることができるギミック
 };
 //------------------------------------------------
 
@@ -126,7 +127,7 @@ enum MAP_BER
 	//ステージ5のみに使用するオブジェクト描画番号
 	MAP_ROLL_BROCK_TYPE_AUTO	,		//自動式回転するブロック
 	MAP_ROLL_BROCK_TYPE_MANUAL	,		//手動式90度回転するブロック
-	MAP_HOOK_GIMMICK			,		//ロープでぶら下がれるギミック
+	MAP_TARZAN_POINT			,		//ロープでぶら下がれるギミック
 	MAP_NEEDLE					,		//針
 	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
 	MAP_STAGE5_BOSS				,		//ステージ5のボス
@@ -167,6 +168,8 @@ enum GRAPHIC_ID
 	GRA_COCONUT,		//ココナッツ
 	GRA_NEEDLE,         //針
 	GRA_NEEDLE_STAND,   //針の土台
+	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
+
 };
 
 //音楽(BGM)
@@ -227,6 +230,8 @@ enum MUSIC
 #define NEEDLE_SIZE_WIDTH     (64.0f)		//針の横のサイズ
 #define NEEDLE_SIZE_HEIGHT    (32.0f)		//針の縦のサイズ
 #define NEEDLE_STAND_SIZE     (64.0f)		//針の土台のサイズ
+#define TARZAN_POINT_WIDTH		(16.0f)		//ロープでぶら下がれるギミック横サイズ
+#define TARZAN_POINT_HEIGHT		(16.0f)		//ロープでぶら下がれるギミック縦サイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -281,6 +286,7 @@ enum MUSIC
 #include "ObjNeedleStand.h"     //針の土台
 #include "ObjDiffusionGimmick.h"//拡散弾発射装置
 #include "ObjRollBlock.h"		//回転ブロック
+#include "ObjTarzanPoint.h"		//ロープでぶら下がることができるギミック
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

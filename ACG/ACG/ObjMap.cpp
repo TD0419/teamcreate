@@ -175,7 +175,7 @@ void CObjMap::CreateObj(int x, int y)
 		
 		case MAP_LIFT_TYPE_AUTO_WIDTH:		//é©ìÆâ°à⁄ìÆÉäÉtÉgçÏê¨
 		{
-			CObjLift* objlift = new CObjLift(x, y,0,640.0f,1);
+			CObjLift* objlift = new CObjLift(x, y,0,300.0f,1);
 			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
@@ -262,6 +262,13 @@ void CObjMap::CreateObj(int x, int y)
 			CObjCannon* objcannon = new CObjCannon(x, y);
 			Objs::InsertObj(objcannon, OBJ_CANNON, 9);
 			break;
+		}
+
+		case MAP_TARZAN_POINT:
+		{
+			CObjTarzanPoint* objtarzanpoint = new CObjTarzanPoint(x, y);
+			Objs::InsertObj(objtarzanpoint, OBJ_TARZAN_POINT, 9);
+
 		}
 
 	}
