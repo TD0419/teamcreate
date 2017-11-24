@@ -124,6 +124,7 @@
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjWater.h" />
     <ClInclude Include="ObjStage3Boss.h" />
+    <ClInclude Include="ObjTarzanPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ObjDiffusionGimmick.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="ObjLift.cpp" />
     <ClCompile Include="ObjNeedle.cpp" />
     <ClCompile Include="ObjRope.cpp" />
+    <ClCompile Include="ObjTarzanPoint.cpp" />
     <ClCompile Include="ObjTime.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjWood.cpp" />
