@@ -42,6 +42,7 @@ enum OBJ_NAME
 	OBJ_ROLL_BLOCK,		//回転するブロック
 	OBJ_NEEDLE,			//針
 	OBJ_NEEDLE_STAND,	//針の土台
+	OBJ_TARZAN_POINT,	//ロープでぶら下がることができるギミック
 };
 //------------------------------------------------
 
@@ -281,6 +282,7 @@ enum MUSIC
 #include "ObjNeedleStand.h"     //針の土台
 #include "ObjDiffusionGimmick.h"//拡散弾発射装置
 #include "ObjRollBlock.h"		//回転ブロック
+#include "ObjTarzanPoint.h"		//ロープでぶら下がることができるギミック
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

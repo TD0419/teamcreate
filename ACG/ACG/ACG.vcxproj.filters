@@ -121,6 +121,9 @@
     <Filter Include="ソース ファイル\Main\Stage5Boss">
       <UniqueIdentifier>{ea05cd55-27ad-4f91-842d-56dd4c413128}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\TarzanPoint">
+      <UniqueIdentifier>{a1b9eec0-0431-430d-9855-66823231a9a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -284,6 +287,9 @@
     </ClInclude>
     <ClInclude Include="ObjNeedleStand.h">
       <Filter>ソース ファイル\Main\Needle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTarzanPoint.h">
+      <Filter>ソース ファイル\Main\TarzanPoint</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -451,6 +457,9 @@
     </ClCompile>
     <ClCompile Include="ObjNeedleStand.cpp">
       <Filter>ソース ファイル\Main\Needle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTarzanPoint.cpp">
+      <Filter>ソース ファイル\Main\TarzanPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
