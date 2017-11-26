@@ -652,7 +652,6 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 		}
 	}
 
-
 	//‰~ŠO‚ğlŠpŒ`‚Å–„‚ßs‚­‚·
 	for (float y = 0.0f; y < (float)WINDOW_SIZE_H; y += one_side)
 	{
