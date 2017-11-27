@@ -66,7 +66,7 @@ void CSceneMain::InitScene()
 	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
-	// objrollblock = new CObjRollBlock(10, 15, 1);
+	//objrollblock = new CObjRollBlock(10, 15, 1);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
 	
