@@ -93,6 +93,11 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 
+	//デバッグ用ステージ番号調整用
+	UserData* s;
+	s->stagenum = 1;
+	//----------------
+
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum )
 	{
@@ -149,11 +154,6 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 //画像データ読み込み関数
 void CSceneMain::ImageDataLoading()
 {
-
-	//デバッグ用ステージ番号調整用
-	UserData* s;
-	s->stagenum = 1;
-	//----------------
 
 	//ステージ別の画像読み込み
 	switch (((UserData*)Save::GetData())->stagenum)
