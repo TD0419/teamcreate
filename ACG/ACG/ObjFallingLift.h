@@ -15,6 +15,7 @@ public:
 	void Init();						//イニシャライズ
 	void Action();						//アクション
 	void Draw();						//ドロー
+	void HeroRide();					//主人公が乗っているときの処理
 private:
 	float m_px;							//落ちるリフト(ギミック)X座標
 	float m_py;							//落ちるリフト(ギミック)Y座標
