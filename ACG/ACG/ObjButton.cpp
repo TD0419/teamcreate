@@ -45,7 +45,6 @@ void CObjButton::Action()
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
 		m_trick_flag = true; //弾とあたっているならtrueを入れる
-
 	}
 
 	//アニメフラグONだと
@@ -69,7 +68,7 @@ void CObjButton::Action()
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px+13, m_py+16);
+	HitBoxUpData(Hits::GetHitBox(this), m_px+13, m_py);
 
 }
 
