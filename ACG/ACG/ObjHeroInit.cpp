@@ -56,12 +56,12 @@ void CObjHero::Init()
 
 	m_block_type = 0;//主人公のしたのブロック情報
 
-					 //ブロックとの衝突した状態(場所)確認用
+	//ブロックとの衝突した状態(場所)確認用
 	m_hit_up = false;
 	m_hit_left = false;
 	m_hit_right = false;
 	m_hit_down = false;
 
 	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, m_px, m_py, 64, 112, ELEMENT_PLAYER, OBJ_HERO, 1);
 }

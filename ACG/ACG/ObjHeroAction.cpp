@@ -141,7 +141,7 @@ void CObjHero::Shot() {
 
 
 
-	
+
 
 	//左クリックを押したら   水に当たっているときと敵に当たっている時は動かない
 	if (Input::GetMouButtonL() == true && m_hero_die_water == false && m_ani_frame_enemy_die == false)
@@ -165,19 +165,39 @@ void CObjHero::Shot() {
 				//向いている方向とクリックしている方向が同じで尚且つ、ロープのアニメーションのフラグがfalseの場合
 				if (m_posture == mous_bullet_way && m_rope_ani_con == false)
 				{
+					// 弾丸発射向き(度数法)
+					float m_bullet_r;
+					
 					if (m_posture == 0.0f && m_ladder_updown == 0)//主人公が右を向いていてはしごに登っていない時とき右側から発射
 					{
+						// 弾丸発射位置を計算するための角度調整
+						if (m_r > 0.f)
+							m_bullet_r = 360.0f - m_r;
+						else
+							m_bullet_r = -m_r;
+
+						// 弾丸の角度から発射位置のずれを求める(*50.0fは腕の回りによる円の半径)
+						float x_add = cos(m_bullet_r* 3.14f / 180.f) * 50.0f;
+						float y_add = sin(m_bullet_r* 3.14f / 180.f) * 50.0f;
 						//弾丸作成
 						Audio::Start(FIRING);//音楽スタート
-						CObjBullet* objbullet = new CObjBullet(m_px + 64.0f, m_py + 50.0f);
+						CObjBullet* objbullet = new CObjBullet(m_px + x_add + 30.0f, m_py + y_add + 55.0f, m_bullet_r);
 						Objs::InsertObj(objbullet, OBJ_BULLET, 10);
 						m_bullet_control = false; //弾丸を出ないフラグにする。
 					}
 					else if (m_posture == 1.0f && m_ladder_updown == 0)//主人公が左を向いていてはしごに登っていない時とき右側から発射
 					{
-						//弾丸作成
+						// 弾丸発射位置を計算するための角度調整
+						if (abs(m_r) > 90.0f)
+							m_bullet_r = m_r;
+						else
+							m_bullet_r = 180.0f + m_r;
+
+						// 弾丸の角度から発射位置のずれを求める(*50.0fは腕の回りによる円の半径)
+						float x_add = cos(m_bullet_r* 3.14f / 180.f) * 50.0f;
+						float y_add = sin(m_bullet_r* 3.14f / 180.f) * 50.0f;
 						Audio::Start(FIRING);//音楽スタート
-						CObjBullet* objbullet = new CObjBullet(m_px - 16.0f, m_py + 50.0f);
+						CObjBullet* objbullet = new CObjBullet(m_px + x_add + 20.0f, m_py + y_add + 55.0f, m_bullet_r);
 						Objs::InsertObj(objbullet, OBJ_BULLET, 10);
 						m_bullet_control = false; //弾丸を出ないフラグにする。
 					}

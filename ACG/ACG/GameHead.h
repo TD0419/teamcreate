@@ -40,8 +40,10 @@ enum OBJ_NAME
 	OBJ_LAST_WALL,		//最後の壁
 	OBJ_TIME,			//タイム
 	OBJ_ROLL_BLOCK,		//回転するブロック
+	OBJ_ROLL_BLOCK_SWITCH,//回転するブロック用のスイッチ
 	OBJ_NEEDLE,			//針
 	OBJ_NEEDLE_STAND,	//針の土台
+	OBJ_TARZAN_POINT,	//ロープでぶら下がることができるギミック
 	OBJ_DIFFUSION_CANNON, //ステージ５の拡散弾キャノン
 	OBJ_DIFFUSION_BULLET, //ステージ５の拡散弾
 };
@@ -65,7 +67,6 @@ enum HIT_ELEMENTS
 //セーブ＆ロードとシーン間のやり取りするデータ
 struct UserData
 {
-	int mSeveData;	//サンプルセーブデータ
 	int stagenum;	//ステージ番号
 };
 //------------------------------------------------
@@ -128,7 +129,7 @@ enum MAP_BER
 	//ステージ5のみに使用するオブジェクト描画番号
 	MAP_ROLL_BROCK_TYPE_AUTO	,		//自動式回転するブロック
 	MAP_ROLL_BROCK_TYPE_MANUAL	,		//手動式90度回転するブロック
-	MAP_HOOK_GIMMICK			,		//ロープでぶら下がれるギミック
+	MAP_TARZAN_POINT			,		//ロープでぶら下がれるギミック
 	MAP_NEEDLE					,		//針
 	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
 	MAP_STAGE5_BOSS				,		//ステージ5のボス
@@ -164,11 +165,15 @@ enum GRAPHIC_ID
 	GRA_LIFE,			//ライフ
 	GRA_SIGN,			//看板
 	GRA_ROLL_BLOCK,		//回転ブロック
+	GRA_ROLL_BLOCK2,	//回転ブロック（パターン2）
 	GRA_TITLE,			//タイトル
 	GRA_GAME_OVER,		//ゲームオーバー
 	GRA_COCONUT,		//ココナッツ
 	GRA_NEEDLE,         //針
 	GRA_NEEDLE_STAND,   //針の土台
+	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
+
+	GRA_ROLL_BLOCK_SWITCH,//回転床用のスイッチ
 	GRA_BLACK_BALL,     //回転ブロックの仕掛けのスイッチ
 	GRA_CANNON_BEAM,    //ステージ5の拡散弾
 };
@@ -231,6 +236,10 @@ enum MUSIC
 #define NEEDLE_SIZE_WIDTH     (64.0f)		//針の横のサイズ
 #define NEEDLE_SIZE_HEIGHT    (32.0f)		//針の縦のサイズ
 #define NEEDLE_STAND_SIZE     (64.0f)		//針の土台のサイズ
+#define TARZAN_POINT_WIDTH		(16.0f)		//ロープでぶら下がれるギミック横サイズ
+#define TARZAN_POINT_HEIGHT		(16.0f)		//ロープでぶら下がれるギミック縦サイズ
+#define ROLL_BLOCK_SWITCH_SIZE_WIDTH (16.0f)		//回転するブロックをまわすスイッチの横サイズ
+#define ROLL_BLOCK_SWITCH_SIZE_HEIGHT (16.0f)	//回転するブロックをまわすスイッチの縦サイズ
 #define DIFFUSION_CANNON_SIZE (64.0f)       //ステージ5の拡散するキャノンのサイズ
 
 //スクロールのライン　（要調整）
@@ -286,6 +295,8 @@ enum MUSIC
 #include "ObjNeedleStand.h"     //針の土台
 #include "ObjDiffusionCannon.h"//拡散弾発射装置
 #include "ObjRollBlock.h"		//回転ブロック
+#include "ObjTarzanPoint.h"		//ロープでぶら下がることができるギミック
+#include "ObjRollBlockSwitch.h"	//回転ブロック用のスイッチ
 #include "ObjDiffusionBullet.h"
 //------------------------------------------------
 

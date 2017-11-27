@@ -264,6 +264,13 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
+		case MAP_TARZAN_POINT:
+		{
+			CObjTarzanPoint* objtarzanpoint = new CObjTarzanPoint(x, y);
+			Objs::InsertObj(objtarzanpoint, OBJ_TARZAN_POINT, 9);
+
+		}
+
 	}
 
 	m_map[y][x].create = false;//フラグをオフにする	

@@ -68,6 +68,9 @@ void CObjRope::Init()
 //アクション
 void CObjRope::Action()
 {
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	
 	//主人公のオブジェクトを持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
@@ -94,12 +97,13 @@ void CObjRope::Action()
 		}
 	}
 
-	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
-	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
+	//ロープスイッチ　または　回転床用のスイッチ　と衝突したとき、ロープが引っかかるようにする
+	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr||
+		hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH)!=nullptr)
 	{
 		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
-		m_px -= m_vx ;
-		m_py -= m_vy ;
+		/*m_px -= m_vx ;
+		m_py -= m_vy */;
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
 	
 		//　Rキーを押してないならロープをRキーで消せるようにする
@@ -110,18 +114,29 @@ void CObjRope::Action()
 
 		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
 		objhero->SetVecX(0.0f);
+	}	
+	else
+	{
+		//移動
+		m_px += m_vx;
+		m_py += m_vy;
 	}
-	
-
-	//引っ掛けたまま移動すると、ロープがズレて外れます。
-	//ロープを引っ掛けているときは主人公は動かない(移動できない)仕様が実装で改善予定
-
-	//移動
-	m_px += m_vx ;
-	m_py += m_vy ;
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
+	
+	//主人公の腕の位置を更新
+	//主人公が右を向いているときの位置
+	if (objhero->GetPosture() == 0.0f)
+	{
+		m_hero_arm_x = objhero->GetPosX() + 64.0f - objmap->GetScrollX();
+		m_hero_arm_y = objhero->GetPosY() + 80.0f - objmap->GetScrollY();
+	}
+	//主人公が左と向いているときの位置
+	else
+	{
+		m_hero_arm_x = objhero->GetPosX() - objmap->GetScrollX();
+		m_hero_arm_y = objhero->GetPosY() + 80.0f - objmap->GetScrollY();
+	}
 }
 
 //ドロー
@@ -147,7 +162,7 @@ void CObjRope::RopeDraw(float color[])
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//描画の太さ
-	float drow_size = 2.0f;
+	float drow_size = 2;
 
 	//点を打つ位置と主人公の腕の距離
 	float drow_px = 0.0f;

@@ -18,6 +18,9 @@ public:
 	void RopeDraw(float color[]);				  // ロープの描画関数
 	void RopeDelete();                            // ロープの消える条件の関数
 	bool GetCaughtFlag() { return m_caught_flag; }//ロープスイッチに引っかかったかを調べる用の変数を返す
+	void SetPosX(float x) { m_px = x; }
+	void SetPosY(float y) { m_py = y; }
+
 
 private:
 	float m_px;			 // ロープX座標

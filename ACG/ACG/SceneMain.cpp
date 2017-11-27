@@ -61,6 +61,15 @@ void CSceneMain::InitScene()
 	
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
+
+	////回転床テスト用
+	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+
+	// objrollblock = new CObjRollBlock(10, 15, 1);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+
+	
 	//タイム
 	CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
 	Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
@@ -68,6 +77,7 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objtime62, OBJ_DIFFUSION_BULLET, 100);
 	
 	//デバッグ--------------------------------------------------
+
 
 	//BGM再生
 	/*
@@ -88,6 +98,11 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
+
+	//デバッグ用ステージ番号調整用
+	UserData* s=0;
+	s->stagenum = 1;
+	//----------------
 
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum )
@@ -145,6 +160,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 //画像データ読み込み関数
 void CSceneMain::ImageDataLoading()
 {
+
 	//ステージ別の画像読み込み
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
@@ -156,6 +172,7 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
+		
 		break;
 	//ステージ２
 	case 2:
@@ -202,6 +219,11 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_32);
 		//針の土台の読み込み
 		Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
+		//ロープでぶら下がることができるギミック
+		Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
+
+		break;
+
 	//画像が用意されていない場合
 	default:
 		//背景画像読み込み
@@ -257,6 +279,16 @@ void CSceneMain::ImageDataLoading()
 
 	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"Image\\zanki.png", GRA_LIFE, TEX_SIZE_64);
+	
+	//回転ブロックの画像読み込み
+	Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+	Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
+	
+	//ゴリラの投擲物読み込み
+	Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
+	
+	//回転ブロックのスイッチ
+	Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_ROLL_BLOCK_SWITCH, TEX_SIZE_16);
 
 	//ステージ5の大砲
 	Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);

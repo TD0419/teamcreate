@@ -153,23 +153,23 @@ void CObjLift::HeroRide()
 			float r = hit_data[i]->r;//あたっている角度を持ってくる
 			
 			//上側があたっていればで
-			if (29.0f <= r && r <= 155.0f)
+			if (30.0f <= r && r <= 155.0f)
 			{
 				objhero->SetHitDown(true);//リフトの上に主人公が乗っていたらm_hit_downにtrueを返す
 
 				//リフトに乗せる処理
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
 				objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
-				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT+1.0f+m_vy);//主人公のポジションをリフトの上にする
+				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT+2.5f+m_vy);//主人公のポジションをリフトの上にする
 			}
 			//右側があたっていればで
-			if (0.0f <= r && r <= 30.0f)
+			if (0.0f <= r && r < 30.0f)
 			{
 				//リフトにのめりこまないようにする処理
 				objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
 			}
 			//左側があたっていればで
-			if (155.0f <= r && r <= 180.0f)
+			if (155.0f < r && r < 180.0f)
 			{
 				//リフトにのめりこまないようにする処理
 				objhero->SetPosX(m_px-64.0f);//主人公をリフトの左に行くようにする
@@ -259,40 +259,34 @@ void CObjLift::ModeMove()
 		//初期位置から動いた距離が最大量を超えると
 		if (m_move_x > m_width_max)
 		{
-			//移動ベクトルXを0にする
-			m_vx = 0.0f;
-
 			//初期の移動方向が右だったら
 			if (m_initial_direction == 0)
 			{
 				//行き過ぎた分を計算
-				m_px += m_move_x - m_width_max;
+				m_vx = m_move_x - m_width_max;
 			}
 			//初期の移動方向が左だったら
 			else
 			{
 				//行き過ぎた分を計算
-				m_px -= m_move_x - m_width_max;
+				m_vx = m_move_x - m_width_max;
 			}
 			m_move_x = m_width_max;//移動量の初期化
 		}
 		//初期位置から動いた距離が０未満だったら
 		if (m_move_x < 0)
 		{
-			//移動ベクトルXを０にする
-			m_vx = 0.0f;
-
 			//初期の移動方向が右だったら
 			if (m_initial_direction == 0)
 			{
 				//行き過ぎた分を計算
-				m_px += m_move_x;
+				m_vx = m_move_x;
 			}
 			//初期の移動方向が左だったら
 			else
 			{
 				//行き過ぎた分を計算
-				m_px -= m_move_x;
+				m_vx = m_move_x;
 			}
 			m_move_x = 0;
 		}

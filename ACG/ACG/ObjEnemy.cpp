@@ -35,7 +35,7 @@ void CObjEnemy::Init()
 	m_speed = 0.5f;	//初期スピード
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, ENEMY_SIZE,ENEMY_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, ENEMY_SIZE,48.0, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 }
 
 //アクション
@@ -157,7 +157,7 @@ void CObjEnemy::Action()
 	m_py += m_vy;
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);	
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py+15);	
 }
 
 //ドロー
