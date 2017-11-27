@@ -280,7 +280,7 @@ void CObjRollBlock::HeroHit()
 				objhero->SetVecX(-1 * objhero->GetVecX());//ŽålŒö‚ÌX•ûŒü‚ÌˆÚ“®—Ê‚ð”½“]‚·‚é
 			}
 			//‰E‘¤‚ª“–‚½‚Á‚Ä‚¢‚ê‚Î
-			else if (0.0f <= r && r <= 45.0f || 315.0f <= r && r < 360.0f)
+			else if (0.0f <= r && r <= 65.0f || 315.0f <= r && r < 360.0f)
 			{
 				//‰E‚É”½”­‚·‚éˆ—
 				if( m_situation_width_flag == true )		//‰¡Œü‚«‚È‚ç

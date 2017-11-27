@@ -90,11 +90,11 @@ void CObjFallingLift::HeroRide()
 			{
 				objhero->SetHitDown(true);//主人公が乗っていたらm_hit_downにtrueを返す
 			    //乗せる処理
-				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT);//ブロックの上側に調節する
+				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT+0.5f);//ブロックの上側に調節する
 
 				//主人公の移動ベクトルが下向きなら
-				if (objhero->GetVecY()>2.0f)
-					objhero->SetVecY(2.0f);//主人公のY方向の移動を0にする
+				if (objhero->GetVecY()>1.0f)
+					objhero->SetVecY(1.0f);//主人公のY方向の移動を0にする
 			}
 			//左側が当たっていれば
 			else if (135.0f <= r && r <= 225.0f)
