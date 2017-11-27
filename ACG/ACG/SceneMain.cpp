@@ -62,12 +62,12 @@ void CSceneMain::InitScene()
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
 
-	//回転床テスト用
-	CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
-	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	////回転床テスト用
+	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
-	 objrollblock = new CObjRollBlock(10, 15, 1);
-	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	// objrollblock = new CObjRollBlock(10, 15, 1);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
 	
 	//デバッグ--------------------------------------------------
