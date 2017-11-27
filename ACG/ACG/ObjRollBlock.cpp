@@ -117,8 +117,7 @@ void CObjRollBlock::Action()
 			break;
 		}
 	}
-
-
+	
 	//ヒーローオブジェクトと当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
