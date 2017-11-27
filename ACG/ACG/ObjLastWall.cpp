@@ -192,11 +192,8 @@ void CObjLastWall::Action()
 			//heroが左側に振れてたら押されていたら
 			if (m_hero_hit_flag == true && m_wall_down_flag == false)
 			{
-				if (Input::GetVKey('N') == true)
-				{
-					m_wall_gauge += 3; // 3ずつ増やしていく
-					Audio::Start(WALL);//開門の音楽スタート
-				}
+				m_wall_gauge += 3; // 3ずつ増やしていく
+				Audio::Start(WALL);//開門の音楽スタート
 			}
 		}
 
