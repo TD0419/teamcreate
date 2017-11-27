@@ -96,7 +96,7 @@ void CObjLastWall::Action()
 				else if (94 < r && r < 266)
 				{
 					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-					objhero->SetPosX(m_px - 63.0+28.0f);//主人公の位置をLastWallの左側までずらす
+					objhero->SetPosX(m_px - 63.0f+28.0f);//主人公の位置をLastWallの左側までずらす
 					m_hero_hit_flag = true;
 
 
@@ -255,7 +255,7 @@ void CObjLastWall::Draw()
 	src.m_bottom = 256.0f;
 
 	//描画位置
-	dst.m_top = m_py - objmap->GetScrollY() - 190;
+	dst.m_top = m_py - objmap->GetScrollY() - 190.0f;
 	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + 96.0f;
 	dst.m_bottom = dst.m_top + 256.0f;
