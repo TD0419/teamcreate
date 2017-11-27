@@ -149,6 +149,12 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 //画像データ読み込み関数
 void CSceneMain::ImageDataLoading()
 {
+
+	//デバッグ用ステージ番号調整用
+	UserData* s;
+	s->stagenum = 1;
+	//----------------
+
 	//ステージ別の画像読み込み
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
