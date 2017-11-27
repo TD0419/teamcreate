@@ -42,6 +42,8 @@ enum OBJ_NAME
 	OBJ_ROLL_BLOCK,		//回転するブロック
 	OBJ_NEEDLE,			//針
 	OBJ_NEEDLE_STAND,	//針の土台
+	OBJ_DIFFUSION_CANNON, //ステージ５の拡散弾キャノン
+	OBJ_DIFFUSION_BULLET, //ステージ５の拡散弾
 };
 //------------------------------------------------
 
@@ -167,6 +169,8 @@ enum GRAPHIC_ID
 	GRA_COCONUT,		//ココナッツ
 	GRA_NEEDLE,         //針
 	GRA_NEEDLE_STAND,   //針の土台
+	GRA_BLACK_BALL,     //回転ブロックの仕掛けのスイッチ
+	GRA_CANNON_BEAM,    //ステージ5の拡散弾
 };
 
 //音楽(BGM)
@@ -227,6 +231,7 @@ enum MUSIC
 #define NEEDLE_SIZE_WIDTH     (64.0f)		//針の横のサイズ
 #define NEEDLE_SIZE_HEIGHT    (32.0f)		//針の縦のサイズ
 #define NEEDLE_STAND_SIZE     (64.0f)		//針の土台のサイズ
+#define DIFFUSION_CANNON_SIZE (64.0f)       //ステージ5の拡散するキャノンのサイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -279,8 +284,9 @@ enum MUSIC
 #include "ObjTime.h"			//タイム
 #include "ObjNeedle.h"			//針
 #include "ObjNeedleStand.h"     //針の土台
-#include "ObjDiffusionGimmick.h"//拡散弾発射装置
+#include "ObjDiffusionCannon.h"//拡散弾発射装置
 #include "ObjRollBlock.h"		//回転ブロック
+#include "ObjDiffusionBullet.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

@@ -141,7 +141,7 @@ void CObjHero::Shot() {
 
 
 
-
+	
 
 	//¶ƒNƒŠƒbƒN‚ğ‰Ÿ‚µ‚½‚ç   …‚É“–‚½‚Á‚Ä‚¢‚é‚Æ‚«‚Æ“G‚É“–‚½‚Á‚Ä‚¢‚é‚Í“®‚©‚È‚¢
 	if (Input::GetMouButtonL() == true && m_hero_die_water == false && m_ani_frame_enemy_die == false)
