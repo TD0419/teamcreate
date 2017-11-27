@@ -125,7 +125,6 @@ void CObjLastWall::Action()
 				float r = 0.0f;
 				r = hit_data_enemy[i]->r;
 
-
 				//LastWall‚Ì‰E‘¤‚ªÕ“Ë‚µ‚Ä‚¢‚éê‡
 				if (0 < r && r < 85 || 275 < r && r < 360)
 				{
