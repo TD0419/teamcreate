@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ObjDiffusionGimmick.h" />
+    <ClInclude Include="ObjFallingLift.h" />
     <ClInclude Include="ObjLastWall.h" />
     <ClInclude Include="ObjBackGround.h" />
     <ClInclude Include="ObjCannon.h" />
@@ -129,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ObjDiffusionGimmick.cpp" />
+    <ClCompile Include="ObjFallingLift.cpp" />
     <ClCompile Include="ObjHeroAction.cpp" />
     <ClCompile Include="ObjHeroInit.cpp" />
     <ClCompile Include="ObjLastWall.cpp" />

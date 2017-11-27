@@ -44,6 +44,7 @@ enum OBJ_NAME
 	OBJ_NEEDLE,			//針
 	OBJ_NEEDLE_STAND,	//針の土台
 	OBJ_TARZAN_POINT,	//ロープでぶら下がることができるギミック
+	OBJ_FALLING_LIFT,	//乗ると落ちるリフト
 };
 //------------------------------------------------
 
@@ -126,13 +127,15 @@ enum MAP_BER
 	MAP_OPEN_DOOR_SWITCH    ,			//シャッター開く用スイッチ	
 
 	//ステージ5のみに使用するオブジェクト描画番号
-	MAP_ROLL_BROCK_TYPE_AUTO	,		//自動式回転するブロック
-	MAP_ROLL_BROCK_TYPE_MANUAL	,		//手動式90度回転するブロック
+	MAP_ROLL_BLOCK_TYPE_AUTO	,		//自動式回転するブロック
+	MAP_ROLL_BLOCK_TYPE_MANUAL	,		//手動式90度回転するブロック
 	MAP_TARZAN_POINT			,		//ロープでぶら下がれるギミック
 	MAP_NEEDLE					,		//針
 	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
 	MAP_STAGE5_BOSS				,		//ステージ5のボス
 	MAP_NEEDLE_STAND			,		//針の土台
+	MAP_FALLING_LIFT			,		//乗ると落ちるリフト
+	
 };
 
 //グラフィックID
@@ -171,7 +174,6 @@ enum GRAPHIC_ID
 	GRA_NEEDLE,         //針
 	GRA_NEEDLE_STAND,   //針の土台
 	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
-
 	GRA_ROLL_BLOCK_SWITCH,//回転床用のスイッチ
 };
 
@@ -293,6 +295,7 @@ enum MUSIC
 #include "ObjRollBlock.h"		//回転ブロック
 #include "ObjTarzanPoint.h"		//ロープでぶら下がることができるギミック
 #include "ObjRollBlockSwitch.h"	//回転ブロック用のスイッチ
+#include "ObjFallingLift.h"		//乗ると落ちるリフト
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

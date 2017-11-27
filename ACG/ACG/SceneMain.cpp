@@ -70,6 +70,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
 	
+	
 	//デバッグ--------------------------------------------------
 
 
