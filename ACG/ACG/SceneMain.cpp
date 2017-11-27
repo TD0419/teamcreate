@@ -69,7 +69,9 @@ void CSceneMain::InitScene()
 	//objrollblock = new CObjRollBlock(10, 15, 1);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
-	
+	//乗ると落ちるリフト(デバッグ中につき、削除しないで)
+	//CObjFallingLift* objfalling_lift = new CObjFallingLift(10, 10);
+	//Objs::InsertObj(objfalling_lift, OBJ_FALLING_LIFT, 10);
 	
 	//デバッグ--------------------------------------------------
 
@@ -95,8 +97,8 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//デバッグ用ステージ番号調整用
-	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 1;
+	//UserData* s = (UserData*)Save::GetData();
+	//s->stagenum = 1;
 	//----------------
 
 	//ステージ番号ごとにステージ読み込み
