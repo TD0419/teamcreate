@@ -124,6 +124,9 @@
     <Filter Include="ソース ファイル\Main\TarzanPoint">
       <UniqueIdentifier>{a1b9eec0-0431-430d-9855-66823231a9a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\FallingLift">
+      <UniqueIdentifier>{41587347-ca41-4c9a-927c-923071064be6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -293,6 +296,9 @@
     </ClInclude>
     <ClInclude Include="ObjRollBlockSwitch.h">
       <Filter>ソース ファイル\Main\RollBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFallingLift.h">
+      <Filter>ソース ファイル\FallingLift</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -466,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="ObjRollBlockSwitch.cpp">
       <Filter>ソース ファイル\Main\RollBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFallingLift.cpp">
+      <Filter>ソース ファイル\FallingLift</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
