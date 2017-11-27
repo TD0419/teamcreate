@@ -388,7 +388,7 @@ void CObjHero::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置 
-	dst.m_top = m_py - objmap->GetScrollY() + 48.0f;
+	dst.m_top = m_py - objmap->GetScrollY() + 43.0f;
 	//　主人公が右を向いている時の腕の描画位置
 	if(m_posture == 0.0f)
 		dst.m_left = (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX() + 20.0f - (HERO_SIZE_WIDTH * m_posture);
@@ -400,7 +400,7 @@ void CObjHero::Draw()
 	else
 		dst.m_right = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px + 16.0f - objmap->GetScrollX() + 33.0f - (HERO_SIZE_WIDTH * m_posture);
 
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_bottom = dst.m_top + 59.0f;
 
 	//描画    ロープが出てる時、はしごに登ってる時、ロープとロープスイッチが当たっている時  主人公が水に当たった時
 	if (m_rope_ani_con == true || m_ladder_updown != 0 || rope_caught == true || m_hero_die_water == true || m_hero_die_enemy == true)

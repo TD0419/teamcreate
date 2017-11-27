@@ -28,6 +28,7 @@ void CObjDiffusionCannon::Action()
 {
 	//15°間隔で弾丸発射
 	m_time++;
+	//25フレームの度に打ち出す要調整
 	if (m_time > 25)
 	{
 		m_time = 0;

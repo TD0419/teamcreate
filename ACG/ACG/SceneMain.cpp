@@ -70,12 +70,10 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
 	
-	//タイム
-	CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
+	//ステージ５の拡散段
+	/*CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
 	Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
-	//CObjDiffusionBullet* objtime62 = new CObjDiffusionBullet(3, 20 ,15);
-	//Objs::InsertObj(objtime62, OBJ_DIFFUSION_BULLET, 100);
-	
+*/
 	//デバッグ--------------------------------------------------
 
 
