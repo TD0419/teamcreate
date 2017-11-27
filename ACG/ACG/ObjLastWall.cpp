@@ -78,6 +78,7 @@ void CObjLastWall::Action()
 				float r=0.0f;
 				
 				r=hit_data[i]->r;
+				//ŽålŒö‚ª‰E‘¤‚ÉÕ“Ë
 				if (0 < r && r < 85 || 275 < r && r < 360)
 				{
 					objhero->SetVecX(0.0f);//ŽålŒö‚ÌX•ûŒü‚ÌˆÚ“®‚ð‚O‚É‚·‚é
