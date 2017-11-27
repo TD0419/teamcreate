@@ -7,11 +7,11 @@
 using namespace GameL;
 
 //オブジェクト：拡散弾発射装置
-class CObjDiffusionGimmick :public CObj
+class CObjDiffusionCannon :public CObj
 {
 public:
-	CObjDiffusionGimmick(float x, float y);	// コンストラクタ
-	~CObjDiffusionGimmick() {};			// デストラクタ
+	CObjDiffusionCannon(int x, int y);	// コンストラクタ
+	~CObjDiffusionCannon() {};			// デストラクタ
 	void Init();				// イニシャライズ
 	void Action();				// アクション
 	void Draw();				// ドロー
@@ -19,5 +19,5 @@ public:
 private:
 	float m_px;		//位置X
 	float m_py;		//位置Y
-
+	int   m_time;   //タイム
 };

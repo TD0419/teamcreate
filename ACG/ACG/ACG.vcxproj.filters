@@ -101,6 +101,9 @@
     <Filter Include="ソース ファイル\Main\Needle">
       <UniqueIdentifier>{230ba973-e57e-4643-8637-354442c26e1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Title">
+      <UniqueIdentifier>{82100ff4-7f6b-4131-a72c-29415e5309b2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ソース ファイル\Main\DiffusionGimmick">
       <UniqueIdentifier>{80252c72-6513-4b03-a027-1d7bd337f358}</UniqueIdentifier>
     </Filter>
@@ -123,6 +126,9 @@
     </Filter>
     <Filter Include="ソース ファイル\Main\TarzanPoint">
       <UniqueIdentifier>{a1b9eec0-0431-430d-9855-66823231a9a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\DiffusionCannon">
+      <UniqueIdentifier>{80252c72-6513-4b03-a027-1d7bd337f358}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\FallingLift">
       <UniqueIdentifier>{41587347-ca41-4c9a-927c-923071064be6}</UniqueIdentifier>
@@ -279,9 +285,6 @@
     <ClInclude Include="ObjNeedle.h">
       <Filter>ソース ファイル\Main\Needle</Filter>
     </ClInclude>
-    <ClInclude Include="ObjDiffusionGimmick.h">
-      <Filter>ソース ファイル\Main\DiffusionGimmick</Filter>
-    </ClInclude>
     <ClInclude Include="ObjStage5Boss.h">
       <Filter>ソース ファイル\Main\Stage5Boss</Filter>
     </ClInclude>
@@ -296,6 +299,12 @@
     </ClInclude>
     <ClInclude Include="ObjRollBlockSwitch.h">
       <Filter>ソース ファイル\Main\RollBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjDiffusionCannon.h">
+      <Filter>ソース ファイル\Main\DiffusionCannon</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjDiffusionBullet.h">
+      <Filter>ソース ファイル\Main\DiffusionCannon</Filter>
     </ClInclude>
     <ClInclude Include="ObjFallingLift.h">
       <Filter>ソース ファイル\FallingLift</Filter>
@@ -449,9 +458,6 @@
     <ClCompile Include="ObjNeedle.cpp">
       <Filter>ソース ファイル\Main\Needle</Filter>
     </ClCompile>
-    <ClCompile Include="ObjDiffusionGimmick.cpp">
-      <Filter>ソース ファイル\Main\DiffusionGimmick</Filter>
-    </ClCompile>
     <ClCompile Include="ObjStage5Boss.cpp">
       <Filter>ソース ファイル\Main\Stage5Boss</Filter>
     </ClCompile>
@@ -472,6 +478,12 @@
     </ClCompile>
     <ClCompile Include="ObjRollBlockSwitch.cpp">
       <Filter>ソース ファイル\Main\RollBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjDiffusionCannon.cpp">
+      <Filter>ソース ファイル\Main\DiffusionCannon</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjDiffusionBullet.cpp">
+      <Filter>ソース ファイル\Main\DiffusionCannon</Filter>
     </ClCompile>
     <ClCompile Include="ObjFallingLift.cpp">
       <Filter>ソース ファイル\FallingLift</Filter>

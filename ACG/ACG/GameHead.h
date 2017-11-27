@@ -44,6 +44,8 @@ enum OBJ_NAME
 	OBJ_NEEDLE,			//針
 	OBJ_NEEDLE_STAND,	//針の土台
 	OBJ_TARZAN_POINT,	//ロープでぶら下がることができるギミック
+	OBJ_DIFFUSION_CANNON, //ステージ５の拡散弾キャノン
+	OBJ_DIFFUSION_BULLET, //ステージ５の拡散弾
 	OBJ_FALLING_LIFT,	//乗ると落ちるリフト
 };
 //------------------------------------------------
@@ -173,7 +175,10 @@ enum GRAPHIC_ID
 	GRA_NEEDLE,         //針
 	GRA_NEEDLE_STAND,   //針の土台
 	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
+
 	GRA_ROLL_BLOCK_SWITCH,//回転床用のスイッチ
+	GRA_BLACK_BALL,     //回転ブロックの仕掛けのスイッチ
+	GRA_CANNON_BEAM,    //ステージ5の拡散弾
 };
 
 //音楽(BGM)
@@ -238,6 +243,7 @@ enum MUSIC
 #define TARZAN_POINT_HEIGHT		(16.0f)		//ロープでぶら下がれるギミック縦サイズ
 #define ROLL_BLOCK_SWITCH_SIZE_WIDTH (16.0f)		//回転するブロックをまわすスイッチの横サイズ
 #define ROLL_BLOCK_SWITCH_SIZE_HEIGHT (16.0f)	//回転するブロックをまわすスイッチの縦サイズ
+#define DIFFUSION_CANNON_SIZE (64.0f)       //ステージ5の拡散するキャノンのサイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -290,10 +296,11 @@ enum MUSIC
 #include "ObjTime.h"			//タイム
 #include "ObjNeedle.h"			//針
 #include "ObjNeedleStand.h"     //針の土台
-#include "ObjDiffusionGimmick.h"//拡散弾発射装置
+#include "ObjDiffusionCannon.h"//拡散弾発射装置
 #include "ObjRollBlock.h"		//回転ブロック
 #include "ObjTarzanPoint.h"		//ロープでぶら下がることができるギミック
 #include "ObjRollBlockSwitch.h"	//回転ブロック用のスイッチ
+#include "ObjDiffusionBullet.h"
 #include "ObjFallingLift.h"		//乗ると落ちるリフト
 //------------------------------------------------
 

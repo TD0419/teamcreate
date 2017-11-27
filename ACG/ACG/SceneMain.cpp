@@ -73,6 +73,10 @@ void CSceneMain::InitScene()
 	//CObjFallingLift* objfalling_lift = new CObjFallingLift(10, 10);
 	//Objs::InsertObj(objfalling_lift, OBJ_FALLING_LIFT, 10);
 	
+	//ステージ５の拡散段
+	/*CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
+	Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
+*/
 	//デバッグ--------------------------------------------------
 
 
@@ -209,9 +213,9 @@ void CSceneMain::ImageDataLoading()
 		//金網ブロックの読み込み
 		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 		//Stage5大砲の読み込み
-		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_64);
+		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
 		//回転ブロックの仕掛けのスイッチの画像読み込み
-		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_CANNON, TEX_SIZE_16);
+		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_BLACK_BALL, TEX_SIZE_16);
 		//針の読み込み
 		Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_32);
 		//針の土台の読み込み
@@ -286,6 +290,13 @@ void CSceneMain::ImageDataLoading()
 	
 	//回転ブロックのスイッチ
 	Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_ROLL_BLOCK_SWITCH, TEX_SIZE_16);
+
+	//ステージ5の大砲
+	Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
+
+	//ステージ5の大砲の弾
+	Draw::LoadImageW(L"Image\\Enemy_Bullet.png", GRA_CANNON_BEAM, TEX_SIZE_64);
+
 }
 
 //音楽データ読み込み関数
