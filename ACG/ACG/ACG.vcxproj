@@ -133,7 +133,6 @@
   <ItemGroup>
     <ClCompile Include="ObjDiffusionBullet.cpp" />
     <ClCompile Include="ObjDiffusionCannon.cpp" />
-    <ClCompile Include="ObjDiffusionGimmick.cpp" />
     <ClCompile Include="ObjFallingLift.cpp" />
     <ClCompile Include="ObjHeroAction.cpp" />
     <ClCompile Include="ObjHeroInit.cpp" />

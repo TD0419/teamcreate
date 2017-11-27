@@ -309,6 +309,9 @@
     <ClInclude Include="ObjFallingLift.h">
       <Filter>ソース ファイル\FallingLift</Filter>
     </ClInclude>
+    <ClInclude Include="ObjDiffusionGimmick.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">

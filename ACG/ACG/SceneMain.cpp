@@ -291,7 +291,7 @@ void CSceneMain::ImageDataLoading()
 	//ステージ5の大砲
 	Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
 
-	//ステージ5の大砲の弾
+	//ステージ5の大砲の弾（仮）
 	Draw::LoadImageW(L"Image\\Enemy_Bullet.png", GRA_CANNON_BEAM, TEX_SIZE_64);
 
 }
