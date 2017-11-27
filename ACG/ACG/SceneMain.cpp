@@ -63,17 +63,17 @@ void CSceneMain::InitScene()
 	//要るの--------------------------------------------------
 
 	//回転床テスト用
-	CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
-	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
-	objrollblock = new CObjRollBlock(10, 15, 1);
-	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	//objrollblock = new CObjRollBlock(10, 15, 1);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
 	//乗ると落ちるリフト(デバッグ中につき、削除しないで)
-	CObjFallingLift* objfalling_lift = new CObjFallingLift(10, 18);
-	Objs::InsertObj(objfalling_lift, OBJ_FALLING_LIFT, 10);
+	//CObjFallingLift* objfalling_lift = new CObjFallingLift(10, 18);
+	//Objs::InsertObj(objfalling_lift, OBJ_FALLING_LIFT, 10);
 	
-	//ステージ５の拡散段
+	//ステージ５の拡散弾
 	/*CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
 	Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
 */
