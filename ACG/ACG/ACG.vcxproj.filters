@@ -130,6 +130,9 @@
     <Filter Include="ソース ファイル\Main\DiffusionCannon">
       <UniqueIdentifier>{80252c72-6513-4b03-a027-1d7bd337f358}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\FallingLift">
+      <UniqueIdentifier>{41587347-ca41-4c9a-927c-923071064be6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -302,6 +305,9 @@
     </ClInclude>
     <ClInclude Include="ObjDiffusionBullet.h">
       <Filter>ソース ファイル\Main\DiffusionCannon</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFallingLift.h">
+      <Filter>ソース ファイル\FallingLift</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -478,6 +484,9 @@
     </ClCompile>
     <ClCompile Include="ObjDiffusionBullet.cpp">
       <Filter>ソース ファイル\Main\DiffusionCannon</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFallingLift.cpp">
+      <Filter>ソース ファイル\FallingLift</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

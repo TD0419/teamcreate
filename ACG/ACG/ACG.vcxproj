@@ -72,6 +72,8 @@
   <ItemGroup>
     <ClInclude Include="ObjDiffusionBullet.h" />
     <ClInclude Include="ObjDiffusionCannon.h" />
+    <ClInclude Include="ObjDiffusionGimmick.h" />
+    <ClInclude Include="ObjFallingLift.h" />
     <ClInclude Include="ObjLastWall.h" />
     <ClInclude Include="ObjBackGround.h" />
     <ClInclude Include="ObjCannon.h" />
@@ -131,6 +133,8 @@
   <ItemGroup>
     <ClCompile Include="ObjDiffusionBullet.cpp" />
     <ClCompile Include="ObjDiffusionCannon.cpp" />
+    <ClCompile Include="ObjDiffusionGimmick.cpp" />
+    <ClCompile Include="ObjFallingLift.cpp" />
     <ClCompile Include="ObjHeroAction.cpp" />
     <ClCompile Include="ObjHeroInit.cpp" />
     <ClCompile Include="ObjLastWall.cpp" />
