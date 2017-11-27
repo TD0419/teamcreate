@@ -100,7 +100,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//デバッグ用ステージ番号調整用
-	UserData* s=0;
+	UserData* s = (UserData*)Save::GetData();
 	s->stagenum = 1;
 	//----------------
 
