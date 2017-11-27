@@ -62,12 +62,12 @@ void CSceneMain::InitScene()
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
 
-	//回転床テスト用
-	CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
-	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	////回転床テスト用
+	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
-	 objrollblock = new CObjRollBlock(10, 15, 1);
-	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	//objrollblock = new CObjRollBlock(10, 15, 1);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
 	
 	
@@ -93,6 +93,11 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
+
+	//デバッグ用ステージ番号調整用
+	UserData* s = (UserData*)Save::GetData();
+	s->stagenum = 1;
+	//----------------
 
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum )
@@ -150,6 +155,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 //画像データ読み込み関数
 void CSceneMain::ImageDataLoading()
 {
+
 	//ステージ別の画像読み込み
 	switch (((UserData*)Save::GetData())->stagenum)
 	{

@@ -66,7 +66,6 @@ enum HIT_ELEMENTS
 //セーブ＆ロードとシーン間のやり取りするデータ
 struct UserData
 {
-	int mSeveData;	//サンプルセーブデータ
 	int stagenum;	//ステージ番号
 };
 //------------------------------------------------
