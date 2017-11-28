@@ -132,10 +132,13 @@ enum MAP_BER
 	MAP_ROLL_BLOCK_TYPE_MANUAL	,		//手動式90度回転するブロック
 	MAP_TARZAN_POINT			,		//ロープでぶら下がれるギミック
 	MAP_NEEDLE					,		//針
-	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
-	MAP_STAGE5_BOSS				,		//ステージ5のボス
 	MAP_NEEDLE_STAND			,		//針の土台
+	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
 	MAP_FALLING_LIFT			,		//乗ると落ちるリフト
+	MAP_WIRE_MESH_FLOOR			,		//金網床
+	MAP_FALLING_BLOCK_FOR_BOSS	,		//ボスステージ用落ちるブロック
+	MAP_STAGE5_BOSS				,		//ステージ5のボス
+	
 	
 };
 
