@@ -283,7 +283,7 @@ void CObjLift::ModeMove()
 						m_lift_audio_count++;
 						if (m_lift_audio_count % 50 == 0)
 						{
-							Audio::Start(PLIFT);
+							Audio::Start(PULLLIFT);
 						}
 					}
 					//‰Šú‚ÌˆÚ“®•ûŒü‚ª¶‚Ì‚Æ‚«
@@ -318,7 +318,7 @@ void CObjLift::ModeMove()
 					m_lift_audio_count++;
 					if (m_lift_audio_count % 50 == 0)
 					{
-						Audio::Start(RLIFT);
+						Audio::Start(RELEASELIFT);
 					}
 				}
 				//‰Šú‚ÌˆÚ“®•ûŒü‚Í¶‚¾‚Á‚½‚ç

@@ -59,12 +59,10 @@ void CObjWater::Action()
 		Audio::Stop(WAVE);
 		Hits::DeleteHitBox(this);//hitbox削除
 		this->SetStatus(false);//自身
-		return;
-		
+		return;	
 	}
 	else
 	{
-		
 		//レバースイッチが押されていたら
 		if (lever_swich == true)
 		{
