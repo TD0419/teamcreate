@@ -62,15 +62,21 @@ void CSceneMain::InitScene()
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
 
-	////回転床テスト用
+	//回転床テスト用
 	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
 	//objrollblock = new CObjRollBlock(10, 15, 1);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
+	//乗ると落ちるリフト(デバッグ中につき、削除しないで)
+	//CObjFallingLift* objfalling_lift = new CObjFallingLift(10, 18);
+	//Objs::InsertObj(objfalling_lift, OBJ_FALLING_LIFT, 10);
 	
-	
+	//ステージ５の拡散弾
+	/*CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
+	Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
+*/
 	//デバッグ--------------------------------------------------
 
 
@@ -95,8 +101,8 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//デバッグ用ステージ番号調整用
-	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 1;
+	//UserData* s = (UserData*)Save::GetData();
+	//s->stagenum = 1;
 	//----------------
 
 	//ステージ番号ごとにステージ読み込み
@@ -207,9 +213,9 @@ void CSceneMain::ImageDataLoading()
 		//金網ブロックの読み込み
 		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 		//Stage5大砲の読み込み
-		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_64);
+		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
 		//回転ブロックの仕掛けのスイッチの画像読み込み
-		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_CANNON, TEX_SIZE_16);
+		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_BLACK_BALL, TEX_SIZE_16);
 		//針の読み込み
 		Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_32);
 		//針の土台の読み込み
@@ -284,6 +290,13 @@ void CSceneMain::ImageDataLoading()
 	
 	//回転ブロックのスイッチ
 	Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_ROLL_BLOCK_SWITCH, TEX_SIZE_16);
+
+	//ステージ5の大砲
+	Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
+
+	//ステージ5の大砲の弾（仮）
+	Draw::LoadImageW(L"Image\\Enemy_Bullet.png", GRA_CANNON_BEAM, TEX_SIZE_64);
+
 }
 
 //音楽データ読み込み関数
