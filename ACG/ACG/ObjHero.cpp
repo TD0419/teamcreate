@@ -14,7 +14,7 @@
 using namespace GameL;
 
 //コンストラクタ
-//引数1,2　初期ぽじしょん
+//引数1,2　初期ポジション
 //引数3	残機数
 CObjHero::CObjHero(int x, int y, int remaining)
 {
@@ -165,13 +165,13 @@ void CObjHero::Action()
 
 	//ジャンプ--------------------------------------------------------------------
 	//ロープを出している時は動かない  はしごを上っている時も動かない　　水に当たっているときと敵と当たった時も動かない
-	if (Input::GetVKey(VK_SPACE) == true &&
+	if (Input::GetVKey(VK_SPACE) == true && m_ladder_updown == 0 &&
 		m_rope_ani_con == false && m_hero_die_water == false &&
 		m_ani_frame_enemy_die == false)
 	{
 		if (m_hit_down == true)
 		{
-			m_vy = -17.0f;
+			m_vy = -13.0f;
 		}
 	}
 
@@ -206,6 +206,11 @@ void CObjHero::Action()
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
+	
+	//移動先が画面外なら
+	if (WindowCheck(m_px - HERO_SIZE_WIDTH, m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT) == false)
+		m_px -= m_vx;
+	
 
 	//移動終わり-----------------------------------------
 

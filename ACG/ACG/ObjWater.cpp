@@ -59,12 +59,10 @@ void CObjWater::Action()
 		Audio::Stop(WAVE);
 		Hits::DeleteHitBox(this);//hitbox削除
 		this->SetStatus(false);//自身
-		return;
-		
+		return;	
 	}
 	else
 	{
-		
 		//レバースイッチが押されていたら
 		if (lever_swich == true)
 		{
@@ -104,10 +102,10 @@ void CObjWater::Draw()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//切り取り位置
-	src.m_top = 0.0f + WATER_SIZE_HEIGHT * m_ani_frame;
+	src.m_top = 0.0f + (WATER_SIZE_HEIGHT + 1.0f) * m_ani_frame;
 	src.m_left =0.0f;
 	src.m_right = src.m_left+WATER_SIZE_WIDTH;
-	src.m_bottom =src.m_top+WATER_SIZE_HEIGHT;
+	src.m_bottom =src.m_top+ WATER_SIZE_HEIGHT - 1.0f;
 
 	//描画位置
 	dst.m_top = m_py + m_water_gauge - objmap->GetScrollY();
