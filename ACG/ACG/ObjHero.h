@@ -81,7 +81,7 @@ private:
 	bool   m_hero_die_screen_out;  //主人公が画面外（落ちた時）に行ったかどうか調べる変数（死）（シーン移行用）
 	float  m_screen_out;           //主人公が死んだ時のｙ位置を記憶するための変数
 	//-----------------
-	int m_ladder_updown; //はしごHit管理
+	int m_ladder_updown; //はしごが上っているかどうかを調べる（0、上ってない１、上っている　2、はしごを上りきるとき）
 	int m_ladder_ani_updown; //はしごアニメーション管理
 
 	//----------------------アニメーション関係

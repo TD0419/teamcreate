@@ -165,7 +165,7 @@ void CObjHero::Action()
 
 	//ジャンプ--------------------------------------------------------------------
 	//ロープを出している時は動かない  はしごを上っている時も動かない　　水に当たっているときと敵と当たった時も動かない
-	if (Input::GetVKey(VK_SPACE) == true &&
+	if (Input::GetVKey(VK_SPACE) == true && m_ladder_updown == 0 &&
 		m_rope_ani_con == false && m_hero_die_water == false &&
 		m_ani_frame_enemy_die == false)
 	{
