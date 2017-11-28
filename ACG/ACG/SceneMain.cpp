@@ -70,9 +70,14 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 	
 	//ステージ５の拡散弾
-	/*CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
-	Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
-*/
+	//CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
+	//Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
+
+	//ステージ５ボス戦専用落ちるブロック(削除禁止)
+	//CObjFallingBlock* objfalling_block = new CObjFallingBlock(10, 20);
+	//Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK,10);
+
+
 	//デバッグ--------------------------------------------------
 
 

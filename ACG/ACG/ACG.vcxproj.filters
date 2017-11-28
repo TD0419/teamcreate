@@ -127,6 +127,9 @@
     <Filter Include="ソース ファイル\FallingLift">
       <UniqueIdentifier>{41587347-ca41-4c9a-927c-923071064be6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\FallingBlock">
+      <UniqueIdentifier>{6c3d54fa-22ae-4188-b990-8b3878b2bd86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -302,6 +305,9 @@
     </ClInclude>
     <ClInclude Include="SceneTitle.h">
       <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFallingBlock.h">
+      <Filter>ソース ファイル\Main\FallingBlock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +487,9 @@
     </ClCompile>
     <ClCompile Include="SceneTitle.cpp">
       <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFallingBlock.cpp">
+      <Filter>ソース ファイル\Main\FallingBlock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
