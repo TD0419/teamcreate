@@ -88,7 +88,6 @@ void CObjLastWall::Action()
 				//LastWallの上側が衝突している場合
 				else if (85 < r && r < 94)
 				{
-
 					objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 					objhero->SetPosY(m_py - 60.0f);//主人公の位置をLastWallの上側までずらす
 				}
@@ -99,8 +98,6 @@ void CObjLastWall::Action()
 					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 					objhero->SetPosX(m_px - 63.0f+28.0f);//主人公の位置をLastWallの左側までずらす
 					m_hero_hit_flag = true;
-
-
 				}
 
 				//LastWallの下側が衝突している場合
@@ -137,7 +134,6 @@ void CObjLastWall::Action()
 					objenemy->SetVX(-2.0f);//敵のX方向の移動を-2にする
 					objenemy->SetPosture(0.0f);//向き変更
 				}
-
 			}
 		}
 	}
