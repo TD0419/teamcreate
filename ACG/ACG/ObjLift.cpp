@@ -61,6 +61,80 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 
 	//移動モードを決める
 	m_move_mode = mode;
+
+	//マップ情報を取得
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	//何個めのブロックの位置までを移動区間とするかの個数
+	int block_count = 0;
+	int block_max_count = (int)(LIFT_SIZE_WIDTH/BLOCK_SIZE);//MAX値
+
+	//移動方向と初期移動方向と最大移動量を決める
+	if (mode == 0||mode == 1)
+	{
+		//マップの位置(リフト)の左下が空気なら初期移動方向は右
+		if (objmap->GetMap(px - 1, py + 1)== MAP_SPACE)
+		{
+			if (mode == 0)
+			{
+				//移動方向と初期移動方向を決める
+				m_direction = 0;
+				m_initial_direction = 0;
+			}
+			else
+			{
+				//移動方向と初期移動方向を決める
+				m_direction = 1;
+				m_initial_direction = 1;
+			}
+			//最大移動量を決める
+			for (int i = px-1; i >= 0; i--)
+			{
+				//マップの位置(リフト)左下から左を近いほうから調べていき
+				//リフトの幅/BLOCK_SIZE個めにあるブロック位置までを移動区間とする
+				if (objmap->GetMap(i, py + 1) == MAP_BLOCK)
+				{
+					//カウントを進める
+					block_count++;
+					if (block_count >= block_max_count)
+					{
+						m_width_max = (px * BLOCK_SIZE) - (i*BLOCK_SIZE);
+						break;
+					}
+				}
+			}
+		}
+		//マップの位置(リフト)の右下が空気なので初期移動方向が左
+		else
+		{
+			if (mode == 0)
+			{
+				//移動方向と初期移動方向を決める
+				m_direction = 1;
+				m_initial_direction = 1;
+			}
+			else
+			{
+				//移動方向と初期移動方向を決める
+				m_direction = 0;
+				m_initial_direction = 0;
+			}
+			//最大移動量を決める
+			for (int i = px + block_max_count; i < MAP_X_MAX; i++)
+			{
+				//マップの位置(リフト)右にblock_max_count,下に1から右を近いほうから調べていき
+				//リフトの幅/BLOCK_SIZE個めにあるブロック位置までを移動区間とする
+				if (objmap->GetMap(i, py + 1)== MAP_BLOCK)
+				{
+					//カウントを進める
+					block_count++;
+					
+					m_width_max = (i*BLOCK_SIZE) - (px * BLOCK_SIZE);
+					break;
+					
+				}
+			}
+		}
+	}
 }
 
 //イニシャライズ

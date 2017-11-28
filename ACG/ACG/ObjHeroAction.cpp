@@ -137,6 +137,12 @@ void CObjHero::Shot() {
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+
+
+
+
+
+
 	//左クリックを押したら   水に当たっているときと敵に当たっている時は動かない
 	if (Input::GetMouButtonL() == true && m_hero_die_water == false && m_ani_frame_enemy_die == false)
 	{

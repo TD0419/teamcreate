@@ -34,7 +34,7 @@ CObjBullet::CObjBullet(float x, float y,float r)
 //イニシャライズ
 void CObjBullet::Init()
 {
-	m_speed = 3.0f; // 弾丸のスピード(調整してください)
+	m_speed = 8.0f; // 弾丸のスピード
 
 	m_window_check = true;
 

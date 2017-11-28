@@ -260,48 +260,83 @@ void CObjRollBlock::HeroHit()
 			//主人公オブジェクトを持ってくる
 			CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-			//上側があたっていれば
-			if (45.0f < r && r < 135.0f)
-			{			
-				objhero->SetHitDown(true);//主人公が乗っていたらm_hit_downにtrueを返す
-
-				 //乗せる処理
-				objhero->SetPosY(m_py-HERO_SIZE_HEIGHT);//ブロックの上側に調節する
-
-				//主人公の移動ベクトルが下向きなら
-				if(objhero->GetVecY()>0.0f)
-					objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
-			}
-			//左側が当たっていれば
-			else if (135.0f <= r && r <= 225.0f)
+			//横向きのときの当たり判定
+			if (m_situation_width_flag == true)
 			{
-				//左に反発する処理
-				objhero->SetPosX(m_px-HERO_SIZE_WIDTH);//主人公の位置をブロックの左にする
-				objhero->SetVecX(-1 * objhero->GetVecX());//主人公のX方向の移動量を反転する
-			}
-			//右側が当たっていれば
-			else if (0.0f <= r && r <= 45.0f || 315.0f <= r && r < 360.0f)
-			{
-				//右に反発する処理
-				if( m_situation_width_flag == true )		//横向きなら
+				//上側があたっていれば
+				if (35.0f < r && r < 145.0f)
+				{
+					objhero->SetHitDown(true);//主人公が乗っていたらm_hit_downにtrueを返す
+
+					 //乗せる処理
+					objhero->SetPosY(m_py - 126.0f);//ブロックの上側に調節する
+
+					//主人公の移動ベクトルが下向きなら
+					if (objhero->GetVecY() > 0.0f)
+						objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
+				}
+				//左側が当たっていれば
+				else if (145.0f <= r && r <= 180.0f)
+				{
+					//左に反発する処理
+					objhero->SetPosX(m_px - 64.8f);//主人公の位置をブロックの左にする
+					objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+				}
+				//右側が当たっていれば
+				else if (0.0f <= r && r <= 35.0f)
+				{
+					//右に反発する処理
 					objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_WIDTH);//主人公の位置をブロックの右にする
-				else					//縦向きなら
-					objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの右にする
+					objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+				}
 
-				objhero->SetVecX(-1 * objhero->GetVecX());//主人公のX方向の移動量を反転する
-			}
-
-			//下側があたっていれば
-			if (225.0f < r && r < 315.0f)
-			{
-				//下に反発する処理
-				if ( m_situation_width_flag == true )//横向きなら
+				//下側があたっていれば
+				else if (180.0f < r && r < 360.0f)
+				{
+					//下に反発する処理
 					objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの下にする
-				else					//縦向きなら
-					objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_WIDTH);//主人公の位置をブロックの下にする
+					objhero->SetVecY(objhero->GetVecY());//主人公のY方向の移動量を反転する
+				}
+			}
+			//縦向きのときの当たり判定
+			else
+			{
+				//上側があたっていれば
+				if (68.0f < r && r < 112.0f)
+				{
+					objhero->SetHitDown(true);//主人公が乗っていたらm_hit_downにtrueを返す
+					//乗せる処理
+					objhero->SetPosY(m_py - 126.0f);//ブロックの上側に調節する
 
-				objhero->SetVecY( -1 * objhero->GetVecY());//主人公のY方向の移動量を反転する
+					//主人公の移動ベクトルが下向きなら
+					if (objhero->GetVecY() > 0.0f)
+						objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
+				}
+				//左側が当たっていれば
+				else if (112.0f <= r && r <= 250.0f)
+				{
+					//左に反発する処理
+					objhero->SetPosX(m_px - 64.8f);//主人公の位置をブロックの左にする
+					objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+				}
+				//右側が当たっていれば
+				else if (0.0f < r && r < 68.0f || 290.0f < r && r < 360.0f)
+				{
+					//縦向きなら
+					objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの右にする
+					objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+				}
+
+				//下側があたっていれば
+				if (250.0f < r && r < 290.0f)
+				{
+					
+					//縦向きなら
+					objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_WIDTH);//主人公の位置をブロックの下にする
+					objhero->SetVecY(objhero->GetVecY());//主人公のY方向の移動量を反転する
+				}
 			}
 		}
+
 	}
 }

@@ -21,7 +21,7 @@ CObjFallingWalls::CObjFallingWalls(int x, int y)
 void CObjFallingWalls::Init()
 {
 	//当たり判定用HitBoxを作成                          
-	Hits::SetHitBox(this, m_px, m_py, FALLING_WALLS_SAIZE, FALLING_WALLS_SAIZE, ELEMENT_GIMMICK, OBJ_ROCK, 1);
+	Hits::SetHitBox(this, m_px, m_py, FALLING_WALLS_SAIZE, FALLING_WALLS_SAIZE, ELEMENT_GIMMICK, OBJ_FALLING_WALLS, 1);
 }
 
 //アクション
