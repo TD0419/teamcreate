@@ -84,6 +84,9 @@ void CObjHero::Action()
 	objblock->AllBlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
+	//落ちるブロックオブジェクトを持ってくる
+	CObjFallingBlock* objfalling_block = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
+
 	LandingCheck();//着地フラグの更新
 
 
