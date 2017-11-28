@@ -33,7 +33,7 @@ void CObjBoss::Init()
 	m_ani_frame_walk = 1;		//静止フレームを初期にする(歩くモーション)
 	m_ani_frame_throw = 1;		//静止フレームを初期にする(投げるモーション)
 	m_ani_walk_max_time = 10;	//歩くアニメーション間隔幅
-	m_ani_throw_max_time = 3;	//投げるアニメーション間隔幅
+	m_ani_throw_max_time = 5;	//投げるアニメーション間隔幅
 
 	m_ani_throw_start_flag = false;//投げるアニメーション開始フラグ false=オフ ture=オン
 
@@ -43,8 +43,9 @@ void CObjBoss::Init()
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
+
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_BOSS, 1);
+	Hits::SetHitBox(this, m_px, m_py, 150.0f, 210.0f, ELEMENT_ENEMY, OBJ_BOSS, 1);
 
 	Audio::Start(STAGE2_BOSS);
 	Audio::Stop(STAGE2);
@@ -130,6 +131,8 @@ void CObjBoss::Action()
 		if (m_posture == 0.0f)
 		{
 			m_posture = 1.0f;//左向きにする
+							 //音楽スタート
+			Audio::Start(GORILLATHROW);
 			// 敵弾丸作成
 			CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 			Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
@@ -137,9 +140,6 @@ void CObjBoss::Action()
 			m_wall_hit_flag = false;
 			//投げるアニメーション開始フラグをＯＮにする
 			m_ani_throw_start_flag = true;
-
-			//音楽スタート
-			Audio::Start(GORILLATHROW);
 		}
 	}
 
@@ -158,10 +158,16 @@ void CObjBoss::Action()
 		this->SetStatus(false);		//自身に削除命令を出す
 		return;
 	}
-
-	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-
+	if (m_posture == 1.0f)
+	{
+		//HitBoxの位置を更新する
+		HitBoxUpData(Hits::GetHitBox(this), m_px + 30.0f, m_py + 48.0f);
+	}
+	else
+	{
+		//HitBoxの位置を更新する
+		HitBoxUpData(Hits::GetHitBox(this), m_px + 20.0f, m_py + 48.0f);
+	}
 }
 
 //ドロー

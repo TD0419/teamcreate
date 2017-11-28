@@ -101,8 +101,8 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//デバッグ用ステージ番号調整用
-	//UserData* s = (UserData*)Save::GetData();
-	//s->stagenum = 1;
+	UserData* s = (UserData*)Save::GetData();
+	s->stagenum = 2;
 	//----------------
 
 	//ステージ番号ごとにステージ読み込み
@@ -305,58 +305,58 @@ void CSceneMain::AudioDataLoading()
 //BGM--------------------------------------------------------
 
 	//ステージ1
-	Audio::LoadAudio(STAGE1, L"Grassland6.wav",BACK_MUSIC);
+	Audio::LoadAudio(STAGE1, L"BGM\\Grassland6.wav",BACK_MUSIC);
 	//ステージ2
-	Audio::LoadAudio(STAGE2, L"Jangle1.wav", BACK_MUSIC);
+	Audio::LoadAudio(STAGE2, L"BGM\\Jangle.wav", BACK_MUSIC);
 
 	//ステージ2_BOSS
-	Audio::LoadAudio(STAGE2_BOSS, L"BOSS1.wav", BACK_MUSIC);
+	Audio::LoadAudio(STAGE2_BOSS, L"BGM\\BOSS2.wav", BACK_MUSIC);
 
 	//ステージ5
-	Audio::LoadAudio(STAGE5, L"Temple1.wav", BACK_MUSIC);
+	Audio::LoadAudio(STAGE5, L"BGM\\Temple1.wav", BACK_MUSIC);
 //------------------------------------------------------------
 
 //SE--------------------------------------------------------
 	//弾の発射
-	Audio::LoadAudio(FIRING, L"Firing1.wav", EFFECT);
+	Audio::LoadAudio(FIRING, L"SE\\Firing1.wav", EFFECT);
 
 	//縄の打ち出し
-	Audio::LoadAudio(ROPE, L"Rope2.wav", EFFECT);
+	Audio::LoadAudio(ROPE, L"SE\\Rope2.wav", EFFECT);
 
 	//岩の爆発
-	Audio::LoadAudio(ROCK, L"Rock2.wav", EFFECT);
+	Audio::LoadAudio(ROCK, L"SE\\Rock2.wav", EFFECT);
 
 	//最後の壁の開閉
-	Audio::LoadAudio(WALL, L"Door1.wav", EFFECT);
+	Audio::LoadAudio(WALL, L"SE\\Door1.wav", EFFECT);
 
 	//木の転倒
-	Audio::LoadAudio(TREE, L"Tree3.wav", EFFECT);
+	Audio::LoadAudio(TREE, L"SE\\Tree3.wav", EFFECT);
 
 	//ドアの開錠
-	Audio::LoadAudio(DOOR, L"Wood Door.wav",EFFECT);
+	Audio::LoadAudio(DOOR, L"SE\\Wood Door.wav",EFFECT);
 
 	//敵に着弾
-	Audio::LoadAudio(LANDING, L"Landing1.wav", EFFECT);
+	Audio::LoadAudio(LANDING, L"SE\\Landing1.wav", EFFECT);
 
 	//レバースイッチ
-	Audio::LoadAudio(LEVER, L"Lever1.wav", EFFECT);
+	Audio::LoadAudio(LEVER, L"SE\\Lever1.wav", EFFECT);
 
 	//ボタン
-	Audio::LoadAudio(BUTTON, L"Switch2.wav", EFFECT);
+	Audio::LoadAudio(BUTTON, L"SE\\Switch2.wav", EFFECT);
 
 	//敵の弾丸
-	Audio::LoadAudio(ENEMYFIR, L"Enemy Fir3.wav", EFFECT);
+	Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
 
 	//リフト(引っ張る)
-	Audio::LoadAudio(PLIFT, L"LiftTrickPull.wav", EFFECT);
+	Audio::LoadAudio(PLIFT, L"SE\\LiftTrickPull.wav", EFFECT);
 
 	//リフト(離す)
-	Audio::LoadAudio(RLIFT, L"LiftTrickRelease.wav", EFFECT);
+	Audio::LoadAudio(RLIFT, L"SE\\LiftTrickRelease.wav", EFFECT);
 
 	//水の流れる音
-	Audio::LoadAudio(WAVE, L"Wave.wav", EFFECT);
+	Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 
 	//ゴリラの投擲音
-	Audio::LoadAudio(GORILLATHROW, L"Gorilla Throw.wav", EFFECT);
+	Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla Throw5.wav", EFFECT);
 //------------------------------------------------------------
 }
