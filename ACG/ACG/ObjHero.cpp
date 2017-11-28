@@ -171,7 +171,7 @@ void CObjHero::Action()
 	{
 		if (m_hit_down == true)
 		{
-			m_vy = -17.0f;
+			m_vy = -13.0f;
 		}
 	}
 
