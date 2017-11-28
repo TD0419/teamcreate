@@ -95,7 +95,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	//デバッグ用ステージ番号調整用
 	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 1;
+	s->stagenum = 2;
 	//----------------
 
 	//ステージ番号ごとにステージ読み込み
