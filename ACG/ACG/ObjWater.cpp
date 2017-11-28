@@ -102,10 +102,10 @@ void CObjWater::Draw()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//Ø‚èŽæ‚èˆÊ’u
-	src.m_top = 0.0f + WATER_SIZE_HEIGHT * m_ani_frame;
+	src.m_top = 0.0f + (WATER_SIZE_HEIGHT + 1.0f) * m_ani_frame;
 	src.m_left =0.0f;
 	src.m_right = src.m_left+WATER_SIZE_WIDTH;
-	src.m_bottom =src.m_top+WATER_SIZE_HEIGHT;
+	src.m_bottom =src.m_top+ WATER_SIZE_HEIGHT - 1.0f;
 
 	//•`‰æˆÊ’u
 	dst.m_top = m_py + m_water_gauge - objmap->GetScrollY();
