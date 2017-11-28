@@ -27,6 +27,10 @@ CObjHero::CObjHero(int x, int y, int remaining)
 //アクション
 void CObjHero::Action()
 {
+	m_count++;//カウンターを増やす
+
+	if (m_count >= 10000)//一定数になると0に戻る
+		m_count = 0;
 
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
@@ -207,11 +211,10 @@ void CObjHero::Action()
 	m_px += m_vx;
 	m_py += m_vy;
 	
-	//移動先が画面外なら
+	//移動先が画面外なら移動を元に戻す
 	if (WindowCheck(m_px - HERO_SIZE_WIDTH, m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT) == false)
 		m_px -= m_vx;
 	
-
 	//移動終わり-----------------------------------------
 
 

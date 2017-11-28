@@ -55,18 +55,20 @@ private:
 	float m_vy;		//Y軸方向のベクトル
 	float m_posture;//姿勢 //右：0.0ｆ　左：1.0ｆ
 	float m_r;		//主人公の回転角度
+	int m_remaining;//残機管理
 	int   m_block_type;//踏んでるブロックの値を保存する
 	float m_fall_speed_max;//主人公の落下スピード最大速度
 	float m_radius; //主人公が死んだ時、周りから黒くする半径の変数
 	bool  m_gravity_flag; // 主人公の重力落下フラグ true:重力あり false:重力なし
-	bool  m_goal_flag;	  // ゴールフラグ true:ゴールした false:ゴールしていない
-
+	bool  m_goal_flag;	  // ゴールフラグ true:ゴールした false:ゴールしていない		
 	float m_mous_x;	    //マウスの位置X
 	float m_mous_y;     //マウスの位置Y
 	float m_rope_moux;	//Rを押したときのマウスの位置X
 	float m_rope_mouy;  //Rを押したときのマウスの位置Y
 	
 	//ーーーー制御系---------
+	int	  m_count;				  //制御用のカウンター
+	int	  m_before_shot_time;	  //最後に弾を撃った時間を保存する	
 	bool  m_bullet_control;       //弾丸発射制御用
 	bool  m_rope_control;	      //ロープ発射制御用
 	bool  m_rope_ani_con;         //ロープアニメーション制御
@@ -107,8 +109,6 @@ private:
 	int m_ani_max_time_enemy_die;     //主人公が敵にあたった時主人公アニメーション動作間隔最大値
 
 	//------------------------------------------
-
-	int m_remaining;//残機管理
 
 	//blockとの衝突確認用
 	bool m_hit_up;

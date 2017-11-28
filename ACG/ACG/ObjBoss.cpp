@@ -84,9 +84,7 @@ void CObjBoss::Action()
 		m_ani_frame_throw = 1;
 		
 	}
-
 	
-
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
