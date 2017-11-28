@@ -68,10 +68,6 @@ void CSceneMain::InitScene()
 
 	//objrollblock = new CObjRollBlock(10, 15, 1);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
-
-	//乗ると落ちるリフト(デバッグ中につき、削除しないで)
-	CObjFallingLift* objfalling_lift = new CObjFallingLift(10, 18);
-	Objs::InsertObj(objfalling_lift, OBJ_FALLING_LIFT, 10);
 	
 	//ステージ５の拡散弾
 	/*CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
