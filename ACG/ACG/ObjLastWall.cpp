@@ -78,6 +78,7 @@ void CObjLastWall::Action()
 				float r=0.0f;
 				
 				r=hit_data[i]->r;
+				//主人公が右側に衝突
 				if (0 < r && r < 85 || 275 < r && r < 360)
 				{
 					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
@@ -124,7 +125,6 @@ void CObjLastWall::Action()
 			{
 				float r = 0.0f;
 				r = hit_data_enemy[i]->r;
-
 
 				//LastWallの右側が衝突している場合
 				if (0 < r && r < 85 || 275 < r && r < 360)
