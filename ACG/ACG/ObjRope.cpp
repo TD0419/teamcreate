@@ -292,42 +292,32 @@ void CObjRope::RopeDelete()
 	}
 
 	//岩に当たった場合ロープを消す
-	if (hit->CheckObjNameHit(OBJ_ROCK) != nullptr)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_ROCK))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
 
 	//リフトに当たった場合ロープを消す
-	if (hit->CheckObjNameHit(OBJ_LIFT) != nullptr)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_LIFT))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
 
 	//木に当たった場合ロープを消す
-	if (hit->CheckObjNameHit(OBJ_WOOD) != nullptr)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_WOOD))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
 
 	//水に当たった場合ロープを消す
-	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_WATER))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
 
 	//Lastwall(壁)にあたったら消去
-	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_LAST_WALL))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
 
