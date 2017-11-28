@@ -14,7 +14,7 @@
 using namespace GameL;
 
 //コンストラクタ
-//引数1,2　初期ぽじしょん
+//引数1,2　初期ポジション
 //引数3	残機数
 CObjHero::CObjHero(int x, int y, int remaining)
 {
@@ -206,6 +206,11 @@ void CObjHero::Action()
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
+	
+	//移動先が画面外なら
+	if (WindowCheck(m_px - HERO_SIZE_WIDTH, m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT) == false)
+		m_px -= m_vx;
+	
 
 	//移動終わり-----------------------------------------
 
