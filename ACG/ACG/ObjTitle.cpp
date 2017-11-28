@@ -108,13 +108,13 @@ void CObjTitle::Draw()
 	//描画
 	Draw::Draw(GRA_TITLE, &src, &dst, color, 0.0f);
 	//メニュー描画
-	Font::StrDraw(L"Start"	, WINDOW_SIZE_W - 300.0f, WINDOW_SIZE_H/2.0f			, CHAR_SIZE, color);
-	Font::StrDraw(L"Option"	, WINDOW_SIZE_W - 300.0f, WINDOW_SIZE_H/2.0f +  80.0f	, CHAR_SIZE, color);
-	Font::StrDraw(L"Exit"	, WINDOW_SIZE_W - 300.0f, WINDOW_SIZE_H/2.0f + 160.0f	, CHAR_SIZE, color);
+	Font::StrDraw(L"Start"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 38.0f    , CHAR_SIZE, color);
+	Font::StrDraw(L"Option"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 118.0f	, CHAR_SIZE, color);
+	Font::StrDraw(L"Exit"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 198.0f	, CHAR_SIZE, color);
 
 
 	//デバッグ用に→を表示
-	Font::StrDraw(L"→"		, WINDOW_SIZE_W - 350.0f, WINDOW_SIZE_H / 2.0f + 80.0f * m_mode , CHAR_SIZE, color);
+	Font::StrDraw(L"→"		, WINDOW_SIZE_W - 300.0f, WINDOW_SIZE_H / 2.0f + 38.0f + 80.0f * m_mode , CHAR_SIZE, color);
 
 	
 }

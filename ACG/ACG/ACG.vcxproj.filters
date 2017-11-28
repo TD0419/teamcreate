@@ -104,9 +104,6 @@
     <Filter Include="ソース ファイル\Title">
       <UniqueIdentifier>{82100ff4-7f6b-4131-a72c-29415e5309b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\DiffusionGimmick">
-      <UniqueIdentifier>{80252c72-6513-4b03-a027-1d7bd337f358}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -120,9 +117,6 @@
     </Filter>
     <Filter Include="ソース ファイル\Main\Stage5Boss">
       <UniqueIdentifier>{ea05cd55-27ad-4f91-842d-56dd4c413128}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Main\Title">
-      <UniqueIdentifier>{82100ff4-7f6b-4131-a72c-29415e5309b2}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Main\TarzanPoint">
       <UniqueIdentifier>{a1b9eec0-0431-430d-9855-66823231a9a6}</UniqueIdentifier>
@@ -176,12 +170,6 @@
     </ClInclude>
     <ClInclude Include="SceneMain.h">
       <Filter>ソース ファイル\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneTitle.h">
-      <Filter>ソース ファイル\Main\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTitle.h">
-      <Filter>ソース ファイル\Main\Title</Filter>
     </ClInclude>
     <ClInclude Include="ObjGameOver.h">
       <Filter>ソース ファイル\GameOver</Filter>
@@ -309,8 +297,11 @@
     <ClInclude Include="ObjFallingLift.h">
       <Filter>ソース ファイル\FallingLift</Filter>
     </ClInclude>
-    <ClInclude Include="ObjDiffusionGimmick.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -352,12 +343,6 @@
     </ClCompile>
     <ClCompile Include="SceneMain.cpp">
       <Filter>ソース ファイル\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
-      <Filter>ソース ファイル\Main\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTitle.cpp">
-      <Filter>ソース ファイル\Main\Title</Filter>
     </ClCompile>
     <ClCompile Include="ObjGameOver.cpp">
       <Filter>ソース ファイル\GameOver</Filter>
@@ -490,6 +475,12 @@
     </ClCompile>
     <ClCompile Include="ObjFallingLift.cpp">
       <Filter>ソース ファイル\FallingLift</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
