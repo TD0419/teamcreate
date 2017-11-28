@@ -108,9 +108,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum )
 	{
-		
 	case 1:
-		//
 		Audio::Start(STAGE1);
 		p = Save::ExternalDataOpen(L"stage1.csv", &size);//外部データ読み込み
 		break;
@@ -145,8 +143,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			
 			//マップ情報を代入
 			map[i][j] = w;
-
-
+			
 			//-1桁数分ずらす
 			while (w/10 != 0)
 			{
