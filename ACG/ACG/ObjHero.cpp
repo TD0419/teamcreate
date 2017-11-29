@@ -38,6 +38,10 @@ void CObjHero::Action()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+	//落ちるブロックオブジェクトを持ってくる
+	CObjFallingBlock* objfalling_block = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
+
+
 	//主人公の左下、真下、右下にあるブロック情報を取得
 	//真下のブロック情報を優先する
 	for (int i = 0; i < 3; i++)
@@ -84,9 +88,7 @@ void CObjHero::Action()
 	objblock->AllBlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 
-	//落ちるブロックオブジェクトを持ってくる
-	CObjFallingBlock* objfalling_block = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
-
+	
 	LandingCheck();//着地フラグの更新
 
 
@@ -687,16 +689,17 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 //着地できてるかどうかを調べる関数
 void CObjHero::LandingCheck()
 {
-	bool c1,c2,c3,c4,c5;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+	bool c1,c2,c3,c4,c5,c6;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
 	
 	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
 	c3 = HitUpCheck(OBJ_LIFT_MOVE); //動くリフトとの着地チェック
 	c4 = HitUpCheck(OBJ_ROLL_BLOCK);//回転するブロック
 	c5 = HitUpCheck(OBJ_FALLING_LIFT);//落ちるリフト
+	c6 = HitUpCheck(OBJ_FALLING_BLOCK);//落ちるブロック
 
 	//チェック項目のどれか一つでもtrueなら
-	if ( c1 == true || c2 ==true || c3 == true || c4 ==true || c5 == true)
+	if ( c1 == true || c2 ==true || c3 == true || c4 ==true || c5 == true || c6 == true)
 		m_hit_down = true;//着地フラグをオンにする
 
 }

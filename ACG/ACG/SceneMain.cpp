@@ -73,9 +73,7 @@ void CSceneMain::InitScene()
 	//CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
 	//Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
 
-	//ステージ５ボス戦専用落ちるブロック(削除禁止)
-	//CObjFallingBlock* objfalling_block = new CObjFallingBlock(10, 20);
-	//Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK,10);
+	
 
 
 	//デバッグ--------------------------------------------------
@@ -102,8 +100,8 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//デバッグ用ステージ番号調整用
-	/*UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 2;*/
+	//UserData* s = (UserData*)Save::GetData();
+	//s->stagenum = 3;
 	//----------------
 
 	//ステージ番号ごとにステージ読み込み

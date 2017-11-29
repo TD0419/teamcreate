@@ -253,7 +253,7 @@ void CObjBlock::AllBlockHit(
 			block_type = objmap->GetMap(j, i);
 
 			//判定したいブロック
-			if (block_type == MAP_BLOCK || block_type == MAP_THROUGH_BLOCK|| block_type ==MAP_LADDERS || block_type == MAP_NEEDLE_STAND || MAP_FALLING_BLOCK)
+			if (block_type == MAP_BLOCK || block_type == MAP_THROUGH_BLOCK|| block_type ==MAP_LADDERS || block_type == MAP_NEEDLE_STAND || block_type == MAP_FALLING_BLOCK)
 			{
 				if (block_type == MAP_LADDERS)//梯子なら
 				{
