@@ -12,28 +12,6 @@
 
 //使用するネームスペース
 using namespace GameL;
-
-//コンストラクタ(移動のベクトルつき）
-//引数1,2	マップの数値(位置)
-//引数3,4	移動するときの速度
-//引数5		移動の最大量（左右）
-//引数6		移動の最大量（上下）
-//引数		移動のためのフラグの配列の要素数	＊後に改造するのでこのままおいといてください
-CObjLift::CObjLift(int px, int py,float vx,float vy,float width_max, float length_max)
-{
-	//表示すべき位置を入れる
-	m_px = (float)px * BLOCK_SIZE;	
-	m_py = (float)py * BLOCK_SIZE;
-	
-	//移動ベクトルを入れる
-	m_vx = vx;
-	m_vy = vy;
-
-	//移動の最大量を入れる
-	m_width_max = width_max;	
-	m_length_max = length_max;
-}
-
 //コンストラクタ
 //引数1,2	マップの数値(位置)
 //引数3		移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
