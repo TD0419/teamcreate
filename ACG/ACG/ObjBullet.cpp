@@ -31,6 +31,7 @@ CObjBullet::CObjBullet(float x, float y,float r)
 	m_vy = sin(r);
 }
 
+
 //イニシャライズ
 void CObjBullet::Init()
 {
@@ -67,51 +68,40 @@ void CObjBullet::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//敵とあたったら消去
-	if (hit->CheckElementHit(ELEMENT_ENEMY)==true)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_ENEMY))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
+	//BOSSと当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_BOSS))
+	{
+		return;
+	}
 	//岩とあたったら消去
-	if (hit->CheckObjNameHit(OBJ_ROCK) != nullptr)//仮　ElementHitに変えるかも
+	if (DeleteCheckObjNameHit(hit, this, OBJ_ROCK))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
 	//Lastwall(壁)にあたったら消去
-	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_LAST_WALL))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
 	//Water(水)とあたったら消去
-	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_WATER))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
 	// リフト当たったら消去
 	if (DeleteCheckObjNameHit(hit, this, OBJ_LIFT))
 	{
 		return;
 	}
-
 	//木と当たったら消去
-	if(hit->CheckObjNameHit(OBJ_WOOD)!=nullptr)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_WOOD))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
 	//反射するブロックとあたった場合
 	if (hit->CheckObjNameHit(OBJ_REFLECT_BLOCK) != nullptr)
 	{

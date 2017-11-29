@@ -88,7 +88,6 @@ void CObjLastWall::Action()
 				//LastWallの上側が衝突している場合
 				else if (85 < r && r < 94)
 				{
-
 					objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 					objhero->SetPosY(m_py - 60.0f);//主人公の位置をLastWallの上側までずらす
 				}
@@ -99,8 +98,6 @@ void CObjLastWall::Action()
 					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 					objhero->SetPosX(m_px - 63.0f+28.0f);//主人公の位置をLastWallの左側までずらす
 					m_hero_hit_flag = true;
-
-
 				}
 
 				//LastWallの下側が衝突している場合
@@ -110,7 +107,6 @@ void CObjLastWall::Action()
 					objhero->SetPosY(m_py + 512.0f - m_wall_gauge +65.0f);//主人公の位置をLastWallの下側までずらす
 					
 				}
-
 			}
 		}
 	}
@@ -137,7 +133,6 @@ void CObjLastWall::Action()
 					objenemy->SetVX(-2.0f);//敵のX方向の移動を-2にする
 					objenemy->SetPosture(0.0f);//向き変更
 				}
-
 			}
 		}
 	}
@@ -189,7 +184,7 @@ void CObjLastWall::Action()
 		}
 		else
 		{
-			//heroが左側に振れてたら押されていたら
+			//heroが左側に振れてたら
 			if (m_hero_hit_flag == true && m_wall_down_flag == false)
 			{
 				m_wall_gauge += 3; // 3ずつ増やしていく
@@ -211,10 +206,12 @@ void CObjLastWall::Action()
 			m_wall_gauge = 0;		//wall初期化
 			Audio::Stop(WALL);		//音楽ストップ
 		}
+
 		//壁がしまった時
 		if (m_wall_gauge2 >= 512)
 		{
 			Audio::Stop(WALL);//音楽ストップ
+			m_wall_unlock_flag = false;
 		}
 		//壁が開いているとき
 		else

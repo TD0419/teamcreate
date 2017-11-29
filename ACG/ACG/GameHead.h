@@ -47,6 +47,7 @@ enum OBJ_NAME
 	OBJ_DIFFUSION_CANNON, //ステージ５の拡散弾キャノン
 	OBJ_DIFFUSION_BULLET, //ステージ５の拡散弾
 	OBJ_FALLING_LIFT,	//乗ると落ちるリフト
+	OBJ_FALLING_BLOCK,	//ステージ5ボス戦専用落ちるブロック
 };
 //------------------------------------------------
 
@@ -136,7 +137,7 @@ enum MAP_BER
 	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
 	MAP_FALLING_LIFT			,		//乗ると落ちるリフト
 	MAP_WIRE_MESH_FLOOR			,		//金網床
-	MAP_FALLING_BLOCK_FOR_BOSS	,		//ボスステージ用落ちるブロック
+	MAP_FALLING_BLOCK			,		//ボスステージ用落ちるブロック
 	MAP_STAGE5_BOSS				,		//ステージ5のボス
 	
 	
@@ -203,8 +204,8 @@ enum MUSIC
 	LEVER		,//レバー
 	BUTTON		,//ボタン
 	ENEMYFIR	,//敵の弾発射
-	PLIFT		,//リフト(引っ張る)
-	RLIFT		,//リフト(離れる)
+	PULLLIFT		,//リフト(引っ張る)
+	RELEASELIFT		,//リフト(離れる)
 	WAVE		,//水の流れ
 	GORILLATHROW,//ゴリラの投擲音
 
@@ -305,6 +306,7 @@ enum MUSIC
 #include "ObjRollBlockSwitch.h"	//回転ブロック用のスイッチ
 #include "ObjDiffusionBullet.h"
 #include "ObjFallingLift.h"		//乗ると落ちるリフト
+#include "ObjFallingBlock.h"	//ステージ5ボス戦専用落ちるブロック
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

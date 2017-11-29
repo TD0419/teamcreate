@@ -78,7 +78,6 @@ void CObjLeverSwich::Action()
 			m_ani_flag2 = false;
 	}
 
-
 	//HitBox‚ÌˆÊ’u‚ğXV‚·‚é
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
