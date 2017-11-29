@@ -23,7 +23,6 @@ public:
 	//			１＝自由移動モード(初期位置Xから最大X位置の間を自動移動)
 	//			２＝無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)
 	CObjLift(int px, int py, int direction, float width_max, int mode);
-	CObjLift(int px, int py, float vx, float vy, float width_max, float length_max);//コンストラクタ
 	~CObjLift() {};			// デストラクタ
 	void Init();			// イニシャライズ
 	void Action();			// アクション

@@ -20,18 +20,36 @@ CObjFallingBlock::CObjFallingBlock(int x, int y)
 //イニシャライズ
 void CObjFallingBlock::Init()
 {
+	m_falling_time = 120;	//ブロックが落ちるまでの時間(仮に120と設定)
+
 	//当たり判定用HitBoxを作成                          
 	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_GIMMICK, OBJ_FALLING_BLOCK, 1);
-
-
 }
 
 //アクション
 void CObjFallingBlock::Action()
 {
+	//m_falling_time--;
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//HitBoxのポインタを持ってくる
+	CHitBox*hit = Hits::GetHitBox(this);
+
+	//ヒーローオブジェクトと当たっていれば
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		HeroHit();//衝突処理をするをする
+	}
+
+	//タイムが0になると下に落ちる
+	//ステージ5ボスのアクション(爪をブロックにたたきつける)実装待ち。
+	//実装されたら使うので、残しておいてください。
+	//if (m_falling_time < 0)
+	//{
+	//	m_py += 1.0f;
+	//}
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
@@ -94,25 +112,25 @@ void CObjFallingBlock::HeroHit()
 			float r = hit_data[i]->r;							//あたっている角度を持ってくる
 
 			//上側があたっていれば
-			if (35.0f < r && r < 145.0f)
+			if (45.0f < r && r < 135.0f)
 			{
 				objhero->SetHitDown(true);						//主人公が乗っていたらm_hit_downにtrueを返す
 																//乗せる処理
-				objhero->SetPosY(m_py - BLOCK_SIZE);				//ブロックの上側に調節する
+				objhero->SetPosY(m_py - BLOCK_SIZE - 62.0f);				//ブロックの上側に調節する
 
 																//主人公の移動ベクトルが下向きなら
-				if (objhero->GetVecY()>0.0f)
-					objhero->SetVecY(0.0f);						//主人公のY方向の移動を0にする
+				if (objhero->GetVecY()>1.0f)
+					objhero->SetVecY(1.0f);						//主人公のY方向の移動を0にする
 			}
 			//左側が当たっていれば
-			else if (145.0f <= r && r <= 180.0f)
+			else if (135.0f <= r && r <= 180.0f)
 			{
 				//左に反発する処理
 				objhero->SetPosX(m_px - BLOCK_SIZE);	//主人公の位置をブロックの左にする
 				objhero->SetVecX(-1.0f * objhero->GetVecX());	//主人公のX方向の移動量を反転する
 			}
 			//右側が当たっていれば
-			else if (0.0f <= r && r <= 35.0f)
+			else if (0.0f <= r && r <= 45.0f)
 			{
 				//右に反発する処理
 				objhero->SetPosX(m_px + BLOCK_SIZE);	//主人公の位置をブロックの右にする
