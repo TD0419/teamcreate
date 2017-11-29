@@ -6,6 +6,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define SHOT_INTERVAL (50.0f)	//弾を撃つ間隔
+
 //オブジェクト：主人公
 class CObjHero:public CObj
 {
@@ -22,7 +24,6 @@ public:
 	void Scroll();					//スクロール処理の関数
 	void LandingCheck();			//着地できてるかどうかを調べる関数
 	bool HitUpCheck(int obj_name);	//指定したオブジェクトの上側と当たっているかしらべる関数
-
 
 	//アクセサ------------------------------------------
 	void SetVecX(float x) { m_vx = x; };							//ベクトルXをセットする
