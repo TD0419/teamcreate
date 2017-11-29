@@ -31,6 +31,7 @@ CObjBullet::CObjBullet(float x, float y,float r)
 	m_vy = sin(r);
 }
 
+
 //イニシャライズ
 void CObjBullet::Init()
 {
