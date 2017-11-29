@@ -59,6 +59,7 @@ void CObjHero::Action()
 		if (objmap->GetMap(x, y) != 0)
 		{
 			m_block_type = objmap->GetMap(x, y);
+			m_block_type_up = objmap->GetMap(x, y - 1); //主人公の上のマップ番号を取る
 		}
 	}
 	//落下にリスタート----------------------------------
@@ -86,7 +87,8 @@ void CObjHero::Action()
 	//はしご-------------------------------------------------LadderScene()
 	//はしごオブジェクトを持ってくる
 	CObjLadders* objladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
-
+	bool l_jump = false;
+	
 	if (objladders != nullptr)
 	{
 		//主人公のしたに通常ブロックがあったらはしごに上っていない判定にする
@@ -95,9 +97,11 @@ void CObjHero::Action()
 			//はしごに登っていない
 			m_ladder_updown = 0;
 		}
-
+		l_jump = objladders->GetHeroJumpCon();  //はしごと主人公が当たっているかどうかを調べる
 		objladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
 	}
+
+
 
 	//はしごのアニメーションタイムを進める
 	m_ani_time_ladders += m_ladder_ani_updown;//はしごから取ってくる
@@ -164,10 +168,11 @@ void CObjHero::Action()
 	}
 
 	//ジャンプ--------------------------------------------------------------------
+	
 	//ロープを出している時は動かない  はしごを上っている時も動かない　　水に当たっているときと敵と当たった時も動かない
 	if (Input::GetVKey(VK_SPACE) == true && m_ladder_updown == 0 &&
 		m_rope_ani_con == false && m_hero_die_water == false &&
-		m_ani_frame_enemy_die == false)
+		m_ani_frame_enemy_die == false && l_jump == false)
 	{
 		if (m_hit_down == true)
 		{

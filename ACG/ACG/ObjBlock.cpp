@@ -251,10 +251,11 @@ void CObjBlock::AllBlockHit(
 		{
 			//ブロックの種類を持ってくる
 			block_type = objmap->GetMap(j, i);
-
+			
 			//判定したいブロック
 			if (block_type == MAP_BLOCK || block_type == MAP_THROUGH_BLOCK|| block_type ==MAP_LADDERS || block_type == MAP_NEEDLE_STAND)
 			{
+
 				if (block_type == MAP_LADDERS)//梯子なら
 				{
 					//梯子情報を持ってくる
@@ -349,11 +350,13 @@ void CObjBlock::AllBlockHit(
 									*y = map_b_y * BLOCK_SIZE - height;
 									*down = true;
 								}
+								/*
 								//梯子なら
 								else if (objmap->GetMap(i, map_b_y) == MAP_LADDERS)
 								{
 									*down = true;
 								}
+								*/
 							}
 						}
 						//上に移動している

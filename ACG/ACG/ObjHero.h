@@ -41,6 +41,7 @@ public:
 	bool GetRopeAniCon() { return m_rope_ani_con; }					//ロープのアニメーションが始まっているかどうかを返す
 	bool GetRopeDeleteRKey() { return m_rope_delete_r_kye; }		//アニメーション用ロープが消えたかどうかを管理するフラグを渡す
 	int GetBlockType() { return m_block_type; }						//下のブロック(踏んでいる)情報を渡す
+	int GetBlockTypeUp() { return m_block_type_up; }                //上のブロック情報を渡す
 	int GetLadderUpdown() { return m_ladder_updown; }				//主人公がはしごのどのアニメーション中かを返す
 
 	void HeroGoal() { m_goal_flag = true; m_radius = 0.0f; }		//主人公のゴール処理切り替え関数(ゴールフラグを立てる)
@@ -56,6 +57,7 @@ private:
 	float m_posture;//姿勢 //右：0.0ｆ　左：1.0ｆ
 	float m_r;		//主人公の回転角度
 	int   m_block_type;//踏んでるブロックの値を保存する
+	int   m_block_type_up; //主人公の上のブロックの値を保存する
 	float m_fall_speed_max;//主人公の落下スピード最大速度
 	float m_radius; //主人公が死んだ時、周りから黒くする半径の変数
 	bool  m_gravity_flag; // 主人公の重力落下フラグ true:重力あり false:重力なし
