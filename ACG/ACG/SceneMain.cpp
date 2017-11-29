@@ -40,6 +40,7 @@ void CSceneMain::InitScene()
 		Scene::SetScene(new CSceneGameOver());
 		return;
 	}
+
 	AudioDataLoading();//音楽データ読み込み関数
 	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
@@ -62,12 +63,15 @@ void CSceneMain::InitScene()
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
 
-	//回転床テスト用
+	//回転床テスト用----------
+	//当たり判定のバグがあったので残しています。バグが取れたら消してください
+
 	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
 	//objrollblock = new CObjRollBlock(10, 15, 1);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	//------------------------------
 	
 	//ステージ５の拡散弾
 	//CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
@@ -159,7 +163,6 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 //画像データ読み込み関数
 void CSceneMain::ImageDataLoading()
 {
-
 	//ステージ別の画像読み込み
 	switch (((UserData*)Save::GetData())->stagenum)
 	{

@@ -164,14 +164,6 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objDoor, OBJ_DOOR, 9);
 			break;
 		}
-
-		case MAP_LIFT_TYPE_MANUAL:		//手動リフト(横移動)作成
-		{
-			CObjLift* objlift = new CObjLift(x, y,0,640.0f,0);
-			Objs::InsertObj(objlift, OBJ_LIFT, 9);
-			break;
-		}
-		
 		
 		case MAP_LIFT_TYPE_AUTO_WIDTH:		//自動横移動リフト作成
 		{

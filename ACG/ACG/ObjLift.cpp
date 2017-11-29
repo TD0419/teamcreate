@@ -45,7 +45,7 @@ CObjLift::CObjLift(int px, int py,float vx,float vy,float width_max, float lengt
 CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 {
 	//初期位置を決める
-	m_px = (float)px * BLOCK_SIZE;
+ 	m_px = (float)px * BLOCK_SIZE;
 	m_py = (float)py * BLOCK_SIZE;
 	
 	//移動方向と初期移動方向を決める
@@ -140,7 +140,7 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 //イニシャライズ
 void CObjLift::Init()
 {
-	//移動量を０にする
+	//移動量を0にする
 	m_move_x = 0.0f;
 	m_move_y = 0.0f;
 	m_vx = 0.0f;
@@ -291,7 +291,6 @@ void CObjLift::ModeMove()
 					{
 						//右に進む
 						m_vx = SPEED;
-
 					}
 
 				}

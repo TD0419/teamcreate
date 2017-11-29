@@ -2,6 +2,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\Audio.h"
+#include "GameL\UserData.h"
 
 #include "GameHead.h"
 #include "ObjRopeSwitch.h"
@@ -13,10 +14,8 @@ using namespace GameL;
 //コンストラクタ
 CObjRopeSwitch::CObjRopeSwitch(int x, int y)
 {
-	m_px = x * ROPE_SWITCH_SIZE;
-	m_py = y * ROPE_SWITCH_SIZE;
-
-	
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
 }
 
 //イニシャライズ
@@ -32,6 +31,30 @@ void CObjRopeSwitch::Action()
 {
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
+
+	//リフトオブジェクトをもってくる
+	CObjLift* objlift = (CObjLift*)Objs::GetObj(OBJ_LIFT);
+
+	if (objlift == nullptr)//リフトオブジェクトがなければ
+	{
+		switch (((UserData*)Save::GetData())->stagenum)
+		{
+		case 1://ステージ1
+		{
+			//リフト（手動）の生成
+			CObjLift* objlift = new CObjLift(28, 22, 0, 640.0f,0);
+			Objs::InsertObj(objlift, OBJ_LIFT, 9);
+			break;
+		}
+		//case 5://ステージ5	←ステージ５が大方できたらコメントはずして位置など調整してください
+		//{
+		//	//リフト（手動）の生成
+		//	CObjLift* objlift = new CObjLift(, , , ,);
+		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
+		//	break;
+		//}
+		}
+	}
 
 	//ロープが当たっていれば
 	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
@@ -65,9 +88,9 @@ void CObjRopeSwitch::Draw()
 	src.m_bottom = 64.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_py - objmap->GetScrollY();
-	dst.m_left = 0.0f + m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + ROPE_SWITCH_SIZE;
+	dst.m_top	 = m_py - objmap->GetScrollY();
+	dst.m_left	 = m_px - objmap->GetScrollX();
+	dst.m_right  = dst.m_left + ROPE_SWITCH_SIZE;
 	dst.m_bottom = dst.m_top + ROPE_SWITCH_SIZE;
 
 	//描画
