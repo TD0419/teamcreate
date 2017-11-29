@@ -271,6 +271,12 @@ void CObjMap::CreateObj(int x, int y)
 
 		}
 
+		case MAP_FALLING_BLOCK:
+		{
+			CObjFallingBlock* objfalling_block = new CObjFallingBlock(x,y);
+			Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK,9);
+		}
+
 	}
 
 	m_map[y][x].create = false;//フラグをオフにする	

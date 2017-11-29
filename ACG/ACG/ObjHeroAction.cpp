@@ -130,18 +130,10 @@ void CObjHero::RopeThrow() {
 
 }
 
-void CObjHero::Shot() {
-
-
-	//Scene　開店準備
+void CObjHero::Shot() 
+{
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-
-
-
-
-
 
 	//左クリックを押したら   水に当たっているときと敵に当たっている時は動かない
 	if (Input::GetMouButtonL() == true && m_hero_die_water == false && m_ani_frame_enemy_die == false)
@@ -179,11 +171,15 @@ void CObjHero::Shot() {
 						// 弾丸の角度から発射位置のずれを求める(*50.0fは腕の回りによる円の半径)
 						float x_add = cos(m_bullet_r* 3.14f / 180.f) * 50.0f;
 						float y_add = sin(m_bullet_r* 3.14f / 180.f) * 50.0f;
+						
 						//弾丸作成
 						Audio::Start(FIRING);//音楽スタート
+						
 						CObjBullet* objbullet = new CObjBullet(m_px + x_add + 30.0f, m_py + y_add + 55.0f, m_bullet_r);
 						Objs::InsertObj(objbullet, OBJ_BULLET, 10);
+
 						m_bullet_control = false; //弾丸を出ないフラグにする。
+						m_before_shot_time = m_count;//弾を撃った時間を記憶する
 					}
 					else if (m_posture == 1.0f && m_ladder_updown == 0)//主人公が左を向いていてはしごに登っていない時とき右側から発射
 					{
@@ -196,18 +192,23 @@ void CObjHero::Shot() {
 						// 弾丸の角度から発射位置のずれを求める(*50.0fは腕の回りによる円の半径)
 						float x_add = cos(m_bullet_r* 3.14f / 180.f) * 50.0f;
 						float y_add = sin(m_bullet_r* 3.14f / 180.f) * 50.0f;
+						
 						Audio::Start(FIRING);//音楽スタート
+						
 						CObjBullet* objbullet = new CObjBullet(m_px + x_add + 20.0f, m_py + y_add + 55.0f, m_bullet_r);
 						Objs::InsertObj(objbullet, OBJ_BULLET, 10);
+						
 						m_bullet_control = false; //弾丸を出ないフラグにする。
+						m_before_shot_time = m_count;//弾を撃った時間を記憶する
 					}
 				}
 			}
 		}
 	}
 	else
+	{
 		m_bullet_control = true; //左クリックしてなければ弾丸をでるフラグにする。
-
+	}
 
 
 
