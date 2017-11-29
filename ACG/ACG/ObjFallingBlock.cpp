@@ -40,7 +40,7 @@ void CObjFallingBlock::Action()
 	//ヒーローオブジェクトと当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		HeroHit();//衝突処理をするをする
+		HeroHit();//衝突処理をする
 	}
 
 	//タイムが0になると下に落ちる
