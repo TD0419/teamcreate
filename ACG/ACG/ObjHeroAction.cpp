@@ -168,8 +168,8 @@ void CObjHero::Shot()
 							m_bullet_r = -m_r;
 
 						// 弾丸の角度から発射位置のずれを求める(*50.0fは腕の回りによる円の半径)
-						float x_add = cos(m_bullet_r* 3.14f / 180.f) * 50.0f;
-						float y_add = sin(m_bullet_r* 3.14f / 180.f) * 50.0f;
+						float x_add = cosf(m_bullet_r* 3.14f / 180.f) * 50.0f;
+						float y_add = sinf(m_bullet_r* 3.14f / 180.f) * 50.0f;
 						
 						//弾丸作成
 						Audio::Start(FIRING);//音楽スタート
@@ -189,8 +189,8 @@ void CObjHero::Shot()
 							m_bullet_r = 180.0f + m_r;
 
 						// 弾丸の角度から発射位置のずれを求める(*50.0fは腕の回りによる円の半径)
-						float x_add = cos(m_bullet_r* 3.14f / 180.f) * 50.0f;
-						float y_add = sin(m_bullet_r* 3.14f / 180.f) * 50.0f;
+						float x_add = cosf(m_bullet_r* 3.14f / 180.f) * 50.0f;
+						float y_add = sinf(m_bullet_r* 3.14f / 180.f) * 50.0f;
 						
 						Audio::Start(FIRING);//音楽スタート
 						
