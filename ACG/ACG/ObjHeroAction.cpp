@@ -138,7 +138,6 @@ void CObjHero::Shot()
 	//左クリックを押したら   水に当たっているときと敵に当たっている時は動かない
 	if (Input::GetMouButtonL() == true && m_hero_die_water == false && m_ani_frame_enemy_die == false)
 	{
-
 		//主人公をクリックしていた場合
 		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
 		{
@@ -207,7 +206,9 @@ void CObjHero::Shot()
 	}
 	else
 	{
-		m_bullet_control = true; //左クリックしてなければ弾丸をでるフラグにする。
+		//前回のshotから一定時間経過していれば
+		if(m_count - m_before_shot_time >= SHOT_INTERVAL)
+			m_bullet_control = true; //左クリックしてなければ弾丸をでるフラグにする。
 	}
 
 
