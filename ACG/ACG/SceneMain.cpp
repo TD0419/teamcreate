@@ -73,7 +73,9 @@ void CSceneMain::InitScene()
 	//CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
 	//Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
 
-	
+	CObjFallingBlock* objfalling_block = new CObjFallingBlock(10, 18);
+	Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK, 9);
+
 
 
 	//デバッグ--------------------------------------------------
