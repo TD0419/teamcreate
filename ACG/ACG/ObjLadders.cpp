@@ -33,6 +33,7 @@ void CObjLadders::Init()
 		m_side_block_flag = false;
 
 	m_up_and_down_speed = 6.0f;//ハシゴ上り下り時の速度
+	m_hero_jump_con = false;
 }
 
 //アクション
@@ -112,10 +113,12 @@ void CObjLadders::HeroHit(float px, float py)
 		if (map_num_up == MAP_LADDERS || map_num_center == MAP_LADDERS || map_num_down == MAP_LADDERS ||
 			map_num_up == MAP_NO_LOOK_LADDERS || map_num_center == MAP_NO_LOOK_LADDERS || map_num_down == MAP_NO_LOOK_LADDERS)
 		{
+			
 			//Wキーがおされたとき 上るとき
 			if (Input::GetVKey('W') == true)
 			{
 				// はしごに掴まっていない(アニメーション中ではない) 調整の余地あり
+
 				if (objhero->GetLadderUpdown() == 0 && map_num_center != MAP_LADDERS && map_num_center != MAP_NO_LOOK_LADDERS)
 				{
 					// はしごブロックの上にいるので下に落ちないようにする
@@ -148,6 +151,11 @@ void CObjLadders::HeroHit(float px, float py)
 				//ロープ出している時ははしごに降りれない
 				if (objhero->GetRopeAniCon() == false)
 				{
+					//主人公の上のブロックが何もないなら
+					if (objhero->GetBlockTypeUp() != MAP_SPACE)
+					{
+						m_hero_jump_con = true; //主人公をジャンプできないようにする（Hero.cppで処理）
+					}
 					//下に通常ブロックが無かったら
 					if (objhero->GetBlockType() != MAP_BLOCK)
 					{
@@ -167,6 +175,12 @@ void CObjLadders::HeroHit(float px, float py)
 				// はしごにつかまっていない場合(はしごを上るアニメーション中ではない)
 				if (objhero->GetLadderUpdown() == 0)
 				{
+					//主人公の上のブロックが何もないなら
+					if (objhero->GetBlockTypeUp() != MAP_SPACE)
+					{
+						m_hero_jump_con = true; //主人公をジャンプできないようにする（Hero.cppで処理）
+					}
+
 					// 一番下にしかはしごがなかったらブロックのように落ちないようにする(一応動いているが判定の仕方に問題あり)
 					if(map_num_down == MAP_LADDERS && map_num_up != MAP_LADDERS && map_num_center != MAP_LADDERS ||
 						map_num_down == MAP_NO_LOOK_LADDERS && map_num_up != MAP_NO_LOOK_LADDERS && map_num_center != MAP_NO_LOOK_LADDERS)
@@ -193,10 +207,10 @@ void CObjLadders::HeroHit(float px, float py)
 		}
 		else
 		{
+			m_hero_jump_con = false;       //主人公をジャンプできるようにする（Hero.cppで処理）
 			objhero->SetGravityFlag(true); // はしごに当たっていないときは重力がかかるようにする
-			objhero->SetLaddersUpdown(0);//主人公がはしごに当たってないときは0を渡す
+			objhero->SetLaddersUpdown(0);  //主人公がはしごに当たってないときは0を渡す
 		}
 	}
-	
 }
 

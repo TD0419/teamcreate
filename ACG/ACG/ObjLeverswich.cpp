@@ -22,7 +22,7 @@ void CObjLeverSwich::Init()
 {
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
-	m_ani_max_time = 4; //アニメーション間隔幅
+	m_ani_max_time = 1; //アニメーション間隔幅
 	m_ani_flag = false;
 	m_ani_flag2 = false;
 	m_water_con = false;
@@ -52,7 +52,7 @@ void CObjLeverSwich::Action()
 
 		//アニメーションの感覚管理
 		//　レバースイッチの描画が押していない状態のとき
-		if (m_ani_flag2 == false && m_ani_flag == false && m_ani_time > m_ani_max_time)
+		if (m_ani_flag2 == false && m_ani_flag == false && m_ani_time >= m_ani_max_time)
 		{
 			m_ani_frame += 1;
 			m_ani_time = 0;
@@ -60,7 +60,7 @@ void CObjLeverSwich::Action()
 		}
 
 		//　レバースイッチの描画が押している状態のとき
-		else if (m_ani_flag2 == true && m_ani_flag == true && m_ani_time > m_ani_max_time)
+		else if (m_ani_flag2 == true && m_ani_flag == true && m_ani_time >= m_ani_max_time)
 		{
 			
 			m_ani_frame -= 1;
