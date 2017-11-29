@@ -107,7 +107,6 @@ void CObjLastWall::Action()
 					objhero->SetPosY(m_py + 512.0f - m_wall_gauge +65.0f);//主人公の位置をLastWallの下側までずらす
 					
 				}
-
 			}
 		}
 	}
@@ -185,7 +184,7 @@ void CObjLastWall::Action()
 		}
 		else
 		{
-			//heroが左側に振れてたら押されていたら
+			//heroが左側に振れてたら
 			if (m_hero_hit_flag == true && m_wall_down_flag == false)
 			{
 				m_wall_gauge += 3; // 3ずつ増やしていく
@@ -207,10 +206,12 @@ void CObjLastWall::Action()
 			m_wall_gauge = 0;		//wall初期化
 			Audio::Stop(WALL);		//音楽ストップ
 		}
+
 		//壁がしまった時
 		if (m_wall_gauge2 >= 512)
 		{
 			Audio::Stop(WALL);//音楽ストップ
+			m_wall_unlock_flag = false;
 		}
 		//壁が開いているとき
 		else
