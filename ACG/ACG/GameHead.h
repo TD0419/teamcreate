@@ -199,6 +199,8 @@ enum MUSIC
 	STAGE2  ,	//ステージ2
 	STAGE2_BOSS,//ステージ2ボス
 	STAGE5  ,	//ステージ5
+	STAGE5_BOSS,//ステージ5ボス
+	GAMEOVER,	//ゲームオーバー
 //SE---------------------
 	FIRING		,//弾の発射
 	ROPE		,//ロープの打ち出し
@@ -214,7 +216,8 @@ enum MUSIC
 	RELEASELIFT		,//リフト(離れる)
 	WAVE		,//水の流れ
 	GORILLATHROW,//ゴリラの投擲音
-
+	ROLLBLOCK,	 //回転ブロック
+	HERODEAD,	 //ヒーロー死亡時
 };
 
 //オブジェクトのサイズ

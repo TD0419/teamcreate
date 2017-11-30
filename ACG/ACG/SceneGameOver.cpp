@@ -34,14 +34,12 @@ void CSceneGameOver::InitScene()
 	//ゲームオーバー画像読み込み
 	Draw::LoadImageW(L"Image\\BackGround\\Scene_Game_Over.png", GRA_GAME_OVER, TEX_SIZE_1024);
 
-	////音楽情報の読み込み
-	////BGM－－－－
-	//Audio::LoadAudio(0, L".wav", BACK_MUSIC);	//ゲームオーバー音
+	//音楽情報の読み込み
+	//BGM－－－－
+	Audio::LoadAudio(GAMEOVER, L"BGM\\GameOver.wav", BACK_MUSIC);	//ゲームオーバー音
 	//																
-	////０番の音楽スタート
-	//Audio::Start(0);
 
-	////SE－－－－－
+	//SE－－－－－
 	//Audio::LoadAudio(1, L".wav", EFFECT);			//決定音
 
 																		

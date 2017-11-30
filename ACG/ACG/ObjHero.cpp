@@ -432,6 +432,7 @@ void CObjHero::Draw()
 
 	//本体---------------------------------
 	//切り取り位置
+
 	//敵に当たった時
 	if(m_hero_die_enemy == true)
 	{
@@ -546,17 +547,6 @@ void CObjHero::Draw()
 	Draw::Draw(GRA_HERO, &src, &dst, color, 0.0f);
 	//本体-------------------------------------
 
-
-	////画面全体を暗くするです。
-	//Draw::SetFill(true);
-	////画面全体をこの色にする
-	////staticなのは消すかもしれないから
-	//static float col[4] = { 0.0f };
-	//col[0] -= 0.001f;
-	//col[1] -= 0.001f;
-	//col[2] -= 0.001f;
-	//Draw::SetColor(col);
-
 	//画面全体をだんだん暗くする処理----------------------------------
 	//死んだことが確定した場合
 	if (m_hero_die_water == true || m_hero_die_enemy == true || m_py > 2000.0f)
@@ -564,7 +554,7 @@ void CObjHero::Draw()
 		// 黒色
 		float radius_color[4] = { 0.f, 0.f, 0.f, 1.f };
 		// 円描画
-		CircleDraw(-11.0f, radius_color, Die);
+		CircleDraw(-7.8f, radius_color, Die);
 	}
 	//----------------------------------------------------------------
 
@@ -619,6 +609,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	// Heroが死んでいたら
 	if (type == Die)
 	{
+		Audio::Start(HERODEAD);
 		//落下時の中央位置 
 		if (m_hero_die_flag == false)
 		{
@@ -645,7 +636,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	//正四角形の１辺の長さ
 	//長ければ長いほど軽く
 	//短ければ短いほど重いよ
-	float one_side = 6.0f;
+	float one_side = 5.5f;
 
 	//半径が最小になったらシーン移行する（上のほうにある）
 	// Heroが死んでいたら

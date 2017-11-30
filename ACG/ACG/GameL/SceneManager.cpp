@@ -34,8 +34,10 @@ int				CSceneManager::m_TimeCount;
 //“o˜^‚µ‚Ä‚éƒV[ƒ“‚ðŽÀs‚·‚é
 void CSceneManager::GameLoop()
 {
+	static wchar_t  c[8];
+	static float cl[4] = { 1.0f,1.0f,1.0f,1.0f };
+	if(m_TimeCount == 0) m_TimeStart = timeGetTime();
 	m_TimeCount++;	
-	m_TimeStart=timeGetTime();
 	
 	CDirectXDeviec::ViewClear();
 	CDirectXDeviec::ViewDraw2D();
@@ -45,17 +47,17 @@ void CSceneManager::GameLoop()
 	SceneDraw();	//ƒV[ƒ“•`‰æ
 	
 	m_TimeEnd=timeGetTime();
-	m_Time+= m_TimeEnd - m_TimeStart;
+	m_Time = m_TimeEnd - m_TimeStart;
+
+	Sleep(16 - (m_Time / 1000));// 60FPS‚ÉŒÅ’è
 
 	//FPS----------------
 	if(DRAW_FPS)
 	{
-		static wchar_t  c[8];
-		static float cl[4]={1.0f,1.0f,1.0f,1.0f};
-		if(m_TimeCount>100)
+		
+		if(m_Time>=1000)
 		{
-			swprintf_s(c,L"%d",m_Time/100);
-			m_Time=0;
+			swprintf_s(c,L"%d",m_TimeCount);
 			m_TimeCount=0;
 		}
 		CDrawFont::StrDraw(c,0,0,16,cl);
