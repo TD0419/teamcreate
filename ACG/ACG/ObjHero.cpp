@@ -547,17 +547,6 @@ void CObjHero::Draw()
 	Draw::Draw(GRA_HERO, &src, &dst, color, 0.0f);
 	//本体-------------------------------------
 
-
-	////画面全体を暗くするです。
-	//Draw::SetFill(true);
-	////画面全体をこの色にする
-	////staticなのは消すかもしれないから
-	//static float col[4] = { 0.0f };
-	//col[0] -= 0.001f;
-	//col[1] -= 0.001f;
-	//col[2] -= 0.001f;
-	//Draw::SetColor(col);
-
 	//画面全体をだんだん暗くする処理----------------------------------
 	//死んだことが確定した場合
 	if (m_hero_die_water == true || m_hero_die_enemy == true || m_py > 2000.0f)
