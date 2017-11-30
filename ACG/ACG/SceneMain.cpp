@@ -66,11 +66,11 @@ void CSceneMain::InitScene()
 	//回転床テスト用----------
 	//当たり判定のバグがあったので残しています。バグが取れたら消してください
 
-	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
+	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
-	//objrollblock = new CObjRollBlock(10, 15, 1);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	objrollblock = new CObjRollBlock(10, 15, 1);
+	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 	//------------------------------
 	
 	//ステージ５の拡散弾
