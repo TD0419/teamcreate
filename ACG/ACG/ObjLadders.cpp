@@ -151,7 +151,7 @@ void CObjLadders::HeroHit(float px, float py)
 				//ロープ出している時ははしごに降りれない
 				if (objhero->GetRopeAniCon() == false)
 				{
-					//主人公の上のブロックが何もないなら
+					//主人公の上のブロックが何もないなら(上りきったときのこと)
 					if (objhero->GetBlockTypeUp() != MAP_SPACE)
 					{
 						m_hero_jump_con = true; //主人公をジャンプできないようにする（Hero.cppで処理）
