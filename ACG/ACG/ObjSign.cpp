@@ -79,8 +79,8 @@ void CObjSign::Draw()
 
 	//描画位置
 	dst.m_top = -SIGN_SIZE * 6.0f - 16.0f + m_py - objmap->GetScrollY();
-	dst.m_left = -192.0f +SIGN_SIZE / 2.0f + m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + 384.0f;
+	dst.m_left = -192.0f +SIGN_SIZE / 2.0f + m_px + 54.0f - objmap->GetScrollX();
+	dst.m_right = dst.m_left + 384.0f - 84.0f;
 	dst.m_bottom = dst.m_top + 128.0f;
 
 	//主人公と当たっている時
@@ -93,10 +93,10 @@ void CObjSign::Draw()
 		if (m_map_x == 68 && m_map_y == 22)
 		{
 			//文字セット
-			Font::StrDraw(L"岩は銃で壊れるぞ", dst.m_left + 65.0f, dst.m_top + 48.0f, 32.0f, color_str);
+			Font::StrDraw(L"岩は銃で壊れるぞ", dst.m_left + 15.0f, dst.m_top + 48.0f, 32.0f, color_str);
 		}
 		else
-		Font::StrDraw(L"縄で引っ張ると･･･", dst.m_left + 65.0f, dst.m_top + 48.0f , 32.0f, color_str); //一個目の看板のテキスト
+		Font::StrDraw(L"縄で引っ張ると･･･", dst.m_left + 15.0f, dst.m_top + 48.0f , 32.0f, color_str); //一個目の看板のテキスト
 	}
 	//----------------------------------------------------------------------------
 
