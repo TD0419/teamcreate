@@ -53,7 +53,7 @@ void CObjHero::Init()
 	m_ani_time_water_die = 0;
 	m_ani_frame_water_die = 0;//主人公が水に当たった時静止フレームを初期にする
 
-	m_ani_max_time_enemy_die = 18;         //主人公が敵に当たった時アニメーション間隔幅 
+	m_ani_max_time_enemy_die = 25;         //主人公が敵に当たった時アニメーション間隔幅 
 	m_ani_time_enemy_die = 0;
 	m_ani_frame_enemy_die = 0;//主人公が敵に当たった時静止フレームを初期にする
 
