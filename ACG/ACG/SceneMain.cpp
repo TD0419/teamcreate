@@ -77,8 +77,9 @@ void CSceneMain::InitScene()
 	//CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
 	//Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
 
-	
-
+	//ステージ５のボス(デバッグ中。消さないで)
+	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,10);
+	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
 
 	//デバッグ--------------------------------------------------
@@ -222,7 +223,7 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
 		//ロープでぶら下がることができるギミック
 		Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
-
+		
 		break;
 
 	//画像が用意されていない場合
@@ -296,6 +297,15 @@ void CSceneMain::ImageDataLoading()
 
 	//ステージ5の大砲の弾（仮）
 	Draw::LoadImageW(L"Image\\Enemy_Bullet.png", GRA_CANNON_BEAM, TEX_SIZE_64);
+
+	//ステージ５ボス胴体
+	Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_BODY, TEX_SIZE_256);
+	//ステージ５ボス眼球
+	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
+	//ステージ５ボス腕
+	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
+	//ステージ５ボス胴腕接続電気
+	Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_ELECTRIC, TEX_SIZE_512);
 
 }
 
