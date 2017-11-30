@@ -309,13 +309,6 @@ void CSceneMain::ImageDataLoading()
 //音楽データ読み込み関数
 void CSceneMain::AudioDataLoading()
 {
-	//タイトル
-	//BGM-------------------------------------------------------
-
-	//ゲームオーバー
-	//BGM-----------------------------------------------------
-	Audio::LoadAudio(GAMEOVER, L"BGM\\GameOver.wav", BACK_MUSIC);
-
 	//ステージ１
 	//BGM---------------------------------------------------------
 	Audio::LoadAudio(STAGE1, L"BGM\\Grassland6.wav", BACK_MUSIC);
@@ -338,7 +331,7 @@ void CSceneMain::AudioDataLoading()
 	//水の流れる音
 	Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 	//ゴリラの投擲音
-	Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla Throw5.wav", EFFECT);
+	Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw5.wav", EFFECT);
 
 	//ステージ5
 	//BGM----------------------------------------------------------
