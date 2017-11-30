@@ -564,7 +564,7 @@ void CObjHero::Draw()
 		// çïêF
 		float radius_color[4] = { 0.f, 0.f, 0.f, 1.f };
 		// â~ï`âÊ
-		CircleDraw(-11.0f, radius_color, Die);
+		CircleDraw(-7.8f, radius_color, Die);
 	}
 	//----------------------------------------------------------------
 
