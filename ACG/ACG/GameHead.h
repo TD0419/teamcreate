@@ -195,11 +195,8 @@ enum GRAPHIC_ID
 enum MUSIC
 {
 //BGM--------------------
-	STAGE1	,	//ステージ1
-	STAGE2  ,	//ステージ2
-	STAGE2_BOSS,//ステージ2ボス
-	STAGE5  ,	//ステージ5
-	STAGE5_BOSS,//ステージ5ボス
+	STAGE,      //ステージ
+	BOSS,       //ボス
 	GAMEOVER,	//ゲームオーバー
 //SE---------------------
 	FIRING		,//弾の発射

@@ -114,18 +114,18 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	switch (((UserData*)Save::GetData())->stagenum )
 	{
 	case 1:
-		Audio::Start(STAGE1);
+		Audio::Start(STAGE);
 		p = Save::ExternalDataOpen(L"stage1.csv", &size);//外部データ読み込み
 		break;
 	case 2:
-		Audio::Start(STAGE2);
+		Audio::Start(STAGE);
 		p = Save::ExternalDataOpen(L"stage2.csv", &size);//外部データ読み込み
 		break;
 	case 3:
 		p = Save::ExternalDataOpen(L"stage3.csv", &size);//外部データ読み込み
 		break;
 	case 5:
-		Audio::Start(STAGE5);
+		Audio::Start(STAGE);
 		p=Save::ExternalDataOpen(L"stage5.csv", &size);//外部データ読み込み
 	default:
 		break;
@@ -320,40 +320,49 @@ void CSceneMain::ImageDataLoading()
 //音楽データ読み込み関数
 void CSceneMain::AudioDataLoading()
 {
-	//ステージ１
-	//BGM---------------------------------------------------------
-	Audio::LoadAudio(STAGE1, L"BGM\\Grassland6.wav", BACK_MUSIC);
-	//SE----------------------------------------------------------
-	//木の転倒
-	Audio::LoadAudio(TREE, L"SE\\Tree3.wav", EFFECT);
-	//リフト(引っ張る)
-	Audio::LoadAudio(PULLLIFT, L"SE\\LiftTrickPull.wav", EFFECT);
-	//リフト(離す)
-	Audio::LoadAudio(RELEASELIFT, L"SE\\LiftTrickRelease.wav", EFFECT);
+	//ステージ別の画像読み込み
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		//ステージ１
+	case 1:
+		//BGM---------------------------------------------------------
+		Audio::LoadAudio(STAGE, L"BGM\\Grassland6.wav", BACK_MUSIC);
+		//SE----------------------------------------------------------
+		//木の転倒
+		Audio::LoadAudio(TREE, L"SE\\Tree3.wav", EFFECT);
+		//リフト(引っ張る)
+		Audio::LoadAudio(PULLLIFT, L"SE\\LiftTrickPull.wav", EFFECT);
+		//リフト(離す)
+		Audio::LoadAudio(RELEASELIFT, L"SE\\LiftTrickRelease.wav", EFFECT);
+		break;
 
-	//ステージ2
-	//BGM---------------------------------------------------------
-	Audio::LoadAudio(STAGE2, L"BGM\\Jangle.wav", BACK_MUSIC);
-	//ステージ2_BOSS
-	Audio::LoadAudio(STAGE2_BOSS, L"BGM\\BOSS2.wav", BACK_MUSIC);
-	//SE----------------------------------------------------------
-	//ボタン
-	Audio::LoadAudio(BUTTON, L"SE\\Switch2.wav", EFFECT);
-	//水の流れる音
-	Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
-	//ゴリラの投擲音
-	Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw.wav", EFFECT);
+	case 2:
+		//ステージ2
+		//BGM---------------------------------------------------------
+		Audio::LoadAudio(STAGE, L"BGM\\Jangle.wav", BACK_MUSIC);
+		//ステージ2_BOSS
+		Audio::LoadAudio(BOSS, L"BGM\\BOSS2.wav", BACK_MUSIC);
+		//SE----------------------------------------------------------
+		//ボタン
+		Audio::LoadAudio(BUTTON, L"SE\\Switch2.wav", EFFECT);
+		//水の流れる音
+		Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
+		//ゴリラの投擲音
+		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw5.wav", EFFECT);
+		break;
 
-	//ステージ5
-	//BGM----------------------------------------------------------
-	Audio::LoadAudio(STAGE5, L"BGM\\Temple1.wav", BACK_MUSIC);
-	Audio::LoadAudio(STAGE5_BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
-	//SE-----------------------------------------------------------
-	//敵の弾丸
-	Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
-	//回転ブロックの音
-	Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav",EFFECT);
-
+	case 5:
+		//ステージ5
+		//BGM----------------------------------------------------------
+		Audio::LoadAudio(STAGE, L"BGM\\Temple1.wav", BACK_MUSIC);
+		Audio::LoadAudio(BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
+		//SE-----------------------------------------------------------
+		//敵の弾丸
+		Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
+		//回転ブロックの音
+		Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav", EFFECT);
+		break;
+	}
 	//共通SE--------------------------------------------------------------
 	//弾の発射
 	Audio::LoadAudio(FIRING, L"SE\\Firing1.wav", EFFECT);

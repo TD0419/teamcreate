@@ -47,8 +47,8 @@ void CObjBoss::Init()
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 150.0f, 210.0f, ELEMENT_ENEMY, OBJ_BOSS, 1);
 
-	Audio::Start(STAGE2_BOSS);
-	Audio::Stop(STAGE2);
+	Audio::Start(BOSS);
+	Audio::Stop(STAGE);
 }
 
 //アクション
