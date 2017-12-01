@@ -31,7 +31,7 @@ void CObjMap::Init()
 			// 主人公のマップ位置から初期のスクロール値を決める
 			if (m_map[y][x].num == MAP_HERO_START)
 			{
-				m_scroll_y = y * BLOCK_SIZE;
+				m_scroll_y = (float)y * BLOCK_SIZE;
 			}
 			m_map[y][x].create = true; //フラグの初期化
 		}
