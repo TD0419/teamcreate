@@ -129,19 +129,24 @@ void CObjBoss::Action()
 		if (m_posture == 0.0f)
 		{
 			m_posture = 1.0f;//左向きにする
-							 //音楽スタート
+			
+			//音楽スタート
 			Audio::Start(GORILLATHROW);
+			
 			// 敵弾丸作成
 			CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
 			Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+			
 			//壁ヒットフラグをfalseにする。
 			m_wall_hit_flag = false;
+			
 			//投げるアニメーション開始フラグをＯＮにする
 			m_ani_throw_start_flag = true;
 		}
 	}
 
 	CObjDoor* objdoor = (CObjDoor*)Objs::GetObj(OBJ_DOOR);
+	
 	//弾丸とあたったらHP-1
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
