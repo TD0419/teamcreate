@@ -348,7 +348,7 @@ void CSceneMain::AudioDataLoading()
 		//…‚Ì—¬‚ê‚é‰¹
 		Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 		//ƒSƒŠƒ‰‚Ì“Š±‰¹
-		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw5.wav", EFFECT);
+		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw.wav", EFFECT);
 		break;
 
 	case 5:
