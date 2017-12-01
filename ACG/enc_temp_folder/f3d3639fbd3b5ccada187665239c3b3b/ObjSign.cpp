@@ -95,7 +95,7 @@ void CObjSign::Draw()
 
 	//•`‰æˆÊ’u
 	dst.m_top = -SIGN_SIZE * 6.0f - 16.0f + m_py - objmap->GetScrollY();
-	dst.m_left = m_px - objmap->GetScrollX() - 192.0f + SIGN_SIZE / 2.0f + 54.0f;
+	dst.m_left = -192.0f + SIGN_SIZE / 2.0f + m_px + 54.0f - objmap->GetScrollX();
 	dst.m_right = dst.m_left + 300.0f;
 	dst.m_bottom = dst.m_top + 128.0f;
 	//-------------------------------------------------------------

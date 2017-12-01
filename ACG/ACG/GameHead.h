@@ -223,6 +223,9 @@ enum MUSIC
 #define LADDERS_SIZE		  (64.0f)		//はしごのサイズ
 #define BUTTON_SIZE			  (64.0f)		//ボタンサイズ（仮）
 #define SIGN_SIZE			  (32.0f)		//看板のサイズ（仮）
+#define SIGN_FRAME_WIDTH	  (192.0f)		//看板の枠サイズ（横）
+
+
 #define LEVER_SWITCH_SIZE	  (64.0f)	    //レバースイッチのサイズ
 #define ROPE_SWITCH_SIZE	  (64.0f)	    //ロープスイッチのサイズ
 #define LIFT_SIZE_WIDTH		  (128.0f)		//リフトサイズ横サイズ
