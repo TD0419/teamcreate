@@ -96,6 +96,15 @@ void CObjBoss::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098f);
 
+	//移動先ががけなら反転させる------------------------------
+
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	int block_num = -1;
+	//objmap->GetMap();
+	//if()
+	//-------------------------------------------------------
+
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
 

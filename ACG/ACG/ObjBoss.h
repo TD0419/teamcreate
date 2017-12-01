@@ -22,8 +22,7 @@ class CObjBoss :public CObj
 		float m_vx;		 // ボスX軸方向のベクトル
 		float m_vy;		 // ボスY軸方向のベクトル
 		float m_posture; // 姿勢 右：0.0f　左：1.0f
-		float m_speed;	 // 速度
-
+		float m_speed;	 // 速度	
 		int m_hp;		 // ボスのＨＰ
 
 	//blockとの衝突確認用
