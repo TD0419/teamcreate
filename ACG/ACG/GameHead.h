@@ -214,7 +214,10 @@ enum MUSIC
 	WAVE		,//水の流れ
 	GORILLATHROW,//ゴリラの投擲音
 	ROLLBLOCK,	 //回転ブロック
-	HERODEAD,	 //ヒーロー死亡時
+	BOSSPOP,	 //ボスが撃つ弾が弾ける音(ボス拡散弾がでる時の音)
+	BOSSLASER,	 //ボスのレーザービームの音
+	GROUND,		 //地面が落ちる音
+	DIFFUSION,	 //ステージ5の拡散弾
 };
 
 //オブジェクトのサイズ

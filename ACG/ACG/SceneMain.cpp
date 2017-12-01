@@ -333,14 +333,14 @@ void CSceneMain::AudioDataLoading()
 		//BGM---------------------------------------------------------
 		Audio::LoadAudio(STAGE, L"BGM\\Jangle.wav", BACK_MUSIC);
 		//ステージ2_BOSS
-		Audio::LoadAudio(BOSS, L"BGM\\BOSS2.wav", BACK_MUSIC);
+		Audio::LoadAudio(BOSS, L"BGM\\Boss2.wav", BACK_MUSIC);
 		//SE----------------------------------------------------------
 		//ボタン
 		Audio::LoadAudio(BUTTON, L"SE\\Switch2.wav", EFFECT);
 		//水の流れる音
 		Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 		//ゴリラの投擲音
-		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw5.wav", EFFECT);
+		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw.wav", EFFECT);
 		break;
 
 	case 5:
@@ -349,10 +349,16 @@ void CSceneMain::AudioDataLoading()
 		Audio::LoadAudio(STAGE, L"BGM\\Temple1.wav", BACK_MUSIC);
 		Audio::LoadAudio(BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
 		//SE-----------------------------------------------------------
-		//敵の弾丸
-		Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
 		//回転ブロックの音
 		Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav", EFFECT);
+		//ボスの拡散弾が出現するときの音
+		Audio::LoadAudio(BOSSPOP, L"SE\\BossPop.wav", EFFECT);
+		//ボスのレーザーが出現するときの音
+		Audio::LoadAudio(BOSSLASER, L"SE\\BossLaser.wav", EFFECT);
+		//地面が落ちる音
+		Audio::LoadAudio(GROUND, L"SE\\Ground.wav", EFFECT);
+		//大砲の拡散弾の音
+		Audio::LoadAudio(DIFFUSION, L"SE\\Diffusion.wav", EFFECT);
 		break;
 	}
 	//共通SE--------------------------------------------------------------
@@ -377,6 +383,7 @@ void CSceneMain::AudioDataLoading()
 	//レバースイッチ
 	Audio::LoadAudio(LEVER, L"SE\\Lever1.wav", EFFECT);
 
-	Audio::LoadAudio(HERODEAD, L"SE\\Dead.wav", EFFECT);
+	//敵の弾丸
+	Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
 	//------------------------------------------------------------
 }

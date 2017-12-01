@@ -717,7 +717,6 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	// Hero‚ªŽ€‚ñ‚Å‚¢‚½‚ç
 	if (type == Die)
 	{
-		Audio::Start(HERODEAD);
 		//—Ž‰ºŽž‚Ì’†‰›ˆÊ’u 
 		if (m_hero_die_flag == false)
 		{
