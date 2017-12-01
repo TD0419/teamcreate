@@ -14,8 +14,9 @@
 using namespace GameL;
 
 //コンストラクタ
-//引数1,2　初期ポジション
-//引数3	残機数
+//引数1 x			:初期ポジションX
+//引数2	y			:初期ポジションY
+//引数3	remaining	:残機数
 CObjHero::CObjHero(int x, int y, int remaining)
 {
 	m_px = (float)x * BLOCK_SIZE;
@@ -40,7 +41,6 @@ void CObjHero::Action()
 
 	//落ちるブロックオブジェクトを持ってくる
 	CObjFallingBlock* objfalling_block = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
-
 
 	//主人公の左下、真下、右下にあるブロック情報を取得
 	//真下のブロック情報を優先する
@@ -217,6 +217,51 @@ void CObjHero::Action()
 
 	Scroll();	//スクロール処理をおこなう
 
+	//ロープオブジェクト情報を持ってくる
+	CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
+	//ロープオブジェクトが有る かつ ターザンポイントに引っかかっているなら
+	//ロープの位置を中心に振り子の動きをする
+	if ((objrope != nullptr && objrope->GetTarzanPointFlag() == true))
+	{
+			float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
+			float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
+			//ロープがターザンポイントに引っかかった瞬間だけ処理
+			//引っかかっていなかったら振り子データ(重力加速度以外)は0.0fなのでこの条件
+			if (pendulum_data.length == 0.0f&&pendulum_data.pretend_width == 0.0f &&
+				pendulum_data.time == 0.0f)
+			{
+				//振り子の糸の長さを計算
+				pendulum_data.length = sqrt((ab_x * ab_x) + (ab_y * ab_y));
+
+				//振り子の糸の長さから今何時(周期)なのかを求める						↓重力加速度が0.98なのを98.0に直している
+				pendulum_data.time = 2.0f*3.141592f*sqrt(pendulum_data.length / (pendulum_data.gravity*100.0f));
+
+				//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
+				pendulum_data.pretend_width = pendulum_data.length / 7.0f;
+			}
+			//ロープから主人公のベクトルの角度を計算
+			float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
+			
+			r = r * 3.14f / 180.0f;//ラジアン度にする
+
+			//ロープの位置
+			float tx = objrope->GetPosX(), ty = objrope->GetPosY();
+
+			//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
+			m_vx = cosf(r) - sinf(r) * pendulum_data.length + (tx - m_px);
+			m_vy = sinf(r) + cosf(r) * pendulum_data.length + (ty - m_py);
+
+			//周期を進める
+			pendulum_data.time +=1.0f;
+	}
+	//ロープがターザンポイントに引っかかっていなかったら
+	//振り子データの重力加速度以外を初期化
+	else
+	{
+		pendulum_data.length = 0.0f;
+		pendulum_data.pretend_width = 0.0f;
+		pendulum_data.time = 0.0f;
+	}
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
@@ -245,7 +290,6 @@ void CObjHero::Action()
 	//角度を求める
 	m_r = rad * 180.0f / 3.14f;
 	//--------------------------------------------------------
-
 
 	//発砲---------------------------------------------------Shot()
 	Shot();
