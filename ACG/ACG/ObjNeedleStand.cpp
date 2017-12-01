@@ -49,7 +49,7 @@ void CObjNeedleStand::Draw()
 	//êÿÇËéÊÇËà íu
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = src.m_left + 64.0f;
+	src.m_right = src.m_left + 640.0f;
 	src.m_bottom = src.m_top + 64.0f;
 
 	//ï`âÊà íu
@@ -59,6 +59,6 @@ void CObjNeedleStand::Draw()
 	dst.m_bottom = dst.m_top + NEEDLE_STAND_SIZE;
 
 	//ï`âÊ
-	Draw::Draw(GRA_NEEDLE_STAND, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_WIRE_MASH, &src, &dst, color, 0.0f);
 	//-------------------------------------------------------
 }

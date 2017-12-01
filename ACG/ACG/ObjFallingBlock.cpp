@@ -1,6 +1,6 @@
 //使用するヘッダーファイル
 #include "GameL\HitBoxManager.h"
-
+#include "GameL\Audio.h"
 #include "GameHead.h"
 #include "ObjFallingBlock.h"
 #include "Function.h"
@@ -49,6 +49,7 @@ void CObjFallingBlock::Action()
 	//if (m_falling_time < 0)
 	//{
 	//	m_py += 1.0f;
+		//Audio::Start(GROUND);
 	//}
 
 	//HitBoxの位置を更新する

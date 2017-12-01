@@ -66,6 +66,10 @@ void CObjHero::Init()
 	m_hit_right = false;
 	m_hit_down = false;
 
+	pendulum_data.gravity = 0.98f;//重力加速度を設定(本当は9.8にしたいけど計算がおかしいのか早くなる)
+	pendulum_data.length = 0.0f;	//振り子の長さ
+	pendulum_data.pretend_width = 0.0f;//ふり幅
+	pendulum_data.time = 0.0f;//時間(周期)
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, 64, 112, ELEMENT_PLAYER, OBJ_HERO, 1);
 }

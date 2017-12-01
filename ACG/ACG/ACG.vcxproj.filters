@@ -130,6 +130,9 @@
     <Filter Include="ソース ファイル\Main\FallingBlock">
       <UniqueIdentifier>{6c3d54fa-22ae-4188-b990-8b3878b2bd86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\WireMesh">
+      <UniqueIdentifier>{5634ba29-12eb-415d-996a-69b59901e12f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -308,6 +311,9 @@
     </ClInclude>
     <ClInclude Include="ObjFallingBlock.h">
       <Filter>ソース ファイル\Main\FallingBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjWireMesh.h">
+      <Filter>ソース ファイル\Main\WireMesh</Filter>
     </ClInclude>
     <ClInclude Include="ObjStage5BossArms.h">
       <Filter>ソース ファイル\Main\Stage5Boss</Filter>
@@ -493,6 +499,9 @@
     </ClCompile>
     <ClCompile Include="ObjFallingBlock.cpp">
       <Filter>ソース ファイル\Main\FallingBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjWireMesh.cpp">
+      <Filter>ソース ファイル\Main\WireMesh</Filter>
     </ClCompile>
     <ClCompile Include="ObjStage5BossArms.cpp">
       <Filter>ソース ファイル\Main\Stage5Boss</Filter>
