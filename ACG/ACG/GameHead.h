@@ -184,10 +184,11 @@ enum GRAPHIC_ID
 	GRA_ROLL_BLOCK_SWITCH,	//回転床用のスイッチ
 	GRA_BLACK_BALL,			//回転ブロックの仕掛けのスイッチ
 	GRA_CANNON_BEAM,		//ステージ5の拡散弾
+	GRA_STAGE5_BOSS_ELECTRIC,	 	//ステージ5のボス胴腕接続電気
 	GRA_STAGE5_BOSS_BODY,	//ステージ5のボス胴体
 	GRA_STAGE5_BOSS_EYE,	//ステージ5のボス眼球
 	GRA_STAGE5_BOSS_ARMS_ALL,      	//ステージ5のボス腕(左右腕)
-	GRA_STAGE5_BOSS_ELECTRIC,	 	//ステージ5のボス胴腕接続電気
+	
  
 };
 

@@ -66,11 +66,11 @@ void CSceneMain::InitScene()
 	//回転床テスト用----------
 	//当たり判定のバグがあったので残しています。バグが取れたら消してください
 
-	CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
-	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
-	objrollblock = new CObjRollBlock(10, 15, 1);
-	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	//objrollblock = new CObjRollBlock(10, 15, 1);
+	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 	//------------------------------
 	
 	//ステージ５の拡散弾
@@ -78,7 +78,7 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
 
 	//ステージ５のボス(デバッグ中。消さないで)
-	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,10);
+	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,14);
 	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
 
@@ -306,14 +306,15 @@ void CSceneMain::ImageDataLoading()
 	//ステージ5の大砲の弾（仮）
 	Draw::LoadImageW(L"Image\\Enemy_Bullet.png", GRA_CANNON_BEAM, TEX_SIZE_64);
 
+	//ステージ５ボス胴腕接続電気
+	Draw::LoadImageW(L"Image\\Lastboss_Electric.png", GRA_STAGE5_BOSS_ELECTRIC, TEX_SIZE_512);
 	//ステージ５ボス胴体
 	Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_BODY, TEX_SIZE_256);
 	//ステージ５ボス眼球
 	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
 	//ステージ５ボス腕
 	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
-	//ステージ５ボス胴腕接続電気
-	Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_ELECTRIC, TEX_SIZE_512);
+	
 
 }
 
