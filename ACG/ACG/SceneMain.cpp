@@ -59,9 +59,6 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objtime, OBJ_TIME, 100);
 
 	//デバッグ　”使い終わったら消してください！”----------------
-	
-	//要らんの--------------------------------------------------
-	//要るの--------------------------------------------------
 
 	//回転床テスト用----------
 	//当たり判定のバグがあったので残しています。バグが取れたら消してください
@@ -77,9 +74,9 @@ void CSceneMain::InitScene()
 	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,14);
 	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
-
-	CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
-	Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);
+	//当たり判定まだなのでため置いていてください
+	/*CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
+	Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);*/
 
 	//デバッグ--------------------------------------------------
 }
