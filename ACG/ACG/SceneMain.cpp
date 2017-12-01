@@ -107,7 +107,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	////デバッグ用ステージ番号調整用
 	//UserData* s = (UserData*)Save::GetData();
-	//s->stagenum = 5;
+	//s->stagenum = 2;
 	////----------------
 
 	//ステージ番号ごとにステージ読み込み
@@ -376,7 +376,7 @@ void CSceneMain::AudioDataLoading()
 	//最後の壁の開閉
 	Audio::LoadAudio(WALL, L"SE\\Door1.wav", EFFECT);
 
-	//ドアの開錠
+	//木のドアの開錠
 	Audio::LoadAudio(DOOR, L"SE\\Wood Door.wav", EFFECT);
 
 	//敵に着弾
