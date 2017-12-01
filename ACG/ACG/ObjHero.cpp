@@ -609,6 +609,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	// Heroが死んでいたら
 	if (type == Die)
 	{
+		Audio::Start(HERODEAD);
 		//落下時の中央位置 
 		if (m_hero_die_flag == false)
 		{
@@ -635,7 +636,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	//正四角形の１辺の長さ
 	//長ければ長いほど軽く
 	//短ければ短いほど重いよ
-	float one_side = 6.0f;
+	float one_side = 5.5f;
 
 	//半径が最小になったらシーン移行する（上のほうにある）
 	// Heroが死んでいたら

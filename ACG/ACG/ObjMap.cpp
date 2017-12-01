@@ -269,6 +269,12 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK,9);
 		}
 
+		case MAP_STAGE5_BOSS://ステージ5ボス(本体)
+		{
+			CObjStage5Boss* objstage5_boss = new CObjStage5Boss(x,y);
+			Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS ,9);
+		}
+
 	}
 
 	m_map[y][x].create = false;//フラグをオフにする	

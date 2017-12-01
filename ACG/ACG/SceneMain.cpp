@@ -77,8 +77,9 @@ void CSceneMain::InitScene()
 	//CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
 	//Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
 
-	
-
+	//ステージ５のボス(デバッグ中。消さないで)
+	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,10);
+	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
 
 	//デバッグ--------------------------------------------------
@@ -105,9 +106,9 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	////デバッグ用ステージ番号調整用
-	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 2;
-	//----------------
+	//UserData* s = (UserData*)Save::GetData();
+	//s->stagenum = 5;
+	////----------------
 
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum )
@@ -123,6 +124,9 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	case 3:
 		p = Save::ExternalDataOpen(L"stage3.csv", &size);//外部データ読み込み
 		break;
+	case 5:
+		Audio::Start(STAGE5);
+		p=Save::ExternalDataOpen(L"stage5.csv", &size);//外部データ読み込み
 	default:
 		break;
 	}
@@ -206,6 +210,8 @@ void CSceneMain::ImageDataLoading()
 	case 4:
 	//ステージ５
 	case 5:
+		//ステージ５の背景画像の読み込み
+		Draw::LoadImageW(L"Image\\BackGround\\Stage5.png", GRA_BACKGROUND, TEX_SIZE_1536);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage5.png", GRA_BLOCK, TEX_SIZE_128);
 		//回転ブロックの画像読み込み
@@ -222,7 +228,7 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
 		//ロープでぶら下がることができるギミック
 		Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
-
+		
 		break;
 
 	//画像が用意されていない場合
@@ -233,6 +239,9 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
+
+		//ドア & 錠画像読み込み
+		Draw::LoadImageW(L"Image\\Door.png", GRA_DOOR, TEX_SIZE_256);
 		break;
 	}
 	
@@ -297,6 +306,15 @@ void CSceneMain::ImageDataLoading()
 	//ステージ5の大砲の弾（仮）
 	Draw::LoadImageW(L"Image\\Enemy_Bullet.png", GRA_CANNON_BEAM, TEX_SIZE_64);
 
+	//ステージ５ボス胴体
+	Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_BODY, TEX_SIZE_256);
+	//ステージ５ボス眼球
+	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
+	//ステージ５ボス腕
+	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
+	//ステージ５ボス胴腕接続電気
+	Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_ELECTRIC, TEX_SIZE_512);
+
 }
 
 //音楽データ読み込み関数
@@ -324,14 +342,17 @@ void CSceneMain::AudioDataLoading()
 	//水の流れる音
 	Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 	//ゴリラの投擲音
-	Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla Throw5.wav", EFFECT);
+	Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw5.wav", EFFECT);
 
 	//ステージ5
 	//BGM----------------------------------------------------------
 	Audio::LoadAudio(STAGE5, L"BGM\\Temple1.wav", BACK_MUSIC);
+	Audio::LoadAudio(STAGE5_BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
 	//SE-----------------------------------------------------------
 	//敵の弾丸
 	Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
+	//回転ブロックの音
+	Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav",EFFECT);
 
 	//共通SE--------------------------------------------------------------
 	//弾の発射
@@ -354,5 +375,7 @@ void CSceneMain::AudioDataLoading()
 
 	//レバースイッチ
 	Audio::LoadAudio(LEVER, L"SE\\Lever1.wav", EFFECT);
+
+	Audio::LoadAudio(HERODEAD, L"SE\\Dead.wav", EFFECT);
 	//------------------------------------------------------------
 }

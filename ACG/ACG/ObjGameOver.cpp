@@ -15,10 +15,12 @@ using namespace GameL;
 //イニシャライズ
 void CObjGameOver::Init()
 {
+	
 	m_key_flag = false;
 	m_audio_se = 0;//SEの音楽の管理
 	//文字のグラフィック作成
 	Font::SetStrTex(L"GAMEOVER");	//
+	Audio::Start(GAMEOVER);
 }
 
 //アクション

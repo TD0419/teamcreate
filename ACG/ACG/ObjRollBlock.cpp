@@ -2,7 +2,7 @@
 #include "GameHead.h"
 #include "ObjRollBlock.h"
 #include "Function.h"
-
+#include"GameL\Audio.h"
 #include "GameL\HitBoxManager.h"
 
 //コンストラクタ
@@ -22,6 +22,8 @@ void CObjRollBlock::Init()
 
 	m_roll_flag = false;//回転のフラグを初期化
 	m_pos_adjustment_flag = false;
+
+	m_audio_time = 119;//音楽制御用のタイム初期化
 
 	switch (m_pattan)
 	{
@@ -106,13 +108,23 @@ void CObjRollBlock::Action()
 		}
 		case 2:	//引っ張ったときに一度のみ回転
 		{
-			if (m_roll_flag == true)//回転のフラグがオンになっていれば
-				m_r += 2.0f;//まわす
+			
 
+			if (m_roll_flag == true)//回転のフラグがオンになっていれば
+			{
+				
+				m_audio_time+=1;//音楽制御のために1ずつプラスしていく
+				if (m_audio_time % 120 == 0)
+				{
+					Audio::Start(ROLLBLOCK);
+				}
+				m_r += 2.0f;//まわす
+			}
 			if (m_r > 90.0f)
 			{
 				m_r = 90.0f;//90を超えないようにする
 				m_situation_width_flag = true; //横向きにする
+				Audio::Stop (ROLLBLOCK);
 			}
 			break;
 		}
