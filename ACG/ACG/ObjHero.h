@@ -8,6 +8,15 @@ using namespace GameL;
 
 #define SHOT_INTERVAL (50.0f)	//弾を撃つ間隔
 
+//振り子の動きをするときに使うデータ
+struct Pendulum
+{
+	float length;		//振り子の長さ
+	float pretend_width;//ふり幅
+	float time;			//時間(周期)
+	float gravity;		//重力加速度
+};
+
 //オブジェクト：主人公
 class CObjHero:public CObj
 {
@@ -66,7 +75,7 @@ private:
 	float m_mous_y;     //マウスの位置Y
 	float m_rope_moux;	//Rを押したときのマウスの位置X
 	float m_rope_mouy;  //Rを押したときのマウスの位置Y
-	
+	Pendulum pendulum_data;	//振り子の動きをするときに使うデータ
 	//ーーーー制御系---------
 	int	  m_count;				  //制御用のカウンター
 	int	  m_before_shot_time;	  //最後に弾を撃った時間を保存する	

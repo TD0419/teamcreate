@@ -54,6 +54,7 @@ void CObjRope::Init()
 {
 	m_caught_flag = false;//false = フラグOFF true = フラグON
 	m_r_key_flag = false;
+	m_tarzan_point_flag = false;
 	
 	//ブロックとの当たり判定フラグの初期化
 	m_hit_up = false;
@@ -97,15 +98,20 @@ void CObjRope::Action()
 		}
 	}
 
-	//ロープスイッチ　または　回転床用のスイッチ　と衝突したとき、ロープが引っかかるようにする
+	//ロープスイッチ　または　回転床用のスイッチ　または　ターザンポイント　と衝突したとき、ロープが引っかかるようにする
 	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr||
-		hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH)!=nullptr)
+		hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH)!=nullptr||
+		hit->CheckObjNameHit(OBJ_TARZAN_POINT)!=nullptr)
 	{
 		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
 		/*m_px -= m_vx ;
 		m_py -= m_vy */;
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
-	
+
+		//ターザンポイントオブジェクトと当たっていたら
+		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr)
+			m_tarzan_point_flag = true;//フラグをONにする
+
 		//　Rキーを押してないならロープをRキーで消せるようにする
 		if (Input::GetMouButtonR() == false)
 		{
@@ -329,6 +335,7 @@ void CObjRope::RopeDelete()
 	if (Input::GetMouButtonR() == true && m_r_key_flag == false && m_caught_flag == true && rope_delete_r_key == true)
 	{
 		m_caught_flag = false;		//ロープ引っかかりフラグをOFFにする
+		m_tarzan_point_flag = false;		//ターザン引っ掛かりフラグをOFFにする
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
 		return;
