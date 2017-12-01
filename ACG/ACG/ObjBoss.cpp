@@ -100,10 +100,12 @@ void CObjBoss::Action()
 
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	int block_num = -1;
+	//int block_num = -1;
+	//float x = (m_px + m_vx) / BLOCK_SIZE;
+	//float y = m_py / BLOCK_SIZE;
 	//objmap->GetMap();
-	//if()
-	//-------------------------------------------------------
+	//if ()
+		//-------------------------------------------------------
 
 	//移動ベクトルをポジションに加算
 	m_px += m_vx;
