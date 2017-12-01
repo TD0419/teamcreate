@@ -327,7 +327,6 @@ void CObjRope::RopeDelete()
 		return;
 	}
 
-
 	//ƒ[ƒv‚ªÁ‚µ‚Ä‚¢‚¢‚©‚Ç‚¤‚©‚ð’²‚×‚é
 	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();
 

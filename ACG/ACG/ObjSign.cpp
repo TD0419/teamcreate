@@ -5,6 +5,7 @@
 #include "GameHead.h"
 #include "ObjSign.h"
 #include "Function.h"
+#include "GameL\UserData.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -24,14 +25,29 @@ void CObjSign::Init()
 	//フラグ初期化
 	m_strdrow = false;
 
-	//ステージ1の二個目の看板のテキスト
-	if (m_map_x == 68 && m_map_y == 22)
+	//ステージ別の文字読み込み
+	switch (((UserData*)Save::GetData())->stagenum)
 	{
-		//文字セット
-		Font::SetStrTex(L"「岩は銃で壊れるぞ」");
+		case 1:
+		{
+			//ステージ1の二個目の看板のテキスト
+			if (m_map_x == 68 && m_map_y == 22)
+			{
+				//文字セット
+				Font::SetStrTex(L"「岩は銃で壊れるぞ」");
+			}
+			else
+			{
+				Font::SetStrTex(L"「縄で引っ張ると･･･」"); //一個目の看板のテキスト
+			}
+			break;
+		}
+		case 2://ステージ２
+		{
+			Font::SetStrTex(L"ここに何かあるかも");
+			break;
+		}
 	}
-	else
-	Font::SetStrTex(L"「縄で引っ張ると･･･」"); //一個目の看板のテキスト
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE+32, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
@@ -78,10 +94,11 @@ void CObjSign::Draw()
 	src.m_bottom = 256.0f;
 
 	//描画位置
-	dst.m_top = -SIGN_SIZE * 6.0f - 16.0f + m_py - objmap->GetScrollY();
-	dst.m_left = -192.0f +SIGN_SIZE / 2.0f + m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + 384.0f;
-	dst.m_bottom = dst.m_top + 128.0f;
+	dst.m_top = m_py - objmap->GetScrollY() -SIGN_SIZE * 6.0f ;
+	dst.m_left = m_px - objmap->GetScrollX() - 122.0f;
+	dst.m_right = dst.m_left + 300.0f;
+	dst.m_bottom = dst.m_top + SIGN_SIZE * 4.0f;
+	//-------------------------------------------------------------
 
 	//主人公と当たっている時
 	if (m_strdrow == true)
@@ -89,14 +106,30 @@ void CObjSign::Draw()
 		//描画
 		Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
 
-		//ステージ1の二個目の看板のテキスト
-		if (m_map_x == 68 && m_map_y == 22)
+		//ステージ別の文字描画
+		switch (((UserData*)Save::GetData())->stagenum)
 		{
-			//文字セット
-			Font::StrDraw(L"岩は銃で壊れるぞ", dst.m_left + 65.0f, dst.m_top + 48.0f, 32.0f, color_str);
+			case 1://ステージ1
+			{
+				//二個目の看板のテキスト
+				if (m_map_x == 68 && m_map_y == 22)
+				{
+					//文字セット
+					Font::StrDraw(L"岩は銃で壊れるぞ", dst.m_left + 15.0f, dst.m_top + 48.0f, 32.0f, color_str);
+				}
+				else
+				{
+					Font::StrDraw(L"縄で引っ張ると･･･", dst.m_left + 15.0f, dst.m_top + 48.0f, 32.0f, color_str); //一個目の看板のテキスト
+				}
+				break;
+			}
+			case 2://ステージ2
+			{
+				//文字セット
+				Font::StrDraw(L"ここに何かあるかも", dst.m_left + 7.0f, dst.m_top + 48.0f, 32.0f, color_str);
+				break;
+			}
 		}
-		else
-		Font::StrDraw(L"縄で引っ張ると･･･", dst.m_left + 65.0f, dst.m_top + 48.0f , 32.0f, color_str); //一個目の看板のテキスト
 	}
 	//----------------------------------------------------------------------------
 

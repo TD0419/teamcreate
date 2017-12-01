@@ -27,8 +27,8 @@ CObjBullet::CObjBullet(float x, float y,float r)
 	r = r * 3.14f / 180.f; 
 
 	// 角度から移動ベクトルを求める
-	m_vx = cos(r);
-	m_vy = sin(r);
+	m_vx = cosf(r);
+	m_vy = sinf(r);
 }
 
 

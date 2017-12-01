@@ -58,6 +58,7 @@ void CObjHero::Init()
 	m_ani_frame_enemy_die = 0;//主人公が敵に当たった時静止フレームを初期にする
 
 	m_block_type = 0;//主人公のしたのブロック情報
+	m_block_type_up = 0;
 
 	//ブロックとの衝突した状態(場所)確認用
 	m_hit_up = false;

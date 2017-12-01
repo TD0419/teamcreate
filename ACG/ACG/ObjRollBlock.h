@@ -36,6 +36,7 @@ private:
 	float m_r;		//回転角
 	int m_count;	//回転の制御用カウンター
 	int m_pattan;	//タイプ(1:一定時間で回転,2：ロープで引っ張って)
+	int m_audio_time;//音楽が重複して鳴らないためのタイム
 	bool m_roll_flag;//回転するかどうかのフラグ
 	bool m_pos_adjustment_flag;//ポジションの調節済を調べるフラグ
 	bool m_situation_width_flag;	//ブロックの向きを調べるフラグ true:横　false:縦

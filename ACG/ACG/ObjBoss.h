@@ -37,8 +37,6 @@ class CObjBoss :public CObj
 
 		int m_hp;		 // ボスのＨＰ
 		
-		
-
 	//blockとの衝突確認用
 	bool m_hit_up;
 	bool m_hit_down;

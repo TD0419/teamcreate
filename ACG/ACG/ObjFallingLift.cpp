@@ -31,7 +31,7 @@ void CObjFallingLift::Action()
 	//ヒーローオブジェクトと当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		HeroRide();//衝突処理をするをする
+		HeroRide();//衝突処理をする
 	}
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);

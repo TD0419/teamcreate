@@ -251,35 +251,10 @@ void CObjBlock::AllBlockHit(
 		{
 			//ブロックの種類を持ってくる
 			block_type = objmap->GetMap(j, i);
-
+			
 			//判定したいブロック
 			if (block_type == MAP_BLOCK || block_type == MAP_THROUGH_BLOCK|| block_type ==MAP_LADDERS || block_type == MAP_NEEDLE_STAND || block_type == MAP_FALLING_BLOCK)
 			{
-				if (block_type == MAP_LADDERS)//梯子なら
-				{
-					//梯子情報を持ってくる
-					CObjLadders* objladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
-
-					if (objladders != nullptr)//梯子があれば
-					{
-						//左右のマップ数値を持ってくる
-						int map_left_side = objmap->GetMap(j - 1, i);
-						int map_right_side = objmap->GetMap(j + 1, i);
-
-						//左右にブロックがあれば
-						if (map_left_side == MAP_BLOCK || map_right_side == MAP_BLOCK)
-						{
-							;//何もしない
-						}
-						else //ブロックがなければ
-						{
-							break;//処理せずにループを抜ける
-						}
-					}
-					else //梯子がなければループを抜ける
-						break;
-				}
-					
 				//要素番号を座標に変更
 				float bx = j*BLOCK_SIZE;
 				float by = i*BLOCK_SIZE;
@@ -304,11 +279,6 @@ void CObjBlock::AllBlockHit(
 									*x = map_b_x * BLOCK_SIZE + BLOCK_SIZE;
 									*right = true;
 								}
-								//梯子の場合
-								else if (objmap->GetMap(map_b_x, i) == MAP_LADDERS)
-								{
-									*right = true;
-								}
 							}
 						}
 						//右に移動している
@@ -324,11 +294,6 @@ void CObjBlock::AllBlockHit(
 								{
 									*vx = 0.0f;
 									*x = map_b_x * BLOCK_SIZE - width;
-									*left = true;
-								}
-								//梯子の場合
-								else if (objmap->GetMap(map_b_x, i) == MAP_LADDERS)
-								{
 									*left = true;
 								}
 							}
@@ -349,11 +314,6 @@ void CObjBlock::AllBlockHit(
 									*y = map_b_y * BLOCK_SIZE - height;
 									*down = true;
 								}
-								//梯子なら
-								else if (objmap->GetMap(i, map_b_y) == MAP_LADDERS)
-								{
-									*down = true;
-								}
 							}
 						}
 						//上に移動している
@@ -369,11 +329,6 @@ void CObjBlock::AllBlockHit(
 								{
 									*vy = 0.0f;
 									*y = map_b_y * BLOCK_SIZE + BLOCK_SIZE;
-									*up = true;
-								}
-								//梯子なら
-								else if (objmap->GetMap(i, map_b_y) == MAP_LADDERS)
-								{
 									*up = true;
 								}
 							}

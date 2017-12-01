@@ -67,6 +67,7 @@ void CObjHero::Action()
 		if (objmap->GetMap(x, y) != 0)
 		{
 			m_block_type = objmap->GetMap(x, y);
+			m_block_type_up = objmap->GetMap(x, y - 1); //主人公の上のマップ番号を取る
 		}
 	}
 	//落下にリスタート----------------------------------
@@ -95,7 +96,8 @@ void CObjHero::Action()
 	//はしご-------------------------------------------------LadderScene()
 	//はしごオブジェクトを持ってくる
 	CObjLadders* objladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
-
+	bool l_jump = false;
+	
 	if (objladders != nullptr)
 	{
 		//主人公のしたに通常ブロックがあったらはしごに上っていない判定にする
@@ -104,9 +106,11 @@ void CObjHero::Action()
 			//はしごに登っていない
 			m_ladder_updown = 0;
 		}
-
+		l_jump = objladders->GetHeroJumpCon();  //はしごと主人公が当たっているかどうかを調べる
 		objladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
 	}
+
+
 
 	//はしごのアニメーションタイムを進める
 	m_ani_time_ladders += m_ladder_ani_updown;//はしごから取ってくる
@@ -173,10 +177,11 @@ void CObjHero::Action()
 	}
 
 	//ジャンプ--------------------------------------------------------------------
+	
 	//ロープを出している時は動かない  はしごを上っている時も動かない　　水に当たっているときと敵と当たった時も動かない
 	if (Input::GetVKey(VK_SPACE) == true && m_ladder_updown == 0 &&
 		m_rope_ani_con == false && m_hero_die_water == false &&
-		m_ani_frame_enemy_die == false)
+		m_ani_frame_enemy_die == false && l_jump == false)
 	{
 		if (m_hit_down == true)
 		{
@@ -439,9 +444,9 @@ void CObjHero::Draw()
 
 	//腕---------------------------------------
 	//切り取り位置
-	src.m_top = 0.0f;
-	src.m_left = 64.0f;
-	src.m_right = 128.0f;
+	src.m_top = 0.2f;
+	src.m_left = 128.0f;
+	src.m_right = 192.0f;
 	src.m_bottom = 64.0f;
 
 	//描画位置 
@@ -471,33 +476,70 @@ void CObjHero::Draw()
 
 	//本体---------------------------------
 	//切り取り位置
+
 	//敵に当たった時
 	if(m_hero_die_enemy == true)
 	{
 		//敵があたって立ちの時のアニメーション
 		if (m_ani_frame_enemy_die == 0 || m_ani_frame_enemy_die == 1)
 		{
-			src.m_top = 832.0f;
-			src.m_left = 0.0f + m_ani_frame_enemy_die * 64;
-			src.m_right = 64.0f + m_ani_frame_enemy_die * 64;
-			src.m_bottom = 958.0f;
+			//　主人公が右を向いている時の描画位置
+			if (m_posture == 0.0f)
+			{
+				src.m_top = 832.0f;
+				src.m_left = 0.0f + m_ani_frame_enemy_die * 64;
+				src.m_right = 64.0f + m_ani_frame_enemy_die * 64;
+				src.m_bottom = 958.0f;
+			}
+			//　主人公が左を向いている時の描画位置
+			else
+			{
+				src.m_top = 832.0f;
+				src.m_left = 128.0f + m_ani_frame_enemy_die * 64;
+				src.m_right = 190.0f + m_ani_frame_enemy_die * 64;
+				src.m_bottom = 958.0f;
+			}
 		}
 		//フレームが２と３の時倒れるアニメーション
 		else if (m_ani_frame_enemy_die == 2 || m_ani_frame_enemy_die == 3) 
 		{
 			if (m_ani_frame_enemy_die == 2)
 			{
-				src.m_top = 960.0f;
-				src.m_left = 0.0f ;
-				src.m_right = 128.0f ;
-				src.m_bottom = 1024.0f;
+				//　主人公が右を向いている時の描画位置
+				if (m_posture == 0.0f)
+				{
+					src.m_top = 960.0f;
+					src.m_left = 0.0f;
+					src.m_right = 128.0f;
+					src.m_bottom = 1024.0f;
+				}
+				//　主人公が左を向いている時の描画位置
+				else
+				{
+					src.m_top = 960.0f;
+					src.m_left = 256.0f;
+					src.m_right = 374.0f;
+					src.m_bottom = 1024.0f;
+				}
 			}
 			else
 			{
-				src.m_top = 960.0f;
-				src.m_left = 0.0f + 128;
-				src.m_right = 128.0f + 128;
-				src.m_bottom = 1024.0f;
+				//　主人公が右を向いている時の描画位置
+				if (m_posture == 0.0f)
+				{
+					src.m_top = 960.0f;
+					src.m_left = 128.0f;
+					src.m_right = 256.0f;
+					src.m_bottom = 1024.0f;
+				}
+				//　主人公が左を向いている時の描画位置
+				else
+				{
+					src.m_top = 960.0f;
+					src.m_left = 384.0f;
+					src.m_right = 520.0f;
+					src.m_bottom = 1024.0f;
+				}
 			}
 		}
 	}
@@ -508,17 +550,41 @@ void CObjHero::Draw()
 		//フレームが0か1ならもがくアニメーション
 		if (m_ani_frame_water_die == 0 || m_ani_frame_water_die == 1)
 		{
-			src.m_top = 640.0f;
-			src.m_left = 0.0f + m_ani_frame_water_die * 64;
-			src.m_right = 64.0f + m_ani_frame_water_die * 64;
-			src.m_bottom = 768.0f;
+			//　主人公が右を向いている時の描画位置
+			if (m_posture == 0.0f)
+			{
+				src.m_top = 640.0f;
+				src.m_left = 0.0f + m_ani_frame_water_die * 64;
+				src.m_right = 64.0f + m_ani_frame_water_die * 64;
+				src.m_bottom = 768.0f;
+			}
+			//　主人公が左を向いている時の描画位置
+			else
+			{
+				src.m_top = 641.0f;
+				src.m_left = 128.0f + m_ani_frame_water_die * 64;
+				src.m_right = 190.0f + m_ani_frame_water_die * 64;
+				src.m_bottom = 768.0f;
+			}
 		}
 		else if (m_ani_frame_water_die == 2) //フレームが2なら倒れるアニメーション
 		{
-			src.m_top = 769.0f;
-			src.m_left = 0.0f;
-			src.m_right = 128.0f;
-			src.m_bottom = 826.0f;
+			//　主人公が右を向いている時の描画位置
+			if (m_posture == 0.0f)
+			{
+				src.m_top = 769.0f;
+				src.m_left = 0.0f;
+				src.m_right = 128.0f;
+				src.m_bottom = 826.0f;
+			}
+			//　主人公が左を向いている時の描画位置
+			else
+			{
+				src.m_top = 769.0f;
+				src.m_left = 128.0f;
+				src.m_right = 256.0f;
+				src.m_bottom = 826.0f;
+			}
 		}
 	}
 	else if (m_ladder_updown == 1)//はしごに上っている時
@@ -530,10 +596,22 @@ void CObjHero::Draw()
 	}
 	else if (m_ladder_updown == 2)//はしごを上りきるとき
 	{
-		src.m_top = 256.0f;
-		src.m_left = 256.0f;
-		src.m_right = 320.0f;
-		src.m_bottom = 384.0f;
+		//左足をあげて上る
+		if (m_ani_frame_ladders == 0 || m_ani_frame_ladders == 3)
+		{
+			src.m_top = 256.0f;
+			src.m_left = 320.0f;
+			src.m_right = 384.0f;
+			src.m_bottom = 384.0f;
+		}
+		//右足を上げて上る
+		else if (m_ani_frame_ladders == 1 || m_ani_frame_ladders == 2)
+		{
+			src.m_top = 256.0f;
+			src.m_left = 256.0f;
+			src.m_right = 320.0f;
+			src.m_bottom = 384.0f;
+		}
 	}
 	else if (m_rope_ani_con == true || rope_caught == true) //ロープを投げるとき
 	{
@@ -544,29 +622,65 @@ void CObjHero::Draw()
 	}
 	else if (m_ladder_updown == 0 && m_hit_down == false && rope_caught == false)  //ジャンプしている時
 	{
-		src.m_top = 128.0f;
-		src.m_left = 256.0f;
-		src.m_right = 320.0f;
-		src.m_bottom = 256.0f;
+		//　主人公が右を向いている時の描画位置
+		if (m_posture == 0.0f)
+		{
+			src.m_top = 128.0f;
+			src.m_left = 256.0f;
+			src.m_right = 320.0f;
+			src.m_bottom = 256.0f;
+		}
+		//　主人公が左を向いている時の描画位置
+		else
+		{
+			src.m_top = 128.0f;
+			src.m_left = 578.0f;
+			src.m_right = 640.0f;
+			src.m_bottom = 256.0f;
+		}
 	}
 	else if (m_ani_frame_stop_move == 1 && m_ladder_updown == 0 && rope_caught == false)  //止まっているとき
 	{
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 128.0f;
+		//　主人公が右を向いている時の描画位置
+		if (m_posture == 0.0f)
+		{
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
+			src.m_right = 64.0f;
+			src.m_bottom = 128.0f;
+		}
+		//　主人公が左を向いている時の描画位置
+		else
+		{
+			src.m_top = 0.0f;
+			src.m_left = 64.0f;
+			src.m_right = 128.0f;
+			src.m_bottom = 128.0f;
+		}
 	}
 	else if (m_ani_frame_stop_move == 0 && m_ladder_updown == 0 && rope_caught == false)//動いているとき
 	{
-		src.m_top = 129.0f;
-		src.m_left = 0.0f + AniData[m_ani_frame_move] * 64;
-		src.m_right = 64.0f + AniData[m_ani_frame_move] * 64;
-		src.m_bottom = 256.0f;
+		//　主人公が右を向いている時の描画位置
+		if (m_posture == 0.0f)
+		{
+			src.m_top = 129.0f;
+			src.m_left = 0.0f + AniData[m_ani_frame_move] * 64;
+			src.m_right = 64.0f + AniData[m_ani_frame_move] * 64;
+			src.m_bottom = 256.0f;
+		}
+		//　主人公が左を向いている時の描画位置
+		else
+		{
+			src.m_top = 129.0f;
+			src.m_left = 320.0f + AniData[m_ani_frame_move] * 64;
+			src.m_right = 384.0f + AniData[m_ani_frame_move] * 64;
+			src.m_bottom = 256.0f;
+		}
 	}
 	
 	//描画位置
 	//   水にあった時主人公が倒れてる時　　敵に当たって倒れている時
-	if (m_ani_frame_water_die == 2 || m_ani_frame_enemy_die == 2 || m_ani_frame_enemy_die == 3)  //水にあたった時のアニメーションで横に倒れるフレーム用
+	if (m_ani_frame_water_die == 2 || m_ani_frame_enemy_die == 2 || m_ani_frame_enemy_die == 3)  //水や敵にあたった時（死んだとき）のアニメーションで横に倒れるフレーム用
 	{
 		dst.m_top = 64.0f + m_py - objmap->GetScrollY();
 		dst.m_left = (128.0f * m_posture) + m_px - objmap->GetScrollX() - 64.0f;
@@ -584,17 +698,6 @@ void CObjHero::Draw()
 	//描画
 	Draw::Draw(GRA_HERO, &src, &dst, color, 0.0f);
 	//本体-------------------------------------
-
-
-	////画面全体を暗くするです。
-	//Draw::SetFill(true);
-	////画面全体をこの色にする
-	////staticなのは消すかもしれないから
-	//static float col[4] = { 0.0f };
-	//col[0] -= 0.001f;
-	//col[1] -= 0.001f;
-	//col[2] -= 0.001f;
-	//Draw::SetColor(col);
 
 	//画面全体をだんだん暗くする処理----------------------------------
 	//死んだことが確定した場合
@@ -684,7 +787,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 	//正四角形の１辺の長さ
 	//長ければ長いほど軽く
 	//短ければ短いほど重いよ
-	float one_side = 6.0f;
+	float one_side = 5.5f;
 
 	//半径が最小になったらシーン移行する（上のほうにある）
 	// Heroが死んでいたら

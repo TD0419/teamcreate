@@ -1,8 +1,6 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\HitBoxManager.h"
-#include "GameL\SceneManager.h"
-#include "GameL\WinInputs.h"
-
+#include "GameL\Audio.h"
 #include "GameHead.h"
 #include "ObjDiffusionCannon.h"
 #include "Function.h"
@@ -26,23 +24,25 @@ void CObjDiffusionCannon::Init()
 //アクション
 void CObjDiffusionCannon::Action()
 {
-	//15°間隔で弾丸発射
+	//15°間隔で弾丸発射--------------------------
 	m_time++;
 	//25フレームの度に打ち出す要調整
-	if (m_time > 25)
+	if (m_time > 50)
 	{
 		m_time = 0;
 
 		//7発同時上に向かって発射
 		CObjDiffusionBullet* obj_b;
-		for (int i = 35; i<165; i += 19)
+		for (int i = 30; i<165; i += 20)
 		{
 			//約15角度で角度弾丸発射
-			obj_b = new CObjDiffusionBullet(m_px, m_py, i);
+			obj_b = new CObjDiffusionBullet(m_px + 28.0f, m_py+20.0f, i);
 			Objs::InsertObj(obj_b, OBJ_DIFFUSION_BULLET, 100);
+			Audio::Start(DIFFUSION);
 		}
 
 	}
+	//---------------------------------
 }
 
 //ドロー

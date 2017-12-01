@@ -164,14 +164,6 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objDoor, OBJ_DOOR, 9);
 			break;
 		}
-
-		case MAP_LIFT_TYPE_MANUAL:		//手動リフト(横移動)作成
-		{
-			CObjLift* objlift = new CObjLift(x, y,0,640.0f,0);
-			Objs::InsertObj(objlift, OBJ_LIFT, 9);
-			break;
-		}
-		
 		
 		case MAP_LIFT_TYPE_AUTO_WIDTH:		//自動横移動リフト作成
 		{
@@ -264,17 +256,23 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
-		case MAP_TARZAN_POINT:
+		case MAP_TARZAN_POINT://ロープでぶら下がれるギミック
 		{
 			CObjTarzanPoint* objtarzanpoint = new CObjTarzanPoint(x, y);
 			Objs::InsertObj(objtarzanpoint, OBJ_TARZAN_POINT, 9);
 
 		}
 
-		case MAP_FALLING_BLOCK:
+		case MAP_FALLING_BLOCK://ステージ5ボス戦専用落ちるブロック
 		{
 			CObjFallingBlock* objfalling_block = new CObjFallingBlock(x,y);
 			Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK,9);
+		}
+
+		case MAP_STAGE5_BOSS://ステージ5ボス(本体)
+		{
+			CObjStage5Boss* objstage5_boss = new CObjStage5Boss(x,y);
+			Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS ,9);
 		}
 
 	}

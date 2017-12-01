@@ -48,6 +48,7 @@ enum OBJ_NAME
 	OBJ_DIFFUSION_BULLET, //ステージ５の拡散弾
 	OBJ_FALLING_LIFT,	//乗ると落ちるリフト
 	OBJ_FALLING_BLOCK,	//ステージ5ボス戦専用落ちるブロック
+	OBJ_STAGE5_BOSS_ARMS,//ステージ5ボスの腕
 };
 //------------------------------------------------
 
@@ -105,8 +106,8 @@ enum MAP_BER
 	MAP_SIGN				,			//看板
 	MAP_GOAL_DOOR			,			//ゴール用ドア
 	MAP_LIFT_TYPE_MANUAL	,			//手動リフト(通常時は動かない。ギミックの過程で引っ張ると動かせる)
-    MAP_LIFT_TYPE_AUTO_WIDTH	 ,		//自動横移動リフト(自動で左右に動く)	//マップの番号対応ができたらコメントをはずしてください
-	MAP_LIFT_TYPE_AUTO_LENGTH	 ,		//自動縦移動リフト(自動で縦方向に動く)	//マップの番号対応ができたらコメントをはずしてください
+    MAP_LIFT_TYPE_AUTO_WIDTH	 ,		//自動横移動リフト(自動で左右に動く)	
+	MAP_LIFT_TYPE_AUTO_LENGTH	 ,		//自動縦移動リフト(自動で縦方向に動く)
 	MAP_ENEMY				,			//敵
 	MAP_LAST_WALL			,			//次ステージへの入り口(最後の壁)
 	
@@ -180,19 +181,24 @@ enum GRAPHIC_ID
 	GRA_NEEDLE_STAND,   //針の土台
 	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
 
-	GRA_ROLL_BLOCK_SWITCH,//回転床用のスイッチ
-	GRA_BLACK_BALL,     //回転ブロックの仕掛けのスイッチ
-	GRA_CANNON_BEAM,    //ステージ5の拡散弾
+	GRA_ROLL_BLOCK_SWITCH,	//回転床用のスイッチ
+	GRA_BLACK_BALL,			//回転ブロックの仕掛けのスイッチ
+	GRA_CANNON_BEAM,		//ステージ5の拡散弾
+	GRA_STAGE5_BOSS_ELECTRIC,	 	//ステージ5のボス胴腕接続電気
+	GRA_STAGE5_BOSS_BODY,	//ステージ5のボス胴体
+	GRA_STAGE5_BOSS_EYE,	//ステージ5のボス眼球
+	GRA_STAGE5_BOSS_ARMS_ALL,      	//ステージ5のボス腕(左右腕)
+	
+ 
 };
 
 //音楽(BGM)
 enum MUSIC
 {
 //BGM--------------------
-	STAGE1	,	//ステージ1
-	STAGE2  ,	//ステージ2
-	STAGE2_BOSS,//ステージ2ボス
-	STAGE5  ,	//ステージ5
+	STAGE,      //ステージ
+	BOSS,       //ボス
+	GAMEOVER,	//ゲームオーバー
 //SE---------------------
 	FIRING		,//弾の発射
 	ROPE		,//ロープの打ち出し
@@ -208,7 +214,11 @@ enum MUSIC
 	RELEASELIFT		,//リフト(離れる)
 	WAVE		,//水の流れ
 	GORILLATHROW,//ゴリラの投擲音
-
+	ROLLBLOCK,	 //回転ブロック
+	BOSSPOP,	 //ボスが撃つ弾が弾ける音(ボス拡散弾がでる時の音)
+	BOSSLASER,	 //ボスのレーザービームの音
+	GROUND,		 //地面が落ちる音
+	DIFFUSION,	 //ステージ5の拡散弾
 };
 
 //オブジェクトのサイズ
@@ -223,6 +233,9 @@ enum MUSIC
 #define LADDERS_SIZE		  (64.0f)		//はしごのサイズ
 #define BUTTON_SIZE			  (64.0f)		//ボタンサイズ（仮）
 #define SIGN_SIZE			  (32.0f)		//看板のサイズ（仮）
+#define SIGN_FRAME_WIDTH	  (192.0f)		//看板の枠サイズ（横）
+
+
 #define LEVER_SWITCH_SIZE	  (64.0f)	    //レバースイッチのサイズ
 #define ROPE_SWITCH_SIZE	  (64.0f)	    //ロープスイッチのサイズ
 #define LIFT_SIZE_WIDTH		  (128.0f)		//リフトサイズ横サイズ
@@ -234,20 +247,26 @@ enum MUSIC
 #define BOSS_SIZE_HEIGHT	  (256.0f)		//BOSS縦幅(仮)
 #define BOSS_DORP_KEY_SIZE	  (32.0f)	    //ボスドロップキーサイズ(仮)
 #define DOOR_SIZE			  (128.0f)		//ドアのサイズ(仮)
-#define THROUGHT_BLOCK_SIZE	 (64.0f)	    //スルーブロックサイズ（仮）
-#define FALLING_WALLS_SAIZE  (64.0f)		//落下壁サイズ(仮)
-#define CANNON_SIZE_WIDTH	 (64.0f)		//砲台の横サイズ(仮)
-#define CANNON_SIZE_HEIGHT	 (32.0f)		//砲台の縦サイズ(仮)
+#define THROUGHT_BLOCK_SIZE	  (64.0f)	    //スルーブロックサイズ（仮）
+#define FALLING_WALLS_SAIZE   (64.0f)		//落下壁サイズ(仮)
+#define CANNON_SIZE_WIDTH	  (64.0f)		//砲台の横サイズ(仮)
+#define CANNON_SIZE_HEIGHT	  (32.0f)		//砲台の縦サイズ(仮)
 #define ROLL_BLOCK_SIZE_WIDTH	(192.0f)	//回転するブロックの横サイズ
 #define ROLL_BLOCK_SIZE_HEIGHT	(64.0f)		//回転するブロックの縦サイズ
 #define NEEDLE_SIZE_WIDTH     (64.0f)		//針の横のサイズ
 #define NEEDLE_SIZE_HEIGHT    (32.0f)		//針の縦のサイズ
 #define NEEDLE_STAND_SIZE     (64.0f)		//針の土台のサイズ
-#define TARZAN_POINT_WIDTH		(16.0f)		//ロープでぶら下がれるギミック横サイズ
-#define TARZAN_POINT_HEIGHT		(16.0f)		//ロープでぶら下がれるギミック縦サイズ
-#define ROLL_BLOCK_SWITCH_SIZE_WIDTH (16.0f)		//回転するブロックをまわすスイッチの横サイズ
+#define TARZAN_POINT_WIDTH	  (16.0f)		//ロープでぶら下がれるギミック横サイズ
+#define TARZAN_POINT_HEIGHT	  (16.0f)		//ロープでぶら下がれるギミック縦サイズ
+#define ROLL_BLOCK_SWITCH_SIZE_WIDTH  (16.0f)	//回転するブロックをまわすスイッチの横サイズ
 #define ROLL_BLOCK_SWITCH_SIZE_HEIGHT (16.0f)	//回転するブロックをまわすスイッチの縦サイズ
-#define DIFFUSION_CANNON_SIZE (64.0f)       //ステージ5の拡散するキャノンのサイズ
+#define DIFFUSION_CANNON_SIZE	      (64.0f)   //ステージ5の拡散するキャノンのサイズ
+#define STAGE5_BOSS_BODY_SIZE	     (256.0f)	//ステージ5のボス胴体サイズ
+#define STAGE5_BOSS_EYE_SIZE	     (133.0f)	//ステージ5のボス眼球サイズ
+#define STAGE5_BOSS_ARMS_WIDTH       (512.0f)	//ステージ5のボス腕サイズ(横)
+#define STAGE5_BOSS_ARMS_HEIGHT      (700.0f)	//ステージ5のボス腕サイズ(縦)
+#define STAGE5_BOSS_ELECTRIC_WIDTH	 (300.0f)	//ステージ5のボス胴腕接続電気サイズ(横)
+#define STAGE5_BOSS_ELECTRIC_HEIGHT	 (256.0f)	//ステージ5のボス胴腕接続電気サイズ(縦)
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
