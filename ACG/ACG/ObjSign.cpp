@@ -94,10 +94,10 @@ void CObjSign::Draw()
 	src.m_bottom = 256.0f;
 
 	//描画位置
-	dst.m_top = -SIGN_SIZE * 6.0f - 16.0f + m_py - objmap->GetScrollY();
-	dst.m_left = m_px - objmap->GetScrollX() - 192.0f + SIGN_SIZE / 2.0f + 54.0f;
+	dst.m_top = m_py - objmap->GetScrollY() -SIGN_SIZE * 6.0f ;
+	dst.m_left = m_px - objmap->GetScrollX() - 122.0f;
 	dst.m_right = dst.m_left + 300.0f;
-	dst.m_bottom = dst.m_top + 128.0f;
+	dst.m_bottom = dst.m_top + SIGN_SIZE * 4.0f;
 	//-------------------------------------------------------------
 
 	//主人公と当たっている時
@@ -126,7 +126,7 @@ void CObjSign::Draw()
 			case 2://ステージ2
 			{
 				//文字セット
-				Font::StrDraw(L"ここに何かあるかも", dst.m_left + 9.0f, dst.m_top + 48.0f, 32.0f, color_str);
+				Font::StrDraw(L"ここに何かあるかも", dst.m_left + 7.0f, dst.m_top + 48.0f, 32.0f, color_str);
 				break;
 			}
 		}
