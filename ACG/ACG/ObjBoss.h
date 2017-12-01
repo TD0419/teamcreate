@@ -26,7 +26,6 @@ class CObjBoss :public CObj
 		float GetPosX() { return m_px; }			//ポジションXを返す
 		float GetPosY() { return m_py; }			//ポジションYを返す
 		
-		
 	private:
 		float m_px;		 // ボスX座標
 		float m_py;		 // ボスY座標
@@ -36,6 +35,7 @@ class CObjBoss :public CObj
 		float m_speed;	 // 速度
 
 		int m_hp;		 // ボスのＨＰ
+		bool m_down_check_flag;//下側のチェックをするかどうかのフラグ
 		
 	//blockとの衝突確認用
 	bool m_hit_up;
