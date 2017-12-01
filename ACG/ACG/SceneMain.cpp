@@ -72,10 +72,6 @@ void CSceneMain::InitScene()
 	//objrollblock = new CObjRollBlock(10, 15, 1);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 	//------------------------------
-	
-	//ステージ５の拡散弾
-	//CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
-	//Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
 
 	//ステージ５のボス(デバッグ中。消さないで)
 	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,14);
@@ -107,25 +103,25 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	////デバッグ用ステージ番号調整用
 	//UserData* s = (UserData*)Save::GetData();
-	//s->stagenum = 5;
+	//s->stagenum = 2;
 	////----------------
 
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum )
 	{
 	case 1:
-		Audio::Start(STAGE1);
+		Audio::Start(STAGE);
 		p = Save::ExternalDataOpen(L"stage1.csv", &size);//外部データ読み込み
 		break;
 	case 2:
-		Audio::Start(STAGE2);
+		Audio::Start(STAGE);
 		p = Save::ExternalDataOpen(L"stage2.csv", &size);//外部データ読み込み
 		break;
 	case 3:
 		p = Save::ExternalDataOpen(L"stage3.csv", &size);//外部データ読み込み
 		break;
 	case 5:
-		Audio::Start(STAGE5);
+		Audio::Start(STAGE);
 		p=Save::ExternalDataOpen(L"stage5.csv", &size);//外部データ読み込み
 	default:
 		break;
@@ -218,8 +214,10 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 		//金網ブロックの読み込み
 		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
-		//Stage5大砲の読み込み
+		//ステージ5の大砲
 		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
+		//ステージ5の大砲の弾
+		Draw::LoadImageW(L"Image\\Cannon_Laser_Beam.png", GRA_CANNON_BEAM, TEX_SIZE_16);
 		//回転ブロックの仕掛けのスイッチの画像読み込み
 		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_BLACK_BALL, TEX_SIZE_16);
 		//針の読み込み
@@ -321,40 +319,55 @@ void CSceneMain::ImageDataLoading()
 //音楽データ読み込み関数
 void CSceneMain::AudioDataLoading()
 {
-	//ステージ１
-	//BGM---------------------------------------------------------
-	Audio::LoadAudio(STAGE1, L"BGM\\Grassland6.wav", BACK_MUSIC);
-	//SE----------------------------------------------------------
-	//木の転倒
-	Audio::LoadAudio(TREE, L"SE\\Tree3.wav", EFFECT);
-	//リフト(引っ張る)
-	Audio::LoadAudio(PULLLIFT, L"SE\\LiftTrickPull.wav", EFFECT);
-	//リフト(離す)
-	Audio::LoadAudio(RELEASELIFT, L"SE\\LiftTrickRelease.wav", EFFECT);
+	//ステージ別の画像読み込み
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		//ステージ１
+	case 1:
+		//BGM---------------------------------------------------------
+		Audio::LoadAudio(STAGE, L"BGM\\Grassland6.wav", BACK_MUSIC);
+		//SE----------------------------------------------------------
+		//木の転倒
+		Audio::LoadAudio(TREE, L"SE\\Tree3.wav", EFFECT);
+		//リフト(引っ張る)
+		Audio::LoadAudio(PULLLIFT, L"SE\\LiftTrickPull.wav", EFFECT);
+		//リフト(離す)
+		Audio::LoadAudio(RELEASELIFT, L"SE\\LiftTrickRelease.wav", EFFECT);
+		break;
 
-	//ステージ2
-	//BGM---------------------------------------------------------
-	Audio::LoadAudio(STAGE2, L"BGM\\Jangle.wav", BACK_MUSIC);
-	//ステージ2_BOSS
-	Audio::LoadAudio(STAGE2_BOSS, L"BGM\\BOSS2.wav", BACK_MUSIC);
-	//SE----------------------------------------------------------
-	//ボタン
-	Audio::LoadAudio(BUTTON, L"SE\\Switch2.wav", EFFECT);
-	//水の流れる音
-	Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
-	//ゴリラの投擲音
-	Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw5.wav", EFFECT);
+	case 2:
+		//ステージ2
+		//BGM---------------------------------------------------------
+		Audio::LoadAudio(STAGE, L"BGM\\Jangle.wav", BACK_MUSIC);
+		//ステージ2_BOSS
+		Audio::LoadAudio(BOSS, L"BGM\\Boss2.wav", BACK_MUSIC);
+		//SE----------------------------------------------------------
+		//ボタン
+		Audio::LoadAudio(BUTTON, L"SE\\Switch2.wav", EFFECT);
+		//水の流れる音
+		Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
+		//ゴリラの投擲音
+		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw.wav", EFFECT);
+		break;
 
-	//ステージ5
-	//BGM----------------------------------------------------------
-	Audio::LoadAudio(STAGE5, L"BGM\\Temple1.wav", BACK_MUSIC);
-	Audio::LoadAudio(STAGE5_BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
-	//SE-----------------------------------------------------------
-	//敵の弾丸
-	Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
-	//回転ブロックの音
-	Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav",EFFECT);
-
+	case 5:
+		//ステージ5
+		//BGM----------------------------------------------------------
+		Audio::LoadAudio(STAGE, L"BGM\\Temple1.wav", BACK_MUSIC);
+		Audio::LoadAudio(BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
+		//SE-----------------------------------------------------------
+		//回転ブロックの音
+		Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav", EFFECT);
+		//ボスの拡散弾が出現するときの音
+		Audio::LoadAudio(BOSSPOP, L"SE\\BossPop.wav", EFFECT);
+		//ボスのレーザーが出現するときの音
+		Audio::LoadAudio(BOSSLASER, L"SE\\BossLaser.wav", EFFECT);
+		//地面が落ちる音
+		Audio::LoadAudio(GROUND, L"SE\\Ground.wav", EFFECT);
+		//大砲の拡散弾の音
+		Audio::LoadAudio(DIFFUSION, L"SE\\Diffusion.wav", EFFECT);
+		break;
+	}
 	//共通SE--------------------------------------------------------------
 	//弾の発射
 	Audio::LoadAudio(FIRING, L"SE\\Firing1.wav", EFFECT);
@@ -368,7 +381,7 @@ void CSceneMain::AudioDataLoading()
 	//最後の壁の開閉
 	Audio::LoadAudio(WALL, L"SE\\Door1.wav", EFFECT);
 
-	//ドアの開錠
+	//木のドアの開錠
 	Audio::LoadAudio(DOOR, L"SE\\Wood Door.wav", EFFECT);
 
 	//敵に着弾
@@ -377,6 +390,7 @@ void CSceneMain::AudioDataLoading()
 	//レバースイッチ
 	Audio::LoadAudio(LEVER, L"SE\\Lever1.wav", EFFECT);
 
-	Audio::LoadAudio(HERODEAD, L"SE\\Dead.wav", EFFECT);
+	//敵の弾丸
+	Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
 	//------------------------------------------------------------
 }

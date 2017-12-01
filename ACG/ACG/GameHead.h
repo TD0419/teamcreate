@@ -196,11 +196,8 @@ enum GRAPHIC_ID
 enum MUSIC
 {
 //BGM--------------------
-	STAGE1	,	//ステージ1
-	STAGE2  ,	//ステージ2
-	STAGE2_BOSS,//ステージ2ボス
-	STAGE5  ,	//ステージ5
-	STAGE5_BOSS,//ステージ5ボス
+	STAGE,      //ステージ
+	BOSS,       //ボス
 	GAMEOVER,	//ゲームオーバー
 //SE---------------------
 	FIRING		,//弾の発射
@@ -218,7 +215,10 @@ enum MUSIC
 	WAVE		,//水の流れ
 	GORILLATHROW,//ゴリラの投擲音
 	ROLLBLOCK,	 //回転ブロック
-	HERODEAD,	 //ヒーロー死亡時
+	BOSSPOP,	 //ボスが撃つ弾が弾ける音(ボス拡散弾がでる時の音)
+	BOSSLASER,	 //ボスのレーザービームの音
+	GROUND,		 //地面が落ちる音
+	DIFFUSION,	 //ステージ5の拡散弾
 };
 
 //オブジェクトのサイズ
@@ -233,6 +233,9 @@ enum MUSIC
 #define LADDERS_SIZE		  (64.0f)		//はしごのサイズ
 #define BUTTON_SIZE			  (64.0f)		//ボタンサイズ（仮）
 #define SIGN_SIZE			  (32.0f)		//看板のサイズ（仮）
+#define SIGN_FRAME_WIDTH	  (192.0f)		//看板の枠サイズ（横）
+
+
 #define LEVER_SWITCH_SIZE	  (64.0f)	    //レバースイッチのサイズ
 #define ROPE_SWITCH_SIZE	  (64.0f)	    //ロープスイッチのサイズ
 #define LIFT_SIZE_WIDTH		  (128.0f)		//リフトサイズ横サイズ
