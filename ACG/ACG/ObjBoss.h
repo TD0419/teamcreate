@@ -15,17 +15,6 @@ class CObjBoss :public CObj
 		void Init();	        //イニシャライズ
 		void Action();	        //アクション
 		void Draw();	        //ドロー
-
-		void SetVX(float x) { m_vx = x; };	//ベクトルXを取得用
-		void SetVY(float y) { m_vy = y; };	//ベクトルYを取得用
-		void SetPosX(float x) { m_px = x; };		//ポジションXを取得用
-		void SetPosY(float y) { m_py = y; };		//ポジションYを取得用
-		void SetPosture(float ps) { m_posture = ps; };//ポジションの向き取得
-		void SetHitF(bool wall_hit) { m_wall_hit_flag = wall_hit; }; //壁の左側に当たったときのフラグ
-
-		float GetPosX() { return m_px; }			//ポジションXを返す
-		float GetPosY() { return m_py; }			//ポジションYを返す
-		
 		
 	private:
 		float m_px;		 // ボスX座標
@@ -36,8 +25,6 @@ class CObjBoss :public CObj
 		float m_speed;	 // 速度
 
 		int m_hp;		 // ボスのＨＰ
-		
-		
 
 	//blockとの衝突確認用
 	bool m_hit_up;

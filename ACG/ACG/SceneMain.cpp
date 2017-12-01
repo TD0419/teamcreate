@@ -41,6 +41,11 @@ void CSceneMain::InitScene()
 		return;
 	}
 
+	////デバッグ用ステージ番号調整用
+	UserData* s = (UserData*)Save::GetData();
+	s->stagenum = 2;
+	////----------------
+
 	AudioDataLoading();//音楽データ読み込み関数
 	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
@@ -104,11 +109,6 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	//外部データの読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
-
-	////デバッグ用ステージ番号調整用
-	//UserData* s = (UserData*)Save::GetData();
-	//s->stagenum = 2;
-	////----------------
 
 	//ステージ番号ごとにステージ読み込み
 	switch (((UserData*)Save::GetData())->stagenum )
@@ -341,14 +341,14 @@ void CSceneMain::AudioDataLoading()
 		//BGM---------------------------------------------------------
 		Audio::LoadAudio(STAGE, L"BGM\\Jangle.wav", BACK_MUSIC);
 		//ステージ2_BOSS
-		Audio::LoadAudio(BOSS, L"BGM\\BOSS2.wav", BACK_MUSIC);
+		Audio::LoadAudio(BOSS, L"BGM\\Boss2.wav", BACK_MUSIC);
 		//SE----------------------------------------------------------
 		//ボタン
 		Audio::LoadAudio(BUTTON, L"SE\\Switch2.wav", EFFECT);
 		//水の流れる音
 		Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 		//ゴリラの投擲音
-		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw5.wav", EFFECT);
+		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw.wav", EFFECT);
 		break;
 
 	case 5:
