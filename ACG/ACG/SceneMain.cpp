@@ -77,10 +77,6 @@ void CSceneMain::InitScene()
 	//objrollblock = new CObjRollBlock(10, 15, 1);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 	//------------------------------
-	
-	//ステージ５の拡散弾
-	//CObjDiffusionCannon* objtime2 = new CObjDiffusionCannon(3,20);
-	//Objs::InsertObj(objtime2, OBJ_DIFFUSION_CANNON, 100);
 
 	//ステージ５のボス(デバッグ中。消さないで)
 	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,10);
@@ -218,8 +214,10 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 		//金網ブロックの読み込み
 		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
-		//Stage5大砲の読み込み
+		//ステージ5の大砲
 		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
+		//ステージ5の大砲の弾
+		Draw::LoadImageW(L"Image\\Cannon_Laser_Beam.png", GRA_CANNON_BEAM, TEX_SIZE_16);
 		//回転ブロックの仕掛けのスイッチの画像読み込み
 		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_BLACK_BALL, TEX_SIZE_16);
 		//針の読み込み
@@ -300,12 +298,6 @@ void CSceneMain::ImageDataLoading()
 	//回転ブロックのスイッチ
 	Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_ROLL_BLOCK_SWITCH, TEX_SIZE_16);
 
-	//ステージ5の大砲
-	Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
-
-	//ステージ5の大砲の弾（仮）
-	Draw::LoadImageW(L"Image\\Enemy_Bullet.png", GRA_CANNON_BEAM, TEX_SIZE_64);
-
 	//ステージ５ボス胴体
 	Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_BODY, TEX_SIZE_256);
 	//ステージ５ボス眼球
@@ -357,10 +349,16 @@ void CSceneMain::AudioDataLoading()
 		Audio::LoadAudio(STAGE, L"BGM\\Temple1.wav", BACK_MUSIC);
 		Audio::LoadAudio(BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
 		//SE-----------------------------------------------------------
-		//敵の弾丸
-		Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
 		//回転ブロックの音
 		Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav", EFFECT);
+		//ボスの拡散弾が出現するときの音
+		Audio::LoadAudio(BOSSPOP, L"SE\\BossPop.wav", EFFECT);
+		//ボスのレーザーが出現するときの音
+		Audio::LoadAudio(BOSSLASER, L"SE\\BossLaser.wav", EFFECT);
+		//地面が落ちる音
+		Audio::LoadAudio(GROUND, L"SE\\Ground.wav", EFFECT);
+		//大砲の拡散弾の音
+		Audio::LoadAudio(DIFFUSION, L"SE\\Diffusion.wav", EFFECT);
 		break;
 	}
 	//共通SE--------------------------------------------------------------
@@ -385,6 +383,7 @@ void CSceneMain::AudioDataLoading()
 	//レバースイッチ
 	Audio::LoadAudio(LEVER, L"SE\\Lever1.wav", EFFECT);
 
-	Audio::LoadAudio(HERODEAD, L"SE\\Dead.wav", EFFECT);
+	//敵の弾丸
+	Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
 	//------------------------------------------------------------
 }
