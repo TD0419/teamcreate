@@ -1,7 +1,7 @@
 #include "GameL\DrawTexture.h"
-#include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 
+#include "GameL\Audio.h"
 #include "GameHead.h"
 #include "Function.h"
 #include "ObjStage5Boss.h"
@@ -23,6 +23,10 @@ void CObjStage5Boss::Init()
 	m_vy = 0.0f;
 
 	m_hp = 100; //‘æ5ƒ{ƒX‚Ì‚g‚o(‰¼‚É‚g‚o‚ğ[100]‚Æİ’è)
+
+	//‰¹Šy
+	Audio::Start(BOSS);
+	Audio::Stop(STAGE);
 
 	//“–‚½‚è”»’è—pHitBox‚ğì¬
 	Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BODY_SIZE, STAGE5_BOSS_BODY_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS, 1);
