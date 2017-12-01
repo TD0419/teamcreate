@@ -49,6 +49,7 @@ enum OBJ_NAME
 	OBJ_FALLING_LIFT,	//乗ると落ちるリフト
 	OBJ_FALLING_BLOCK,	//ステージ5ボス戦専用落ちるブロック
 	OBJ_STAGE5_BOSS_ARMS,//ステージ5ボスの腕
+	OBJ_WIRE_MESH,//ステージ5の金網
 };
 //------------------------------------------------
 
@@ -184,12 +185,11 @@ enum GRAPHIC_ID
 	GRA_ROLL_BLOCK_SWITCH,	//回転床用のスイッチ
 	GRA_BLACK_BALL,			//回転ブロックの仕掛けのスイッチ
 	GRA_CANNON_BEAM,		//ステージ5の拡散弾
+	GRA_WIRE_MASH,			//ステージ5の金網
 	GRA_STAGE5_BOSS_ELECTRIC,	 	//ステージ5のボス胴腕接続電気
 	GRA_STAGE5_BOSS_BODY,	//ステージ5のボス胴体
 	GRA_STAGE5_BOSS_EYE,	//ステージ5のボス眼球
 	GRA_STAGE5_BOSS_ARMS_ALL,      	//ステージ5のボス腕(左右腕)
-	
- 
 };
 
 //音楽(BGM)
@@ -267,6 +267,8 @@ enum MUSIC
 #define STAGE5_BOSS_ARMS_HEIGHT      (700.0f)	//ステージ5のボス腕サイズ(縦)
 #define STAGE5_BOSS_ELECTRIC_WIDTH	 (300.0f)	//ステージ5のボス胴腕接続電気サイズ(横)
 #define STAGE5_BOSS_ELECTRIC_HEIGHT	 (256.0f)	//ステージ5のボス胴腕接続電気サイズ(縦)
+#define WIRE_MESH_SIZE_WIDTH	(640.0f) //金網の横サイズ
+#define WIRE_MESH_SIZE_HEIGHT	(64.0f) //金網の縦サイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -326,6 +328,7 @@ enum MUSIC
 #include "ObjDiffusionBullet.h"
 #include "ObjFallingLift.h"		//乗ると落ちるリフト
 #include "ObjFallingBlock.h"	//ステージ5ボス戦専用落ちるブロック
+#include"ObjWireMesh.h"//ステージ5の金網
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

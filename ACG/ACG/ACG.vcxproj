@@ -129,6 +129,7 @@
     <ClInclude Include="ObjWater.h" />
     <ClInclude Include="ObjStage3Boss.h" />
     <ClInclude Include="ObjTarzanPoint.h" />
+    <ClInclude Include="ObjWireMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ObjDiffusionBullet.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="ObjReflectBlock.cpp" />
     <ClCompile Include="ObjThroughBlock.cpp" />
     <ClCompile Include="ObjStage5Boss.cpp" />
+    <ClCompile Include="ObjWireMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameL\Draw2DTex.hlsl" />

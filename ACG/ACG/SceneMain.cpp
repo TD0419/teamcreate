@@ -78,14 +78,10 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
 
+	CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
+	Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);
+
 	//デバッグ--------------------------------------------------
-
-
-	//BGM再生
-	/*
-	
-	Audio::Start(STAGE5);*/
-
 }
 
 //ゲームメイン実行中メソッド
@@ -299,8 +295,8 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
 	//ステージ５ボス腕
 	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
-	
-
+	//金網
+	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
 }
 
 //音楽データ読み込み関数
