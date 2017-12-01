@@ -19,5 +19,5 @@ public:
 private:
 	float m_px;		//位置X
 	float m_py;		//位置Y
-	int   m_time;   //タイム
+	int   m_time;   //拡散弾の出るタイム
 };

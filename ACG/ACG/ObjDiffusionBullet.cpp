@@ -28,7 +28,7 @@ void CObjDiffusionBullet::Init()
 	m_window_check = true;
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 12.0f, 12.0f, ELEMENT_ENEMY, OBJ_DIFFUSION_BULLET, 1);
+	Hits::SetHitBox(this, m_px, m_py, 16.0f, 16.0f, ELEMENT_ENEMY, OBJ_DIFFUSION_BULLET, 1);
 }
 
 //アクション
@@ -48,12 +48,12 @@ void CObjDiffusionBullet::Action()
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
-	//弾丸のHitBox更新用ポインター取得
+	
+	//拡散弾HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//主人公とあたったら消去
-	if (hit->CheckElementHit(OBJ_HERO) == true)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
@@ -77,14 +77,14 @@ void CObjDiffusionBullet::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 16.0f;
+	src.m_bottom = 16.0f;
 
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_right = dst.m_left + 16.0f;
+	dst.m_bottom = dst.m_top + 16.0f;
 
 	Draw::Draw(GRA_CANNON_BEAM, &src, &dst, color, m_r);
 
