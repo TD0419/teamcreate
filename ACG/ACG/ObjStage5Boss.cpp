@@ -51,6 +51,38 @@ void CObjStage5Boss::Draw()
 	//ƒ}ƒbƒvƒIƒuƒWƒFƒNƒg‚ðŽ‚Á‚Ä‚­‚é
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+	//“·˜rÚ‘±“d‹C-------------------------------
+	//¶˜r•”•ª
+	//Ø‚èŽæ‚èˆÊ’u
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = src.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
+	src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+
+	//•`‰æˆÊ’u
+	dst.m_top = m_py - objmap->GetScrollY()  + ELECTRIC_L_CORRECTION_HEIGHT;
+	dst.m_left = m_px - objmap->GetScrollX() - ELECTRIC_L_CORRECTION_WIDTH;
+	dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
+	dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+	//•`‰æ
+	Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);
+
+	//‰E˜r•”•ª
+	//Ø‚èŽæ‚èˆÊ’u
+	src.m_top = STAGE5_BOSS_ELECTRIC_HEIGHT;
+	src.m_left = 0.0f;
+	src.m_right = src.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
+	src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+
+	//•`‰æˆÊ’u
+	dst.m_top =  m_py - objmap->GetScrollY() + ELECTRIC_R_CORRECTION_HEIGHT;
+	dst.m_left = m_px - objmap->GetScrollX() + ELECTRIC_R_CORRECTION_WIDTH;
+	dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
+	dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+	//•`‰æ
+	Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);
+
+	//“·‘Ì--------------------------------------
 	//Ø‚èŽæ‚èˆÊ’u
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -62,7 +94,23 @@ void CObjStage5Boss::Draw()
 	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = STAGE5_BOSS_BODY_SIZE + m_px - objmap->GetScrollX();
 	dst.m_bottom = dst.m_top + STAGE5_BOSS_BODY_SIZE;
-
 	//•`‰æ
 	Draw::Draw(GRA_STAGE5_BOSS_BODY, &src, &dst, color, 0.0f);
+
+
+	//Šá‹…---------------------------------------
+	//Ø‚èŽæ‚èˆÊ’u
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = src.m_left + STAGE5_BOSS_EYE_SIZE;
+	src.m_bottom = src.m_top + STAGE5_BOSS_EYE_SIZE;
+
+	//•`‰æˆÊ’u
+	dst.m_top = m_py - objmap->GetScrollY()  + EYE_CORRECTION_HEIGHT;
+	dst.m_left = m_px - objmap->GetScrollX() + EYE_CORRECTION_WIDTH;
+	dst.m_right = dst.m_left + STAGE5_BOSS_EYE_SIZE;	
+	dst.m_bottom = dst.m_top + STAGE5_BOSS_EYE_SIZE;
+	//•`‰æ
+	Draw::Draw(GRA_STAGE5_BOSS_EYE, &src, &dst, color, 0.0f);
+	
 }
