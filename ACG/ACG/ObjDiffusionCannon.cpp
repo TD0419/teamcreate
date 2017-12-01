@@ -1,8 +1,6 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\HitBoxManager.h"
-#include "GameL\SceneManager.h"
-#include "GameL\WinInputs.h"
-
+#include "GameL\Audio.h"
 #include "GameHead.h"
 #include "ObjDiffusionCannon.h"
 #include "Function.h"
@@ -40,6 +38,7 @@ void CObjDiffusionCannon::Action()
 			//–ñ15Šp“x‚ÅŠp“x’eŠÛ”­ŽË
 			obj_b = new CObjDiffusionBullet(m_px, m_py, i);
 			Objs::InsertObj(obj_b, OBJ_DIFFUSION_BULLET, 100);
+			Audio::Start(DIFFUSION);
 		}
 
 	}
