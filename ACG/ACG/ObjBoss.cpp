@@ -96,25 +96,31 @@ void CObjBoss::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098f);
 
-	//移動先ががけなら反転させる------------------------------
+	////移動先ががけなら反転させる------------------------------
 
-	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	//CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//int block_num = -1;
+	////ゴリラの左下にあたるブロックの位置
 	//float x = (m_px + m_vx) / BLOCK_SIZE;
-	//float y = m_py / BLOCK_SIZE;
-	//objmap->GetMap();
-	//if ()
-		//-------------------------------------------------------
+	//float y = (m_py + BOSS_SIZE_HEIGHT )/ BLOCK_SIZE;
 
-	//移動ベクトルをポジションに加算
-	m_px += m_vx;
+	////1マス下のブロックを調べる
+	//int block_num = objmap->GetMap((int)x,(int)y+1);
+	//
+	//if (block_num==MAP_SPACE)
+
+	////-------------------------------------------------------
+
 
 	//ブロックとの当たり判定実行
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	objblock->BlockHit(&m_px, &m_py, BOSS_SIZE_WIDTH, BOSS_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
+
+	if (m_hit_down == false)//下にブロックがなければ
+		m_posture = 1.0f;//左向きにする
+	
 
 	if (m_hit_right == true)    // ブロックの右側に当たっていたら 
 	{
