@@ -400,9 +400,9 @@ void CObjHero::Draw()
 
 	//˜r---------------------------------------
 	//Ø‚èŽæ‚èˆÊ’u
-	src.m_top = 0.0f;
-	src.m_left = 64.0f;
-	src.m_right = 128.0f;
+	src.m_top = 0.2f;
+	src.m_left = 128.0f;
+	src.m_right = 192.0f;
 	src.m_bottom = 64.0f;
 
 	//•`‰æˆÊ’u 
@@ -512,17 +512,39 @@ void CObjHero::Draw()
 	}
 	else if (m_ani_frame_stop_move == 1 && m_ladder_updown == 0 && rope_caught == false)  //Ž~‚Ü‚Á‚Ä‚¢‚é‚Æ‚«
 	{
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 128.0f;
+		//@ŽålŒö‚ª‰E‚ðŒü‚¢‚Ä‚¢‚éŽž‚Ì•`‰æˆÊ’u
+		if (m_posture == 0.0f)
+		{
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
+			src.m_right = 64.0f;
+			src.m_bottom = 128.0f;
+		}
+		else//@ŽålŒö‚ª¶‚ðŒü‚¢‚Ä‚¢‚éŽž‚Ì•`‰æˆÊ’u
+		{
+			src.m_top = 0.0f;
+			src.m_left = 64.0f;
+			src.m_right = 128.0f;
+			src.m_bottom = 128.0f;
+		}
 	}
 	else if (m_ani_frame_stop_move == 0 && m_ladder_updown == 0 && rope_caught == false)//“®‚¢‚Ä‚¢‚é‚Æ‚«
 	{
-		src.m_top = 129.0f;
-		src.m_left = 0.0f + AniData[m_ani_frame_move] * 64;
-		src.m_right = 64.0f + AniData[m_ani_frame_move] * 64;
-		src.m_bottom = 256.0f;
+		//@ŽålŒö‚ª‰E‚ðŒü‚¢‚Ä‚¢‚éŽž‚Ì•`‰æˆÊ’u
+		if (m_posture == 0.0f)
+		{
+			src.m_top = 129.0f;
+			src.m_left = 0.0f + AniData[m_ani_frame_move] * 64;
+			src.m_right = 64.0f + AniData[m_ani_frame_move] * 64;
+			src.m_bottom = 256.0f;
+		}
+		else//@ŽålŒö‚ª¶‚ðŒü‚¢‚Ä‚¢‚éŽž‚Ì•`‰æˆÊ’u
+		{
+			src.m_top = 129.0f;
+			src.m_left = 320.0f + AniData[m_ani_frame_move] * 64;
+			src.m_right = 384.0f + AniData[m_ani_frame_move] * 64;
+			src.m_bottom = 256.0f;
+		}
 	}
 	
 	//•`‰æˆÊ’u
@@ -537,9 +559,15 @@ void CObjHero::Draw()
 	else
 	{
 		dst.m_top = m_py - objmap->GetScrollY();
+		dst.m_left = dst.m_left = m_px - objmap->GetScrollX();
+		dst.m_right = dst.m_right = dst.m_left + HERO_SIZE_WIDTH;
+		dst.m_bottom = dst.m_top + HERO_SIZE_HEIGHT;
+
+		//â‘Î‚É‚¢‚é‚Ì‚ÅÁ‚³‚È‚¢‚Å
+		/*dst.m_top = m_py - objmap->GetScrollY();
 		dst.m_left = (HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
 		dst.m_right = (HERO_SIZE_WIDTH - HERO_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
-		dst.m_bottom = dst.m_top + HERO_SIZE_HEIGHT;
+		dst.m_bottom = dst.m_top + HERO_SIZE_HEIGHT;*/
 	}
 
 	//•`‰æ
