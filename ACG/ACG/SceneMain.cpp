@@ -79,9 +79,9 @@ void CSceneMain::InitScene()
 	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,14);
 	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
-	//当たり判定まだなのでため置いていてください
-	/*CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
-	Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);*/
+	////当たり判定まだなのでため置いていてください
+	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
+	//Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);
 
 	//デバッグ--------------------------------------------------
 }
