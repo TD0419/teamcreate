@@ -82,6 +82,7 @@
     <ClInclude Include="ObjRollBlockSwitch.h" />
     <ClInclude Include="ObjNeedleStand.h" />
     <ClInclude Include="ObjStage5Boss.h" />
+    <ClInclude Include="ObjStage5BossArms.h" />
     <ClInclude Include="ObjThroughBlock.h" />
     <ClInclude Include="ObjBossDropKey.h" />
     <ClInclude Include="Function.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="ObjNeedle.cpp" />
     <ClCompile Include="ObjRollBlockSwitch.cpp" />
     <ClCompile Include="ObjRope.cpp" />
+    <ClCompile Include="ObjStage5BossArms.cpp" />
     <ClCompile Include="ObjTarzanPoint.cpp" />
     <ClCompile Include="ObjTime.cpp" />
     <ClCompile Include="ObjTitle.cpp" />

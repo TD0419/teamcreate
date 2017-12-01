@@ -309,6 +309,9 @@
     <ClInclude Include="ObjFallingBlock.h">
       <Filter>ソース ファイル\Main\FallingBlock</Filter>
     </ClInclude>
+    <ClInclude Include="ObjStage5BossArms.h">
+      <Filter>ソース ファイル\Main\Stage5Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -490,6 +493,9 @@
     </ClCompile>
     <ClCompile Include="ObjFallingBlock.cpp">
       <Filter>ソース ファイル\Main\FallingBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStage5BossArms.cpp">
+      <Filter>ソース ファイル\Main\Stage5Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

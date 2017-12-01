@@ -263,8 +263,8 @@ enum MUSIC
 #define DIFFUSION_CANNON_SIZE	      (64.0f)   //ステージ5の拡散するキャノンのサイズ
 #define STAGE5_BOSS_BODY_SIZE	     (256.0f)	//ステージ5のボス胴体サイズ
 #define STAGE5_BOSS_EYE_SIZE	     (133.0f)	//ステージ5のボス眼球サイズ
-#define STAGE5_BOSS_ARMS_WIDTH       (512.0f)	//ステージ5のボス腕サイズ(横)
-#define STAGE5_BOSS_ARMS_HEIGHT      (700.0f)	//ステージ5のボス腕サイズ(縦)
+#define STAGE5_BOSS_ARMS_WIDTH_SIZE       (512.0f)	//ステージ5のボス腕サイズ(横)
+#define STAGE5_BOSS_ARMS_HEIGHT_SIZE      (700.0f)	//ステージ5のボス腕サイズ(縦)
 #define STAGE5_BOSS_ELECTRIC_WIDTH	 (300.0f)	//ステージ5のボス胴腕接続電気サイズ(横)
 #define STAGE5_BOSS_ELECTRIC_HEIGHT	 (256.0f)	//ステージ5のボス胴腕接続電気サイズ(縦)
 
@@ -302,6 +302,7 @@ enum MUSIC
 #include "ObjBoss.h"			//ボス
 #include "ObjStage3Boss.h"		//第三ステージボス
 #include "ObjStage5Boss.h"		//第五ステージボス
+#include "ObjStage5BossArms.h"	//第五ステージボスの腕
 #include "ObjBossDropKey.h"		//ボスが落とす鍵
 #include "ObjTitle.h"			//タイトル
 #include "ObjSign.h"			//看板

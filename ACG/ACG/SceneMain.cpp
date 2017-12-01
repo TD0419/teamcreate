@@ -74,9 +74,12 @@ void CSceneMain::InitScene()
 	//------------------------------
 
 	//ステージ５のボス(デバッグ中。消さないで)
-	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,14);
+	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,12);
 	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
+	//ステージ５のボスの腕
+	//CObjStage5BossArms* objstage5_boss_arms = new CObjStage5BossArms(4 ,9);
+	//Objs::InsertObj(objstage5_boss_arms, OBJ_STAGE5_BOSS_ARMS, 10);
 
 	//デバッグ--------------------------------------------------
 
@@ -102,7 +105,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	////デバッグ用ステージ番号調整用
-	//UserData* s = (UserData*)Save::GetData();
+	UserData* s = (UserData*)Save::GetData();
 	//s->stagenum = 2;
 	////----------------
 
