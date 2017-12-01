@@ -18,10 +18,11 @@ public:
 	void RopeDraw(float color[]);				  // ロープの描画関数
 	void RopeDelete();                            // ロープの消える条件の関数
 	bool GetCaughtFlag() { return m_caught_flag; }//ロープスイッチに引っかかったかを調べる用の変数を返す
+	bool GetTarzanPointFlag() { return m_tarzan_point_flag; }//ターザンに引っかかったかを調べる用の変数を返す
+	float GetPosX() { return m_px; }
+	float GetPosY() { return m_py; }
 	void SetPosX(float x) { m_px = x; }
 	void SetPosY(float y) { m_py = y; }
-
-
 private:
 	float m_px;			 // ロープX座標
 	float m_py;			 // ロープY座標
@@ -36,6 +37,7 @@ private:
 	bool  m_caught_flag; //ロープスイッチに引っかかったかを調べる用
 	bool  m_r_key_flag;  //ロープスイッチに引っかかるさいにRキーバグを直すための変数（Rキー押したままだとそのまま消える）
 
+	bool m_tarzan_point_flag;//ターザンポイントに引っかかったかどうかフラグ　true=引っかかっている false=引っかかっていない
 	//ブロックとの当たり判定用フラグ
 	bool m_hit_left;
 	bool m_hit_right;
