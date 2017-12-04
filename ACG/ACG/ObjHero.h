@@ -6,7 +6,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-#define SHOT_INTERVAL (50.0f)	//弾を撃つ間隔
+#define SHOT_INTERVAL (50)	//弾を撃つ間隔
 
 //振り子の動きをするときに使うデータ
 struct Pendulum

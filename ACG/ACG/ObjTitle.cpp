@@ -32,7 +32,7 @@ void CObjTitle::Action()
 	//↑キーが押された時
 	if (Input::GetVKey('W') == true)
 	{
-		//1以上　且つ　キーフラグがtrue　なら
+		//モード番号1以上　且つ　キーフラグがtrue　なら
 		if (m_mode >= 1 && m_keypush_flag == true)
 		{
 			m_mode--;	//モード番号を1減らす
@@ -65,23 +65,23 @@ void CObjTitle::Action()
 		{
 			switch (m_mode)
 			{
-			case 0:
-			{
-				//シーンメインに移動
-				Scene::SetScene(new CSceneMain);
-				break;
-			}
-			case 1:
-			{
-				//オプション
-				break;
-			}
-			case 2:
-			{
-				//ゲーム終了
-				exit(0);
-				break;
-			}
+				case 0:
+				{
+					//シーンメインに移動
+					Scene::SetScene(new CSceneMain);
+					break;
+				}
+				case 1:
+				{
+					//オプション
+					break;
+				}
+				case 2:
+				{
+					//ゲーム終了
+					exit(0);
+					break;
+				}
 			}
 		}
 	}

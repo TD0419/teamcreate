@@ -32,6 +32,10 @@ void CObjLadders::Init()
 	else
 		m_side_block_flag = false;
 
+	//左右がスルーブロックなら
+	if (map_left_side == MAP_THROUGH_BLOCK || map_right_side == MAP_THROUGH_BLOCK)
+		//m_side_through_block_flag;
+
 	m_up_and_down_speed = 6.0f;//ハシゴ上り下り時の速度
 	m_hero_jump_con = false;
 }
