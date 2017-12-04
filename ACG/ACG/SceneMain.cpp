@@ -82,6 +82,11 @@ void CSceneMain::InitScene()
 	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,14);
 	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
+	//ターザンポイントオブジェクト作成(デバック中です。)
+	CObjTarzanPoint* objtarzan_point = new CObjTarzanPoint(10, 18);
+	Objs::InsertObj(objtarzan_point, OBJ_TARZAN_POINT, 9);
+	objtarzan_point = new CObjTarzanPoint(17, 18);
+	Objs::InsertObj(objtarzan_point, OBJ_TARZAN_POINT, 9);
 
 	//デバッグ--------------------------------------------------
 
