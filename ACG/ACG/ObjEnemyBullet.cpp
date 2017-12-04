@@ -24,18 +24,17 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	//速さを決める
 	m_speed = 6.5f;
 
-	//主人公が本来いる位置に変更
+	//敵用弾丸にスクロールの影響を適用させる
 	x -= objmap->GetScrollX();
 	y -= objmap->GetScrollY();
 
-	//主人公機と敵用弾丸で角度を取る
+	//主人公との角度の計算を行う-----------------------------
+	//主人公のオブジェクト情報を持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-	//主人公との角度の計算を行う
 	float hero_x = objhero->GetPosX() - objmap->GetScrollX();		//主人公の位置情報X取得
 	float hero_y = objhero->GetPosY() - objmap->GetScrollY();		//主人公の位置情報Y取得
 
-	//主人公の位置のベクトル情報取得
+	//主人公の位置ベクトル情報取得
 	float Hvector_x = hero_x - x ;
 	float Hvector_y = hero_y - y ;
 
@@ -45,7 +44,9 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	//角度を求める
 	m_r = acos(Hvector_x / hypotenuse);
 
-	//角度方向に移動
+	//----------------------------------------------------------
+
+	//角度方向に弾丸を移動させる
 	m_vx = cos(m_r) * m_speed;
 	m_r = m_r * 180.0f / 3.14f;
 

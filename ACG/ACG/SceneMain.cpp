@@ -79,8 +79,15 @@ void CSceneMain::InitScene()
 	//------------------------------
 
 	//ステージ５のボス(デバッグ中。消さないで)
-	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,14);
+	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,12);
 	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
+
+	//ステージ５のボスの腕
+	//CObjStage5BossArms* objstage5_boss_arms = new CObjStage5BossArms(4 ,9);
+	//Objs::InsertObj(objstage5_boss_arms, OBJ_STAGE5_BOSS_ARMS, 10);
+	////当たり判定まだなのでため置いていてください
+	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
+	//Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);
 
 	//ターザンポイントオブジェクト作成(デバック中です。)
 	CObjTarzanPoint* objtarzan_point = new CObjTarzanPoint(10, 18);
@@ -89,13 +96,6 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(objtarzan_point, OBJ_TARZAN_POINT, 9);
 
 	//デバッグ--------------------------------------------------
-
-
-	//BGM再生
-	/*
-	
-	Audio::Start(STAGE5);*/
-
 }
 
 //ゲームメイン実行中メソッド
@@ -304,8 +304,8 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
 	//ステージ５ボス腕
 	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
-	
-
+	//金網
+	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
 }
 
 //音楽データ読み込み関数

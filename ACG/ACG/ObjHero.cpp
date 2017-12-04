@@ -281,9 +281,6 @@ void CObjHero::Action()
 	float y = m_mous_y - (m_py - objmap->GetScrollY() + (HERO_SIZE_HEIGHT / 2.0f));//Y
 	float inclination = sqrt(x * x + y * y);				//斜辺
 
-	////角度を求める
-	//float rad = acosf(x / inclination);
-	//m_r = rad* 180.0f / 3.14f;
 
 	if (y > 0.0f)	//yの値が0より大きいなら角度を正しい値に修正
 		m_r = 360.0f - m_r;

@@ -35,6 +35,7 @@ void CObjBoss::Init()
 	m_ani_throw_max_time = 5;	//投げるアニメーション間隔幅
 
 	m_ani_throw_start_flag = false;//投げるアニメーション開始フラグ false=オフ ture=オン
+	m_down_check_flag = false;//した判定を最初はしないに設定
 
 	m_wall_hit_flag = false;
 	// blockとの衝突確認用
@@ -96,21 +97,11 @@ void CObjBoss::Action()
 	//摩擦
 	m_vx += -(m_vx * 0.098f);
 
-	////移動先ががけなら反転させる------------------------------
+	m_vy = 9.8f / (16.0f);//自由落下
 
-	//CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	////ゴリラの左下にあたるブロックの位置
-	//float x = (m_px + m_vx) / BLOCK_SIZE;
-	//float y = (m_py + BOSS_SIZE_HEIGHT )/ BLOCK_SIZE;
-
-	////1マス下のブロックを調べる
-	//int block_num = objmap->GetMap((int)x,(int)y+1);
-	//
-	//if (block_num==MAP_SPACE)
-
-	////-------------------------------------------------------
-
+	//移動
+	m_px += m_vx;
+	m_py += m_vy;
 
 	//ブロックとの当たり判定実行
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -119,8 +110,17 @@ void CObjBoss::Action()
 	);
 
 	if (m_hit_down == false)//下にブロックがなければ
-		m_posture = 1.0f;//左向きにする
-	
+	{
+		if (m_down_check_flag = true)
+		{
+			m_posture = 1.0f;//左向きにする
+			m_px -= m_vx;		//移動前の位置に戻す
+		}
+	}
+	else //一度着地したら
+	{
+		m_down_check_flag = true;//した判定をオンにする
+	}
 
 	if (m_hit_right == true)    // ブロックの右側に当たっていたら 
 	{
@@ -175,6 +175,13 @@ void CObjBoss::Action()
 		m_hp -= 1;
 	}
 
+	//柱とあたれば
+	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
+	{
+		CObjLastWall* objlastwall = (CObjLastWall*)Objs::GetObj(OBJ_LAST_WALL);
+		
+		m_px = objlastwall->GetPosX()-BOSS_SIZE_WIDTH;//柱の左側に
+	}
 	// 体力が0以下なら
 	if (m_hp <= 0)
 	{

@@ -25,8 +25,8 @@ void CObjStage5Boss::Init()
 	m_hp = 100; //第5ボスのＨＰ(仮にＨＰを[100]と設定)
 
 	//音楽
-	Audio::Start(BOSS);
-	Audio::Stop(STAGE);
+	//Audio::Start(BOSS);
+	//Audio::Stop(STAGE);
 
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BODY_SIZE, STAGE5_BOSS_BODY_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS, 1);
