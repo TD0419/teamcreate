@@ -32,6 +32,12 @@ void CObjLadders::Init()
 	else
 		m_side_block_flag = false;
 
+	//左右がスルーブロックなら
+	if (map_left_side == MAP_THROUGH_BLOCK || map_right_side == MAP_THROUGH_BLOCK)
+		m_side_through_block_flag = true;
+	else
+		m_side_through_block_flag = false;
+
 	m_up_and_down_speed = 6.0f;//ハシゴ上り下り時の速度
 	m_hero_jump_con = false;
 }
@@ -76,6 +82,10 @@ void CObjLadders::Draw()
 		//サイドにブロックがあれば
 		if (m_side_block_flag == true)
 			Draw::Draw(GRA_BLOCK, &src, &dst, color, 0);//ブロックの描画
+
+		//サイドにスルーブロックがあれば
+		if(m_side_through_block_flag==true)
+			Draw::Draw(GRA_THROUGH_BLOCK, &src, &dst, color, 0);//スルーブロックの描画
 
 		//ハシゴの描画
 		Draw::Draw(GRA_LADDERS, &src, &dst, color, 0);

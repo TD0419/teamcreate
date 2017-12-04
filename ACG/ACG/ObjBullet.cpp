@@ -112,30 +112,37 @@ void CObjBullet::Action()
 	{
 		return;
 	}
-	//反射するブロックとあたった場合
-	if (hit->CheckObjNameHit(OBJ_REFLECT_BLOCK) != nullptr)
+	//金網と当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_WIRE_MESH))
 	{
-		HIT_DATA** hit_data;	//衝突の情報を入れる構造体
-		hit_data = hit->SearchObjNameHit(OBJ_BLOCK);//衝突の情報をhit_dataに入れる
-
-		for (int i = 0; i < hit->GetCount(); i++)
-		{
-			if (hit_data[i] != nullptr)
-			{
-				float r = hit_data[i]->r;
-
-				//上　または　下で衝突している場合
-				if (45.0f <= r && r < 135.0f || 225.0f <= r && r < 315.0f)
-				{
-					m_vy *= (-1.0f);//移動ベクトルの上下を反転する
-				}
-				else //左または右で衝突している場合
-				{
-					m_vx *= (-1.0f);//移動ベクトルの左右を反転する
-				}
-			}
-		}
+		return;
 	}
+	
+	//ステージ３で使うかも　使わない場合は消すこと！
+	////反射するブロックとあたった場合
+	//if (hit->CheckObjNameHit(OBJ_REFLECT_BLOCK) != nullptr)
+	//{
+	//	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
+	//	hit_data = hit->SearchObjNameHit(OBJ_BLOCK);//衝突の情報をhit_dataに入れる
+
+	//	for (int i = 0; i < hit->GetCount(); i++)
+	//	{
+	//		if (hit_data[i] != nullptr)
+	//		{
+	//			float r = hit_data[i]->r;
+
+	//			//上　または　下で衝突している場合
+	//			if (45.0f <= r && r < 135.0f || 225.0f <= r && r < 315.0f)
+	//			{
+	//				m_vy *= (-1.0f);//移動ベクトルの上下を反転する
+	//			}
+	//			else //左または右で衝突している場合
+	//			{
+	//				m_vx *= (-1.0f);//移動ベクトルの左右を反転する
+	//			}
+	//		}
+	//	}
+	//}
 
 	// ブロックオブジェクトを持ってくる
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);

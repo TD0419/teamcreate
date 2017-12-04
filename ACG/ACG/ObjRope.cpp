@@ -326,7 +326,11 @@ void CObjRope::RopeDelete()
 	{
 		return;
 	}
-
+	//‹à–Ô‚Æ“–‚½‚Á‚½‚çÁ‹Ž
+	if (DeleteCheckObjNameHit(hit, this, OBJ_WIRE_MESH))
+	{
+		return;
+	}
 	//ƒ[ƒv‚ªÁ‚µ‚Ä‚¢‚¢‚©‚Ç‚¤‚©‚ð’²‚×‚é
 	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();
 

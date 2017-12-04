@@ -31,7 +31,12 @@ void CObjHero::Action()
 	m_count++;//カウンターを増やす
 
 	if (m_count >= 10000)//一定数になると0に戻る
-		m_count = 0;
+	{
+		m_count = 50;
+		
+		//弾の制御を変数を更新
+		m_before_shot_time = SHOT_INTERVAL - (10000 - m_before_shot_time) ;
+	}
 
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
@@ -88,14 +93,15 @@ void CObjHero::Action()
 	//ブロックとの当たり判定
 	objblock->AllBlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
-
-	
+		
 	LandingCheck();//着地フラグの更新
-
 
 	//はしご-------------------------------------------------LadderScene()
 	//はしごオブジェクトを持ってくる
 	CObjLadders* objladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
+
+	//trueなら主人公とはしごがあたっているのでジャンプできないようにする変数
+	//falseならあたっていないのでジャンプできる
 	bool l_jump = false;
 	
 	if (objladders != nullptr)
@@ -106,12 +112,10 @@ void CObjHero::Action()
 			//はしごに登っていない
 			m_ladder_updown = 0;
 		}
-		l_jump = objladders->GetHeroJumpCon();  //はしごと主人公が当たっているかどうかを調べる
-		objladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
+		l_jump = objladders->GetHeroJumpCon();  //はしごと接触しているかどうかを調べる
+		objladders->HeroHit(m_px, m_py);
 	}
-
-
-
+	
 	//はしごのアニメーションタイムを進める
 	m_ani_time_ladders += m_ladder_ani_updown;//はしごから取ってくる
 
@@ -127,8 +131,6 @@ void CObjHero::Action()
 	{
 		m_ani_frame_ladders = 0;
 	}
-
-
 	//はしご終了---------------------------------------------
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーーMoveScene
@@ -225,6 +227,10 @@ void CObjHero::Action()
 	{
 			float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
 			float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
+
+			//ロープの位置
+			float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
+
 			//ロープがターザンポイントに引っかかった瞬間だけ処理
 			//引っかかっていなかったら振り子データ(重力加速度以外)は0.0fなのでこの条件
 			if (pendulum_data.length == 0.0f&&pendulum_data.pretend_width == 0.0f &&
@@ -236,20 +242,25 @@ void CObjHero::Action()
 				//振り子の糸の長さから今何時(周期)なのかを求める						↓重力加速度が0.98なのを98.0に直している
 				pendulum_data.time = 2.0f*3.141592f*sqrt(pendulum_data.length / (pendulum_data.gravity*100.0f));
 
+				//ロープのX位置より主人公が右にいたら時間(周期をーにする)
+				if (m_px > rope_x)
+					pendulum_data.time *= -1;
+
 				//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
 				pendulum_data.pretend_width = pendulum_data.length / 7.0f;
+
+				//ふり幅を一定数を超えないようにする
+				if (pendulum_data.pretend_width > 50.0f)
+					pendulum_data.pretend_width = 50.0f;
 			}
 			//ロープから主人公のベクトルの角度を計算
 			float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
 			
 			r = r * 3.14f / 180.0f;//ラジアン度にする
 
-			//ロープの位置
-			float tx = objrope->GetPosX(), ty = objrope->GetPosY();
-
 			//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
-			m_vx = cosf(r) - sinf(r) * pendulum_data.length + (tx - m_px);
-			m_vy = sinf(r) + cosf(r) * pendulum_data.length + (ty - m_py);
+			m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
+			m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
 
 			//周期を進める
 			pendulum_data.time +=1.0f;
@@ -441,7 +452,7 @@ void CObjHero::Draw()
 
 	//腕---------------------------------------
 	//切り取り位置
-	src.m_top = 0.2f;
+	src.m_top = 0.5f;
 	src.m_left = 128.0f;
 	src.m_right = 192.0f;
 	src.m_bottom = 64.0f;
@@ -550,7 +561,7 @@ void CObjHero::Draw()
 			//　主人公が右を向いている時の描画位置
 			if (m_posture == 0.0f)
 			{
-				src.m_top = 640.0f;
+				src.m_top = 641.0f;
 				src.m_left = 0.0f + m_ani_frame_water_die * 64;
 				src.m_right = 64.0f + m_ani_frame_water_die * 64;
 				src.m_bottom = 768.0f;
@@ -803,9 +814,18 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 		// 半径が一定値を超えたらシーン移行
 		if (m_radius >= 768.0f)
 		{
-			//ステージカウントを増やして次のステージにする
-			((UserData*)Save::GetData())->stagenum += 1;
-			Scene::SetScene(new CSceneMain());
+			//ステージ５ならクリアのシーンにする
+			if (((UserData*)Save::GetData())->stagenum == 5)
+			{
+				Scene::SetScene(new CSceneGameClear());
+				return;
+			}
+			else
+			{
+				//ステージカウントを増やして次のステージにする
+				((UserData*)Save::GetData())->stagenum += 1;
+				Scene::SetScene(new CSceneMain());
+			}
 		}
 	}
 
@@ -833,7 +853,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 //着地できてるかどうかを調べる関数
 void CObjHero::LandingCheck()
 {
-	bool c1,c2,c3,c4,c5,c6;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+	bool c1,c2,c3,c4,c5,c6,c7;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
 	
 	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
@@ -841,9 +861,9 @@ void CObjHero::LandingCheck()
 	c4 = HitUpCheck(OBJ_ROLL_BLOCK);//回転するブロック
 	c5 = HitUpCheck(OBJ_FALLING_LIFT);//落ちるリフト
 	c6 = HitUpCheck(OBJ_FALLING_BLOCK);//落ちるブロック
-
+	c7 = HitUpCheck(OBJ_WIRE_MESH);//金網
 	//チェック項目のどれか一つでもtrueなら
-	if ( c1 == true || c2 ==true || c3 == true || c4 ==true || c5 == true || c6 == true)
+	if ( c1 == true || c2 ==true || c3 == true || c4 ==true || c5 == true || c6 == true||c7==true)
 		m_hit_down = true;//着地フラグをオンにする
 
 }

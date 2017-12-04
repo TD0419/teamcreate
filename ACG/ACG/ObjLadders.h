@@ -24,5 +24,6 @@ private:
 	float m_up_and_down_speed;  //ハシゴの上り下り時の速度
 	bool  m_obj_look_f;			//ハシゴが見えるかどうか false:見えない true:見える
 	bool  m_side_block_flag;	//サイドにブロックがあるかを確認する
+	bool  m_side_through_block_flag;	//サイドにスルーブロックがあるかを確認する
 	bool  m_hero_jump_con;      //主人公が無駄にジャンプするのを制御
 };
