@@ -34,6 +34,7 @@ void CObjDiffusionBullet::Init()
 //アクション
 void CObjDiffusionBullet::Action()
 {
+	
 	//移動
 	m_px += m_vx* m_speed;
 	m_py -= m_vy* m_speed;
@@ -48,9 +49,28 @@ void CObjDiffusionBullet::Action()
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-	
 	//拡散弾HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
+
+	//Heroに当たれば削除
+	if (DeleteCheckObjNameHit(hit, this, OBJ_HERO))
+	{
+		return;
+	}
+
+	// ブロックオブジェクトを持ってくる
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//ブロックとの当たり判定
+	objblock->AllBlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+
+	//ブロックとあたっていれば削除する
+	if (m_hit_up == true || m_hit_down == true || m_hit_right == true || m_hit_left == true)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
+	}
 
 	//主人公とあたったら消去
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
