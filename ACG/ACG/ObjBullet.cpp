@@ -77,6 +77,16 @@ void CObjBullet::Action()
 	{
 		return;
 	}
+	//ステージ5ボスと当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_STAGE5_BOSS))
+	{
+		return;
+	}
+	//ステージ5ボスのアーム(ライトアーム、レフトアーム)と当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_STAGE5_BOSS_ARMS))
+	{
+		return;
+	}
 	//岩とあたったら消去
 	if (DeleteCheckObjNameHit(hit, this, OBJ_ROCK))
 	{

@@ -71,15 +71,7 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 //イニシャライズ
 void CObjEnemyBullet::Init()
 {
-	/*
-	m_vx = 0.0f;
-	m_vy = 1.0f;
-	m_speed = 0.0f;
 	
-	m_vx = cos(m_angle) * m_speed;
-	m_angle = m_angle * 180.0 / 3.14;
-	*/
-
 	m_window_check = true;
 
 	//当たり判定用HitBoxを作成
