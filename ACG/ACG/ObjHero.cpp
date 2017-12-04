@@ -31,7 +31,12 @@ void CObjHero::Action()
 	m_count++;//カウンターを増やす
 
 	if (m_count >= 10000)//一定数になると0に戻る
+	{
 		m_count = 0;
+		
+		//弾の制御を変数を更新
+		m_before_shot_time = -( SHOT_INTERVAL - (10000 - m_before_shot_time) );
+	}
 
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
@@ -88,10 +93,8 @@ void CObjHero::Action()
 	//ブロックとの当たり判定
 	objblock->AllBlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
-
-	
+		
 	LandingCheck();//着地フラグの更新
-
 
 	//はしご-------------------------------------------------LadderScene()
 	//はしごオブジェクトを持ってくる
@@ -109,9 +112,7 @@ void CObjHero::Action()
 		l_jump = objladders->GetHeroJumpCon();  //はしごと主人公が当たっているかどうかを調べる
 		objladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
 	}
-
-
-
+	
 	//はしごのアニメーションタイムを進める
 	m_ani_time_ladders += m_ladder_ani_updown;//はしごから取ってくる
 
@@ -127,8 +128,6 @@ void CObjHero::Action()
 	{
 		m_ani_frame_ladders = 0;
 	}
-
-
 	//はしご終了---------------------------------------------
 
 	//移動ーーーーーーーーーーーーーーーーーーーーーーーーーーーーMoveScene
