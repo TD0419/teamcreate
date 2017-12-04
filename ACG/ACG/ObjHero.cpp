@@ -558,7 +558,7 @@ void CObjHero::Draw()
 			//　主人公が右を向いている時の描画位置
 			if (m_posture == 0.0f)
 			{
-				src.m_top = 640.0f;
+				src.m_top = 641.0f;
 				src.m_left = 0.0f + m_ani_frame_water_die * 64;
 				src.m_right = 64.0f + m_ani_frame_water_die * 64;
 				src.m_bottom = 768.0f;
