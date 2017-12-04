@@ -102,6 +102,11 @@ void CObjBullet::Action()
 	{
 		return;
 	}
+	//‹à–Ô‚Æ“–‚½‚Á‚½‚çÁ‹Ž
+	if (DeleteCheckObjNameHit(hit, this, OBJ_WIRE_MESH))
+	{
+		return;
+	}
 	//”½ŽË‚·‚éƒuƒƒbƒN‚Æ‚ ‚½‚Á‚½ê‡
 	if (hit->CheckObjNameHit(OBJ_REFLECT_BLOCK) != nullptr)
 	{

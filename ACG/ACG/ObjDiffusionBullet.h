@@ -25,4 +25,9 @@ private:
 	float m_r;					//拡散弾の角度			
 	bool m_window_check;//画面内かどうかのチェック用 true:画面内 false:画面外
 
+	//ブロックとの当たり判定用フラグ
+	bool m_hit_left;
+	bool m_hit_right;
+	bool m_hit_up;
+	bool m_hit_down;
 };

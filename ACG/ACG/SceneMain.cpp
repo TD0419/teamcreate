@@ -71,11 +71,11 @@ void CSceneMain::InitScene()
 	//回転床テスト用----------
 	//当たり判定のバグがあったので残しています。バグが取れたら消してください
 
-	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
+	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 
-	//objrollblock = new CObjRollBlock(10, 15, 1);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	objrollblock = new CObjRollBlock(18, 18, 1);
+	Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 	//------------------------------
 
 	//ステージ５のボス(デバッグ中。消さないで)
@@ -85,6 +85,7 @@ void CSceneMain::InitScene()
 	//ステージ５のボスの腕
 	//CObjStage5BossArms* objstage5_boss_arms = new CObjStage5BossArms(4 ,9);
 	//Objs::InsertObj(objstage5_boss_arms, OBJ_STAGE5_BOSS_ARMS, 10);
+
 	////当たり判定まだなのでため置いていてください
 	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
 	//Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);
@@ -217,9 +218,7 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\BackGround\\Stage5.png", GRA_BACKGROUND, TEX_SIZE_1536);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage5.png", GRA_BLOCK, TEX_SIZE_128);
-		//回転ブロックの画像読み込み
-		Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
-		Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
+	
 		//金網ブロックの読み込み
 		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 		//ステージ5の大砲
@@ -295,6 +294,9 @@ void CSceneMain::ImageDataLoading()
 	
 	//回転ブロックのスイッチ
 	Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_ROLL_BLOCK_SWITCH, TEX_SIZE_16);
+	//回転ブロックの画像読み込み
+	Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+	Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
 
 	//ステージ５ボス胴腕接続電気
 	Draw::LoadImageW(L"Image\\Lastboss_Electric.png", GRA_STAGE5_BOSS_ELECTRIC, TEX_SIZE_512);
@@ -332,10 +334,10 @@ void CSceneMain::AudioDataLoading()
 		//BGM---------------------------------------------------------
 		Audio::LoadAudio(STAGE, L"BGM\\Jangle.wav", BACK_MUSIC);
 		//ステージ2_BOSS
-		Audio::LoadAudio(BOSS, L"BGM\\Boss2.wav", BACK_MUSIC);
+		Audio::LoadAudio(BOSS, L"BGM\\Boss.wav", BACK_MUSIC);
 		//SE----------------------------------------------------------
 		//ボタン
-		Audio::LoadAudio(BUTTON, L"SE\\Switch2.wav", EFFECT);
+		Audio::LoadAudio(BUTTON, L"SE\\Switch.wav", EFFECT);
 		//水の流れる音
 		Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 		//ゴリラの投擲音
@@ -345,11 +347,10 @@ void CSceneMain::AudioDataLoading()
 	case 5:
 		//ステージ5
 		//BGM----------------------------------------------------------
-		Audio::LoadAudio(STAGE, L"BGM\\Temple1.wav", BACK_MUSIC);
+		Audio::LoadAudio(STAGE, L"BGM\\Temple.wav", BACK_MUSIC);
 		Audio::LoadAudio(BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
 		//SE-----------------------------------------------------------
-		//回転ブロックの音
-		Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav", EFFECT);
+		
 		//ボスの拡散弾が出現するときの音
 		Audio::LoadAudio(BOSSPOP, L"SE\\BossPop.wav", EFFECT);
 		//ボスのレーザーが出現するときの音
@@ -363,26 +364,27 @@ void CSceneMain::AudioDataLoading()
 	//共通SE--------------------------------------------------------------
 	//弾の発射
 	Audio::LoadAudio(FIRING, L"SE\\Firing1.wav", EFFECT);
-
+	//回転ブロックの音
+	Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav", EFFECT);
 	//縄の打ち出し
-	Audio::LoadAudio(ROPE, L"SE\\Rope2.wav", EFFECT);
+	Audio::LoadAudio(ROPE, L"SE\\Rope.wav", EFFECT);
 
 	//岩の爆発
-	Audio::LoadAudio(ROCK, L"SE\\Rock2.wav", EFFECT);
+	Audio::LoadAudio(ROCK, L"SE\\Rock.wav", EFFECT);
 
 	//最後の壁の開閉
-	Audio::LoadAudio(WALL, L"SE\\Door1.wav", EFFECT);
+	Audio::LoadAudio(WALL, L"SE\\Door.wav", EFFECT);
 
 	//木のドアの開錠
-	Audio::LoadAudio(DOOR, L"SE\\Wood Door.wav", EFFECT);
+	Audio::LoadAudio(DOOR, L"SE\\Wood_Door.wav", EFFECT);
 
 	//敵に着弾
-	Audio::LoadAudio(LANDING, L"SE\\Landing1.wav", EFFECT);
+	Audio::LoadAudio(LANDING, L"SE\\Landing.wav", EFFECT);
 
 	//レバースイッチ
-	Audio::LoadAudio(LEVER, L"SE\\Lever1.wav", EFFECT);
+	Audio::LoadAudio(LEVER, L"SE\\Lever.wav", EFFECT);
 
 	//敵の弾丸
-	Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir3.wav", EFFECT);
+	Audio::LoadAudio(ENEMYFIR, L"SE\\Enemy Fir.wav", EFFECT);
 	//------------------------------------------------------------
-}
+} 

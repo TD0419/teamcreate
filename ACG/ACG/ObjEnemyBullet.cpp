@@ -108,37 +108,25 @@ void CObjEnemyBullet::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//主人公とあたったら消去
-	if (hit->CheckElementHit(OBJ_HERO) == true)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_HERO))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
 	//岩とあたったら消去
-	if (hit->CheckObjNameHit(OBJ_ROCK) != nullptr)//仮　ElementHitに変えるかも
+	if (DeleteCheckObjNameHit(hit, this, OBJ_ROCK))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
 	//Water(水)とあたったら消去
-	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
+	if (DeleteCheckObjNameHit(hit, this, OBJ_WATER))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
-	//lastwallと当たったら消去
-	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
+	//Lastwall(壁)にあたったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_LAST_WALL))
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
