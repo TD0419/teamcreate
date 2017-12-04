@@ -99,6 +99,9 @@ void CObjHero::Action()
 	//はしご-------------------------------------------------LadderScene()
 	//はしごオブジェクトを持ってくる
 	CObjLadders* objladders = (CObjLadders*)Objs::GetObj(OBJ_LADDERS);
+
+	//trueなら主人公とはしごがあたっているのでジャンプできないようにする変数
+	//falseならあたっていないのでジャンプできる
 	bool l_jump = false;
 	
 	if (objladders != nullptr)
@@ -109,8 +112,8 @@ void CObjHero::Action()
 			//はしごに登っていない
 			m_ladder_updown = 0;
 		}
-		l_jump = objladders->GetHeroJumpCon();  //はしごと主人公が当たっているかどうかを調べる
-		objladders->HeroHit(m_px, m_py);//はしごと接触しているかどうかを調べる
+		l_jump = objladders->GetHeroJumpCon();  //はしごと接触しているかどうかを調べる
+		objladders->HeroHit(m_px, m_py);
 	}
 	
 	//はしごのアニメーションタイムを進める
