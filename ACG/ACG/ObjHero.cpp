@@ -32,10 +32,10 @@ void CObjHero::Action()
 
 	if (m_count >= 10000)//ˆê’è”‚É‚È‚é‚Æ0‚É–ß‚é
 	{
-		m_count = 0;
+		m_count = 50;
 		
 		//’e‚Ì§Œä‚ğ•Ï”‚ğXV
-		m_before_shot_time = -( SHOT_INTERVAL - (10000 - m_before_shot_time) );
+		m_before_shot_time = SHOT_INTERVAL - (10000 - m_before_shot_time) ;
 	}
 
 	//©g‚ÌHitBox‚ğ‚à‚Á‚Ä‚­‚é
