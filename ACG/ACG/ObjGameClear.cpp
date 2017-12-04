@@ -15,7 +15,7 @@ using namespace GameL;
 void CObjGameClear::Init()
 {
 	m_key_flag = false;
-
+	Audio::Start(CLEAR);
 	//文字のグラフィック作成
 	Font::SetStrTex(L"GAMECLEAR");	
 }
