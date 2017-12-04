@@ -320,10 +320,10 @@ void CSceneMain::AudioDataLoading()
 		//ステージ１
 	case 1:
 		//BGM---------------------------------------------------------
-		Audio::LoadAudio(STAGE, L"BGM\\Grassland6.wav", BACK_MUSIC);
+		Audio::LoadAudio(STAGE, L"BGM\\Grassland.wav", BACK_MUSIC);
 		//SE----------------------------------------------------------
 		//木の転倒
-		Audio::LoadAudio(TREE, L"SE\\Tree3.wav", EFFECT);
+		Audio::LoadAudio(TREE, L"SE\\Tree.wav", EFFECT);
 		//リフト(引っ張る)
 		Audio::LoadAudio(PULLLIFT, L"SE\\LiftTrickPull.wav", EFFECT);
 		//リフト(離す)
@@ -364,7 +364,7 @@ void CSceneMain::AudioDataLoading()
 	}
 	//共通SE--------------------------------------------------------------
 	//弾の発射
-	Audio::LoadAudio(FIRING, L"SE\\Firing1.wav", EFFECT);
+	Audio::LoadAudio(FIRING, L"SE\\Firing.wav", EFFECT);
 	//回転ブロックの音
 	Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav", EFFECT);
 	//縄の打ち出し

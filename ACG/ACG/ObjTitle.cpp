@@ -1,7 +1,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
-
+#include "GameL\Audio.h"
 #include "GameHead.h"
 #include "ObjTitle.h"
 
@@ -24,11 +24,14 @@ void CObjTitle::Init()
 	Font::SetStrTex(L"→");	//→
 
 	((UserData*)Save::GetData())->stagenum = 1;
+
+	Audio::Start(TITLE);
 }
 
 //アクション
 void CObjTitle::Action()
 {
+	
 	//↑キーが押された時
 	if (Input::GetVKey('W') == true)
 	{
