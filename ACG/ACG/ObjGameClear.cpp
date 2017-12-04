@@ -37,8 +37,8 @@ void CObjGameClear::Draw()
 {
 	float color[4] = { 1.0f,1.0f,1.0f,1.0f };
 
-	RECT_F src;	//描画先切り取り位置
-	RECT_F dst;	//描画先表示位置
+//	RECT_F src;	//描画先切り取り位置
+//	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置設定
 	//src.m_top = 0.0f;

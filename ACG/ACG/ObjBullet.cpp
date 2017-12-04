@@ -102,6 +102,11 @@ void CObjBullet::Action()
 	{
 		return;
 	}
+	//金網と当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_WIRE_MESH))
+	{
+		return;
+	}
 	
 	//ステージ３で使うかも　使わない場合は消すこと！
 	////反射するブロックとあたった場合
