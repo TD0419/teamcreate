@@ -20,7 +20,6 @@ void CObjTitle::Init()
 	Font::SetStrTex(L"Option");	//オプション
 	Font::SetStrTex(L"Exit");	//終了
 
-	//デバッグ用
 	Font::SetStrTex(L"→");	//→
 
 	((UserData*)Save::GetData())->stagenum = 1;
@@ -32,18 +31,18 @@ void CObjTitle::Init()
 void CObjTitle::Action()
 {
 	
-	//↑キーが押された時
-	if (Input::GetVKey('W') == true)
+	//Wキー　又は　↑キーが押された時
+	if (Input::GetVKey('W') == true || Input::GetVKey(VK_UP) == true)
 	{
-		//モード番号1以上　且つ　キーフラグがtrue　なら
+		//1以上　且つ　キーフラグがtrue　なら
 		if (m_mode >= 1 && m_keypush_flag == true)
 		{
 			m_mode--;	//モード番号を1減らす
 			m_keypush_flag = false;	//キーフラグをオフにする
 		}
 	}
-	//↓キーが押された時
-	else if (Input::GetVKey('S') == true)
+	//Sキー　又は　↓キーが押された時
+	else if (Input::GetVKey('S') == true || Input::GetVKey(VK_DOWN) == true)
 	{
 		//1以下　且つ　キーフラグがtrue　なら
 		if (m_mode <= 1 && m_keypush_flag == true)
@@ -52,7 +51,7 @@ void CObjTitle::Action()
 			m_keypush_flag = false;	//キーフラグをオフにする
 		}
 	}
-	//↑と↓が押されてないとき
+	//W、S、↑、↓が押されてないとき
 	else
 		m_keypush_flag = true;//キーフラグをオンにする
 
