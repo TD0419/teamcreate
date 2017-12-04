@@ -108,11 +108,8 @@ void CObjRollBlock::Action()
 		}
 		case 2:	//引っ張ったときに一度のみ回転
 		{
-			
-
 			if (m_roll_flag == true)//回転のフラグがオンになっていれば
 			{
-				
 				m_audio_time+=1;//音楽制御のために1ずつプラスしていく
 				if (m_audio_time % 120 == 0)
 				{
