@@ -42,12 +42,12 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	float hypotenuse = sqrt(Hvector_y * Hvector_y + Hvector_x * Hvector_x);
 
 	//角度を求める
-	m_r = acos(Hvector_x / hypotenuse);
+	m_r = acosf(Hvector_x / hypotenuse);
 
 	//----------------------------------------------------------
 
 	//角度方向に弾丸を移動させる
-	m_vx = cos(m_r) * m_speed;
+	m_vx = cosf(m_r) * m_speed;
 	m_r = m_r * 180.0f / 3.14f;
 
 	//マウスのY位置が主人公のY位置より下だったら
@@ -59,11 +59,11 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	//マウスのY位置が初期Y位置より上
 	if (hero_y < y)
 	{
-		m_vy = -sin(acos(Hvector_x / hypotenuse)) * m_speed;
+		m_vy = -sin(acosf(Hvector_x / hypotenuse)) * m_speed;
 	}
 	else
 	{
-		m_vy = sin(acos(Hvector_x / hypotenuse)) * m_speed;
+		m_vy = sin(acosf(Hvector_x / hypotenuse)) * m_speed;
 	}
 	
 }
@@ -71,15 +71,6 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 //イニシャライズ
 void CObjEnemyBullet::Init()
 {
-	/*
-	m_vx = 0.0f;
-	m_vy = 1.0f;
-	m_speed = 0.0f;
-	
-	m_vx = cos(m_angle) * m_speed;
-	m_angle = m_angle * 180.0 / 3.14;
-	*/
-
 	m_window_check = true;
 
 	//当たり判定用HitBoxを作成
@@ -96,12 +87,24 @@ void CObjEnemyBullet::Action()
 	//画面内か調べる
 	m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
 
-	//画面外なら消去
+	//画面外なら
 	if (m_window_check == false)
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
-		return;
+		//主人公とボスのオブジェクトをもってくる
+		CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+		//主人公とボスのXの位置を持ってくる
+		float boss_x = objboss->GetPosX();
+		float hero_x = objhero->GetPosX();
+
+		//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
+		if (abs(boss_x - m_px) > abs(boss_x - hero_x))
+		{
+			this->SetStatus(false);		//自身に消去命令を出す。
+			Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+			return;
+		}
 	}
 
 	//弾丸のHitBox更新用ポインター取得
