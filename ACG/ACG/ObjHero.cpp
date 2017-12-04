@@ -450,7 +450,7 @@ void CObjHero::Draw()
 
 	//腕---------------------------------------
 	//切り取り位置
-	src.m_top = 0.2f;
+	src.m_top = 0.5f;
 	src.m_left = 128.0f;
 	src.m_right = 192.0f;
 	src.m_bottom = 64.0f;
@@ -812,9 +812,18 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 		// 半径が一定値を超えたらシーン移行
 		if (m_radius >= 768.0f)
 		{
-			//ステージカウントを増やして次のステージにする
-			((UserData*)Save::GetData())->stagenum += 1;
-			Scene::SetScene(new CSceneMain());
+			//ステージ５ならクリアのシーンにする
+			if (((UserData*)Save::GetData())->stagenum == 5)
+			{
+				Scene::SetScene(new CSceneGameClear());
+				return;
+			}
+			else
+			{
+				//ステージカウントを増やして次のステージにする
+				((UserData*)Save::GetData())->stagenum += 1;
+				Scene::SetScene(new CSceneMain());
+			}
 		}
 	}
 

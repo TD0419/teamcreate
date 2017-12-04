@@ -29,7 +29,7 @@ void CObjGameOver::Action()
 	//エンターキーが押された時
 	if (Input::GetVKey(VK_RETURN) == true)
 	{
-		//シーンメインに移動
+		//シーンタイトルに移動
 		Scene::SetScene(new CSceneTitle());
 		return;
 	}
