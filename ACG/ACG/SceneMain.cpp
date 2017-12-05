@@ -92,6 +92,11 @@ void CSceneMain::InitScene()
 	//objtarzan_point = new CObjTarzanPoint(17, 18);
 	//Objs::InsertObj(objtarzan_point, OBJ_TARZAN_POINT, 9);
 
+	//落ちるリフト
+	CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
+	Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
+
+
 	//デバッグ--------------------------------------------------
 }
 
