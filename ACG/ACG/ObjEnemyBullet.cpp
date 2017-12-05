@@ -71,6 +71,7 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 //イニシャライズ
 void CObjEnemyBullet::Init()
 {
+	
 	m_window_check = true;
 
 	//当たり判定用HitBoxを作成
