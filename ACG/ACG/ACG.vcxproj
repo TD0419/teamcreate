@@ -137,7 +137,7 @@
     <ClCompile Include="ObjDiffusionCannon.cpp" />
     <ClCompile Include="ObjFallingBlock.cpp" />
     <ClCompile Include="ObjFallingLift.cpp" />
-    <ClCompile Include="ObjHeroAction.cpp" />
+    <ClCompile Include="ObjHeroDraw.cpp" />
     <ClCompile Include="ObjHeroInit.cpp" />
     <ClCompile Include="ObjLastWall.cpp" />
     <ClCompile Include="ObjBackGround.cpp" />

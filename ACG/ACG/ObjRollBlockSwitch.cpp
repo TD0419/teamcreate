@@ -49,7 +49,13 @@ void CObjRollBlockSwitch::Action()
 		//左移動していれば
 		if (Input::GetVKey('A') == true)
 		{
-			m_r += 2.0f;//角度の加算
+			//90度を超えていたなら
+			if (m_r >= 90.0f)
+			{
+				m_r = 90.0f;//90を超えないようにする
+			}
+			else
+				m_r += 2.0f;//角度の加算
 
 			//sin値　cos値を求める
 			float sin = sinf(m_r * 3.14f / 180.0f);

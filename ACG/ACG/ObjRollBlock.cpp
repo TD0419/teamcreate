@@ -23,7 +23,7 @@ void CObjRollBlock::Init()
 	m_roll_flag = false;//回転のフラグを初期化
 	m_pos_adjustment_flag = false;
 
-	m_audio_time = 119;//音楽制御用のタイム初期化
+	m_audio_time = 29;//音楽制御用のタイム初期化
 
 	switch (m_pattan)
 	{
@@ -105,16 +105,14 @@ void CObjRollBlock::Action()
 				m_count = 0;			//カウントを0で初期化する
 			}
 			break;
+
 		}
 		case 2:	//引っ張ったときに一度のみ回転
 		{
-			
-
 			if (m_roll_flag == true)//回転のフラグがオンになっていれば
 			{
-				
 				m_audio_time+=1;//音楽制御のために1ずつプラスしていく
-				if (m_audio_time % 120 == 0)
+				if (m_audio_time % 40 == 0)
 				{
 					Audio::Start(ROLLBLOCK);
 				}

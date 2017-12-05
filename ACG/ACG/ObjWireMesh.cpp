@@ -8,10 +8,10 @@
 using namespace GameL;
 
 //コンストラクタ
-CObjWireMesh::CObjWireMesh(float x, float y)
+CObjWireMesh::CObjWireMesh(int x, int y)
 {
-	m_px = x * BLOCK_SIZE;
-	m_py = y * BLOCK_SIZE;
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
 }
 
 //イニシャライズ
@@ -50,20 +50,6 @@ void CObjWireMesh::Action()
 				//主人公の移動ベクトルが下向きなら
 				if (objhero->GetVecY() > 0.0f)
 					objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
-			}
-			//左側が当たっていれば
-			else if (174.5f <= r && r <= 185.5f)
-			{
-				//左に反発する処理
-				objhero->SetPosX(m_px - 64.8f);//主人公の位置をブロックの左にする
-				objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
-			}
-			//右側が当たっていれば
-			else if (0.0f < r && r < 5.5f || 355.0f < r && r < 360.0f)
-			{
-				//縦向きなら
-				objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの右にする
-				objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
 			}
 		}
 	}

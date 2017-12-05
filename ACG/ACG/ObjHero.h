@@ -6,7 +6,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-#define SHOT_INTERVAL (50.0f)	//弾を撃つ間隔
+#define SHOT_INTERVAL (50)	//弾を撃つ間隔
 
 //振り子の動きをするときに使うデータ
 struct Pendulum
@@ -25,10 +25,12 @@ public:
 	~CObjHero() {};					//デストラクタ
 	void Init();					//イニシャライズ
 	void Action();					//アクション
+	void GetBlockInformation();		//主人公の左下、真下、右下にあるブロック情報を取得関数
+	void MoveScene();				//移動関数
 	void Shot();                //発砲関数
+	void LadderScene();			//梯子関数
 	void RopeThrow();			//Rope スロー関数
-
-
+	void HitScene();			//当たり判定関数
 	void Draw();					//ドロー
 	void Scroll();					//スクロール処理の関数
 	void LandingCheck();			//着地できてるかどうかを調べる関数
@@ -66,17 +68,18 @@ private:
 	float m_vy;		//Y軸方向のベクトル
 	float m_posture;//姿勢 //右：0.0ｆ　左：1.0ｆ
 	float m_r;		//主人公の回転角度
-	int m_remaining;//残機管理
-	int   m_block_type;//踏んでるブロックの値を保存する
-	int   m_block_type_up; //主人公の上のブロックの値を保存する
 	float m_fall_speed_max;//主人公の落下スピード最大速度
 	float m_radius; //主人公が死んだ時、周りから黒くする半径の変数
-	bool  m_gravity_flag; // 主人公の重力落下フラグ true:重力あり false:重力なし
-	bool  m_goal_flag;	  // ゴールフラグ true:ゴールした false:ゴールしていない		
 	float m_mous_x;	    //マウスの位置X
 	float m_mous_y;     //マウスの位置Y
 	float m_rope_moux;	//Rを押したときのマウスの位置X
 	float m_rope_mouy;  //Rを押したときのマウスの位置Y
+	int	  m_remaining;//残機管理
+	int   m_block_type;//踏んでるブロックの値を保存する
+	int   m_block_type_up; //主人公の上のブロックの値を保存する
+
+	bool  m_gravity_flag; // 主人公の重力落下フラグ true:重力あり false:重力なし
+	bool  m_goal_flag;	  // ゴールフラグ true:ゴールした false:ゴールしていない		
 	Pendulum pendulum_data;	//振り子の動きをするときに使うデータ
 	//ーーーー制御系---------
 	int	  m_count;				  //制御用のカウンター
@@ -88,6 +91,9 @@ private:
 	bool  m_rope_delete_r_kye;    //アニメーション用ロープが消えたかどうかを管理する 
 	bool  m_rope_delete_control;  //ロープが消えた時の判定を制御する変数
 	bool  m_hero_die_flag;        //主人公が死んだ時の高さを制御するためのフラグ
+
+	bool l_jump;				  //trueなら主人公とはしごがあたっているのでジャンプできないようにする変数
+								  //falseならあたっていないのでジャンプできる
 	//-----------
 	//-------Heroが死ぬ系---------
 	bool   m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）

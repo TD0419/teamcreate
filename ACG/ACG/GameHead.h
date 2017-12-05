@@ -199,6 +199,8 @@ enum MUSIC
 	STAGE,      //ステージ
 	BOSS,       //ボス
 	GAMEOVER,	//ゲームオーバー
+	TITLE,		//タイトル
+	CLEAR,		//クリア
 //SE---------------------
 	FIRING		,//弾の発射
 	ROPE		,//ロープの打ち出し

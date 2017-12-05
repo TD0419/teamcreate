@@ -20,7 +20,7 @@ void CObjHero::Init()
 	m_rope_mouy = 0.0f;		    //Rを押したときのマウスの位置Y
 
 	m_count = 0;	//カウンターの初期化
-	m_before_shot_time = -0;	//弾の発射時間の初期化（スタート直後に打てるように大きめの負の数で初期化）
+	m_before_shot_time = -50;	//弾の発射時間の初期化（スタート直後に打てるように大きめの負の数で初期化）
 
 	m_bullet_control = true;	//弾丸発射制御用
 	m_rope_control = false;		//ロープ発射制御用
@@ -56,6 +56,8 @@ void CObjHero::Init()
 	m_ani_max_time_enemy_die = 18;         //主人公が敵に当たった時アニメーション間隔幅 
 	m_ani_time_enemy_die = 0;
 	m_ani_frame_enemy_die = 0;//主人公が敵に当たった時静止フレームを初期にする
+
+	l_jump = false;
 
 	m_block_type = 0;//主人公のしたのブロック情報
 	m_block_type_up = 0;

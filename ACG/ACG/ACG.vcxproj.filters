@@ -470,9 +470,6 @@
     <ClCompile Include="ObjHeroInit.cpp">
       <Filter>ソース ファイル\Main\Hero</Filter>
     </ClCompile>
-    <ClCompile Include="ObjHeroAction.cpp">
-      <Filter>ソース ファイル\Main\Hero</Filter>
-    </ClCompile>
     <ClCompile Include="ObjNeedleStand.cpp">
       <Filter>ソース ファイル\Main\Needle</Filter>
     </ClCompile>
@@ -505,6 +502,9 @@
     </ClCompile>
     <ClCompile Include="ObjStage5BossArms.cpp">
       <Filter>ソース ファイル\Main\Stage5Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHeroDraw.cpp">
+      <Filter>ソース ファイル\Main\Hero</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

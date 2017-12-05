@@ -1,7 +1,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
-
+#include "GameL\Audio.h"
 #include "GameHead.h"
 #include "ObjTitle.h"
 
@@ -20,17 +20,19 @@ void CObjTitle::Init()
 	Font::SetStrTex(L"Option");	//オプション
 	Font::SetStrTex(L"Exit");	//終了
 
-	//デバッグ用
 	Font::SetStrTex(L"→");	//→
 
 	((UserData*)Save::GetData())->stagenum = 1;
+
+	Audio::Start(TITLE);
 }
 
 //アクション
 void CObjTitle::Action()
 {
-	//↑キーが押された時
-	if (Input::GetVKey('W') == true)
+	
+	//Wキー　又は　↑キーが押された時
+	if (Input::GetVKey('W') == true || Input::GetVKey(VK_UP) == true)
 	{
 		//1以上　且つ　キーフラグがtrue　なら
 		if (m_mode >= 1 && m_keypush_flag == true)
@@ -39,8 +41,8 @@ void CObjTitle::Action()
 			m_keypush_flag = false;	//キーフラグをオフにする
 		}
 	}
-	//↓キーが押された時
-	else if (Input::GetVKey('S') == true)
+	//Sキー　又は　↓キーが押された時
+	else if (Input::GetVKey('S') == true || Input::GetVKey(VK_DOWN) == true)
 	{
 		//1以下　且つ　キーフラグがtrue　なら
 		if (m_mode <= 1 && m_keypush_flag == true)
@@ -49,7 +51,7 @@ void CObjTitle::Action()
 			m_keypush_flag = false;	//キーフラグをオフにする
 		}
 	}
-	//↑と↓が押されてないとき
+	//W、S、↑、↓が押されてないとき
 	else
 		m_keypush_flag = true;//キーフラグをオンにする
 
@@ -65,23 +67,23 @@ void CObjTitle::Action()
 		{
 			switch (m_mode)
 			{
-			case 0:
-			{
-				//シーンメインに移動
-				Scene::SetScene(new CSceneMain);
-				break;
-			}
-			case 1:
-			{
-				//オプション
-				break;
-			}
-			case 2:
-			{
-				//ゲーム終了
-				exit(0);
-				break;
-			}
+				case 0:
+				{
+					//シーンメインに移動
+					Scene::SetScene(new CSceneMain);
+					break;
+				}
+				case 1:
+				{
+					//オプション
+					break;
+				}
+				case 2:
+				{
+					//ゲーム終了
+					exit(0);
+					break;
+				}
 			}
 		}
 	}
