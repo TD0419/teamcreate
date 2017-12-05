@@ -72,6 +72,18 @@ void CObjHero::Init()
 	pendulum_data.length = 0.0f;	//U‚èq‚Ì’·‚³
 	pendulum_data.pretend_width = 0.0f;//‚Ó‚è•
 	pendulum_data.time = 0.0f;//ŠÔ(üŠú)
-	//“–‚½‚è”»’è
-	Hits::SetHitBox(this, m_px, m_py, 64, 112, ELEMENT_PLAYER, OBJ_HERO, 1);
+
+	//‰EŒü‚«‚Ì‚Æ‚«‚Ì“–‚½‚è”»’è
+	if (m_posture == 0.0f)
+	{
+		//“–‚½‚è”»’è
+		Hits::SetHitBox(this, m_px, m_py, 46, 112, ELEMENT_PLAYER, OBJ_HERO, 1);
+	}
+
+	//¶Œü‚«‚Ì‚Æ‚«‚Ì“–‚½‚è”»’è
+	else
+	{
+		//“–‚½‚è”»’è
+		Hits::SetHitBox(this, m_px, m_py, 46, 112, ELEMENT_PLAYER, OBJ_HERO, 1);
+	}
 }

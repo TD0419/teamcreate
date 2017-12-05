@@ -75,9 +75,17 @@ void CObjHero::Action()
 	RopeThrow();//ロープ射出
 
 	HitScene();	//当たり判定
-	
-	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py + 14);
+
+	if (m_posture == 0.0f)
+	{
+		//HitBoxの位置を更新する
+		HitBoxUpData(Hits::GetHitBox(this), m_px+3, m_py + 14);
+	}
+	else
+	{
+		//HitBoxの位置を更新する
+		HitBoxUpData(Hits::GetHitBox(this), m_px+15, m_py + 14);
+	}
 }
 
 //主人公の左下、真下、右下にあるブロック情報を取得
