@@ -243,12 +243,15 @@ void CObjHero::MoveScene()
 
 		r = r * 3.14f / 180.0f;//ラジアン度にする
 
-		//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
-		m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
-		m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
-
-		//周期を進める
-		pendulum_data.time += 1.0f;
+		//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
+		if (!m_hit_down  && !m_hit_left && !m_hit_right && !m_hit_up)
+		{
+			//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
+			m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
+			m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
+			//周期を進める
+			pendulum_data.time += 1.0f;
+		}
 	}
 	//ロープがターザンポイントに引っかかっていなかったら
 	//振り子データの重力加速度以外を初期化
