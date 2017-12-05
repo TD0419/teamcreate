@@ -1,7 +1,5 @@
 #pragma once
 //使用するヘッダー
-#include "GameL\DrawTexture.h"
-#include "GameL\SceneObjManager.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -10,7 +8,7 @@ using namespace GameL;
 class CObjWireMesh :public CObj
 {
 public:
-	CObjWireMesh(float x, float y);	// コンストラクタ
+	CObjWireMesh(int x, int y);	// コンストラクタ
 	~CObjWireMesh() {};			// デストラクタ
 	void Init();				// イニシャライズ
 	void Action();				// アクション
