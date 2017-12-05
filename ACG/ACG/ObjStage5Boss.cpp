@@ -28,6 +28,13 @@ void CObjStage5Boss::Init()
 	//Audio::Start(BOSS);
 	//Audio::Stop(STAGE);
 
+	//ライトアームの描画
+	CObjStage5BossArms* objstage5_boss_arms = new CObjStage5BossArms(5.0, 10.0, 1);
+	Objs::InsertObj(objstage5_boss_arms, OBJ_STAGE5_BOSS_ARMS, 10);
+	//レフトアームの描画
+	CObjStage5BossArms* objstage5_boss_arms2 = new CObjStage5BossArms(5.0, 10.0, 2);
+	Objs::InsertObj(objstage5_boss_arms2, OBJ_STAGE5_BOSS_ARMS, 10);
+
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BODY_SIZE, STAGE5_BOSS_BODY_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS, 1);
 }
@@ -113,4 +120,5 @@ void CObjStage5Boss::Draw()
 	//描画
 	Draw::Draw(GRA_STAGE5_BOSS_EYE, &src, &dst, color, 0.0f);
 	
+
 }

@@ -98,7 +98,7 @@ void CObjEnemy::Action()
 
 	//移動終わり-----------------------------------------
 
-	//弾丸のHitBox更新用ポインター取得
+	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//弾丸とあたったら消去
