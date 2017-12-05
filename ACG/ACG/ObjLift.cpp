@@ -12,12 +12,12 @@
 
 //使用するネームスペース
 using namespace GameL;
+
 //コンストラクタ
 //引数1,2	マップの数値(位置)
 //引数3		移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
 //引数4		X方向への最大移動量(初期位置～最大移動量分動きます。移動モードが２の場合値は関係ありません)
 //引数5		リフトの動きモード
-//			０＝手動モード(縄を紐スイッチに当てて移動するモード)
 //			１＝自由移動モード(初期位置Xから最大X位置の間を自動移動)
 //			２＝無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)
 CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
@@ -34,21 +34,22 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 	//値が負の数なら正の数にする
 	if (width_max < 0)
 		width_max *= -1;
+
 	m_width_max = width_max;
-	m_length_max = 0.0f;//今のところ使っていない2017/11/22
 
 	//移動モードを決める
 	m_move_mode = mode;
 
 	//マップ情報を取得
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	//何個めのブロックの位置までを移動区間とするかの個数
-	int block_count = 0;
-	int block_max_count = (int)(LIFT_SIZE_WIDTH/BLOCK_SIZE);//MAX値
-
+	
 	//移動方向と初期移動方向と最大移動量を決める
 	if (mode == 0||mode == 1)
 	{
+		//何個めのブロックの位置までを移動区間とするかの個数
+		int block_count = 0;
+		int block_max_count = (int)(LIFT_SIZE_WIDTH / BLOCK_SIZE);//MAX値
+		
 		//マップの位置(リフト)の左下が空気なら初期移動方向は右
 		if (objmap->GetMap(px - 1, py + 1)== MAP_SPACE)
 		{
@@ -126,8 +127,26 @@ void CObjLift::Init()
 	
 	//リフトのカウント初期化
 	m_lift_audio_count = 47;
-	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		case 1:
+		case 2:
+		{
+			//当たり判定
+			Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+			break;
+			
+		}
+		case 5:
+		{
+			//当たり判定
+			Hits::SetHitBox(this, m_px, m_py, STAGE5_LIFT_SIZE_WIDTH, STAGE5_LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+			break;
+		}
+	}
+
+	
 }
 
 //アクション
@@ -136,8 +155,7 @@ void CObjLift::Action()
 	
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
-
-
+	
 	//主人公が当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
@@ -150,10 +168,6 @@ void CObjLift::Action()
 	//位置情報を更新
 	m_px += m_vx;
 	m_py += m_vy;
-
-	//移動量の保存
-	/*m_move_x += m_vx;
-	m_move_y += m_vy;*/
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
@@ -173,15 +187,40 @@ void CObjLift::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 128.0f;
-	src.m_bottom = 128.0f;
-
+	
 	//描画の位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
-	dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
 
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		case 1:
+		case 2:
+		{
+			//切り取り
+			src.m_right = 128.0f;
+			src.m_bottom = 32.0f;
+
+			//描画
+			dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
+			dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
+
+			break;
+		}
+		case 5:
+		{
+			//切り取り
+			src.m_right = 320.0f;
+			src.m_bottom = 16.0f;
+
+			//描画
+			dst.m_right = dst.m_left + STAGE5_LIFT_SIZE_WIDTH;
+			dst.m_bottom = dst.m_top + STAGE5_LIFT_SIZE_HEIGHT;
+
+			break;
+		}
+	}
+	
 	//リフトの描画
 	Draw::Draw(GRA_LIFT, &src, &dst, color, 0.0f);
 }

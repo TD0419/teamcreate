@@ -240,8 +240,12 @@ enum MUSIC
 
 #define LEVER_SWITCH_SIZE	  (64.0f)	    //レバースイッチのサイズ
 #define ROPE_SWITCH_SIZE	  (64.0f)	    //ロープスイッチのサイズ
+
 #define LIFT_SIZE_WIDTH		  (128.0f)		//リフトサイズ横サイズ
 #define LIFT_SIZE_HEIGHT	  (32.0f)		//リフトサイズ縦サイズ
+#define STAGE5_LIFT_SIZE_WIDTH (320.0f)		//ステージ5のリフトサイズ
+#define STAGE5_LIFT_SIZE_HEIGHT (16.0f)		//ステージ5のリフトサイズ
+
 #define ROCK_SIZE_WIDTH		  (170.0f)		//岩の横サイズ（仮
 #define ROCK_SIZE_HEIGHT	  (240.0f)		//岩の縦サイズ（仮
 #define WOOD_SIZE			  (320.0f)		//木のサイズ(仮)
