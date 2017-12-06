@@ -129,34 +129,41 @@ void CObjHero::MoveScene()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//ロープを出している時と水に当たった時と敵に当たった時は動かない
-	if (m_rope_ani_con == false && m_hero_die_water == false && m_ani_frame_enemy_die == false && m_py < 2000.0f)
+	//ロープオブジェクト情報を持ってくる
+	CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
+	
+	//ロープを出している時かロープがターザンポイントに引っかかっている
+	if (m_rope_ani_con == false || (objrope != nullptr && objrope->GetTarzanPointFlag() == true))
 	{
-		//Dキーがおされたとき：右移動　
-		if (Input::GetVKey('D') == true)
+		//水に当たった時と敵に当たった時は動かない
+		if (m_hero_die_water == false && m_ani_frame_enemy_die == false && m_py < 2000.0f)
 		{
-			m_vx += 0.5f;
-			m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
-			m_posture = 0.0f;		    //主人公の向き
-			m_ani_time_move += 1;
-		}
-		//Aキーがおされたとき：左移動　
-		else if (Input::GetVKey('A') == true)
-		{
-			m_vx -= 0.5f;
-			m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
+			//Dキーがおされたとき：右移動　
+			if (Input::GetVKey('D') == true)
+			{
+				m_vx += 0.5f;
+				m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
+				m_posture = 0.0f;		    //主人公の向き
+				m_ani_time_move += 1;
+			}
+			//Aキーがおされたとき：左移動　
+			else if (Input::GetVKey('A') == true)
+			{
+				m_vx -= 0.5f;
+				m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
 
-			if (m_ladder_updown == 1)   //はしごに登ってるときは向きを変えない
-				m_posture = 0.0f;		//主人公の向き
+				if (m_ladder_updown == 1)   //はしごに登ってるときは向きを変えない
+					m_posture = 0.0f;		//主人公の向き
+				else
+					m_posture = 1.0f;		//主人公の向き
+				m_ani_time_move += 1;
+			}
 			else
-				m_posture = 1.0f;		//主人公の向き
-			m_ani_time_move += 1;
-		}
-		else
-		{
-			m_ani_frame_stop_move = 1;	//キー入力が無い時は1を入れる
-			m_ani_frame_move = 1;		//キー入力が無い場合は静止フレームにする
-			m_ani_time_move = 0;
+			{
+				m_ani_frame_stop_move = 1;	//キー入力が無い時は1を入れる
+				m_ani_frame_move = 1;		//キー入力が無い場合は静止フレームにする
+				m_ani_time_move = 0;
+			}
 		}
 	}
 
@@ -212,8 +219,6 @@ void CObjHero::MoveScene()
 	if (m_gravity_flag == true && m_vy > m_fall_speed_max)
 		m_vy = m_fall_speed_max;
 
-	//ロープオブジェクト情報を持ってくる
-	CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
 	//ロープオブジェクトが有る かつ ターザンポイントに引っかかっているなら
 	//ロープの位置を中心に振り子の動きをする
 	if ((objrope != nullptr && objrope->GetTarzanPointFlag() == true))
@@ -221,7 +226,7 @@ void CObjHero::MoveScene()
 		float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
 		float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
 
-											   //ロープの位置
+		//ロープの位置
 		float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
 
 		//ロープがターザンポイントに引っかかった瞬間だけ処理
