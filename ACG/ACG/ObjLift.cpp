@@ -191,6 +191,13 @@ void CObjLift::Action()
 	m_px += m_vx;
 	m_py += m_vy;
 
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//mapの一番下まで行ったら
+	if (m_py > MAP_Y_MAX * BLOCK_SIZE)
+		m_py = 0.0f;
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
 }
