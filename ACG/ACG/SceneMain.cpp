@@ -222,7 +222,7 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
 
 		//金網ブロックの読み込み
-		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_WIRE_MASH, TEX_SIZE_256);
 		
 		//ステージ5の大砲
 		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
