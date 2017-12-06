@@ -350,6 +350,10 @@ void CSceneMain::AudioDataLoading()
 		Audio::LoadAudio(BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
 		//SE-----------------------------------------------------------
 		
+		//リフト(引っ張る)
+		Audio::LoadAudio(PULLLIFT, L"SE\\LiftTrickPull.wav", EFFECT);
+		//リフト(離す)
+		Audio::LoadAudio(RELEASELIFT, L"SE\\LiftTrickRelease.wav", EFFECT);
 		//ボスの拡散弾が出現するときの音
 		Audio::LoadAudio(BOSSPOP, L"SE\\BossPop.wav", EFFECT);
 		//ボスのレーザーが出現するときの音
