@@ -105,7 +105,6 @@ void CObjLastWall::Action()
 				{
 					objhero->SetVecY(0.0f);//ålŒö‚ÌY•ûŒü‚ÌˆÚ“®‚ğ‚O‚É‚·‚é
 					objhero->SetPosY(m_py + 512.0f - m_wall_gauge +65.0f);//ålŒö‚ÌˆÊ’u‚ğLastWall‚Ì‰º‘¤‚Ü‚Å‚¸‚ç‚·
-					
 				}
 			}
 		}

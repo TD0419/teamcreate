@@ -90,7 +90,7 @@ void CObjWood::Action()
 	//主人公との当たり判定
 	//衝突したら主人公の位置を更新する
 	if (HitTestOfAB(m_wood_image_x, m_wood_image_y, hit_w, hit_h,
-		&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT, &hero_vx, &hero_vy)
+		&hero_x, &hero_y, 42, 120, &hero_vx, &hero_vy)
 		)
 	{
 		//主人公の位置を更新

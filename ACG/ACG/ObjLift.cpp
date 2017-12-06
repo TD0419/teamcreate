@@ -218,11 +218,11 @@ void CObjLift::HeroRide()
 			if (0.0f <= r && r < 30.0f)
 			{
 				//リフトにめりこまないようにする処理
-				if (objhero->GetPosture() == 1.0f)//右向き
+				if (objhero->GetPosture() == 1.0f)//左向き
 				{
 					objhero->SetPosX(m_px + LIFT_SIZE_WIDTH - 14.5f);//主人公をリフトの右に行くようにする
 				}
-				else//左向き
+				else//右向き
 				{
 					//当たり判定のずれから振り向いたらめり込んでしまうので、-14.5fを削除
 					objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);
@@ -232,7 +232,15 @@ void CObjLift::HeroRide()
 			if (155.0f < r && r < 180.0f)
 			{
 				//リフトにのめりこまないようにする処理
-				objhero->SetPosX(m_px-50.0f);//主人公をリフトの左に行くようにする
+				if (objhero->GetPosture() == 0.0f)//右向き
+				{
+					objhero->SetPosX(m_px - 48.5f);//主人公をリフトの左に行くようにする
+				}
+				else//左向き
+				{
+					//めり込み防止のため左向きのときは-64.0fにする
+					objhero->SetPosX(m_px-64.0f);//主人公をリフトの左に行くようにする
+				}
 			}
 		}
 	}
