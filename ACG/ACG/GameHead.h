@@ -139,7 +139,7 @@ enum MAP_BER
 	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
 	MAP_FALLING_LIFT			,		//乗ると落ちるリフト
 	//csvデータ(最新版)が届いたらコメント化を解除してください。
-	//MAP_LIFT_TYPE_AUTO_UP		,		//自動上移動リフト(自動で上方向に動く)
+	MAP_LIFT_TYPE_AUTO_UP		,		//自動上移動リフト(自動で上方向に動く)
 	MAP_WIRE_MESH_FLOOR			,		//金網床
 	MAP_FALLING_BLOCK           ,		//ボスステージ用落ちるブロック
 	MAP_STAGE5_BOSS             ,		//ステージ5のボス
