@@ -278,6 +278,13 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
+		case MAP_WIRE_MESH_FLOOR://金網
+		{
+			CObjWireMesh* objwirwmesh = new CObjWireMesh(x, y);
+			Objs::InsertObj(objwirwmesh, OBJ_WIRE_MESH, 9);
+			break;
+		}
+
 	}
 
 	m_map[y][x].create = false;//フラグをオフにする	
