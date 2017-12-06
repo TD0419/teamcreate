@@ -10,11 +10,14 @@ using namespace GameL;
 //テスト用
 #define SPEED (1.5f)
 
+
 //オブジェクト：リフト
 class CObjLift :public CObj
 {
 public:
+	//コンストラクタ
 	CObjLift(int px, int py, int direction, float width_max, int mode);
+	CObjLift(int px, int py, int direction);
 	~CObjLift() {};			// デストラクタ
 	void Init();			// イニシャライズ
 	void Action();			// アクション
@@ -30,7 +33,6 @@ private:
 	float m_vx;		// リフトの移動ベクトルX
 	float m_vy;		// リフトの移動ベクトルY
 	float m_width_max;	//左右の最大移動量
-	float m_length_max;	//上下の最大移動量
 	
 	//現在の移動方向
 	//０＝右：１＝左：２＝上：３＝下

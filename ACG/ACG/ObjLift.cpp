@@ -12,11 +12,14 @@
 
 //使用するネームスペース
 using namespace GameL;
+
 //コンストラクタ
-//引数1,2	マップの数値(位置)
-//引数3		移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
-//引数4		X方向への最大移動量(初期位置～最大移動量分動きます。移動モードが２の場合値は関係ありません)
-//引数5		リフトの動きモード
+//モード0,1専用
+//引数1		int px			:マップの数値(X位置)
+//引数2		int py			:マップの数値(Y位置)
+//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
+//引数4		int	width_max	:	X方向への最大移動量(初期位置～最大移動量分動きます。)
+//引数5		int mode			:リフトの動きモード
 //			０＝手動モード(縄を紐スイッチに当てて移動するモード)
 //			１＝自由移動モード(初期位置Xから最大X位置の間を自動移動)
 //			２＝無限移動モード(上または下に行き画面外に行くと上なら下から、下なら上から出てくる)
@@ -34,87 +37,107 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 	//値が負の数なら正の数にする
 	if (width_max < 0)
 		width_max *= -1;
+
+	//X方向の最大移動量をセット
 	m_width_max = width_max;
-	m_length_max = 0.0f;//今のところ使っていない2017/11/22
 
 	//移動モードを決める
 	m_move_mode = mode;
 
 	//マップ情報を取得
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	
 	//何個めのブロックの位置までを移動区間とするかの個数
 	int block_count = 0;
-	int block_max_count = (int)(LIFT_SIZE_WIDTH/BLOCK_SIZE);//MAX値
+	int block_max_count = (int)(LIFT_SIZE_WIDTH / BLOCK_SIZE);//MAX値
 
 	//移動方向と初期移動方向と最大移動量を決める
-	if (mode == 0||mode == 1)
+	//マップの位置(リフト)の左下が空気なら初期移動方向は右
+	if (objmap->GetMap(px - 1, py + 1)== MAP_SPACE)
 	{
-		//マップの位置(リフト)の左下が空気なら初期移動方向は右
-		if (objmap->GetMap(px - 1, py + 1)== MAP_SPACE)
+		if (mode == 0)
 		{
-			if (mode == 0)
-			{
-				//移動方向と初期移動方向を決める
-				m_direction = 0;
-				m_initial_direction = 0;
-			}
-			else
-			{
-				//移動方向と初期移動方向を決める
-				m_direction = 1;
-				m_initial_direction = 1;
-			}
-			//最大移動量を決める
-			for (int i = px-1; i >= 0; i--)
-			{
-				//マップの位置(リフト)左下から左を近いほうから調べていき
-				//リフトの幅/BLOCK_SIZE個めにあるブロック位置までを移動区間とする
-				if (objmap->GetMap(i, py + 1) == MAP_BLOCK)
-				{
-					//カウントを進める
-					block_count++;
-					if (block_count >= block_max_count)
-					{
-						m_width_max = (px * BLOCK_SIZE) - (i*BLOCK_SIZE);
-						break;
-					}
-				}
-			}
+			//移動方向と初期移動方向を決める
+			m_direction = 0;
+			m_initial_direction = 0;
 		}
-		//マップの位置(リフト)の右下が空気なので初期移動方向が左
 		else
 		{
-			if (mode == 0)
+			//移動方向と初期移動方向を決める
+			m_direction = 1;
+			m_initial_direction = 1;
+		}
+		//最大移動量を決める
+		for (int i = px-1; i >= 0; i--)
+		{
+			//マップの位置(リフト)左下から左を近いほうから調べていき
+			//リフトの幅/BLOCK_SIZE個めにあるブロック位置までを移動区間とする
+			if (objmap->GetMap(i, py + 1) == MAP_BLOCK)
 			{
-				//移動方向と初期移動方向を決める
-				m_direction = 1;
-				m_initial_direction = 1;
-			}
-			else
-			{
-				//移動方向と初期移動方向を決める
-				m_direction = 0;
-				m_initial_direction = 0;
-			}
-			//最大移動量を決める
-			for (int i = px + block_max_count; i < MAP_X_MAX; i++)
-			{
-				//マップの位置(リフト)右にblock_max_count,下に1から右を近いほうから調べていき
-				//リフトの幅/BLOCK_SIZE個めにあるブロック位置までを移動区間とする
-				if (objmap->GetMap(i, py + 1)== MAP_BLOCK)
+				//カウントを進める
+				block_count++;
+				if (block_count >= block_max_count)
 				{
-					//カウントを進める
-					block_count++;
-					
-					m_width_max = (i*BLOCK_SIZE) - (px * BLOCK_SIZE);
+					m_width_max = (px * BLOCK_SIZE) - (i*BLOCK_SIZE);
 					break;
-					
 				}
 			}
 		}
 	}
+	//マップの位置(リフト)の右下が空気なので初期移動方向が左
+	else
+	{
+		if (mode == 0)
+		{
+			//移動方向と初期移動方向を決める
+			m_direction = 1;
+			m_initial_direction = 1;
+		}
+		else
+		{
+			//移動方向と初期移動方向を決める
+			m_direction = 0;
+			m_initial_direction = 0;
+		}
+		//最大移動量を決める
+		for (int i = px + block_max_count; i < MAP_X_MAX; i++)
+		{
+			//マップの位置(リフト)右にblock_max_count,下に1から右を近いほうから調べていき
+			//リフトの幅/BLOCK_SIZE個めにあるブロック位置までを移動区間とする
+			if (objmap->GetMap(i, py + 1)== MAP_BLOCK)
+			{
+				//カウントを進める
+				block_count++;
+					
+				m_width_max = (i*BLOCK_SIZE) - (px * BLOCK_SIZE);
+				break;
+			}
+		}
+	}
+	
 }
 
+//コンストラクタ
+//モード２専用
+//引数1		int px			:マップの数値(X位置)
+//引数2		int py			:マップの数値(Y位置)
+//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
+CObjLift::CObjLift(int px, int py, int direction)
+{
+	//初期位置を決める
+	m_px = (float)px * BLOCK_SIZE;
+	m_py = (float)py * BLOCK_SIZE;
+
+	//移動方向と初期移動方向を決める
+	m_direction = direction;
+	m_initial_direction = direction;
+
+	//移動モードセット
+	m_move_mode = 2;
+
+	//モード２のときは使わないけど初期化しておく
+	m_width_max = 0.0f;
+}
 //イニシャライズ
 void CObjLift::Init()
 {
@@ -126,8 +149,26 @@ void CObjLift::Init()
 	
 	//リフトのカウント初期化
 	m_lift_audio_count = 47;
-	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		case 1:
+		case 2:
+		{
+			//当たり判定
+			Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+			break;
+			
+		}
+		case 5:
+		{
+			//当たり判定
+			Hits::SetHitBox(this, m_px, m_py, STAGE5_LIFT_SIZE_WIDTH, STAGE5_LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+			break;
+		}
+	}
+
+	
 }
 
 //アクション
@@ -136,8 +177,7 @@ void CObjLift::Action()
 	
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
-
-
+	
 	//主人公が当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
@@ -150,10 +190,6 @@ void CObjLift::Action()
 	//位置情報を更新
 	m_px += m_vx;
 	m_py += m_vy;
-
-	//移動量の保存
-	/*m_move_x += m_vx;
-	m_move_y += m_vy;*/
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
@@ -173,15 +209,40 @@ void CObjLift::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 128.0f;
-	src.m_bottom = 128.0f;
-
+	
 	//描画の位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
-	dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
 
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		case 1:
+		case 2:
+		{
+			//切り取り
+			src.m_right = 128.0f;
+			src.m_bottom = 32.0f;
+
+			//描画
+			dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
+			dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
+
+			break;
+		}
+		case 5:
+		{
+			//切り取り
+			src.m_right = 320.0f;
+			src.m_bottom = 16.0f;
+
+			//描画
+			dst.m_right = dst.m_left + STAGE5_LIFT_SIZE_WIDTH;
+			dst.m_bottom = dst.m_top + STAGE5_LIFT_SIZE_HEIGHT;
+
+			break;
+		}
+	}
+	
 	//リフトの描画
 	Draw::Draw(GRA_LIFT, &src, &dst, color, 0.0f);
 }
@@ -217,6 +278,21 @@ void CObjLift::HeroRide()
 			//右側があたっていればで
 			if (0.0f <= r && r < 30.0f)
 			{
+				switch(((UserData*)Save::GetData())->stagenum)
+				{
+					case 1:
+					case 2:
+					{
+						//リフトにのめりこまないようにする処理
+						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+						break;
+					}
+					case 5:
+					{
+						//リフトにのめりこまないようにする処理
+						objhero->SetPosX(m_px + STAGE5_LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+						break;
+					}
 				//リフトにめりこまないようにする処理
 				if (objhero->GetPosture() == 1.0f)//左向き
 				{
@@ -227,6 +303,7 @@ void CObjLift::HeroRide()
 					//当たり判定のずれから振り向いたらめり込んでしまうので、-14.5fを削除
 					objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);
 				}
+				
 			}
 			//左側があたっていればで
 			if (155.0f < r && r < 180.0f)
@@ -407,7 +484,7 @@ void CObjLift::ModeMove()
 		{
 			//行き過ぎた分
 			//初期位置から動いた距離がMAX越えなら
-			if (m_move_x > m_width_max)
+			if (m_move_x > m_width_max) 
 			{
 				//現在の移動方向が右
 				if (m_direction == 0)

@@ -78,13 +78,13 @@ void CObjFallingBlock::Draw()
 	src.m_bottom = 64.0f;
 
 	//ブロックの一個上にブロックがある時描画変更
-	if (map_num == MAP_FALLING_BLOCK)
-	{
-		src.m_top = 0.0f;
-		src.m_left = 65.0f;
-		src.m_right = 128.0f;
-		src.m_bottom = 64.0f;
-	}
+	//if (map_num == MAP_FALLING_BLOCK)
+	//{
+	//	src.m_top = 0.0f;
+	//	src.m_left = 65.0f;
+	//	src.m_right = 128.0f;
+	//	src.m_bottom = 64.0f;
+	//}
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
