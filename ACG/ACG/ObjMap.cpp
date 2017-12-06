@@ -174,7 +174,7 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_LIFT_TYPE_AUTO_LENGTH:		//自動縦移動リフト作成
 		{
-			CObjLift* objlift = new CObjLift(x, y,2,0.0f,2);
+			CObjLift* objlift = new CObjLift(x, y,3);
 			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
@@ -241,7 +241,21 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objreflec_block, OBJ_REFLECT_BLOCK, 9);
 			break;
 		}
+
+		case MAP_ROLL_BLOCK_TYPE_AUTO://回転ブロック（自動回転）作成
+		{
+			CObjRollBlock* objrollblock = new CObjRollBlock(x, y,1);
+			Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 9);
+			break;
+		}
 		
+		case MAP_ROLL_BLOCK_TYPE_MANUAL://回転ブロック（手動）作成
+		{
+			CObjRollBlock* objrollblock = new CObjRollBlock(x, y, 2);
+			Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 9);
+			break;
+		}
+
 		case MAP_STAGE3_BOSS:		//第三ボス作成
 		{
 			CObjStage3Boss* objstage3_boss = new CObjStage3Boss(x, y);
