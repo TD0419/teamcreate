@@ -256,8 +256,23 @@ void CObjLift::HeroRide()
 			//右側があたっていればで
 			if (0.0f <= r && r < 30.0f)
 			{
-				//リフトにのめりこまないようにする処理
-				objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+				switch(((UserData*)Save::GetData())->stagenum)
+				{
+					case 1:
+					case 2:
+					{
+						//リフトにのめりこまないようにする処理
+						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+						break;
+					}
+					case 5:
+					{
+						//リフトにのめりこまないようにする処理
+						objhero->SetPosX(m_px + STAGE5_LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+						break;
+					}
+				}
+				
 			}
 			//左側があたっていればで
 			if (155.0f < r && r < 180.0f)

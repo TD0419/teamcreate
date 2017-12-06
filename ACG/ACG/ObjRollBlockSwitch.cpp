@@ -106,5 +106,5 @@ void CObjRollBlockSwitch::Draw()
 	dst.m_right = dst.m_left + ROLL_BLOCK_SWITCH_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + ROLL_BLOCK_SWITCH_SIZE_HEIGHT;
 
-	Draw::Draw(GRA_ROLL_BLOCK_SWITCH, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_BLACK_BALL, &src, &dst, color, 0.0f);
 }

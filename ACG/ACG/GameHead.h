@@ -182,7 +182,6 @@ enum GRAPHIC_ID
 	GRA_NEEDLE_STAND,   //針の土台
 	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
 
-	GRA_ROLL_BLOCK_SWITCH,	//回転床用のスイッチ
 	GRA_BLACK_BALL,			//回転ブロックの仕掛けのスイッチ
 	GRA_CANNON_BEAM,		//ステージ5の拡散弾
 	GRA_WIRE_MASH,			//ステージ5の金網

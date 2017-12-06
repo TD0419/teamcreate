@@ -125,6 +125,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	case 5:
 		//Audio::Start(STAGE);
 		p=Save::ExternalDataOpen(L"stage5.csv", &size);//外部データ読み込み
+		break;
 	default:
 		break;
 	}
@@ -215,8 +216,13 @@ void CSceneMain::ImageDataLoading()
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage5.png", GRA_BLOCK, TEX_SIZE_128);
 	
+		//回転ブロックの画像読み込み
+		Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+		Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
+
 		//金網ブロックの読み込み
 		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+		
 		//ステージ5の大砲
 		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
 		//ステージ5の大砲の弾
@@ -229,7 +235,8 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
 		//ロープでぶら下がることができるギミック
 		Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
-		
+		//リフト画像読み込み
+		Draw::LoadImageW(L"Image\\Lift\\Stage5.png", GRA_LIFT, TEX_SIZE_512);
 		break;
 
 	//画像が用意されていない場合
@@ -288,12 +295,7 @@ void CSceneMain::ImageDataLoading()
 	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"Image\\zanki.png", GRA_LIFE, TEX_SIZE_64);
 	
-	//回転ブロックのスイッチ
-	Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_ROLL_BLOCK_SWITCH, TEX_SIZE_16);
-	//回転ブロックの画像読み込み
-	Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
-	Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
-
+	
 	//ステージ５ボス胴腕接続電気
 	Draw::LoadImageW(L"Image\\Lastboss_Electric.png", GRA_STAGE5_BOSS_ELECTRIC, TEX_SIZE_512);
 	//ステージ５ボス胴体
