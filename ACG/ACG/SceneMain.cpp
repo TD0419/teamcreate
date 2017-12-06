@@ -86,9 +86,9 @@ void CSceneMain::InitScene()
 	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
 	//Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);
 
-	//落ちるリフト
-	CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
-	Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
+	////落ちるリフト
+	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
+	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
 
 
 	//デバッグ--------------------------------------------------

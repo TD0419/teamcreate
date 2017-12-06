@@ -47,6 +47,10 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 	//マップ情報を取得
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	
+	//何個めのブロックの位置までを移動区間とするかの個数
+	int block_count = 0;
+	int block_max_count = (int)(LIFT_SIZE_WIDTH / BLOCK_SIZE);//MAX値
+
 	//移動方向と初期移動方向と最大移動量を決める
 	//マップの位置(リフト)の左下が空気なら初期移動方向は右
 	if (objmap->GetMap(px - 1, py + 1)== MAP_SPACE)
@@ -107,7 +111,6 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 					
 				m_width_max = (i*BLOCK_SIZE) - (px * BLOCK_SIZE);
 				break;
-					
 			}
 		}
 	}
@@ -464,7 +467,7 @@ void CObjLift::ModeMove()
 		{
 			//行き過ぎた分
 			//初期位置から動いた距離がMAX越えなら
-			if (m_move_x > m_width_max)
+			if (m_move_x > m_width_max) 
 			{
 				//現在の移動方向が右
 				if (m_direction == 0)
