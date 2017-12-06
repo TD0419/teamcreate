@@ -29,8 +29,7 @@ void CObjFallingBlock::Init()
 //アクション
 void CObjFallingBlock::Action()
 {
-	//m_falling_time--;
-
+	
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
@@ -43,7 +42,7 @@ void CObjFallingBlock::Action()
 		HeroHit();//衝突処理をする
 	}
 
-	//タイムが0になると下に落ちる
+	//タイムが0になると下に落ちる(仮)
 	//ステージ5ボスのアクション(爪をブロックにたたきつける)実装待ち。
 	//実装されたら使うので、残しておいてください。
 	//if (m_falling_time < 0)
@@ -78,13 +77,13 @@ void CObjFallingBlock::Draw()
 	src.m_bottom = 64.0f;
 
 	//ブロックの一個上にブロックがある時描画変更
-	//if (map_num == MAP_FALLING_BLOCK)
-	//{
-	//	src.m_top = 0.0f;
-	//	src.m_left = 65.0f;
-	//	src.m_right = 128.0f;
-	//	src.m_bottom = 64.0f;
-	//}
+	if (map_num == MAP_FALLING_BLOCK)
+	{
+		src.m_top = 0.0f;
+		src.m_left = 65.0f;
+		src.m_right = 128.0f;
+		src.m_bottom = 64.0f;
+	}
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();

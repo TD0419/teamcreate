@@ -108,7 +108,7 @@ enum MAP_BER
 	MAP_GOAL_DOOR			,			//ゴール用ドア
 	MAP_LIFT_TYPE_MANUAL	,			//手動リフト(通常時は動かない。ギミックの過程で引っ張ると動かせる)
     MAP_LIFT_TYPE_AUTO_WIDTH	 ,		//自動横移動リフト(自動で左右に動く)	
-	MAP_LIFT_TYPE_AUTO_LENGTH	 ,		//自動縦移動リフト(自動で縦方向に動く)
+	MAP_LIFT_TYPE_AUTO_LENGTH	 ,		//自動下移動リフト(自動で下方向に動く)
 	MAP_ENEMY				,			//敵
 	MAP_LAST_WALL			,			//次ステージへの入り口(最後の壁)
 	
@@ -138,9 +138,11 @@ enum MAP_BER
 	MAP_NEEDLE_STAND			,		//針の土台
 	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
 	MAP_FALLING_LIFT			,		//乗ると落ちるリフト
+	//csvデータ(最新版)が届いたらコメント化を解除してください。
+	//MAP_LIFT_TYPE_AUTO_UP		,		//自動上移動リフト(自動で上方向に動く)
 	MAP_WIRE_MESH_FLOOR			,		//金網床
-	MAP_FALLING_BLOCK			,		//ボスステージ用落ちるブロック
-	MAP_STAGE5_BOSS				,		//ステージ5のボス
+	MAP_FALLING_BLOCK           ,		//ボスステージ用落ちるブロック
+	MAP_STAGE5_BOSS             ,		//ステージ5のボス
 	
 	
 };
