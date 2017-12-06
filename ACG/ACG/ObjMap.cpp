@@ -277,13 +277,14 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 
 		}
-		/*
-		実装されたら、コメント化を外してください。
-		case MAP_LIFT_TYPE_AUTO_UP:
+		
+		case MAP_LIFT_TYPE_AUTO_UP://上方向に移動するリフト生成
 		{
+			CObjLift* objlift = new CObjLift(x, y, 2);
+			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
-		*/
+		
 		case MAP_FALLING_BLOCK://ステージ5ボス戦専用落ちるブロック
 		{
 			CObjFallingBlock* objfalling_block = new CObjFallingBlock(x,y);
@@ -295,6 +296,13 @@ void CObjMap::CreateObj(int x, int y)
 		{
 			CObjStage5Boss* objstage5_boss = new CObjStage5Boss(x,y);
 			Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS ,9);
+			break;
+		}
+
+		case MAP_WIRE_MESH_FLOOR://金網
+		{
+			CObjWireMesh* objwirwmesh = new CObjWireMesh(x, y);
+			Objs::InsertObj(objwirwmesh, OBJ_WIRE_MESH, 9);
 			break;
 		}
 

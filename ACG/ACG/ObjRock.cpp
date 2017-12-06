@@ -81,24 +81,32 @@ void CObjRock::Action()
 			//岩の右側が衝突している場合
 			if (0 < r && r < 65|| 315 < r && r < 360)
 			{
-				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				objhero->SetPosX(m_px + ROCK_SIZE_WIDTH);//主人公の位置を岩の右側までずらす
-			}
-			
-			//岩の上側が衝突している場合
-			else if (65 < r && r < 115)
-			{
-
-				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				objhero->SetPosY(m_py - ROCK_SIZE_HEIGHT-57.0f);//主人公の位置を岩の上側までずらす
+				//岩にめりこまないようにする処理
+				if (objhero->GetPosture() == 0.0f)//右向き
+				{
+					objhero->SetPosX(m_px + ROCK_SIZE_WIDTH);//主人公の位置を岩の右側までずらす
+				}
+				else//左向き
+				{
+					objhero->SetPosX(m_px + 155.0f);//主人公の位置を岩の右側までずらす
+				}
 				
 			}
-
+			
 			//岩の左側が衝突している場合
 			else if (115 < r && r < 225 )
 			{
-				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-				objhero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公の位置を岩の左側までずらす
+				//岩にめりこまないようにする処理
+				if (objhero->GetPosture() == 0.0f)//右向き
+				{
+					objhero->SetPosX(m_px - HERO_SIZE_WIDTH+15.0f);//主人公を岩の左に行くようにする
+				}
+				else//左向き
+				{
+					//めり込み防止のため
+					objhero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公を岩の左に行くようにする
+				}
+				
 			}
 
 			//岩の下側が衝突している場合
@@ -109,7 +117,6 @@ void CObjRock::Action()
 			}
 		}
 	}
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py- ROCK_SIZE_WIDTH);
 
