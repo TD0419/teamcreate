@@ -78,9 +78,6 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 	//------------------------------
 
-	//ステージ５のボス(デバッグ中。消さないで)
-	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,12);
-	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
 	////当たり判定まだなのでため置いていてください
 	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
