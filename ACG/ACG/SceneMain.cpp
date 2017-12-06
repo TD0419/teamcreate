@@ -93,9 +93,10 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objtarzan_point, OBJ_TARZAN_POINT, 9);
 
 	//落ちるリフト
-	CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
-	Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
+	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
+	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
 
+	
 
 	//デバッグ--------------------------------------------------
 }
@@ -118,7 +119,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	{
 	case 1:
 		Audio::Start(STAGE);
-		p = Save::ExternalDataOpen(L"stage1.csv", &size);//外部データ読み込み
+		p = Save::ExternalDataOpen(L"stage5.csv", &size);//外部データ読み込み
 		break;
 	case 2:
 		Audio::Start(STAGE);
