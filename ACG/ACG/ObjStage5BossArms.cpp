@@ -14,8 +14,8 @@ using namespace GameL;
 //ステージ5ボスcppからの描画の都合で、xとyの型をintからfloatに変更しています。(描画で細かい値を使いたいため)
 CObjStage5BossArms::CObjStage5BossArms(float x, float y, int type)
 {
-	m_px = x * BLOCK_SIZE;
-	m_py = y * BLOCK_SIZE;
+	m_px = x;
+	m_py = y;
 	m_arms_type = type;//type = 1…ライトアーム  2…レフトアーム
 }
 
@@ -31,13 +31,13 @@ void CObjStage5BossArms::Init()
 	if (m_arms_type == 1)
 	{
 		//当たり判定用HitBoxを作成
-		Hits::SetHitBox(this, m_px + 160.0f, m_py + 138.0f, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 1);
+		Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 1);
 	}
 	//typeの値が1のときレフトアームの当たり判定表示
 	else if (m_arms_type == 2)
 	{
 		//当たり判定用HitBoxを作成
-		Hits::SetHitBox(this, m_px + 698.0f, m_py + 138.0f, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
+		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
 	}
 
 }

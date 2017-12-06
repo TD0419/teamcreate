@@ -277,7 +277,13 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 
 		}
-
+		/*
+		実装されたら、コメント化を外してください。
+		case MAP_LIFT_TYPE_AUTO_UP:
+		{
+			break;
+		}
+		*/
 		case MAP_FALLING_BLOCK://ステージ5ボス戦専用落ちるブロック
 		{
 			CObjFallingBlock* objfalling_block = new CObjFallingBlock(x,y);
