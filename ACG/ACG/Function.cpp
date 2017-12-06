@@ -131,7 +131,7 @@ int HitTestOfAB(float ax, float ay, float aw, float ah,
 			if (*bvx >= 0.0f)
 			{
 				*bvx = 0.00000f;//X移動量を0にする
-				*bx -= bx_max - ax_min + 0.001f;//密着してジャンプるると上に乗ってしまうので＋0.001している
+				*bx -= bx_max - ax_min + 0.001f;//密着してジャンプすると上に乗ってしまうので＋0.001している
 				return 3;
 			}
 		}

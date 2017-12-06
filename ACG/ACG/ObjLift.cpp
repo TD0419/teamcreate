@@ -17,7 +17,7 @@ using namespace GameL;
 //モード0,1専用
 //引数1		int px			:マップの数値(X位置)
 //引数2		int py			:マップの数値(Y位置)
-//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
+//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左
 //引数4		int	width_max	:	X方向への最大移動量(初期位置～最大移動量分動きます。)
 //引数5		int mode			:リフトの動きモード
 //			０＝手動モード(縄を紐スイッチに当てて移動するモード)
@@ -121,7 +121,7 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 //モード２専用
 //引数1		int px			:マップの数値(X位置)
 //引数2		int py			:マップの数値(Y位置)
-//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
+//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　２＝上：３＝下
 CObjLift::CObjLift(int px, int py, int direction)
 {
 	//初期位置を決める
@@ -194,10 +194,6 @@ void CObjLift::Action()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//mapの一番下まで行ったら
-	if (m_py > MAP_Y_MAX * BLOCK_SIZE)
-		m_py = 0.0f;
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
 }
@@ -213,9 +209,7 @@ void CObjLift::Draw()
 
 	RECT_F src, dst;
 
-	//切り取り位置
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
+	
 	
 	//描画の位置
 	dst.m_top = m_py - objmap->GetScrollY();
@@ -227,6 +221,8 @@ void CObjLift::Draw()
 		case 2:
 		{
 			//切り取り
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
 			src.m_right = 128.0f;
 			src.m_bottom = 32.0f;
 
@@ -239,6 +235,8 @@ void CObjLift::Draw()
 		case 5:
 		{
 			//切り取り
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
 			src.m_right = 320.0f;
 			src.m_bottom = 16.0f;
 
@@ -271,7 +269,7 @@ void CObjLift::HeroRide()
 		if (hit_data[i] != nullptr)
 		{
 			float r = hit_data[i]->r;//あたっている角度を持ってくる
-			
+
 			//上側があたっていればで
 			if (30.0f <= r && r <= 155.0f)
 			{
@@ -280,34 +278,60 @@ void CObjLift::HeroRide()
 				//リフトに乗せる処理
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
 				objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
-				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT+2.5f+m_vy);//主人公のポジションをリフトの上にする
+				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + 2.5f + m_vy);//主人公のポジションをリフトの上にする
 			}
 			//右側があたっていればで
 			if (0.0f <= r && r < 30.0f)
 			{
-				switch(((UserData*)Save::GetData())->stagenum)
+				switch (((UserData*)Save::GetData())->stagenum)
 				{
-					case 1:
-					case 2:
+				case 1:
+				case 2:
+				{
+					if (objhero->GetPosture() == 1.0f)//左向き
 					{
 						//リフトにのめりこまないようにする処理
-						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH - 14.5f);//主人公をリフトの右に行くようにする
+						objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 						break;
 					}
-					case 5:
+					else//右向き
 					{
-						//リフトにのめりこまないようにする処理
-						objhero->SetPosX(m_px + STAGE5_LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+						//当たり判定のずれから振り向いたらめり込んでしまうので、-14.5fを削除
+						objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);
 						break;
 					}
 				}
-				
+				case 5:
+				{
+					
+					break;
+				}
+				}
 			}
 			//左側があたっていればで
 			if (155.0f < r && r < 180.0f)
 			{
-				//リフトにのめりこまないようにする処理
-				objhero->SetPosX(m_px-50.0f);//主人公をリフトの左に行くようにする
+				switch (((UserData*)Save::GetData())->stagenum)
+				{
+					case 1:
+					case 2:
+						//リフトにのめりこまないようにする処理
+						if (objhero->GetPosture() == 0.0f)//右向き
+						{
+							objhero->SetPosX(m_px - 48.5f);//主人公をリフトの左に行くようにする
+						}
+						else//左向き
+						{
+							//めり込み防止のため左向きのときは-64.0fにする
+							objhero->SetPosX(m_px - 64.0f);//主人公をリフトの左に行くようにする
+						}
+					case 5:
+					{
+						break;
+					}
+				}
 			}
 		}
 	}

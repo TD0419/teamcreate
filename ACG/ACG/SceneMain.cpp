@@ -219,7 +219,7 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
 
 		//金網ブロックの読み込み
-		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_WIRE_MASH, TEX_SIZE_256);
+		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_WIRE_MASH, TEX_SIZE_640);
 		
 		//ステージ5の大砲
 		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
@@ -347,6 +347,10 @@ void CSceneMain::AudioDataLoading()
 		Audio::LoadAudio(BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
 		//SE-----------------------------------------------------------
 		
+		//リフト(引っ張る)
+		Audio::LoadAudio(PULLLIFT, L"SE\\LiftTrickPull.wav", EFFECT);
+		//リフト(離す)
+		Audio::LoadAudio(RELEASELIFT, L"SE\\LiftTrickRelease.wav", EFFECT);
 		//ボスの拡散弾が出現するときの音
 		Audio::LoadAudio(BOSSPOP, L"SE\\BossPop.wav", EFFECT);
 		//ボスのレーザーが出現するときの音
