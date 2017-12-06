@@ -17,7 +17,7 @@ using namespace GameL;
 //モード0,1専用
 //引数1		int px			:マップの数値(X位置)
 //引数2		int py			:マップの数値(Y位置)
-//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
+//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左
 //引数4		int	width_max	:	X方向への最大移動量(初期位置～最大移動量分動きます。)
 //引数5		int mode			:リフトの動きモード
 //			０＝手動モード(縄を紐スイッチに当てて移動するモード)
@@ -121,7 +121,7 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 //モード２専用
 //引数1		int px			:マップの数値(X位置)
 //引数2		int py			:マップの数値(Y位置)
-//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　０＝右：１＝左：２＝上：３＝下
+//引数3		int direction	:移動方向(モードが手動のときは自動で動く方向)　２＝上：３＝下
 CObjLift::CObjLift(int px, int py, int direction)
 {
 	//初期位置を決める
@@ -193,10 +193,6 @@ void CObjLift::Action()
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	//mapの一番下まで行ったら
-	if (m_py > MAP_Y_MAX * BLOCK_SIZE)
-		m_py = 0.0f;
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);

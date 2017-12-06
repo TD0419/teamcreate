@@ -46,13 +46,13 @@ void CObjRopeSwitch::Action()
 			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
-		//case 5://ステージ5	←ステージ５が大方できたらコメントはずして位置など調整してください
-		//{
-		//	//リフト（手動）の生成
-		//	CObjLift* objlift = new CObjLift(, , , ,);
-		//	Objs::InsertObj(objlift, OBJ_LIFT, 9);
-		//	break;
-		//}
+		case 5://ステージ5	←ステージ５が大方できたらコメントはずして位置など調整してください
+		{
+			//リフト（手動）の生成
+			CObjLift* objlift = new CObjLift(27,22 ,0,640.0f ,0);
+			Objs::InsertObj(objlift, OBJ_LIFT, 9);
+			break;
+		}
 		}
 	}
 
