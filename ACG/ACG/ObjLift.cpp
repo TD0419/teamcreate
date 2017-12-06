@@ -12,6 +12,7 @@
 
 //使用するネームスペース
 using namespace GameL;
+
 //コンストラクタ
 //モード0,1専用
 //引数1		int px			:マップの数値(X位置)
@@ -45,9 +46,10 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 
 	//マップ情報を取得
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	
 	//何個めのブロックの位置までを移動区間とするかの個数
 	int block_count = 0;
-	int block_max_count = (int)(LIFT_SIZE_WIDTH/BLOCK_SIZE);//MAX値
+	int block_max_count = (int)(LIFT_SIZE_WIDTH / BLOCK_SIZE);//MAX値
 
 	//移動方向と初期移動方向と最大移動量を決める
 	//マップの位置(リフト)の左下が空気なら初期移動方向は右
@@ -109,7 +111,6 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 					
 				m_width_max = (i*BLOCK_SIZE) - (px * BLOCK_SIZE);
 				break;
-					
 			}
 		}
 	}
@@ -148,8 +149,26 @@ void CObjLift::Init()
 	
 	//リフトのカウント初期化
 	m_lift_audio_count = 47;
-	//当たり判定
-	Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		case 1:
+		case 2:
+		{
+			//当たり判定
+			Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+			break;
+			
+		}
+		case 5:
+		{
+			//当たり判定
+			Hits::SetHitBox(this, m_px, m_py, STAGE5_LIFT_SIZE_WIDTH, STAGE5_LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+			break;
+		}
+	}
+
+	
 }
 
 //アクション
@@ -158,8 +177,7 @@ void CObjLift::Action()
 	
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
-
-
+	
 	//主人公が当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
@@ -172,10 +190,6 @@ void CObjLift::Action()
 	//位置情報を更新
 	m_px += m_vx;
 	m_py += m_vy;
-
-	//移動量の保存
-	/*m_move_x += m_vx;
-	m_move_y += m_vy;*/
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
@@ -195,15 +209,40 @@ void CObjLift::Draw()
 	//切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 128.0f;
-	src.m_bottom = 128.0f;
-
+	
 	//描画の位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
-	dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
 
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		case 1:
+		case 2:
+		{
+			//切り取り
+			src.m_right = 128.0f;
+			src.m_bottom = 32.0f;
+
+			//描画
+			dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
+			dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
+
+			break;
+		}
+		case 5:
+		{
+			//切り取り
+			src.m_right = 320.0f;
+			src.m_bottom = 16.0f;
+
+			//描画
+			dst.m_right = dst.m_left + STAGE5_LIFT_SIZE_WIDTH;
+			dst.m_bottom = dst.m_top + STAGE5_LIFT_SIZE_HEIGHT;
+
+			break;
+		}
+	}
+	
 	//リフトの描画
 	Draw::Draw(GRA_LIFT, &src, &dst, color, 0.0f);
 }
@@ -239,16 +278,23 @@ void CObjLift::HeroRide()
 			//右側があたっていればで
 			if (0.0f <= r && r < 30.0f)
 			{
-				//リフトにめりこまないようにする処理
-				if (objhero->GetPosture() == 1.0f)//右向き
+				switch(((UserData*)Save::GetData())->stagenum)
 				{
-					objhero->SetPosX(m_px + LIFT_SIZE_WIDTH - 14.5f);//主人公をリフトの右に行くようにする
+					case 1:
+					case 2:
+					{
+						//リフトにのめりこまないようにする処理
+						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+						break;
+					}
+					case 5:
+					{
+						//リフトにのめりこまないようにする処理
+						objhero->SetPosX(m_px + STAGE5_LIFT_SIZE_WIDTH);//主人公をリフトの右に行くようにする
+						break;
+					}
 				}
-				else//左向き
-				{
-					//当たり判定のずれから振り向いたらめり込んでしまうので、-14.5fを削除
-					objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);
-				}
+				
 			}
 			//左側があたっていればで
 			if (155.0f < r && r < 180.0f)
@@ -421,7 +467,7 @@ void CObjLift::ModeMove()
 		{
 			//行き過ぎた分
 			//初期位置から動いた距離がMAX越えなら
-			if (m_move_x > m_width_max)
+			if (m_move_x > m_width_max) 
 			{
 				//現在の移動方向が右
 				if (m_direction == 0)

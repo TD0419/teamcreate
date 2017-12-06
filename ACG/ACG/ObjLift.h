@@ -10,6 +10,7 @@ using namespace GameL;
 //テスト用
 #define SPEED (1.5f)
 
+
 //オブジェクト：リフト
 class CObjLift :public CObj
 {
