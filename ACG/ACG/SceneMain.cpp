@@ -90,7 +90,9 @@ void CSceneMain::InitScene()
 	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
 	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
 
-
+	/*CObjDiffusionCannon* p = new CObjDiffusionCannon(10,20);
+	Objs::InsertObj(p, OBJ_DIFFUSION_CANNON, 9);
+*/
 	//デバッグ--------------------------------------------------
 }
 
