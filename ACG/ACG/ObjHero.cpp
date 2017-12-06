@@ -75,9 +75,17 @@ void CObjHero::Action()
 	RopeThrow();//ロープ射出
 
 	HitScene();	//当たり判定
-	
-	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py + 14);
+
+	if (m_posture == 0.0f)
+	{
+		//HitBoxの位置を更新する
+		HitBoxUpData(Hits::GetHitBox(this), m_px+3, m_py + 14);
+	}
+	else
+	{
+		//HitBoxの位置を更新する
+		HitBoxUpData(Hits::GetHitBox(this), m_px+15, m_py + 14);
+	}
 }
 
 //主人公の左下、真下、右下にあるブロック情報を取得
@@ -243,12 +251,15 @@ void CObjHero::MoveScene()
 
 		r = r * 3.14f / 180.0f;//ラジアン度にする
 
-		//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
-		m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
-		m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
-
-		//周期を進める
-		pendulum_data.time += 1.0f;
+		//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
+		if (!m_hit_down  && !m_hit_left && !m_hit_right && !m_hit_up)
+		{
+			//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
+			m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
+			m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
+			//周期を進める
+			pendulum_data.time += 1.0f;
+		}
 	}
 	//ロープがターザンポイントに引っかかっていなかったら
 	//振り子データの重力加速度以外を初期化

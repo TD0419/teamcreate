@@ -19,4 +19,5 @@ public:
 private:
 	float m_px;							//落ちるリフト(ギミック)X座標
 	float m_py;							//落ちるリフト(ギミック)Y座標
+	bool m_get_on_flag;					//主人公が落ちるリフトの上に乗っているか調べる
 };

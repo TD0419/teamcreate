@@ -18,6 +18,7 @@ CObjFallingLift::CObjFallingLift(int x, int y)
 //イニシャライズ
 void CObjFallingLift::Init()
 {
+	m_get_on_flag = false;		//false…主人公が乗っていない  true…主人公が乗っている
 	//当たり判定用HitBoxを作成                          
 	Hits::SetHitBox(this, m_px, m_py, ROLL_BLOCK_SIZE_WIDTH, ROLL_BLOCK_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_FALLING_LIFT, 1);
 }
@@ -28,9 +29,16 @@ void CObjFallingLift::Action()
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	//ヒーローオブジェクトと当たっていれば
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	//主人公オブジェクトと当たってるかつ主人公がリフトの乗っていないとき
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && m_get_on_flag == false)
 	{
+		HeroRide();//衝突処理をする
+	}
+	//主人公オブジェクトと当たってるかつ主人公がリフトの乗っているとき
+	else if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && m_get_on_flag == true)
+	{
+		//落ちるリフトが移動(落下する)
+		m_py += 2.0f;
 		HeroRide();//衝突処理をする
 	}
 	//HitBoxの位置を更新する
@@ -86,17 +94,19 @@ void CObjFallingLift::HeroRide()
 			//上側があたっていれば
 			if (35.0f < r && r < 145.0f)
 			{
+				m_get_on_flag = true;							//「主人公が乗っている」と識別する。
 				objhero->SetHitDown(true);						//主人公が乗っていたらm_hit_downにtrueを返す
 			    //乗せる処理
 				objhero->SetPosY(m_py - 126.0f);				//ブロックの上側に調節する
 
 				//主人公の移動ベクトルが下向きなら
-				if (objhero->GetVecY()>0.0f)
-					objhero->SetVecY(0.0f);						//主人公のY方向の移動を0にする
+				if (objhero->GetVecY()>2.0f)
+					objhero->SetVecY(2.0f);						//主人公のY方向の移動を2にする
 			}
 			//左側が当たっていれば
 			else if (145.0f <= r && r <= 180.0f)
 			{
+				m_get_on_flag = false;							//「主人公は乗っていない」と識別する。
 				//左に反発する処理
 				objhero->SetPosX(m_px - HERO_SIZE_WIDTH+0.8f);	//主人公の位置をブロックの左にする
 				objhero->SetVecX(-1.0f * objhero->GetVecX());	//主人公のX方向の移動量を反転する
@@ -104,6 +114,7 @@ void CObjFallingLift::HeroRide()
 			//右側が当たっていれば
 			else if (0.0f <= r && r <= 35.0f )
 			{
+				m_get_on_flag = false;							//「主人公は乗っていない」と識別する。
 				//右に反発する処理
 				objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_WIDTH);	//主人公の位置をブロックの右にする
 				objhero->SetVecX(-1.0f * objhero->GetVecX());	//主人公のX方向の移動量を反転する
@@ -112,6 +123,7 @@ void CObjFallingLift::HeroRide()
 			//下側があたっていれば
 			else if (180.0f < r && r < 360.0f)
 			{
+				m_get_on_flag = false;							//「主人公は乗っていない」と識別する。
 				//下に反発する処理
 				objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの下にする
 				objhero->SetVecY(-1.0f * objhero->GetVecY());	//主人公のY方向の移動量を反転する
