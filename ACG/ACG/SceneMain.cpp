@@ -86,12 +86,6 @@ void CSceneMain::InitScene()
 	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
 	//Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);
 
-	//ターザンポイントオブジェクト作成(デバック中です。)
-	//CObjTarzanPoint* objtarzan_point = new CObjTarzanPoint(10, 18);
-	//Objs::InsertObj(objtarzan_point, OBJ_TARZAN_POINT, 9);
-	//objtarzan_point = new CObjTarzanPoint(17, 18);
-	//Objs::InsertObj(objtarzan_point, OBJ_TARZAN_POINT, 9);
-
 	//落ちるリフト
 	CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
 	Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
