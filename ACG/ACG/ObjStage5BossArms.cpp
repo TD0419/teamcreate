@@ -58,7 +58,7 @@ void CObjStage5BossArms::Action()
 	else if (m_arms_type == 2)
 	{
 		//“–‚½‚è”»’èXV
-		HitBoxUpData(Hits::GetHitBox(this), m_px + 698.0f, m_py + 138.0f);
+		HitBoxUpData(Hits::GetHitBox(this), m_px + 186.0f, m_py + 138.0f);
 	}
 
 	//’eŠÛ‚Æ‚ ‚½‚Á‚½‚ç‚g‚o‚ð1Œ¸‚ç‚·
@@ -121,7 +121,7 @@ void CObjStage5BossArms::Draw()
 
 		//•`‰æˆÊ’u
 		dst.m_top = m_py - objmap->GetScrollY();
-		dst.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE + m_px - objmap->GetScrollX();
+		dst.m_left =   m_px - objmap->GetScrollX();
 		dst.m_right = dst.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 		//•`‰æ
