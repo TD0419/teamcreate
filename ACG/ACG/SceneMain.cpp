@@ -42,8 +42,8 @@ void CSceneMain::InitScene()
 	}
 
 	////デバッグ用ステージ番号調整用
-	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 5;
+	/*UserData* s = (UserData*)Save::GetData();
+	s->stagenum = 5;*/
 	////----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -171,16 +171,19 @@ void CSceneMain::ImageDataLoading()
 	{
 	//ステージ１
 	case 1:
+	{
 		//背景画像読み込み
 		Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
 		//リフト画像読み込み
 		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
-		
+
 		break;
+	}
 	//ステージ２
 	case 2:
+	{
 		//背景画像読み込み
 		Draw::LoadImageW(L"Image\\BackGround\\Stage2.png", GRA_BACKGROUND, TEX_SIZE_1536);
 		//リフト画像読み込み
@@ -196,8 +199,10 @@ void CSceneMain::ImageDataLoading()
 		//ゴリラの投擲物読み込み
 		Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
 		break;
+	}
 	//ステージ３
 	case 3:
+	{
 		//リフト画像読み込み
 		Draw::LoadImageW(L"Image\\Lift\\Stage3.png", GRA_LIFT, TEX_SIZE_128);
 		//ブロック画像読み込み
@@ -208,22 +213,27 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL, TEX_SIZE_256);//上
 		Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
 		break;
+	}
 	//ステージ４
 	case 4:
+	{
+		break;
+	}
 	//ステージ５
 	case 5:
+	{
 		//ステージ５の背景画像の読み込み
 		Draw::LoadImageW(L"Image\\BackGround\\Stage5.png", GRA_BACKGROUND, TEX_SIZE_1536);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage5.png", GRA_BLOCK, TEX_SIZE_128);
-	
+
 		//回転ブロックの画像読み込み
 		Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 		Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
 
 		//金網ブロックの読み込み
 		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_WIRE_MASH, TEX_SIZE_256);
-		
+
 		//ステージ5の大砲
 		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
 		//ステージ5の大砲の弾
@@ -239,19 +249,19 @@ void CSceneMain::ImageDataLoading()
 		//リフト画像読み込み
 		Draw::LoadImageW(L"Image\\Lift\\Stage5.png", GRA_LIFT, TEX_SIZE_512);
 		break;
+	}
+	////画像が用意されていない場合
+	//default:
+	//	//背景画像読み込み
+	//	Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
+	//	//リフト画像読み込み
+	//	Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
+	//	//ブロック画像読み込み
+	//	Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
 
-	//画像が用意されていない場合
-	default:
-		//背景画像読み込み
-		Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
-		//リフト画像読み込み
-		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
-		//ブロック画像読み込み
-		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
-
-		//ドア & 錠画像読み込み
-		Draw::LoadImageW(L"Image\\Door.png", GRA_DOOR, TEX_SIZE_256);
-		break;
+	//	//ドア & 錠画像読み込み
+	//	Draw::LoadImageW(L"Image\\Door.png", GRA_DOOR, TEX_SIZE_256);
+	//	break;
 	}
 	
 	//プレイヤー画像読み込み

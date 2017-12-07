@@ -209,8 +209,6 @@ void CObjLift::Draw()
 
 	RECT_F src, dst;
 
-	
-	
 	//ï`âÊÇÃà íu
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
@@ -221,10 +219,10 @@ void CObjLift::Draw()
 		case 2:
 		{
 			//êÿÇËéÊÇË
-			src.m_top = 0.0f;
+ 			src.m_top = 0.0f;
 			src.m_left = 0.0f;
-			src.m_right = 128.0f;
-			src.m_bottom = 32.0f;
+			src.m_right = src.m_left+ LIFT_SIZE_WIDTH;
+			src.m_bottom = src.m_top+ LIFT_SIZE_HEIGHT;
 
 			//ï`âÊ
 			dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
