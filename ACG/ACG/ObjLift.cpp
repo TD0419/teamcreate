@@ -222,7 +222,7 @@ void CObjLift::Draw()
  			src.m_top = 0.0f;
 			src.m_left = 0.0f;
 			src.m_right = src.m_left+ LIFT_SIZE_WIDTH;
-			src.m_bottom = src.m_top+ LIFT_SIZE_HEIGHT;
+			src.m_bottom = src.m_top+ 128.0f;
 
 			//•`‰æ
 			dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
