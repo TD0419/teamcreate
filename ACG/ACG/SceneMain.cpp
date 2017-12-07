@@ -78,9 +78,6 @@ void CSceneMain::InitScene()
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
 	//------------------------------
 
-	//ステージ５のボス(デバッグ中。消さないで)
-	//CObjStage5Boss* objstage5_boss = new CObjStage5Boss(10,12);
-	//Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);
 
 	////当たり判定まだなのでため置いていてください
 	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
@@ -232,8 +229,8 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
 
 		//金網ブロックの読み込み
-		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_WIRE_MASH, TEX_SIZE_256);
-
+		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_WIRE_MASH, TEX_SIZE_640);
+		
 		//ステージ5の大砲
 		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
 		//ステージ5の大砲の弾
