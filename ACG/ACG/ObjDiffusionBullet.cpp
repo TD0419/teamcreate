@@ -25,8 +25,7 @@ void CObjDiffusionBullet::Init()
 	m_vx = cos(3.14f / 180.0f*m_r);
 	m_vy = sin(3.14f / 180.0f*m_r);
 	m_speed = 5.5f;
-	m_window_check = true;
-
+	
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 16.0f, 16.0f, ELEMENT_ENEMY, OBJ_DIFFUSION_BULLET, 1);
 }
@@ -39,16 +38,13 @@ void CObjDiffusionBullet::Action()
 	m_px += m_vx* m_speed;
 	m_py -= m_vy* m_speed;
 
-	//画面内か調べる
-	m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
-
-	//画面外なら消去
-	if (m_window_check == false)
+	//画面外なら
+	if(WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE)==false)
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		WindowOutDelete(this);//削除処理
 		return;
 	}
+
 	//拡散弾HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 

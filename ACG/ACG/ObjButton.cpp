@@ -16,6 +16,8 @@ CObjButton::CObjButton(int x, int y)
 {
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -34,6 +36,13 @@ void CObjButton::Init()
 //アクション
 void CObjButton::Action()
 {
+	//画面外なら
+	if (WindowCheck(m_px, m_py,36.0f, 32.0f) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
+
 	// ボタンが押されたら
 	if (m_trick_flag == true)
 	{

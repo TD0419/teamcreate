@@ -23,6 +23,9 @@ public:
 private:
     float m_px;	 // ロープスイッチX座標
     float m_py;	 // ロープスイッチY座標
+	//マップの要素数
+	int m_map_x;
+	int m_map_y;
 
 	bool m_rope_flag; //ロープがあったとき記憶する用
 };

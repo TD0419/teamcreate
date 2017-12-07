@@ -10,13 +10,16 @@ using namespace GameL;
 class CObjNeedleStand :public CObj
 {
 public:
-	CObjNeedleStand(float x, float y);	// コンストラクタ
+	CObjNeedleStand(int x, int y);	// コンストラクタ
 	~CObjNeedleStand() {};			// デストラクタ
 	void Init();				// イニシャライズ
 	void Action();				// アクション
 	void Draw();				// ドロー
 
 private:
+	//mapの要素数
+	int m_map_x;
+	int m_map_y;
 	float m_px;		//位置X
 	float m_py;		//位置Y
 };

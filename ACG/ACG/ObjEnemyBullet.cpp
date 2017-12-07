@@ -71,9 +71,6 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 //イニシャライズ
 void CObjEnemyBullet::Init()
 {
-	
-	m_window_check = true;
-
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
 }
@@ -85,11 +82,8 @@ void CObjEnemyBullet::Action()
 	m_px += m_vx*1.0f;
 	m_py += m_vy*1.0f;
 
-	//画面内か調べる
-	m_window_check = WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE);
-
 	//画面外なら
-	if (m_window_check == false)
+	if(WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE)==false)
 	{
 		//主人公とボスのオブジェクトをもってくる
 		CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
@@ -102,8 +96,7 @@ void CObjEnemyBullet::Action()
 		//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
 		if (abs(boss_x - m_px) > abs(boss_x - hero_x))
 		{
-			this->SetStatus(false);		//自身に消去命令を出す。
-			Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+			WindowOutDelete(this);//削除処理
 			return;
 		}
 	}

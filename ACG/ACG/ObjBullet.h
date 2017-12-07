@@ -24,8 +24,7 @@ private:
 	float m_r;	// 弾丸の角度	
 	float m_scroll_x;	//スクロールの値X 
 	float m_scroll_y;	// スクロールの値Y
-	bool m_window_check;//画面内かどうかのチェック用 true:画面内 false:画面外
-
+	
 	//ブロックとの当たり判定用フラグ
 	bool m_hit_left;	
 	bool m_hit_right;	

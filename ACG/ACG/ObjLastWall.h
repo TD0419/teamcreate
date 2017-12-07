@@ -22,7 +22,7 @@ class CObjLastWall :public CObj
 		float m_px;	//X座標
 		float m_py;	//Y座標
 
-					//マップ上の位置（要素数）
+		//マップ上の位置（要素数）
 		int m_map_x;//X
 		int m_map_y;//Y
 		int m_wall_gauge;//壁の高さ管理

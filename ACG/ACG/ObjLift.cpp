@@ -227,7 +227,6 @@ void CObjLift::Draw()
 			//描画
 			dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
 			dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
-
 			break;
 		}
 		case 5:
@@ -283,29 +282,29 @@ void CObjLift::HeroRide()
 			{
 				switch (((UserData*)Save::GetData())->stagenum)
 				{
-				case 1:
-				case 2:
-				{
-					if (objhero->GetPosture() == 1.0f)//左向き
+					case 1:
+					case 2:
 					{
-						//リフトにのめりこまないようにする処理
-						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH - 14.5f);//主人公をリフトの右に行くようにする
-						objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-						break;
+						if (objhero->GetPosture() == 1.0f)//左向き
+						{
+							//リフトにのめりこまないようにする処理
+							objhero->SetPosX(m_px + LIFT_SIZE_WIDTH - 14.5f);//主人公をリフトの右に行くようにする
+							objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+							break;
+						}
+						else//右向き
+						{
+							//当たり判定のずれから振り向いたらめり込んでしまうので、-14.5fを削除
+							objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+							objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);
+							break;
+						}
 					}
-					else//右向き
+					case 5:
 					{
-						//当たり判定のずれから振り向いたらめり込んでしまうので、-14.5fを削除
-						objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);
-						break;
-					}
-				}
-				case 5:
-				{
 					
-					break;
-				}
+						break;
+					}
 				}
 			}
 			//左側があたっていればで
@@ -315,16 +314,16 @@ void CObjLift::HeroRide()
 				{
 					case 1:
 					case 2:
-						//リフトにのめりこまないようにする処理
-						if (objhero->GetPosture() == 0.0f)//右向き
-						{
-							objhero->SetPosX(m_px - 48.5f);//主人公をリフトの左に行くようにする
-						}
-						else//左向き
-						{
-							//めり込み防止のため左向きのときは-64.0fにする
-							objhero->SetPosX(m_px - 64.0f);//主人公をリフトの左に行くようにする
-						}
+					//リフトにのめりこまないようにする処理
+					if (objhero->GetPosture() == 0.0f)//右向き
+					{
+						objhero->SetPosX(m_px - 48.5f);//主人公をリフトの左に行くようにする
+					}
+					else//左向き
+					{
+						//めり込み防止のため左向きのときは-64.0fにする
+						objhero->SetPosX(m_px - 64.0f);//主人公をリフトの左に行くようにする
+					}
 					case 5:
 					{
 						break;

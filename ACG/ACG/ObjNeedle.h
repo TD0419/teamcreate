@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjNeedle:public CObj
 {
 public:
-	CObjNeedle(float x, float y);	// コンストラクタ
+	CObjNeedle(int x, int y);	// コンストラクタ
 	~CObjNeedle() {};			// デストラクタ
 	void Init();				// イニシャライズ
 	void Action();				// アクション
@@ -19,7 +19,9 @@ public:
 private:
 	float m_px;		//位置X
 	float m_py;		//位置Y
-	
+	//マップの要素数
+	int m_map_x;
+	int m_map_y;
 	float m_needle_gauge; //針の沈む速度
 	int   m_time;         //針の沈んだあとのタイム
 };

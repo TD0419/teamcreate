@@ -306,6 +306,27 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
+		case MAP_NEEDLE:	//j
+		{
+			CObjNeedle* objneedle = new CObjNeedle(x, y);
+			Objs::InsertObj(objneedle, OBJ_NEEDLE, 9);
+			break;
+		}
+	
+		case MAP_NEEDLE_STAND:	//j‚Ì‘ä
+		{
+			CObjNeedleStand* objneedlestand = new CObjNeedleStand(x, y);
+			Objs::InsertObj(objneedlestand, OBJ_NEEDLE_STAND, 9);
+			break;
+		}
+
+		case MAP_DIFFUSION_CANNON://ŠgU’e‚ğŒ‚‚Â‚â‚Â
+		{
+			CObjDiffusionCannon* objdiffusioncannnon = new CObjDiffusionCannon(x, y);
+			Objs::InsertObj(objdiffusioncannnon, OBJ_DIFFUSION_CANNON, 9);
+			break;
+
+		}
 	}
 
 	m_map[y][x].create = false;//ƒtƒ‰ƒO‚ğƒIƒt‚É‚·‚é	

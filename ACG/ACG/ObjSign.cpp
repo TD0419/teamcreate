@@ -56,6 +56,13 @@ void CObjSign::Init()
 //アクション
 void CObjSign::Action()
 {
+	//画面外なら
+	if (WindowCheck(m_px, m_py, SIGN_SIZE, SIGN_SIZE) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
+
 	//当たり判定をもってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 

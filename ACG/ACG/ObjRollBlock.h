@@ -33,6 +33,10 @@ private:
 	float m_difference_x;
 	float m_difference_y;
 
+	//マップの要素番号
+	int m_map_x;
+	int m_map_y;
+
 	float m_r;		//回転角
 	int m_count;	//回転の制御用カウンター
 	int m_pattan;	//タイプ(1:一定時間で回転,2：ロープで引っ張って)

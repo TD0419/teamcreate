@@ -22,7 +22,5 @@ private:
 	float m_vx;						// X軸方向のベクトル
 	float m_vy;						// Y軸方向のベクトル
 	float m_speed;					//弾丸の速度
-	float m_r;					//弾丸の角度			
-	bool m_window_check;//画面内かどうかのチェック用 true:画面内 false:画面外
-	
+	float m_r;					//弾丸の角度				
 };

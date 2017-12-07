@@ -16,6 +16,8 @@ CObjRopeSwitch::CObjRopeSwitch(int x, int y)
 {
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -29,6 +31,13 @@ void CObjRopeSwitch::Init()
 //アクション
 void CObjRopeSwitch::Action()
 {
+	//画面外なら
+	if (WindowCheck(m_px, m_py, 20.0f, 20.0f) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
+
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 

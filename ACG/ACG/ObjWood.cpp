@@ -19,6 +19,9 @@ CObjWood::CObjWood(int x, int y)
 	//マップ情報の木の位置が木の下を指していたので調整
 	m_px -= WOOD_SIZE - 64.0f;
 	m_py -= WOOD_SIZE - 64.0f;
+
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -39,6 +42,13 @@ void CObjWood::Init()
 //アクション
 void CObjWood::Action()
 {	
+	//画面外なら
+	if (WindowCheck(m_px, m_py, 64.0f, WOOD_SIZE) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
+
 	//主人公オブジェクト情報を持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hero_x = objhero->GetPosX();
