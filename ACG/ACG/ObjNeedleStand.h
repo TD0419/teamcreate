@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjNeedleStand :public CObj
 {
 public:
-	CObjNeedleStand(float x, float y);	// コンストラクタ
+	CObjNeedleStand(int x, int y);	// コンストラクタ
 	~CObjNeedleStand() {};			// デストラクタ
 	void Init();				// イニシャライズ
 	void Action();				// アクション

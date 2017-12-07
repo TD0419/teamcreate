@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjNeedle:public CObj
 {
 public:
-	CObjNeedle(float x, float y);	// コンストラクタ
+	CObjNeedle(int x, int y);	// コンストラクタ
 	~CObjNeedle() {};			// デストラクタ
 	void Init();				// イニシャライズ
 	void Action();				// アクション

@@ -32,6 +32,8 @@ void CObjWood::Init()
 	m_wood_image_y = m_py;
 	m_audio_start_flag = false;//木の音を鳴らすフラグ
 
+	m_wood_determine = 0;//木の判定
+
 	//当たり判定
 	Hits::SetHitBox(this, m_wood_image_x, m_wood_image_y, 64, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
 }
@@ -89,17 +91,27 @@ void CObjWood::Action()
 
 	//主人公との当たり判定
 	//衝突したら主人公の位置を更新する
-	if (HitTestOfAB(m_wood_image_x, m_wood_image_y, hit_w, hit_h,
-		&hero_x, &hero_y, 42, 120, &hero_vx, &hero_vy)
-		)
-	{
-		//主人公の位置を更新
-		objhero->SetPosX(hero_x);
-		objhero->SetPosY(hero_y+2.0f);
-		objhero->SetVecX(hero_vx);
-		objhero->SetVecY(hero_vy);
-	}
+	m_wood_determine = HitTestOfAB(m_wood_image_x-7.0f, m_wood_image_y-2.0f, hit_w-8.0f, hit_h,&hero_x, &hero_y, 42, 120, &hero_vx, &hero_vy);
 
+	switch (m_wood_determine)
+	{
+	case 1:
+		break;
+	case 2:
+		//主人公の位置を更新
+		objhero->SetPosY(hero_y - 2.0f);
+		objhero->SetVecY(hero_vy);
+		break;
+	case 3:
+		objhero->SetPosX(hero_x);
+		objhero->SetVecX(hero_vx);
+		break;
+	case 4:
+		objhero->SetPosX(hero_x);
+		objhero->SetVecX(hero_vx);
+		break;
+	}
+	
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_wood_image_x, m_wood_image_y, hit_w, hit_h);	
 }
