@@ -13,8 +13,10 @@ using namespace GameL;
 //コンストラクタ
 CObjThroughBlock::CObjThroughBlock(int x, int y)
 {
-	m_px = x * BLOCK_SIZE;
-	m_py = y * BLOCK_SIZE;
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -25,6 +27,20 @@ void CObjThroughBlock::Init()
 //アクション
 void CObjThroughBlock::Action()
 {
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//画面内か調べる
+	bool wincheck_flag = WindowCheck(m_px, m_py, BLOCK_SIZE, BLOCK_SIZE);
+
+	//画面外なら
+	if (wincheck_flag == false)
+	{
+		//削除するので次に来たときに生成するようにフラグをオンにする
+		objmap->SetMapCreate(m_map_x, m_map_y, true);
+		this->SetStatus(false);		//自身を削除
+	}
+
 }
 
 //ドロー

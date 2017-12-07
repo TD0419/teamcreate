@@ -277,7 +277,7 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 
 		}
-		/*•`‰æ‚ª’²®‚Å‚«‚½‚çƒRƒƒ“ƒg‰»‚ğ‰ğœ‚µ‚Ä‚­‚¾‚³‚¢B
+		
 		case MAP_NEEDLE:		//ƒgƒQ
 		{
 			CObjNeedle* objneedle = new CObjNeedle(x,y);
@@ -291,8 +291,8 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objneedle_stand, OBJ_NEEDLE_STAND, 9);
 			break;
 		}
-		*/
-		case MAP_DIFFUSION_GIMMICK:	//ŠgU’e”­ËƒMƒ~ƒbƒN
+		
+		case MAP_DIFFUSION_CANNON:	//ŠgU’e”­ËƒMƒ~ƒbƒN
 		{
 			CObjDiffusionCannon* objdiffusion_cannon = new CObjDiffusionCannon(x,y);
 			Objs::InsertObj(objdiffusion_cannon,OBJ_DIFFUSION_CANNON,9);
@@ -332,28 +332,6 @@ void CObjMap::CreateObj(int x, int y)
 			CObjWireMesh* objwirwmesh = new CObjWireMesh(x, y);
 			Objs::InsertObj(objwirwmesh, OBJ_WIRE_MESH, 9);
 			break;
-		}
-
-		case MAP_NEEDLE:	//j
-		{
-			CObjNeedle* objneedle = new CObjNeedle(x, y);
-			Objs::InsertObj(objneedle, OBJ_NEEDLE, 9);
-			break;
-		}
-	
-		case MAP_NEEDLE_STAND:	//j‚Ì‘ä
-		{
-			CObjNeedleStand* objneedlestand = new CObjNeedleStand(x, y);
-			Objs::InsertObj(objneedlestand, OBJ_NEEDLE_STAND, 9);
-			break;
-		}
-
-		case MAP_DIFFUSION_CANNON://ŠgU’e‚ğŒ‚‚Â‚â‚Â
-		{
-			CObjDiffusionCannon* objdiffusioncannnon = new CObjDiffusionCannon(x, y);
-			Objs::InsertObj(objdiffusioncannnon, OBJ_DIFFUSION_CANNON, 9);
-			break;
-
 		}
 	}
 
