@@ -353,7 +353,8 @@ void CSceneMain::AudioDataLoading()
 		Audio::LoadAudio(STAGE, L"BGM\\Temple.wav", BACK_MUSIC);
 		Audio::LoadAudio(BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);
 		//SE-----------------------------------------------------------
-		
+		//回転ブロックの音
+		Audio::LoadAudio(ROLLBLOCK, L"SE\\BlockRocate.wav", EFFECT);
 		//リフト(引っ張る)
 		Audio::LoadAudio(PULLLIFT, L"SE\\LiftTrickPull.wav", EFFECT);
 		//リフト(離す)

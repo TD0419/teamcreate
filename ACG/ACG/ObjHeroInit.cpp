@@ -72,7 +72,7 @@ void CObjHero::Init()
 	pendulum_data.length = 0.0f;	//振り子の長さ
 	pendulum_data.pretend_width = 0.0f;//ふり幅
 	pendulum_data.time = 0.0f;//時間(周期)
-
+	pendulum_data.find_value_flag = true;//値を求めるかどうかのフラグNO
 	
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, 46, 112, ELEMENT_PLAYER, OBJ_HERO, 1);

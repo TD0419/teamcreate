@@ -89,7 +89,7 @@ void CObjLastWall::Action()
 				//主人公が右側に衝突
 				if (0 < r && r < 85 || 275 < r && r < 360)
 				{
-					//岩にめりこまないようにする処理
+					//壁にめりこまないようにする処理
 					if (objhero->GetPosture() == 0.0f)//右向き
 					{
 						objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
@@ -98,7 +98,7 @@ void CObjLastWall::Action()
 					else//左向き
 					{
 						objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-						objhero->SetPosX(m_px + 61.0f);//主人公の位置をLastWallの右側までずらす
+						objhero->SetPosX(m_px + 47.0f);//主人公の位置をLastWallの右側までずらす
 					}
 				}
 
@@ -112,11 +112,11 @@ void CObjLastWall::Action()
 				//LastWallの左側が衝突している場合
 				else if (94 < r && r < 266)
 				{
-					//岩にめりこまないようにする処理
+					//壁にめりこまないようにする処理
 					if (objhero->GetPosture() == 0.0f)//右向き
 					{
 						objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-						objhero->SetPosX(m_px - 63.0f + 28.0f);//主人公の位置をLastWallの左側までずらす
+						objhero->SetPosX(m_px - 63.0f + 42.0f);//主人公の位置をLastWallの左側までずらす
 					}
 					else//左向き
 					{
