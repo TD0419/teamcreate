@@ -15,6 +15,7 @@ struct Pendulum
 	float pretend_width;//ふり幅
 	float time;			//時間(周期)
 	float gravity;		//重力加速度
+	bool find_value_flag;	//値(長さ、ふり幅、周期)を求めるかどうかのflag　true= 求める:false=　求めない
 };
 
 //オブジェクト：主人公
