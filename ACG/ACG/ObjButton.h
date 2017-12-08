@@ -20,6 +20,9 @@ class CObjButton : public CObj
 	private:
 		float m_px;			//ボタンX位置
 		float m_py;			//ボタンY位置
+		//マップの要素数
+		int m_map_x;
+		int m_map_y;		
 
 		bool m_trick_flag;	//弾と当たっているかどうかを調べる
 		//アニメーション関係

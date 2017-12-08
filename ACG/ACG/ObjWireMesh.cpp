@@ -12,6 +12,9 @@ CObjWireMesh::CObjWireMesh(int x, int y)
 {
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
+
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -24,6 +27,13 @@ void CObjWireMesh::Init()
 //アクション
 void CObjWireMesh::Action()
 {
+	//画面外なら
+	if (WindowCheck(m_px, m_py, WIRE_MESH_SIZE_WIDTH, WIRE_MESH_SIZE_WIDTH) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
+
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 

@@ -257,7 +257,6 @@ void CAudio::LoadAudio(int id ,wchar_t* name,SOUND_TYPE type)
 	XAUDIO2_SEND_DESCRIPTOR SFXSend = {1, m_AudioData[id]->m_pSFXSubmixVoice};
 	XAUDIO2_VOICE_SENDS SFXSendList = {1, &SFXSend};
 	for(int i=0;i<SCENE_AUDIO_EFFCT_MAX;i++)
-
 		m_pXAudio2->CreateSourceVoice(&m_AudioData[id]->m_pSourceVoice[i],&WaveformatEx,0U,2.0f,NULL,&SFXSendList);
 
 	//サウンドバッファをソースボイスキューに作成

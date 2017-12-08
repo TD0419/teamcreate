@@ -18,5 +18,8 @@ public:
 private:
 	float m_px;							//X座標
 	float m_py;							//Y座標
+	//マップの要素数
+	int m_map_x;
+	int m_map_y;
 	
 };

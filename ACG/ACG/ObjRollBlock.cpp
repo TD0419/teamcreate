@@ -12,6 +12,8 @@ CObjRollBlock::CObjRollBlock(int x,int y,int pattan)
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
 	m_pattan = pattan;
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -65,6 +67,7 @@ void CObjRollBlock::Init()
 //アクション
 void CObjRollBlock::Action()
 {
+	
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 	

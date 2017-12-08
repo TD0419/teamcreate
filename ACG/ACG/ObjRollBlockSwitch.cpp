@@ -34,6 +34,18 @@ void CObjRollBlockSwitch::Init()
 //アクション
 void CObjRollBlockSwitch::Action()
 {
+
+	//画面外なら
+	if (WindowCheck(m_px, m_py, ROLL_BLOCK_SWITCH_SIZE_WIDTH, ROLL_BLOCK_SWITCH_SIZE_WIDTH) == false)
+	{
+		CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//所持するHitBoxを除去。
+
+		return;
+	}
+
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 

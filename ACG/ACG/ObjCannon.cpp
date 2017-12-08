@@ -15,15 +15,16 @@ CObjCannon::CObjCannon(int x, int y)
 {
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
 void CObjCannon::Init()
 {
-	
 	m_r = 0.0f;
 	m_rec = 0.0f;
-	
+		
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, CANNON_SIZE_WIDTH, CANNON_SIZE_HEIGHT, ELEMENT_ENEMY, OBJ_CANNON, 1);
 
@@ -32,7 +33,13 @@ void CObjCannon::Init()
 //アクション
 void CObjCannon::Action()
 {
-	
+	//画面外なら
+	if (WindowCheck(m_px, m_py, CANNON_SIZE_WIDTH, CANNON_SIZE_HEIGHT) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
+
 	m_rec++;//弾丸発射カウント開始
 
 	if (m_rec == 90.0f)

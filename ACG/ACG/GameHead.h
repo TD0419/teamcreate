@@ -136,7 +136,7 @@ enum MAP_BER
 	MAP_TARZAN_POINT			,		//ロープでぶら下がれるギミック
 	MAP_NEEDLE					,		//針
 	MAP_NEEDLE_STAND			,		//針の土台
-	MAP_DIFFUSION_GIMMICK		,		//拡散弾発射ギミック
+	MAP_DIFFUSION_CANNON		,	//拡散弾発射ギミック
 	MAP_FALLING_LIFT			,		//乗ると落ちるリフト
 	MAP_LIFT_TYPE_AUTO_UP		,		//自動上移動リフト(自動で上方向に動く)
 	MAP_WIRE_MESH_FLOOR			,		//金網床

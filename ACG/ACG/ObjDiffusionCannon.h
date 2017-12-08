@@ -20,4 +20,6 @@ private:
 	float m_px;		//位置X
 	float m_py;		//位置Y
 	int   m_time;   //拡散弾の出るタイム
+	int m_map_x;	//マップの要素番号
+	int m_map_y;	//マップの要素番号
 };

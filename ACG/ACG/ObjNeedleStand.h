@@ -17,6 +17,9 @@ public:
 	void Draw();				// ドロー
 
 private:
+	//mapの要素数
+	int m_map_x;
+	int m_map_y;
 	float m_px;		//位置X
 	float m_py;		//位置Y
 };

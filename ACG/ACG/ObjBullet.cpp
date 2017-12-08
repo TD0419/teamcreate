@@ -37,8 +37,6 @@ void CObjBullet::Init()
 {
 	m_speed = 8.0f; // 弾丸のスピード
 
-	m_window_check = true;
-
 	//ブロックとの当たり判定フラグの初期化
 	m_hit_up	= false;
 	m_hit_down	= false;
@@ -53,17 +51,14 @@ void CObjBullet::Init()
 void CObjBullet::Action()
 {	
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	//画面内か調べる
-	m_window_check=WindowCheck(m_px,m_py,BULLET_SIZE,BULLET_SIZE);
-
-	//画面外なら消去
-	if(m_window_check==false)
+	
+	//画面外なら
+	if (WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE) == false)
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		WindowOutDelete(this);//削除処理
 		return;
 	}
-	
+
 	//弾丸のHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 

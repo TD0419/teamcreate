@@ -15,6 +15,8 @@ CObjLeverSwich::CObjLeverSwich(int x, int y)
 {
 	m_px = (float)x * LEVER_SWITCH_SIZE;
 	m_py = (float)y * LEVER_SWITCH_SIZE;
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -33,6 +35,13 @@ void CObjLeverSwich::Init()
 //アクション
 void CObjLeverSwich::Action()
 {
+	////画面外なら
+	//if (WindowCheck(m_px, m_py, LEVER_SWITCH_SIZE, LEVER_SWITCH_SIZE) == false)
+	//{
+	//	WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+	//	return;
+	//}
+
 	//レバースイッチのHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 

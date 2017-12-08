@@ -19,6 +19,9 @@ CObjWood::CObjWood(int x, int y)
 	//マップ情報の木の位置が木の下を指していたので調整
 	m_px -= WOOD_SIZE - 64.0f;
 	m_py -= WOOD_SIZE - 64.0f;
+
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ

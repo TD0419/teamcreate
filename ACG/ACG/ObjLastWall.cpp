@@ -16,6 +16,8 @@ CObjLastWall::CObjLastWall(int x, int y)
 {
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -55,6 +57,12 @@ void CObjLastWall::Init()
 //アクション
 void CObjLastWall::Action()
 {
+	//画面外なら
+	if (WindowCheck(m_px, m_py, 32.0f, 512.0f) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
 	
 	//HitBoxの位置の変更
 	//引数で持ってきたオブジェクトとあたっているか調べる

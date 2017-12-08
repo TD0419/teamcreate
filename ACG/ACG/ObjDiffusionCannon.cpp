@@ -13,6 +13,8 @@ CObjDiffusionCannon::CObjDiffusionCannon(int x, int y)
 {
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -24,10 +26,17 @@ void CObjDiffusionCannon::Init()
 //アクション
 void CObjDiffusionCannon::Action()
 {
-	//15°間隔で弾丸発射--------------------------
+	//画面外なら
+	if (WindowCheck(m_px, m_py, 64.0f, 64.0f) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
+
 	m_time++;
-	//25フレームの度に打ち出す要調整
-	if (m_time > 50)
+	
+	//50フレームの度に打ち出す要調整
+	if (m_time > 100)
 	{
 		m_time = 0;
 
@@ -35,14 +44,13 @@ void CObjDiffusionCannon::Action()
 		CObjDiffusionBullet* obj_b;
 		for (int i = 30; i<165; i += 20)
 		{
-			//約15角度で角度弾丸発射
+			//約20角度で角度弾丸発射
 			obj_b = new CObjDiffusionBullet(m_px + 28.0f, m_py+20.0f, i);
 			Objs::InsertObj(obj_b, OBJ_DIFFUSION_BULLET, 100);
 			Audio::Start(DIFFUSION);
 		}
 
 	}
-	//---------------------------------
 }
 
 //ドロー

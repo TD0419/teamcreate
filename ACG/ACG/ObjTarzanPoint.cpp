@@ -15,6 +15,8 @@ CObjTarzanPoint::CObjTarzanPoint(int x, int y)
 {
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
+	m_map_x = x;
+	m_map_y = y;
 }
 
 //イニシャライズ
@@ -27,6 +29,12 @@ void CObjTarzanPoint::Init()
 //アクション
 void CObjTarzanPoint::Action()
 {
+	//画面外なら
+	if (WindowCheck(m_px, m_py, TARZAN_POINT_WIDTH,TARZAN_POINT_HEIGHT) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
 
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);

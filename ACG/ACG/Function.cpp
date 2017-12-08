@@ -66,6 +66,29 @@ bool WindowCheck(float m_px, float m_py,float obj_size_x, float obj_size_y)
 	return true;
 }
 
+//画面外にあるオブジェクトの削除関数(画面内に入っても復活しない)
+//引数1：対象オブジェクトのポインタ
+void WindowOutDelete(CObj* obj_p)
+{
+	obj_p->SetStatus(false);		//自身に消去命令を出す。
+	Hits::DeleteHitBox(obj_p);	//所持するHitBoxを除去。
+}
+
+
+//画面外にいるオブジェクトの削除関数(画面内に入ると再度復活)
+//引数1：対象オブジェクトのポインタ
+//引数2,3：マップの要素数
+void WindowOutDelete(CObj* obj_p,int map_x,int map_y)
+{
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	obj_p->SetStatus(false);		//自身に消去命令を出す。
+	Hits::DeleteHitBox(obj_p);	//所持するHitBoxを除去。
+
+	//戻ってきたときに復活するようにする
+	objmap->SetMapCreate(map_x, map_y, true);
+}
+
 //ブロックAとブロックBの当たり判定
 //ブロックA＝当たった場合移動しないブロック
 //ブロックB＝あたった場合移動するブロック

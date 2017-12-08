@@ -277,7 +277,7 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 
 		}
-		/*描画が調整できたらコメント化を解除してください。
+		
 		case MAP_NEEDLE:		//トゲ
 		{
 			CObjNeedle* objneedle = new CObjNeedle(x,y);
@@ -291,8 +291,8 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objneedle_stand, OBJ_NEEDLE_STAND, 9);
 			break;
 		}
-		*/
-		case MAP_DIFFUSION_GIMMICK:	//拡散弾発射ギミック
+		
+		case MAP_DIFFUSION_CANNON:	//拡散弾発射ギミック
 		{
 			CObjDiffusionCannon* objdiffusion_cannon = new CObjDiffusionCannon(x,y);
 			Objs::InsertObj(objdiffusion_cannon,OBJ_DIFFUSION_CANNON,9);
@@ -333,7 +333,6 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objwirwmesh, OBJ_WIRE_MESH, 9);
 			break;
 		}
-
 	}
 
 	m_map[y][x].create = false;//フラグをオフにする	

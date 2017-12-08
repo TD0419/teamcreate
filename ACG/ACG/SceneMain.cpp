@@ -41,10 +41,10 @@ void CSceneMain::InitScene()
 		return;
 	}
 
-	////デバッグ用ステージ番号調整用
-	/*UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 5;*/
-	////----------------
+	//デバッグ用ステージ番号調整用
+	UserData* s = (UserData*)Save::GetData();
+	s->stagenum = 2;
+	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
 	MapDataLoading(m_map);//マップ情報を読み込み
@@ -86,10 +86,7 @@ void CSceneMain::InitScene()
 	////落ちるリフト
 	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
 	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
-
-	/*CObjDiffusionCannon* p = new CObjDiffusionCannon(10,20);
-	Objs::InsertObj(p, OBJ_DIFFUSION_CANNON, 9);
-*/
+	
 	//デバッグ--------------------------------------------------
 }
 
@@ -238,7 +235,7 @@ void CSceneMain::ImageDataLoading()
 		//回転ブロックの仕掛けのスイッチの画像読み込み
 		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_BLACK_BALL, TEX_SIZE_16);
 		//針の読み込み
-		Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_32);
+		Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_64);
 		//針の土台の読み込み
 		Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
 		//ロープでぶら下がることができるギミック

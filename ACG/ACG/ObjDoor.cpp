@@ -16,6 +16,8 @@ CObjDoor::CObjDoor(int x, int y)
 {
 	m_px = x * BLOCK_SIZE;
 	m_py = y * BLOCK_SIZE;
+	m_map_x=x;	
+	m_map_y=y;
 }
 
 //イニシャライズ
@@ -59,6 +61,13 @@ void CObjDoor::Init()
 //アクション
 void CObjDoor::Action()
 {
+	//画面外なら
+	if (WindowCheck(m_px, m_py, DOOR_SIZE, DOOR_SIZE) == false)
+	{
+		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
+		return;
+	}
+
 	//ドアのHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 

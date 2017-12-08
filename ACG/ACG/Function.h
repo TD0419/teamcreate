@@ -12,6 +12,10 @@ void HitBoxUpData(CHitBox* hit, float m_px, float m_py,float w,float h);//HitBox
 
 bool WindowCheck(float m_px, float m_py,float obj_size_x,float obj_size_y);//画面の外に出ているか判定する関数
 
+
+void WindowOutDelete(CObj* obj_p);//画面外にあるオブジェクトの削除関数(画面内に入っても復活しない)
+void WindowOutDelete(CObj* obj_p, int map_x, int map_y);//画面外にあるオブジェクトの削除関数(画面内に入ったときに再度復活)
+
 //ブロックAとブロックBの当たり判定
 //ブロックA＝移動しないブロック
 //ブロックB＝あたった場合移動するブロック
