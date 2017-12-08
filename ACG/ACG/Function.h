@@ -20,6 +20,3 @@ void WindowOutDelete(CObj* obj_p, int map_x, int map_y);//画面外にあるオブジェク
 int HitTestOfAB(float ax, float ay, float aw, float ah,
 	float* bx, float* by, float bw, float bh,
 	float* bvx, float* bvy);
-
-//ランダムで値を決める関数
-int GetRandom(int min, int max);

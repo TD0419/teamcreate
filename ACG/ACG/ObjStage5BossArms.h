@@ -42,4 +42,8 @@ private:
 	int m_arms_type;	 //第五ボスアームのタイプ(1…ライトアーム  2…レフトアーム)
 
 	int m_arm_hp;    // 第五ボスのアームのＨＰ
+
+	bool m_posture;//姿　true=開いている　false=閉じている
+
+	int m_ani_flame;//アニメーションflame数
 };
