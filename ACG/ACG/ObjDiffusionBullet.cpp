@@ -41,8 +41,20 @@ void CObjDiffusionBullet::Action()
 	//画面外なら
 	if(WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE)==false)
 	{
-		WindowOutDelete(this);//削除処理
-		return;
+		//主人公と拡散砲台のオブジェクトをもってくる
+		CObjDiffusionCannon* objcannon = (CObjDiffusionCannon*)Objs::GetObj(OBJ_DIFFUSION_CANNON);
+		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+		//主人公と拡散砲台のXの位置を持ってくる
+		float cannon_y = objcannon->GetPosY();
+		float hero_y = objhero->GetPosY();
+
+		//拡散砲台と弾の距離　が　拡散砲台とヒーローの距離　より大きければ
+		if (abs(cannon_y - m_py) > abs(cannon_y - hero_y))
+		{
+			WindowOutDelete(this);//削除処理
+			return;
+		}
 	}
 
 	//拡散弾HitBox更新用ポインター取得

@@ -190,6 +190,8 @@ enum GRAPHIC_ID
 	GRA_STAGE5_BOSS_BODY,	//ステージ5のボス胴体
 	GRA_STAGE5_BOSS_EYE,	//ステージ5のボス眼球
 	GRA_STAGE5_BOSS_ARMS_ALL,      	//ステージ5のボス腕(左右腕)
+	GRA_FALLING_LIFT,	//落ちるリフト
+	GRA_HAND_LIFT,//手動で引っ張るリフト
 };
 
 //音楽(BGM)

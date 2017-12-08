@@ -26,16 +26,9 @@ void CObjDiffusionCannon::Init()
 //アクション
 void CObjDiffusionCannon::Action()
 {
-	//画面外なら
-	if (WindowCheck(m_px, m_py, 64.0f, 64.0f) == false)
-	{
-		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
-		return;
-	}
-
 	m_time++;
 	
-	//50フレームの度に打ち出す要調整
+	//100フレームの度に打ち出す
 	if (m_time > 100)
 	{
 		m_time = 0;
