@@ -24,4 +24,7 @@ private:
 	int m_map_y;
 	float m_needle_gauge; //針の沈む速度
 	int   m_time;         //針の沈んだあとのタイム
+
+	bool m_over_or_under;//トゲの台の上にあるか、下にあるかを判別する
+
 };

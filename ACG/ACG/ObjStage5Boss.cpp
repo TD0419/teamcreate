@@ -29,10 +29,10 @@ void CObjStage5Boss::Init()
 	//Audio::Stop(STAGE);
 
 	//ライトアームの描画
-	CObjStage5BossArms* objstage5_boss_arm_right = new CObjStage5BossArms(m_px - 370, m_py - 166, 1);
+	CObjStage5BossArms* objstage5_boss_arm_right = new CObjStage5BossArms(m_px - 370.0f, m_py - 166.0f, 1);
 	Objs::InsertObj(objstage5_boss_arm_right, OBJ_STAGE5_BOSS_ARMS, 10);
 	//レフトアームの描画
-	CObjStage5BossArms* objstage5_boss_arm_left = new CObjStage5BossArms(m_px + 156, m_py - 166, 2);
+	CObjStage5BossArms* objstage5_boss_arm_left = new CObjStage5BossArms(m_px + 156.0f, m_py - 166.0f, 2);
 	Objs::InsertObj(objstage5_boss_arm_left, OBJ_STAGE5_BOSS_ARMS, 10);
 
 	//当たり判定用HitBoxを作成
