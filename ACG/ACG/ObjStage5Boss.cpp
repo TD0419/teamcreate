@@ -35,7 +35,7 @@ void CObjStage5Boss::Init()
 	Objs::InsertObj(m_boos_arm_right, OBJ_STAGE5_BOSS_ARMS, 10);
 
 	//左アームオブジェクト作成
-	CObjStage5BossArms* m_boos_arm_left = new CObjStage5BossArms(m_px + 156.0f, m_py - 166.0f, 2);
+	m_boos_arm_left = new CObjStage5BossArms(m_px + 156.0f, m_py - 166.0f, 2);
 	Objs::InsertObj(m_boos_arm_left, OBJ_STAGE5_BOSS_ARMS, 10);
 
 	//当たり判定用HitBoxを作成
