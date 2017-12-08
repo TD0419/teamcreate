@@ -1,5 +1,6 @@
 #include "Function.h"
 #include "GameHead.h"
+#include <time.h>
 //オブジェクト同士が衝突したときに消失する関数
 //引数1　HitBoxポインタ
 //引数2　判定したいオブジェクトポインタ
@@ -170,4 +171,20 @@ int HitTestOfAB(float ax, float ay, float aw, float ah,
 		}
 	}
 	return 0;
+}
+
+//ランダムで値を決める関数
+//引数1 int min	:最小値
+//引数2 int max	:最大値
+//戻り値 int	:最小値～最大値の間の数値をランダムで渡す(最大値、最小値を含む)
+int GetRandom(int min,int max)
+{
+	//一回だけ初期化をする用
+	static bool initialization = true;
+	if (initialization == true)
+	{
+		srand((unsigned)time(NULL));  //乱数系列の変更
+		initialization = false;
+	}
+	return min + (int)(rand()*(max - min + 1.0f) / (1.0f + RAND_MAX));
 }
