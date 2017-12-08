@@ -8,7 +8,6 @@
 
 //使用するネームスペース
 using namespace GameL;
-
 //コンストラクタ
 CObjStage5Boss::CObjStage5Boss(int x, int y)
 {
@@ -24,16 +23,20 @@ void CObjStage5Boss::Init()
 
 	m_hp = 100; //第5ボスのＨＰ(仮にＨＰを[100]と設定)
 
+	//初期化する(何もしていない)
+	m_attack_mode = 0;
+
 	//音楽
 	//Audio::Start(BOSS);
 	//Audio::Stop(STAGE);
 
-	//ライトアームの描画
-	CObjStage5BossArms* objstage5_boss_arm_right = new CObjStage5BossArms(m_px - 370, m_py - 166, 1);
-	Objs::InsertObj(objstage5_boss_arm_right, OBJ_STAGE5_BOSS_ARMS, 10);
-	//レフトアームの描画
-	CObjStage5BossArms* objstage5_boss_arm_left = new CObjStage5BossArms(m_px + 156, m_py - 166, 2);
-	Objs::InsertObj(objstage5_boss_arm_left, OBJ_STAGE5_BOSS_ARMS, 10);
+	//右アームオブジェクト作成
+	m_boos_arm_right = new CObjStage5BossArms(m_px - 370.0f, m_py - 166.0f, 1);
+	Objs::InsertObj(m_boos_arm_right, OBJ_STAGE5_BOSS_ARMS, 10);
+
+	//左アームオブジェクト作成
+	m_boos_arm_left = new CObjStage5BossArms(m_px + 156.0f, m_py - 166.0f, 2);
+	Objs::InsertObj(m_boos_arm_left, OBJ_STAGE5_BOSS_ARMS, 10);
 
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BODY_SIZE, STAGE5_BOSS_BODY_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS, 1);
@@ -42,7 +45,32 @@ void CObjStage5Boss::Init()
 //アクション
 void CObjStage5Boss::Action()
 {
+	switch (m_attack_mode)
+	{
+		//何もしていない状態
+	case 0:
+		//何もしていないので攻撃モードをランダムで決める
+		m_attack_mode = GetRandom(1, 4);
+		break;
+		//主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす攻撃
+	case 1:
 
+		break;
+		//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
+	case 2:
+
+		break;
+		//ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
+	case 3:
+
+		break;
+		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
+	case 4:
+
+		break;
+	default:
+		break;
+	}
 	//当たり判定更新
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }

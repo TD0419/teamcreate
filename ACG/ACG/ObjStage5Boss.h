@@ -2,7 +2,7 @@
 
 //使用するヘッダー
 #include "GameL\SceneManager.h"
-
+#include "ObjStage5BossArms.h"
 //使用するネームスペース
 using namespace GameL;
 
@@ -38,6 +38,11 @@ private:
 	float m_vy;  // 第五ボスY軸移動ベクトル
 
 	int m_hp;    // 第五ボスのＨＰ
+
+	//右アームオブジェクトの情報
+	CObjStage5BossArms* m_boos_arm_right;
+	//左アームオブジェクトの情報
+	CObjStage5BossArms* m_boos_arm_left;
 
 	//第五ボスの攻撃モード
 	//0:何もしない
