@@ -67,13 +67,7 @@ void CObjRollBlock::Init()
 //アクション
 void CObjRollBlock::Action()
 {
-	//画面外なら
-	if (WindowCheck(m_px, m_py, SIGN_SIZE, SIGN_SIZE) == false)
-	{
-		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
-		return;
-	}
-
+	
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 	
