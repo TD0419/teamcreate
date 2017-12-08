@@ -59,7 +59,7 @@ void CObjHero::Action()
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//ブロックとの当たり判定
-	objblock->AllBlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
+	objblock->AllBlockHit(&m_px, &m_py, 46.0f, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 		
 	LandingCheck();//着地フラグの更新
@@ -221,6 +221,7 @@ void CObjHero::MoveScene()
 
 	//ロープオブジェクトが有る かつ ターザンポイントに引っかかっているなら
 	//ロープの位置を中心に振り子の動きをする
+	//このプログラムは単振り子です
 	if ((objrope != nullptr && objrope->GetTarzanPointFlag() == true))
 	{
 		float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
@@ -244,23 +245,28 @@ void CObjHero::MoveScene()
 			if (m_px > rope_x)
 				pendulum_data.time *= -1;
 
-			//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
-			pendulum_data.pretend_width = pendulum_data.length / 7.0f;
+			//ロープの位置から垂直の線と
+			//主人公の位置から平行の線の
+			//交点
+			float bx = rope_x;
+			float by = m_py;
 
-			//ふり幅を一定数を超えないようにする
-			if (pendulum_data.pretend_width > 50.0f)
-				pendulum_data.pretend_width = 50.0f;
+			//ロープ位置、主人公位置、交点からsinθを求める
+			float r = sqrt(((rope_x - bx) * (rope_x - bx)) + ((rope_y - by) * (rope_y - by))) / sqrt(((rope_x - m_px) * (rope_x - m_px)) + ((rope_y - m_py) * (rope_y - m_py)));
+			r = sinf(r);
+
+			//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
+			pendulum_data.pretend_width = r/2*pendulum_data.length/2;
+
 			//値を求めたのでフラグをOFFにする
 			pendulum_data.find_value_flag = false;
 		}
-		//ロープから主人公のベクトルの角度を計算
-		float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
-
-		r = r * 3.14f / 180.0f;//ラジアン度にする
-
 		//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
 		if (!m_hit_down && !m_hit_left && !m_hit_right && !m_hit_up)
 		{
+			//ロープから主人公のベクトルの角度を計算
+			float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
+			r = r * 3.14f / 180.0f;//ラジアン度にする
 			//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
 			m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
 			m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
@@ -420,6 +426,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 			else
 			{
 				//ステージカウントを増やして次のステージにする
+				Objs::ListDeleteSceneObj();//オブジェクトの削除
 				((UserData*)Save::GetData())->stagenum += 1;
 				Scene::SetScene(new CSceneMain());
 			}
@@ -450,8 +457,8 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 //着地できてるかどうかを調べる関数
 void CObjHero::LandingCheck()
 {
-	bool c1,c2,c3,c4,c5,c6,c7;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
-	
+	bool c1, c2, c3, c4, c5, c6, c7, c8;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+
 	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
 	c3 = HitUpCheck(OBJ_LIFT_MOVE); //動くリフトとの着地チェック
@@ -459,8 +466,10 @@ void CObjHero::LandingCheck()
 	c5 = HitUpCheck(OBJ_FALLING_LIFT);//落ちるリフト
 	c6 = HitUpCheck(OBJ_FALLING_BLOCK);//落ちるブロック
 	c7 = HitUpCheck(OBJ_WIRE_MESH);//金網
-	//チェック項目のどれか一つでもtrueなら
-	if ( c1 == true || c2 ==true || c3 == true || c4 ==true || c5 == true || c6 == true||c7==true)
+	c8 = HitUpCheck(OBJ_NEEDLE_STAND);//針を出す台
+
+		//チェック項目のどれか一つでもtrueなら
+	if (c1 == true || c2 == true || c3 == true || c4 == true || c5 == true || c6 == true || c7 == true||c8 == true)
 		m_hit_down = true;//着地フラグをオンにする
 
 }

@@ -41,10 +41,10 @@ void CSceneMain::InitScene()
 		return;
 	}
 
-	////デバッグ用ステージ番号調整用
+	//デバッグ用ステージ番号調整用
 	UserData* s = (UserData*)Save::GetData();
 	s->stagenum = 5;
-	////----------------
+	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
 	MapDataLoading(m_map);//マップ情報を読み込み
@@ -76,6 +76,7 @@ void CSceneMain::InitScene()
 
 	//objrollblock = new CObjRollBlock(18, 18, 1);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	
 	//------------------------------
 
 
