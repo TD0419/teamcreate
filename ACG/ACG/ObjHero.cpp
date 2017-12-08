@@ -420,6 +420,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 			else
 			{
 				//ステージカウントを増やして次のステージにする
+				Objs::ListDeleteSceneObj();//オブジェクトの削除
 				((UserData*)Save::GetData())->stagenum += 1;
 				Scene::SetScene(new CSceneMain());
 			}
