@@ -75,6 +75,9 @@ void CObjRope::Action()
 	//主人公のオブジェクトを持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
+	//回転ブロックのスイッチのオブジェクトを持ってくる
+	CObjRollBlockSwitch* objrolls = (CObjRollBlockSwitch*)Objs::GetObj(OBJ_ROLL_BLOCK_SWITCH);
+
 	//画面外にいれば
 	if(WindowCheck(m_px,m_py,ROPE_SIZE, ROPE_SIZE) == false)
 	{
@@ -112,10 +115,22 @@ void CObjRope::Action()
 		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr)
 			m_tarzan_point_flag = true;//フラグをONにする
 
-		//　Rキーを押してないならロープをRキーで消せるようにする
-		if (Input::GetMouButtonR() == false)
+		//　ステージ５の回転ブロックスイッチが動いてる時はRキーを押してもロープが消えないようにする
+		if (objrolls->GetKeyFlag() == true)
+		{
+			m_r_key_flag = true;
+		}
+		else if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
 		{
 			m_r_key_flag = false;
+		}
+
+		//　ステージ5の回転ブロックスイッチが最後まで行った時ロープを自動的に消すようにする
+		if (objrolls->GetLastRoll() == true)
+		{
+			this->SetStatus(false);		//自身に消去命令を出す
+			Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+			return;
 		}
 
 		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
@@ -127,6 +142,14 @@ void CObjRope::Action()
 		m_px += m_vx;
 		m_py += m_vy;
 	}
+
+	//回転ブロックのスイッチと当たっている場合
+	if (hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH) != nullptr)
+	{
+		m_vx = 0.0f; //ロープ本体の移動速度を0にしてロープと回転ブロックのスイッチを離れさせないようにする
+		m_vy = 0.0f;
+	}
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
 	
