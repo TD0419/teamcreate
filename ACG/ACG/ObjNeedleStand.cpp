@@ -39,6 +39,8 @@ void CObjNeedleStand::Action()
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
 
+	//hit->CheckObjNameHit(OBJ_HERO)
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
