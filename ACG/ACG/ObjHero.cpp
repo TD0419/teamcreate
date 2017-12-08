@@ -59,7 +59,7 @@ void CObjHero::Action()
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//ブロックとの当たり判定
-	objblock->AllBlockHit(&m_px, &m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
+	objblock->AllBlockHit(&m_px, &m_py, 46.0f, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 		
 	LandingCheck();//着地フラグの更新

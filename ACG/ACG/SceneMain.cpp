@@ -41,10 +41,10 @@ void CSceneMain::InitScene()
 		return;
 	}
 
-	////デバッグ用ステージ番号調整用
-	/*UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 1;*/
-	////----------------
+	//デバッグ用ステージ番号調整用
+	UserData* s = (UserData*)Save::GetData();
+	s->stagenum = 2;
+	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
 	MapDataLoading(m_map);//マップ情報を読み込み
