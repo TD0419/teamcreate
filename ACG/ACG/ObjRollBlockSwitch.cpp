@@ -25,7 +25,10 @@ CObjRollBlockSwitch::CObjRollBlockSwitch(float x, float y, CObjRollBlock* p)
 void CObjRollBlockSwitch::Init()
 {
 	m_pull_flag = false;
+	m_lastroll = false;
+	m_key_flag = false;
 	m_r = 0.0f;
+	m_once_flag = false;
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, ROLL_BLOCK_SWITCH_SIZE_WIDTH, ROLL_BLOCK_SWITCH_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_ROLL_BLOCK_SWITCH, 1);
@@ -36,7 +39,7 @@ void CObjRollBlockSwitch::Action()
 {
 
 	//画面外なら
-	if (WindowCheck(m_px, m_py, ROLL_BLOCK_SWITCH_SIZE_WIDTH, ROLL_BLOCK_SWITCH_SIZE_WIDTH) == false)
+	if (WindowCheck(m_px, m_py, ROLL_BLOCK_SWITCH_SIZE_WIDTH, ROLL_BLOCK_SWITCH_SIZE_HEIGHT) == false)
 	{
 		CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
@@ -61,13 +64,28 @@ void CObjRollBlockSwitch::Action()
 		//左移動していれば
 		if (Input::GetVKey('A') == true)
 		{
-			//90度を超えていたなら
-			if (m_r >= 90.0f)
+			m_once_flag = true; //一回だけ
+		}
+
+		if(m_once_flag == true)
+		{
+			//92度を超えていたなら
+			if (m_r >= 92.0f)
 			{
-				m_r = 90.0f;//90を超えないようにする
+				//引っ張りをオフにする
+				m_pull_flag = false;
+
+				m_lastroll = true; 
+				m_r = 92.0f;//90を超えないようにする
 			}
-			else
+			else if (m_r < 92.0f) //92度以下ならスイッチを回転させる
+			{
 				m_r += 2.0f;//角度の加算
+
+				//引っ張りのフラグをオンにする
+				m_pull_flag = true;
+				m_key_flag = true;
+			}
 
 			//sin値　cos値を求める
 			float sin = sinf(m_r * 3.14f / 180.0f);
@@ -80,12 +98,10 @@ void CObjRollBlockSwitch::Action()
 			//ロープオブジェクトを持ってくる
 			CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
 			
-			//ロープの位置をこのオブジェクトの位置に合わせる
-			objrope->SetPosX(m_px);
-			objrope->SetPosY(m_py);
+			//ロープの位置をこのオブジェクトの位置に合わせる　+2.0fすることでロープとスイッチが常にあたるようにする
+			objrope->SetPosX(m_px+2.0f);
+			objrope->SetPosY(m_py+2.0f);
 
-			//引っ張りのフラグをオンにする
-			m_pull_flag=true;
 		}
 	}
 

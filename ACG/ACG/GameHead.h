@@ -136,7 +136,7 @@ enum MAP_BER
 	MAP_TARZAN_POINT			,		//ロープでぶら下がれるギミック
 	MAP_NEEDLE					,		//針
 	MAP_NEEDLE_STAND			,		//針の土台
-	MAP_DIFFUSION_CANNON		,	//拡散弾発射ギミック
+	MAP_DIFFUSION_CANNON		,		//拡散弾発射ギミック
 	MAP_FALLING_LIFT			,		//乗ると落ちるリフト
 	MAP_LIFT_TYPE_AUTO_UP		,		//自動上移動リフト(自動で上方向に動く)
 	MAP_WIRE_MESH_FLOOR			,		//金網床
@@ -190,6 +190,8 @@ enum GRAPHIC_ID
 	GRA_STAGE5_BOSS_BODY,	//ステージ5のボス胴体
 	GRA_STAGE5_BOSS_EYE,	//ステージ5のボス眼球
 	GRA_STAGE5_BOSS_ARMS_ALL,      	//ステージ5のボス腕(左右腕)
+	GRA_FALLING_LIFT,	//落ちるリフト
+	GRA_HAND_LIFT,//手動で引っ張るリフト
 };
 
 //音楽(BGM)

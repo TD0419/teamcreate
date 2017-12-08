@@ -16,6 +16,10 @@ public:
 	void Action();				// アクション
 	void Draw();				// ドロー
 
+	//アクセサ
+	float GetPosX(){return m_px; }
+	float GetPosY() { return m_py; }
+
 private:
 	float m_px;		//位置X
 	float m_py;		//位置Y

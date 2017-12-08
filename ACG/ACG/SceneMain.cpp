@@ -76,6 +76,7 @@ void CSceneMain::InitScene()
 
 	//objrollblock = new CObjRollBlock(18, 18, 1);
 	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
+	
 	//------------------------------
 
 
@@ -242,7 +243,13 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
 		//リフト画像読み込み
 		Draw::LoadImageW(L"Image\\Lift\\Stage5.png", GRA_LIFT, TEX_SIZE_512);
+		//落ちるリフト
+		Draw::LoadImageW(L"Image\\Lift\\Falling_Lift.png", GRA_FALLING_LIFT, TEX_SIZE_256);
+		//横移動リフト
+		Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
 		break;
+
+		
 	}
 	////画像が用意されていない場合
 	//default:

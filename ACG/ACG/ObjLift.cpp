@@ -162,8 +162,16 @@ void CObjLift::Init()
 		}
 		case 5:
 		{
-			//当たり判定
-			Hits::SetHitBox(this, m_px, m_py, STAGE5_LIFT_SIZE_WIDTH, STAGE5_LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+			if (m_move_mode == 0)//手動
+			{
+				//当たり判定
+				Hits::SetHitBox(this, m_px, m_py, LIFT_SIZE_WIDTH, LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+			}
+			else//自動
+			{
+				//当たり判定
+				Hits::SetHitBox(this, m_px, m_py, STAGE5_LIFT_SIZE_WIDTH, STAGE5_LIFT_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_LIFT, 1);
+			}
 			break;
 		}
 	}
@@ -191,9 +199,6 @@ void CObjLift::Action()
 	m_px += m_vx;
 	m_py += m_vy;
 
-	//マップオブジェクトを持ってくる
-	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
 }
@@ -209,6 +214,10 @@ void CObjLift::Draw()
 
 	RECT_F src, dst;
 
+	//切り取り
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+
 	//描画の位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
@@ -219,34 +228,51 @@ void CObjLift::Draw()
 		case 2:
 		{
 			//切り取り
- 			src.m_top = 0.0f;
-			src.m_left = 0.0f;
 			src.m_right = src.m_left+ LIFT_SIZE_WIDTH;
 			src.m_bottom = src.m_top+ LIFT_SIZE_HEIGHT;
 
 			//描画
 			dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
 			dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
+
+			//リフトの描画
+			Draw::Draw(GRA_LIFT, &src, &dst, color, 0.0f);
 			break;
 		}
 		case 5:
 		{
-			//切り取り
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 320.0f;
-			src.m_bottom = 16.0f;
+			if(m_move_mode==0)//手動なら
+			{
+				//切り取り
+				src.m_right = src.m_left + LIFT_SIZE_WIDTH;
+				src.m_bottom = src.m_top + LIFT_SIZE_HEIGHT;
 
-			//描画
-			dst.m_right = dst.m_left + STAGE5_LIFT_SIZE_WIDTH;
-			dst.m_bottom = dst.m_top + STAGE5_LIFT_SIZE_HEIGHT;
+				//描画
+				dst.m_right = dst.m_left + LIFT_SIZE_WIDTH;
+				dst.m_bottom = dst.m_top + LIFT_SIZE_HEIGHT;
 
+				//リフトの描画
+				Draw::Draw(GRA_HAND_LIFT, &src, &dst, color, 0.0f);
+
+			}
+			else
+			{
+				//切り取り
+				src.m_right = 320.0f;
+				src.m_bottom = 16.0f;
+
+				//描画
+				dst.m_right = dst.m_left + STAGE5_LIFT_SIZE_WIDTH;
+				dst.m_bottom = dst.m_top + STAGE5_LIFT_SIZE_HEIGHT;
+
+				//リフトの描画
+				Draw::Draw(GRA_LIFT, &src, &dst, color, 0.0f);
+			}
 			break;
 		}
 	}
 	
-	//リフトの描画
-	Draw::Draw(GRA_LIFT, &src, &dst, color, 0.0f);
+	
 }
 
 //主人公を乗せる処理をする
@@ -366,6 +392,20 @@ void CObjLift::HeroRide()
 					//左側があたっていればで
 					if (175.0f < r && r < 180.0f && 5.0f <= r && r <= 175.0f|| 5.0f <= r && r <= 175.0f&&0.0f <= r && r < 5.0f ||  5.0f <= r && r <= 175.0f)
 					{
+						if (m_move_mode == 0)//手動なら
+						{
+							//リフトにのめりこまないようにする処理
+							if (objhero->GetPosture() == 0.0f)//右向き
+							{
+								objhero->SetPosX(m_px - 48.5f);//主人公をリフトの左に行くようにする
+							}
+							else//左向き
+							{
+								//めり込み防止のため左向きのときは-64.0fにする
+								objhero->SetPosX(m_px - 64.0f);//主人公をリフトの左に行くようにする
+							}
+						}
+						break;
 					}
 				}
 				break;
