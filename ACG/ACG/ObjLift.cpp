@@ -266,54 +266,41 @@ void CObjLift::HeroRide()
 		if (hit_data[i] != nullptr)
 		{
 			float r = hit_data[i]->r;//あたっている角度を持ってくる
-
-			//上側があたっていればで
-			if (30.0f <= r && r <= 155.0f)
+			switch (((UserData*)Save::GetData())->stagenum)
 			{
-				objhero->SetHitDown(true);//リフトの上に主人公が乗っていたらm_hit_downにtrueを返す
-
-				//リフトに乗せる処理
-				objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
-				objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
-				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + 2.5f + m_vy);//主人公のポジションをリフトの上にする
-			}
-			//右側があたっていればで
-			if (0.0f <= r && r < 30.0f)
-			{
-				switch (((UserData*)Save::GetData())->stagenum)
+			case 1:
+			case 2:
+				//上側があたっていればで
+				if (30.0f <= r && r <= 155.0f)
 				{
-					case 1:
-					case 2:
+					objhero->SetHitDown(true);//リフトの上に主人公が乗っていたらm_hit_downにtrueを返す
+
+					//リフトに乗せる処理
+					objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
+					objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
+					objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + 2.5f + m_vy);//主人公のポジションをリフトの上にする
+				}
+				//右側があたっていればで
+				if (0.0f <= r && r < 30.0f)
+				{
+
+					if (objhero->GetPosture() == 1.0f)//左向き
 					{
-						if (objhero->GetPosture() == 1.0f)//左向き
-						{
-							//リフトにのめりこまないようにする処理
-							objhero->SetPosX(m_px + LIFT_SIZE_WIDTH - 14.5f);//主人公をリフトの右に行くようにする
-							objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-							break;
-						}
-						else//右向き
-						{
-							//当たり判定のずれから振り向いたらめり込んでしまうので、-14.5fを削除
-							objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
-							objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);
-							break;
-						}
+						//リフトにのめりこまないようにする処理
+						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH - 14.5f);//主人公をリフトの右に行くようにする
+						objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 					}
-					case 5:
+					else//右向き
 					{
-					
-						break;
+						//当たり判定のずれから振り向いたらめり込んでしまうので、-14.5fを削除
+						objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+						objhero->SetPosX(m_px + LIFT_SIZE_WIDTH);
 					}
 				}
-			}
-			//左側があたっていればで
-			if (155.0f < r && r < 180.0f)
-			{
-				switch (((UserData*)Save::GetData())->stagenum)
+				//左側があたっていればで
+				if (155.0f < r && r < 180.0f)
 				{
-					case 1:
-					case 2:
+
 					//リフトにのめりこまないようにする処理
 					if (objhero->GetPosture() == 0.0f)//右向き
 					{
@@ -324,11 +311,64 @@ void CObjLift::HeroRide()
 						//めり込み防止のため左向きのときは-64.0fにする
 						objhero->SetPosX(m_px - 64.0f);//主人公をリフトの左に行くようにする
 					}
-					case 5:
+				}
+				break;
+			case 5:
+				//上側があたっていればで
+				if (5.0f <= r && r <= 175.0f)
+				{
+					objhero->SetHitDown(true);//リフトの上に主人公が乗っていたらm_hit_downにtrueを返す
+
+					//リフトに乗せる処理
+					objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
+					objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
+					objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + 1.4f + m_vy);//主人公のポジションをリフトの上にする
+				}
+				//ロープオブジェクトを持ってくる
+				CObjRopeSwitch* objrope_switch;
+				objrope_switch = (CObjRopeSwitch*)Objs::GetObj(OBJ_ROPE_SWITCH);
+				//ロープスイッチ情報があるかつ
+				//ロープとロープスイッチがあたっているとき
+				if (objrope_switch != nullptr && objrope_switch->GetRopeFlag() == true)
+				{
+					//右側があたっていればで
+					if (0.0f <= r && r < 5.0f)
 					{
-						break;
+
+						if (objhero->GetPosture() == 1.0f)//左向き
+						{
+							//リフトにのめりこまないようにする処理
+							objhero->SetPosX(m_px + 305.0f);//主人公をリフトの右に行くようにする
+							objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+						}
+						else//右向き
+						{
+							//当たり判定のずれから振り向いたらめり込んでしまうので、-14.5fを削除
+							objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+							objhero->SetPosX(m_px + STAGE5_LIFT_SIZE_WIDTH);
+						}
+					}
+					//左側があたっていればで
+					if (175.0f < r && r < 180.0f)
+					{
+
+						//リフトにのめりこまないようにする処理
+						if (objhero->GetPosture() == 0.0f)//右向き
+						{
+							objhero->SetPosX(m_px - 48.5f);//主人公をリフトの左に行くようにする
+						}
+						else//左向き
+						{
+							//めり込み防止のため左向きのときは-64.0fにする
+							objhero->SetPosX(m_px - 64.0f);//主人公をリフトの左に行くようにする
+						}
+					}
+					//左側があたっていればで
+					if (175.0f < r && r < 180.0f && 5.0f <= r && r <= 175.0f|| 5.0f <= r && r <= 175.0f&&0.0f <= r && r < 5.0f ||  5.0f <= r && r <= 175.0f)
+					{
 					}
 				}
+				break;
 			}
 		}
 	}

@@ -65,57 +65,45 @@ void CObjRock::Action()
 		}
 	}
 
-	HIT_DATA** hit_data;	//衝突の情報を入れる構造体
-	hit_data = hit->SearchObjNameHit(OBJ_HERO);//衝突の情報をhit_dataに入れる
-
-	//主人公オブジェクトを持ってくる
+	//主人公オブジェクト情報を持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	float hero_x = objhero->GetPosX();
+	float hero_y = objhero->GetPosY();
+	float hero_vx = objhero->GetVecX();
+	float hero_vy = objhero->GetVecY();
 
-	for (int i = 0; i < hit->GetCount(); i++)
+	//HitBoxの幅、高さ
+	float hit_w, hit_h;
+
+	//HitBoxの幅、高さ設定
+	hit_w = ROCK_SIZE_WIDTH;
+	hit_h = ROCK_SIZE_HEIGHT;
+	//主人公との当たり判定
+	//衝突したら主人公の位置を更新する
+	m_rock_determine = HitTestOfAB(m_px - 7.0f, m_py - 8.0f, hit_w - 8.0f, hit_h + 12.0f, &hero_x, &hero_y, 42, 120, &hero_vx, &hero_vy);
+
+	switch (m_rock_determine)
 	{
-		//データがあれば
-		if (hit_data[i] != nullptr)
-		{
-			float r = hit_data[i]->r;//あたっている角度をもってくる
-
-			//岩の右側が衝突している場合
-			if (0 < r && r < 65|| 315 < r && r < 360)
-			{
-				//岩にめりこまないようにする処理
-				if (objhero->GetPosture() == 0.0f)//右向き
-				{
-					objhero->SetPosX(m_px + ROCK_SIZE_WIDTH);//主人公の位置を岩の右側までずらす
-				}
-				else//左向き
-				{
-					objhero->SetPosX(m_px + 155.0f);//主人公の位置を岩の右側までずらす
-				}
-				
-			}
-			
-			//岩の左側が衝突している場合
-			else if (115 < r && r < 225 )
-			{
-				//岩にめりこまないようにする処理
-				if (objhero->GetPosture() == 0.0f)//右向き
-				{
-					objhero->SetPosX(m_px - HERO_SIZE_WIDTH+15.0f);//主人公を岩の左に行くようにする
-				}
-				else//左向き
-				{
-					//めり込み防止のため
-					objhero->SetPosX(m_px - HERO_SIZE_WIDTH);//主人公を岩の左に行くようにする
-				}
-				
-			}
-
-			//岩の下側が衝突している場合
-			else if (225 < r && r < 315)
-			{
-				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
-				objhero->SetPosY(m_py + ROCK_SIZE_HEIGHT);//主人公の位置を岩の下側までずらす
-			}
-		}
+	case 1://下が当たっている
+		   //主人公の位置を更新
+		objhero->SetPosY(hero_y);
+		objhero->SetVecY(hero_vy);
+		break;
+	case 2://上が当たっている
+		   //主人公の位置を更新
+		objhero->SetPosY(hero_y);
+		objhero->SetVecY(hero_vy);
+		break;
+	case 3://右が当たっている
+		   //主人公の位置を更新
+		objhero->SetPosX(hero_x);
+		objhero->SetVecX(hero_vx);
+		break;
+	case 4://左が当たっている
+		   //主人公の位置を更新
+		objhero->SetPosX(hero_x);
+		objhero->SetVecX(hero_vx);
+		break;
 	}
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py- ROCK_SIZE_WIDTH);

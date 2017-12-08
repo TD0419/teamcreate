@@ -43,7 +43,7 @@ void CSceneMain::InitScene()
 
 	//デバッグ用ステージ番号調整用
 	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 2;
+	s->stagenum = 5;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
