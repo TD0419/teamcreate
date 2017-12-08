@@ -221,6 +221,7 @@ void CObjHero::MoveScene()
 
 	//ロープオブジェクトが有る かつ ターザンポイントに引っかかっているなら
 	//ロープの位置を中心に振り子の動きをする
+	//このプログラムは単振り子です
 	if ((objrope != nullptr && objrope->GetTarzanPointFlag() == true))
 	{
 		float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
@@ -244,23 +245,28 @@ void CObjHero::MoveScene()
 			if (m_px > rope_x)
 				pendulum_data.time *= -1;
 
-			//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
-			pendulum_data.pretend_width = pendulum_data.length / 7.0f;
+			//ロープの位置から垂直の線と
+			//主人公の位置から平行の線の
+			//交点
+			float bx = rope_x;
+			float by = m_py;
 
-			//ふり幅を一定数を超えないようにする
-			if (pendulum_data.pretend_width > 50.0f)
-				pendulum_data.pretend_width = 50.0f;
+			//ロープ位置、主人公位置、交点からsinθを求める
+			float r = sqrt(((rope_x - bx) * (rope_x - bx)) + ((rope_y - by) * (rope_y - by))) / sqrt(((rope_x - m_px) * (rope_x - m_px)) + ((rope_y - m_py) * (rope_y - m_py)));
+			r = sinf(r);
+
+			//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
+			pendulum_data.pretend_width = r/2*pendulum_data.length/2;
+
 			//値を求めたのでフラグをOFFにする
 			pendulum_data.find_value_flag = false;
 		}
-		//ロープから主人公のベクトルの角度を計算
-		float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
-
-		r = r * 3.14f / 180.0f;//ラジアン度にする
-
 		//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
 		if (!m_hit_down && !m_hit_left && !m_hit_right && !m_hit_up)
 		{
+			//ロープから主人公のベクトルの角度を計算
+			float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
+			r = r * 3.14f / 180.0f;//ラジアン度にする
 			//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
 			m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
 			m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
