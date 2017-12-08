@@ -457,8 +457,8 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 //着地できてるかどうかを調べる関数
 void CObjHero::LandingCheck()
 {
-	bool c1,c2,c3,c4,c5,c6,c7;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
-	
+	bool c1, c2, c3, c4, c5, c6, c7, c8;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
+
 	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
 	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
 	c3 = HitUpCheck(OBJ_LIFT_MOVE); //動くリフトとの着地チェック
@@ -466,8 +466,10 @@ void CObjHero::LandingCheck()
 	c5 = HitUpCheck(OBJ_FALLING_LIFT);//落ちるリフト
 	c6 = HitUpCheck(OBJ_FALLING_BLOCK);//落ちるブロック
 	c7 = HitUpCheck(OBJ_WIRE_MESH);//金網
-	//チェック項目のどれか一つでもtrueなら
-	if ( c1 == true || c2 ==true || c3 == true || c4 ==true || c5 == true || c6 == true||c7==true)
+	c8 = HitUpCheck(OBJ_NEEDLE_STAND);//針を出す台
+
+		//チェック項目のどれか一つでもtrueなら
+	if (c1 == true || c2 == true || c3 == true || c4 == true || c5 == true || c6 == true || c7 == true||c8 == true)
 		m_hit_down = true;//着地フラグをオンにする
 
 }
