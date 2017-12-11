@@ -6,6 +6,8 @@
 #include "Function.h"
 #include "ObjStage5Boss.h"
 
+#include <time.h>
+
 //使用するネームスペース
 using namespace GameL;
 //コンストラクタ
@@ -30,12 +32,12 @@ void CObjStage5Boss::Init()
 	//Audio::Start(BOSS);
 	//Audio::Stop(STAGE);
 
-	//右アームオブジェクト作成
+	//右腕オブジェクト作成
 	m_boos_arm_right = new CObjStage5BossArms(m_px - 370.0f, m_py - 166.0f, 1);
 	Objs::InsertObj(m_boos_arm_right, OBJ_STAGE5_BOSS_ARMS, 10);
 
-	//左アームオブジェクト作成
-	m_boos_arm_left = new CObjStage5BossArms(m_px + 156.0f, m_py - 166.0f, 2);
+	//左腕オブジェクト作成
+	m_boos_arm_left = new CObjStage5BossArms(m_px + 126.0f, m_py - 166.0f, 2);
 	Objs::InsertObj(m_boos_arm_left, OBJ_STAGE5_BOSS_ARMS, 10);
 
 	//当たり判定用HitBoxを作成
@@ -45,6 +47,9 @@ void CObjStage5Boss::Init()
 //アクション
 void CObjStage5Boss::Action()
 {
+	//HitBox更新用ポインター取得
+	CHitBox* hit = Hits::GetHitBox(this);
+
 	switch (m_attack_mode)
 	{
 		//何もしていない状態
@@ -73,6 +78,23 @@ void CObjStage5Boss::Action()
 	}
 	//当たり判定更新
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+
+	//主人公の弾丸とぶつかったらＨＰを-1にする
+	//弾丸とあたったらＨＰを1減らす
+	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
+	{
+		m_hp -= 1;
+	}
+
+	//(仮)ＨＰが0になったらクリア画面に移動
+	//クリア画面移動条件が確定したら、変更してください。
+	if (m_hp == 0)
+	{
+		//クリア画面に移動
+		Scene::SetScene(new CSceneGameClear());
+		return;
+	}
+
 }
 
 //ドロー
@@ -149,4 +171,19 @@ void CObjStage5Boss::Draw()
 	Draw::Draw(GRA_STAGE5_BOSS_EYE, &src, &dst, color, 0.0f);
 	
 
+}
+//ランダムで値を決める関数
+//引数1 int min	:最小値
+//引数2 int max	:最大値
+//戻り値 int	:最小値～最大値の間の数値をランダムで渡す(最大値、最小値を含む)
+int CObjStage5Boss::GetRandom(int min, int max)
+{
+	//一回だけ初期化をする用
+	static bool initialization = true;
+	if (initialization == true)
+	{
+		srand((unsigned)time(NULL));  //乱数系列の変更
+		initialization = false;
+	}
+	return min + (int)(rand()*(max - min + 1.0f) / (1.0f + RAND_MAX));
 }

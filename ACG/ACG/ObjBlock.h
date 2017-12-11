@@ -43,6 +43,6 @@ private:
 	float m_scroll;		//左右スクリーン用
 	float m_px;			//ブロック位置X
 	float m_py;			//ブロック位置Y
-
+	int m_block_determine;  //ブロックと主人公の判定用
 	
 };

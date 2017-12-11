@@ -178,6 +178,7 @@ enum GRAPHIC_ID
 	GRA_ROLL_BLOCK2,	//回転ブロック（パターン2）
 	GRA_TITLE,			//タイトル
 	GRA_GAME_OVER,		//ゲームオーバー
+	GRA_GAME_CLEAR,		//ゲームクリア
 	GRA_COCONUT,		//ココナッツ
 	GRA_NEEDLE,         //針
 	GRA_NEEDLE_STAND,   //針の土台
@@ -349,5 +350,6 @@ enum MUSIC
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneTitle
+//#define SET_GAME_START CSceneTitle
+#define SET_GAME_START CSceneGameOver
 //-----------------------------------------------
