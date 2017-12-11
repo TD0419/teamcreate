@@ -8,12 +8,6 @@
     <Filter Include="ソース ファイル\Main">
       <UniqueIdentifier>{b34ebc1d-67b9-4b76-aba6-c4a9108cffe0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\GameOver">
-      <UniqueIdentifier>{fe99c31b-e2da-4cb5-83ac-c221d1ada5e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\GameClear">
-      <UniqueIdentifier>{dd15b67a-49f8-4ed3-ae5a-86151bb6d95b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\Block">
       <UniqueIdentifier>{f347293b-fdcc-4f18-bd9e-0ad1eba741be}</UniqueIdentifier>
     </Filter>
@@ -101,9 +95,6 @@
     <Filter Include="ソース ファイル\Main\Needle">
       <UniqueIdentifier>{230ba973-e57e-4643-8637-354442c26e1e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Title">
-      <UniqueIdentifier>{82100ff4-7f6b-4131-a72c-29415e5309b2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -132,6 +123,18 @@
     </Filter>
     <Filter Include="ソース ファイル\Main\WireMesh">
       <UniqueIdentifier>{5634ba29-12eb-415d-996a-69b59901e12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{6350f608-960a-4626-95c4-dc19e261fc56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\GameClear">
+      <UniqueIdentifier>{dd15b67a-49f8-4ed3-ae5a-86151bb6d95b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\Title">
+      <UniqueIdentifier>{82100ff4-7f6b-4131-a72c-29415e5309b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\GameOver">
+      <UniqueIdentifier>{fe99c31b-e2da-4cb5-83ac-c221d1ada5e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -178,10 +181,10 @@
       <Filter>ソース ファイル\Main</Filter>
     </ClInclude>
     <ClInclude Include="ObjGameOver.h">
-      <Filter>ソース ファイル\GameOver</Filter>
+      <Filter>ソース ファイル\Scene\GameOver</Filter>
     </ClInclude>
     <ClInclude Include="SceneGameOver.h">
-      <Filter>ソース ファイル\GameOver</Filter>
+      <Filter>ソース ファイル\Scene\GameOver</Filter>
     </ClInclude>
     <ClInclude Include="ObjButton.h">
       <Filter>ソース ファイル\Main\Button</Filter>
@@ -220,10 +223,10 @@
       <Filter>ソース ファイル\Main\Sign</Filter>
     </ClInclude>
     <ClInclude Include="ObjGameClear.h">
-      <Filter>ソース ファイル\GameClear</Filter>
+      <Filter>ソース ファイル\Scene\GameClear</Filter>
     </ClInclude>
     <ClInclude Include="SceneGameClear.h">
-      <Filter>ソース ファイル\GameClear</Filter>
+      <Filter>ソース ファイル\Scene\GameClear</Filter>
     </ClInclude>
     <ClInclude Include="ObjWater.h">
       <Filter>ソース ファイル\Main\Water</Filter>
@@ -304,10 +307,10 @@
       <Filter>ソース ファイル\FallingLift</Filter>
     </ClInclude>
     <ClInclude Include="ObjTitle.h">
-      <Filter>ソース ファイル\Title</Filter>
+      <Filter>ソース ファイル\Scene\Title</Filter>
     </ClInclude>
     <ClInclude Include="SceneTitle.h">
-      <Filter>ソース ファイル\Title</Filter>
+      <Filter>ソース ファイル\Scene\Title</Filter>
     </ClInclude>
     <ClInclude Include="ObjFallingBlock.h">
       <Filter>ソース ファイル\Main\FallingBlock</Filter>
@@ -360,10 +363,10 @@
       <Filter>ソース ファイル\Main</Filter>
     </ClCompile>
     <ClCompile Include="ObjGameOver.cpp">
-      <Filter>ソース ファイル\GameOver</Filter>
+      <Filter>ソース ファイル\Scene\GameOver</Filter>
     </ClCompile>
     <ClCompile Include="SceneGameOver.cpp">
-      <Filter>ソース ファイル\GameOver</Filter>
+      <Filter>ソース ファイル\Scene\GameOver</Filter>
     </ClCompile>
     <ClCompile Include="ObjBlock.cpp">
       <Filter>ソース ファイル\Main\Block</Filter>
@@ -402,10 +405,10 @@
       <Filter>ソース ファイル\Main\Sign</Filter>
     </ClCompile>
     <ClCompile Include="ObjGameClear.cpp">
-      <Filter>ソース ファイル\GameClear</Filter>
+      <Filter>ソース ファイル\Scene\GameClear</Filter>
     </ClCompile>
     <ClCompile Include="SceneGameClear.cpp">
-      <Filter>ソース ファイル\GameClear</Filter>
+      <Filter>ソース ファイル\Scene\GameClear</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemyBullet.cpp">
       <Filter>ソース ファイル\Main\EnemyBullet</Filter>
@@ -489,10 +492,10 @@
       <Filter>ソース ファイル\FallingLift</Filter>
     </ClCompile>
     <ClCompile Include="ObjTitle.cpp">
-      <Filter>ソース ファイル\Title</Filter>
+      <Filter>ソース ファイル\Scene\Title</Filter>
     </ClCompile>
     <ClCompile Include="SceneTitle.cpp">
-      <Filter>ソース ファイル\Title</Filter>
+      <Filter>ソース ファイル\Scene\Title</Filter>
     </ClCompile>
     <ClCompile Include="ObjFallingBlock.cpp">
       <Filter>ソース ファイル\Main\FallingBlock</Filter>

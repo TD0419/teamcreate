@@ -24,6 +24,7 @@ CObjBlock::CObjBlock(int x, int y)
 //イニシャライズ
 void CObjBlock::Init()
 {	
+	m_block_determine=0;
 }
 
 //アクション
@@ -44,6 +45,7 @@ void CObjBlock::Action()
 		this->SetStatus(false);		//自身を削除
 	}
 
+	
 }
 
 //ドロー

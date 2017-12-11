@@ -38,13 +38,16 @@ void CObjStage5BossArms::Init()
 	//typeの値が1のときライトアームの当たり判定表示
 	if (m_arms_type == 1)
 	{
-		//当たり判定用HitBoxを作成
+		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
+		//																横サイズ補正値						   縦サイズ補正値
 		Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 1);
+		
 	}
 	//typeの値が1のときレフトアームの当たり判定表示
 	else if (m_arms_type == 2)
 	{
-		//当たり判定用HitBoxを作成
+		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
+		//																横サイズ補正値						   縦サイズ補正値
 		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
 	}
 
