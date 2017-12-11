@@ -30,6 +30,7 @@ public:
 	float GetVecX() { return m_vx; }//ベクトルXを渡す
 	float GetVecY() { return m_vy; }//ベクトルYを渡す
 
+	void SetPosture(float posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
 	//-------------------------------------------------
 
 private:
@@ -44,6 +45,9 @@ private:
 	int m_arm_hp;    // 第五ボスのアームのＨＰ
 
 	bool m_posture;//姿　true=開いている　false=閉じている
-
-	int m_ani_flame;//アニメーションflame数
+	
+	bool m_input_posture;//入力された姿　true=開いている	false=閉じている
+	int m_ani_frame;//描画フレーム
+	int m_ani_time;	//アニメーションフレーム動作感覚
+	int m_ani_max_time;//アニメーションフレーム動作感覚最大値
 };

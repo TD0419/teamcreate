@@ -27,6 +27,14 @@ void CObjStage5BossArms::Init()
 
 	m_arm_hp = 10; //第5ボスアームのＨＰ(仮にＨＰを[10]と設定、左右のアーム共通)
 
+	m_input_posture = false;//入力された姿の初期化　最初は閉じている
+
+	m_posture = false;//現在の姿　最初は閉じている
+
+	m_ani_frame = 0;	//描画アニメーション
+	m_ani_max_time = 10;//アニメーションフレーム動作間隔最大値
+	m_ani_time = 0;		//アニメーションフレーム動作間隔
+
 	//typeの値が1のときライトアームの当たり判定表示
 	if (m_arms_type == 1)
 	{
@@ -75,7 +83,40 @@ void CObjStage5BossArms::Action()
 		return;
 	}
 	
-	
+	//入力姿と現在の姿が違う
+	if (m_posture != m_input_posture)
+	{
+		//アニメーション動作間隔を進める
+		m_ani_time++;
+		//アニメーション動作間隔最大値以上なら
+		if (m_ani_time >= m_ani_max_time)
+		{
+			//アニメーション動作間隔を０にする
+			m_ani_time = 0;
+			//入力姿が開いている
+			if (m_input_posture == true)
+			{
+				//描画フレームを戻す
+				m_ani_frame++;
+			}
+			//入力姿が閉じている
+			else
+			{
+				//描画フレームを進める
+				m_ani_frame--;
+			}
+		}
+	}
+	//描画フレームが０なら閉じている
+	if (m_ani_frame == 0)
+	{
+		m_posture = false;
+	}
+	//描画フレームは２なら開いている
+	if(m_ani_frame == 2)
+	{
+		m_posture = true;
+	}
 }
 
 //ドロー
