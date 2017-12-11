@@ -88,6 +88,9 @@ void CSceneMain::InitScene()
 	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
 	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
 	
+	//ステージ5ボス作成(爪の開閉アニメーション確認用)
+	/*CObjStage5Boss* objstage5_boss = new CObjStage5Boss(6, 12);
+	Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);*/
 	//デバッグ--------------------------------------------------
 }
 
