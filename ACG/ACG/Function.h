@@ -17,19 +17,6 @@ void WindowOutDelete(CObj* obj_p);//‰æ–ÊŠO‚É‚ ‚éƒIƒuƒWƒFƒNƒg‚ÌíœŠÖ”(‰æ–Ê“à‚É“
 void WindowOutDelete(CObj* obj_p, int map_x, int map_y);//‰æ–ÊŠO‚É‚ ‚éƒIƒuƒWƒFƒNƒg‚ÌíœŠÖ”(‰æ–Ê“à‚É“ü‚Á‚½‚Æ‚«‚ÉÄ“x•œŠˆ)
 
 //ƒuƒƒbƒNA‚ÆƒuƒƒbƒNB‚Ì“–‚½‚è”»’è
-//ƒuƒƒbƒNAˆÚ“®‚µ‚È‚¢ƒuƒƒbƒN
-//ƒuƒƒbƒNB‚ ‚½‚Á‚½ê‡ˆÚ“®‚·‚éƒuƒƒbƒN
-//ˆø”1  float  ax		:ƒuƒƒbƒNA‚ÌXˆÊ’u
-//ˆø”2  float  ay		:ƒuƒƒbƒNA‚ÌYˆÊ’u
-//ˆø”3  float  aw		:ƒuƒƒbƒNA‚Ì•
-//ˆø”4  float  ah		:ƒuƒƒbƒNA‚Ì‚‚³
-//ˆø”5  float* bx		:ƒuƒƒbƒNB‚ÌXˆÊ’u ƒ|ƒCƒ“ƒ^
-//ˆø”6  float* by		:ƒuƒƒbƒNB‚ÌYˆÊ’u ƒ|ƒCƒ“ƒ^
-//ˆø”7  float  bw		:ƒuƒƒbƒNB‚Ì•
-//ˆø”8  float  bh		:ƒuƒƒbƒNB‚Ì‚‚³
-//ˆø”9  float* bvx		:ƒuƒƒbƒNB‚ÌXˆÚ“®—Ê ƒ|ƒCƒ“ƒ^
-//ˆø”10 float* bvy		:ƒuƒƒbƒNB‚ÌYˆÚ“®—Ê ƒ|ƒCƒ“ƒ^
-//–ß‚è’l	int			:“–‚½‚Á‚½‚©‚Ç‚¤‚©||‚Ç‚±‚É“–‚½‚Á‚½‚©@0=“–‚½‚è–³‚µF1=B‚©‚çŒ©‚ÄãF2=B‚©‚çŒ©‚Ä‰ºF3=B‚©‚çŒ©‚Ä‰E:4=B‚©‚çŒ©‚Ä¶
 int HitTestOfAB(float ax, float ay, float aw, float ah,
 	float* bx, float* by, float bw, float bh,
 	float* bvx, float* bvy);

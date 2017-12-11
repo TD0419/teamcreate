@@ -101,9 +101,8 @@ void CObjRope::Action()
 		}
 	}
 
-	//ロープスイッチ　または　回転床用のスイッチ　または　ターザンポイント　と衝突したとき、ロープが引っかかるようにする
+	//ロープスイッチ　または　ターザンポイント　と衝突したとき、ロープが引っかかるようにする
 	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr||
-		hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH)!=nullptr||
 		hit->CheckObjNameHit(OBJ_TARZAN_POINT)!=nullptr)
 	{
 		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
@@ -115,22 +114,9 @@ void CObjRope::Action()
 		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr)
 			m_tarzan_point_flag = true;//フラグをONにする
 
-		//　ステージ５の回転ブロックスイッチが動いてる時はRキーを押してもロープが消えないようにする
-		if (objrolls->GetKeyFlag() == true)
-		{
-			m_r_key_flag = true;
-		}
-		else if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
+		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
 		{
 			m_r_key_flag = false;
-		}
-
-		//　ステージ5の回転ブロックスイッチが最後まで行った時ロープを自動的に消すようにする
-		if (objrolls->GetLastRoll() == true)
-		{
-			this->SetStatus(false);		//自身に消去命令を出す
-			Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
-			return;
 		}
 
 		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
@@ -141,6 +127,24 @@ void CObjRope::Action()
 		//移動
 		m_px += m_vx;
 		m_py += m_vy;
+	}
+
+	//バグがおきたので上とわけました
+	//回転床用のスイッチと衝突したとき、ロープが引っかかるようにする
+	if (hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH) != nullptr)
+	{
+		//　ステージ５の回転ブロックスイッチが動いてる時はRキーを押してもロープが消えないようにする
+		if (objrolls->GetKeyFlag() == true)
+		{
+			m_r_key_flag = true;
+		}
+		//　ステージ5の回転ブロックスイッチが最後まで行った時ロープを自動的に消すようにする
+		if (objrolls->GetLastRoll() == true)
+		{
+			this->SetStatus(false);		//自身に消去命令を出す
+			Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+			return;
+		}
 	}
 
 	//回転ブロックのスイッチと当たっている場合

@@ -2,7 +2,7 @@
 
 //使用するヘッダー
 #include "GameL\SceneManager.h"
-
+#include "ObjStage5BossArms.h"
 //使用するネームスペース
 using namespace GameL;
 
@@ -39,6 +39,11 @@ private:
 
 	int m_hp;    // 第五ボスのＨＰ
 
+	//右アームオブジェクトの情報
+	CObjStage5BossArms* m_boos_arm_right;
+	//左アームオブジェクトの情報
+	CObjStage5BossArms* m_boos_arm_left;
+
 	//第五ボスの攻撃モード
 	//0:何もしない
 	//1:主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす
@@ -46,4 +51,7 @@ private:
 	//3:ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)
 	//4:3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 	int m_attack_mode;
+
+	//ランダムで値を決める関数
+	int GetRandom(int min, int max);
 };
