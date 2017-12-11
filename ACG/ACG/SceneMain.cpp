@@ -67,16 +67,6 @@ void CSceneMain::InitScene()
 	
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
-
-	//回転床テスト用----------
-	//当たり判定のバグがあったので残しています。バグが取れたら消してください
-
-	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
-
-	//objrollblock = new CObjRollBlock(18, 18, 1);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
-	
 	//------------------------------
 
 
