@@ -35,12 +35,12 @@ void CObjStage5Boss::Init()
 	//Audio::Start(BOSS);
 	//Audio::Stop(STAGE);
 
-	//右アームオブジェクト作成
+	//右腕オブジェクト作成
 	m_boos_arm_right = new CObjStage5BossArms(m_px - 370.0f, m_py - 166.0f, 1);
 	Objs::InsertObj(m_boos_arm_right, OBJ_STAGE5_BOSS_ARMS, 10);
 
-	//左アームオブジェクト作成
-	m_boos_arm_left = new CObjStage5BossArms(m_px + 156.0f, m_py - 166.0f, 2);
+	//左腕オブジェクト作成
+	m_boos_arm_left = new CObjStage5BossArms(m_px + 126.0f, m_py - 166.0f, 2);
 	Objs::InsertObj(m_boos_arm_left, OBJ_STAGE5_BOSS_ARMS, 10);
 
 	//当たり判定用HitBoxを作成
@@ -56,6 +56,9 @@ void CObjStage5Boss::Action()
 		m_time = 0;
 
 	
+
+	//HitBox更新用ポインター取得
+	CHitBox* hit = Hits::GetHitBox(this);
 
 	switch (m_attack_mode)
 	{
@@ -93,6 +96,23 @@ void CObjStage5Boss::Action()
 
 	//当たり判定更新
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+
+	//主人公の弾丸とぶつかったらＨＰを-1にする
+	//弾丸とあたったらＨＰを1減らす
+	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
+	{
+		m_hp -= 1;
+	}
+
+	//(仮)ＨＰが0になったらクリア画面に移動
+	//クリア画面移動条件が確定したら、変更してください。
+	if (m_hp == 0)
+	{
+		//クリア画面に移動
+		Scene::SetScene(new CSceneGameClear());
+		return;
+	}
+
 }
 
 //ドロー

@@ -67,16 +67,6 @@ void CSceneMain::InitScene()
 	
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
-
-	//回転床テスト用----------
-	//当たり判定のバグがあったので残しています。バグが取れたら消してください
-
-	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
-
-	//objrollblock = new CObjRollBlock(18, 18, 1);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
-	
 	//------------------------------
 
 
@@ -94,6 +84,9 @@ void CSceneMain::InitScene()
 
 
 	
+	//ステージ5ボス作成(爪の開閉アニメーション確認用)
+	/*CObjStage5Boss* objstage5_boss = new CObjStage5Boss(6, 12);
+	Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);*/
 	//デバッグ--------------------------------------------------
 }
 

@@ -14,10 +14,11 @@ using namespace GameL;
 //イニシャライズ
 void CObjGameClear::Init()
 {
-	m_key_flag = false;
+	
 	Audio::Start(CLEAR);
 	//文字のグラフィック作成
-	Font::SetStrTex(L"GAMECLEAR");	
+	Font::SetStrTex(L"GAME CLEAR!!");	
+	Font::SetStrTex(L"TITLE:PUSH ENTER KEY");
 }
 
 //アクション
@@ -35,27 +36,29 @@ void CObjGameClear::Action()
 //ドロー
 void CObjGameClear::Draw()
 {
-	float color[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float back_color [4] = { 1.0f,1.0f,1.0f,1.0f };//背景用カラー
+	float text_color [4] = { 0.0f,0.0f,0.0f,1.0f };//文字用カラー(黒)
 
-//	RECT_F src;	//描画先切り取り位置
-//	RECT_F dst;	//描画先表示位置
+	RECT_F src;	//描画先切り取り位置
+	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置設定
-	//src.m_top = 0.0f;
-	//src.m_left = 0.0f;
-	//src.m_right = 1024.0f;
-	//src.m_bottom = 1024.0f;
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 1024.0f;
+	src.m_bottom = 1024.0f;
 
-	//////表示位置設定
-	//dst.m_top = 0.0f;
-	//dst.m_left = 0.0f;
-	//dst.m_right = 1024.0f;
-	//dst.m_bottom = 1024.0f;
+	//表示位置設定
+	dst.m_top = 0.0f;
+	dst.m_left = 0.0f;
+	dst.m_right = 1024.0f;
+	dst.m_bottom = 1024.0f;
 
 	//背景描画
-//	Draw::Draw(GRA_GAME_OVER, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_GAME_CLEAR, &src, &dst, back_color, 0.0f);
 
-	//文字描画
-	Font::StrDraw(L"GAMECLEAR", 2.f, WINDOW_SIZE_H / 3.f, 45.0f, color);
+	//文字描画                              x      y     size
+	Font::StrDraw(L"GAME CLEAR!!"       , 220.0f, 46.0f, 105.0f, text_color);
+	Font::StrDraw(L"TITLE:PUSH ENTERKEY", 580.0f, 710.0f, 45.0f, text_color);
 
 }
