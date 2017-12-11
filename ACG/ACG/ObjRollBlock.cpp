@@ -367,7 +367,7 @@ void CObjRollBlock::HeroHit()
 					//リフトにのめりこまないようにする処理
 					if (objhero->GetPosture() == 0.0f)//右向き
 					{
-						objhero->SetPosX(m_px + 60.5);//主人公の位置をブロックの右にする
+						objhero->SetPosX(m_px + 60.5f);//主人公の位置をブロックの右にする
 						objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
 					}
 					else//左向き
