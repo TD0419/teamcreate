@@ -52,6 +52,8 @@ private:
 	//4:3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 	int m_attack_mode;
 
+	int m_time;//攻撃のたいみんぐ管理用
+
 	//ランダムで値を決める関数
 	int GetRandom(int min, int max);
 };

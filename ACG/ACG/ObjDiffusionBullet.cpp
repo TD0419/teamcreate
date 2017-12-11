@@ -5,17 +5,29 @@
 
 #include "GameHead.h"
 #include "ObjDiffusionBullet.h"
+#include "ObjDiffusionSource.h"
 #include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
+//コンストラクタ(砲台用)
 CObjDiffusionBullet::CObjDiffusionBullet(float x, float y, int r)
 {
 	m_px = x ;
 	m_py = y ;
 	m_r  = (float)r;
+	m_type = CANNON;
+}
+
+//コンストラクタ(ボス用)
+CObjDiffusionBullet::CObjDiffusionBullet(float x, float y, int r, CObjDiffusionSource* p)
+{
+	m_px = x;
+	m_py = y;
+	m_r = (float)r;
+	m_type = BOSS;
+	mp_base = p;
 }
 
 //イニシャライズ
@@ -41,20 +53,43 @@ void CObjDiffusionBullet::Action()
 	//画面外なら
 	if(WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE)==false)
 	{
-		//主人公と拡散砲台のオブジェクトをもってくる
-		CObjDiffusionCannon* objcannon = (CObjDiffusionCannon*)Objs::GetObj(OBJ_DIFFUSION_CANNON);
-		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-		//主人公と拡散砲台のXの位置を持ってくる
-		float cannon_y = objcannon->GetPosY();
-		float hero_y = objhero->GetPosY();
-
-		//拡散砲台と弾の距離　が　拡散砲台とヒーローの距離　より大きければ
-		if (abs(cannon_y - m_py) > abs(cannon_y - hero_y))
+		switch (m_type)
 		{
-			WindowOutDelete(this);//削除処理
-			return;
+			case CANNON:
+			{
+				//主人公と拡散砲台のオブジェクトをもってくる
+				CObjDiffusionCannon* objcannon = (CObjDiffusionCannon*)Objs::GetObj(OBJ_DIFFUSION_CANNON);
+				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+				//主人公と拡散砲台のYの位置を持ってくる
+				float cannon_y = objcannon->GetPosY();
+				float hero_y = objhero->GetPosY();
+
+				//拡散砲台と弾の距離　が　拡散砲台とヒーローの距離　より大きければ
+				if (abs(cannon_y - m_py) > abs(cannon_y - hero_y))
+				{
+					WindowOutDelete(this);//削除処理
+					return;
+				}
+			}
+			case BOSS:
+			{
+				//主人公のオブジェクトをもってくる
+				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+				//主人公と打ち出し源の位置Yを持ってくる
+				float base_y = mp_base->GetPosY();
+				float hero_y = objhero->GetPosY();
+
+				//拡散砲台と弾の距離　が　拡散砲台とヒーローの距離　より大きければ
+				if (abs(base_y - m_py) > abs(base_y - hero_y))
+				{
+					WindowOutDelete(this);//削除処理
+					return;
+				}
+			}
 		}
+
 	}
 
 	//拡散弾HitBox更新用ポインター取得

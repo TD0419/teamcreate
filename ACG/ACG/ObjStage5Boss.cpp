@@ -28,6 +28,9 @@ void CObjStage5Boss::Init()
 	//初期化する(何もしていない)
 	m_attack_mode = 0;
 
+	//たいみんぐ管理
+	m_time=0;
+
 	//音楽
 	//Audio::Start(BOSS);
 	//Audio::Stop(STAGE);
@@ -47,6 +50,13 @@ void CObjStage5Boss::Init()
 //アクション
 void CObjStage5Boss::Action()
 {
+	m_time++;
+
+	if (m_time > 10000)
+		m_time = 0;
+
+	
+
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -61,10 +71,17 @@ void CObjStage5Boss::Action()
 	case 1:
 
 		break;
-		//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
-	case 2:
-
+	
+	case 2:	//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
+	{
+		if (m_time % 200 == 0)
+		{
+			m_boos_arm_left->DiffusionAttack(GetRandom(60, 180));
+			m_boos_arm_right->DiffusionAttack(GetRandom(60, 180));
+			m_attack_mode = 0;
+		}
 		break;
+	}
 		//ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
 	case 3:
 
@@ -76,6 +93,7 @@ void CObjStage5Boss::Action()
 	default:
 		break;
 	}
+
 	//当たり判定更新
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
@@ -167,11 +185,13 @@ void CObjStage5Boss::Draw()
 	dst.m_left = m_px - objmap->GetScrollX() + EYE_CORRECTION_WIDTH;
 	dst.m_right = dst.m_left + STAGE5_BOSS_EYE_SIZE;	
 	dst.m_bottom = dst.m_top + STAGE5_BOSS_EYE_SIZE;
+	
 	//描画
 	Draw::Draw(GRA_STAGE5_BOSS_EYE, &src, &dst, color, 0.0f);
 	
 
 }
+
 //ランダムで値を決める関数
 //引数1 int min	:最小値
 //引数2 int max	:最大値

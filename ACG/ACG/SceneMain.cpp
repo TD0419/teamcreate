@@ -67,16 +67,6 @@ void CSceneMain::InitScene()
 	
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
-
-	//回転床テスト用----------
-	//当たり判定のバグがあったので残しています。バグが取れたら消してください
-
-	//CObjRollBlock* objrollblock = new CObjRollBlock(18,20,2);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
-
-	//objrollblock = new CObjRollBlock(18, 18, 1);
-	//Objs::InsertObj(objrollblock, OBJ_ROLL_BLOCK, 10);
-	
 	//------------------------------
 
 
@@ -87,6 +77,12 @@ void CSceneMain::InitScene()
 	////落ちるリフト
 	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
 	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
+
+	//ステージ５ボス	デバッグで使うためおいといてください
+	//CObjStage5Boss* p = new CObjStage5Boss(4, 10);
+	//Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);
+
+
 	
 	//ステージ5ボス作成(爪の開閉アニメーション確認用)
 	/*CObjStage5Boss* objstage5_boss = new CObjStage5Boss(6, 12);
@@ -250,6 +246,10 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Falling_Lift.png", GRA_FALLING_LIFT, TEX_SIZE_256);
 		//横移動リフト
 		Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
+		//拡散弾を撃つ弾
+		Draw::LoadImageW(L"Image\\Boss_Diffusion_Glass.png", GRA_DIFFUSION_SOURCE, TEX_SIZE_32);
+
+
 		break;
 
 		
