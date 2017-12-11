@@ -78,6 +78,15 @@ void CObjStage5BossArms::Action()
 	
 }
 
+//ŠgU’e‚ğ‘Å‚ÂUŒ‚
+//ˆø”F”š”­‚Ü‚Å‚ÌŠÔ
+void CObjStage5BossArms::DiffusionAttack(int limit_time)
+{
+	//ŠgU’e‚ÌŒ¹‚ğì¬
+	CObjDiffusionSource* p = new CObjDiffusionSource(m_px+ STAGE5_BOSS_ARMS_WIDTH_SIZE /2.0f, m_py+ STAGE5_BOSS_ARMS_HEIGHT_SIZE -87.0f,limit_time);
+	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
+}
+
 //ƒhƒ[
 void CObjStage5BossArms::Draw()
 {

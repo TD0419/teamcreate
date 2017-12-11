@@ -87,6 +87,12 @@ void CSceneMain::InitScene()
 	////落ちるリフト
 	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
 	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
+
+	//ステージ５ボス	デバッグで使うためおいといてください
+	//CObjStage5Boss* p = new CObjStage5Boss(4, 10);
+	//Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);
+
+
 	
 	//デバッグ--------------------------------------------------
 }
@@ -247,6 +253,10 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Falling_Lift.png", GRA_FALLING_LIFT, TEX_SIZE_256);
 		//横移動リフト
 		Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
+		//拡散弾を撃つ弾
+		Draw::LoadImageW(L"Image\\Boss_Diffusion_Glass.png", GRA_DIFFUSION_SOURCE, TEX_SIZE_32);
+
+
 		break;
 
 		

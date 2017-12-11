@@ -30,6 +30,8 @@ public:
 	float GetVecX() { return m_vx; }//ƒxƒNƒgƒ‹X‚ğ“n‚·
 	float GetVecY() { return m_vy; }//ƒxƒNƒgƒ‹Y‚ğ“n‚·
 
+	void DiffusionAttack(int limit_time);		//ŠgU’e‚ğ‘Å‚ÂUŒ‚
+
 	//-------------------------------------------------
 
 private:
