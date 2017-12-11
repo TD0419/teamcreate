@@ -47,6 +47,9 @@ void CObjStage5Boss::Init()
 //アクション
 void CObjStage5Boss::Action()
 {
+	//HitBox更新用ポインター取得
+	CHitBox* hit = Hits::GetHitBox(this);
+
 	switch (m_attack_mode)
 	{
 		//何もしていない状態
@@ -75,6 +78,23 @@ void CObjStage5Boss::Action()
 	}
 	//当たり判定更新
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+
+	//主人公の弾丸とぶつかったらＨＰを-1にする
+	//弾丸とあたったらＨＰを1減らす
+	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
+	{
+		m_hp -= 1;
+	}
+
+	//(仮)ＨＰが0になったらクリア画面に移動
+	//クリア画面移動条件が確定したら、変更してください。
+	if (m_hp == 0)
+	{
+		//クリア画面に移動
+		Scene::SetScene(new CSceneGameClear());
+		return;
+	}
+
 }
 
 //ドロー
