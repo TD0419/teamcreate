@@ -30,7 +30,7 @@ public:
 	float GetVecX() { return m_vx; }//ベクトルXを渡す
 	float GetVecY() { return m_vy; }//ベクトルYを渡す
 
-	void SetPosture(float posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
+	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
 	//-------------------------------------------------
 
 private:
