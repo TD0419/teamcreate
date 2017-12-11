@@ -5,6 +5,7 @@
 //GameLで使用するヘッダー
 #include "GameL\SceneObjManager.h"
 #include "GameL\DrawFont.h"
+#include "GameL\UserData.h"
 #include "GameL\Audio.h"
 
 //使用するネームスペース
@@ -17,8 +18,11 @@ using namespace GameL;
 //初期化メソッド
 void CSceneGameClear::InitScene()
 {
-	////外部グラフィックファイルを読み込み0番に登録(512×512ピクセル)
-	//Draw::LoadImageW(L".png", 0, TEX_SIZE_512);
+	//外部グラフィックファイルを読み込み0番に登録
+	Draw::LoadImageW(L"Image\\BackGround\\Ending.png", GRA_GAME_CLEAR, TEX_SIZE_1024);
+	//Draw::LoadImageW(L"Image\\BackGround\\Scene_Title.png", GRA_GAME_CLEAR, TEX_SIZE_1024);
+
+
 
 	//BGM----------------------------------
 	//音楽読み込み
@@ -27,11 +31,13 @@ void CSceneGameClear::InitScene()
 	//SE------------------------------
 	//Audio::LoadAudio(1, L".wav", EFFECT);			//決定音
 
-	CObjGameClear* objgame_clear = new CObjGameClear();	//クリアオブジェクト作成
+	//ゲームクリアオブジェクト作成
+	CObjGameClear* objgame_clear = new CObjGameClear();	
 	Objs::InsertObj(objgame_clear, OBJ_GAME_CLEAR, 10);	//クリアオブジェクト登録
 }
 
 //実行中メソッド
 void CSceneGameClear::Scene()
 {
+
 }
