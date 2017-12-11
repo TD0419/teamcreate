@@ -20,10 +20,7 @@ void CSceneGameClear::InitScene()
 {
 	//外部グラフィックファイルを読み込み0番に登録
 	Draw::LoadImageW(L"Image\\BackGround\\Ending.png", GRA_GAME_CLEAR, TEX_SIZE_1024);
-	//Draw::LoadImageW(L"Image\\BackGround\\Scene_Title.png", GRA_GAME_CLEAR, TEX_SIZE_1024);
-
-
-
+	
 	//BGM----------------------------------
 	//音楽読み込み
 	Audio::LoadAudio(CLEAR, L"BGM\\Clear.wav", BACK_MUSIC);

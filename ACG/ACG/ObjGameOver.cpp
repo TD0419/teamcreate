@@ -17,7 +17,7 @@ void CObjGameOver::Init()
 {
 	
 	//文字のグラフィック作成
-	Font::SetStrTex(L"GAMEOVER");
+	Font::SetStrTex(L"GAME OVER");
 	Audio::Start(GAMEOVER);
 }
 
@@ -57,5 +57,6 @@ void CObjGameOver::Draw()
 	//描画
 	Draw::Draw(GRA_GAME_OVER, &src, &dst, color, 0.0f);
 	//メニュー描画
-	Font::StrDraw(L"GAMEOVER", 2.f, WINDOW_SIZE_H / 3.f, 45.0f, color);
+	Font::StrDraw(L"GAME OVER", 270.0f, 46.0f, 105.0f, color);
+	Font::StrDraw(L"TITLE:PUSH ENTERKEY", 580.0f, 710.0f, 45.0f, color);
 }
