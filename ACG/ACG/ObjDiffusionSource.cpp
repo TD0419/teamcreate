@@ -37,7 +37,6 @@ void CObjDiffusionSource::Action()
 
 	if (m_limit < 0)//リミットタイムが0以下なら
 	{
-
 		//5発同時発射
 		CObjDiffusionBullet* p;
 		for (int i = 210; i<360; i += 30)

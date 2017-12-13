@@ -31,13 +31,22 @@ public:
 	void Init();	        //イニシャライズ
 	void Action();	        //アクション
 	void Draw();	        //ドロー
+
+	void LastWallHit();//ラストウォールと当たったときの処理
+
+	//アクセサ
+	void SetVecX(float x) { m_vx = x; }
+	void SetVecY(float y) { m_vy = y; }
+	
+
 private:
 	float m_px;	 // 第五ボスX座標
 	float m_py;	 // 第五ボスY座標
 	float m_vx;  // 第五ボスX軸移動ベクトル
 	float m_vy;  // 第五ボスY軸移動ベクトル
-
 	int m_hp;    // 第五ボスのＨＰ
+
+	bool m_attack3_flag;//攻撃パターン3のフラグ
 
 	//右アームオブジェクトの情報
 	CObjStage5BossArms* m_boos_arm_right;
