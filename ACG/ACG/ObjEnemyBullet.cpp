@@ -2,6 +2,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\Audio.h"
+#include "GameL\UserData.h"
 
 #include "GameHead.h"
 #include "ObjEnemyBullet.h"
@@ -10,8 +11,8 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
-CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
+//コンストラクタ（プレイヤーの方向に）
+CObjEnemyBullet::CObjEnemyBullet(float x, float y)
 {
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -19,8 +20,7 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	//初期位置を決める
 	m_px = x;
 	m_py = y;
-	m_r = rad;
-
+	
 	//速さを決める
 	m_speed = 6.5f;
 
@@ -34,9 +34,9 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	float hero_x = objhero->GetPosX() - objmap->GetScrollX();		//主人公の位置情報X取得
 	float hero_y = objhero->GetPosY() - objmap->GetScrollY();		//主人公の位置情報Y取得
 
-	//主人公の位置ベクトル情報取得
-	float Hvector_x = hero_x - x ;
-	float Hvector_y = hero_y - y ;
+																	//主人公の位置ベクトル情報取得
+	float Hvector_x = hero_x - x;
+	float Hvector_y = hero_y - y;
 
 	//斜辺取得
 	float hypotenuse = sqrt(Hvector_y * Hvector_y + Hvector_x * Hvector_x);
@@ -65,7 +65,26 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	{
 		m_vy = sin(acosf(Hvector_x / hypotenuse)) * m_speed;
 	}
-	
+
+}
+
+//コンストラクタ(指定した方向へ)
+CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
+{
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//初期位置を決める
+	m_px = x;
+	m_py = y;
+	m_r = rad;
+
+	//速さを決める
+	m_speed = 6.5f;
+
+	//敵用弾丸にスクロールの影響を適用させる
+	x -= objmap->GetScrollX();
+	y -= objmap->GetScrollY();
 }
 
 //イニシャライズ
@@ -85,19 +104,22 @@ void CObjEnemyBullet::Action()
 	//画面外なら
 	if(WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE)==false)
 	{
-		//主人公とボスのオブジェクトをもってくる
-		CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-		//主人公とボスのXの位置を持ってくる
-		float boss_x = objboss->GetPosX();
-		float hero_x = objhero->GetPosX();
-
-		//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
-		if (abs(boss_x - m_px) > abs(boss_x - hero_x))
+		if ((((UserData*)Save::GetData())->stagenum) == 2)
 		{
-			WindowOutDelete(this);//削除処理
-			return;
+			//主人公とボスのオブジェクトをもってくる
+			CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+			CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+			//主人公とボスのXの位置を持ってくる
+			float boss_x = objboss->GetPosX();
+			float hero_x = objhero->GetPosX();
+
+			//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
+			if (abs(boss_x - m_px) > abs(boss_x - hero_x))
+			{
+				WindowOutDelete(this);//削除処理
+				return;
+			}
 		}
 	}
 

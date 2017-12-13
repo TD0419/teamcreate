@@ -101,10 +101,10 @@ void CObjStage5Boss::Action()
 			m_attack3_flag = true;//フラグをtrueにする
 		}
 
-		//30フレームに一度
-		if (m_time % 30 == 0)
+		//60フレームに一度
+		if (m_time % 60 == 0)
 		{
-			CObjEnemyBullet* p = new CObjEnemyBullet(m_px+ STAGE5_BOSS_ELECTRIC_WIDTH,m_py+STAGE5_BOSS_ELECTRIC_HEIGHT,);
+			CObjEnemyBullet* p = new CObjEnemyBullet(m_px+ EYE_CORRECTION_WIDTH+STAGE5_BOSS_EYE_SIZE/2.0f,m_py+ EYE_CORRECTION_HEIGHT+ STAGE5_BOSS_EYE_SIZE / 2.0f);
 			Objs::InsertObj(p, OBJ_ENEMY_BULLET, 9);
 		}
 
