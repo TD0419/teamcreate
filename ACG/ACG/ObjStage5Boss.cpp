@@ -65,7 +65,7 @@ void CObjStage5Boss::Action()
 		//何もしていない状態
 	case 0:
 		//何もしていないので攻撃モードをランダムで決める
-		m_attack_mode = GetRandom(1, 4);
+		m_attack_mode = 2;// GetRandom(1, 4);
 		break;
 		//主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす攻撃
 	case 1:
@@ -74,12 +74,16 @@ void CObjStage5Boss::Action()
 	
 	case 2:	//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
 	{
-		if (m_time % 200 == 0)
+		if (m_time % 300 == 150)
 		{
 			m_boos_arm_left->DiffusionAttack(GetRandom(60, 180));
+		}
+		else if (m_time % 300 == 0)
+		{
 			m_boos_arm_right->DiffusionAttack(GetRandom(60, 180));
 			m_attack_mode = 0;
 		}
+
 		break;
 	}
 		//ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
