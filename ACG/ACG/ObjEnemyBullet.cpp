@@ -50,13 +50,13 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	m_vx = cosf(m_r) * m_speed;
 	m_r = m_r * 180.0f / 3.14f;
 
-	//マウスのY位置が主人公のY位置より下だったら
+	//主人公のY位置が上だった場合の発射角度
 	if (hero_y > y)
 	{
 		//180°～360°の値にする
 		m_r = 360 - abs(m_r);
 	}
-	//マウスのY位置が初期Y位置より上
+	//主人公のY位置が下だった場合の発射角度
 	if (hero_y < y)
 	{
 		m_vy = -sin(acosf(Hvector_x / hypotenuse)) * m_speed;
