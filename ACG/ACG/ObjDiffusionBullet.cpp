@@ -71,6 +71,7 @@ void CObjDiffusionBullet::Action()
 					WindowOutDelete(this);//íœˆ—
 					return;
 				}
+				break;
 			}
 			case BOSS:
 			{
@@ -87,6 +88,7 @@ void CObjDiffusionBullet::Action()
 					WindowOutDelete(this);//íœˆ—
 					return;
 				}
+				break;
 			}
 		}
 
