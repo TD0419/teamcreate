@@ -78,9 +78,9 @@ void CSceneMain::InitScene()
 	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
 	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
 
-	////ステージ５ボス	デバッグで使うためおいといてください
-	//CObjStage5Boss* p = new CObjStage5Boss(4, 10);
-	//Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);
+	//ステージ５ボス	デバッグで使うためおいといてください
+	/*CObjStage5Boss* p = new CObjStage5Boss(4, 10);
+	Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);*/
 
 
 	//
@@ -318,7 +318,7 @@ void CSceneMain::ImageDataLoading()
 	//ステージ５ボス眼球
 	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
 	//ステージ５ボス腕
-	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
+	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_1280);
 	//金網
 	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
 }
