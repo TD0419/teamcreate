@@ -31,8 +31,9 @@ void CObjStage5Boss::Init()
 	//たいみんぐ管理
 	m_time=0;
 
-	//攻撃パターン3のフラグ
+	//攻撃パターン3
 	m_attack3_flag=false;
+	m_attack3_count = 0;
 
 	//音楽
 	//Audio::Start(BOSS);
@@ -70,7 +71,6 @@ void CObjStage5Boss::Action()
 		{
 			//何もしていないので攻撃モードをランダムで決める
 			m_attack_mode = 3;// GetRandom(1, 4);
-			m_time = 0;//タイムの初期化
 		}
 		break;
 	}
@@ -97,8 +97,9 @@ void CObjStage5Boss::Action()
 	{
 		if (m_attack3_flag == false)//フラグがオフなら
 		{
+			m_attack3_count = 0;
 			m_vx = -1.0f;//移動量を左に設定
-			m_attack3_flag = true;//フラグをtrueにする
+			m_attack3_flag = true;//フラグをオン
 		}
 
 		//60フレームに一度
@@ -106,6 +107,15 @@ void CObjStage5Boss::Action()
 		{
 			CObjEnemyBullet* p = new CObjEnemyBullet(m_px+ EYE_CORRECTION_WIDTH+STAGE5_BOSS_EYE_SIZE/2.0f,m_py+ EYE_CORRECTION_HEIGHT+ STAGE5_BOSS_EYE_SIZE / 2.0f);
 			Objs::InsertObj(p, OBJ_ENEMY_BULLET, 9);
+
+			m_attack3_count++;
+		}
+
+		if (m_attack3_count == 10)//10回攻撃したら
+		{
+			m_attack3_flag = false;//フラグをオフ
+			m_vx = 0.0f;//移動をとめる
+			m_attack_mode = 0;
 		}
 
 		break;
@@ -113,8 +123,6 @@ void CObjStage5Boss::Action()
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 	case 4:
 
-		break;
-	default:
 		break;
 	}
 

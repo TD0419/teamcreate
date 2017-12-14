@@ -35,9 +35,8 @@ public:
 	void LastWallHit();//ラストウォールと当たったときの処理
 
 	//アクセサ
-	void SetVecX(float x) { m_vx = x; }
-	void SetVecY(float y) { m_vy = y; }
-	
+	float GetPosY() { return m_py; }
+	void SetVecX(float x) { m_vx = x; }	
 
 private:
 	float m_px;	 // 第五ボスX座標
@@ -46,6 +45,7 @@ private:
 	float m_vy;  // 第五ボスY軸移動ベクトル
 	int m_hp;    // 第五ボスのＨＰ
 
+	int m_attack3_count;//攻撃パターン３用のカウンター
 	bool m_attack3_flag;//攻撃パターン3のフラグ
 
 	//右アームオブジェクトの情報
