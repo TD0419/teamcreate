@@ -41,9 +41,9 @@ void CSceneMain::InitScene()
 		return;
 	}
 
-	//デバッグ用ステージ番号調整用
-	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 5;
+	////デバッグ用ステージ番号調整用
+	//UserData* s = (UserData*)Save::GetData();
+	//s->stagenum = 5;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -68,7 +68,8 @@ void CSceneMain::InitScene()
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
 	//------------------------------
-
+	/*CObjFallingLift* objfallinglift = new CObjFallingLift(5, 20);
+	Objs::InsertObj(objfallinglift, OBJ_FALLING_LIFT, 10);*/
 
 	////当たり判定まだなのでため置いていてください
 	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
