@@ -38,7 +38,7 @@ void CObjFallingLift::Action()
 	else if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && m_get_on_flag == true)
 	{
 		//落ちるリフトが移動(落下する)
-		m_py += 2.0f;
+		m_py += 5.0f;
 		HeroRide();//衝突処理をする
 	}
 	//HitBoxの位置を更新する
@@ -70,8 +70,6 @@ void CObjFallingLift::Draw()
 		
 	//描画
 	Draw::Draw(GRA_FALLING_LIFT, &src, &dst, color, 0);
-	
-	
 }
 
 //主人公が当たったときの処理
@@ -92,41 +90,38 @@ void CObjFallingLift::HeroRide()
 			float r = hit_data[i]->r;							//あたっている角度を持ってくる
 
 			//上側があたっていれば
-			if (35.0f < r && r < 145.0f)
+			if (33.5f < r && r < 145.5f)
 			{
 				m_get_on_flag = true;							//「主人公が乗っている」と識別する。
 				objhero->SetHitDown(true);						//主人公が乗っていたらm_hit_downにtrueを返す
 			    //乗せる処理
-				objhero->SetPosY(m_py - 126.0f);				//ブロックの上側に調節する
-
-				//主人公の移動ベクトルが下向きなら
-				if (objhero->GetVecY()>2.0f)
-					objhero->SetVecY(2.0f);						//主人公のY方向の移動を2にする
+				objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + 2.5f);//主人公のポジションをリフトの上にする
+				objhero->SetVecY(4.0f);							//主人公のY方向の移動を3にする
 			}
 			//左側が当たっていれば
-			else if (145.0f <= r && r <= 180.0f)
+			if (145.5f <= r && r <= 180.0f)
 			{
 				m_get_on_flag = false;							//「主人公は乗っていない」と識別する。
 				//左に反発する処理
 				objhero->SetPosX(m_px - HERO_SIZE_WIDTH+0.8f);	//主人公の位置をブロックの左にする
-				objhero->SetVecX(-1.0f * objhero->GetVecX());	//主人公のX方向の移動量を反転する
+				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 			}
 			//右側が当たっていれば
-			else if (0.0f <= r && r <= 35.0f )
+			if (0.0f <= r && r <= 33.5f )
 			{
 				m_get_on_flag = false;							//「主人公は乗っていない」と識別する。
 				//右に反発する処理
 				objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_WIDTH);	//主人公の位置をブロックの右にする
-				objhero->SetVecX(-1.0f * objhero->GetVecX());	//主人公のX方向の移動量を反転する
+				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
 			}
 
 			//下側があたっていれば
-			else if (180.0f < r && r < 360.0f)
+			if (180.0f < r && r < 360.0f)
 			{
 				m_get_on_flag = false;							//「主人公は乗っていない」と識別する。
 				//下に反発する処理
 				objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの下にする
-				objhero->SetVecY(-1.0f * objhero->GetVecY());	//主人公のY方向の移動量を反転する
+				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 			}
 		}
 	}

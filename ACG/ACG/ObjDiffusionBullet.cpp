@@ -18,6 +18,8 @@ CObjDiffusionBullet::CObjDiffusionBullet(float x, float y, int r)
 	m_py = y ;
 	m_r  = (float)r;
 	m_type = CANNON;
+	m_speed = 5.5f;
+
 }
 
 //コンストラクタ(ボス用)
@@ -28,6 +30,8 @@ CObjDiffusionBullet::CObjDiffusionBullet(float x, float y, int r, CObjDiffusionS
 	m_r = (float)r;
 	m_type = BOSS;
 	mp_base = p;
+	m_speed = 3.0f;
+
 }
 
 //イニシャライズ
@@ -36,7 +40,6 @@ void CObjDiffusionBullet::Init()
 	//飛んでいく方向の計算
 	m_vx = cos(3.14f / 180.0f*m_r);
 	m_vy = sin(3.14f / 180.0f*m_r);
-	m_speed = 5.5f;
 	
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 16.0f, 16.0f, ELEMENT_ENEMY, OBJ_DIFFUSION_BULLET, 1);

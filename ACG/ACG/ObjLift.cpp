@@ -147,7 +147,7 @@ void CObjLift::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	
-	//リフトのカウント初期化
+	//リフトのカウント初期化(%50==0で音鳴らすので47で初期化)
 	m_lift_audio_count = 47;
 
 	switch (((UserData*)Save::GetData())->stagenum)
@@ -363,16 +363,6 @@ void CObjLift::HeroRide()
 					}
 				}
 
-				////上側と左側or上側と右側or上側と下側が当たっていればなにもしない。(上にワープしない)
-				//if (m_move_mode != 0)
-				//{
-				//	if (90.0f <= r && r < 180.0f)
-				//	{
-				//		objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
-				//		objhero->SetPosX(h_px);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
-				//		objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + m_vy);//主人公のポジションをリフトの上にする
-				//	}
-				//}
 				//引っ張って動くリフトのとき
 				if (m_move_mode == 0)
 				{

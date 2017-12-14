@@ -133,7 +133,7 @@ void CObjBoss::Action()
 			Audio::Start(GORILLATHROW);
 
 			// 敵弾丸作成
-			CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
+			CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py);
 			Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
 			
 			//投げるアニメーション開始フラグをＯＮにする
@@ -154,7 +154,7 @@ void CObjBoss::Action()
 				Audio::Start(GORILLATHROW);
 
 				// 敵弾丸作成
-				CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py, 0.0f);
+				CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py);
 				Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
 
 				//壁ヒットフラグをfalseにする。
