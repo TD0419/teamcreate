@@ -52,11 +52,6 @@ void CObjStage5Boss::Action()
 {
 	m_time++;
 
-	if (m_time > 10000)
-		m_time = 0;
-
-	
-
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -64,14 +59,22 @@ void CObjStage5Boss::Action()
 	{
 		//何もしていない状態
 	case 0:
+	{
 		//何もしていないので攻撃モードをランダムで決める
 		m_attack_mode = GetRandom(1, 4);
+		m_time = 0;
 		break;
+	}
 		//主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす攻撃
 	case 1:
+	{
+		//主人公オブジェクト情報を取得
+		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
+		//腕を下ろす攻撃をする(左腕)
+		m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(), m_time);
 		break;
-	
+	}
 	case 2:	//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
 	{
 		if (m_time % 200 == 0)
@@ -84,12 +87,14 @@ void CObjStage5Boss::Action()
 	}
 		//ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
 	case 3:
-
+	{
 		break;
+	}
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 	case 4:
-
+	{
 		break;
+	}
 	default:
 		break;
 	}
