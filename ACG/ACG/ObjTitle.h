@@ -6,7 +6,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-#define CHAR_SIZE (32.0f)	//文字のサイズ
+#define CHAR_SIZE (52.0f)	//文字のサイズ
 
 //オブジェクト：タイトル
 class CObjTitle :public CObj
@@ -21,4 +21,6 @@ private:
 	int m_mode;				//モードの選択用変数(0～2)
 	bool m_keypush_flag;	//キーのトリガー処理用フラグ
 	bool m_enter_key_flag;  //ゲームオーバーからくるとすぐに飛んでしまうんでそれを制御する変数
+	
+
 };

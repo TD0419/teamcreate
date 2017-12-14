@@ -39,14 +39,17 @@ void CObjStage5Boss::Init()
 	//Audio::Start(BOSS);
 	//Audio::Stop(STAGE);
 
-	//右腕オブジェクト作成
-	m_boos_arm_right = new CObjStage5BossArms(m_px - 370.0f, m_py - 166.0f, 1);
+	//左右の腕作成ー------------------
+	//右腕オブジェクト作成								↓ボスの胴体に密着する位置
+	m_boos_arm_right = new CObjStage5BossArms((m_px+ STAGE5_BOSS_BODY_SIZE)+60.0f, m_py - 100.0f, 1);
 	Objs::InsertObj(m_boos_arm_right, OBJ_STAGE5_BOSS_ARMS, 10);
 
-	//左腕オブジェクト作成
-	m_boos_arm_left = new CObjStage5BossArms(m_px + 126.0f, m_py - 166.0f, 2);
+	//左腕オブジェクト作成								↓ボスの胴体に密着する位置		
+	m_boos_arm_left = new CObjStage5BossArms((m_px-  STAGE5_BOSS_ARMS_WIDTH_SIZE)-60.0f, m_py - 100.0f, 2);
 	Objs::InsertObj(m_boos_arm_left, OBJ_STAGE5_BOSS_ARMS, 10);
 
+	//-------------------------------
+	
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BODY_SIZE, STAGE5_BOSS_BODY_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS, 1);
 }
@@ -76,9 +79,14 @@ void CObjStage5Boss::Action()
 	}
 		//主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす攻撃
 	case 1:
+	{
+		//主人公オブジェクト情報を取得
+		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
+		//腕を下ろす攻撃をする(左腕)
+		m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(), m_time);
 		break;
-	
+	}
 	case 2:	//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
 	{
 		if (m_time % 300 == 150)
@@ -122,7 +130,7 @@ void CObjStage5Boss::Action()
 	}
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 	case 4:
-
+	{
 		break;
 	}
 

@@ -35,6 +35,8 @@ void CObjStage5BossArms::Init()
 	m_ani_max_time = 10;//アニメーションフレーム動作間隔最大値
 	m_ani_time = 0;		//アニメーションフレーム動作間隔
 
+	m_arm_lower_marker_px = 0.0f;	//腕を下ろす位置を示すかどうかとそのX位置
+
 	m_hit_flag = false;
 
 	//typeの値が1のときライトアームの当たり判定表示
@@ -42,7 +44,7 @@ void CObjStage5BossArms::Init()
 	{
 		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
 		//																横サイズ補正値						   縦サイズ補正値
-		Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 1);
+		Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 1);
 		
 	}
 	//typeの値が1のときレフトアームの当たり判定表示
@@ -50,7 +52,7 @@ void CObjStage5BossArms::Init()
 	{
 		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
 		//																横サイズ補正値						   縦サイズ補正値
-		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
+		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
 	}
 
 }
@@ -65,13 +67,13 @@ void CObjStage5BossArms::Action()
 	if (m_arms_type == 1)
 	{
 		//当たり判定更新
-		HitBoxUpData(Hits::GetHitBox(this), m_px + 160.0f, m_py + 138.0f);
+		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 	}
 	//アームタイプが2のとき、レフトアーム用の当たり判定表示
 	else if (m_arms_type == 2)
 	{
 		//当たり判定更新
-		HitBoxUpData(Hits::GetHitBox(this), m_px + 186.0f, m_py + 138.0f);
+		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 	}
 
 	//移動
@@ -151,16 +153,53 @@ void CObjStage5BossArms::Action()
 void CObjStage5BossArms::DiffusionAttack(int limit_time)
 {
 	//拡散弾の源を作成
-	CObjDiffusionSource* p = new CObjDiffusionSource(m_px+ STAGE5_BOSS_ARMS_WIDTH_SIZE /2.0f, m_py+ STAGE5_BOSS_ARMS_HEIGHT_SIZE -87.0f,limit_time);
+	CObjDiffusionSource* p = new CObjDiffusionSource(m_px+ STAGE5_BOSS_ARMS_WIDTH_SIZE /2.0f, m_py+ STAGE5_BOSS_ARMS_HEIGHT_SIZE-10.0f,limit_time);
 	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
 }
 
+//腕を下ろす攻撃
+//引数1	float x	:腕を下ろすX位置
+//引数3 int time:
+//まだ作成中なので待ってください。
+void CObjStage5BossArms::ArmLowerAttack(float x, int time)
+{
+	static float xx = x;
+	//120フレームの間に主人公のX位置と同じになるようにベクトルXを調整
+	if (time < 120)
+	{
+		m_vx = (xx - m_px) / (120 - time);
+	}
+	else
+	{
+		m_vx=0.0f;
+	}
+
+	//時間が120になったら腕を下ろす攻撃をする
+	if (time >= 120)
+	{
+		m_arm_lower_marker_px = 0.0f;
+		m_vy = 10.0f;
+		//ブロックオブジェクトを持ってくる
+		CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+		bool hit_up, hit_down, hit_left, hit_right;
+		//ブロックとの当たり判定
+		objblock->AllBlockHit(&m_px, &m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE,
+			&hit_up, &hit_down, &hit_left, &hit_right, &m_vx, &m_vy);
+
+		
+	}
+	//時間が120になるまで腕を下ろす位置をマークする
+	else
+	{
+		m_arm_lower_marker_px = xx;
+	}
+}
 //ドロー
 void CObjStage5BossArms::Draw()
 {
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
-
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
@@ -172,7 +211,7 @@ void CObjStage5BossArms::Draw()
 	{
 		//切り取り位置
 		src.m_top = STAGE5_BOSS_ARMS_HEIGHT_SIZE;
-		src.m_left = 0.0f;
+		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
@@ -191,8 +230,8 @@ void CObjStage5BossArms::Draw()
 	if (m_arms_type == 2)
 	{
 		//切り取り位置
-		src.m_top = STAGE5_BOSS_ARMS_HEIGHT_SIZE;
-		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE;
+		src.m_top = 0.0f;
+		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
@@ -203,5 +242,25 @@ void CObjStage5BossArms::Draw()
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 		//描画
 		Draw::Draw(GRA_STAGE5_BOSS_ARMS_ALL, &src, &dst, color, 0.0f);
+	}
+
+	//腕を下ろす位置を示すなら示す
+	if (m_arm_lower_marker_px > 0.0f)
+	{
+		//カラー情報
+		float marker_color[4] = { 1.0f,0.0f,0.0f,0.2f };
+
+		//途中なのでおいといてください。
+		/*int map_x = (int)m_arm_lower_marker_px / BLOCK_SIZE;
+		float 
+		if (map_x < MAP_X_MAX)
+		{
+			for (int i = 0;i < MAP_Y_MAX; i++)
+			{
+				objmap->GetMap(map_x, i)
+			}
+		}*/
+		//
+		Draw::DrawHitBox(m_arm_lower_marker_px, 0.0f, 1000.0f, 100.0f, marker_color);
 	}
 }

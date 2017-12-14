@@ -35,12 +35,15 @@ public:
 	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
 	//-------------------------------------------------
 
+	void ArmLowerAttack(float x,int time);	//腕を下ろす攻撃
 private:
 	float m_px;	 // 第五ボスのアームX座標
 	float m_py;	 // 第五ボスのアームY座標
 	
 	float m_vx;  // 第五ボスのアームX軸移動ベクトル
 	float m_vy;  // 第五ボスのアームY軸移動ベクトル
+
+	float m_arm_lower_marker_px;//腕を下ろす位置を示すかどうかとそのX位置　0.0f以下 ＝示さない　0.0fを超える＝示すかつX位置情報
 
 	int m_arms_type;	 //第五ボスアームのタイプ(1…ライトアーム  2…レフトアーム)
 
