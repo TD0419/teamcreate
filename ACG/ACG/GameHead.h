@@ -87,7 +87,7 @@ struct UserData
 #define PIXEL_SIZE_H	(768)	//縦
 
 //マップサイズ
-#define MAP_X_MAX (111)	//mapの最大値X←ステージによって変動するようにする必要がある
+#define MAP_X_MAX (100)	//mapの最大値X←ステージによって変動するようにする必要がある
 #define MAP_Y_MAX (24)	//mapの最大値Y
 #define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X(16)
 #define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y(12)
