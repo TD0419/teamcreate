@@ -38,14 +38,17 @@ void CObjStage5Boss::Init()
 	//Audio::Start(BOSS);
 	//Audio::Stop(STAGE);
 
-	//右腕オブジェクト作成
-	m_boos_arm_right = new CObjStage5BossArms(m_px - 370.0f, m_py - 166.0f, 1);
+	//左右の腕作成ー------------------
+	//右腕オブジェクト作成								↓ボスの胴体に密着する位置
+	m_boos_arm_right = new CObjStage5BossArms((m_px+ STAGE5_BOSS_BODY_SIZE)+60.0f, m_py - 100.0f, 1);
 	Objs::InsertObj(m_boos_arm_right, OBJ_STAGE5_BOSS_ARMS, 10);
 
-	//左腕オブジェクト作成
-	m_boos_arm_left = new CObjStage5BossArms(m_px + 126.0f, m_py - 166.0f, 2);
+	//左腕オブジェクト作成								↓ボスの胴体に密着する位置		
+	m_boos_arm_left = new CObjStage5BossArms((m_px-  STAGE5_BOSS_ARMS_WIDTH_SIZE)-60.0f, m_py - 100.0f, 2);
 	Objs::InsertObj(m_boos_arm_left, OBJ_STAGE5_BOSS_ARMS, 10);
 
+	//-------------------------------
+	
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BODY_SIZE, STAGE5_BOSS_BODY_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS, 1);
 }
@@ -69,7 +72,7 @@ void CObjStage5Boss::Action()
 		if (m_time % 100 == 0)
 		{
 			//何もしていないので攻撃モードをランダムで決める
-			m_attack_mode = 3;// GetRandom(1, 4);
+			m_attack_mode = 0;// GetRandom(1, 4);
 			m_time = 0;//タイムの初期化
 		}
 		break;

@@ -99,28 +99,49 @@ void CObjFallingLift::HeroRide()
 				objhero->SetVecY(4.0f);							//主人公のY方向の移動を3にする
 			}
 			//左側が当たっていれば
-			if (145.5f <= r && r <= 180.0f)
+			if (145.5f <= r && r <= 210.0f)
 			{
 				m_get_on_flag = false;							//「主人公は乗っていない」と識別する。
-				//左に反発する処理
-				objhero->SetPosX(m_px - HERO_SIZE_WIDTH+0.8f);	//主人公の位置をブロックの左にする
-				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				//主人公が右側向いているとき
+				if (objhero->GetPosture() == 0.0f)
+				{
+					//左に反発する処理
+					objhero->SetPosX(m_px - 49.0f);	//主人公の位置をブロックの左にする
+					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				}
+				//主人公が左向いている時
+				else
+				{
+					//左に反発する処理
+					objhero->SetPosX(m_px - 62.0f);	//主人公の位置をブロックの左にする
+					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				}
 			}
 			//右側が当たっていれば
-			if (0.0f <= r && r <= 33.5f )
+			if (0.0f <= r && r <= 33.5f||335.0f<r&&r<360.0f )
 			{
-				m_get_on_flag = false;							//「主人公は乗っていない」と識別する。
-				//右に反発する処理
-				objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_WIDTH);	//主人公の位置をブロックの右にする
-				objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				if (objhero->GetPosture() == 1.0)
+				{
+					m_get_on_flag = false;//「主人公は乗っていない」と識別する。
+					//右に反発する処理
+					objhero->SetPosX(m_px + 177.0f);//主人公の位置をブロックの右にする
+					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				}
+				else
+				{
+					m_get_on_flag = false;//「主人公は乗っていない」と識別する。
+					//右に反発する処理
+					objhero->SetPosX(m_px + 190.0f);	//主人公の位置をブロックの右にする
+					objhero->SetVecX(0.0f);//主人公のX方向の移動を０にする
+				}
 			}
-
+			
 			//下側があたっていれば
-			if (180.0f < r && r < 360.0f)
+			if (210.0f < r && r < 335.0f)
 			{
 				m_get_on_flag = false;							//「主人公は乗っていない」と識別する。
 				//下に反発する処理
-				objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの下にする
+				objhero->SetPosY(m_py + 49.5f);//主人公の位置をブロックの下にする
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 			}
 		}

@@ -41,9 +41,9 @@ void CSceneMain::InitScene()
 		return;
 	}
 
-	//デバッグ用ステージ番号調整用
-	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 5;
+	////デバッグ用ステージ番号調整用
+	//UserData* s = (UserData*)Save::GetData();
+	//s->stagenum = 5;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -68,7 +68,8 @@ void CSceneMain::InitScene()
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
 	//------------------------------
-
+	/*CObjFallingLift* objfallinglift = new CObjFallingLift(5, 20);
+	Objs::InsertObj(objfallinglift, OBJ_FALLING_LIFT, 10);*/
 
 	////当たり判定まだなのでため置いていてください
 	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
@@ -78,9 +79,9 @@ void CSceneMain::InitScene()
 	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
 	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
 
-	////ステージ５ボス	デバッグで使うためおいといてください
-	//CObjStage5Boss* p = new CObjStage5Boss(4, 10);
-	//Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);
+	//ステージ５ボス	デバッグで使うためおいといてください
+	/*CObjStage5Boss* p = new CObjStage5Boss(4, 10);
+	Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);*/
 
 
 	//
@@ -318,7 +319,7 @@ void CSceneMain::ImageDataLoading()
 	//ステージ５ボス眼球
 	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
 	//ステージ５ボス腕
-	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
+	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_1280);
 	//金網
 	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
 }
