@@ -68,8 +68,8 @@ void CSceneMain::InitScene()
 	//—v‚ç‚ñ‚Ì--------------------------------------------------
 	//—v‚é‚Ì--------------------------------------------------
 	//------------------------------
-	CObjFallingLift* objfallinglift = new CObjFallingLift(5, 20);
-	Objs::InsertObj(objfallinglift, OBJ_FALLING_LIFT, 10);
+	/*CObjFallingLift* objfallinglift = new CObjFallingLift(5, 20);
+	Objs::InsertObj(objfallinglift, OBJ_FALLING_LIFT, 10);*/
 
 	////“–‚½‚è”»’è‚Ü‚¾‚È‚Ì‚Å‚½‚ß’u‚¢‚Ä‚¢‚Ä‚­‚¾‚³‚¢
 	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
