@@ -289,22 +289,40 @@ void CObjRollBlock::HeroHit()
 						objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
 				}
 				//左側が当たっていれば
-				else if (145.0f <= r && r <= 180.0f)
+				else if (145.0f <= r && r <= 210.0f)
 				{
 					//左に反発する処理
-					objhero->SetPosX(m_px - 64.8f);//主人公の位置をブロックの左にする
-					objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					//リフトにのめりこまないようにする処理
+					if (objhero->GetPosture() == 0.0f)//右向き
+					{
+						objhero->SetPosX(m_px - 48.5f);//主人公の位置をブロックの左にする
+						objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					}
+					else
+					{
+						objhero->SetPosX(m_px - 60.5f);//主人公の位置をブロックの左にする
+						objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					}
 				}
 				//右側が当たっていれば
-				else if (0.0f <= r && r <= 35.0f)
+				else if (0.0f <= r && r <= 35.0f || 360.0f > r && 340.0f < r)
 				{
 					//右に反発する処理
-					objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_WIDTH);//主人公の位置をブロックの右にする
-					objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					//リフトにのめりこまないようにする処理
+					if (objhero->GetPosture() == 0.0f)//右向き
+					{
+						objhero->SetPosX(m_px + 190.5f);//主人公の位置をブロックの左にする
+						objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					}
+					else
+					{
+						objhero->SetPosX(m_px + 180.5f);//主人公の位置をブロックの左にする
+						objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					}
 				}
 
 				//下側があたっていれば
-				else if (180.0f < r && r < 360.0f)
+				else if (180.0f < r && r < 340.0f)
 				{
 					//下に反発する処理
 					objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの下にする
@@ -328,16 +346,35 @@ void CObjRollBlock::HeroHit()
 				//左側が当たっていれば
 				else if (112.0f <= r && r <= 250.0f)
 				{
-					//左に反発する処理
-					objhero->SetPosX(m_px - 64.8f);//主人公の位置をブロックの左にする
-					objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					//リフトにのめりこまないようにする処理
+					if (objhero->GetPosture() == 0.0f)//右向き
+					{
+						objhero->SetPosX(m_px - 48.5f);//主人公をリフトの左に行くようにする
+						objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					}
+					else//左向き
+					{
+						//めり込み防止のため左向きのときは-64.0fにする
+						//左に反発する処理
+						objhero->SetPosX(m_px - 60.5f);//主人公の位置をブロックの左にする
+						objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					}
 				}
 				//右側が当たっていれば
 				else if (0.0f < r && r < 68.0f || 290.0f < r && r < 360.0f)
 				{
 					//縦向きなら
-					objhero->SetPosX(m_px + ROLL_BLOCK_SIZE_HEIGHT);//主人公の位置をブロックの右にする
-					objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					//リフトにのめりこまないようにする処理
+					if (objhero->GetPosture() == 0.0f)//右向き
+					{
+						objhero->SetPosX(m_px + 60.5f);//主人公の位置をブロックの右にする
+						objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					}
+					else//左向き
+					{
+						objhero->SetPosX(m_px + 48.5f);//主人公の位置をブロックの右にする
+						objhero->SetVecX(objhero->GetVecX());//主人公のX方向の移動量を反転する
+					}
 				}
 
 				//下側があたっていれば

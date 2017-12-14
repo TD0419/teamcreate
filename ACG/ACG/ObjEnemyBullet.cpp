@@ -2,6 +2,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\Audio.h"
+#include "GameL\UserData.h"
 
 #include "GameHead.h"
 #include "ObjEnemyBullet.h"
@@ -10,7 +11,64 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
+//コンストラクタ（プレイヤーの方向に）
+CObjEnemyBullet::CObjEnemyBullet(float x, float y)
+{
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//初期位置を決める
+	m_px = x;
+	m_py = y;
+	
+	//速さを決める
+	m_speed = 6.5f;
+
+	//敵用弾丸にスクロールの影響を適用させる
+	x -= objmap->GetScrollX();
+	y -= objmap->GetScrollY();
+
+	//主人公との角度の計算を行う-----------------------------
+	//主人公のオブジェクト情報を持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	float hero_x = objhero->GetPosX() - objmap->GetScrollX();		//主人公の位置情報X取得
+	float hero_y = objhero->GetPosY() - objmap->GetScrollY();		//主人公の位置情報Y取得
+
+																	//主人公の位置ベクトル情報取得
+	float Hvector_x = hero_x - x;
+	float Hvector_y = hero_y - y;
+
+	//斜辺取得
+	float hypotenuse = sqrt(Hvector_y * Hvector_y + Hvector_x * Hvector_x);
+
+	//角度を求める
+	m_r = acosf(Hvector_x / hypotenuse);
+
+	//----------------------------------------------------------
+
+	//角度方向に弾丸を移動させる
+	m_vx = cosf(m_r) * m_speed;
+	m_r = m_r * 180.0f / 3.14f;
+
+	//主人公のY位置が上だった場合の発射角度
+	if (hero_y > y)
+	{
+		//180°～360°の値にする
+		m_r = 360 - abs(m_r);
+	}
+	//主人公のY位置が下だった場合の発射角度
+	if (hero_y < y)
+	{
+		m_vy = -sin(acosf(Hvector_x / hypotenuse)) * m_speed;
+	}
+	else
+	{
+		m_vy = sin(acosf(Hvector_x / hypotenuse)) * m_speed;
+	}
+
+}
+
+//コンストラクタ(指定した方向へ)
 CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 {
 	//マップオブジェクトを持ってくる
@@ -27,45 +85,6 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 	//敵用弾丸にスクロールの影響を適用させる
 	x -= objmap->GetScrollX();
 	y -= objmap->GetScrollY();
-
-	//主人公との角度の計算を行う-----------------------------
-	//主人公のオブジェクト情報を持ってくる
-	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hero_x = objhero->GetPosX() - objmap->GetScrollX();		//主人公の位置情報X取得
-	float hero_y = objhero->GetPosY() - objmap->GetScrollY();		//主人公の位置情報Y取得
-
-	//主人公の位置ベクトル情報取得
-	float Hvector_x = hero_x - x ;
-	float Hvector_y = hero_y - y ;
-
-	//斜辺取得
-	float hypotenuse = sqrt(Hvector_y * Hvector_y + Hvector_x * Hvector_x);
-
-	//角度を求める
-	m_r = acosf(Hvector_x / hypotenuse);
-
-	//----------------------------------------------------------
-
-	//角度方向に弾丸を移動させる
-	m_vx = cosf(m_r) * m_speed;
-	m_r = m_r * 180.0f / 3.14f;
-
-	//マウスのY位置が主人公のY位置より下だったら
-	if (hero_y > y)
-	{
-		//180°～360°の値にする
-		m_r = 360 - abs(m_r);
-	}
-	//マウスのY位置が初期Y位置より上
-	if (hero_y < y)
-	{
-		m_vy = -sin(acosf(Hvector_x / hypotenuse)) * m_speed;
-	}
-	else
-	{
-		m_vy = sin(acosf(Hvector_x / hypotenuse)) * m_speed;
-	}
-	
 }
 
 //イニシャライズ
@@ -85,19 +104,22 @@ void CObjEnemyBullet::Action()
 	//画面外なら
 	if(WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE)==false)
 	{
-		//主人公とボスのオブジェクトをもってくる
-		CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-		//主人公とボスのXの位置を持ってくる
-		float boss_x = objboss->GetPosX();
-		float hero_x = objhero->GetPosX();
-
-		//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
-		if (abs(boss_x - m_px) > abs(boss_x - hero_x))
+		if ((((UserData*)Save::GetData())->stagenum) == 2)
 		{
-			WindowOutDelete(this);//削除処理
-			return;
+			//主人公とボスのオブジェクトをもってくる
+			CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+			CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+			//主人公とボスのXの位置を持ってくる
+			float boss_x = objboss->GetPosX();
+			float hero_x = objhero->GetPosX();
+
+			//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
+			if (abs(boss_x - m_px) > abs(boss_x - hero_x))
+			{
+				WindowOutDelete(this);//削除処理
+				return;
+			}
 		}
 	}
 

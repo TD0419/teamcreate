@@ -5,17 +5,33 @@
 
 #include "GameHead.h"
 #include "ObjDiffusionBullet.h"
+#include "ObjDiffusionSource.h"
 #include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ
+//コンストラクタ(砲台用)
 CObjDiffusionBullet::CObjDiffusionBullet(float x, float y, int r)
 {
 	m_px = x ;
 	m_py = y ;
 	m_r  = (float)r;
+	m_type = CANNON;
+	m_speed = 5.5f;
+
+}
+
+//コンストラクタ(ボス用)
+CObjDiffusionBullet::CObjDiffusionBullet(float x, float y, int r, CObjDiffusionSource* p)
+{
+	m_px = x;
+	m_py = y;
+	m_r = (float)r;
+	m_type = BOSS;
+	mp_base = p;
+	m_speed = 3.0f;
+
 }
 
 //イニシャライズ
@@ -24,7 +40,6 @@ void CObjDiffusionBullet::Init()
 	//飛んでいく方向の計算
 	m_vx = cos(3.14f / 180.0f*m_r);
 	m_vy = sin(3.14f / 180.0f*m_r);
-	m_speed = 5.5f;
 	
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 16.0f, 16.0f, ELEMENT_ENEMY, OBJ_DIFFUSION_BULLET, 1);
@@ -41,20 +56,45 @@ void CObjDiffusionBullet::Action()
 	//画面外なら
 	if(WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE)==false)
 	{
-		//主人公と拡散砲台のオブジェクトをもってくる
-		CObjDiffusionCannon* objcannon = (CObjDiffusionCannon*)Objs::GetObj(OBJ_DIFFUSION_CANNON);
-		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-		//主人公と拡散砲台のXの位置を持ってくる
-		float cannon_y = objcannon->GetPosY();
-		float hero_y = objhero->GetPosY();
-
-		//拡散砲台と弾の距離　が　拡散砲台とヒーローの距離　より大きければ
-		if (abs(cannon_y - m_py) > abs(cannon_y - hero_y))
+		switch (m_type)
 		{
-			WindowOutDelete(this);//削除処理
-			return;
+			case CANNON:
+			{
+				//主人公と拡散砲台のオブジェクトをもってくる
+				CObjDiffusionCannon* objcannon = (CObjDiffusionCannon*)Objs::GetObj(OBJ_DIFFUSION_CANNON);
+				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+				//主人公と拡散砲台のYの位置を持ってくる
+				float cannon_y = objcannon->GetPosY();
+				float hero_y = objhero->GetPosY();
+
+				//拡散砲台と弾の距離　が　拡散砲台とヒーローの距離　より大きければ
+				if (abs(cannon_y - m_py) > abs(cannon_y - hero_y))
+				{
+					WindowOutDelete(this);//削除処理
+					return;
+				}
+				break;
+			}
+			case BOSS:
+			{
+				//主人公のオブジェクトをもってくる
+				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+				//主人公と打ち出し源の位置Yを持ってくる
+				float base_y = mp_base->GetPosY();
+				float hero_y = objhero->GetPosY();
+
+				//拡散砲台と弾の距離　が　拡散砲台とヒーローの距離　より大きければ
+				if (abs(base_y - m_py) > abs(base_y - hero_y))
+				{
+					WindowOutDelete(this);//削除処理
+					return;
+				}
+				break;
+			}
 		}
+
 	}
 
 	//拡散弾HitBox更新用ポインター取得

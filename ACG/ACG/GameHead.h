@@ -50,6 +50,7 @@ enum OBJ_NAME
 	OBJ_FALLING_BLOCK,	//ステージ5ボス戦専用落ちるブロック
 	OBJ_STAGE5_BOSS_ARMS,//ステージ5ボスの腕
 	OBJ_WIRE_MESH,//ステージ5の金網
+	OBJ_DIFFUSION_SOURCE,//拡散弾の源
 };
 //------------------------------------------------
 
@@ -86,7 +87,7 @@ struct UserData
 #define PIXEL_SIZE_H	(768)	//縦
 
 //マップサイズ
-#define MAP_X_MAX (100)	//mapの最大値X←ステージによって変動するようにする必要がある
+#define MAP_X_MAX (111)	//mapの最大値X←ステージによって変動するようにする必要がある
 #define MAP_Y_MAX (24)	//mapの最大値Y
 #define MAP_WINDOW_MAX_X (int)( WINDOW_SIZE_W/ BLOCK_SIZE )	//画面内に収まるmapの最大値X(16)
 #define MAP_WINDOW_MAX_Y (int)( WINDOW_SIZE_H/ BLOCK_SIZE )	//画面内に収まるmapの最大値Y(12)
@@ -178,6 +179,7 @@ enum GRAPHIC_ID
 	GRA_ROLL_BLOCK2,	//回転ブロック（パターン2）
 	GRA_TITLE,			//タイトル
 	GRA_GAME_OVER,		//ゲームオーバー
+	GRA_GAME_CLEAR,		//ゲームクリア
 	GRA_COCONUT,		//ココナッツ
 	GRA_NEEDLE,         //針
 	GRA_NEEDLE_STAND,   //針の土台
@@ -192,6 +194,7 @@ enum GRAPHIC_ID
 	GRA_STAGE5_BOSS_ARMS_ALL,      	//ステージ5のボス腕(左右腕)
 	GRA_FALLING_LIFT,	//落ちるリフト
 	GRA_HAND_LIFT,//手動で引っ張るリフト
+	GRA_DIFFUSION_SOURCE,//拡散弾を撃つ弾
 };
 
 //音楽(BGM)
@@ -277,6 +280,7 @@ enum MUSIC
 #define STAGE5_BOSS_ELECTRIC_HEIGHT	 (256.0f)	//ステージ5のボス胴腕接続電気サイズ(縦)
 #define WIRE_MESH_SIZE_WIDTH	(640.0f) //金網の横サイズ
 #define WIRE_MESH_SIZE_HEIGHT	(64.0f) //金網の縦サイズ
+#define DIFFUSION_SOURCE_SIZE	(32.0f)//拡散弾を撃つ弾のサイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -338,6 +342,7 @@ enum MUSIC
 #include "ObjFallingLift.h"		//乗ると落ちるリフト
 #include "ObjFallingBlock.h"	//ステージ5ボス戦専用落ちるブロック
 #include"ObjWireMesh.h"//ステージ5の金網
+#include "ObjDiffusionSource.h"//ステージ５ボスの拡散弾の源
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
@@ -350,4 +355,5 @@ enum MUSIC
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
 #define SET_GAME_START CSceneTitle
+
 //-----------------------------------------------

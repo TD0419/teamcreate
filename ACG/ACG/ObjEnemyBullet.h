@@ -10,7 +10,8 @@ using namespace GameL;
 class CObjEnemyBullet :public CObj
 {
 public:
-	CObjEnemyBullet(float x, float y, float rad);  //コンストラクタ
+	CObjEnemyBullet(float x, float y);  //コンストラクタ（プレイヤーの方向に）
+	CObjEnemyBullet(float x, float y, float rad);  //コンストラクタ(方向指定)
 	~CObjEnemyBullet() {};	        //デストラクタ
 	void Init();	                //イニシャライズ
 	void Action();	                //アクション
