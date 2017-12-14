@@ -31,6 +31,9 @@ void CObjStage5Boss::Init()
 	//たいみんぐ管理
 	m_time=0;
 
+	//攻撃パターン3のフラグ
+	m_attack3_flag=false;
+
 	//音楽
 	//Audio::Start(BOSS);
 	//Audio::Stop(STAGE);
@@ -52,6 +55,9 @@ void CObjStage5Boss::Action()
 {
 	m_time++;
 
+	if (m_time > 10000)
+		m_time = 0;
+	
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -60,9 +66,12 @@ void CObjStage5Boss::Action()
 		//何もしていない状態
 	case 0:
 	{
-		//何もしていないので攻撃モードをランダムで決める
-		m_attack_mode = GetRandom(1, 4);
-		m_time = 0;
+		if (m_time % 100 == 0)
+		{
+			//何もしていないので攻撃モードをランダムで決める
+			m_attack_mode = 3;// GetRandom(1, 4);
+			m_time = 0;//タイムの初期化
+		}
 		break;
 	}
 		//主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす攻撃
@@ -77,17 +86,33 @@ void CObjStage5Boss::Action()
 	}
 	case 2:	//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
 	{
-		if (m_time % 200 == 0)
+		if (m_time % 300 == 150)
 		{
 			m_boos_arm_left->DiffusionAttack(GetRandom(60, 180));
+		}
+		else if (m_time % 300 == 0)
+		{
 			m_boos_arm_right->DiffusionAttack(GetRandom(60, 180));
 			m_attack_mode = 0;
 		}
+
 		break;
 	}
-		//ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
-	case 3:
+	case 3://ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
 	{
+		if (m_attack3_flag == false)//フラグがオフなら
+		{
+			m_vx = -1.0f;//移動量を左に設定
+			m_attack3_flag = true;//フラグをtrueにする
+		}
+
+		//60フレームに一度
+		if (m_time % 60 == 0)
+		{
+			CObjEnemyBullet* p = new CObjEnemyBullet(m_px+ EYE_CORRECTION_WIDTH+STAGE5_BOSS_EYE_SIZE/2.0f,m_py+ EYE_CORRECTION_HEIGHT+ STAGE5_BOSS_EYE_SIZE / 2.0f);
+			Objs::InsertObj(p, OBJ_ENEMY_BULLET, 9);
+		}
+
 		break;
 	}
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
@@ -99,6 +124,13 @@ void CObjStage5Boss::Action()
 		break;
 	}
 
+	//移動
+	m_px += m_vx;
+
+	//腕にも移動量を渡す
+	m_boos_arm_right->SetVecX(m_vx);
+	m_boos_arm_left->SetVecX(m_vx);
+	
 	//当たり判定更新
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 
@@ -193,8 +225,12 @@ void CObjStage5Boss::Draw()
 	
 	//描画
 	Draw::Draw(GRA_STAGE5_BOSS_EYE, &src, &dst, color, 0.0f);
-	
+}
 
+//ラストウォールと当たったときの処理
+void CObjStage5Boss::LastWallHit()
+{
+	m_vx *= -1.0f;//移動ベクトルを逆にする。
 }
 
 //ランダムで値を決める関数

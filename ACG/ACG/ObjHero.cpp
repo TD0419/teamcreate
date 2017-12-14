@@ -774,33 +774,33 @@ void CObjHero::HitScene()
 		m_hero_die_water = true; //主人公の水にあたったときの溺れるフラグをONにする
 	}
 
-	//敵オブジェクトと衝突していれば
-	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
-	{
-		m_hero_die_enemy = true; //主人公の敵にあたったときの死亡フラグをONにする
-	}
+	////敵オブジェクトと衝突していれば
+	//if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	//{
+	//	m_hero_die_enemy = true; //主人公の敵にあたったときの死亡フラグをONにする
+	//}
 
-	//主人公の敵に当たったときの死亡フラグがONなら死亡アニメーションをする
-	if (m_hero_die_enemy == true)
-	{
-		//主人公が敵に当たった時のアニメーションタイムを進める
-		m_ani_time_enemy_die += 1;
-		//アニメーションの感覚管理
-		if (m_ani_time_enemy_die > m_ani_max_time_enemy_die)
-		{
-			m_ani_frame_enemy_die += 1;
-			m_ani_time_enemy_die = 0;
-		}
+	////主人公の敵に当たったときの死亡フラグがONなら死亡アニメーションをする
+	//if (m_hero_die_enemy == true)
+	//{
+	//	//主人公が敵に当たった時のアニメーションタイムを進める
+	//	m_ani_time_enemy_die += 1;
+	//	//アニメーションの感覚管理
+	//	if (m_ani_time_enemy_die > m_ani_max_time_enemy_die)
+	//	{
+	//		m_ani_frame_enemy_die += 1;
+	//		m_ani_time_enemy_die = 0;
+	//	}
 
-		//最後までアニメーションが進むと主人公削除
-		if (m_ani_frame_enemy_die == 4)
-		{
-			this->SetStatus(false);		//自身を削除
-			Hits::DeleteHitBox(this);	//ヒットボックスを削除
+	//	//最後までアニメーションが進むと主人公削除
+	//	if (m_ani_frame_enemy_die == 4)
+	//	{
+	//		this->SetStatus(false);		//自身を削除
+	//		Hits::DeleteHitBox(this);	//ヒットボックスを削除
 
-			return;
-		}
-	}
+	//		return;
+	//	}
+	//}
 
 	//主人公の水に当たったときの溺れるフラグがONなら溺れるアニメーションをする
 	if (m_hero_die_water == true)

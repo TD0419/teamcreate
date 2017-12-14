@@ -37,6 +37,8 @@ void CObjStage5BossArms::Init()
 
 	m_arm_lower_marker_px = 0.0f;	//腕を下ろす位置を示すかどうかとそのX位置
 
+	m_hit_flag = false;
+
 	//typeの値が1のときライトアームの当たり判定表示
 	if (m_arms_type == 1)
 	{
@@ -61,10 +63,6 @@ void CObjStage5BossArms::Action()
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//位置情報更新
-	m_px += m_vx;
-	m_py += m_vy;
-
 	//アームタイプが1のとき、ライトアーム用の当たり判定表示
 	if (m_arms_type == 1)
 	{
@@ -76,6 +74,27 @@ void CObjStage5BossArms::Action()
 	{
 		//当たり判定更新
 		HitBoxUpData(Hits::GetHitBox(this), m_px + 186.0f, m_py + 138.0f);
+	}
+
+	//移動
+	m_px += m_vx;
+
+	//ラストウォールと当たっていれば
+	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
+	{
+		//衝突ふらぐがオフなら
+		if (m_hit_flag == false)
+		{
+			//ボスのオブジェクトを持ってくる
+			CObjStage5Boss* objbossbase = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+			objbossbase->LastWallHit();//ラストウォールと当たった時の処理をする
+
+			m_hit_flag = true;//ふらぐをtrueに
+		}
+	}
+	else
+	{
+		m_hit_flag = false;//ふらぐをfalseに
 	}
 
 	//弾丸とあたったらＨＰを1減らす
@@ -126,6 +145,7 @@ void CObjStage5BossArms::Action()
 	{
 		m_posture = true;
 	}
+
 }
 
 //拡散弾を打つ攻撃

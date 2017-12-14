@@ -57,12 +57,6 @@ void CObjLastWall::Init()
 //アクション
 void CObjLastWall::Action()
 {
-	//画面外なら
-	if (WindowCheck(m_px, m_py, 32.0f, 512.0f) == false)
-	{
-		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
-		return;
-	}
 	
 	//HitBoxの位置の変更
 	//引数で持ってきたオブジェクトとあたっているか調べる
