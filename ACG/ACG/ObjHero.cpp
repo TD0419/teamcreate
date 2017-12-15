@@ -201,6 +201,10 @@ void CObjHero::MoveScene()
 	{
 		m_vy = 20.0f;
 	}
+	if (Input::GetVKey(VK_RIGHT) == true)
+	{
+		m_vx = 30.0f;
+	}
 	//↑キーがおされたとき：上に下がる（デバッグ）
 	if (Input::GetVKey(VK_UP) == true)
 	{
@@ -764,6 +768,7 @@ void CObjHero::HitScene()
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	//針オブジェクトと衝突していれば
+
 	if (hit->CheckObjNameHit(OBJ_NEEDLE) != nullptr)
 	{
 		m_hero_die_enemy = true; //主人公の針にあたったときの死亡フラグをONにする
@@ -780,27 +785,18 @@ void CObjHero::HitScene()
 	//	m_hero_die_enemy = true; //主人公の敵にあたったときの死亡フラグをONにする
 	//}
 
-	////主人公の敵に当たったときの死亡フラグがONなら死亡アニメーションをする
-	//if (m_hero_die_enemy == true)
-	//{
-	//	//主人公が敵に当たった時のアニメーションタイムを進める
-	//	m_ani_time_enemy_die += 1;
-	//	//アニメーションの感覚管理
-	//	if (m_ani_time_enemy_die > m_ani_max_time_enemy_die)
-	//	{
-	//		m_ani_frame_enemy_die += 1;
-	//		m_ani_time_enemy_die = 0;
-	//	}
-
-	//	//最後までアニメーションが進むと主人公削除
-	//	if (m_ani_frame_enemy_die == 4)
-	//	{
-	//		this->SetStatus(false);		//自身を削除
-	//		Hits::DeleteHitBox(this);	//ヒットボックスを削除
-
-	//		return;
-	//	}
-	//}
+	//主人公の敵に当たったときの死亡フラグがONなら死亡アニメーションをする
+	if (m_hero_die_enemy == true)
+	{
+		//主人公が敵に当たった時のアニメーションタイムを進める
+		m_ani_time_enemy_die += 1;
+		//アニメーションの感覚管理
+		if (m_ani_time_enemy_die > m_ani_max_time_enemy_die)
+		{
+			m_ani_frame_enemy_die += 1;
+			m_ani_time_enemy_die = 0;
+		}
+	}
 
 	//主人公の水に当たったときの溺れるフラグがONなら溺れるアニメーションをする
 	if (m_hero_die_water == true)
@@ -814,15 +810,6 @@ void CObjHero::HitScene()
 		{
 			m_ani_frame_water_die += 1;
 			m_ani_time_water_die = 0;
-		}
-
-		//最後までアニメーションが進むと主人公削除
-		if (m_ani_frame_water_die == 3)
-		{
-			this->SetStatus(false);		//自身を削除
-			Hits::DeleteHitBox(this);	//ヒットボックスを削除
-
-			return;
 		}
 	}
 }
