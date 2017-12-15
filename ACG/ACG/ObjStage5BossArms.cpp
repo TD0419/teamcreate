@@ -31,9 +31,9 @@ void CObjStage5BossArms::Init()
 
 	m_posture = false;//現在の姿　最初は閉じている
 
-	m_ani_frame = 0;	//描画アニメーション
-	m_ani_max_time = 10;//アニメーションフレーム動作間隔最大値
-	m_ani_time = 0;		//アニメーションフレーム動作間隔
+	m_ani_frame_claw = 0;	//描画アニメーション(爪)
+	m_ani_max_time_claw = 10;//アニメーションフレーム動作間隔最大値(爪)
+	m_ani_time_claw = 0;		//アニメーションフレーム動作間隔(爪)
 
 	m_arm_lower_marker_px = 0.0f;	//腕を下ろす位置を示すかどうかとそのX位置
 
@@ -126,41 +126,42 @@ void CObjStage5BossArms::Action()
 		return;
 	}
 	
+	//爪のアニメーション処理-----------------------------------
 	//入力姿と現在の姿が違う
 	if (m_posture != m_input_posture)
 	{
 		//アニメーション動作間隔を進める
-		m_ani_time++;
+		m_ani_time_claw++;
 		//アニメーション動作間隔最大値以上なら
-		if (m_ani_time >= m_ani_max_time)
+		if (m_ani_time_claw >= m_ani_max_time_claw)
 		{
 			//アニメーション動作間隔を０にする
-			m_ani_time = 0;
+			m_ani_time_claw = 0;
 			//入力姿が開いている
 			if (m_input_posture == true)
 			{
 				//描画フレームを戻す
-				m_ani_frame++;
+				m_ani_frame_claw++;
 			}
 			//入力姿が閉じている
 			else
 			{
 				//描画フレームを進める
-				m_ani_frame--;
+				m_ani_frame_claw--;
 			}
 		}
 	}
 	//描画フレームが０なら閉じている
-	if (m_ani_frame == 0)
+	if (m_ani_frame_claw == 0)
 	{
 		m_posture = false;
 	}
 	//描画フレームは２なら開いている
-	if(m_ani_frame == 2)
+	if(m_ani_frame_claw == 1)
 	{
 		m_posture = true;
 	}
-
+	//---------------------------------------------------------
 }
 
 //拡散弾を打つ攻撃
@@ -218,7 +219,7 @@ void CObjStage5BossArms::Draw()
 	{
 		//切り取り位置
 		src.m_top = STAGE5_BOSS_ARMS_HEIGHT_SIZE;
-		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame;
+		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame_claw;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
@@ -238,7 +239,7 @@ void CObjStage5BossArms::Draw()
 	{
 		//切り取り位置
 		src.m_top = 0.0f;
-		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame;
+		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame_claw;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
@@ -258,7 +259,7 @@ void CObjStage5BossArms::Draw()
 		float marker_color[4] = { 1.0f,0.0f,0.0f,0.2f };
 
 		//腕を下ろすX位置をマップ番号に当てはめたときのX位置
-		int map_x = (int)m_arm_lower_marker_px / BLOCK_SIZE;
+		int map_x = (int)(m_arm_lower_marker_px / BLOCK_SIZE);
 
 		//マーカーを四角形で出すのでその高さ
 		float marker_h= WINDOW_SIZE_H;
