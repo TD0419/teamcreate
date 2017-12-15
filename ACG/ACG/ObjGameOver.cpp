@@ -114,19 +114,18 @@ void CObjGameOver::Draw()
 	//描画
 	Draw::Draw(GRA_GAME_OVER, &src, &dst, color_white, 0.0f);
 	//文字描画
-	Font::StrDraw(L"GAME OVER", 270.0f, 46.0f, 105.0f, color_white);
-	
+	Font::StrDraw(L"GAME OVER", WINDOW_SIZE_W - 754.0f, WINDOW_SIZE_H - 722.0f, FONT_SIZE_GO + 51.0f, color_white);
 	//→がContinueを指している場合は、Continueの文字を黄色にする。Titleの文字は白色。
 	if (m_mode == 0)
 	{
-		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 42.0f, TEXT_SIZE, color_yellow);
-		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 112.0f, TEXT_SIZE -10.0f, color_white);
+		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 42.0f, FONT_SIZE_GO, color_yellow);
+		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 112.0f, FONT_SIZE_GO -10.0f, color_white);
 	}
 	//→がTitleを指している場合は、Titleの文字を黄色にする。Continueの文字は白色。
 	else if (m_mode == 1)
 	{
-		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 42.0f, TEXT_SIZE-10.0f, color_white);
-		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 112.0f, TEXT_SIZE, color_yellow);
+		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 42.0f, FONT_SIZE_GO -10.0f, color_white);
+		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 112.0f, FONT_SIZE_GO, color_yellow);
 
 	}
 
