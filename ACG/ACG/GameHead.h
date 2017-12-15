@@ -357,6 +357,6 @@ enum MUSIC
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneTitle
 
+#define SET_GAME_START CSceneTitle //タイトル画面
 //-----------------------------------------------
