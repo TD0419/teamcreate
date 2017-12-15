@@ -42,8 +42,8 @@ void CSceneMain::InitScene()
 	}
 
 	////デバッグ用ステージ番号調整用
-	//UserData* s = (UserData*)Save::GetData();
-	//s->stagenum = 5;
+	UserData* s = (UserData*)Save::GetData();
+	s->stagenum = 5;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -83,8 +83,6 @@ void CSceneMain::InitScene()
 	/*CObjStage5Boss* p = new CObjStage5Boss(4, 10);
 	Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);*/
 
-
-	//
 	//ステージ5ボス作成(爪の開閉アニメーション確認用)
 	/*CObjStage5Boss* objstage5_boss = new CObjStage5Boss(6, 12);
 	Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);*/
@@ -173,7 +171,6 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
-
 		break;
 	}
 	//ステージ２
@@ -249,11 +246,10 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
 		//拡散弾を撃つ弾
 		Draw::LoadImageW(L"Image\\Boss_Diffusion_Glass.png", GRA_DIFFUSION_SOURCE, TEX_SIZE_32);
-
-
-		break;
-
 		
+		//ボスの拡散弾
+		Draw::LoadImageW(L"Image\\Diffusion_Bullet.png", GRA_BOSS_DIFFUSION, TEX_SIZE_16);
+		break;		
 	}
 	////画像が用意されていない場合
 	//default:
@@ -355,7 +351,7 @@ void CSceneMain::AudioDataLoading()
 		//水の流れる音
 		Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 		//ゴリラの投擲音
-		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw.wav", EFFECT);
+		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla Throw.wav", EFFECT);
 		break;
 
 	case 5:

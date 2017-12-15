@@ -115,9 +115,6 @@
     <Filter Include="ソース ファイル\Main\DiffusionCannon">
       <UniqueIdentifier>{80252c72-6513-4b03-a027-1d7bd337f358}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\FallingLift">
-      <UniqueIdentifier>{41587347-ca41-4c9a-927c-923071064be6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\FallingBlock">
       <UniqueIdentifier>{6c3d54fa-22ae-4188-b990-8b3878b2bd86}</UniqueIdentifier>
     </Filter>
@@ -135,6 +132,9 @@
     </Filter>
     <Filter Include="ソース ファイル\Scene\GameOver">
       <UniqueIdentifier>{fe99c31b-e2da-4cb5-83ac-c221d1ada5e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\FallingLift">
+      <UniqueIdentifier>{41587347-ca41-4c9a-927c-923071064be6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -304,7 +304,7 @@
       <Filter>ソース ファイル\Main\DiffusionCannon</Filter>
     </ClInclude>
     <ClInclude Include="ObjFallingLift.h">
-      <Filter>ソース ファイル\FallingLift</Filter>
+      <Filter>ソース ファイル\Main\FallingLift</Filter>
     </ClInclude>
     <ClInclude Include="ObjTitle.h">
       <Filter>ソース ファイル\Scene\Title</Filter>
@@ -492,7 +492,7 @@
       <Filter>ソース ファイル\Main\DiffusionCannon</Filter>
     </ClCompile>
     <ClCompile Include="ObjFallingLift.cpp">
-      <Filter>ソース ファイル\FallingLift</Filter>
+      <Filter>ソース ファイル\Main\FallingLift</Filter>
     </ClCompile>
     <ClCompile Include="ObjTitle.cpp">
       <Filter>ソース ファイル\Scene\Title</Filter>

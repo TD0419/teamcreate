@@ -71,7 +71,7 @@ bool WindowCheck(float m_px, float m_py,float obj_size_x, float obj_size_y)
 void WindowOutDelete(CObj* obj_p)
 {
 	obj_p->SetStatus(false);		//自身に消去命令を出す。
-	Hits::DeleteHitBox(obj_p);	//所持するHitBoxを除去。
+	Hits::DeleteHitBox(obj_p);		//所持するHitBoxを除去。
 }
 
 
