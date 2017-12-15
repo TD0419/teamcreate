@@ -41,9 +41,9 @@ void CSceneMain::InitScene()
 		return;
 	}
 
-	//デバッグ用ステージ番号調整用
-	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 5;
+	////デバッグ用ステージ番号調整用
+	//UserData* s = (UserData*)Save::GetData();
+	//s->stagenum = 5;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -68,7 +68,8 @@ void CSceneMain::InitScene()
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
 	//------------------------------
-
+	/*CObjFallingLift* objfallinglift = new CObjFallingLift(5, 20);
+	Objs::InsertObj(objfallinglift, OBJ_FALLING_LIFT, 10);*/
 
 	////当たり判定まだなのでため置いていてください
 	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
@@ -78,12 +79,10 @@ void CSceneMain::InitScene()
 	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
 	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
 
-	////ステージ５ボス	デバッグで使うためおいといてください
-	//CObjStage5Boss* p = new CObjStage5Boss(4, 10);
-	//Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);
+	//ステージ５ボス	デバッグで使うためおいといてください
+	/*CObjStage5Boss* p = new CObjStage5Boss(4, 10);
+	Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);*/
 
-
-	//
 	//ステージ5ボス作成(爪の開閉アニメーション確認用)
 	/*CObjStage5Boss* objstage5_boss = new CObjStage5Boss(6, 12);
 	Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);*/
@@ -172,7 +171,6 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 		//ブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
-
 		break;
 	}
 	//ステージ２
@@ -248,11 +246,7 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
 		//拡散弾を撃つ弾
 		Draw::LoadImageW(L"Image\\Boss_Diffusion_Glass.png", GRA_DIFFUSION_SOURCE, TEX_SIZE_32);
-
-
-		break;
-
-		
+		break;		
 	}
 	////画像が用意されていない場合
 	//default:
@@ -318,7 +312,7 @@ void CSceneMain::ImageDataLoading()
 	//ステージ５ボス眼球
 	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
 	//ステージ５ボス腕
-	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
+	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_1280);
 	//金網
 	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
 }

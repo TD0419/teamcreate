@@ -11,7 +11,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//コンストラクタ（プレイヤーの方向に）
+//コンストラクタ（BOSS用主人公の方向へ）
 CObjEnemyBullet::CObjEnemyBullet(float x, float y)
 {
 	//マップオブジェクトを持ってくる
@@ -34,7 +34,7 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y)
 	float hero_x = objhero->GetPosX() - objmap->GetScrollX();		//主人公の位置情報X取得
 	float hero_y = objhero->GetPosY() - objmap->GetScrollY();		//主人公の位置情報Y取得
 
-																	//主人公の位置ベクトル情報取得
+	//主人公の位置ベクトル情報取得
 	float Hvector_x = hero_x - x;
 	float Hvector_y = hero_y - y;
 
@@ -43,7 +43,6 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y)
 
 	//角度を求める
 	m_r = acosf(Hvector_x / hypotenuse);
-
 	//----------------------------------------------------------
 
 	//角度方向に弾丸を移動させる
@@ -65,10 +64,9 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y)
 	{
 		m_vy = sin(acosf(Hvector_x / hypotenuse)) * m_speed;
 	}
-
 }
 
-//コンストラクタ(指定した方向へ)
+//コンストラクタ(ギミック用　指定した方向へ)
 CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 {
 	//マップオブジェクトを持ってくる
@@ -90,6 +88,13 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
 //イニシャライズ
 void CObjEnemyBullet::Init()
 {
+	m_delete_flag = false;
+
+	m_hit_up = false;
+	m_hit_right = false;
+	m_hit_left = false;
+	m_hit_down = false;
+	
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
 }
@@ -104,23 +109,61 @@ void CObjEnemyBullet::Action()
 	//画面外なら
 	if(WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE)==false)
 	{
-		if ((((UserData*)Save::GetData())->stagenum) == 2)
+		switch ((((UserData*)Save::GetData())->stagenum))
 		{
-			//主人公とボスのオブジェクトをもってくる
-			CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-			CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-			//主人公とボスのXの位置を持ってくる
-			float boss_x = objboss->GetPosX();
-			float hero_x = objhero->GetPosX();
-
-			//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
-			if (abs(boss_x - m_px) > abs(boss_x - hero_x))
+			case 2:	//ステージ2(ボス)
 			{
-				WindowOutDelete(this);//削除処理
-				return;
+				//主人公とボスのオブジェクトをもってくる
+				CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+				//主人公とボスのXの位置を持ってくる
+				float boss_x = objboss->GetPosX();
+				float hero_x = objhero->GetPosX();
+
+				//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
+				if (abs(boss_x - m_px) > abs(boss_x - hero_x))
+					m_delete_flag = true;//削除フラグをオンにする
+
+				break;
+			}
+			case 5:	//ステージ５
+			{
+				CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+				//主人公とボスのXの位置を持ってくる
+				float boss_y = objboss->GetPosY();
+				float hero_y = objhero->GetPosY();
+
+				//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
+				if (abs(boss_y - m_py) > abs(boss_y - hero_y))
+					m_delete_flag = true;//削除フラグをオンにする
+
+				break;
 			}
 		}
+	}
+
+	if (m_delete_flag == true)	//削除フラグがオンなら
+	{
+		WindowOutDelete(this);//削除処理
+		return;
+	}
+	
+	//ブロックオブジェクトを持ってくる
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	//ブロックとの当たり判定
+	objblock->AllBlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+
+	//ブロックとあたっていれば削除する
+	if (m_hit_up == true || m_hit_down == true || m_hit_right == true || m_hit_left == true)
+	{
+		this->SetStatus(false);		//自身に消去命令を出す。
+		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		return;
 	}
 
 	//弾丸のHitBox更新用ポインター取得
@@ -146,6 +189,7 @@ void CObjEnemyBullet::Action()
 	{
 		return;
 	}
+
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }

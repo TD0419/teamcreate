@@ -18,7 +18,7 @@ void CObjGameOver::Init()
 	m_mode = 0;				//モード選択変数の初期化
 	m_keypush_flag = true;	//キーフラグの初期化
 	m_enter_key_flag = true;
-	m_text_color = false;	//false…白色の文字  ture…黄色の文字
+	
 
 	//文字のグラフィック作成
 	Font::SetStrTex(L"GAME OVER");
@@ -40,20 +40,20 @@ void CObjGameOver::Action()
 		//1以上　且つ　キーフラグがtrue　なら
 		if (m_mode >= 1 && m_keypush_flag == true)
 		{
-			m_mode--;	//モード番号を1減らす
+			m_mode-=1;	//モード番号を1減らす
 			m_keypush_flag = false;	//キーフラグをオフにする
-			m_text_color = false;//文字を白色にする
+			
 		}
 	}
 	//Sキー　又は　↓キーが押された時
 	else if (Input::GetVKey('S') == true || Input::GetVKey(VK_DOWN) == true)
 	{
-		//1以下　且つ　キーフラグがtrue　なら
+		//0以下　且つ　キーフラグがtrue　なら
 		if (m_mode <= 0 && m_keypush_flag == true)
 		{
-			m_mode++;	//モード番号を1増やす
+			m_mode+=1;	//モード番号を1増やす
 			m_keypush_flag = false;	//キーフラグをオフにする
-			m_text_color = true;//文字を黄色にする
+			
 		}
 	}
 	//W、S、↑、↓が押されてないとき
@@ -118,13 +118,13 @@ void CObjGameOver::Draw()
 	Font::StrDraw(L"GAME OVER", 270.0f, 46.0f, 105.0f, color_white);
 	
 	//→がContinueを指している場合は、Continueの文字を黄色にする。Titleの文字は白色。
-	if (m_text_color==false)
+	if (m_mode == 0)
 	{
 		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 38.0f, TEXT_SIZE, color_yellow);
 		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 108.0f, TEXT_SIZE, color_white);
 	}
 	//→がTitleを指している場合は、Titleの文字を黄色にする。Continueの文字は白色。
-	else if (m_text_color == true)
+	else if (m_mode == 1)
 	{
 		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 38.0f, TEXT_SIZE, color_white);
 		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 108.0f, TEXT_SIZE, color_yellow);

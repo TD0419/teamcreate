@@ -44,7 +44,7 @@ void CObjStage5BossArms::Init()
 	{
 		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
 		//																横サイズ補正値						   縦サイズ補正値
-		Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 1);
+		Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 1);
 		
 	}
 	//typeの値が1のときレフトアームの当たり判定表示
@@ -52,7 +52,7 @@ void CObjStage5BossArms::Init()
 	{
 		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
 		//																横サイズ補正値						   縦サイズ補正値
-		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
+		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
 	}
 
 }
@@ -67,13 +67,13 @@ void CObjStage5BossArms::Action()
 	if (m_arms_type == 1)
 	{
 		//当たり判定更新
-		HitBoxUpData(Hits::GetHitBox(this), m_px + 160.0f, m_py + 138.0f);
+		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 	}
 	//アームタイプが2のとき、レフトアーム用の当たり判定表示
 	else if (m_arms_type == 2)
 	{
 		//当たり判定更新
-		HitBoxUpData(Hits::GetHitBox(this), m_px + 186.0f, m_py + 138.0f);
+		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 	}
 
 	//移動
@@ -153,7 +153,7 @@ void CObjStage5BossArms::Action()
 void CObjStage5BossArms::DiffusionAttack(int limit_time)
 {
 	//拡散弾の源を作成
-	CObjDiffusionSource* p = new CObjDiffusionSource(m_px+ STAGE5_BOSS_ARMS_WIDTH_SIZE /2.0f, m_py+ STAGE5_BOSS_ARMS_HEIGHT_SIZE -87.0f,limit_time);
+	CObjDiffusionSource* p = new CObjDiffusionSource(m_px+ STAGE5_BOSS_ARMS_WIDTH_SIZE /2.0f, m_py+ STAGE5_BOSS_ARMS_HEIGHT_SIZE-10.0f,limit_time);
 	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
 }
 
@@ -184,7 +184,7 @@ void CObjStage5BossArms::ArmLowerAttack(float x, int time)
 
 		bool hit_up, hit_down, hit_left, hit_right;
 		//ブロックとの当たり判定
-		objblock->AllBlockHit(&m_px, &m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE - 360.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE - 225.0f,
+		objblock->AllBlockHit(&m_px, &m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE,
 			&hit_up, &hit_down, &hit_left, &hit_right, &m_vx, &m_vy);
 
 		
@@ -211,7 +211,7 @@ void CObjStage5BossArms::Draw()
 	{
 		//切り取り位置
 		src.m_top = STAGE5_BOSS_ARMS_HEIGHT_SIZE;
-		src.m_left = 0.0f;
+		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
@@ -230,8 +230,8 @@ void CObjStage5BossArms::Draw()
 	if (m_arms_type == 2)
 	{
 		//切り取り位置
-		src.m_top = STAGE5_BOSS_ARMS_HEIGHT_SIZE;
-		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE;
+		src.m_top = 0.0f;
+		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
