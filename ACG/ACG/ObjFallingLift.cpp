@@ -90,7 +90,7 @@ void CObjFallingLift::HeroRide()
 			float r = hit_data[i]->r;							//あたっている角度を持ってくる
 
 			//上側があたっていれば
-			if (33.5f < r && r < 145.5f)
+			if (31.0f < r && r < 145.5f)
 			{
 				m_get_on_flag = true;							//「主人公が乗っている」と識別する。
 				objhero->SetHitDown(true);						//主人公が乗っていたらm_hit_downにtrueを返す
@@ -118,7 +118,7 @@ void CObjFallingLift::HeroRide()
 				}
 			}
 			//右側が当たっていれば
-			if (0.0f <= r && r <= 33.5f||335.0f<r&&r<360.0f )
+			if (0.0f <= r && r <= 31.0f||335.0f<r&&r<360.0f )
 			{
 				if (objhero->GetPosture() == 1.0)
 				{

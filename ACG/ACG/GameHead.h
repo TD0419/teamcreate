@@ -196,6 +196,7 @@ enum GRAPHIC_ID
 	GRA_HAND_LIFT,//手動で引っ張るリフト
 	GRA_DIFFUSION_SOURCE,//拡散弾を撃つ弾
 	GRA_BOSS_DIFFUSION,//ボスの発射する拡散弾
+	GRA_STAGE5_BOSS_BULLET,//ボスの発射する弾
 };
 
 //音楽(BGM)
@@ -356,10 +357,6 @@ enum MUSIC
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-//デバッグ中。消さないで。
 
-#define SET_GAME_START CSceneTitle
-//#define SET_GAME_START CSceneGameOver
-//#define SET_GAME_START CSceneGameClear
-
+#define SET_GAME_START CSceneTitle //タイトル画面
 //-----------------------------------------------

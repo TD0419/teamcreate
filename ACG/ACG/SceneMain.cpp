@@ -41,9 +41,9 @@ void CSceneMain::InitScene()
 		return;
 	}
 
-	////デバッグ用ステージ番号調整用
+	//デバッグ用ステージ番号調整用
 	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 5;
+	s->stagenum = 2;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -68,7 +68,7 @@ void CSceneMain::InitScene()
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
 	//------------------------------
-	/*CObjFallingLift* objfallinglift = new CObjFallingLift(5, 20);
+	/*CObjFallingLift* objfallinglift = new CObjFallingLift(5, 22);
 	Objs::InsertObj(objfallinglift, OBJ_FALLING_LIFT, 10);*/
 
 	////当たり判定まだなのでため置いていてください
@@ -135,13 +135,21 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	for (int i = 0; i < MAP_Y_MAX; i++)
 	{
-		for (int j = 0; j < MAP_X_MAX; j++)
+		for (int j = 0; j < 100; j++)
 		{
 			//マップ情報を入れる
 			int w = 0;
 			//マップ情報取得
 			swscanf_s(&p.get()[count], L"%d", &w);
 			
+			if (((UserData*)Save::GetData())->stagenum != 5)
+			{
+				if (j > 99)
+				{
+					break;
+				}
+			}
+
 			//マップ情報を代入
 			map[i][j] = w;
 			
@@ -187,7 +195,7 @@ void CSceneMain::ImageDataLoading()
 		//すり抜けるブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
 		//ボス画像読み込み
-		Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1024);
+		Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1280);
 		//ゴリラの投擲物読み込み
 		Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
 		break;
@@ -249,6 +257,10 @@ void CSceneMain::ImageDataLoading()
 		
 		//ボスの拡散弾
 		Draw::LoadImageW(L"Image\\Diffusion_Bullet.png", GRA_BOSS_DIFFUSION, TEX_SIZE_16);
+
+		//ボスの打つ弾
+		Draw::LoadImageW(L"Image\\Lastboss_Bullet.png", GRA_STAGE5_BOSS_BULLET, TEX_SIZE_32);
+		
 		break;		
 	}
 	////画像が用意されていない場合

@@ -358,6 +358,11 @@ void CObjRope::RopeDelete()
 	{
 		return;
 	}
+	//回転ブロックと当たったら削除
+	if (DeleteCheckObjNameHit(hit, this, OBJ_ROLL_BLOCK))
+	{
+		return;
+	}
 	//ロープが消していいかどうかを調べる
 	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();
 
