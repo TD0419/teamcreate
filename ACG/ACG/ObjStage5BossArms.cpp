@@ -27,12 +27,10 @@ void CObjStage5BossArms::Init()
 
 	m_arm_hp = 10; //第5ボスアームのＨＰ(仮にＨＰを[10]と設定、左右のアーム共通)
 
-	m_input_posture = false;//入力された姿の初期化　最初は閉じている
-
-	m_posture = false;//現在の姿　最初は閉じている
+	m_ani_flag_claw = false;//爪の開閉アニメーションをしない
 
 	m_ani_frame_claw = 0;	//描画アニメーション(爪)
-	m_ani_max_time_claw = 10;//アニメーションフレーム動作間隔最大値(爪)
+	m_ani_max_time_claw = 5;//アニメーションフレーム動作間隔最大値(爪)
 	m_ani_time_claw = 0;		//アニメーションフレーム動作間隔(爪)
 
 	m_arm_lower_marker_px = 0.0f;	//腕を下ろす位置を示すかどうかとそのX位置
@@ -127,8 +125,8 @@ void CObjStage5BossArms::Action()
 	}
 	
 	//爪のアニメーション処理-----------------------------------
-	//入力姿と現在の姿が違う
-	if (m_posture != m_input_posture)
+	//爪のアニメーションをする
+	if (m_ani_flag_claw == true)
 	{
 		//アニメーション動作間隔を進める
 		m_ani_time_claw++;
@@ -137,29 +135,14 @@ void CObjStage5BossArms::Action()
 		{
 			//アニメーション動作間隔を０にする
 			m_ani_time_claw = 0;
-			//入力姿が開いている
-			if (m_input_posture == true)
-			{
-				//描画フレームを戻す
-				m_ani_frame_claw++;
-			}
-			//入力姿が閉じている
-			else
-			{
-				//描画フレームを進める
-				m_ani_frame_claw--;
-			}
+			m_ani_frame_claw++;
+			
 		}
-	}
-	//描画フレームが０なら閉じている
-	if (m_ani_frame_claw == 0)
-	{
-		m_posture = false;
-	}
-	//描画フレームは２なら開いている
-	if(m_ani_frame_claw == 1)
-	{
-		m_posture = true;
+		if (m_ani_frame_claw == 5)
+		{
+			m_ani_frame_claw = 0;
+			m_ani_flag_claw = false;
+		}
 	}
 	//---------------------------------------------------------
 }
@@ -168,6 +151,9 @@ void CObjStage5BossArms::Action()
 //引数：爆発までの時間
 void CObjStage5BossArms::DiffusionAttack(int limit_time)
 {
+	//爪の開閉アニメーションをする
+	m_ani_flag_claw = true;
+
 	//拡散弾の源を作成
 	CObjDiffusionSource* p = new CObjDiffusionSource(m_px+ STAGE5_BOSS_ARMS_WIDTH_SIZE /2.0f, m_py+ STAGE5_BOSS_ARMS_HEIGHT_SIZE-10.0f,limit_time);
 	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
@@ -213,13 +199,22 @@ void CObjStage5BossArms::Draw()
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+	//爪の開閉アニメーションをするときの配列
+	//要素数はm_ani_frame_claw
+	int ani_claw[5] = { 1,2,0 };
+
 	//右腕(ライトアーム)---------------------------------------
 	//アームタイプが1のときはライトアームを描画
 	if (m_arms_type == 1)
 	{
+	
+		
 		//切り取り位置
 		src.m_top = STAGE5_BOSS_ARMS_HEIGHT_SIZE;
-		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame_claw;
+		if(m_ani_flag_claw == true)//爪の開閉アニメーションをするなら
+			src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*ani_claw[m_ani_frame_claw];
+		else
+			src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*1;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
@@ -239,7 +234,10 @@ void CObjStage5BossArms::Draw()
 	{
 		//切り取り位置
 		src.m_top = 0.0f;
-		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame_claw;
+		if (m_ani_flag_claw == true)//爪の開閉アニメーションをするなら
+			src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*ani_claw[m_ani_frame_claw];
+		else
+			src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE * 1;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 

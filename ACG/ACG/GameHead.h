@@ -275,8 +275,8 @@ enum MUSIC
 #define DIFFUSION_CANNON_SIZE	      (64.0f)   //ステージ5の拡散するキャノンのサイズ
 #define STAGE5_BOSS_BODY_SIZE	     (256.0f)	//ステージ5のボス胴体サイズ
 #define STAGE5_BOSS_EYE_SIZE	     (133.0f)	//ステージ5のボス眼球サイズ
-#define STAGE5_BOSS_ARMS_WIDTH_SIZE       (170.0f)	//ステージ5のボス腕サイズ(横)
-#define STAGE5_BOSS_ARMS_HEIGHT_SIZE      (564.0f)	//ステージ5のボス腕サイズ(縦)
+#define STAGE5_BOSS_ARMS_WIDTH_SIZE       (175.0f)	//ステージ5のボス腕サイズ(横)
+#define STAGE5_BOSS_ARMS_HEIGHT_SIZE      (577.0f)	//ステージ5のボス腕サイズ(縦)
 #define STAGE5_BOSS_ELECTRIC_WIDTH	 (300.0f)	//ステージ5のボス胴腕接続電気サイズ(横)
 #define STAGE5_BOSS_ELECTRIC_HEIGHT	 (256.0f)	//ステージ5のボス胴腕接続電気サイズ(縦)
 #define WIRE_MESH_SIZE_WIDTH	(640.0f) //金網の横サイズ
