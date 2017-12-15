@@ -315,7 +315,7 @@ void CSceneMain::ImageDataLoading()
 	//ステージ５ボス眼球
 	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
 	//ステージ５ボス腕
-	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_1280);
+	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
 	//金網
 	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
 }
