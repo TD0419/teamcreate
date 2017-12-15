@@ -68,70 +68,71 @@ void CObjStage5Boss::Action()
 	switch (m_attack_mode)
 	{
 		//何もしていない状態
-	case 0:
-	{
-		if (m_time % 100 == 0)
+		case 0:
 		{
-			//何もしていないので攻撃モードをランダムで決める
-			m_attack_mode = 3;// GetRandom(1, 4);
+			if (m_time % 100 == 0)
+			{
+				//何もしていないので攻撃モードをランダムで決める
+				m_attack_mode = 3;// GetRandom(1, 4);
+			}
+			break;
 		}
-		break;
-	}
 		//主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす攻撃
-	case 1:
-	{
-		//主人公オブジェクト情報を取得
-		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-		//腕を下ろす攻撃をする(左腕)
-		m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(), m_time);
-		break;
-	}
-	case 2:	//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
-	{
-		if (m_time % 300 == 150)
+		case 1:
 		{
-			m_boos_arm_left->DiffusionAttack(GetRandom(60, 180));
+			//主人公オブジェクト情報を取得
+			CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+			//腕を下ろす攻撃をする(左腕)
+			m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(), m_time);
+			break;
 		}
-		else if (m_time % 300 == 0)
+		case 2:	//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
 		{
-			m_boos_arm_right->DiffusionAttack(GetRandom(60, 180));
-			m_attack_mode = 0;
-		}
+			if (m_time % 300 == 150)
+			{
+				m_boos_arm_left->DiffusionAttack(GetRandom(60, 180));
+			}
+			else if (m_time % 300 == 0)
+			{
+				m_boos_arm_right->DiffusionAttack(GetRandom(60, 180));
+				m_attack_mode = 0;
+			}
 
-		break;
-	}
-	case 3://ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
-	{
-		if (m_attack3_flag == false)//フラグがオフなら
+			break;
+		}
+		case 3://ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
 		{
-			m_attack3_count = 0;
-			m_vx = -1.0f;//移動量を左に設定
-			m_attack3_flag = true;//フラグをオン
+			if (m_attack3_flag == false)//フラグがオフなら
+			{
+				m_attack3_count = 0;
+				m_vx = -1.0f;//移動量を左に設定
+				m_attack3_flag = true;//フラグをオン
+			}
+
+			//60フレームに一度
+			if (m_time % 60 == 0)
+			{
+				CObjEnemyBullet* p = new CObjEnemyBullet(m_px + EYE_CORRECTION_WIDTH + STAGE5_BOSS_EYE_SIZE / 2.0f, m_py + EYE_CORRECTION_HEIGHT + STAGE5_BOSS_EYE_SIZE / 2.0f);
+				Objs::InsertObj(p, OBJ_ENEMY_BULLET, 9);
+
+				m_attack3_count++;
+			}
+
+			if (m_attack3_count == 10)//10回攻撃したら
+			{
+				m_attack3_flag = false;//フラグをオフ
+				m_vx = 0.0f;//移動をとめる
+				m_attack_mode = 0;
+			}
+
+			break;
 		}
-
-		//60フレームに一度
-		if (m_time % 60 == 0)
-		{
-			CObjEnemyBullet* p = new CObjEnemyBullet(m_px+ EYE_CORRECTION_WIDTH+STAGE5_BOSS_EYE_SIZE/2.0f,m_py+ EYE_CORRECTION_HEIGHT+ STAGE5_BOSS_EYE_SIZE / 2.0f);
-			Objs::InsertObj(p, OBJ_ENEMY_BULLET, 9);
-
-			m_attack3_count++;
-		}
-
-		if (m_attack3_count == 10)//10回攻撃したら
-		{
-			m_attack3_flag = false;//フラグをオフ
-			m_vx = 0.0f;//移動をとめる
-			m_attack_mode = 0;
-		}
-
-		break;
-	}
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
-	case 4:
-	{
-		break;
+		case 4:
+		{
+			break;
+		}
 	}
 
 	//移動
