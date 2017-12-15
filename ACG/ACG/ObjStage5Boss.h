@@ -36,6 +36,7 @@ public:
 
 	//アクセサ
 	float GetPosY() { return m_py; }
+	float GetPosX() { return m_px; }
 	void SetVecX(float x) { m_vx = x; }	
 
 private:
