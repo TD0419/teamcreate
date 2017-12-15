@@ -43,7 +43,7 @@ void CSceneMain::InitScene()
 
 	//デバッグ用ステージ番号調整用
 	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 5;
+	s->stagenum = 2;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -135,7 +135,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	for (int i = 0; i < MAP_Y_MAX; i++)
 	{
-		for (int j = 0; j < MAP_X_MAX; j++)
+		for (int j = 0; j < 100; j++)
 		{
 			//マップ情報を入れる
 			int w = 0;
@@ -195,7 +195,7 @@ void CSceneMain::ImageDataLoading()
 		//すり抜けるブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
 		//ボス画像読み込み
-		Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1024);
+		Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1280);
 		//ゴリラの投擲物読み込み
 		Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
 		break;
