@@ -31,9 +31,9 @@ void CObjStage5BossArms::Init()
 
 	m_posture = false;//現在の姿　最初は閉じている
 
-	m_ani_frame = 0;	//描画アニメーション
-	m_ani_max_time = 10;//アニメーションフレーム動作間隔最大値
-	m_ani_time = 0;		//アニメーションフレーム動作間隔
+	m_ani_frame_claw = 0;	//描画アニメーション(爪)
+	m_ani_max_time_claw = 10;//アニメーションフレーム動作間隔最大値(爪)
+	m_ani_time_claw = 0;		//アニメーションフレーム動作間隔(爪)
 
 	m_arm_lower_marker_px = 0.0f;	//腕を下ろす位置を示すかどうかとそのX位置
 
@@ -60,8 +60,19 @@ void CObjStage5BossArms::Init()
 //アクション
 void CObjStage5BossArms::Action()
 {
+	//初期位置を更新する
+	UpdateInitial();
+
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
+
+	//ブロックオブジェクトを持ってくる
+	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	//ブロックとの当たり判定
+	bool hit_up, hit_down, hit_left, hit_right;
+	objblock->AllBlockHit(&m_px, &m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE,
+		&hit_up, &hit_down, &hit_left, &hit_right, &m_vx, &m_vy);
 
 	//アームタイプが1のとき、ライトアーム用の当たり判定表示
 	if (m_arms_type == 1)
@@ -78,6 +89,7 @@ void CObjStage5BossArms::Action()
 
 	//移動
 	m_px += m_vx;
+	m_py += m_vy;
 
 	//ラストウォールと当たっていれば
 	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
@@ -106,46 +118,50 @@ void CObjStage5BossArms::Action()
 	//ＨＰが0になったらオブジェクト消去
 	if (m_arm_hp == 0)
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//アームが所持するHitBoxを除去。
+		//初期位置に戻す
+		m_px = m_initial_px;
+		m_py = m_initial_py;
+		//HPを戻す
+		m_arm_hp = 10;
 		return;
 	}
 	
+	//爪のアニメーション処理-----------------------------------
 	//入力姿と現在の姿が違う
 	if (m_posture != m_input_posture)
 	{
 		//アニメーション動作間隔を進める
-		m_ani_time++;
+		m_ani_time_claw++;
 		//アニメーション動作間隔最大値以上なら
-		if (m_ani_time >= m_ani_max_time)
+		if (m_ani_time_claw >= m_ani_max_time_claw)
 		{
 			//アニメーション動作間隔を０にする
-			m_ani_time = 0;
+			m_ani_time_claw = 0;
 			//入力姿が開いている
 			if (m_input_posture == true)
 			{
 				//描画フレームを戻す
-				m_ani_frame++;
+				m_ani_frame_claw++;
 			}
 			//入力姿が閉じている
 			else
 			{
 				//描画フレームを進める
-				m_ani_frame--;
+				m_ani_frame_claw--;
 			}
 		}
 	}
 	//描画フレームが０なら閉じている
-	if (m_ani_frame == 0)
+	if (m_ani_frame_claw == 0)
 	{
 		m_posture = false;
 	}
 	//描画フレームは２なら開いている
-	if(m_ani_frame == 2)
+	if(m_ani_frame_claw == 1)
 	{
 		m_posture = true;
 	}
-
+	//---------------------------------------------------------
 }
 
 //拡散弾を打つ攻撃
@@ -159,16 +175,20 @@ void CObjStage5BossArms::DiffusionAttack(int limit_time)
 
 //腕を下ろす攻撃
 //引数1	float x	:腕を下ろすX位置
-//引数3 int time:
-//まだ作成中なので待ってください。
+//引数3 int time:腕を下ろそうとしたときから経過時間
 void CObjStage5BossArms::ArmLowerAttack(float x, int time)
 {
-	static float xx = x;
+	//攻撃が始まる瞬間に腕を下ろすX位置を決める
+	if (time == 1)
+	{
+		m_arm_lower_marker_px = x;
+	}
 	//120フレームの間に主人公のX位置と同じになるようにベクトルXを調整
 	if (time < 120)
 	{
-		m_vx = (xx - m_px) / (120 - time);
+		m_vx = (m_arm_lower_marker_px - m_px) / (120 - time);
 	}
+	//120以上なら腕を下ろす攻撃をするのでX移動量を0.0fにする
 	else
 	{
 		m_vx=0.0f;
@@ -177,22 +197,10 @@ void CObjStage5BossArms::ArmLowerAttack(float x, int time)
 	//時間が120になったら腕を下ろす攻撃をする
 	if (time >= 120)
 	{
+		//腕を下ろす位置を示さない
 		m_arm_lower_marker_px = 0.0f;
+		//腕を下ろす
 		m_vy = 10.0f;
-		//ブロックオブジェクトを持ってくる
-		CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-		bool hit_up, hit_down, hit_left, hit_right;
-		//ブロックとの当たり判定
-		objblock->AllBlockHit(&m_px, &m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE,
-			&hit_up, &hit_down, &hit_left, &hit_right, &m_vx, &m_vy);
-
-		
-	}
-	//時間が120になるまで腕を下ろす位置をマークする
-	else
-	{
-		m_arm_lower_marker_px = xx;
 	}
 }
 //ドロー
@@ -211,7 +219,7 @@ void CObjStage5BossArms::Draw()
 	{
 		//切り取り位置
 		src.m_top = STAGE5_BOSS_ARMS_HEIGHT_SIZE;
-		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame;
+		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame_claw;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
@@ -231,7 +239,7 @@ void CObjStage5BossArms::Draw()
 	{
 		//切り取り位置
 		src.m_top = 0.0f;
-		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame;
+		src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*m_ani_frame_claw;
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
@@ -250,17 +258,50 @@ void CObjStage5BossArms::Draw()
 		//カラー情報
 		float marker_color[4] = { 1.0f,0.0f,0.0f,0.2f };
 
-		//途中なのでおいといてください。
-		/*int map_x = (int)m_arm_lower_marker_px / BLOCK_SIZE;
-		float 
+		//腕を下ろすX位置をマップ番号に当てはめたときのX位置
+		int map_x = (int)(m_arm_lower_marker_px / BLOCK_SIZE);
+
+		//マーカーを四角形で出すのでその高さ
+		float marker_h= WINDOW_SIZE_H;
+
+		//X位置が最大値未満なら
 		if (map_x < MAP_X_MAX)
 		{
-			for (int i = 0;i < MAP_Y_MAX; i++)
+			//Y位置を0～最大値まで調べる
+			for (int map_y = 0; map_y < MAP_Y_MAX; map_y++)
 			{
-				objmap->GetMap(map_x, i)
+				//ブロックがあるか調べてあるならその位置までを高さとする
+				if (objmap->GetMap(map_x, map_y) == MAP_BLOCK)
+				{
+					marker_h = map_y * BLOCK_SIZE-m_py;
+					break;
+				}
 			}
-		}*/
-		//
-		Draw::DrawHitBox(m_arm_lower_marker_px, 0.0f, 1000.0f, 100.0f, marker_color);
+		}
+
+		//マーカー(四角形)を表示する
+		Draw::DrawHitBox(m_arm_lower_marker_px - objmap->GetScrollX(), m_py - objmap->GetScrollY(), marker_h, STAGE5_BOSS_ARMS_WIDTH_SIZE, marker_color);
 	}
+}
+
+//初期位置を計算する
+//初期位置をボス(胴体)の位置を元に求める
+void CObjStage5BossArms::UpdateInitial()
+{
+	//ボス(胴体)の情報を取得
+	CObjStage5Boss* objstage5_boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+	
+	//ライトアームの時
+	if (m_arms_type == 1)
+	{	//										↓ボスの胴体に密着する位置
+		m_initial_px = (objstage5_boss->GetPosX() + STAGE5_BOSS_BODY_SIZE) + 60.0f;
+	}
+	//レフトアームの時
+	else
+	{
+		//										↓ボスの胴体に密着する位置
+		m_initial_px = (objstage5_boss->GetPosX() - STAGE5_BOSS_ARMS_WIDTH_SIZE) - 60.0f;
+		
+	}
+	m_initial_py = objstage5_boss->GetPosY() - 100.0f;
 }

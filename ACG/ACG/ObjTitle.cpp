@@ -20,7 +20,7 @@ void CObjTitle::Init()
 	Font::SetStrTex(L"Option");	//オプション
 	Font::SetStrTex(L"Exit");	//終了
 
-	Font::SetStrTex(L"→");	//→
+	
 
 	((UserData*)Save::GetData())->stagenum = 1;
 
@@ -119,28 +119,24 @@ void CObjTitle::Draw()
 	//→がStartを指している場合は、Startの文字を黄色にする。optionとExitの文字は白色。
 	if( m_mode == 0 )
 	{
-		Font::StrDraw(L"Start"	, WINDOW_SIZE_W - 210.0f, WINDOW_SIZE_H/2.0f + 38.0f    , CHAR_SIZE, color_yellow);
-		Font::StrDraw(L"Option"	, WINDOW_SIZE_W - 210.0f, WINDOW_SIZE_H/2.0f + 118.0f	, CHAR_SIZE, color_white);
-		Font::StrDraw(L"Exit"	, WINDOW_SIZE_W - 210.0f, WINDOW_SIZE_H/2.0f + 198.0f	, CHAR_SIZE, color_white);
+		Font::StrDraw(L"Start"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 40.0f    , FONT_SIZE_TITLE, color_yellow);
+		Font::StrDraw(L"Option"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 118.0f	, FONT_SIZE_TITLE - 10.0f, color_white);
+		Font::StrDraw(L"Exit"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 198.0f	, FONT_SIZE_TITLE - 10.0f, color_white);
 
 	}
 	//→がOptionを指している場合は、Optionの文字を黄色にする。StartとExitの文字は白色。
 	else if ( m_mode == 1 )
 	{
-		Font::StrDraw(L"Start", WINDOW_SIZE_W - 210.0f, WINDOW_SIZE_H / 2.0f + 38.0f, CHAR_SIZE , color_white);
-		Font::StrDraw(L"Option", WINDOW_SIZE_W - 210.0f, WINDOW_SIZE_H / 2.0f + 118.0f, CHAR_SIZE , color_yellow);
-		Font::StrDraw(L"Exit", WINDOW_SIZE_W - 210.0f, WINDOW_SIZE_H / 2.0f + 198.0f, CHAR_SIZE , color_white);
+		Font::StrDraw(L"Start", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 40.0f, FONT_SIZE_TITLE - 10.0f, color_white);
+		Font::StrDraw(L"Option", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 118.0f, FONT_SIZE_TITLE, color_yellow);
+		Font::StrDraw(L"Exit", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 198.0f, FONT_SIZE_TITLE - 10.0f, color_white);
 	}
 	//→がExitを指している場合は、Exitの文字を黄色にする。StartとOptionの文字は白色。
 	else if ( m_mode == 2 )
 	{
-		Font::StrDraw(L"Start", WINDOW_SIZE_W - 210.0f, WINDOW_SIZE_H / 2.0f + 38.0f, CHAR_SIZE , color_white);
-		Font::StrDraw(L"Option", WINDOW_SIZE_W - 210.0f, WINDOW_SIZE_H / 2.0f + 118.0f, CHAR_SIZE , color_white);
-		Font::StrDraw(L"Exit", WINDOW_SIZE_W - 210.0f, WINDOW_SIZE_H / 2.0f + 198.0f, CHAR_SIZE , color_yellow);
+		Font::StrDraw(L"Start", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 40.0f, FONT_SIZE_TITLE -10.0f, color_white);
+		Font::StrDraw(L"Option", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 118.0f, FONT_SIZE_TITLE -10.0f, color_white);
+		Font::StrDraw(L"Exit", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 198.0f, FONT_SIZE_TITLE, color_yellow);
 	}
 
-	//デバッグ用に→を表示
-	Font::StrDraw(L"→"		, WINDOW_SIZE_W - 290.0f, WINDOW_SIZE_H / 2.0f + 38.0f + 80.0f * m_mode , CHAR_SIZE, color_yellow);
-
-	
 }

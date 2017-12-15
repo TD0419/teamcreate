@@ -195,6 +195,8 @@ enum GRAPHIC_ID
 	GRA_FALLING_LIFT,	//落ちるリフト
 	GRA_HAND_LIFT,//手動で引っ張るリフト
 	GRA_DIFFUSION_SOURCE,//拡散弾を撃つ弾
+	GRA_BOSS_DIFFUSION,//ボスの発射する拡散弾
+	GRA_STAGE5_BOSS_BULLET,//ボスの発射する弾
 };
 
 //音楽(BGM)
@@ -281,6 +283,7 @@ enum MUSIC
 #define WIRE_MESH_SIZE_WIDTH	(640.0f) //金網の横サイズ
 #define WIRE_MESH_SIZE_HEIGHT	(64.0f) //金網の縦サイズ
 #define DIFFUSION_SOURCE_SIZE	(32.0f)//拡散弾を撃つ弾のサイズ
+#define STAGE5_BOSS_BULLET_SIZE (32.0f)//ステージ５のボスが打つ弾のサイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -354,6 +357,6 @@ enum MUSIC
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneTitle
 
+#define SET_GAME_START CSceneTitle //タイトル画面
 //-----------------------------------------------

@@ -64,12 +64,20 @@ void CObjDiffusionBullet::Action()
 				CObjDiffusionCannon* objcannon = (CObjDiffusionCannon*)Objs::GetObj(OBJ_DIFFUSION_CANNON);
 				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-				//ålŒö‚ÆŠgU–C‘ä‚ÌY‚ÌˆÊ’u‚ğ‚Á‚Ä‚­‚é
-				float cannon_y = objcannon->GetPosY();
-				float hero_y = objhero->GetPosY();
+				if (objcannon != nullptr)//–C‘ä‚ª‚ ‚ê‚Î
+				{
+					//ålŒö‚ÆŠgU–C‘ä‚ÌY‚ÌˆÊ’u‚ğ‚Á‚Ä‚­‚é
+					float cannon_y = objcannon->GetPosY();
+					float hero_y = objhero->GetPosY();
 
-				//ŠgU–C‘ä‚Æ’e‚Ì‹——£@‚ª@ŠgU–C‘ä‚Æƒq[ƒ[‚Ì‹——£@‚æ‚è‘å‚«‚¯‚ê‚Î
-				if (abs(cannon_y - m_py) > abs(cannon_y - hero_y))
+					//ŠgU–C‘ä‚Æ’e‚Ì‹——£@‚ª@ŠgU–C‘ä‚Æƒq[ƒ[‚Ì‹——£@‚æ‚è‘å‚«‚¯‚ê‚Î
+					if (abs(cannon_y - m_py) > abs(cannon_y - hero_y))
+					{
+						WindowOutDelete(this);//íœˆ—
+						return;
+					}
+				}
+				else	//–C‘ä‚ª‚È‚¯‚ê‚Î
 				{
 					WindowOutDelete(this);//íœˆ—
 					return;
@@ -154,6 +162,12 @@ void CObjDiffusionBullet::Draw()
 	dst.m_right = dst.m_left + 16.0f;
 	dst.m_bottom = dst.m_top + 16.0f;
 
-	Draw::Draw(GRA_CANNON_BEAM, &src, &dst, color, m_r);
+	if (m_type == CANNON)
+		Draw::Draw(GRA_CANNON_BEAM, &src, &dst, color, m_r);
+	
+	if (m_type == BOSS)
+		Draw::Draw(GRA_BOSS_DIFFUSION, &src, &dst, color, m_r);
+
+
 
 }

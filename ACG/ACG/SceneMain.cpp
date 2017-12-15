@@ -142,6 +142,14 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			//マップ情報取得
 			swscanf_s(&p.get()[count], L"%d", &w);
 			
+			if (((UserData*)Save::GetData())->stagenum != 5)
+			{
+				if (j > 99)
+				{
+					break;
+				}
+			}
+
 			//マップ情報を代入
 			map[i][j] = w;
 			
@@ -246,6 +254,13 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
 		//拡散弾を撃つ弾
 		Draw::LoadImageW(L"Image\\Boss_Diffusion_Glass.png", GRA_DIFFUSION_SOURCE, TEX_SIZE_32);
+		
+		//ボスの拡散弾
+		Draw::LoadImageW(L"Image\\Diffusion_Bullet.png", GRA_BOSS_DIFFUSION, TEX_SIZE_16);
+
+		//ボスの打つ弾
+		Draw::LoadImageW(L"Image\\Lastboss_Bullet.png", GRA_STAGE5_BOSS_BULLET, TEX_SIZE_32);
+		
 		break;		
 	}
 	////画像が用意されていない場合
@@ -312,7 +327,7 @@ void CSceneMain::ImageDataLoading()
 	//ステージ５ボス眼球
 	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
 	//ステージ５ボス腕
-	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_1280);
+	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
 	//金網
 	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
 }
@@ -348,7 +363,7 @@ void CSceneMain::AudioDataLoading()
 		//水の流れる音
 		Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 		//ゴリラの投擲音
-		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw.wav", EFFECT);
+		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla Throw.wav", EFFECT);
 		break;
 
 	case 5:

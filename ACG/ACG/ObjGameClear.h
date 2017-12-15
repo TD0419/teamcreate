@@ -4,6 +4,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define FONT_SIZE_GC (86.0f)	//文字のサイズ(ゲームクリア用)
+
 //オブジェクト：クリア
 class CObjGameClear : public CObj
 {
