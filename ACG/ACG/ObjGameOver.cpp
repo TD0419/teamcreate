@@ -24,7 +24,6 @@ void CObjGameOver::Init()
 	Font::SetStrTex(L"GAME OVER");
 	Font::SetStrTex(L"Title");
 	Font::SetStrTex(L"Continue");
-	Font::SetStrTex(L"→");
 	Audio::Start(GAMEOVER);	//BGMをならす
 
 	((UserData*)Save::GetData())->stagenum = 1;//ステージを１から始めるようにする
@@ -115,23 +114,19 @@ void CObjGameOver::Draw()
 	//描画
 	Draw::Draw(GRA_GAME_OVER, &src, &dst, color_white, 0.0f);
 	//文字描画
-	Font::StrDraw(L"GAME OVER", 270.0f, 46.0f, 105.0f, color_white);
-	
+	Font::StrDraw(L"GAME OVER", WINDOW_SIZE_W - 754.0f, WINDOW_SIZE_H - 722.0f, FONT_SIZE_GO + 51.0f, color_white);
 	//→がContinueを指している場合は、Continueの文字を黄色にする。Titleの文字は白色。
 	if (m_mode == 0)
 	{
-		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 38.0f, TEXT_SIZE, color_yellow);
-		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 108.0f, TEXT_SIZE, color_white);
+		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 42.0f, FONT_SIZE_GO, color_yellow);
+		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 112.0f, FONT_SIZE_GO -10.0f, color_white);
 	}
 	//→がTitleを指している場合は、Titleの文字を黄色にする。Continueの文字は白色。
 	else if (m_mode == 1)
 	{
-		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 38.0f, TEXT_SIZE, color_white);
-		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 108.0f, TEXT_SIZE, color_yellow);
+		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 42.0f, FONT_SIZE_GO -10.0f, color_white);
+		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 112.0f, FONT_SIZE_GO, color_yellow);
 
 	}
-	//→を表示
-	//					 x位置				     y位置(→の位置)   →の移動間隔	   文字サイズ
-	Font::StrDraw(L"→", WINDOW_SIZE_W - 350.0f, 1210.0f / 2.0f  + 70.0f * m_mode, TEXT_SIZE, color_yellow);
 
 }

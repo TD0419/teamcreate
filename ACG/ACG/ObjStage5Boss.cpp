@@ -28,6 +28,8 @@ void CObjStage5Boss::Init()
 	//初期化する(何もしていない)
 	m_attack_mode = 0;
 
+	m_lastwall_hit_flag=false;
+
 	//たいみんぐ管理
 	m_time=0;
 
@@ -73,7 +75,7 @@ void CObjStage5Boss::Action()
 			if (m_time % 100 == 0)
 			{
 				//何もしていないので攻撃モードをランダムで決める
-				m_attack_mode = 3;// GetRandom(1, 4);
+				m_attack_mode = GetRandom(2, 3);// GetRandom(1, 4);
 			}
 			break;
 		}
@@ -83,8 +85,21 @@ void CObjStage5Boss::Action()
 			//主人公オブジェクト情報を取得
 			CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-			//腕を下ろす攻撃をする(左腕)
-			m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(), m_time);
+			if (m_time <= 200)
+			{
+				//腕を下ろす攻撃をする(左腕)
+				m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(), m_time);
+			}
+			else
+			{
+				//腕を下ろす攻撃をする(右腕)
+				m_boos_arm_right->ArmLowerAttack(objhero->GetPosX(), m_time - 200);
+			}
+
+			if (m_time >= 400)
+			{
+				m_attack_mode = 0;
+			}
 			break;
 		}
 		case 2:	//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
@@ -125,7 +140,9 @@ void CObjStage5Boss::Action()
 				m_vx = 0.0f;//移動をとめる
 				m_attack_mode = 0;
 			}
-
+			//腕にも移動量を渡す
+			m_boos_arm_right->SetVecX(m_vx);
+			m_boos_arm_left->SetVecX(m_vx);
 			break;
 		}
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
@@ -137,13 +154,22 @@ void CObjStage5Boss::Action()
 
 	//移動
 	m_px += m_vx;
-
-	//腕にも移動量を渡す
-	m_boos_arm_right->SetVecX(m_vx);
-	m_boos_arm_left->SetVecX(m_vx);
 	
 	//当たり判定更新
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+
+	//ラストウォールと当たったら
+	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
+	{
+		//ラストウォールのヒットフラグオフなら
+		if (m_lastwall_hit_flag == false)
+		{
+			LastWallHit();//ヒット処理を行う
+			m_lastwall_hit_flag = true; //ラストウォールのヒットフラグオンにする
+		}
+	}
+	else
+		m_lastwall_hit_flag = false;//ラストウォールのヒットフラグオフ
 
 	//主人公の弾丸とぶつかったらＨＰを-1にする
 	//弾丸とあたったらＨＰを1減らす
