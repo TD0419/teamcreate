@@ -6,7 +6,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-#define CHAR_SIZE (52.0f)	//文字のサイズ
+#define CHAR_SIZE (54.0f)	//文字のサイズ
 
 //オブジェクト：タイトル
 class CObjTitle :public CObj

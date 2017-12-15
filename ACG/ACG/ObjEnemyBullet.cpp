@@ -95,8 +95,22 @@ void CObjEnemyBullet::Init()
 	m_hit_left = false;
 	m_hit_down = false;
 	
-	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
+	switch (((UserData*)Save::GetData())->stagenum)
+	{
+		case 5://ステージ５
+		{
+			//当たり判定用HitBoxを作成
+			Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BULLET_SIZE, STAGE5_BOSS_BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
+			break;
+		}
+		default:
+		{
+			//当たり判定用HitBoxを作成
+			Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
+			break;
+		}
+	}
+
 }
 
 //アクション
@@ -155,8 +169,16 @@ void CObjEnemyBullet::Action()
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//ブロックとの当たり判定
-	objblock->AllBlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+	if(((UserData*)Save::GetData())->stagenum==5)	//ステージ5
+	{
+		objblock->AllBlockHit(&m_px, &m_py, STAGE5_BOSS_BULLET_SIZE, STAGE5_BOSS_BULLET_SIZE,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+	}
+	else
+	{
+		objblock->AllBlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
+	}
 
 	//ブロックとあたっていれば削除する
 	if (m_hit_up == true || m_hit_down == true || m_hit_right == true || m_hit_left == true)
@@ -213,9 +235,19 @@ void CObjEnemyBullet::Draw()
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + BULLET_SIZE;
-	dst.m_bottom = dst.m_top + BULLET_SIZE;
+	
+	if (((UserData*)Save::GetData())->stagenum == 2)//ステージ2なら
+	{
+		dst.m_right = dst.m_left + BULLET_SIZE;
+		dst.m_bottom = dst.m_top + BULLET_SIZE;
 
-	Draw::Draw(GRA_COCONUT, &src, &dst, color, m_r);
+		Draw::Draw(GRA_COCONUT, &src, &dst, color, m_r);
+	}
+	else
+	{
+		dst.m_right = dst.m_left + STAGE5_BOSS_BULLET_SIZE;
+		dst.m_bottom = dst.m_top + STAGE5_BOSS_BULLET_SIZE;
 
+		Draw::Draw(GRA_DIFFUSION_SOURCE, &src, &dst, color, m_r);
+	}
 }

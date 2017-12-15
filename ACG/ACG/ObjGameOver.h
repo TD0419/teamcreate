@@ -4,7 +4,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-#define TEXT_SIZE (52.0f)	//文字のサイズ
+#define TEXT_SIZE (54.0f)	//文字のサイズ
 
 //オブジェクト：ゲームオーバー
 class CObjGameOver : public CObj
