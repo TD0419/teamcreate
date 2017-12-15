@@ -42,8 +42,8 @@ void CSceneMain::InitScene()
 	}
 
 	////デバッグ用ステージ番号調整用
-	//UserData* s = (UserData*)Save::GetData();
-	//s->stagenum = 5;
+	UserData* s = (UserData*)Save::GetData();
+	s->stagenum = 5;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -246,6 +246,9 @@ void CSceneMain::ImageDataLoading()
 		Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
 		//拡散弾を撃つ弾
 		Draw::LoadImageW(L"Image\\Boss_Diffusion_Glass.png", GRA_DIFFUSION_SOURCE, TEX_SIZE_32);
+		
+		//ボスの拡散弾
+		Draw::LoadImageW(L"Image\\Diffusion_Bullet.png", GRA_BOSS_DIFFUSION, TEX_SIZE_16);
 		break;		
 	}
 	////画像が用意されていない場合
@@ -348,7 +351,7 @@ void CSceneMain::AudioDataLoading()
 		//水の流れる音
 		Audio::LoadAudio(WAVE, L"SE\\Wave.wav", EFFECT);
 		//ゴリラの投擲音
-		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw.wav", EFFECT);
+		//Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla_Throw.wav", EFFECT);
 		break;
 
 	case 5:

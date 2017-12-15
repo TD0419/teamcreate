@@ -17,7 +17,7 @@ public:
 	void Draw();				// ドロー
 
 	//アクセサ
-	float GetPosX(){return m_px; }
+	float GetPosX(){ return m_px; }
 	float GetPosY() { return m_py; }
 
 private:
