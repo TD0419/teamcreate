@@ -60,8 +60,9 @@ private:
 	//3:ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)
 	//4:3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 	int m_attack_mode;
-
 	int m_time;//攻撃のたいみんぐ管理用
+
+	bool m_lastwall_hit_flag;//ラストウォールとの処理用フラグ
 
 	//ランダムで値を決める関数
 	int GetRandom(int min, int max);

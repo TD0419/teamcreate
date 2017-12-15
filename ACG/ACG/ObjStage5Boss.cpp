@@ -28,6 +28,8 @@ void CObjStage5Boss::Init()
 	//初期化する(何もしていない)
 	m_attack_mode = 0;
 
+	m_lastwall_hit_flag=false;
+
 	//たいみんぐ管理
 	m_time=0;
 
@@ -73,7 +75,7 @@ void CObjStage5Boss::Action()
 			if (m_time % 100 == 0)
 			{
 				//何もしていないので攻撃モードをランダムで決める
-				m_attack_mode = 3;// GetRandom(1, 4);
+				m_attack_mode = GetRandom(2, 3);// GetRandom(1, 4);
 			}
 			break;
 		}
@@ -144,6 +146,19 @@ void CObjStage5Boss::Action()
 	
 	//当たり判定更新
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+
+	//ラストウォールと当たったら
+	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
+	{
+		//ラストウォールのヒットフラグオフなら
+		if (m_lastwall_hit_flag == false)
+		{
+			LastWallHit();//ヒット処理を行う
+			m_lastwall_hit_flag = true; //ラストウォールのヒットフラグオンにする
+		}
+	}
+	else
+		m_lastwall_hit_flag = false;//ラストウォールのヒットフラグオフ
 
 	//主人公の弾丸とぶつかったらＨＰを-1にする
 	//弾丸とあたったらＨＰを1減らす

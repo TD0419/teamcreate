@@ -142,6 +142,14 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			//マップ情報取得
 			swscanf_s(&p.get()[count], L"%d", &w);
 			
+			if (((UserData*)Save::GetData())->stagenum != 5)
+			{
+				if (j > 99)
+				{
+					break;
+				}
+			}
+
 			//マップ情報を代入
 			map[i][j] = w;
 			
@@ -249,6 +257,10 @@ void CSceneMain::ImageDataLoading()
 		
 		//ボスの拡散弾
 		Draw::LoadImageW(L"Image\\Diffusion_Bullet.png", GRA_BOSS_DIFFUSION, TEX_SIZE_16);
+
+		//ボスの打つ弾
+		Draw::LoadImageW(L"Image\\Lastboss_Bullet.png", GRA_STAGE5_BOSS_BULLET, TEX_SIZE_32);
+		
 		break;		
 	}
 	////画像が用意されていない場合
