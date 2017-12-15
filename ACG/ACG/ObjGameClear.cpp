@@ -17,7 +17,12 @@ void CObjGameClear::Init()
 	
 	Audio::Start(CLEAR);
 	//文字のグラフィック作成
-	Font::SetStrTex(L"GAME CLEAR!!");	
+	Font::SetStrTex(L"GAME CLEAR!!");
+
+	Font::SetStrTex(L"     CLEAR!!");//
+
+	Font::SetStrTex(L"GAME");//
+
 	Font::SetStrTex(L"TITLE:PUSH ENTER KEY");
 }
 
@@ -58,7 +63,12 @@ void CObjGameClear::Draw()
 	Draw::Draw(GRA_GAME_CLEAR, &src, &dst, back_color, 0.0f);
 
 	//文字描画                              x      y     size
-	Font::StrDraw(L"GAME CLEAR!!"       , 220.0f, 46.0f, 105.0f, text_color);
-	Font::StrDraw(L"TITLE:PUSH ENTERKEY", 580.0f, 710.0f, 45.0f, text_color);
+
+	Font::StrDraw(L"GAME"   , WINDOW_SIZE_W - 799.0f, WINDOW_SIZE_H - 722.0f, 107.0f, text_color);
+	Font::StrDraw(L"CLEAR!!", WINDOW_SIZE_W - 534.0f, WINDOW_SIZE_H - 722.0f, 107.0f, text_color);
+
+
+	Font::StrDraw(L"GAME CLEAR!!"       , WINDOW_SIZE_W - 804.0f, WINDOW_SIZE_H - 722.0f, 106.0f, back_color);
+	Font::StrDraw(L"TITLE:PUSH ENTERKEY", WINDOW_SIZE_W - 444.0f, WINDOW_SIZE_H - 58.0f, 45.0f, text_color);
 
 }
