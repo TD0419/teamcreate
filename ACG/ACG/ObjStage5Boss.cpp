@@ -274,7 +274,7 @@ void CObjStage5Boss::Draw()
 		m_r = atan2(-hero_y, hero_x)*180.0f / 3.14f;
 		if (m_r < 0)
 		{
-			m_r = 360.0f - abs(m_r) + 86.0f; //86.0fcŠp“x•â³
+			m_r = 360.0f - abs(m_r);
 		}
 	}
 	//--------------------------------------------------
