@@ -110,7 +110,7 @@ void CObjRope::Action()
 		m_py -= m_vy */;
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
 
-		//ターザンポイントオブジェクトと当たっていたら
+		//ターザンポイントオブジェクトと当たっていた時、vxが５以上、vyが-6以上じゃないとき
 		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr&&m_vx<=5.0f&&m_vy>=-6.0f)
 			m_tarzan_point_flag = true;//フラグをONにする
 		else
@@ -363,6 +363,7 @@ void CObjRope::RopeDelete()
 	{
 		return;
 	}
+	
 	//ロープが消していいかどうかを調べる
 	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();
 
