@@ -176,7 +176,7 @@ void CObjEnemyBullet::Action()
 	}
 	else
 	{
-		objblock->AllBlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
+		objblock->BlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 	}
 

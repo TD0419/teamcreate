@@ -205,6 +205,10 @@ void CObjHero::MoveScene()
 	{
 		m_vx = 30.0f;
 	}
+	if (Input::GetVKey(VK_LEFT) == true)
+	{
+		m_vx = -90.0f;
+	}
 	//↑キーがおされたとき：上に下がる（デバッグ）
 	if (Input::GetVKey(VK_UP) == true)
 	{
