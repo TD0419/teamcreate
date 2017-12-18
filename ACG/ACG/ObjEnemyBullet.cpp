@@ -176,7 +176,7 @@ void CObjEnemyBullet::Action()
 	}
 	else
 	{
-		objblock->AllBlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
+		objblock->BlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
 	}
 
@@ -248,6 +248,6 @@ void CObjEnemyBullet::Draw()
 		dst.m_right = dst.m_left + STAGE5_BOSS_BULLET_SIZE;
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_BULLET_SIZE;
 
-		Draw::Draw(GRA_DIFFUSION_SOURCE, &src, &dst, color, m_r);
+		Draw::Draw(GRA_STAGE5_BOSS_BULLET, &src, &dst, color, m_r);
 	}
 }

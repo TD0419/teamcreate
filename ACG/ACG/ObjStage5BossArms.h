@@ -31,8 +31,6 @@ public:
 	float GetVecY() { return m_vy; }//ベクトルYを渡す
 
 	void DiffusionAttack(int limit_time);		//拡散弾を打つ攻撃
-
-	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
 	//-------------------------------------------------
 
 	void ArmLowerAttack(float x,int time);	//腕を下ろす攻撃
@@ -52,11 +50,11 @@ private:
 
 	int m_arm_hp;    // 第五ボスのアームのＨＰ
 
-	bool m_posture;//姿　true=開いている　false=閉じている
-	bool m_input_posture;//入力された姿　true=開いている	false=閉じている
+	bool m_ani_flag_claw;//爪の開閉アニメーションフラグ　true=アニメーションをする	false=アニメーションをしない
+
 	bool m_hit_flag;//衝突時の多重判定を防ぐフラグ
 
-	int m_ani_frame_claw;//描画フレーム(爪)
+	int m_ani_frame_claw;	//描画フレーム(爪)
 	int m_ani_time_claw;	//アニメーションフレーム動作感覚(爪)
 	int m_ani_max_time_claw;//アニメーションフレーム動作感覚最大値(爪)
 

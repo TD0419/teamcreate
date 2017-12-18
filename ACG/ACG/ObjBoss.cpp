@@ -35,6 +35,7 @@ void CObjBoss::Init()
 	m_ani_throw_max_time = 5;	//投げるアニメーション間隔幅
 
 	m_ani_throw_start_flag = false;//投げるアニメーション開始フラグ false=オフ ture=オン
+	m_throw_bullet_flag = false;   //投げるココナッツの制御フラグ
 	m_down_check_flag = false;//した判定を最初はしないに設定
 
 	m_wall_hit_flag = false;
@@ -45,11 +46,11 @@ void CObjBoss::Init()
 	m_hit_right = false;
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py+100.0f, 150.0f, 150.0f, ELEMENT_ENEMY, OBJ_BOSS, 1);
+	Hits::SetHitBox(this, m_px, m_py + 100.0f, 150.0f, 150.0f, ELEMENT_ENEMY, OBJ_BOSS, 1);
 
 	Audio::Stop(STAGE);
 	Audio::Start(BOSS);
-	
+
 }
 
 //アクション
@@ -79,29 +80,58 @@ void CObjBoss::Action()
 	}
 
 	//(アニメーション)最後までアニメーションが進むと最初にいく
-	if (m_ani_frame_throw == 4)
+	if (m_ani_frame_throw == 13)
 	{
 		m_ani_throw_start_flag = false;
 		m_ani_frame_throw = 1;
-		
+		m_throw_bullet_flag = false;
 	}
-	
+
+
+	// 敵弾丸作成
+	if (m_ani_frame_throw == 9)//腕を上げたとき
+	{
+		//ココナッツを投げる。
+		if (m_throw_bullet_flag == false) //一個だけ
+		{
+			//音楽スタート
+			Audio::Start(GORILLATHROW);
+			if (m_posture == 0.0f)    // 右向きの時
+			{
+				CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px + 80.0f, m_py + 11.0f);
+				Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+			}
+			else if (m_posture == 1.0f)// 左向きの時
+			{
+				CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px + 64.0f, m_py + 11.0f);
+				Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
+			}
+		}
+		m_throw_bullet_flag = true;
+	}
+
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
+
 
 	if (m_posture == 0.0f)		// 右向きなら
 		m_vx = m_speed;			// 右に進む
 	else if (m_posture == 1.0f) // 左向きなら
 		m_vx = -m_speed;		// 左に進む
-	
-	//摩擦
+
+
+//摩擦
 	m_vx += -(m_vx * 0.098f);
 
 	m_vy = 9.8f / (16.0f);//自由落下
 
-	//移動
-	m_px += m_vx;
-	m_py += m_vy;
+	//投げるアニメーション中は動かないようにする
+	if (m_ani_throw_start_flag == false)
+	{
+		//移動
+		m_px += m_vx;
+		m_py += m_vy;
+	}
 
 	//ブロックとの当たり判定実行
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -129,34 +159,21 @@ void CObjBoss::Action()
 		//投げモーション中でなければ（多重生成を防ぐ）
 		if (m_ani_throw_start_flag == false)
 		{
-			//音楽スタート
-			Audio::Start(GORILLATHROW);
-
-			// 敵弾丸作成
-			CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py);
-			Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
-			
 			//投げるアニメーション開始フラグをＯＮにする
 			m_ani_throw_start_flag = true;
 		}
+
 	}
-	else if (m_hit_left == true||m_wall_hit_flag==true)// ブロックの左側に当たっていたら
+	else if (m_hit_left == true || m_wall_hit_flag == true)// ブロックの左側に当たっていたら
 	{
 		//右向きの時に
 		if (m_posture == 0.0f)
 		{
 			m_posture = 1.0f;//左向きにする
-			
+
 			//投げモーション中でなければ（多重生成を防ぐ）
 			if (m_ani_throw_start_flag == false)
 			{
-				//音楽スタート
-				Audio::Start(GORILLATHROW);
-
-				// 敵弾丸作成
-				CObjEnemyBullet* objenemy = new CObjEnemyBullet(m_px, m_py);
-				Objs::InsertObj(objenemy, OBJ_ENEMY_BULLET, 10);
-
 				//壁ヒットフラグをfalseにする。
 				m_wall_hit_flag = false;
 
@@ -167,7 +184,7 @@ void CObjBoss::Action()
 	}
 
 	CObjDoor* objdoor = (CObjDoor*)Objs::GetObj(OBJ_DOOR);
-	
+
 	//弾丸とあたったらHP-1
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
@@ -179,8 +196,8 @@ void CObjBoss::Action()
 	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
 	{
 		CObjLastWall* objlastwall = (CObjLastWall*)Objs::GetObj(OBJ_LAST_WALL);
-		
-		m_px = objlastwall->GetPosX()-BOSS_SIZE_WIDTH;//柱の左側に
+
+		m_px = objlastwall->GetPosX() - BOSS_SIZE_WIDTH;//柱の左側に
 	}
 	// 体力が0以下なら
 	if (m_hp <= 0)
@@ -205,7 +222,7 @@ void CObjBoss::Action()
 //ドロー
 void CObjBoss::Draw()
 {
-	
+
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 

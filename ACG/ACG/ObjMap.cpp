@@ -231,7 +231,7 @@ void CObjMap::CreateObj(int x, int y)
 		case MAP_BOSS://É{ÉXçÏê¨
 		{
 			CObjBoss* objboss = new CObjBoss(x, y);
-			Objs::InsertObj(objboss, OBJ_BOSS, 9);
+			Objs::InsertObj(objboss, OBJ_BOSS, 10);
 			break;
 		}
 
