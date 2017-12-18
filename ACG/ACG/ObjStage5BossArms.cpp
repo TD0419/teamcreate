@@ -141,46 +141,46 @@ void CObjStage5BossArms::Action()
 	}
 	//---------------------------------------------------------
 }
-
-//ŠgU’e‚ğ‘Å‚ÂUŒ‚
-//ˆø”F”š”­‚Ü‚Å‚ÌŠÔ
-void CObjStage5BossArms::DiffusionAttack(int limit_time)
-{
-	//ŠgU’e‚ÌŒ¹‚ğì¬
-	CObjDiffusionSource* p = new CObjDiffusionSource(m_px+ STAGE5_BOSS_ARMS_WIDTH_SIZE /2.0f, m_py+ STAGE5_BOSS_ARMS_HEIGHT_SIZE-10.0f,limit_time);
-	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
-}
-
-//˜r‚ğ‰º‚ë‚·UŒ‚
-//ˆø”1	float x	:˜r‚ğ‰º‚ë‚·XˆÊ’u
-//ˆø”3 int time:˜r‚ğ‰º‚ë‚»‚¤‚Æ‚µ‚½‚Æ‚«‚©‚çŒo‰ßŠÔ
-void CObjStage5BossArms::ArmLowerAttack(float x, int time)
-{
-	//UŒ‚‚ªn‚Ü‚éuŠÔ‚É˜r‚ğ‰º‚ë‚·XˆÊ’u‚ğŒˆ‚ß‚é
-	if (time == 1)
-	{
-		m_arm_lower_marker_px = x;
-	}
-	//120ƒtƒŒ[ƒ€‚ÌŠÔ‚ÉålŒö‚ÌXˆÊ’u‚Æ“¯‚¶‚É‚È‚é‚æ‚¤‚ÉƒxƒNƒgƒ‹X‚ğ’²®
-	if (time < 120)
-	{
-		m_vx = (m_arm_lower_marker_px - m_px) / (120 - time);
-	}
-	//120ˆÈã‚È‚ç˜r‚ğ‰º‚ë‚·UŒ‚‚ğ‚·‚é‚Ì‚ÅXˆÚ“®—Ê‚ğ0.0f‚É‚·‚é
-	else
-	{
-		m_vx=0.0f;
-	}
-
-	//ŠÔ‚ª120‚É‚È‚Á‚½‚ç˜r‚ğ‰º‚ë‚·UŒ‚‚ğ‚·‚é
-	if (time >= 120)
-	{
-		//˜r‚ğ‰º‚ë‚·ˆÊ’u‚ğ¦‚³‚È‚¢
-		m_arm_lower_marker_px = 0.0f;
-		//˜r‚ğ‰º‚ë‚·
-		m_vy = 10.0f;
-	}
-}
+//
+////ŠgU’e‚ğ‘Å‚ÂUŒ‚
+////ˆø”F”š”­‚Ü‚Å‚ÌŠÔ
+//void CObjStage5BossArms::DiffusionAttack(int limit_time)
+//{
+//	//ŠgU’e‚ÌŒ¹‚ğì¬
+//	CObjDiffusionSource* p = new CObjDiffusionSource(m_px+ STAGE5_BOSS_ARMS_WIDTH_SIZE /2.0f, m_py+ STAGE5_BOSS_ARMS_HEIGHT_SIZE-10.0f,limit_time);
+//	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
+//}
+//
+////˜r‚ğ‰º‚ë‚·UŒ‚
+////ˆø”1	float x	:˜r‚ğ‰º‚ë‚·XˆÊ’u
+////ˆø”3 int time:˜r‚ğ‰º‚ë‚»‚¤‚Æ‚µ‚½‚Æ‚«‚©‚çŒo‰ßŠÔ
+//void CObjStage5BossArms::ArmLowerAttack(float x, int time)
+//{
+//	//UŒ‚‚ªn‚Ü‚éuŠÔ‚É˜r‚ğ‰º‚ë‚·XˆÊ’u‚ğŒˆ‚ß‚é
+//	if (time == 1)
+//	{
+//		m_arm_lower_marker_px = x;
+//	}
+//	//120ƒtƒŒ[ƒ€‚ÌŠÔ‚ÉålŒö‚ÌXˆÊ’u‚Æ“¯‚¶‚É‚È‚é‚æ‚¤‚ÉƒxƒNƒgƒ‹X‚ğ’²®
+//	if (time < 120)
+//	{
+//		m_vx = (m_arm_lower_marker_px - m_px) / (120 - time);
+//	}
+//	//120ˆÈã‚È‚ç˜r‚ğ‰º‚ë‚·UŒ‚‚ğ‚·‚é‚Ì‚ÅXˆÚ“®—Ê‚ğ0.0f‚É‚·‚é
+//	else
+//	{
+//		m_vx=0.0f;
+//	}
+//
+//	//ŠÔ‚ª120‚É‚È‚Á‚½‚ç˜r‚ğ‰º‚ë‚·UŒ‚‚ğ‚·‚é
+//	if (time >= 120)
+//	{
+//		//˜r‚ğ‰º‚ë‚·ˆÊ’u‚ğ¦‚³‚È‚¢
+//		m_arm_lower_marker_px = 0.0f;
+//		//˜r‚ğ‰º‚ë‚·
+//		m_vy = 10.0f;
+//	}
+//}
 //ƒhƒ[
 void CObjStage5BossArms::Draw()
 {
