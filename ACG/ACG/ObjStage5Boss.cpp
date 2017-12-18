@@ -38,8 +38,8 @@ void CObjStage5Boss::Init()
 	m_attack3_count = 0;
 
 	//音楽
-	//Audio::Start(BOSS);
-	//Audio::Stop(STAGE);
+	Audio::Start(BOSS);
+	Audio::Stop(STAGE);
 
 	//左右の腕作成ー------------------
 	//右腕オブジェクト作成								↓ボスの胴体に密着する位置

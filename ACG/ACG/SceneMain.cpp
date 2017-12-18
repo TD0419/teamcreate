@@ -43,7 +43,7 @@ void CSceneMain::InitScene()
 
 	//デバッグ用ステージ番号調整用
 	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 2;
+	s->stagenum = 5;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -113,8 +113,8 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 		p = Save::ExternalDataOpen(L"stage3.csv", &size);//外部データ読み込み
 		break;
 	case 5:
-		//Audio::Start(STAGE);
-		p=Save::ExternalDataOpen(L"stage5ver2.csv", &size);//外部データ読み込み
+		Audio::Start(STAGE);
+		p=Save::ExternalDataOpen(L"stage5.csv", &size);//外部データ読み込み
 		break;
 	default:
 		break;
