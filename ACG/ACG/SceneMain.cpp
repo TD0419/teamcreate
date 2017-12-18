@@ -82,10 +82,6 @@ void CSceneMain::InitScene()
 	//ステージ５ボス	デバッグで使うためおいといてください
 	/*CObjStage5Boss* p = new CObjStage5Boss(4, 10);
 	Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);*/
-
-	//ステージ5ボス作成(爪の開閉アニメーション確認用)
-	/*CObjStage5Boss* objstage5_boss = new CObjStage5Boss(6, 12);
-	Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);*/
 	//デバッグ--------------------------------------------------
 }
 
@@ -117,8 +113,8 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 		p = Save::ExternalDataOpen(L"stage3.csv", &size);//外部データ読み込み
 		break;
 	case 5:
-		//Audio::Start(STAGE);
-		p=Save::ExternalDataOpen(L"stage5ver2.csv", &size);//外部データ読み込み
+		Audio::Start(STAGE);
+		p=Save::ExternalDataOpen(L"stage5.csv", &size);//外部データ読み込み
 		break;
 	default:
 		break;

@@ -45,7 +45,7 @@ void CObjHero::Init()
 	m_ani_time_ladders = 0;
 	m_ani_frame_ladders = 0;	//ladders静止フレームを初期にする
 
-	m_ani_max_time_rope = 25; //ropeアニメーション間隔幅 
+	m_ani_max_time_rope = 4; //ropeアニメーション間隔幅 
 	m_ani_time_rope = 0;
 	m_ani_frame_rope = 0;	//rope静止フレームを初期にする
 
