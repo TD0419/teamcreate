@@ -41,16 +41,16 @@ enum OBJ_NAME
 	OBJ_TIME,			//タイム
 	OBJ_ROLL_BLOCK,		//回転するブロック
 	OBJ_ROLL_BLOCK_SWITCH,//回転するブロック用のスイッチ
-	OBJ_NEEDLE,			//針
-	OBJ_NEEDLE_STAND,	//針の土台
-	OBJ_TARZAN_POINT,	//ロープでぶら下がることができるギミック
+	OBJ_NEEDLE,			  //針
+	OBJ_NEEDLE_STAND,	  //針の土台
+	OBJ_TARZAN_POINT,	  //ロープでぶら下がることができるギミック
 	OBJ_DIFFUSION_CANNON, //ステージ５の拡散弾キャノン
 	OBJ_DIFFUSION_BULLET, //ステージ５の拡散弾
-	OBJ_FALLING_LIFT,	//乗ると落ちるリフト
-	OBJ_FALLING_BLOCK,	//ステージ5ボス戦専用落ちるブロック
-	OBJ_STAGE5_BOSS_ARMS,//ステージ5ボスの腕
-	OBJ_WIRE_MESH,//ステージ5の金網
-	OBJ_DIFFUSION_SOURCE,//拡散弾の源
+	OBJ_FALLING_LIFT,	  //乗ると落ちるリフト
+	OBJ_FALLING_BLOCK,	  //ステージ5ボス戦専用落ちるブロック
+	OBJ_STAGE5_BOSS_ARMS, //ステージ5ボスの腕
+	OBJ_WIRE_MESH,		  //ステージ5の金網
+	OBJ_DIFFUSION_SOURCE, //拡散弾の源
 };
 //------------------------------------------------
 
@@ -185,17 +185,17 @@ enum GRAPHIC_ID
 	GRA_NEEDLE_STAND,   //針の土台
 	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
 
-	GRA_BLACK_BALL,			//回転ブロックの仕掛けのスイッチ
-	GRA_CANNON_BEAM,		//ステージ5の拡散弾
-	GRA_WIRE_MASH,			//ステージ5の金網
-	GRA_STAGE5_BOSS_ELECTRIC,	 	//ステージ5のボス胴腕接続電気
-	GRA_STAGE5_BOSS_BODY,	//ステージ5のボス胴体
-	GRA_STAGE5_BOSS_EYE,	//ステージ5のボス眼球
-	GRA_STAGE5_BOSS_ARMS_ALL,      	//ステージ5のボス腕(左右腕)
-	GRA_FALLING_LIFT,	//落ちるリフト
-	GRA_HAND_LIFT,//手動で引っ張るリフト
-	GRA_DIFFUSION_SOURCE,//拡散弾を撃つ弾
-	GRA_BOSS_DIFFUSION,//ボスの発射する拡散弾
+	GRA_BLACK_BALL,			 //回転ブロックの仕掛けのスイッチ
+	GRA_CANNON_BEAM,		 //ステージ5の拡散弾
+	GRA_WIRE_MASH,			 //ステージ5の金網
+	GRA_STAGE5_BOSS_ELECTRIC,//ステージ5のボス胴腕接続電気
+	GRA_STAGE5_BOSS_BODY,	 //ステージ5のボス胴体
+	GRA_STAGE5_BOSS_EYE,	 //ステージ5のボス眼球
+	GRA_STAGE5_BOSS_ARMS_ALL,//ステージ5のボス腕(左右腕)
+	GRA_FALLING_LIFT,		 //落ちるリフト
+	GRA_HAND_LIFT,			 //手動で引っ張るリフト
+	GRA_DIFFUSION_SOURCE,	 //拡散弾を撃つ弾
+	GRA_BOSS_DIFFUSION,		 //ボスの発射する拡散弾
 };
 
 //音楽(BGM)
@@ -218,8 +218,8 @@ enum MUSIC
 	LEVER		,//レバー
 	BUTTON		,//ボタン
 	ENEMYFIR	,//敵の弾発射
-	PULLLIFT		,//リフト(引っ張る)
-	RELEASELIFT		,//リフト(離れる)
+	PULLLIFT	,//リフト(引っ張る)
+	RELEASELIFT	,//リフト(離れる)
 	WAVE		,//水の流れ
 	GORILLATHROW,//ゴリラの投擲音
 	ROLLBLOCK,	 //回転ブロック
@@ -230,59 +230,55 @@ enum MUSIC
 };
 
 //オブジェクトのサイズ
-#define HERO_SIZE_WIDTH	      (64.0f)		//主人公の横サイズ	
-#define HERO_SIZE_HEIGHT	  (128.0f)		//主人公の縦サイズ	
-#define ENEMY_SIZE			  (64.0f)		//敵のサイズ(仮)
-#define BULLET_SIZE			  (20.0f)		//弾丸サイズ（仮）
-#define ROPE_SIZE			  (5.0f)		//ロープサイズ（仮）
-#define BLOCK_SIZE			  (64.0f)		//ブロックのサイズ（仮）	
-#define WATER_SIZE_WIDTH	  (640.0f)		//水の横サイズ
-#define WATER_SIZE_HEIGHT	  (192.0f)       //水の縦サイズ
-#define LADDERS_SIZE		  (64.0f)		//はしごのサイズ
-#define BUTTON_SIZE			  (64.0f)		//ボタンサイズ（仮）
-#define SIGN_SIZE			  (32.0f)		//看板のサイズ（仮）
-#define SIGN_FRAME_WIDTH	  (192.0f)		//看板の枠サイズ（横）
-
-
-#define LEVER_SWITCH_SIZE	  (64.0f)	    //レバースイッチのサイズ
-#define ROPE_SWITCH_SIZE	  (64.0f)	    //ロープスイッチのサイズ
-
-#define LIFT_SIZE_WIDTH		  (128.0f)		//リフトサイズ横サイズ
-#define LIFT_SIZE_HEIGHT	  (32.0f)		//リフトサイズ縦サイズ
-#define STAGE5_LIFT_SIZE_WIDTH (320.0f)		//ステージ5のリフトサイズ
-#define STAGE5_LIFT_SIZE_HEIGHT (16.0f)		//ステージ5のリフトサイズ
-
-#define ROCK_SIZE_WIDTH		  (170.0f)		//岩の横サイズ（仮
-#define ROCK_SIZE_HEIGHT	  (240.0f)		//岩の縦サイズ（仮
-#define WOOD_SIZE			  (320.0f)		//木のサイズ(仮)
-#define BOSS_SIZE_WIDTH		  (192.0f)		//BOSS横幅(仮)
-#define BOSS_SIZE_HEIGHT	  (256.0f)		//BOSS縦幅(仮)
-#define BOSS_DORP_KEY_SIZE	  (32.0f)	    //ボスドロップキーサイズ(仮)
-#define DOOR_SIZE			  (128.0f)		//ドアのサイズ(仮)
-#define THROUGHT_BLOCK_SIZE	  (64.0f)	    //スルーブロックサイズ（仮）
-#define FALLING_WALLS_SAIZE   (64.0f)		//落下壁サイズ(仮)
-#define CANNON_SIZE_WIDTH	  (64.0f)		//砲台の横サイズ(仮)
-#define CANNON_SIZE_HEIGHT	  (32.0f)		//砲台の縦サイズ(仮)
-#define ROLL_BLOCK_SIZE_WIDTH	(192.0f)	//回転するブロックの横サイズ
-#define ROLL_BLOCK_SIZE_HEIGHT	(64.0f)		//回転するブロックの縦サイズ
-#define NEEDLE_SIZE_WIDTH     (64.0f)		//針の横のサイズ
-#define NEEDLE_SIZE_HEIGHT    (32.0f)		//針の縦のサイズ
-#define NEEDLE_STAND_SIZE     (64.0f)		//針の土台のサイズ
-#define TARZAN_POINT_WIDTH	  (16.0f)		//ロープでぶら下がれるギミック横サイズ
-#define TARZAN_POINT_HEIGHT	  (16.0f)		//ロープでぶら下がれるギミック縦サイズ
-#define ROLL_BLOCK_SWITCH_SIZE_WIDTH  (16.0f)	//回転するブロックをまわすスイッチの横サイズ
-#define ROLL_BLOCK_SWITCH_SIZE_HEIGHT (16.0f)	//回転するブロックをまわすスイッチの縦サイズ
-#define DIFFUSION_CANNON_SIZE	      (64.0f)   //ステージ5の拡散するキャノンのサイズ
-#define STAGE5_BOSS_BODY_SIZE	     (256.0f)	//ステージ5のボス胴体サイズ
-#define STAGE5_BOSS_EYE_SIZE	     (133.0f)	//ステージ5のボス眼球サイズ
-#define STAGE5_BOSS_ARMS_WIDTH_SIZE       (170.0f)	//ステージ5のボス腕サイズ(横)
-#define STAGE5_BOSS_ARMS_HEIGHT_SIZE      (564.0f)	//ステージ5のボス腕サイズ(縦)
-#define STAGE5_BOSS_ELECTRIC_WIDTH	 (300.0f)	//ステージ5のボス胴腕接続電気サイズ(横)
-#define STAGE5_BOSS_ELECTRIC_HEIGHT	 (256.0f)	//ステージ5のボス胴腕接続電気サイズ(縦)
-#define WIRE_MESH_SIZE_WIDTH	(640.0f) //金網の横サイズ
-#define WIRE_MESH_SIZE_HEIGHT	(64.0f) //金網の縦サイズ
-#define DIFFUSION_SOURCE_SIZE	(32.0f)//拡散弾を撃つ弾のサイズ
-#define STAGE5_BOSS_BULLET_SIZE (32.0f)//ステージ５のボスが打つ弾のサイズ
+#define HERO_SIZE_WIDTH			 (64.0f)		//主人公の横サイズ	
+#define HERO_SIZE_HEIGHT		(128.0f)		//主人公の縦サイズ	
+#define ENEMY_SIZE				 (64.0f)		//敵のサイズ(仮)
+#define BULLET_SIZE				 (20.0f)		//弾丸サイズ（仮）
+#define ROPE_SIZE				  (5.0f)		//ロープサイズ（仮）
+#define BLOCK_SIZE				 (64.0f)		//ブロックのサイズ（仮）	
+#define WATER_SIZE_WIDTH		(640.0f)		//水の横サイズ
+#define WATER_SIZE_HEIGHT		(192.0f)		//水の縦サイズ
+#define LADDERS_SIZE			 (64.0f)		//はしごのサイズ
+#define BUTTON_SIZE				 (64.0f)		//ボタンサイズ（仮）
+#define SIGN_SIZE				 (32.0f)		//看板のサイズ（仮）
+#define SIGN_FRAME_WIDTH		(192.0f)		//看板の枠サイズ（横）
+#define LEVER_SWITCH_SIZE	     (64.0f)	    //レバースイッチのサイズ
+#define ROPE_SWITCH_SIZE	     (64.0f)	    //ロープスイッチのサイズ
+#define LIFT_SIZE_WIDTH		    (128.0f)		//リフトサイズ横サイズ
+#define LIFT_SIZE_HEIGHT	     (32.0f)		//リフトサイズ縦サイズ
+#define STAGE5_LIFT_SIZE_WIDTH	(320.0f)		//ステージ5のリフトサイズ
+#define STAGE5_LIFT_SIZE_HEIGHT  (16.0f)		//ステージ5のリフトサイズ
+#define ROCK_SIZE_WIDTH		    (170.0f)		//岩の横サイズ（仮)
+#define ROCK_SIZE_HEIGHT	    (240.0f)		//岩の縦サイズ（仮)
+#define WOOD_SIZE			    (320.0f)		//木のサイズ(仮)
+#define BOSS_SIZE_WIDTH		    (192.0f)		//BOSS横幅(仮)
+#define BOSS_SIZE_HEIGHT	    (256.0f)		//BOSS縦幅(仮)
+#define BOSS_DORP_KEY_SIZE		 (32.0f)	    //ボスドロップキーサイズ(仮)
+#define DOOR_SIZE			    (128.0f)		//ドアのサイズ(仮)
+#define THROUGHT_BLOCK_SIZE		 (64.0f)	    //スルーブロックサイズ（仮）
+#define FALLING_WALLS_SAIZE		 (64.0f)		//落下壁サイズ(仮)
+#define CANNON_SIZE_WIDTH		 (64.0f)		//砲台の横サイズ(仮)
+#define CANNON_SIZE_HEIGHT		 (32.0f)		//砲台の縦サイズ(仮)
+#define ROLL_BLOCK_SIZE_WIDTH	(192.0f)		//回転するブロックの横サイズ
+#define ROLL_BLOCK_SIZE_HEIGHT	 (64.0f)		//回転するブロックの縦サイズ
+#define NEEDLE_SIZE_WIDTH		 (64.0f)		//針の横のサイズ
+#define NEEDLE_SIZE_HEIGHT		 (32.0f)		//針の縦のサイズ
+#define NEEDLE_STAND_SIZE		 (64.0f)		//針の土台のサイズ
+#define TARZAN_POINT_WIDTH		 (16.0f)		//ロープでぶら下がれるギミック横サイズ
+#define TARZAN_POINT_HEIGHT		 (16.0f)		//ロープでぶら下がれるギミック縦サイズ
+#define ROLL_BLOCK_SWITCH_SIZE_WIDTH   (16.0f)	//回転するブロックをまわすスイッチの横サイズ
+#define ROLL_BLOCK_SWITCH_SIZE_HEIGHT  (16.0f)	//回転するブロックをまわすスイッチの縦サイズ
+#define DIFFUSION_CANNON_SIZE	       (64.0f)  //ステージ5の拡散するキャノンのサイズ
+#define STAGE5_BOSS_BODY_SIZE	      (256.0f)	//ステージ5のボス胴体サイズ
+#define STAGE5_BOSS_EYE_SIZE	      (133.0f)	//ステージ5のボス眼球サイズ
+#define STAGE5_BOSS_ARMS_WIDTH_SIZE   (170.0f)	//ステージ5のボス腕サイズ(横)
+#define STAGE5_BOSS_ARMS_HEIGHT_SIZE  (564.0f)	//ステージ5のボス腕サイズ(縦)
+#define STAGE5_BOSS_ELECTRIC_WIDTH	  (300.0f)	//ステージ5のボス胴腕接続電気サイズ(横)
+#define STAGE5_BOSS_ELECTRIC_HEIGHT	  (256.0f)	//ステージ5のボス胴腕接続電気サイズ(縦)
+#define WIRE_MESH_SIZE_WIDTH	(640.0f)		//金網の横サイズ
+#define WIRE_MESH_SIZE_HEIGHT	 (64.0f)		//金網の縦サイズ
+#define DIFFUSION_SOURCE_SIZE	 (32.0f)		//拡散弾を撃つ弾のサイズ
+#define STAGE5_BOSS_BULLET_SIZE  (32.0f)		//ステージ５のボスが打つ弾のサイズ
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
@@ -336,15 +332,15 @@ enum MUSIC
 #include "ObjTime.h"			//タイム
 #include "ObjNeedle.h"			//針
 #include "ObjNeedleStand.h"     //針の土台
-#include "ObjDiffusionCannon.h"//拡散弾発射装置
+#include "ObjDiffusionCannon.h" //拡散弾発射装置
 #include "ObjRollBlock.h"		//回転ブロック
 #include "ObjTarzanPoint.h"		//ロープでぶら下がることができるギミック
 #include "ObjRollBlockSwitch.h"	//回転ブロック用のスイッチ
-#include "ObjDiffusionBullet.h"
+#include "ObjDiffusionBullet.h" //拡散弾
 #include "ObjFallingLift.h"		//乗ると落ちるリフト
 #include "ObjFallingBlock.h"	//ステージ5ボス戦専用落ちるブロック
-#include"ObjWireMesh.h"//ステージ5の金網
-#include "ObjDiffusionSource.h"//ステージ５ボスの拡散弾の源
+#include"ObjWireMesh.h"			//ステージ5の金網
+#include "ObjDiffusionSource.h"	//ステージ５ボスの拡散弾のソース
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
