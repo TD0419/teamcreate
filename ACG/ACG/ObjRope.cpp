@@ -111,7 +111,7 @@ void CObjRope::Action()
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
 
 		//ターザンポイントオブジェクトと当たっていたら
-		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr)
+		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr&&m_vx<=5.0f&&m_vy>=-6.0f)
 			m_tarzan_point_flag = true;//フラグをONにする
 
 		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
