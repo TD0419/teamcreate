@@ -43,7 +43,7 @@ void CSceneMain::InitScene()
 
 	//デバッグ用ステージ番号調整用
 	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 2;
+	s->stagenum = 5;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -135,7 +135,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 
 	for (int i = 0; i < MAP_Y_MAX; i++)
 	{
-		for (int j = 0; j < 100; j++)
+		for (int j = 0; j < MAP_X_MAX; j++)
 		{
 			//マップ情報を入れる
 			int w = 0;
