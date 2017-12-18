@@ -114,7 +114,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 		break;
 	case 5:
 		Audio::Start(STAGE);
-		p=Save::ExternalDataOpen(L"stage5.csv", &size);//外部データ読み込み
+		p=Save::ExternalDataOpen(L"stage5ver2.csv", &size);//外部データ読み込み
 		break;
 	default:
 		break;
