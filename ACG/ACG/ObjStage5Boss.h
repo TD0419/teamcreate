@@ -53,7 +53,7 @@ private:
 	bool m_attack4_flag;//攻撃パターン4用のフラグ
 	bool m_block_down_flag;//ブロックを落とすかどうかのフラグ
 	float m_attack4_scroll;//攻撃パターン４用のスクロール値
-
+	int m_attack4_count;//攻撃パターン3用のカウンター
 
 	//右アームオブジェクトの情報
 	CObjStage5BossArms* m_boos_arm_right;
