@@ -41,16 +41,16 @@ enum OBJ_NAME
 	OBJ_TIME,			//タイム
 	OBJ_ROLL_BLOCK,		//回転するブロック
 	OBJ_ROLL_BLOCK_SWITCH,//回転するブロック用のスイッチ
-	OBJ_NEEDLE,			//針
-	OBJ_NEEDLE_STAND,	//針の土台
-	OBJ_TARZAN_POINT,	//ロープでぶら下がることができるギミック
+	OBJ_NEEDLE,			  //針
+	OBJ_NEEDLE_STAND,	  //針の土台
+	OBJ_TARZAN_POINT,	  //ロープでぶら下がることができるギミック
 	OBJ_DIFFUSION_CANNON, //ステージ５の拡散弾キャノン
 	OBJ_DIFFUSION_BULLET, //ステージ５の拡散弾
-	OBJ_FALLING_LIFT,	//乗ると落ちるリフト
-	OBJ_FALLING_BLOCK,	//ステージ5ボス戦専用落ちるブロック
-	OBJ_STAGE5_BOSS_ARMS,//ステージ5ボスの腕
-	OBJ_WIRE_MESH,//ステージ5の金網
-	OBJ_DIFFUSION_SOURCE,//拡散弾の源
+	OBJ_FALLING_LIFT,	  //乗ると落ちるリフト
+	OBJ_FALLING_BLOCK,	  //ステージ5ボス戦専用落ちるブロック
+	OBJ_STAGE5_BOSS_ARMS, //ステージ5ボスの腕
+	OBJ_WIRE_MESH,		  //ステージ5の金網
+	OBJ_DIFFUSION_SOURCE, //拡散弾の源
 };
 //------------------------------------------------
 
@@ -219,8 +219,8 @@ enum MUSIC
 	LEVER		,//レバー
 	BUTTON		,//ボタン
 	ENEMYFIR	,//敵の弾発射
-	PULLLIFT		,//リフト(引っ張る)
-	RELEASELIFT		,//リフト(離れる)
+	PULLLIFT	,//リフト(引っ張る)
+	RELEASELIFT	,//リフト(離れる)
 	WAVE		,//水の流れ
 	GORILLATHROW,//ゴリラの投擲音
 	ROLLBLOCK,	 //回転ブロック
@@ -337,15 +337,15 @@ enum MUSIC
 #include "ObjTime.h"			//タイム
 #include "ObjNeedle.h"			//針
 #include "ObjNeedleStand.h"     //針の土台
-#include "ObjDiffusionCannon.h"//拡散弾発射装置
+#include "ObjDiffusionCannon.h" //拡散弾発射装置
 #include "ObjRollBlock.h"		//回転ブロック
 #include "ObjTarzanPoint.h"		//ロープでぶら下がることができるギミック
 #include "ObjRollBlockSwitch.h"	//回転ブロック用のスイッチ
-#include "ObjDiffusionBullet.h"
+#include "ObjDiffusionBullet.h" //拡散弾
 #include "ObjFallingLift.h"		//乗ると落ちるリフト
 #include "ObjFallingBlock.h"	//ステージ5ボス戦専用落ちるブロック
-#include"ObjWireMesh.h"//ステージ5の金網
-#include "ObjDiffusionSource.h"//ステージ５ボスの拡散弾の源
+#include"ObjWireMesh.h"			//ステージ5の金網
+#include "ObjDiffusionSource.h"	//ステージ５ボスの拡散弾のソース
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

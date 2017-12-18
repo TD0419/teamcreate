@@ -38,8 +38,8 @@ void CObjStage5Boss::Init()
 	m_attack3_count = 0;
 
 	//音楽
-	//Audio::Start(BOSS);
-	//Audio::Stop(STAGE);
+	Audio::Start(BOSS);
+	Audio::Stop(STAGE);
 
 	//左右の腕作成ー------------------
 	//右腕オブジェクト作成								↓ボスの胴体に密着する位置
@@ -259,9 +259,28 @@ void CObjStage5Boss::Draw()
 	dst.m_left = m_px - objmap->GetScrollX() + EYE_CORRECTION_WIDTH;
 	dst.m_right = dst.m_left + STAGE5_BOSS_EYE_SIZE;	
 	dst.m_bottom = dst.m_top + STAGE5_BOSS_EYE_SIZE;
+
+	//主人公のオブジェクト情報を取得
+	CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+	//眼球を主人公の方へ向くようにする-----------------
+
+	//主人公が生存している場合、角度の計算を行う
+	float m_r = 0.0f;
+	if (obj_hero != nullptr)
+	{
+		float hero_x = obj_hero->GetPosX() - m_px;		//主人公の位置情報X取得
+		float hero_y = obj_hero->GetPosY() - m_py;		//主人公の位置情報Y取得
+		m_r = atan2(-hero_y, hero_x)*180.0f / 3.14f;
+		if (m_r < 0)
+		{
+			m_r = 360.0f - abs(m_r);
+		}
+	}
+	//--------------------------------------------------
 	
 	//描画
-	Draw::Draw(GRA_STAGE5_BOSS_EYE, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_STAGE5_BOSS_EYE, &src, &dst, color, m_r);
 }
 
 //ラストウォールと当たったときの処理
