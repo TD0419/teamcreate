@@ -52,4 +52,5 @@ class CObjBoss :public CObj
 	int m_ani_walk_max_time;	//アニメーション歩く動作間隔最大値
 	int m_ani_throw_max_time;	//アニメーション投げる動作間隔最大値
 	bool m_ani_throw_start_flag;//投げるアニメーション開始フラグ
+	bool m_throw_bullet_flag;   //投げるココナッツの制御フラグ
 };

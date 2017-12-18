@@ -1,5 +1,6 @@
 #include "GameHead.h"
 #include "ObjMap.h"
+#include "GameL\UserData.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -188,8 +189,16 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_LAST_WALL:		//壁(次ステージを隔てる壁)
 		{
-			CObjLastWall* objLastWall = new CObjLastWall(x, y);
-			Objs::InsertObj(objLastWall, OBJ_LAST_WALL, 10);
+			if (((UserData*)Save::GetData())->stagenum == 5)	//ステージ5のときは下のほうから生成する
+			{
+				CObjLastWall* objLastWall = new CObjLastWall(x, y - 8);
+				Objs::InsertObj(objLastWall, OBJ_LAST_WALL, 10);
+			}
+			else 
+			{
+				CObjLastWall* objLastWall = new CObjLastWall(x, y);
+				Objs::InsertObj(objLastWall, OBJ_LAST_WALL, 10);
+			}
 			break;
 		}
 	
@@ -231,7 +240,7 @@ void CObjMap::CreateObj(int x, int y)
 		case MAP_BOSS://ボス作成
 		{
 			CObjBoss* objboss = new CObjBoss(x, y);
-			Objs::InsertObj(objboss, OBJ_BOSS, 9);
+			Objs::InsertObj(objboss, OBJ_BOSS, 10);
 			break;
 		}
 
@@ -322,7 +331,7 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_STAGE5_BOSS://ステージ5ボス(本体)
 		{
-			CObjStage5Boss* objstage5_boss = new CObjStage5Boss(x,y);
+			CObjStage5Boss* objstage5_boss = new CObjStage5Boss(x,y - 11); //下のほうから生成する
 			Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS ,9);
 			break;
 		}

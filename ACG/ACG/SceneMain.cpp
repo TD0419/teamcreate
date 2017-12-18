@@ -41,7 +41,7 @@ void CSceneMain::InitScene()
 		return;
 	}
 
-	////デバッグ用ステージ番号調整用
+	//デバッグ用ステージ番号調整用
 	UserData* s = (UserData*)Save::GetData();
 	s->stagenum = 5;
 	//----------------
@@ -68,7 +68,7 @@ void CSceneMain::InitScene()
 	//要らんの--------------------------------------------------
 	//要るの--------------------------------------------------
 	//------------------------------
-	/*CObjFallingLift* objfallinglift = new CObjFallingLift(5, 20);
+	/*CObjFallingLift* objfallinglift = new CObjFallingLift(5, 22);
 	Objs::InsertObj(objfallinglift, OBJ_FALLING_LIFT, 10);*/
 
 	////当たり判定まだなのでため置いていてください
@@ -82,10 +82,6 @@ void CSceneMain::InitScene()
 	//ステージ５ボス	デバッグで使うためおいといてください
 	/*CObjStage5Boss* p = new CObjStage5Boss(4, 10);
 	Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);*/
-
-	//ステージ5ボス作成(爪の開閉アニメーション確認用)
-	/*CObjStage5Boss* objstage5_boss = new CObjStage5Boss(6, 12);
-	Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS, 9);*/
 	//デバッグ--------------------------------------------------
 }
 
@@ -117,7 +113,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 		p = Save::ExternalDataOpen(L"stage3.csv", &size);//外部データ読み込み
 		break;
 	case 5:
-		//Audio::Start(STAGE);
+		Audio::Start(STAGE);
 		p=Save::ExternalDataOpen(L"stage5ver2.csv", &size);//外部データ読み込み
 		break;
 	default:
@@ -195,7 +191,7 @@ void CSceneMain::ImageDataLoading()
 		//すり抜けるブロック画像読み込み
 		Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
 		//ボス画像読み込み
-		Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1024);
+		Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1280);
 		//ゴリラの投擲物読み込み
 		Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
 		break;

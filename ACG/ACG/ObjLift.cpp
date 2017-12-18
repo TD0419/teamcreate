@@ -340,8 +340,8 @@ void CObjLift::HeroRide()
 				}
 				break;
 			case 5:
-				//ã‘¤‚ª‚ ‚½‚Á‚Ä‚¢‚ê‚Î‚Å
-				if (5.0f <= r && r <= 175.0f&&objhero->GetVecY()>0)
+				//ã‘¤‚ª‚ ‚½‚Á‚Ä‚¢‚ê‚Î
+				if (10.0f <= r && r <= 170.0f&&objhero->GetVecY()>0)
 				{
 					objhero->SetHitDown(true);//ƒŠƒtƒg‚Ìã‚ÉålŒö‚ªæ‚Á‚Ä‚¢‚½‚çm_hit_down‚Étrue‚ğ•Ô‚·
 

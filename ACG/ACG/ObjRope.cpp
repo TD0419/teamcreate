@@ -111,16 +111,16 @@ void CObjRope::Action()
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
 
 		//ターザンポイントオブジェクトと当たっていたら
-		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr)
+		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr&&m_vx<=5.0f&&m_vy>=-6.0f)
 			m_tarzan_point_flag = true;//フラグをONにする
+		else
+			//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
+			objhero->SetVecX(0.0f);
 
 		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
 		{
 			m_r_key_flag = false;
 		}
-
-		//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
-		objhero->SetVecX(0.0f);
 	}	
 	else
 	{
@@ -355,6 +355,11 @@ void CObjRope::RopeDelete()
 	}
 	//金網と当たったら消去
 	if (DeleteCheckObjNameHit(hit, this, OBJ_WIRE_MESH))
+	{
+		return;
+	}
+	//回転ブロックと当たったら削除
+	if (DeleteCheckObjNameHit(hit, this, OBJ_ROLL_BLOCK))
 	{
 		return;
 	}

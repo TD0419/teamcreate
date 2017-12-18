@@ -60,6 +60,9 @@ private:
 	int m_arm_hp;    // 第五ボスのアームのＨＰ
 	bool m_posture;//姿　true=開いている　false=閉じている
 	bool m_input_posture;//入力された姿　true=開いている	false=閉じている
+
+	bool m_ani_flag_claw;//爪の開閉アニメーションフラグ　true=アニメーションをする	false=アニメーションをしない
+
 	bool m_hit_flag;//衝突時の多重判定を防ぐフラグ
 
 	//ブロックとの当たり判定用
