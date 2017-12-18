@@ -272,7 +272,7 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_TARZAN_POINT://ロープでぶら下がれるギミック
 		{
-			CObjTarzanPoint* objtarzanpoint = new CObjTarzanPoint(x, y);
+			CObjTarzanPoint* objtarzanpoint = new CObjTarzanPoint(x, y,true);
 			Objs::InsertObj(objtarzanpoint, OBJ_TARZAN_POINT, 9);
 			break;
 
@@ -333,6 +333,15 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objwirwmesh, OBJ_WIRE_MESH, 9);
 			break;
 		}
+
+		case MAP_BOSS_TARZAN_POINT://ボス戦い用ロープでぶら下がれるギミック
+		{
+			CObjTarzanPoint* objtarzanpoint = new CObjTarzanPoint(x, y, false);
+			Objs::InsertObj(objtarzanpoint, OBJ_TARZAN_POINT, 9);
+			break;
+
+		}
+
 	}
 
 	m_map[y][x].create = false;//フラグをオフにする	

@@ -34,8 +34,13 @@ void CObjStage5Boss::Init()
 	m_time=0;
 
 	//攻撃パターン3
-	m_attack3_flag=false;
+	m_attack3_flag = false;
 	m_attack3_count = 0;
+
+	//攻撃パターン4
+	m_attack4_flag = false;
+	m_attack4_scroll = 0.0f;
+	m_block_down_flag = false;
 
 	//音楽
 	//Audio::Start(BOSS);
@@ -75,7 +80,8 @@ void CObjStage5Boss::Action()
 			if (m_time % 100 == 0)
 			{
 				//何もしていないので攻撃モードをランダムで決める
-				m_attack_mode = GetRandom(2, 3);// GetRandom(1, 4);
+				m_attack_mode = 4;// GetRandom(1, 4);
+				m_time = 0;
 			}
 			break;
 		}
@@ -88,17 +94,21 @@ void CObjStage5Boss::Action()
 			if (m_time <= 200)
 			{
 				//腕を下ろす攻撃をする(左腕)
-				m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(), m_time);
+				m_boos_arm_left->ArmLowerAttack(objhero->GetPosX());
 			}
 			else
 			{
 				//腕を下ろす攻撃をする(右腕)
-				m_boos_arm_right->ArmLowerAttack(objhero->GetPosX(), m_time - 200);
+				m_boos_arm_right->ArmLowerAttack(objhero->GetPosX());
 			}
 
 			if (m_time >= 400)
 			{
 				m_attack_mode = 0;
+
+				//腕の管理タイムを0にする
+				m_boos_arm_left->ArmDownTimeInit();
+				m_boos_arm_right->ArmDownTimeInit();
 			}
 			break;
 		}
@@ -148,6 +158,29 @@ void CObjStage5Boss::Action()
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 		case 4:
 		{
+			//攻撃が始まって一回のみ
+			if (m_attack4_flag==false)
+			{
+				//マップオブジェクトを持ってくる
+				CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);	
+				m_attack4_scroll =objmap->GetScrollX();//スクロール値Xを持ってくる
+				m_attack4_flag = true;
+			}
+
+			//腕を移動させて落とす
+			m_boos_arm_left->BlockDownAttackMove(m_attack4_scroll);
+			m_boos_arm_right->BlockDownAttackMove(m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE);
+
+			//左右の腕が地面まで落ちているかどうかを調べる
+			bool left_arm_down = m_boos_arm_left->GetHitDown();
+			bool right_arm_down = m_boos_arm_right->GetHitDown();
+		
+			//両方の腕が地面までおちていれば
+			if (left_arm_down == true && right_arm_down == true)
+			{
+				m_block_down_flag = true;
+			}
+
 			break;
 		}
 	}
