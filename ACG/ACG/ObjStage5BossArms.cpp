@@ -36,13 +36,10 @@ void CObjStage5BossArms::Init()
 	m_arm_lower_marker_px = 0.0f;	//腕を下ろす位置を示すかどうかとそのX位置
 	m_armdown_time=0;//腕を下ろすときの管理用タイム
 
-	m_hit_flag = false;
+	m_wall_hit_flag = false;
 
-	m_hit_down = false;
-	m_hit_up = false;
-	m_hit_right = false;
-	m_hit_left = false;
-
+	m_block_hit_flag = false;
+	m_initpos_flag = false;
 
 	//typeの値が1のときライトアームの当たり判定表示
 	if (m_arms_type == RIGHT_ARM)
@@ -70,13 +67,6 @@ void CObjStage5BossArms::Action()
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//ブロックオブジェクトを持ってくる
-	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-	//ブロックとの当たり判定
-	objblock->AllBlockHit(&m_px, &m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
-
 	//アームタイプが1のとき、ライトアーム用の当たり判定表示
 	if (m_arms_type == RIGHT_ARM)
 	{
@@ -89,11 +79,22 @@ void CObjStage5BossArms::Action()
 		//当たり判定更新
 		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 	}
-
+	
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
 
+	//落ちるブロックと当たれば
+	if (hit->CheckObjNameHit(OBJ_FALLING_BLOCK) != nullptr)
+	{
+		m_py -= m_vy;
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+
+		m_block_hit_flag = true;
+	}
+
+	
 	//ボスオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
@@ -112,14 +113,22 @@ void CObjStage5BossArms::Action()
 		m_arm_hp -= 1;
 	}
 
-	//ＨＰが0になったらオブジェクト消去
+	//ＨＰが0になったらオブジェクトを初期位置に戻すためのフラグをオンにする
 	if (m_arm_hp == 0)
+	{
+		m_initpos_flag = true;
+	}
+
+	//初期位置フラグがオンなら
+	if (m_initpos_flag == true)
 	{
 		//初期位置に戻す
 		m_px = m_initial_px;
 		m_py = m_initial_py;
 		//HPを戻す
 		m_arm_hp = 10;
+		m_initpos_flag = false;
+		m_block_hit_flag = false;
 		return;
 	}
 	
@@ -233,7 +242,6 @@ void CObjStage5BossArms::Draw()
 				}
 			}
 		}
-
 		//マーカー(四角形)を表示する
 		Draw::DrawHitBox(m_arm_lower_marker_px - objmap->GetScrollX(), m_py - objmap->GetScrollY(), marker_h, STAGE5_BOSS_ARMS_WIDTH_SIZE, marker_color);
 	}
@@ -249,19 +257,19 @@ void CObjStage5BossArms::MoveShotAttack()
 	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
 	{
 		//衝突ふらぐがオフなら
-		if (m_hit_flag == false)
+		if (m_wall_hit_flag == false)
 		{
 			//ボスのオブジェクトを持ってくる
 			CObjStage5Boss* objbossbase = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 			if(objbossbase != nullptr)	//ステージ５のボスが存在していたら
 				objbossbase->LastWallHit();//ラストウォールと当たった時の処理をする
 
-			m_hit_flag = true;//ふらぐをtrueに
+			m_wall_hit_flag = true;//ふらぐをtrueに
 		}
 	}
 	else
 	{
-		m_hit_flag = false;//ふらぐをfalseに
+		m_wall_hit_flag = false;//ふらぐをfalseに
 	}
 }
 
@@ -346,9 +354,16 @@ void CObjStage5BossArms::ArmLowerAttack(float x)
 	{
 		//腕を下ろす位置を示さない
 		m_arm_lower_marker_px = 0.0f;
-		//腕を下ろす
-		m_vy = 10.0f;
+
+		//ブロックと当たるまで
+		if (m_block_hit_flag == false)
+		{
+			//腕を下ろす
+			m_vy = 10.0f;
+		}
 	}
+
+	
 }
 
 //初期位置を計算する

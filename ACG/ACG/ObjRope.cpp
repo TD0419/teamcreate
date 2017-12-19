@@ -101,9 +101,24 @@ void CObjRope::Action()
 		}
 	}
 
-	//ロープスイッチ　または　ターザンポイント　と衝突したとき、ロープが引っかかるようにする
-	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr||
-		hit->CheckObjNameHit(OBJ_TARZAN_POINT)!=nullptr)
+	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
+	if (hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
+	{
+		m_vx = 0.0f; //ロープ本体の移動速度を0にしてロープを動かないようにする
+		m_vy = 0.0f;
+
+		objhero->SetVecX(0.0f);
+
+		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
+
+		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
+		{
+			m_r_key_flag = false;
+		}
+	}
+
+	//ターザンポイントと衝突したとき、ロープが引っかかるようにする
+	if(hit->CheckObjNameHit(OBJ_TARZAN_POINT)!=nullptr)
 	{
 		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
 		/*m_px -= m_vx ;
@@ -374,7 +389,34 @@ void CObjRope::RopeDelete()
 	{
 		return;
 	}
+	//落ちるリフトと当たったら削除
+	if (DeleteCheckObjNameHit(hit, this, OBJ_FALLING_LIFT))
+	{
+		return;
+	}
+	//トゲの台と当たったら削除
+	if (DeleteCheckObjNameHit(hit, this, OBJ_NEEDLE_STAND))
+	{
+		return;
+	}
+	//落ちるブロックと当たったら削除
+	if (DeleteCheckObjNameHit(hit, this, OBJ_FALLING_BLOCK))
+	{
+		return;
+	}
+	//ステージ5ボス本体と当たったら削除
+	if (DeleteCheckObjNameHit(hit, this, OBJ_STAGE5_BOSS))
+	{
+		return;
+	}
+	//ステージ5ボスのアームと当たったら削除
+	if (DeleteCheckObjNameHit(hit, this, OBJ_STAGE5_BOSS_ARMS))
+	{
+		return;
+	}
 	
+
+
 	//ロープが消していいかどうかを調べる
 	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();
 
