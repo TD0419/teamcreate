@@ -772,7 +772,6 @@ void CObjHero::HitScene()
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	//針オブジェクトと衝突していれば
-
 	if (hit->CheckObjNameHit(OBJ_NEEDLE) != nullptr)
 	{
 		m_hero_die_enemy = true; //主人公の針にあたったときの死亡フラグをONにする
