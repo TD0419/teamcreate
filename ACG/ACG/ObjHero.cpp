@@ -143,7 +143,8 @@ void CObjHero::MoveScene()
 			{
 				m_vx += 0.5f;
 				m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
-				m_posture = 0.0f;		    //主人公の向き
+				if(objrope == nullptr)
+					m_posture = 0.0f;		    //主人公の向き
 				m_ani_time_move += 1;
 			}
 			//Aキーがおされたとき：左移動　
@@ -154,7 +155,7 @@ void CObjHero::MoveScene()
 
 				if (m_ladder_updown == 1)   //はしごに登ってるときは向きを変えない
 					m_posture = 0.0f;		//主人公の向き
-				else
+				else if(objrope == nullptr)
 					m_posture = 1.0f;		//主人公の向き
 				m_ani_time_move += 1;
 			}
@@ -230,61 +231,146 @@ void CObjHero::MoveScene()
 	//ロープオブジェクトが有る かつ ターザンポイントに引っかかっているなら
 	//ロープの位置を中心に振り子の動きをする
 	//このプログラムは単振り子です
+
+	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+	CObjTarzanPoint* obj = (CObjTarzanPoint*)Objs::GetObj(OBJ_TARZAN_POINT);
 	if ((objrope != nullptr && objrope->GetTarzanPointFlag() == true))
 	{
-		float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
-		float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
-
-		//ロープの位置
-		float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
-
-		//振り子データの値を求めるかどうかフラグがNOのとき
-		//値(長さ、ふり幅、周期)を求める
-		if (pendulum_data.find_value_flag == true)
+		if (objboss != nullptr)
 		{
-			//振り子の糸の長さを計算
-			pendulum_data.length = sqrt((ab_x * ab_x) + (ab_y * ab_y));
+			int a = obj->GetX();
+			//if (m_px > objrope->GetPosX() || m_px < objrope->GetPosX())
+			//{
+			////	m_vx = 0.0f;
+			//	m_vy = 0.0f;
+			//}
+			//else
+			//{
+				float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
+				float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
 
-			//振り子の糸の長さから今何時(周期)なのかを求める					↓重力加速度が0.98なのを9.8に直している
-			//振り子の等時性
-			pendulum_data.time = 2.0f*3.141592f*sqrt(pendulum_data.length / (pendulum_data.gravity * 10.0f));
+													   //ロープの位置
+				float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
 
-			//ロープのX位置より主人公が右にいたら時間(周期をーにする)
-			if (m_px > rope_x)
-				pendulum_data.time *= -1;
+				//振り子データの値を求めるかどうかフラグがNOのとき
+				//値(長さ、ふり幅、周期)を求める
+				if (pendulum_data.find_value_flag == true)
+				{
+					//振り子の糸の長さを計算
+					pendulum_data.length = sqrt((ab_x * ab_x) + (ab_y * ab_y));
 
-			//ロープの位置から垂直の線と
-			//主人公の位置から平行の線の
-			//交点
-			float bx = rope_x;
-			float by = m_py;
+					//振り子の糸の長さから今何時(周期)なのかを求める					↓重力加速度が0.98なのを9.8に直している
+					//振り子の等時性
+					pendulum_data.time = 2.0f*3.141592f*sqrt(pendulum_data.length / (pendulum_data.gravity * 10.0f));
 
-			//ロープ位置、主人公位置、交点からsinθを求める
-			float r = sqrt(((rope_x - bx) * (rope_x - bx)) + ((rope_y - by) * (rope_y - by))) / sqrt(((rope_x - m_px) * (rope_x - m_px)) + ((rope_y - m_py) * (rope_y - m_py)));
-			r = sinf(r);
+					//ロープのX位置より主人公が右にいたら時間(周期をーにする)
+					if (m_px > rope_x)
+						pendulum_data.time *= -1;
 
-			//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
-			pendulum_data.pretend_width = r/2*pendulum_data.length/2;
+					//ロープの位置から垂直の線と
+					//主人公の位置から平行の線の
+					//交点
+					float bx = rope_x;
+					float by = m_py;
 
-			//値を求めたのでフラグをOFFにする
-			pendulum_data.find_value_flag = false;
+					//ロープ位置、主人公位置、交点からsinθを求める
+					float r = sqrt(((rope_x - bx) * (rope_x - bx)) + ((rope_y - by) * (rope_y - by))) / sqrt(((rope_x - m_px) * (rope_x - m_px)) + ((rope_y - m_py) * (rope_y - m_py)));
+					r = sinf(r);
+
+					//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
+					pendulum_data.pretend_width = r / 2 * pendulum_data.length / 2;
+
+					//値を求めたのでフラグをOFFにする
+					pendulum_data.find_value_flag = false;
+				}
+				//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
+				if (!m_hit_down && !m_hit_left && !m_hit_right && !m_hit_up)
+				{
+					//ロープから主人公のベクトルの角度を計算
+					float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
+					r = r * 3.14f / 180.0f;//ラジアン度にする
+
+					//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
+					m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
+					m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
+					//周期を進める
+					pendulum_data.time += 1.0f;
+
+					if ( m_posture == 1.0f && m_px < rope_x && pendulum_data.time > 3.0f)
+					{
+						m_vx = 0.0f;
+						m_vy = 0.0f;
+					}
+					else if(m_posture == 0.0f && m_px > rope_x && pendulum_data.time > 3.0f)
+					{
+						m_vx = 0.0f;
+						m_vy = 0.0f;
+					}
+		
+				}
+				//ブロックに当たっている==振り子の運動停止しているなら
+				//もう一度値を求めたいのでフラグをONにする
+				else
+					pendulum_data.find_value_flag = true;
+			//}
+
 		}
-		//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
-		if (!m_hit_down && !m_hit_left && !m_hit_right && !m_hit_up)
-		{
-			//ロープから主人公のベクトルの角度を計算
-			float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
-			r = r * 3.14f / 180.0f;//ラジアン度にする
-			//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
-			m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
-			m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
-			//周期を進める
-			pendulum_data.time += 1.0f;
-		}
-		//ブロックに当たっている==振り子の運動停止しているなら
-		//もう一度値を求めたいのでフラグをONにする
 		else
-			pendulum_data.find_value_flag = true;
+		{
+			float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
+			float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
+
+			//ロープの位置
+			float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
+
+			//振り子データの値を求めるかどうかフラグがNOのとき
+			//値(長さ、ふり幅、周期)を求める
+			if (pendulum_data.find_value_flag == true)
+			{
+				//振り子の糸の長さを計算
+				pendulum_data.length = sqrt((ab_x * ab_x) + (ab_y * ab_y));
+
+				//振り子の糸の長さから今何時(周期)なのかを求める					↓重力加速度が0.98なのを9.8に直している
+				//振り子の等時性
+				pendulum_data.time = 2.0f*3.141592f*sqrt(pendulum_data.length / (pendulum_data.gravity * 10.0f));
+
+				//ロープのX位置より主人公が右にいたら時間(周期をーにする)
+				if (m_px > rope_x)
+					pendulum_data.time *= -1;
+
+				//ロープの位置から垂直の線と
+				//主人公の位置から平行の線の
+				//交点
+				float bx = rope_x;
+				float by = m_py;
+
+				//ロープ位置、主人公位置、交点からsinθを求める
+				float r = sqrt(((rope_x - bx) * (rope_x - bx)) + ((rope_y - by) * (rope_y - by))) / sqrt(((rope_x - m_px) * (rope_x - m_px)) + ((rope_y - m_py) * (rope_y - m_py)));
+				r = sinf(r);
+
+				//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
+				pendulum_data.pretend_width = r / 2 * pendulum_data.length / 2;
+
+				//値を求めたのでフラグをOFFにする
+				pendulum_data.find_value_flag = false;
+			}
+			//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
+			if (!m_hit_down && !m_hit_left && !m_hit_right && !m_hit_up)
+			{
+				//ロープから主人公のベクトルの角度を計算
+				float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
+				r = r * 3.14f / 180.0f;//ラジアン度にする
+				//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
+				m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
+				m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
+				//周期を進める
+				pendulum_data.time += 1.0f;
+			}
+			//ブロックに当たっている==振り子の運動停止しているなら
+			//もう一度値を求めたいのでフラグをONにする
+			else
+				pendulum_data.find_value_flag = true;
+		}
 		
 	}
 	//ロープがターザンポイントに引っかかっていなかったら
