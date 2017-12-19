@@ -324,6 +324,9 @@
     <ClInclude Include="ObjDiffusionSource.h">
       <Filter>ソース ファイル\Main\Stage5Boss</Filter>
     </ClInclude>
+    <ClInclude Include="ObjAfterBossDisappearance.h">
+      <Filter>ソース ファイル\Main\Stage5Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -513,6 +516,9 @@
       <Filter>ソース ファイル\Main\Hero</Filter>
     </ClCompile>
     <ClCompile Include="ObjDiffusionSource.cpp">
+      <Filter>ソース ファイル\Main\Stage5Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjAfterBossDisappearance.cpp">
       <Filter>ソース ファイル\Main\Stage5Boss</Filter>
     </ClCompile>
   </ItemGroup>
