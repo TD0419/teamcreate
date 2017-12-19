@@ -51,6 +51,7 @@ enum OBJ_NAME
 	OBJ_STAGE5_BOSS_ARMS, //ステージ5ボスの腕
 	OBJ_WIRE_MESH,		  //ステージ5の金網
 	OBJ_DIFFUSION_SOURCE, //拡散弾の源
+	OBJ_AFTER_BOSS_DISAPPEARANCE,	//ステージ５ボス消滅アニメージョン後
 };
 //------------------------------------------------
 
@@ -143,8 +144,7 @@ enum MAP_BER
 	MAP_WIRE_MESH_FLOOR			,		//金網床
 	MAP_FALLING_BLOCK           ,		//ボスステージ用落ちるブロック
 	MAP_STAGE5_BOSS             ,		//ステージ5のボス
-	
-	
+	MAP_BOSS_TARZAN_POINT		,		//ボス戦時に出現するロープでぶら下がれるギミック
 };
 
 //グラフィックID
@@ -344,7 +344,7 @@ enum MUSIC
 #include "ObjDiffusionBullet.h" //拡散弾
 #include "ObjFallingLift.h"		//乗ると落ちるリフト
 #include "ObjFallingBlock.h"	//ステージ5ボス戦専用落ちるブロック
-#include"ObjWireMesh.h"			//ステージ5の金網
+#include "ObjWireMesh.h"			//ステージ5の金網
 #include "ObjDiffusionSource.h"	//ステージ５ボスの拡散弾のソース
 //------------------------------------------------
 
