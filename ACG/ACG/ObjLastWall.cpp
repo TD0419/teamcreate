@@ -68,7 +68,8 @@ void CObjLastWall::Action()
 	CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 	//BOSSオブジェクトと持ってくる
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-	
+	//BOSSオブジェクトと持ってくる
+	CObjStage5Boss*objstage5boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		HIT_DATA** hit_data;		//主人公の衝突の情報を入れる構造体
@@ -220,7 +221,7 @@ void CObjLastWall::Action()
 		}
 
 		// ボスが出てきたら強制的に閉める処理
-		if (objboss != nullptr || objenemy != nullptr)
+		if (objboss != nullptr || objenemy != nullptr||objstage5boss!=nullptr)
 		{
 			m_wall_down_flag = true;//切り替えフラグオン
 			m_wall_gauge = 0;		//wall初期化
