@@ -255,7 +255,7 @@ void CObjBlock::AllBlockHit(
 			block_type = objmap->GetMap(j, i);
 			
 			//判定したいブロック
-			if (block_type == MAP_BLOCK || block_type == MAP_THROUGH_BLOCK|| block_type ==MAP_LADDERS || block_type == MAP_NEEDLE_STAND || block_type == MAP_FALLING_BLOCK)
+			if (block_type == MAP_BLOCK || block_type == MAP_THROUGH_BLOCK|| block_type ==MAP_LADDERS || block_type == MAP_NEEDLE_STAND )
 			{
 				//要素番号を座標に変更
 				float bx = j*BLOCK_SIZE;

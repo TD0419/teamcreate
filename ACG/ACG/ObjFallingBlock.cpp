@@ -116,7 +116,7 @@ void CObjFallingBlock::HeroHit()
 			{
 				objhero->SetHitDown(true);						//主人公が乗っていたらm_hit_downにtrueを返す
 																//乗せる処理
-				objhero->SetPosY(m_py - BLOCK_SIZE - 62.0f);				//ブロックの上側に調節する
+				objhero->SetPosY(m_py - BLOCK_SIZE - 63.0f);				//ブロックの上側に調節する
 
 																//主人公の移動ベクトルが下向きなら
 				if (objhero->GetVecY()>1.0f)
@@ -125,16 +125,36 @@ void CObjFallingBlock::HeroHit()
 			//左側が当たっていれば
 			else if (135.0f <= r && r <= 180.0f)
 			{
-				//左に反発する処理
-				objhero->SetPosX(m_px - BLOCK_SIZE);	//主人公の位置をブロックの左にする
-				objhero->SetVecX(-1.0f * objhero->GetVecX());	//主人公のX方向の移動量を反転する
+				//blockにのめりこまないようにする処理
+				if (objhero->GetPosture() == 0.0f)//右向き
+				{
+					//左に反発する処理
+					objhero->SetPosX(m_px - 49.0f);	//主人公の位置をブロックの左にする
+					objhero->SetVecX(0.0f);//主人公のX方向の移動量を反転する
+				}
+				else
+				{
+					//右に反発する処理
+					objhero->SetPosX(m_px - 61.5f);	//主人公の位置をブロックの左にする
+					objhero->SetVecX(0.0f);//主人公のX方向の移動量を反転する
+				}
 			}
 			//右側が当たっていれば
 			else if (0.0f <= r && r <= 45.0f)
 			{
-				//右に反発する処理
-				objhero->SetPosX(m_px + BLOCK_SIZE);	//主人公の位置をブロックの右にする
-				objhero->SetVecX(-1.0f * objhero->GetVecX());	//主人公のX方向の移動量を反転する
+				//リフトにのめりこまないようにする処理
+				if (objhero->GetPosture() == 0.0f)//右向き
+				{
+					//左に反発する処理
+					objhero->SetPosX(m_px + 61.5f);	//主人公の位置をブロックの右にする
+					objhero->SetVecX(0.0f);//主人公のX方向の移動量を反転する
+				}
+				else
+				{
+					//右に反発する処理
+					objhero->SetPosX(m_px + 49.7f);	//主人公の位置をブロックの右にする
+					objhero->SetVecX(0.0f);//主人公のX方向の移動量を反転する
+				}
 			}
 
 			//下側があたっていれば
