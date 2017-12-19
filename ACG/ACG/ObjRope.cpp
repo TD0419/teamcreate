@@ -129,14 +129,14 @@ void CObjRope::Action()
 		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr&&m_vx <= 5.0f&&m_vy >= -6.2f)
 		{
 			m_tarzan_point_flag = true;//フラグをONにする
-									   //今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
-			objhero->SetVecX(0.0f);
 		}
 		else
 		{
 			m_tarzan_point_flag = false;		//ターザン引っ掛かりフラグをOFFにする
 			this->SetStatus(false);		//自身に消去命令を出す。
 			Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+										//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
+			objhero->SetVecX(0.0f);
 		}
 		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
 		{
