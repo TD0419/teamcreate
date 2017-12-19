@@ -2,6 +2,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\Audio.h"
+#include "GameL\DrawFont.h"
 
 #include "GameHead.h"
 #include "ObjAfterBossDisappearance.h"
@@ -12,7 +13,15 @@ using namespace GameL;
 //イニシャライズ
 void CObjAfterBossDisappearance::Init()
 {
+	//マップ情報を取得
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
+	//マップ情報にドアを追加
+	objmap->SetMap(108,18, MAP_GOAL_DOOR);
+
+	//ドアを作成
+	CObjDoor* objDoor = new CObjDoor(108, 18);
+	Objs::InsertObj(objDoor, OBJ_DOOR, 9);
 }
 
 //アクション
@@ -24,5 +33,6 @@ void CObjAfterBossDisappearance::Action()
 //ドロー
 void CObjAfterBossDisappearance::Draw()
 {
-	
+	float font_color[4] = { 1.0f,1.0f,1.0f,1.0f };
+	Font::StrDraw(L"GAME CLEAR", 100, 20, 150, font_color);
 }
