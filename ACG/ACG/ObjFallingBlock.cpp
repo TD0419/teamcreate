@@ -20,7 +20,8 @@ CObjFallingBlock::CObjFallingBlock(int x, int y)
 //イニシャライズ
 void CObjFallingBlock::Init()
 {
-	m_falling_time = 120;	//ブロックが落ちるまでの時間(仮に120と設定)
+	m_falling_time = 10;	//ブロックが落ちるまでの時間
+	m_fallint_start_flag = false;
 
 	//当たり判定用HitBoxを作成                          
 	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_GIMMICK, OBJ_FALLING_BLOCK, 1);
@@ -29,31 +30,50 @@ void CObjFallingBlock::Init()
 //アクション
 void CObjFallingBlock::Action()
 {
-	
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	//ヒーローオブジェクトと当たっていれば
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	float a = WINDOW_SIZE_H * 2.0f;
+	float b = BLOCK_SIZE * MAP_Y_MAX;
+
+	//マップの外側までいけば
+	if (m_py > BLOCK_SIZE * MAP_Y_MAX)
 	{
-		HeroHit();//衝突処理をする
+		WindowOutDelete(this);
 	}
 
-	//タイムが0になると下に落ちる(仮)
-	//ステージ5ボスのアクション(爪をブロックにたたきつける)実装待ち。
-	//実装されたら使うので、残しておいてください。
-	//if (m_falling_time < 0)
-	//{
-	//	m_py += 1.0f;
-		//Audio::Start(GROUND);
-	//}
 
-	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	//ボスのオブジェクトの取得
+	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
+	if (objboss != nullptr)//ボスオブジェクトがあれば
+	{
+		//落下させるかのフラグを更新
+		m_fallint_start_flag = objboss->GetBlockDownFlag();
+	}
+	if (m_fallint_start_flag == true)//落下開始フラグがオンなら
+		m_falling_time--;
+
+	//タイムが0になると下に落ちる
+	if (m_falling_time < 0)
+	{
+		m_py += 1.0f;
+		Audio::Start(GROUND);
+	}
+
+	//ヒーローオブジェクトと当たっていれば
+	if (hit != nullptr)
+	{
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+		{
+			HeroHit();//衝突処理をする
+		}
+		//HitBoxの位置を更新する
+		HitBoxUpData(hit, m_px, m_py);
+	}
 }
 
 //ドロー

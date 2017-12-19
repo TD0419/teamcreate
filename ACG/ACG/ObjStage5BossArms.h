@@ -6,6 +6,9 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define RIGHT_ARM 1
+#define LEFT_ARM 2
+
 //------------------------------------------
 
 //オブジェクト：第五ステージのボスの腕
@@ -30,10 +33,16 @@ public:
 	float GetVecX() { return m_vx; }//ベクトルXを渡す
 	float GetVecY() { return m_vy; }//ベクトルYを渡す
 
-	void DiffusionAttack(int limit_time);		//拡散弾を打つ攻撃
+	void ArmDownTimeInit() { m_armdown_time = 0; }//タイムの初期化
+	bool GetHitDown() {	return m_hit_down;	}//下のヒットフラグを返す
 	//-------------------------------------------------
 
-	void ArmLowerAttack(float x,int time);	//腕を下ろす攻撃
+	void DiffusionAttack(int limit_time);		//拡散弾を打つ攻撃
+	void BlockDownAttackMove(float px);//ブロックを落とす攻撃の移動
+	void MoveShotAttack();//移動しながら弾を撃つ攻撃
+	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
+	
+	void ArmLowerAttack(float x);	//腕を下ろす攻撃
 private:
 	float m_px;	 // 第五ボスのアームX座標
 	float m_py;	 // 第五ボスのアームY座標
@@ -47,14 +56,22 @@ private:
 	float m_initial_py;//初期Y位置(ボスの横)
 
 	int m_arms_type;	 //第五ボスアームのタイプ(1…ライトアーム  2…レフトアーム)
-
+	int m_armdown_time;//腕を下ろすときの管理用タイム
 	int m_arm_hp;    // 第五ボスのアームのＨＰ
+	bool m_posture;//姿　true=開いている　false=閉じている
+	bool m_input_posture;//入力された姿　true=開いている	false=閉じている
 
 	bool m_ani_flag_claw;//爪の開閉アニメーションフラグ　true=アニメーションをする	false=アニメーションをしない
 
 	bool m_hit_flag;//衝突時の多重判定を防ぐフラグ
 
-	int m_ani_frame_claw;	//描画フレーム(爪)
+	//ブロックとの当たり判定用
+	bool m_hit_up;
+	bool m_hit_down; 
+	bool m_hit_left;
+	bool m_hit_right;
+
+	int m_ani_frame_claw;//描画フレーム(爪)
 	int m_ani_time_claw;	//アニメーションフレーム動作感覚(爪)
 	int m_ani_max_time_claw;//アニメーションフレーム動作感覚最大値(爪)
 

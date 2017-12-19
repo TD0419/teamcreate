@@ -38,6 +38,8 @@ public:
 	float GetPosY() { return m_py; }
 	float GetPosX() { return m_px; }
 	void SetVecX(float x) { m_vx = x; }	
+	int GetAttackMode() { return m_attack_mode; }
+	bool GetBlockDownFlag() { return m_block_down_flag; }
 
 private:
 	float m_px;	 // 第五ボスX座標
@@ -46,8 +48,12 @@ private:
 	float m_vy;  // 第五ボスY軸移動ベクトル
 	int m_hp;    // 第五ボスのＨＰ
 
-	int m_attack3_count;//攻撃パターン３用のカウンター
-	bool m_attack3_flag;//攻撃パターン3のフラグ
+	int m_attack3_count;//攻撃パターン3用のカウンター
+	bool m_attack3_flag;//攻撃パターン3用のフラグ
+	bool m_attack4_flag;//攻撃パターン4用のフラグ
+	bool m_block_down_flag;//ブロックを落とすかどうかのフラグ
+	float m_attack4_scroll;//攻撃パターン４用のスクロール値
+	int m_attack4_count;//攻撃パターン3用のカウンター
 
 	//右アームオブジェクトの情報
 	CObjStage5BossArms* m_boos_arm_right;
@@ -61,6 +67,7 @@ private:
 	//3:ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)
 	//4:3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 	int m_attack_mode;
+
 	int m_time;//攻撃のたいみんぐ管理用
 
 	bool m_lastwall_hit_flag;//ラストウォールとの処理用フラグ

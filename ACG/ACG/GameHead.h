@@ -143,8 +143,7 @@ enum MAP_BER
 	MAP_WIRE_MESH_FLOOR			,		//金網床
 	MAP_FALLING_BLOCK           ,		//ボスステージ用落ちるブロック
 	MAP_STAGE5_BOSS             ,		//ステージ5のボス
-	
-	
+	MAP_BOSS_TARZAN_POINT		,		//ボス戦時に出現するロープでぶら下がれるギミック
 };
 
 //グラフィックID
@@ -359,4 +358,6 @@ enum MUSIC
 //ゲーム開始時のシーンクラス登録
 
 #define SET_GAME_START CSceneTitle //タイトル画面
+
+
 //-----------------------------------------------

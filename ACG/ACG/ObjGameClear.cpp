@@ -58,8 +58,7 @@ void CObjGameClear::Draw()
 	Draw::Draw(GRA_GAME_CLEAR, &src, &dst, back_color, 0.0f);
 
 	//文字描画                                    x                       y              textsize
-	Font::StrDraw(L"CONGRATULATIONS!"    , WINDOW_SIZE_W - 849.0f, WINDOW_SIZE_H - 716.0f, FONT_SIZE_GC, text_color);//黒色(背面用)
-	Font::StrDraw(L"CONGRATULATIONS!"    , WINDOW_SIZE_W - 854.0f, WINDOW_SIZE_H - 716.0f, FONT_SIZE_GC, back_color);//白色(前面用)
+	Font::StrDraw(L"CONGRATULATIONS!"    , WINDOW_SIZE_W - 844.0f, WINDOW_SIZE_H - 716.0f, FONT_SIZE_GC, text_color);//黒色
 	Font::StrDraw(L"TITLE:PUSH ENTERKEY" , WINDOW_SIZE_W - 444.0f, WINDOW_SIZE_H - 58.0f, FONT_SIZE_GC - 41.0f, text_color);
 
 }
