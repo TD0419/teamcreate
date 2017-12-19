@@ -250,6 +250,10 @@ void CObjStage5Boss::Action()
 	//クリア画面移動条件が確定したら、変更してください。
 	if (m_hp == 0)
 	{
+		//ステージ５ボス消滅アニメージョン後のオブジェクト作成
+		CObjAfterBossDisappearance* objafter_boss_disappearance = new CObjAfterBossDisappearance();
+		Objs::InsertObj(objafter_boss_disappearance, OBJ_AFTER_BOSS_DISAPPEARANCE, 9);
+
 		Hits::DeleteHitBox(this);	//BOSSが所有するHitBoxに削除する
 		this->SetStatus(false);		//自身に削除命令を出す
 		return;
