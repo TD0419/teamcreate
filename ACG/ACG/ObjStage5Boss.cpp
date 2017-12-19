@@ -23,7 +23,7 @@ void CObjStage5Boss::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_hp = 1; //‘æ5ƒ{ƒX‚Ì‚g‚o(‰¼‚É‚g‚o‚ð[100]‚ÆÝ’è)
+	m_hp = 100; //‘æ5ƒ{ƒX‚Ì‚g‚o(‰¼‚É‚g‚o‚ð[100]‚ÆÝ’è)
 
 	//‰Šú‰»‚·‚é(‰½‚à‚µ‚Ä‚¢‚È‚¢)
 	m_attack_mode = 0;
