@@ -101,9 +101,24 @@ void CObjRope::Action()
 		}
 	}
 
-	//ロープスイッチ　または　ターザンポイント　と衝突したとき、ロープが引っかかるようにする
-	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr||
-		hit->CheckObjNameHit(OBJ_TARZAN_POINT)!=nullptr)
+	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
+	if (hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
+	{
+		m_vx = 0.0f; //ロープ本体の移動速度を0にしてロープを動かないようにする
+		m_vy = 0.0f;
+
+		objhero->SetVecX(0.0f);
+
+		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
+
+		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
+		{
+			m_r_key_flag = false;
+		}
+	}
+
+	//ターザンポイントと衝突したとき、ロープが引っかかるようにする
+	if(hit->CheckObjNameHit(OBJ_TARZAN_POINT)!=nullptr)
 	{
 		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
 		/*m_px -= m_vx ;
