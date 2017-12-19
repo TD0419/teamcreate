@@ -497,6 +497,12 @@ bool CObjHero::HitUpCheck(int obj_name)
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 	
+	if (Objs::GetObj(obj_name) == nullptr)
+		return false;
+
+	if (hit == nullptr)
+		return false;
+
 	//引数で持ってきたオブジェクトとあたっているか調べる
 	if (hit->CheckObjNameHit(obj_name) != nullptr)
 	{

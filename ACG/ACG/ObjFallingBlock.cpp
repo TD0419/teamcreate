@@ -42,9 +42,9 @@ void CObjFallingBlock::Action()
 	//マップの外側までいけば
 	if (m_py > BLOCK_SIZE * MAP_Y_MAX)
 	{
-		WindowOutDelete(this);
+		Audio::Stop(GROUND);
+		this->SetStatus(false);	//削除
 	}
-
 
 	//ボスのオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
@@ -54,6 +54,7 @@ void CObjFallingBlock::Action()
 		//落下させるかのフラグを更新
 		m_fallint_start_flag = objboss->GetBlockDownFlag();
 	}
+	
 	if (m_fallint_start_flag == true)//落下開始フラグがオンなら
 		m_falling_time--;
 
