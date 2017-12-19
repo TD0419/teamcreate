@@ -75,13 +75,13 @@ void CObjStage5BossArms::Action()
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//アームタイプが1のとき、ライトアーム用の当たり判定表示
+	//ライトアーム用の当たり判定表示
 	if (m_arms_type == RIGHT_ARM)
 	{
 		//当たり判定更新
 		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 	}
-	//アームタイプが2のとき、レフトアーム用の当たり判定表示
+	//レフトアーム用の当たり判定表示
 	else if (m_arms_type == LEFT_ARM)
 	{
 		//当たり判定更新
@@ -109,7 +109,7 @@ void CObjStage5BossArms::Action()
 	//ステージ５のボスが存在していたら
 	if (objboss != nullptr)
 	{
-		if (objboss->GetAttackMode() == 3)//攻撃パターン３なら
+		if ( objboss->GetAttackMode() == 3)//攻撃パターン３なら
 		{
 			MoveShotAttack();
 		}
@@ -124,6 +124,12 @@ void CObjStage5BossArms::Action()
 	//ＨＰが0になったらオブジェクトを初期位置に戻すためのフラグをオンにする
 	if (m_arm_hp == 0)
 	{
+		//腕のフラグを更新する
+		if (m_arms_type == RIGHT_ARM)//右腕
+			objboss->SetArmDownFlagRight();
+		else
+			objboss->SetArmDownFlagLeft();
+
 		m_initpos_flag = true;
 	}
 

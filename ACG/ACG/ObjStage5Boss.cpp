@@ -25,6 +25,9 @@ void CObjStage5Boss::Init()
 
 	m_hp = 100; //第5ボスのＨＰ(仮にＨＰを[100]と設定)
 
+	m_right_arm_down_flag = false;
+	m_left_arm_down_flag = false;
+
 	//初期化する(何もしていない)
 	m_attack_mode = 0;
 
@@ -81,7 +84,7 @@ void CObjStage5Boss::Action()
 			if (m_time % 100 == 0)
 			{
 				//何もしていないので攻撃モードをランダムで決める
-				m_attack_mode = 4;//GetRandom(1, 4);
+				m_attack_mode = GetRandom(1, 4);
 				m_time = 0;
 			}
 			break;
@@ -96,11 +99,13 @@ void CObjStage5Boss::Action()
 			{
 				//腕を下ろす攻撃をする(左腕)
 				m_boos_arm_left->ArmLowerAttack(objhero->GetPosX());
+				m_left_arm_down_flag = true;
 			}
 			else
 			{
 				//腕を下ろす攻撃をする(右腕)
 				m_boos_arm_right->ArmLowerAttack(objhero->GetPosX());
+				m_right_arm_down_flag = true;
 			}
 
 			if (m_time >= 400)
@@ -108,8 +113,8 @@ void CObjStage5Boss::Action()
 				//腕の管理タイムを0にする
 				m_boos_arm_left->ArmDownTimeInit();
 				m_boos_arm_right->ArmDownTimeInit();
-			
-				m_attack_mode = 0;
+		
+				m_attack_mode = 3;//腕をおろした後は攻撃３にする
 			}
 			break;
 		}
@@ -149,11 +154,18 @@ void CObjStage5Boss::Action()
 			{
 				m_attack3_flag = false;//フラグをオフ
 				m_vx = 0.0f;//移動をとめる
-				m_attack_mode = 0;
+				
+				//腕が地面に残っていなければ
+ 				if ( m_right_arm_down_flag == false && m_left_arm_down_flag == false)
+					m_attack_mode = 0;
+				else
+					m_attack_mode = 3;
 			}
 			//腕にも移動量を渡す
-			m_boos_arm_right->SetVecX(m_vx);
-			m_boos_arm_left->SetVecX(m_vx);
+			if( m_right_arm_down_flag == false )	//腕が落ちていなければ
+				m_boos_arm_right->SetVecX(m_vx);
+			if( m_left_arm_down_flag == false )		//腕が落ちていなければ
+				m_boos_arm_left->SetVecX(m_vx);
 			break;
 		}
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
