@@ -22,7 +22,6 @@ void CObjFallingBlock::Init()
 {
 	m_falling_time = 10;	//ブロックが落ちるまでの時間
 	m_fallint_start_flag = false;
-	m_processing_flag = true;
 
 	//当たり判定用HitBoxを作成                          
 	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_GIMMICK, OBJ_FALLING_BLOCK, 1);
@@ -43,9 +42,9 @@ void CObjFallingBlock::Action()
 	//マップの外側までいけば
 	if (m_py > BLOCK_SIZE * MAP_Y_MAX)
 	{
-		m_processing_flag = false;
+		Audio::Stop(GROUND);
+		this->SetStatus(false);	//削除
 	}
-
 
 	//ボスのオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
@@ -58,12 +57,6 @@ void CObjFallingBlock::Action()
 	
 	if (m_fallint_start_flag == true)//落下開始フラグがオンなら
 		m_falling_time--;
-	else
-	{
-		m_py = m_map_y * BLOCK_SIZE;
-		m_processing_flag = true;
-		m_falling_time = 10;
-	}
 
 	//タイムが0になると下に落ちる
 	if (m_falling_time < 0)
@@ -72,18 +65,15 @@ void CObjFallingBlock::Action()
 		Audio::Start(GROUND);
 	}
 
-	if (m_processing_flag)	//処理フラグがオンなら
+	//ヒーローオブジェクトと当たっていれば
+	if (hit != nullptr)
 	{
-		//ヒーローオブジェクトと当たっていれば
-		if (hit != nullptr)
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
-			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-			{
-				HeroHit();//衝突処理をする
-			}
-			//HitBoxの位置を更新する
-			HitBoxUpData(hit, m_px, m_py);
+			HeroHit();//衝突処理をする
 		}
+		//HitBoxの位置を更新する
+		HitBoxUpData(hit, m_px, m_py);
 	}
 }
 

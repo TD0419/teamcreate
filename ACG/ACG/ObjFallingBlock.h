@@ -23,5 +23,5 @@ private:
 	float m_py;			//落ちるブロックY座標
 	int   m_falling_time;//ブロックが落ちるまでの時間
 	bool m_fallint_start_flag;//ブロックを落下させるかどうかのフラグ
-	bool m_processing_flag;//処理をするかどうかのフラグ
+
 };

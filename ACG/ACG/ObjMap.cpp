@@ -356,6 +356,25 @@ void CObjMap::CreateObj(int x, int y)
 	m_map[y][x].create = false;//フラグをオフにする	
 }
 
+//落ちるブロックだけを生成する（ボス戦用）
+void CObjMap::CreateFallingBloack()
+{
+	//yの値が　マップの最大値　に達するまで回す
+	for (int y = 0 ; y < MAP_Y_MAX ; y++)
+	{
+		//xの値が　マップの最大値　に達するまで回す
+		for (int x = 0;x < MAP_X_MAX ; x++)
+		{
+			//落ちるブロックだけを生成する
+			if (m_map[y][x].num == MAP_FALLING_BLOCK)
+			{
+				CObjFallingBlock* objfalling_block = new CObjFallingBlock(x, y);
+				Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK, 9);
+			}
+		}
+	}
+}
+
 //調べたいマップの位置にあるマップ番号を返す
 int CObjMap::GetMap(int x, int y)
 {
