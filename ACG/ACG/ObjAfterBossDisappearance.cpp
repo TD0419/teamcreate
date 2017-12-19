@@ -2,6 +2,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\Audio.h"
+#include "GameL\DrawFont.h"
 
 #include "GameHead.h"
 #include "ObjAfterBossDisappearance.h"
@@ -32,5 +33,6 @@ void CObjAfterBossDisappearance::Action()
 //ÉhÉçÅ[
 void CObjAfterBossDisappearance::Draw()
 {
-	
+	float font_color[4] = { 1.0f,1.0f,1.0f,1.0f };
+	Font::StrDraw(L"GAME CLEAR", 100, 20, 150, font_color);
 }
