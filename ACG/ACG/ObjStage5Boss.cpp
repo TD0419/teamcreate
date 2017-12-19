@@ -31,7 +31,7 @@ void CObjStage5Boss::Init()
 	m_lastwall_hit_flag=false;
 
 	//たいみんぐ管理
-	m_time=0;
+	m_time = 0;
 
 	//攻撃パターン3
 	m_attack3_flag = false;
@@ -41,6 +41,7 @@ void CObjStage5Boss::Init()
 	m_attack4_flag = false;
 	m_attack4_scroll = 0.0f;
 	m_block_down_flag = false;
+	m_attack4_count = 0;
 
 	//音楽
 	Audio::Start(BOSS);
@@ -104,11 +105,11 @@ void CObjStage5Boss::Action()
 
 			if (m_time >= 400)
 			{
-				m_attack_mode = 0;
-
 				//腕の管理タイムを0にする
 				m_boos_arm_left->ArmDownTimeInit();
 				m_boos_arm_right->ArmDownTimeInit();
+			
+				m_attack_mode = 0;
 			}
 			break;
 		}
@@ -179,6 +180,21 @@ void CObjStage5Boss::Action()
 			if (left_arm_down == true && right_arm_down == true)
 			{
 				m_block_down_flag = true;
+			}
+
+			//落ちるブロックの取得
+			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
+			
+			//落ちるブロックがなければ
+			if (objfallingblock == nullptr)
+				m_attack4_count++;
+
+			if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
+			{
+				m_attack4_count = 0;		//カウンターの初期化
+				m_block_down_flag = false;	//ブロックが落ちない様にする
+				m_attack4_scroll = 0.0f;	//スクロール量の初期化
+				m_attack_mode = 0;			
 			}
 
 			break;

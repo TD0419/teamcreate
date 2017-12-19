@@ -31,17 +31,21 @@ void CObjFallingBlock::Init()
 //アクション
 void CObjFallingBlock::Action()
 {
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//HitBoxのポインタを持ってくる
+	CHitBox*hit = Hits::GetHitBox(this);
+
+	float a = WINDOW_SIZE_H * 2.0f;
+	float b = BLOCK_SIZE * MAP_Y_MAX;
+
 	//マップの外側までいけば
 	if (m_py > BLOCK_SIZE * MAP_Y_MAX)
 	{
 		m_processing_flag = false;
 	}
 
-	//マップオブジェクトを持ってくる
-	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	//HitBoxのポインタを持ってくる
-	CHitBox*hit = Hits::GetHitBox(this);
 
 	//ボスのオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);

@@ -128,7 +128,7 @@ void CObjStage5BossArms::Action()
 		//アニメーション動作間隔最大値以上なら
 		if (m_ani_time_claw >= m_ani_max_time_claw)
 		{
-			//アニメーション動作間隔を０にする
+			//アニメーション動作間隔を0にする
 			m_ani_time_claw = 0;
 			m_ani_frame_claw++;
 			
@@ -141,46 +141,7 @@ void CObjStage5BossArms::Action()
 	}
 	//---------------------------------------------------------
 }
-//
-////拡散弾を打つ攻撃
-////引数：爆発までの時間
-//void CObjStage5BossArms::DiffusionAttack(int limit_time)
-//{
-//	//拡散弾の源を作成
-//	CObjDiffusionSource* p = new CObjDiffusionSource(m_px+ STAGE5_BOSS_ARMS_WIDTH_SIZE /2.0f, m_py+ STAGE5_BOSS_ARMS_HEIGHT_SIZE-10.0f,limit_time);
-//	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
-//}
-//
-////腕を下ろす攻撃
-////引数1	float x	:腕を下ろすX位置
-////引数3 int time:腕を下ろそうとしたときから経過時間
-//void CObjStage5BossArms::ArmLowerAttack(float x, int time)
-//{
-//	//攻撃が始まる瞬間に腕を下ろすX位置を決める
-//	if (time == 1)
-//	{
-//		m_arm_lower_marker_px = x;
-//	}
-//	//120フレームの間に主人公のX位置と同じになるようにベクトルXを調整
-//	if (time < 120)
-//	{
-//		m_vx = (m_arm_lower_marker_px - m_px) / (120 - time);
-//	}
-//	//120以上なら腕を下ろす攻撃をするのでX移動量を0.0fにする
-//	else
-//	{
-//		m_vx=0.0f;
-//	}
-//
-//	//時間が120になったら腕を下ろす攻撃をする
-//	if (time >= 120)
-//	{
-//		//腕を下ろす位置を示さない
-//		m_arm_lower_marker_px = 0.0f;
-//		//腕を下ろす
-//		m_vy = 10.0f;
-//	}
-//}
+
 //ドロー
 void CObjStage5BossArms::Draw()
 {
@@ -199,14 +160,14 @@ void CObjStage5BossArms::Draw()
 	//アームタイプが1のときはライトアームを描画
 	if (m_arms_type == RIGHT_ARM)
 	{
-	
-		
 		//切り取り位置
 		src.m_top = STAGE5_BOSS_ARMS_HEIGHT_SIZE;
+		
 		if(m_ani_flag_claw == true)//爪の開閉アニメーションをするなら
 			src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*ani_claw[m_ani_frame_claw];
 		else
 			src.m_left = STAGE5_BOSS_ARMS_WIDTH_SIZE*1;
+
 		src.m_right = src.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		src.m_bottom = src.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 
@@ -312,7 +273,6 @@ void CObjStage5BossArms::DiffusionAttack(int limit_time)
 //引数1:移動してほしい地点のX値
 void CObjStage5BossArms::BlockDownAttackMove(float px)
 {
-
 	//HitBoxポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 	
