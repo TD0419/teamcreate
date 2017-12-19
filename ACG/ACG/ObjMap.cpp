@@ -331,7 +331,7 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_STAGE5_BOSS://ステージ5ボス(本体)
 		{
-			CObjStage5Boss* objstage5_boss = new CObjStage5Boss(x+2,y - 11); //下のほうから生成し、右にも少しずらす
+			CObjStage5Boss* objstage5_boss = new CObjStage5Boss(x-2,y - 11); //下のほうから生成し、右にも少しずらす
 			Objs::InsertObj(objstage5_boss, OBJ_STAGE5_BOSS ,9);
 			break;
 		}
