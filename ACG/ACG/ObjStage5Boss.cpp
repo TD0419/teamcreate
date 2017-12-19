@@ -81,7 +81,7 @@ void CObjStage5Boss::Action()
 			if (m_time % 100 == 0)
 			{
 				//何もしていないので攻撃モードをランダムで決める
-				m_attack_mode = 4;// GetRandom(1, 4);
+				m_attack_mode =  GetRandom(1, 4);
 				m_time = 0;
 			}
 			break;
@@ -159,11 +159,12 @@ void CObjStage5Boss::Action()
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 		case 4:
 		{
+			//マップオブジェクトを持ってくる
+			CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 			//攻撃が始まって一回のみ
 			if (m_attack4_flag==false)
-			{
-				//マップオブジェクトを持ってくる
-				CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);	
+			{	
 				m_attack4_scroll =objmap->GetScrollX();//スクロール値Xを持ってくる
 				m_attack4_flag = true;
 			}
@@ -173,8 +174,8 @@ void CObjStage5Boss::Action()
 			m_boos_arm_right->BlockDownAttackMove(m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE);
 
 			//左右の腕が地面まで落ちているかどうかを調べる
-			bool left_arm_down = m_boos_arm_left->GetHitDown();
-			bool right_arm_down = m_boos_arm_right->GetHitDown();
+			bool left_arm_down = m_boos_arm_left->GetBlockHit();
+			bool right_arm_down = m_boos_arm_right->GetBlockHit();
 		
 			//両方の腕が地面までおちていれば
 			if (left_arm_down == true && right_arm_down == true)
@@ -191,6 +192,12 @@ void CObjStage5Boss::Action()
 
 			if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
 			{
+				//腕の位置を初期位置に戻す
+				m_boos_arm_left->SetInitPosFlagON();
+				m_boos_arm_right->SetInitPosFlagON();
+				
+				objmap->CreateFallingBloack();//落ちるブロックを作成する
+
 				m_attack4_count = 0;		//カウンターの初期化
 				m_block_down_flag = false;	//ブロックが落ちない様にする
 				m_attack4_scroll = 0.0f;	//スクロール量の初期化
@@ -231,8 +238,8 @@ void CObjStage5Boss::Action()
 	//クリア画面移動条件が確定したら、変更してください。
 	if (m_hp == 0)
 	{
-		//クリア画面に移動
-		Scene::SetScene(new CSceneGameClear());
+		Hits::DeleteHitBox(this);	//BOSSが所有するHitBoxに削除する
+		this->SetStatus(false);		//自身に削除命令を出す
 		return;
 	}
 

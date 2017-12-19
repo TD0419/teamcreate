@@ -33,8 +33,10 @@ public:
 	float GetVecX() { return m_vx; }//ベクトルXを渡す
 	float GetVecY() { return m_vy; }//ベクトルYを渡す
 
+	void SetInitPosFlagON() { m_initpos_flag = true; }//初期位置に戻すフラグをオンにする
+
 	void ArmDownTimeInit() { m_armdown_time = 0; }//タイムの初期化
-	bool GetHitDown() {	return m_hit_down;	}//下のヒットフラグを返す
+	bool GetBlockHit() {return m_block_hit_flag;}//ブロックのヒットフラグを返す
 	//-------------------------------------------------
 
 	void DiffusionAttack(int limit_time);		//拡散弾を打つ攻撃
@@ -63,13 +65,9 @@ private:
 
 	bool m_ani_flag_claw;//爪の開閉アニメーションフラグ　true=アニメーションをする	false=アニメーションをしない
 
-	bool m_hit_flag;//衝突時の多重判定を防ぐフラグ
-
-	//ブロックとの当たり判定用
-	bool m_hit_up;
-	bool m_hit_down; 
-	bool m_hit_left;
-	bool m_hit_right;
+	bool m_wall_hit_flag;//衝突時の多重判定を防ぐフラグ
+	bool m_initpos_flag;//初期位置に戻すかどうかのフラグ
+	bool m_block_hit_flag;//落ちるブロックと当たっているかどうかの判定
 
 	int m_ani_frame_claw;//描画フレーム(爪)
 	int m_ani_time_claw;	//アニメーションフレーム動作感覚(爪)
