@@ -101,22 +101,43 @@ void CObjRope::Action()
 		}
 	}
 
-	//ロープスイッチ　または　ターザンポイント　と衝突したとき、ロープが引っかかるようにする
-	if(hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr||
-		hit->CheckObjNameHit(OBJ_TARZAN_POINT)!=nullptr)
+	//ロープスイッチと衝突したとき、ロープが引っかかるようにする
+	if (hit->CheckObjNameHit(OBJ_ROPE_SWITCH) != nullptr)
+	{
+		m_vx = 0.0f; //ロープ本体の移動速度を0にしてロープを動かないようにする
+		m_vy = 0.0f;
+
+		objhero->SetVecX(0.0f);
+
+		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
+
+		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
+		{
+			m_r_key_flag = false;
+		}
+	}
+
+	//ターザンポイントと衝突したとき、ロープが引っかかるようにする
+	if(hit->CheckObjNameHit(OBJ_TARZAN_POINT)!=nullptr)
 	{
 		//ロープスイッチと接触すると、ロープが引っかかる(動きが止まる)
 		/*m_px -= m_vx ;
 		m_py -= m_vy */;
 		m_caught_flag = true;		//ロープ引っかかりフラグをONにする
 
-		//ターザンポイントオブジェクトと当たっていたら
-		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr&&m_vx<=5.0f&&m_vy>=-6.0f)
+		//ターザンポイントオブジェクトと当たっていた時、vxが５以上、vyが-6.2以下じゃないとき
+		if (hit->CheckObjNameHit(OBJ_TARZAN_POINT) != nullptr&&m_vx <= 5.0f&&m_vy >= -6.2f)
+		{
 			m_tarzan_point_flag = true;//フラグをONにする
-		else
-			//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
+									   //今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
 			objhero->SetVecX(0.0f);
-
+		}
+		else
+		{
+			m_tarzan_point_flag = false;		//ターザン引っ掛かりフラグをOFFにする
+			this->SetStatus(false);		//自身に消去命令を出す。
+			Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+		}
 		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
 		{
 			m_r_key_flag = false;
@@ -137,6 +158,11 @@ void CObjRope::Action()
 		if (objrolls->GetKeyFlag() == true)
 		{
 			m_r_key_flag = true;
+		}
+		else if (objrolls->GetKeyFlag() == false && Input::GetMouButtonR() == false)
+		{
+			m_caught_flag = true;
+			m_r_key_flag = false;
 		}
 		//　ステージ5の回転ブロックスイッチが最後まで行った時ロープを自動的に消すようにする
 		if (objrolls->GetLastRoll() == true)
@@ -363,6 +389,7 @@ void CObjRope::RopeDelete()
 	{
 		return;
 	}
+	
 	//ロープが消していいかどうかを調べる
 	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();
 

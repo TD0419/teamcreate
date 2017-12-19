@@ -169,7 +169,7 @@ void CObjEnemyBullet::Action()
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//ブロックとの当たり判定
-	if(((UserData*)Save::GetData())->stagenum==5)	//ステージ5
+	if(((UserData*)Save::GetData())->stagenum == 5)	//ステージ5
 	{
 		objblock->AllBlockHit(&m_px, &m_py, STAGE5_BOSS_BULLET_SIZE, STAGE5_BOSS_BULLET_SIZE,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
@@ -208,6 +208,11 @@ void CObjEnemyBullet::Action()
 	}
 	//Lastwall(壁)にあたったら消去
 	if (DeleteCheckObjNameHit(hit, this, OBJ_LAST_WALL))
+	{
+		return;
+	}
+	//落ちるブロックにあたったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_FALLING_BLOCK))
 	{
 		return;
 	}

@@ -70,6 +70,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ObjAfterBossDisappearance.h" />
     <ClInclude Include="ObjDiffusionBullet.h" />
     <ClInclude Include="ObjDiffusionCannon.h" />
     <ClInclude Include="ObjDiffusionSource.h" />
@@ -134,6 +135,7 @@
     <ClInclude Include="ObjWireMesh.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ObjAfterBossDisappearance.cpp" />
     <ClCompile Include="ObjDiffusionBullet.cpp" />
     <ClCompile Include="ObjDiffusionCannon.cpp" />
     <ClCompile Include="ObjDiffusionSource.cpp" />

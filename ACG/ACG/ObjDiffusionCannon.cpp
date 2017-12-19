@@ -20,7 +20,7 @@ CObjDiffusionCannon::CObjDiffusionCannon(int x, int y)
 //イニシャライズ
 void CObjDiffusionCannon::Init()
 {
-	m_time = 0;
+	m_time = 100;
 }
 
 //アクション

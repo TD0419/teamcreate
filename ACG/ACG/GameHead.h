@@ -51,6 +51,7 @@ enum OBJ_NAME
 	OBJ_STAGE5_BOSS_ARMS, //ステージ5ボスの腕
 	OBJ_WIRE_MESH,		  //ステージ5の金網
 	OBJ_DIFFUSION_SOURCE, //拡散弾の源
+	OBJ_AFTER_BOSS_DISAPPEARANCE,	//ステージ５ボス消滅アニメージョン後
 };
 //------------------------------------------------
 
@@ -343,8 +344,9 @@ enum MUSIC
 #include "ObjDiffusionBullet.h" //拡散弾
 #include "ObjFallingLift.h"		//乗ると落ちるリフト
 #include "ObjFallingBlock.h"	//ステージ5ボス戦専用落ちるブロック
-#include"ObjWireMesh.h"			//ステージ5の金網
+#include "ObjWireMesh.h"			//ステージ5の金網
 #include "ObjDiffusionSource.h"	//ステージ５ボスの拡散弾のソース
+#include "ObjAfterBossDisappearance.h" //ステージ５ボス消滅後
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
@@ -358,6 +360,4 @@ enum MUSIC
 //ゲーム開始時のシーンクラス登録
 
 #define SET_GAME_START CSceneTitle //タイトル画面
-
-
 //-----------------------------------------------

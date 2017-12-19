@@ -74,19 +74,25 @@ void CObjDoor::Action()
 	//ボスの情報を呼ぶの
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 	CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
-	
+	CObjStage5Boss* objstage5_boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 	switch (m_door_type)
 	{
 	case 1:
 		if (objenemy == nullptr)
 		{
-			m_unlock_flag = true;
+			m_unlock_flag = true;//施錠解除フラグをonにします
 		}
 		break;
 	case 2:
-	case 5:
 		//ボスが消滅したとき
 		if (objboss == nullptr)
+		{
+			m_unlock_flag = true;//施錠解除フラグをonにします
+		}
+		break;
+	case 5:
+		//ステージ５のボスが消滅したとき
+		if (objstage5_boss == nullptr)
 		{
 			m_unlock_flag = true;//施錠解除フラグをonにします
 		}

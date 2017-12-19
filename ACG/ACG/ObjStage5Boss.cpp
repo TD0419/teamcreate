@@ -238,8 +238,8 @@ void CObjStage5Boss::Action()
 	//クリア画面移動条件が確定したら、変更してください。
 	if (m_hp == 0)
 	{
-		//クリア画面に移動
-		Scene::SetScene(new CSceneGameClear());
+		Hits::DeleteHitBox(this);	//BOSSが所有するHitBoxに削除する
+		this->SetStatus(false);		//自身に削除命令を出す
 		return;
 	}
 
