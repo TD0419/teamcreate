@@ -254,11 +254,17 @@ void CObjStage5Boss::Draw()
 {
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+	float transparent[4] = { 0.0f,0.0f,0.0f, 0.0f };//透明に描画する
 
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//アームオブジェクトより、ライトアームとレフトアームの移動状況を受け取る
+	bool m_move_right_arm = m_boos_arm_right->GetRightarmAction();//ライトアームの移動状況
+	bool m_move_left_arm = m_boos_arm_left->GetLeftarmAction();		//レフトアームの移動状況
+
 
 	//胴腕接続電気-------------------------------
 	//左腕部分
@@ -273,8 +279,17 @@ void CObjStage5Boss::Draw()
 	dst.m_left = m_px - objmap->GetScrollX() - ELECTRIC_L_CORRECTION_WIDTH;
 	dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
 	dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+
 	//描画
-	Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);
+	//レフトアームが動いているときは、透明に描画する。
+	if (m_move_left_arm == true)//レフトアームが「動いている」判定がでているとき
+	{
+		Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
+	}
+	else//レフトアームが「初期位置(描画)から動いていない」判定がでている 
+	{
+		Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
+	}
 
 	//右腕部分
 	//切り取り位置
@@ -289,7 +304,15 @@ void CObjStage5Boss::Draw()
 	dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
 	dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
 	//描画
-	Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);
+	//ライトアームが動いているときは、透明に描画する。
+	if (m_move_right_arm == true)//ライトアームが「動いている」判定がでているとき
+	{
+		Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
+	}
+	else//ライトアームが「初期位置(描画)から動いていない」判定がでているとき
+	{
+		Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
+	}
 
 	//胴体--------------------------------------
 	//切り取り位置
