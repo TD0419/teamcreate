@@ -97,9 +97,13 @@ void CObjStage5BossArms::Action()
 	//ボスオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
-	if (objboss->GetAttackMode() == 3)//攻撃パターン３なら
+	//ステージ５のボスが存在していたら
+	if (objboss != nullptr)
 	{
-		MoveShotAttack();
+		if (objboss->GetAttackMode() == 3)//攻撃パターン３なら
+		{
+			MoveShotAttack();
+		}
 	}
 
 	//弾丸とあたったらＨＰを1減らす
@@ -249,7 +253,8 @@ void CObjStage5BossArms::MoveShotAttack()
 		{
 			//ボスのオブジェクトを持ってくる
 			CObjStage5Boss* objbossbase = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
-			objbossbase->LastWallHit();//ラストウォールと当たった時の処理をする
+			if(objbossbase != nullptr)	//ステージ５のボスが存在していたら
+				objbossbase->LastWallHit();//ラストウォールと当たった時の処理をする
 
 			m_hit_flag = true;//ふらぐをtrueに
 		}
@@ -313,22 +318,26 @@ void CObjStage5BossArms::ArmLowerAttack(float x)
 	//ボスオブジェクトを持ってくる
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
-	if (objboss->GetAttackMode() == 1)//攻撃パターン１なら
+	//ステージ５のボスが存在していたら
+	if (objboss != nullptr)
 	{
-		//攻撃が始まる瞬間に腕を下ろすX位置を決める
-		if (m_armdown_time == 1)
+		if (objboss->GetAttackMode() == 1)//攻撃パターン１なら
 		{
-			m_arm_lower_marker_px = x;
-		}
-		//120フレームの間に主人公のX位置と同じになるようにベクトルXを調整
-		if (m_armdown_time < 120)
-		{
-			m_vx = (m_arm_lower_marker_px - m_px) / (120 - m_armdown_time);
-		}
-		//120以上なら腕を下ろす攻撃をするのでX移動量を0.0fにする
-		else
-		{
-			m_vx = 0.0f;
+			//攻撃が始まる瞬間に腕を下ろすX位置を決める
+			if (m_armdown_time == 1)
+			{
+				m_arm_lower_marker_px = x;
+			}
+			//120フレームの間に主人公のX位置と同じになるようにベクトルXを調整
+			if (m_armdown_time < 120)
+			{
+				m_vx = (m_arm_lower_marker_px - m_px) / (120 - m_armdown_time);
+			}
+			//120以上なら腕を下ろす攻撃をするのでX移動量を0.0fにする
+			else
+			{
+				m_vx = 0.0f;
+			}
 		}
 	}
 
@@ -349,17 +358,21 @@ void CObjStage5BossArms::UpdateInitial()
 	//ボス(胴体)の情報を取得
 	CObjStage5Boss* objstage5_boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 	
-	//ライトアームの時
-	if (m_arms_type == RIGHT_ARM)
-	{	//										↓ボスの胴体に密着する位置
-		m_initial_px = (objstage5_boss->GetPosX() + STAGE5_BOSS_BODY_SIZE) + 60.0f;
-	}
-	//レフトアームの時
-	else
+	//ステージ５のボスが存在していたら
+	if (objstage5_boss != nullptr)
 	{
-		//										↓ボスの胴体に密着する位置
-		m_initial_px = (objstage5_boss->GetPosX() - STAGE5_BOSS_ARMS_WIDTH_SIZE) - 60.0f;
-		
+		//ライトアームの時
+		if (m_arms_type == RIGHT_ARM)
+		{	//										↓ボスの胴体に密着する位置
+			m_initial_px = (objstage5_boss->GetPosX() + STAGE5_BOSS_BODY_SIZE) + 60.0f;
+		}
+		//レフトアームの時
+		else
+		{
+			//										↓ボスの胴体に密着する位置
+			m_initial_px = (objstage5_boss->GetPosX() - STAGE5_BOSS_ARMS_WIDTH_SIZE) - 60.0f;
+
+		}
+		m_initial_py = objstage5_boss->GetPosY() - 100.0f;
 	}
-	m_initial_py = objstage5_boss->GetPosY() - 100.0f;
 }

@@ -23,7 +23,7 @@ void CObjStage5Boss::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_hp = 100; //第5ボスのＨＰ(仮にＨＰを[100]と設定)
+	m_hp = 1; //第5ボスのＨＰ(仮にＨＰを[100]と設定)
 
 	//初期化する(何もしていない)
 	m_attack_mode = 0;
@@ -231,8 +231,8 @@ void CObjStage5Boss::Action()
 	//クリア画面移動条件が確定したら、変更してください。
 	if (m_hp == 0)
 	{
-		//クリア画面に移動
-		Scene::SetScene(new CSceneGameClear());
+		Hits::DeleteHitBox(this);	//BOSSが所有するHitBoxに削除する
+		this->SetStatus(false);		//自身に削除命令を出す
 		return;
 	}
 
