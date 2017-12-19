@@ -346,6 +346,7 @@ enum MUSIC
 #include "ObjFallingBlock.h"	//ステージ5ボス戦専用落ちるブロック
 #include "ObjWireMesh.h"			//ステージ5の金網
 #include "ObjDiffusionSource.h"	//ステージ５ボスの拡散弾のソース
+#include "ObjAfterBossDisappearance.h" //ステージ５ボス消滅後
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
