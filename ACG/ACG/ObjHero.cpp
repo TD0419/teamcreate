@@ -771,19 +771,24 @@ void CObjHero::HitScene()
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	//針オブジェクトと衝突していれば
-
+	//トゲオブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_NEEDLE) != nullptr)
 	{
-		m_hero_die_enemy = true; //主人公の針にあたったときの死亡フラグをONにする
+		m_hero_die_enemy = true; //主人公がトゲにあたったとき、死亡フラグをONにする
 	}
 	//水オブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
 	{
-		m_hero_die_water = true; //主人公の水にあたったときの溺れるフラグをONにする
+		m_hero_die_water = true; //主人公の水にあたったとき、溺れるフラグをONにする
+	}
+	//(ステージ5)トゲの台とリフトにはさまれた場合(二つのオブジェクトの判定のはさまれた)
+	if (hit->CheckObjNameHit(OBJ_NEEDLE_STAND) != nullptr && hit->CheckObjNameHit(OBJ_LIFT) != nullptr)
+	{
+		m_hero_die_enemy = true; //主人公がトゲの台とリフトにはさまったときの死亡フラグをONにする
 	}
 
-	////敵オブジェクトと衝突していれば
+	//敵オブジェクトと衝突していれば
+	//デバッグ中。消さないで
 	//if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 	//{
 	//	m_hero_die_enemy = true; //主人公の敵にあたったときの死亡フラグをONにする

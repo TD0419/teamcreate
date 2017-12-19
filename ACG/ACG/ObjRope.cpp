@@ -138,6 +138,11 @@ void CObjRope::Action()
 		{
 			m_r_key_flag = true;
 		}
+		else if (objrolls->GetKeyFlag() == false && Input::GetMouButtonR() == false)
+		{
+			m_caught_flag = true;
+			m_r_key_flag = false;
+		}
 		//　ステージ5の回転ブロックスイッチが最後まで行った時ロープを自動的に消すようにする
 		if (objrolls->GetLastRoll() == true)
 		{
