@@ -112,6 +112,21 @@ void CObjBullet::Action()
 	{
 		return;
 	}
+	//回転ブロックと当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_ROLL_BLOCK))
+	{
+		return;
+	}
+	//落ちるリフトと当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_FALLING_LIFT))
+	{
+		return;
+	}
+	//トゲの台と当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_NEEDLE_STAND))
+	{
+		return;
+	}
 	
 	//ステージ３で使うかも　使わない場合は消すこと！
 	////反射するブロックとあたった場合
