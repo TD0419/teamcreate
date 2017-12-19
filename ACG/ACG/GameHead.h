@@ -51,6 +51,7 @@ enum OBJ_NAME
 	OBJ_STAGE5_BOSS_ARMS, //ステージ5ボスの腕
 	OBJ_WIRE_MESH,		  //ステージ5の金網
 	OBJ_DIFFUSION_SOURCE, //拡散弾の源
+	OBJ_AFTER_BOSS_DISAPPEARANCE,	//ステージ５ボス消滅アニメージョン後
 };
 //------------------------------------------------
 
