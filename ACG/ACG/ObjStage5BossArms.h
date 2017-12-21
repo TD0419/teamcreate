@@ -35,6 +35,8 @@ public:
 
 	void SetInitPosFlagON() { m_initpos_flag = true; }//初期位置に戻すフラグをオンにする
 
+	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
+
 	void ArmDownTimeInit() { m_armdown_time = 0; }//タイムの初期化
 	bool GetBlockHit() {return m_block_hit_flag;}//ブロックのヒットフラグを返す
 
@@ -47,8 +49,10 @@ public:
 	void DiffusionAttack(int limit_time);		//拡散弾を打つ攻撃
 	void BlockDownAttackMove(float px);//ブロックを落とす攻撃の移動
 	void MoveShotAttack();//移動しながら弾を撃つ攻撃
-	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
 	void ArmLowerAttack(float x);	//腕を下ろす攻撃
+
+	void Delete();	//HIT_BOXと自身(腕)を消去する
+
 private:
 	float m_px;	 // 第五ボスのアームX座標
 	float m_py;	 // 第五ボスのアームY座標

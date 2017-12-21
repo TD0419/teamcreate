@@ -427,3 +427,10 @@ void CObjStage5BossArms::UpdateInitial()
 		m_initial_py = objstage5_boss->GetPosY() - 100.0f;
 	}
 }
+
+//自身(腕)とHIT_BOXを消去する
+void CObjStage5BossArms::Delete()
+{
+	this->SetStatus(false);		//自身に削除命令を出す
+	Hits::DeleteHitBox(this);//自身が所有するHitBoxを削除する
+}

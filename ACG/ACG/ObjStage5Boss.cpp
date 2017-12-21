@@ -261,7 +261,9 @@ void CObjStage5Boss::Action()
 		if (m_hp == 0)
 		{
 			//—¼˜r‚ğÁ‹‚·‚é
-			
+			m_boos_arm_right->Delete();
+			m_boos_arm_left->Delete();
+
 			//BOSS‚ªŠ—L‚·‚éHitBox‚ğíœ‚·‚é
 			Hits::DeleteHitBox(this);	
 
