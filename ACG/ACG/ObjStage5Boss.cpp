@@ -94,7 +94,7 @@ void CObjStage5Boss::Action()
 				if (m_time % 100 == 0)
 				{
 					//何もしていないので攻撃モードをランダムで決める
-					m_attack_mode = GetRandom(1, 4);
+					m_attack_mode = GetRandom(4, 4);
 					m_time = 0;
 				}
 				break;
@@ -186,8 +186,9 @@ void CObjStage5Boss::Action()
 					m_attack4_flag = true;
 
 					//腕を移動させて落とす
-					m_boos_arm_left->ArmLowerAttack(93*BLOCK_SIZE);
-					m_boos_arm_right->ArmLowerAttack(109 * BLOCK_SIZE);
+					//引数の値はラストウォールの横
+					m_boos_arm_left->ArmLowerAttack(94*BLOCK_SIZE);
+					m_boos_arm_right->ArmLowerAttack(108 * BLOCK_SIZE);
 				}
 			//左右の腕が地面まで落ちているかどうかを調べる
 			bool left_arm_down = m_boos_arm_left->GetBlockHit();
