@@ -41,6 +41,14 @@ void CObjStage5BossArms::Init()
 	m_block_hit_flag = false;
 	m_initpos_flag = false;
 
+	//腕の接続部分の電流を表示する/しないかを判断するための変数----------------------
+	//接続部分の描画はObjStage5Boss.cppにて
+
+	m_left_arm_move = false; //false…初期位置から動いていない　true…動いている(レフトアーム用)
+	m_right_arm_move = false;//false…初期位置から動いていない　true…動いている(ライトアーム用)
+
+	//-------------------------------------------------------------------------------
+
 	//typeの値が1のときライトアームの当たり判定表示
 	if (m_arms_type == RIGHT_ARM)
 	{
@@ -67,13 +75,13 @@ void CObjStage5BossArms::Action()
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//アームタイプが1のとき、ライトアーム用の当たり判定表示
+	//ライトアーム用の当たり判定表示
 	if (m_arms_type == RIGHT_ARM)
 	{
 		//当たり判定更新
 		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 	}
-	//アームタイプが2のとき、レフトアーム用の当たり判定表示
+	//レフトアーム用の当たり判定表示
 	else if (m_arms_type == LEFT_ARM)
 	{
 		//当たり判定更新
@@ -101,7 +109,7 @@ void CObjStage5BossArms::Action()
 	//ステージ５のボスが存在していたら
 	if (objboss != nullptr)
 	{
-		if (objboss->GetAttackMode() == 3)//攻撃パターン３なら
+		if ( objboss->GetAttackMode() == 3)//攻撃パターン３なら
 		{
 			MoveShotAttack();
 		}
@@ -116,12 +124,21 @@ void CObjStage5BossArms::Action()
 	//ＨＰが0になったらオブジェクトを初期位置に戻すためのフラグをオンにする
 	if (m_arm_hp == 0)
 	{
+		//腕のフラグを更新する
+		if (m_arms_type == RIGHT_ARM)//右腕
+			objboss->SetArmDownFlagRight();
+		else
+			objboss->SetArmDownFlagLeft();
+
 		m_initpos_flag = true;
 	}
 
 	//初期位置フラグがオンなら
 	if (m_initpos_flag == true)
 	{
+		m_left_arm_move = false; //レフトアームが「初期位置から動いていない」判定を出す
+		m_right_arm_move = false;//ライトアームが「初期位置から動いていない」判定を出す
+		
 		//初期位置に戻す
 		m_px = m_initial_px;
 		m_py = m_initial_py;
@@ -288,18 +305,20 @@ void CObjStage5BossArms::BlockDownAttackMove(float px)
 {
 	//HitBoxポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
-	
+
 	if (m_arms_type == RIGHT_ARM)//右腕なら
 	{
 		//目的地までたどりついてなく　かつ　ラストウォールと当たっていなければ
-		if ((px - m_px) > 0.0f && ( hit->CheckObjNameHit(OBJ_LAST_WALL) == nullptr ) )
+		if ((px - m_px) > 0.0f && (hit->CheckObjNameHit(OBJ_LAST_WALL) == nullptr))
 		{
 			m_vx = 1.0f;
+			m_right_arm_move = true;//ライトアームが「動いている」判定を出す
 		}
 		else
 		{
 			m_vx = 0.0f;//xの移動を0にする
 			ArmLowerAttack(m_px);//腕を下ろす処理をする
+			
 		}
 	}
 	else //左腕なら
@@ -308,11 +327,13 @@ void CObjStage5BossArms::BlockDownAttackMove(float px)
 		if ((px - m_px) < 0.0f && (hit->CheckObjNameHit(OBJ_LAST_WALL) == nullptr))
 		{
 			m_vx = -1.0f;
+			m_left_arm_move = true;
 		}
 		else
 		{
 			m_vx = 0.0f;//xの移動を0にする
 			ArmLowerAttack(m_px);//腕を下ろす処理をする
+			
 		}
 	}
 }
@@ -355,11 +376,25 @@ void CObjStage5BossArms::ArmLowerAttack(float x)
 		//腕を下ろす位置を示さない
 		m_arm_lower_marker_px = 0.0f;
 
+		//ライトアームまたはレフトアームがＸ軸初期位置から動かず、Ｙ軸初期位置の直下に
+		//腕を下ろした場合に「腕が動いている」判定を出す処理---------------------------
+		if (m_right_arm_move == false)	//ライトアームが「初期位置から動いていない」判定が出ているとき
+		{
+			m_right_arm_move = true;	//「ライトアームが動いている」判定を出す
+		}
+		if(m_left_arm_move == false)	//ライトアームが「初期位置から動いていない」判定が出ているとき
+		{
+			m_left_arm_move = true;		//「レフトアームが動いている」判定を出す
+		}
+		//---------------------------------------------------------------------------------
+
 		//ブロックと当たるまで
 		if (m_block_hit_flag == false)
 		{
 			//腕を下ろす
 			m_vy = 10.0f;
+			
+			
 		}
 	}
 
@@ -380,14 +415,22 @@ void CObjStage5BossArms::UpdateInitial()
 		if (m_arms_type == RIGHT_ARM)
 		{	//										↓ボスの胴体に密着する位置
 			m_initial_px = (objstage5_boss->GetPosX() + STAGE5_BOSS_BODY_SIZE) + 60.0f;
+			
 		}
 		//レフトアームの時
 		else
 		{
 			//										↓ボスの胴体に密着する位置
 			m_initial_px = (objstage5_boss->GetPosX() - STAGE5_BOSS_ARMS_WIDTH_SIZE) - 60.0f;
-
+		
 		}
 		m_initial_py = objstage5_boss->GetPosY() - 100.0f;
 	}
+}
+
+//自身(腕)とHIT_BOXを消去する
+void CObjStage5BossArms::Delete()
+{
+	this->SetStatus(false);		//自身に削除命令を出す
+	Hits::DeleteHitBox(this);//自身が所有するHitBoxを削除する
 }
