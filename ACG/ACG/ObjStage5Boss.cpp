@@ -139,17 +139,16 @@ void CObjStage5Boss::Action()
 				m_boos_arm_right->DiffusionAttack(GetRandom(60, 180));
 				m_attack_mode = 0;
 			}
-
-				break;
-			}
-			case 3://ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
+			break;
+		}
+		case 3://ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
+		{
+			if (m_attack3_flag == false)//フラグがオフなら
 			{
-				if (m_attack3_flag == false)//フラグがオフなら
-				{
-					m_attack3_count = 0;
-					m_vx = -1.0f;//移動量を左に設定
-					m_attack3_flag = true;//フラグをオン
-				}
+				m_attack3_count = 0;
+				m_vx = -1.0f;//移動量を左に設定
+				m_attack3_flag = true;//フラグをオン
+			}
 
 			//60フレームに一度
 			if (m_time % 60 == 0)
@@ -157,71 +156,75 @@ void CObjStage5Boss::Action()
 				CObjEnemyBullet* p = new CObjEnemyBullet(m_px + EYE_CORRECTION_WIDTH + STAGE5_BOSS_EYE_SIZE / 2.0f, m_py + EYE_CORRECTION_HEIGHT + STAGE5_BOSS_EYE_SIZE / 2.0f);
 				Objs::InsertObj(p, OBJ_ENEMY_BULLET, 11);
 
-					m_attack3_count++;
-				}
-
-				if (m_attack3_count == 10)//10回攻撃したら
-				{
-					m_attack3_flag = false;//フラグをオフ
-					m_vx = 0.0f;//移動をとめる
-
-					//腕が地面に残っていなければ
-					if (m_right_arm_down_flag == false && m_left_arm_down_flag == false)
-						m_attack_mode = 0;
-					else
-						m_attack_mode = 3;
-				}
-				//腕にも移動量を渡す
-				if (m_right_arm_down_flag == false)	//腕が落ちていなければ
-					m_boos_arm_right->SetVecX(m_vx);
-				if (m_left_arm_down_flag == false)		//腕が落ちていなければ
-					m_boos_arm_left->SetVecX(m_vx);
-				break;
+				m_attack3_count++;
 			}
-			//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
-			case 4:
+			
+			if (m_attack3_count == 10)//10回攻撃したら
 			{
-				//マップオブジェクトを持ってくる
-				CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+				m_attack3_flag = false;//フラグをオフ
+				m_vx = 0.0f;//移動をとめる
+				
+				//腕が地面に残っていなければ
+				if (m_right_arm_down_flag == false && m_left_arm_down_flag == false)
+					m_attack_mode = 0;
+				else
+					m_attack_mode = 3;
+			}
+			//腕にも移動量を渡す
+			if (m_right_arm_down_flag == false)	//腕が落ちていなければ
+				m_boos_arm_right->SetVecX(m_vx);
+			if (m_left_arm_down_flag == false)		//腕が落ちていなければ
+				m_boos_arm_left->SetVecX(m_vx);
+			break;
+		}
+		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
+		case 4:
+		{
+			//マップオブジェクトを持ってくる
+			CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+			
+			//攻撃が始まって一回のみ
+			if (m_attack4_flag == false)
+			{
+				m_attack4_scroll = objmap->GetScrollX();//スクロール値Xを持ってくる
+				m_attack4_flag = true;
+			}
 
-				//攻撃が始まって一回のみ
-				if (m_attack4_flag == false)
-				{
-					m_attack4_scroll = objmap->GetScrollX();//スクロール値Xを持ってくる
-					m_attack4_flag = true;
-				}
+			//腕を移動させて落とす
+			m_boos_arm_left->BlockDownAttackMove(m_attack4_scroll);
+			m_boos_arm_right->BlockDownAttackMove(m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE);
 
-				//腕を移動させて落とす
-				m_boos_arm_left->BlockDownAttackMove(m_attack4_scroll);
-				m_boos_arm_right->BlockDownAttackMove(m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE);
+			//左右の腕が地面まで落ちているかどうかを調べる
+			bool left_arm_down = m_boos_arm_left->GetBlockHit();
+			bool right_arm_down = m_boos_arm_right->GetBlockHit();
 
-				//左右の腕が地面まで落ちているかどうかを調べる
-				bool left_arm_down = m_boos_arm_left->GetBlockHit();
-				bool right_arm_down = m_boos_arm_right->GetBlockHit();
+			//両方の腕が地面までおちていれば
+			if (left_arm_down == true && right_arm_down == true)
+			{
+				m_block_down_flag = true;	//ブロックが落ちる様にする
+			}			
+			else
+			{
+				m_block_down_flag = false;	//ブロックが落ちない様にする
+			}
 
-				//両方の腕が地面までおちていれば
-				if (left_arm_down == true && right_arm_down == true)
-				{
-					m_block_down_flag = true;
-				}
+			//落ちるブロックの取得
+			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
 
-				//落ちるブロックの取得
-				CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
+			//落ちるブロックがなければ
+			if (objfallingblock == nullptr)
+				m_attack4_count++;
 
-				//落ちるブロックがなければ
-				if (objfallingblock == nullptr)
-					m_attack4_count++;
-
-				if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
-				{
-					//腕の位置を初期位置に戻す
-					m_boos_arm_left->SetInitPosFlagON();
-					m_boos_arm_right->SetInitPosFlagON();
-
-					objmap->CreateFallingBloack();//落ちるブロックを作成する
+			if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
+			{
+				//腕の位置を初期位置に戻す
+				m_boos_arm_left->SetInitPosFlagON();
+				m_boos_arm_right->SetInitPosFlagON();
+				
+				objmap->CreateFallingBloack();//落ちるブロックを作成する
+				m_block_down_flag = false;
 
 				m_attack4_count = 0;		//カウンターの初期化
-				m_block_down_flag = false;	//ブロックが落ちない様にする
 				m_attack4_scroll = 0.0f;	//スクロール量の初期化
 				m_attack_mode = 0;			
 			}
