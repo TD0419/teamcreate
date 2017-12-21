@@ -35,16 +35,24 @@ public:
 
 	void SetInitPosFlagON() { m_initpos_flag = true; }//初期位置に戻すフラグをオンにする
 
+	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
+
 	void ArmDownTimeInit() { m_armdown_time = 0; }//タイムの初期化
 	bool GetBlockHit() {return m_block_hit_flag;}//ブロックのヒットフラグを返す
+
+
+	bool GetLeftarmAction() { return m_left_arm_move; }//レフトアームの移動状況を返す
+	bool GetRightarmAction() { return m_right_arm_move; }//ライトアームの移動状況を返す
+
 	//-------------------------------------------------
 
 	void DiffusionAttack(int limit_time);		//拡散弾を打つ攻撃
 	void BlockDownAttackMove(float px);//ブロックを落とす攻撃の移動
 	void MoveShotAttack();//移動しながら弾を撃つ攻撃
-	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
-	
 	void ArmLowerAttack(float x);	//腕を下ろす攻撃
+
+	void Delete();	//HIT_BOXと自身(腕)を消去する
+
 private:
 	float m_px;	 // 第五ボスのアームX座標
 	float m_py;	 // 第五ボスのアームY座標
@@ -72,6 +80,10 @@ private:
 	int m_ani_frame_claw;//描画フレーム(爪)
 	int m_ani_time_claw;	//アニメーションフレーム動作感覚(爪)
 	int m_ani_max_time_claw;//アニメーションフレーム動作感覚最大値(爪)
+
+	bool m_left_arm_move;//レフトアームが動いているかどうかを判別する
+	bool m_right_arm_move;//ライトアームが動いているかどうかを判別する
+	
 
 	void UpdateInitial();//初期位置を計算する
 };

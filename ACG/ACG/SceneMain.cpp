@@ -326,6 +326,8 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
 	//金網
 	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
+	//ボスの爆発
+	Draw::LoadImageW(L"Image\\Explosion.png", GRA_EXPLOSION,TEX_SIZE_320);
 }
 
 //音楽データ読み込み関数
