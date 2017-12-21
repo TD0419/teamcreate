@@ -186,15 +186,9 @@ void CObjStage5Boss::Action()
 					m_attack4_flag = true;
 
 					//˜r‚ðˆÚ“®‚³‚¹‚Ä—Ž‚Æ‚·
-
 					m_boos_arm_left->ArmLowerAttack(93*BLOCK_SIZE);
 					m_boos_arm_right->ArmLowerAttack(109 * BLOCK_SIZE);
 				}
-
-				//˜r‚ðˆÚ“®‚³‚¹‚Ä—Ž‚Æ‚·
-				m_boos_arm_left->BlockDownAttackMove(m_attack4_scroll);
-				m_boos_arm_right->BlockDownAttackMove(m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE);
-
 			//¶‰E‚Ì˜r‚ª’n–Ê‚Ü‚Å—Ž‚¿‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð’²‚×‚é
 			bool left_arm_down = m_boos_arm_left->GetBlockHit();
 			bool right_arm_down = m_boos_arm_right->GetBlockHit();
