@@ -25,6 +25,9 @@ void CObjStage5Boss::Init()
 
 	m_hp = 100; //第5ボスのＨＰ(仮にＨＰを[100]と設定)
 
+	m_right_arm_down_flag = false;
+	m_left_arm_down_flag = false;
+
 	//初期化する(何もしていない)
 	m_attack_mode = 0;
 
@@ -91,7 +94,7 @@ void CObjStage5Boss::Action()
 			if (m_time % 100 == 0)
 			{
 				//何もしていないので攻撃モードをランダムで決める
-				m_attack_mode = 4;//GetRandom(1, 4);
+				m_attack_mode = GetRandom(1, 4);
 				m_time = 0;
 			}
 			break;
@@ -106,11 +109,13 @@ void CObjStage5Boss::Action()
 			{
 				//腕を下ろす攻撃をする(左腕)
 				m_boos_arm_left->ArmLowerAttack(objhero->GetPosX());
+				m_left_arm_down_flag = true;
 			}
 			else
 			{
 				//腕を下ろす攻撃をする(右腕)
 				m_boos_arm_right->ArmLowerAttack(objhero->GetPosX());
+				m_right_arm_down_flag = true;
 			}
 
 			if (m_time >= 400)
@@ -118,7 +123,7 @@ void CObjStage5Boss::Action()
 				//腕の管理タイムを0にする
 				m_boos_arm_left->ArmDownTimeInit();
 				m_boos_arm_right->ArmDownTimeInit();
-
+			
 				m_attack_mode = 0;
 			}
 			break;
@@ -159,11 +164,18 @@ void CObjStage5Boss::Action()
 			{
 				m_attack3_flag = false;//フラグをオフ
 				m_vx = 0.0f;//移動をとめる
-				m_attack_mode = 0;
+				
+				//腕が地面に残っていなければ
+ 				if ( m_right_arm_down_flag == false && m_left_arm_down_flag == false)
+					m_attack_mode = 0;
+				else
+					m_attack_mode = 3;
 			}
 			//腕にも移動量を渡す
-			m_boos_arm_right->SetVecX(m_vx);
-			m_boos_arm_left->SetVecX(m_vx);
+			if( m_right_arm_down_flag == false )	//腕が落ちていなければ
+				m_boos_arm_right->SetVecX(m_vx);
+			if( m_left_arm_down_flag == false )		//腕が落ちていなければ
+				m_boos_arm_left->SetVecX(m_vx);
 			break;
 		}
 		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
@@ -215,7 +227,6 @@ void CObjStage5Boss::Action()
 			}
 
 			break;
-		}
 		}
 
 		//移動
@@ -293,6 +304,7 @@ void CObjStage5Boss::Draw()
 {
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+	float transparent[4] = { 0.0f,0.0f,0.0f, 0.0f };//透明に描画する
 
 	RECT_F src, dst;
 
@@ -300,8 +312,13 @@ void CObjStage5Boss::Draw()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//生きているときの描画
-	if (m_death_flag == false)
+	if(m_death_flag == false)
 	{
+		//アームオブジェクトより、ライトアームとレフトアームの移動状況を受け取る
+		bool m_move_right_arm = m_boos_arm_right->GetRightarmAction();//ライトアームの移動状況
+		bool m_move_left_arm = m_boos_arm_left->GetLeftarmAction();		//レフトアームの移動状況
+
+
 		//胴腕接続電気-------------------------------
 		//左腕部分
 		//切り取り位置
@@ -311,12 +328,21 @@ void CObjStage5Boss::Draw()
 		src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
 
 		//描画位置
-		dst.m_top = m_py - objmap->GetScrollY() + ELECTRIC_L_CORRECTION_HEIGHT;
+		dst.m_top = m_py - objmap->GetScrollY()  + ELECTRIC_L_CORRECTION_HEIGHT;
 		dst.m_left = m_px - objmap->GetScrollX() - ELECTRIC_L_CORRECTION_WIDTH;
 		dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+
 		//描画
-		Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);
+		//レフトアームが動いているときは、透明に描画する。
+		if (m_move_left_arm == true)//レフトアームが「動いている」判定がでているとき
+		{
+			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
+		}
+		else//レフトアームが「初期位置(描画)から動いていない」判定がでている 
+		{
+			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
+		}
 
 		//右腕部分
 		//切り取り位置
@@ -326,12 +352,20 @@ void CObjStage5Boss::Draw()
 		src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
 
 		//描画位置
-		dst.m_top = m_py - objmap->GetScrollY() + ELECTRIC_R_CORRECTION_HEIGHT;
+		dst.m_top =  m_py - objmap->GetScrollY() + ELECTRIC_R_CORRECTION_HEIGHT;
 		dst.m_left = m_px - objmap->GetScrollX() + ELECTRIC_R_CORRECTION_WIDTH;
 		dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
 		//描画
-		Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);
+		//ライトアームが動いているときは、透明に描画する。
+		if (m_move_right_arm == true)//ライトアームが「動いている」判定がでているとき
+		{
+			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
+		}
+		else//ライトアームが「初期位置(描画)から動いていない」判定がでているとき
+		{
+			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
+		}
 
 		//胴体--------------------------------------
 		//切り取り位置

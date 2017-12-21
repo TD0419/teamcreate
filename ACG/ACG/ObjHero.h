@@ -56,7 +56,7 @@ public:
 	int GetBlockType() { return m_block_type; }						//下のブロック(踏んでいる)情報を渡す
 	int GetBlockTypeUp() { return m_block_type_up; }                //上のブロック情報を渡す
 	int GetLadderUpdown() { return m_ladder_updown; }				//主人公がはしごのどのアニメーション中かを返す
-
+	bool GetTarzanDeleteFlag() { return m_tarzan_delete_flag; }
 	void HeroGoal() { m_goal_flag = true; m_radius = 0.0f; }		//主人公のゴール処理切り替え関数(ゴールフラグを立てる)
 
 private:
@@ -92,7 +92,7 @@ private:
 	bool  m_rope_delete_r_kye;    //アニメーション用ロープが消えたかどうかを管理する 
 	bool  m_rope_delete_control;  //ロープが消えた時の判定を制御する変数
 	bool  m_hero_die_flag;        //主人公が死んだ時の高さを制御するためのフラグ
-
+	bool  m_tarzan_delete_flag; //ターザンロープを消すためのフラグ
 	bool l_jump;				  //trueなら主人公とはしごがあたっているのでジャンプできないようにする変数
 								  //falseならあたっていないのでジャンプできる
 	//-----------

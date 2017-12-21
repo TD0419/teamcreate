@@ -40,6 +40,8 @@ public:
 	void SetVecX(float x) { m_vx = x; }	
 	int GetAttackMode() { return m_attack_mode; }
 	bool GetBlockDownFlag() { return m_block_down_flag; }
+	void SetArmDownFlagRight() { m_right_arm_down_flag = false; }
+	void SetArmDownFlagLeft() { m_left_arm_down_flag = false; }
 
 private:
 	float m_px;	 // 第五ボスX座標
@@ -47,6 +49,8 @@ private:
 	float m_vx;  // 第五ボスX軸移動ベクトル
 	float m_vy;  // 第五ボスY軸移動ベクトル
 	int m_hp;    // 第五ボスのＨＰ
+
+	int m_arm_break_count;//腕が壊れた回数を記録する
 
 	int m_attack3_count;//攻撃パターン3用のカウンター
 	bool m_attack3_flag;//攻撃パターン3用のフラグ
@@ -71,6 +75,10 @@ private:
 	int m_attack_mode;
 
 	int m_time;//攻撃のたいみんぐ管理用
+
+	//腕が落ちているかどうかのフラグ
+	bool m_right_arm_down_flag;
+	bool m_left_arm_down_flag;
 
 	bool m_lastwall_hit_flag;//ラストウォールとの処理用フラグ
 
