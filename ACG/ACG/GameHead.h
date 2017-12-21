@@ -197,6 +197,7 @@ enum GRAPHIC_ID
 	GRA_DIFFUSION_SOURCE,//拡散弾を撃つ弾
 	GRA_BOSS_DIFFUSION,//ボスの発射する拡散弾
 	GRA_STAGE5_BOSS_BULLET,//ボスの発射する弾
+	GRA_EXPLOSION,	//ボスの爆発
 };
 
 //音楽(BGM)

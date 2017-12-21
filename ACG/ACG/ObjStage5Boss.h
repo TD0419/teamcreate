@@ -60,6 +60,8 @@ private:
 	//左アームオブジェクトの情報
 	CObjStage5BossArms* m_boos_arm_left;
 
+	bool m_death_flag;//死亡フラグ　true=死亡している	false=生きている
+
 	//第五ボスの攻撃モード
 	//0:何もしない
 	//1:主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす
@@ -71,6 +73,10 @@ private:
 	int m_time;//攻撃のたいみんぐ管理用
 
 	bool m_lastwall_hit_flag;//ラストウォールとの処理用フラグ
+
+	int m_ani_frame_death;//描画フレーム(死亡)
+	int m_ani_time_death;	//アニメーションフレーム動作間隔(死亡)
+	int m_ani_max_time_death;//アニメーションフレーム動作間隔最大値(死亡)
 
 	//ランダムで値を決める関数
 	int GetRandom(int min, int max);
