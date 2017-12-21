@@ -105,13 +105,13 @@ void CObjStage5Boss::Action()
 				//主人公オブジェクト情報を取得
 				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-				if (m_time <= 200)
+				if (m_time == 200)
 				{
 					//腕を下ろす攻撃をする(左腕)
 					m_boos_arm_left->ArmLowerAttack(objhero->GetPosX());
 					m_left_arm_down_flag = true;
 				}
-				else
+				else if(m_time == 300)
 				{
 					//腕を下ろす攻撃をする(右腕)
 					m_boos_arm_right->ArmLowerAttack(objhero->GetPosX());
@@ -120,10 +120,6 @@ void CObjStage5Boss::Action()
 
 			if (m_time >= 400)
 			{
-				//腕の管理タイムを0にする
-				m_boos_arm_left->ArmDownTimeInit();
-				m_boos_arm_right->ArmDownTimeInit();
-		
 				m_attack_mode = 3;//腕をおろした後は攻撃３にする
 			}
 			break;
@@ -189,11 +185,14 @@ void CObjStage5Boss::Action()
 				{
 					m_attack4_scroll = objmap->GetScrollX();//スクロール値Xを持ってくる
 					m_attack4_flag = true;
+
+					//腕を移動させて落とす
+
+					m_boos_arm_left->ArmLowerAttack(93*BLOCK_SIZE);
+					m_boos_arm_right->ArmLowerAttack(109 * BLOCK_SIZE);
 				}
 
-				//腕を移動させて落とす
-				m_boos_arm_left->BlockDownAttackMove(m_attack4_scroll);
-				m_boos_arm_right->BlockDownAttackMove(m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE);
+				
 
 				//左右の腕が地面まで落ちているかどうかを調べる
 				bool left_arm_down = m_boos_arm_left->GetBlockHit();
@@ -219,7 +218,8 @@ void CObjStage5Boss::Action()
 					m_boos_arm_right->SetInitPosFlagON();
 
 					objmap->CreateFallingBloack();//落ちるブロックを作成する
-
+					m_attack4_flag = false;
+				
 				m_attack4_count = 0;		//カウンターの初期化
 				m_block_down_flag = false;	//ブロックが落ちない様にする
 				m_attack4_scroll = 0.0f;	//スクロール量の初期化
