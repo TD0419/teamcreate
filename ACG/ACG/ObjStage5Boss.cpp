@@ -53,11 +53,11 @@ void CObjStage5Boss::Init()
 	//左右の腕作成ー------------------
 	//右腕オブジェクト作成								↓ボスの胴体に密着する位置
 	m_boos_arm_right = new CObjStage5BossArms((m_px+ STAGE5_BOSS_BODY_SIZE)+60.0f, m_py - 100.0f, 1);
-	Objs::InsertObj(m_boos_arm_right, OBJ_STAGE5_BOSS_ARMS, 10);
+	Objs::InsertObj(m_boos_arm_right, OBJ_STAGE5_BOSS_ARMS, 8);
 
 	//左腕オブジェクト作成								↓ボスの胴体に密着する位置		
 	m_boos_arm_left = new CObjStage5BossArms((m_px-  STAGE5_BOSS_ARMS_WIDTH_SIZE)-60.0f, m_py - 100.0f, 2);
-	Objs::InsertObj(m_boos_arm_left, OBJ_STAGE5_BOSS_ARMS, 10);
+	Objs::InsertObj(m_boos_arm_left, OBJ_STAGE5_BOSS_ARMS, 8);
 
 	//-------------------------------
 	
@@ -118,7 +118,7 @@ void CObjStage5Boss::Action()
 			}
 			break;
 		}
-		case 2:	//打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す攻撃
+		case 2:	//打ち出してからランダムな時間経過で拡散弾になる弾を出す攻撃
 		{
 			if (m_time % 300 == 150)
 			{
@@ -145,7 +145,7 @@ void CObjStage5Boss::Action()
 			if (m_time % 60 == 0)
 			{
 				CObjEnemyBullet* p = new CObjEnemyBullet(m_px + EYE_CORRECTION_WIDTH + STAGE5_BOSS_EYE_SIZE / 2.0f, m_py + EYE_CORRECTION_HEIGHT + STAGE5_BOSS_EYE_SIZE / 2.0f);
-				Objs::InsertObj(p, OBJ_ENEMY_BULLET, 9);
+				Objs::InsertObj(p, OBJ_ENEMY_BULLET, 11);
 
 				m_attack3_count++;
 			}
@@ -215,7 +215,6 @@ void CObjStage5Boss::Action()
 				m_attack4_scroll = 0.0f;	//スクロール量の初期化
 				m_attack_mode = 0;			
 			}
-
 			break;
 		}
 	}
