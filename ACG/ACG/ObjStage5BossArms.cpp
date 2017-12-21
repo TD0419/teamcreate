@@ -77,19 +77,6 @@ void CObjStage5BossArms::Action()
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//ライトアーム用の当たり判定表示
-	if (m_arms_type == RIGHT_ARM)
-	{
-		//当たり判定更新
-		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-	}
-	//レフトアーム用の当たり判定表示
-	else if (m_arms_type == LEFT_ARM)
-	{
-		//当たり判定更新
-		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-	}
-	
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
@@ -155,6 +142,10 @@ void CObjStage5BossArms::Action()
 		m_arm_hp = 10;
 		m_initpos_flag = false;
 		m_block_hit_flag = false;
+
+		//当たり判定更新
+		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+
 		return;
 	}
 	
@@ -179,6 +170,9 @@ void CObjStage5BossArms::Action()
 		}
 	}
 	//---------------------------------------------------------
+
+	//当たり判定更新
+	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
 
 //ドロー

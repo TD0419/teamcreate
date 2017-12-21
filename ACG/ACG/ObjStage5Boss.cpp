@@ -135,17 +135,16 @@ void CObjStage5Boss::Action()
 				m_boos_arm_right->DiffusionAttack(GetRandom(60, 180));
 				m_attack_mode = 0;
 			}
-
-				break;
-			}
-			case 3://ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
+			break;
+		}
+		case 3://ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)攻撃
+		{
+			if (m_attack3_flag == false)//フラグがオフなら
 			{
-				if (m_attack3_flag == false)//フラグがオフなら
-				{
-					m_attack3_count = 0;
-					m_vx = -1.0f;//移動量を左に設定
-					m_attack3_flag = true;//フラグをオン
-				}
+				m_attack3_count = 0;
+				m_vx = -1.0f;//移動量を左に設定
+				m_attack3_flag = true;//フラグをオン
+			}
 
 			//60フレームに一度
 			if (m_time % 60 == 0)
@@ -192,24 +191,30 @@ void CObjStage5Boss::Action()
 					m_boos_arm_right->ArmLowerAttack(109 * BLOCK_SIZE);
 				}
 
-				
+				//腕を移動させて落とす
+				m_boos_arm_left->BlockDownAttackMove(m_attack4_scroll);
+				m_boos_arm_right->BlockDownAttackMove(m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE);
 
-				//左右の腕が地面まで落ちているかどうかを調べる
-				bool left_arm_down = m_boos_arm_left->GetBlockHit();
-				bool right_arm_down = m_boos_arm_right->GetBlockHit();
+			//左右の腕が地面まで落ちているかどうかを調べる
+			bool left_arm_down = m_boos_arm_left->GetBlockHit();
+			bool right_arm_down = m_boos_arm_right->GetBlockHit();
 
-				//両方の腕が地面までおちていれば
-				if (left_arm_down == true && right_arm_down == true)
-				{
-					m_block_down_flag = true;
-				}
+			//両方の腕が地面までおちていれば
+			if (left_arm_down == true && right_arm_down == true)
+			{
+				m_block_down_flag = true;	//ブロックが落ちる様にする
+			}			
+			else
+			{
+				m_block_down_flag = false;	//ブロックが落ちない様にする
+			}
 
-				//落ちるブロックの取得
-				CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
+			//落ちるブロックの取得
+			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
 
-				//落ちるブロックがなければ
-				if (objfallingblock == nullptr)
-					m_attack4_count++;
+			//落ちるブロックがなければ
+			if (objfallingblock == nullptr)
+				m_attack4_count++;
 
 				if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
 				{
@@ -221,7 +226,6 @@ void CObjStage5Boss::Action()
 					m_attack4_flag = false;
 				
 				m_attack4_count = 0;		//カウンターの初期化
-				m_block_down_flag = false;	//ブロックが落ちない様にする
 				m_attack4_scroll = 0.0f;	//スクロール量の初期化
 				m_attack_mode = 0;			
 			}

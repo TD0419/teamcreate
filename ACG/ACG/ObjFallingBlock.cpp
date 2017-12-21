@@ -36,9 +36,6 @@ void CObjFallingBlock::Action()
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	float a = WINDOW_SIZE_H * 2.0f;
-	float b = BLOCK_SIZE * MAP_Y_MAX;
-
 	//マップの外側までいけば
 	if (m_py > BLOCK_SIZE * MAP_Y_MAX)
 	{
