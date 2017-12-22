@@ -47,7 +47,7 @@ public:
 
 	void DiffusionAttack(int limit_time);		//拡散弾を打つ攻撃
 	void MoveShotAttack();//移動しながら弾を撃つ攻撃
-	void ArmLowerAttack(float x);	//腕を下ろす攻撃(下ろすX位置を求めるとき)
+	void ArmLowerAttack(float x, bool marker);	//腕を下ろす攻撃(下ろすX位置を求めるとき)
 	void ArmLowerAttack();			//腕を下ろす攻撃(最初にブロックが当たるまで腕を下ろし続ける)
 
 	void Delete();	//HIT_BOXと自身(腕)を消去する
@@ -59,8 +59,10 @@ private:
 	float m_vx;  // 第五ボスのアームX軸移動ベクトル
 	float m_vy;  // 第五ボスのアームY軸移動ベクトル
 
-	float m_arm_lower_marker_px;//腕を下ろす位置を示すかどうかとそのX位置　0.0f以下 ＝示さない　0.0fを超える＝示すかつX位置情報
-
+	//腕を下ろすX位置
+	float m_arm_lower_marker_px;
+	//腕を下ろす位置を示すかどうかのフラグ
+	bool m_arm_down_marker;
 	//腕を下す攻撃をするか否か　true=攻撃をする	false=攻撃をしない
 	//フラグがONになってから最初にブロック(落ちる)に当たるまで下ろし続ける
 	bool m_arm_down_attack_flag;
