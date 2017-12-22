@@ -35,7 +35,9 @@ void CObjStage5BossArms::Init()
 	m_ani_max_time_claw = 5;//アニメーションフレーム動作間隔最大値(爪)
 	m_ani_time_claw = 0;		//アニメーションフレーム動作間隔(爪)
 
-	m_arm_lower_marker_px = 0.0f;	//腕を下ろす位置を示すかどうかとそのX位置
+	m_arm_lower_marker_px = 0.0f;	//腕を下ろすX位置
+	m_arm_down_marker = false;		//腕を下ろす位置を示さない
+
 	m_armdown_time=0;//腕を下ろすときの管理用タイム
 
 	m_wall_hit_flag = false;
@@ -311,7 +313,7 @@ void CObjStage5BossArms::Draw()
 	}
 
 	//腕を下ろす位置を示すなら示す
-	if (m_arm_lower_marker_px > 0.0f)
+	if (m_arm_down_marker == true)
 	{
 		//カラー情報
 		float marker_color[4] = { 1.0f,0.0f,0.0f,0.2f };
@@ -329,7 +331,7 @@ void CObjStage5BossArms::Draw()
 			for (int map_y = 0; map_y < MAP_Y_MAX; map_y++)
 			{
 				//ブロックがあるか調べてあるならその位置までを高さとする
-				if (objmap->GetMap(map_x, map_y) == MAP_BLOCK)
+				if (objmap->GetMap(map_x, map_y) == MAP_FALLING_BLOCK)
 				{
 					marker_h = map_y * BLOCK_SIZE-m_py;
 					break;
@@ -377,8 +379,9 @@ void CObjStage5BossArms::DiffusionAttack(int limit_time)
 }
 
 //腕を下ろす攻撃
-//引数1	float x:腕を下ろすX位置
-void CObjStage5BossArms::ArmLowerAttack(float x)
+//引数1	float x		:腕を下ろすX位置
+//引数2 bool marker	:腕を下ろす位置を示すかどうか
+void CObjStage5BossArms::ArmLowerAttack(float x,bool marker)
 {
 	//腕を下ろす攻撃フラグをONにする
 	m_arm_down_attack_flag = true;
@@ -386,6 +389,8 @@ void CObjStage5BossArms::ArmLowerAttack(float x)
 	m_armdown_time = 0;
 	//腕を下ろすX位置を決める
 	m_arm_lower_marker_px = x;
+	//腕を下ろす位置を示すかどうかを決める
+	m_arm_down_marker = marker;
 }
 //腕を下ろす攻撃
 void CObjStage5BossArms::ArmLowerAttack()
@@ -406,7 +411,9 @@ void CObjStage5BossArms::ArmLowerAttack()
 	//時間が120になったら腕を下ろす攻撃をする
 	if (m_armdown_time >= 120)
 	{
+		
 		//腕を下ろす位置を示さない
+		m_arm_down_marker = false;
 		m_arm_lower_marker_px = 0.0f;
 
 		//ライトアームまたはレフトアームがＸ軸初期位置から動かず、Ｙ軸初期位置の直下に

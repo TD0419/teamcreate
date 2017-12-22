@@ -108,13 +108,13 @@ void CObjStage5Boss::Action()
 				if (m_time == 200)
 				{
 					//˜r‚ð‰º‚ë‚·UŒ‚‚ð‚·‚é(¶˜r)
-					m_boos_arm_left->ArmLowerAttack(objhero->GetPosX());
+					m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(),true);
 					m_left_arm_down_flag = true;
 				}
 				else if(m_time == 300)
 				{
 					//˜r‚ð‰º‚ë‚·UŒ‚‚ð‚·‚é(‰E˜r)
-					m_boos_arm_right->ArmLowerAttack(objhero->GetPosX());
+					m_boos_arm_right->ArmLowerAttack(objhero->GetPosX(), true);
 					m_right_arm_down_flag = true;
 				}
 
@@ -203,8 +203,8 @@ void CObjStage5Boss::Action()
 						right_down_x = m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE;
 
 					//˜r‚ð‰º‚ë‚·UŒ‚‚ð‚·‚é
-					m_boos_arm_left->ArmLowerAttack(left_down_x);
-					m_boos_arm_right->ArmLowerAttack(right_down_x);
+					m_boos_arm_left->ArmLowerAttack(left_down_x,false);
+					m_boos_arm_right->ArmLowerAttack(right_down_x,false);
 				}
 			//¶‰E‚Ì˜r‚ª’n–Ê‚Ü‚Å—Ž‚¿‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð’²‚×‚é
 			bool left_arm_down = m_boos_arm_left->GetBlockHit();
