@@ -43,6 +43,8 @@ void CObjStage5BossArms::Init()
 	m_block_hit_flag = false;
 	m_initpos_flag = false;
 
+	m_arm_down_attack_flag = false;	//最初は腕下ろし攻撃フラグをOFF
+
 	//腕の接続部分の電流を表示する/しないかを判断するための変数----------------------
 	//接続部分の描画はObjStage5Boss.cppにて
 
@@ -90,7 +92,15 @@ void CObjStage5BossArms::Action()
 
 		m_block_hit_flag = true;
 	}
-	
+	//落ちるブロックと当たっていなければ
+	else
+		m_block_hit_flag = false;//落ちるブロックHitフラグをOFFにする
+
+	//腕を下ろす攻撃フラグがONなら行う
+	if (m_arm_down_attack_flag == true)
+	{
+		ArmLowerAttack();
+	}
 	//ボスオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
@@ -308,75 +318,31 @@ void CObjStage5BossArms::DiffusionAttack(int limit_time)
 	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
 }
 
-//ブロックを落とす攻撃
-//引数1:移動してほしい地点のX値
-void CObjStage5BossArms::BlockDownAttackMove(float px)
-{
-	//HitBoxポインター取得
-	CHitBox* hit = Hits::GetHitBox(this);
-
-	if (m_arms_type == RIGHT_ARM)//右腕なら
-	{
-		//目的地までたどりついてなく　かつ　ラストウォールと当たっていなければ
-		if ((px - m_px) > 0.0f && (hit->CheckObjNameHit(OBJ_LAST_WALL) == nullptr))
-		{
-			m_vx = 1.0f;
-			m_right_arm_move = true;//ライトアームが「動いている」判定を出す
-		}
-		else
-		{
-			m_vx = 0.0f;//xの移動を0にする
-			ArmLowerAttack(m_px);//腕を下ろす処理をする
-			
-		}
-	}
-	else //左腕なら
-	{
-		//目的地までたどりついてなく　かつ　ラストウォールと当たっていなけれ
-		if ((px - m_px) < 0.0f && (hit->CheckObjNameHit(OBJ_LAST_WALL) == nullptr))
-		{
-			m_vx = -1.0f;
-			m_left_arm_move = true;
-		}
-		else
-		{
-			m_vx = 0.0f;//xの移動を0にする
-			ArmLowerAttack(m_px);//腕を下ろす処理をする
-			
-		}
-	}
-}
-
 //腕を下ろす攻撃
 //引数1	float x:腕を下ろすX位置
 void CObjStage5BossArms::ArmLowerAttack(float x)
 {
+	//腕を下ろす攻撃フラグをONにする
+	m_arm_down_attack_flag = true;
+	//腕を下ろすときの管理用タイムを０にする
+	m_armdown_time = 0;
+	//腕を下ろすX位置を決める
+	m_arm_lower_marker_px = x;
+}
+//腕を下ろす攻撃
+void CObjStage5BossArms::ArmLowerAttack()
+{
 	m_armdown_time++;
 
-	//ボスオブジェクトを持ってくる
-	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
-
-	//ステージ５のボスが存在していたら
-	if (objboss != nullptr)
+	//120フレームの間に主人公のX位置と同じになるようにベクトルXを調整
+	if (m_armdown_time < 120)
 	{
-		if (objboss->GetAttackMode() == 1)//攻撃パターン１なら
-		{
-			//攻撃が始まる瞬間に腕を下ろすX位置を決める
-			if (m_armdown_time == 1)
-			{
-				m_arm_lower_marker_px = x;
-			}
-			//120フレームの間に主人公のX位置と同じになるようにベクトルXを調整
-			if (m_armdown_time < 120)
-			{
-				m_vx = (m_arm_lower_marker_px - m_px) / (120 - m_armdown_time);
-			}
-			//120以上なら腕を下ろす攻撃をするのでX移動量を0.0fにする
-			else
-			{
-				m_vx = 0.0f;
-			}
-		}
+		m_vx = (m_arm_lower_marker_px - m_px) / (120 - m_armdown_time);
+	}
+	//120以上なら腕を下ろすのでX移動量を0.0fにする
+	else
+	{
+		m_vx = 0.0f;
 	}
 
 	//時間が120になったら腕を下ろす攻撃をする
@@ -402,6 +368,11 @@ void CObjStage5BossArms::ArmLowerAttack(float x)
 		{
 			//腕を下ろす
 			m_vy = 10.0f;
+		}
+		//ブロックに当たったら腕を下ろす攻撃をやめる
+		else
+		{
+			m_arm_down_attack_flag = false;
 		}
 	}
 }
