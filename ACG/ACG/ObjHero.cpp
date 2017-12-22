@@ -148,6 +148,7 @@ void CObjHero::MoveScene()
 				if (objrope == nullptr)
 					m_posture = 0.0f;		    //主人公の向き
 				m_ani_time_move += 1;
+				
 			}
 			//Aキーがおされたとき：左移動　
 			else if (Input::GetVKey('A') == true)
@@ -207,18 +208,12 @@ void CObjHero::MoveScene()
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
 		m_vx = 30.0f;
-		if (pendulum_data.find_value_flag == true ==true&&m_posture==0.0f)
-		{
-			m_vx = 30.0f;
-		}
+		
 	}
 	if (Input::GetVKey(VK_LEFT) == true)
 	{
 		m_vx = -90.0f;
-		if (pendulum_data.find_value_flag == true)
-		{
-			m_vx = -90.0f;
-		}
+		
 	}
 	//↑キーがおされたとき：上に下がる（デバッグ）
 	if (Input::GetVKey(VK_UP) == true)
@@ -366,6 +361,16 @@ void CObjHero::MoveScene()
 			//もう一度値を求めたいのでフラグをONにする
 			else
 				pendulum_data.find_value_flag = true;
+		}
+		if (pendulum_data.find_value_flag == true && m_posture == 0.0f)
+		{
+			if (Input::GetVKey('A') == true)
+				m_vx = 0.0f;
+		}
+		if (pendulum_data.find_value_flag == true && m_posture == 1.0f)
+		{
+			if (Input::GetVKey('D') == true)
+				m_vx = 0.0f;
 		}
 	}
 
