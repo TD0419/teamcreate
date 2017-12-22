@@ -130,7 +130,7 @@ void CObjRope::Action()
 		{
 			m_tarzan_point_flag = true;//フラグをONにする
 			//heroがリフトに乗ってたらor主人公のyベクトルが10.0f以上なら
-			if (objhero->HitUpCheck(OBJ_LIFT)||objhero->GetVecY()>=10.0f)
+			if (objhero->HitUpCheck(OBJ_LIFT)||objhero->GetVecY()>=8.0f)
 			{
 				m_tarzan_point_flag = false;		//ターザン引っ掛かりフラグをOFFにする
 				this->SetStatus(false);		//自身に消去命令を出す。
