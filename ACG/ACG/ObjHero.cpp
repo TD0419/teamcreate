@@ -238,13 +238,7 @@ void CObjHero::MoveScene()
 		//ロープの位置
 		float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
 
-		//ロープが伸びすぎたら削除
-		if (rope_x<= 5.0f&&rope_y >= -6.2f)
-		{
-			this->SetStatus(false);		//自身に消去命令を出す。
-			Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
-			return;
-		}
+		
 		//振り子データの値を求めるかどうかフラグがNOのとき
 		//値(長さ、ふり幅、周期)を求める
 		if (pendulum_data.find_value_flag == true)
