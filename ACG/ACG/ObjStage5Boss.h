@@ -42,7 +42,8 @@ public:
 	bool GetBlockDownFlag() { return m_block_down_flag; }
 	void SetArmDownFlagRight() { m_right_arm_down_flag = false; }
 	void SetArmDownFlagLeft() { m_left_arm_down_flag = false; }
-
+	bool GetArmDownFlagRight() { return m_right_arm_down_flag; }
+	bool GetArmDownFlagLeft() { return m_left_arm_down_flag; }
 private:
 	float m_px;	 // 第五ボスX座標
 	float m_py;	 // 第五ボスY座標

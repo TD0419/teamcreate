@@ -25,9 +25,11 @@ void CObjStage5BossArms::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_arm_hp = 10; //第5ボスアームのＨＰ(仮にＨＰを[10]と設定、左右のアーム共通)
+	m_arm_hp = 1; //第5ボスアームのＨＰ(仮にＨＰを[10]と設定、左右のアーム共通)
 
 	m_ani_flag_claw = false;//爪の開閉アニメーションをしない
+
+	m_arm_down_flag = false;//初期は落ちていない
 
 	m_ani_frame_claw = 0;	//描画アニメーション(爪)
 	m_ani_max_time_claw = 5;//アニメーションフレーム動作間隔最大値(爪)
@@ -101,41 +103,55 @@ void CObjStage5BossArms::Action()
 		}
 	}
 
-	//弾丸とあたったらＨＰを1減らす
-	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
+	if ( m_arms_type == RIGHT_ARM )//右腕
+		m_arm_down_flag = objboss->GetArmDownFlagRight();
+	else
+		m_arm_down_flag = objboss->GetArmDownFlagLeft();
+	
+	//腕が落ちてるとき かつ　初期に戻すフラグがオフ　なら
+	if ( m_arm_down_flag == true && m_initpos_flag == false )
 	{
-		m_arm_hp -= 1;
+		//弾丸とあたったらＨＰを1減らす
+		if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
+		{
+			m_arm_hp -= 1;
+		}
 	}
 
 	//ＨＰが0になったらオブジェクトを初期位置に戻すためのフラグをオンにする
-	if (m_arm_hp == 0)
+	if (m_arm_hp <= 0)
 	{
-		//腕のフラグを更新する
-		if (m_arms_type == RIGHT_ARM)//右腕
-			objboss->SetArmDownFlagRight();
-		else
-			objboss->SetArmDownFlagLeft();
+		//腕の復活位置が2本の柱の内側にあれば
+		if (6100.0f < m_initial_px && m_initial_px + STAGE5_BOSS_ARMS_WIDTH_SIZE < 7000.0f)
+		{
+			//腕のフラグを更新する
+			if (m_arms_type == RIGHT_ARM)//右腕
+				objboss->SetArmDownFlagRight();
+			else
+				objboss->SetArmDownFlagLeft();
 
-		m_initpos_flag = true;
+			m_initpos_flag = true;
+		}
 	}
 
 	//初期位置フラグがオンなら
 	if (m_initpos_flag == true)
 	{
+		
 		m_left_arm_move = false; //レフトアームが「初期位置から動いていない」判定を出す
 		m_right_arm_move = false;//ライトアームが「初期位置から動いていない」判定を出す
-		
+
 		//初期位置に戻す
 		m_px = m_initial_px;
 		m_py = m_initial_py;
+
 		//HPを戻す
-		m_arm_hp = 10;
+		m_arm_hp = 1;
 		m_initpos_flag = false;
 		m_block_hit_flag = false;
 
 		//当たり判定更新
 		HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
-
 		return;
 	}
 	
@@ -386,12 +402,8 @@ void CObjStage5BossArms::ArmLowerAttack(float x)
 		{
 			//腕を下ろす
 			m_vy = 10.0f;
-			
-			
 		}
 	}
-
-	
 }
 
 //初期位置を計算する

@@ -94,7 +94,7 @@ void CObjStage5Boss::Action()
 				if (m_time % 100 == 0)
 				{
 					//‰½‚à‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅUŒ‚ƒ‚[ƒh‚ğƒ‰ƒ“ƒ_ƒ€‚ÅŒˆ‚ß‚é
-					m_attack_mode = GetRandom(1, 4);
+					m_attack_mode = 1;// GetRandom(1, 4);
 					m_time = 0;
 				}
 				break;
