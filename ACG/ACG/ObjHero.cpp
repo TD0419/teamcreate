@@ -42,14 +42,18 @@ void CObjHero::Action()
 	}
 
 	GetBlockInformation();	//主人公の左下、真下、右下にあるブロック情報を取得
-
-	//落下にリスタート----------------------------------
+	
+	//落下時にリスタート----------------------------------
 	//m_pyが2000以下ならリスタートする
 	if (m_hero_die_screen_out == true)
 	{
 		//場外に出たらリスタート
 		Scene::SetScene(new CSceneMain(-1));
 	}
+
+	//ステージ５の落ちるブロックのオブジェクト情報を持ってくる
+	CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
+
 
 	//マウスの位置情報取得
 	m_mous_x = (float)Input::GetPosX();
