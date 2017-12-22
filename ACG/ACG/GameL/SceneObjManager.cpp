@@ -152,13 +152,25 @@ void CSceneObjManager::ObjDraw()
 	}
 }
 
-//OBJ_NEMEからオブジェクト情報取得
+//OBJ_NEMEからオブジェクト情報取得(前から)
 CObj* CSceneObjManager::GetObj(int name)
 {
     for(auto itr =m_ListData->begin() ; itr != m_ListData->end() ; itr++ )
 	{
 		if( (*itr)->GetName()== name )
 			return (*itr).get(); 
+	}
+
+	return NULL;
+}
+
+//OBJ_NEMEからオブジェクト情報取得（後ろから）
+CObj* CSceneObjManager::GetObjBack(int name)
+{
+	for (auto itr = m_ListData->end(); itr != m_ListData->begin(); itr--)
+	{
+		if ((*itr)->GetName() == name)
+			return (*itr).get();
 	}
 
 	return NULL;
