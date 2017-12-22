@@ -40,9 +40,6 @@ public:
 	void ArmDownTimeInit() { m_armdown_time = 0; }//タイムの初期化
 	bool GetBlockHit() {return m_block_hit_flag;}//ブロックのヒットフラグを返す
 
-	bool GetLeftarmAction() { return m_left_arm_move; }//レフトアームの移動状況を返す
-	bool GetRightarmAction() { return m_right_arm_move; }//ライトアームの移動状況を返す
-
 	//-------------------------------------------------
 
 	void DiffusionAttack(int limit_time);		//拡散弾を打つ攻撃
