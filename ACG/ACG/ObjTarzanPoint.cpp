@@ -34,6 +34,12 @@ void CObjTarzanPoint::Action()
 	//ボスオブジェクトを持ってくる
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
+	//ロープオブジェクトを持ってくる
+	CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
+
+	//HitBoxのポインタを持ってくる
+	CHitBox*hit = Hits::GetHitBox(this);
+
 	//ボスオブジェクトがあれば
 	if (objboss != nullptr)
 	{
@@ -50,15 +56,20 @@ void CObjTarzanPoint::Action()
 		return;
 	}
 
+	//ロープと当たっているならロープの位置を合わせる
+	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
+	{
+		//ロープの位置をこのオブジェクトの位置に合わせる　+2.0fすることでロープとスイッチが常にあたるようにする
+		objrope->SetPosX(m_px + 6.0f);
+		objrope->SetPosY(m_py + 6.0f);
+	}
+
 	//画面外なら
 	if (WindowCheck(m_px, m_py, TARZAN_POINT_WIDTH, TARZAN_POINT_HEIGHT) == false )
 	{
 		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
 		return;
 	}
-
-	//HitBox更新用ポインター取得
-	CHitBox* hit = Hits::GetHitBox(this);
 
 	//当たり判定がなければ当たり判定をセット
 	if (hit == nullptr)
