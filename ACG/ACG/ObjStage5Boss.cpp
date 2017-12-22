@@ -186,9 +186,25 @@ void CObjStage5Boss::Action()
 					m_attack4_flag = true;
 
 					//腕を移動させて落とす
-					//引数の値はラストウォールの横
-					m_boos_arm_left->ArmLowerAttack(94*BLOCK_SIZE);
-					m_boos_arm_right->ArmLowerAttack(108 * BLOCK_SIZE);
+
+					//左腕を下ろすX位置
+					//初期値はラストウォールの横
+					float left_down_x = 94 * BLOCK_SIZE;
+					//右腕を下ろす位置
+					//初期値はラストウォールの横
+					float right_down_x = 108 * BLOCK_SIZE;
+					//ラストウォールの横より画面左端が大きかったら
+					//下ろす位置を画面左端にする
+					if (left_down_x < m_attack4_scroll)
+						left_down_x = m_attack4_scroll;
+					//ラストウォールの横より画面右端が小さかったら
+					//下ろす位置を画面右端にする
+					if (right_down_x > m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE)
+						right_down_x = m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE;
+
+					//腕を下ろす攻撃をする
+					m_boos_arm_left->ArmLowerAttack(left_down_x);
+					m_boos_arm_right->ArmLowerAttack(right_down_x);
 				}
 			//左右の腕が地面まで落ちているかどうかを調べる
 			bool left_arm_down = m_boos_arm_left->GetBlockHit();
@@ -211,14 +227,14 @@ void CObjStage5Boss::Action()
 			if (objfallingblock == nullptr)
 				m_attack4_count++;
 
-				if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
-				{
-					//腕の位置を初期位置に戻す
-					m_boos_arm_left->SetInitPosFlagON();
-					m_boos_arm_right->SetInitPosFlagON();
+			if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
+			{
+				//腕の位置を初期位置に戻す
+				m_boos_arm_left->SetInitPosFlagON();
+				m_boos_arm_right->SetInitPosFlagON();
 
-					objmap->CreateFallingBloack();//落ちるブロックを作成する
-					m_attack4_flag = false;
+				objmap->CreateFallingBloack();//落ちるブロックを作成する
+				m_attack4_flag = false;
 				
 				m_attack4_count = 0;		//カウンターの初期化
 				m_attack4_scroll = 0.0f;	//スクロール量の初期化
