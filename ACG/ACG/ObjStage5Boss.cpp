@@ -49,6 +49,8 @@ void CObjStage5Boss::Init()
 	//死亡フラグをOFFにする
 	m_death_flag = false;
 
+	m_progress_atk_count4 = false;//false…120フレーム経過していない　true…120フレーム経過した
+
 	//音楽
 	Audio::Start(BOSS);
 	Audio::Stop(STAGE);
@@ -85,6 +87,8 @@ void CObjStage5Boss::Action()
 
 		//HitBox更新用ポインター取得
 		CHitBox* hit = Hits::GetHitBox(this);
+
+		m_attack_mode = 4;//デバッグ用
 
 		switch (m_attack_mode)
 		{
@@ -206,23 +210,31 @@ void CObjStage5Boss::Action()
 
 			//落ちるブロックの取得
 			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
-
-			//落ちるブロックがなければ
-			if (objfallingblock == nullptr)
+			//スクリーン外にブロック出た情報を取得
+			bool screen_out_brock = objfallingblock->GetScreenOut();
+			
+			//スクリーン外にブロック出た
+			if(screen_out_brock ==true)
 				m_attack4_count++;
 
-				if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
-				{
-					//腕の位置を初期位置に戻す
-					m_boos_arm_left->SetInitPosFlagON();
-					m_boos_arm_right->SetInitPosFlagON();
+			if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
+			{
+				//腕の位置を初期位置に戻す
+				m_boos_arm_left->SetInitPosFlagON();
+				m_boos_arm_right->SetInitPosFlagON();
 
-					objmap->CreateFallingBloack();//落ちるブロックを作成する
-					m_attack4_flag = false;
-				
+				screen_out_brock = false;//スクリーン内にブロックを戻す
+				m_progress_atk_count4 = true;//120フレームが経過した
+
+				m_attack4_flag = false;
+	
 				m_attack4_count = 0;		//カウンターの初期化
 				m_attack4_scroll = 0.0f;	//スクロール量の初期化
 				m_attack_mode = 0;			
+			}
+			else
+			{
+				m_progress_atk_count4 = false;//120フレーム経過していない
 			}
 			break;
 		}

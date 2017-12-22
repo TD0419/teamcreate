@@ -43,6 +43,8 @@ public:
 	void SetArmDownFlagRight() { m_right_arm_down_flag = false; }
 	void SetArmDownFlagLeft() { m_left_arm_down_flag = false; }
 
+	bool GetBlockRetuenFlag() { return m_return_block_y; }//120フレームが経過した情報を入れる
+
 private:
 	float m_px;	 // 第五ボスX座標
 	float m_py;	 // 第五ボスY座標
@@ -81,6 +83,8 @@ private:
 	bool m_left_arm_down_flag;
 
 	bool m_lastwall_hit_flag;//ラストウォールとの処理用フラグ
+	
+	bool m_progress_atk_count4;//攻撃4用のカウンターが120フレーム経過したかどうかを判別するための変数
 
 	int m_ani_frame_death;//描画フレーム(死亡)
 	int m_ani_time_death;	//アニメーションフレーム動作間隔(死亡)
