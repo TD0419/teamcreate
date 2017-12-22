@@ -373,6 +373,8 @@ void CObjHero::MoveScene()
 				m_vx = 0.0f;
 		}
 	}
+	else
+		pendulum_data.find_value_flag = true;
 
 	//移動
 	m_px += m_vx;
@@ -860,7 +862,7 @@ void CObjHero::HitScene()
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	//トゲオブジェクトと衝突していれば
-	if (hit->CheckObjNameHit(OBJ_NEEDLE) != nullptr&&pendulum_data.find_value_flag == true)
+	if (hit->CheckObjNameHit(OBJ_NEEDLE) != nullptr && pendulum_data.find_value_flag == true)
 	{
 		m_hero_die_enemy = true; //主人公がトゲにあたったとき、死亡フラグをONにする
 	}
