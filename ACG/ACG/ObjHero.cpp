@@ -215,7 +215,7 @@ void CObjHero::MoveScene()
 	if (Input::GetVKey(VK_LEFT) == true)
 	{
 		m_vx = -90.0f;
-		if (pendulum_data.find_value_flag == true == true && m_posture == 1.0f)
+		if (pendulum_data.find_value_flag == true)
 		{
 			m_vx = -90.0f;
 		}
