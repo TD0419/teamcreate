@@ -98,7 +98,7 @@ void CObjStage5Boss::Action()
 				if (m_time % 100 == 0)
 				{
 					//何もしていないので攻撃モードをランダムで決める
-					m_attack_mode = GetRandom(1, 4);
+					m_attack_mode = 0;// GetRandom(1, 4);
 					m_time = 0;
 				}
 				break;
@@ -112,13 +112,13 @@ void CObjStage5Boss::Action()
 				if (m_time == 200)
 				{
 					//腕を下ろす攻撃をする(左腕)
-					m_boos_arm_left->ArmLowerAttack(objhero->GetPosX());
+					m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(),true);
 					m_left_arm_down_flag = true;
 				}
 				else if(m_time == 300)
 				{
 					//腕を下ろす攻撃をする(右腕)
-					m_boos_arm_right->ArmLowerAttack(objhero->GetPosX());
+					m_boos_arm_right->ArmLowerAttack(objhero->GetPosX(), true);
 					m_right_arm_down_flag = true;
 				}
 
@@ -190,9 +190,25 @@ void CObjStage5Boss::Action()
 					m_attack4_flag = true;
 
 					//腕を移動させて落とす
-					//引数の値はラストウォールの横
-					m_boos_arm_left->ArmLowerAttack(94*BLOCK_SIZE);
-					m_boos_arm_right->ArmLowerAttack(108 * BLOCK_SIZE);
+
+					//左腕を下ろすX位置
+					//初期値はラストウォールの横
+					float left_down_x = 94 * BLOCK_SIZE;
+					//右腕を下ろす位置
+					//初期値はラストウォールの横
+					float right_down_x = 108 * BLOCK_SIZE;
+					//ラストウォールの横より画面左端が大きかったら
+					//下ろす位置を画面左端にする
+					if (left_down_x < m_attack4_scroll)
+						left_down_x = m_attack4_scroll;
+					//ラストウォールの横より画面右端が小さかったら
+					//下ろす位置を画面右端にする
+					if (right_down_x > m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE)
+						right_down_x = m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE;
+
+					//腕を下ろす攻撃をする
+					m_boos_arm_left->ArmLowerAttack(left_down_x,false);
+					m_boos_arm_right->ArmLowerAttack(right_down_x,false);
 				}
 			//左右の腕が地面まで落ちているかどうかを調べる
 			bool left_arm_down = m_boos_arm_left->GetBlockHit();
@@ -327,59 +343,7 @@ void CObjStage5Boss::Draw()
 	//生きているときの描画
 	if(m_death_flag == false)
 	{
-		//アームオブジェクトより、ライトアームとレフトアームの移動状況を受け取る
-		bool m_move_right_arm = m_boos_arm_right->GetRightarmAction();//ライトアームの移動状況
-		bool m_move_left_arm = m_boos_arm_left->GetLeftarmAction();		//レフトアームの移動状況
-
-
-		//胴腕接続電気-------------------------------
-		//左腕部分
-		//切り取り位置
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = src.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
-		src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
-
-		//描画位置
-		dst.m_top = m_py - objmap->GetScrollY()  + ELECTRIC_L_CORRECTION_HEIGHT;
-		dst.m_left = m_px - objmap->GetScrollX() - ELECTRIC_L_CORRECTION_WIDTH;
-		dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
-		dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
-
-		//描画
-		//レフトアームが動いているときは、透明に描画する。
-		if (m_move_left_arm == true)//レフトアームが「動いている」判定がでているとき
-		{
-			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
-		}
-		else//レフトアームが「初期位置(描画)から動いていない」判定がでている 
-		{
-			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
-		}
-
-		//右腕部分
-		//切り取り位置
-		src.m_top = STAGE5_BOSS_ELECTRIC_HEIGHT;
-		src.m_left = 0.0f;
-		src.m_right = src.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
-		src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
-
-		//描画位置
-		dst.m_top =  m_py - objmap->GetScrollY() + ELECTRIC_R_CORRECTION_HEIGHT;
-		dst.m_left = m_px - objmap->GetScrollX() + ELECTRIC_R_CORRECTION_WIDTH;
-		dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
-		dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
-		//描画
-		//ライトアームが動いているときは、透明に描画する。
-		if (m_move_right_arm == true)//ライトアームが「動いている」判定がでているとき
-		{
-			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
-		}
-		else//ライトアームが「初期位置(描画)から動いていない」判定がでているとき
-		{
-			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
-		}
-
+		
 		//胴体--------------------------------------
 		//切り取り位置
 		src.m_top = 0.0f;

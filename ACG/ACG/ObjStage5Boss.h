@@ -42,6 +42,8 @@ public:
 	bool GetBlockDownFlag() { return m_block_down_flag; }
 	void SetArmDownFlagRight() { m_right_arm_down_flag = false; }
 	void SetArmDownFlagLeft() { m_left_arm_down_flag = false; }
+	bool GetArmDownFlagRight() { return m_right_arm_down_flag; }
+	bool GetArmDownFlagLeft() { return m_left_arm_down_flag; }
 
 	bool GetBlockRetuenFlag() { return m_return_block_y; }//120ƒtƒŒ[ƒ€‚ªŒo‰ß‚µ‚½î•ñ‚ğ“ü‚ê‚é
 

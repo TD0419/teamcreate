@@ -15,6 +15,7 @@ public:
 	void Init();						//イニシャライズ
 	void Action();						//アクション
 	void Draw();						//ドロー
+	float GetX() { return m_px; }
 
 private:
 	float m_px;							//X座標
