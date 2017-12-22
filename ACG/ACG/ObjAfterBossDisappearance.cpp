@@ -34,5 +34,5 @@ void CObjAfterBossDisappearance::Action()
 void CObjAfterBossDisappearance::Draw()
 {
 	float font_color[4] = { 1.0f,1.0f,1.0f,1.0f };
-	Font::StrDraw(L"GAME CLEAR", 100, 20, 150, font_color);
+	Font::StrDraw(L"GAME CLEAR", 150, 120, 150, font_color);
 }

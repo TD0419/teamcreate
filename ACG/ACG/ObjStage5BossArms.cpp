@@ -198,11 +198,69 @@ void CObjStage5BossArms::Draw()
 {
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+	float transparent[4] = { 0.0f,0.0f,0.0f, 0.0f };//透明に描画する
+
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	//ボスオブジェクトをもってくる
+	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
+
+	//胴腕接続電気-------------------------------
+
+	if (m_arms_type == LEFT_ARM)
+	{
+		//左腕部分																//切り取り位置
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = src.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
+		src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+
+		//描画位置
+		dst.m_top = objboss->GetPosY()+ ELECTRIC_L_CORRECTION_HEIGHT-objmap->GetScrollY();
+		dst.m_left = m_px - objmap->GetScrollX() ;
+		dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
+		dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+
+		//描画
+		//レフトアームが動いているときは、透明に描画する。
+		if (m_left_arm_move == true)//レフトアームが「動いている」判定がでているとき
+		{
+			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
+		}
+		else//レフトアームが「初期位置(描画)から動いていない」判定がでている 
+		{
+			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
+		}
+	}
+	else
+	{
+		//右腕部分
+		//切り取り位置
+		src.m_top = STAGE5_BOSS_ELECTRIC_HEIGHT;
+		src.m_left = 0.0f;
+		src.m_right = src.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
+		src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+
+		//描画位置
+
+		dst.m_top = objboss->GetPosY() + ELECTRIC_L_CORRECTION_HEIGHT-objmap->GetScrollY();		
+		dst.m_left = m_px - objmap->GetScrollX() - STAGE5_BOSS_ARMS_WIDTH_SIZE;
+		dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
+		dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
+		//描画
+		//ライトアームが動いているときは、透明に描画する。
+		if (m_right_arm_move == true)//ライトアームが「動いている」判定がでているとき
+		{
+			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
+		}
+		else//ライトアームが「初期位置(描画)から動いていない」判定がでているとき
+		{
+			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
+		}
+	}
 	//爪の開閉アニメーションをするときの配列
 	//要素数はm_ani_frame_claw
 	int ani_claw[5] = { 1,2,0 };
