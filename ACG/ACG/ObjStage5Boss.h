@@ -45,7 +45,7 @@ public:
 	bool GetArmDownFlagRight() { return m_right_arm_down_flag; }
 	bool GetArmDownFlagLeft() { return m_left_arm_down_flag; }
 
-	bool GetBlockRetuenFlag() { return m_return_block_y; }//120フレームが経過した情報を入れる
+	bool GetBlockRetuenFlag() { return m_progress_atk_count4; }//120フレームが経過した情報を入れる
 
 private:
 	float m_px;	 // 第五ボスX座標
