@@ -87,6 +87,8 @@ private:
 	bool m_left_arm_move;//レフトアームが動いているかどうかを判別する
 	bool m_right_arm_move;//ライトアームが動いているかどうかを判別する
 	
+	bool m_arm_down_flag;//腕が落ちてるかどうかのフラグ
+
 
 	void UpdateInitial();//初期位置を計算する
 };
