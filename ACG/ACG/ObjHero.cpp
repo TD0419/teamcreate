@@ -86,6 +86,8 @@ void CObjHero::Action()
 		//HitBoxの位置を更新する
 		HitBoxUpData(Hits::GetHitBox(this), m_px+15, m_py + 14);
 	}
+
+	
 }
 
 //主人公の左下、真下、右下にあるブロック情報を取得
@@ -195,7 +197,7 @@ void CObjHero::MoveScene()
 
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
-
+	
 	//↓キーがおされたとき：下に下がる（デバッグ）
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
@@ -204,10 +206,18 @@ void CObjHero::MoveScene()
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
 		m_vx = 30.0f;
+		if (pendulum_data.find_value_flag == true ==true&&m_posture==0.0f)
+		{
+			m_vx = 30.0f;
+		}
 	}
 	if (Input::GetVKey(VK_LEFT) == true)
 	{
 		m_vx = -90.0f;
+		if (pendulum_data.find_value_flag == true == true && m_posture == 1.0f)
+		{
+			m_vx = -90.0f;
+		}
 	}
 	//↑キーがおされたとき：上に下がる（デバッグ）
 	if (Input::GetVKey(VK_UP) == true)
@@ -273,6 +283,7 @@ void CObjHero::MoveScene()
 		//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
 		if (!m_hit_down && !m_hit_left && !m_hit_right && !m_hit_up)
 		{
+
 			//ロープから主人公のベクトルの角度を計算
 			float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
 			r = r * 3.14f / 180.0f;//ラジアン度にする
