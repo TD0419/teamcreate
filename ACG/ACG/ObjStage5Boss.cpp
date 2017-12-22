@@ -49,7 +49,7 @@ void CObjStage5Boss::Init()
 	//死亡フラグをOFFにする
 	m_death_flag = false;
 
-	m_progress_atk_count4 = false;//false…120フレーム経過していない　true…120フレーム経過した
+	m_progress_atk4_count = false;//false…120フレーム経過していない　true…120フレーム経過した
 
 	//音楽
 	Audio::Start(BOSS);
@@ -240,7 +240,7 @@ void CObjStage5Boss::Action()
 				m_boos_arm_right->SetInitPosFlagON();
 
 				screen_out_brock = false;//スクリーン内にブロックを戻す
-				m_progress_atk_count4 = true;//120フレームが経過した
+				m_progress_atk4_count = true;//120フレームが経過した
 
 				m_attack4_flag = false;
 	
@@ -250,7 +250,7 @@ void CObjStage5Boss::Action()
 			}
 			else
 			{
-				m_progress_atk_count4 = false;//120フレーム経過していない
+				m_progress_atk4_count = false;//120フレーム経過していない
 			}
 			break;
 		}

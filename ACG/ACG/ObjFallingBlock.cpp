@@ -11,11 +11,12 @@ using namespace GameL;
 //コンストラクタ
 CObjFallingBlock::CObjFallingBlock(int x, int y)
 {
+
 	m_map_x = x;
 	m_map_y = y;
 	m_px = x * BLOCK_SIZE;
 	m_py = y * BLOCK_SIZE;
-	m_return_block_y = m_py;
+	m_return_block_y = m_py;//Y座標を入れる
 }
 
 //イニシャライズ
@@ -47,50 +48,36 @@ void CObjFallingBlock::Action()
 		Audio::Stop(GROUND);
 		m_screen_out = true;//画面外にブロックが出ている
 		
-		//this->SetStatus(false);	//削除
-		//Hits::DeleteHitBox(this);	//所持するHitBoxを除去。
 	}
 	else
 	{
-		m_screen_out = false;
+		m_screen_out = false;//画面外にブロックが出ていない
 	}
 
 	//ボスのオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
-	bool m_block_y_return=false;
-
-	if(objboss != nullptr)
-		
-
-	//
-	
-
+	bool m_stage5boss_atk4_count = false;//ステージ5ボスの攻撃４用カウンターの情報を取得
 
 	if (objboss != nullptr)//ボスオブジェクトがあれば
 	{
 		//ブロックを初期位置に戻すためのフラグ
-		m_block_y_return = objboss->GetBlockRetuenFlag();
+		m_stage5boss_atk4_count = objboss->GetBlockRetuenFlag();
 
 		//落下させるかのフラグを更新
 		m_fallint_start_flag = objboss->GetBlockDownFlag();
 	}
 	
 	//ボスの攻撃4のカウンターが120フレーム経過したら、ブロックを初期位置に戻す
-	if (m_block_y_return == true)
+	if (m_stage5boss_atk4_count == true)
 	{
 		m_py = m_return_block_y;//初期位置にブロックを戻す
 		m_falling_time = 10;	//ブロックが落ちるまでの時間
 		m_fallint_start_flag = false;//落下フラグをオフにする
 	}
 
-
 	if (m_fallint_start_flag == true)//落下開始フラグがオンなら
 		m_falling_time--;
-	//else if (m_fallint_start_flag == false)
-		//m_falling_time=10;
-
-	//m_falling_time--;
-
+	
 	//タイムが0になると下に落ちる
 	if (m_falling_time < 0)
 	{

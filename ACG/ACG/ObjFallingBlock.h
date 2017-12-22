@@ -16,8 +16,7 @@ public:
 	void Draw();						//ドロー
 	void HeroHit();						//主人公との当たり判定を処理する
 
-	float GetPy() { return m_py; }
-	bool GetScreenOut() { return m_screen_out; }//画面外にブロックが出た
+	bool GetScreenOut() { return m_screen_out; }//画面外にブロックが出た情報を入れる
 private:
 	//マップ上の位置（要素数）
 	int m_map_x;//X
@@ -27,7 +26,6 @@ private:
 	int   m_falling_time;//ブロックが落ちるまでの時間
 	bool m_fallint_start_flag;//ブロックを落下させるかどうかのフラグ
 
-	int m_return_block_y;	//ブロックを元の位置に戻すための変数
-
+	float m_return_block_y;	//ブロックを元の位置に戻すための変数
 	bool m_screen_out;		//ブロックが画面外に出ているかを調べる
 };

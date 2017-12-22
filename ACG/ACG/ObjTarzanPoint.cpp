@@ -57,13 +57,16 @@ void CObjTarzanPoint::Action()
 	}
 
 	//ロープと当たっているならロープの位置を合わせる
-	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
+	if (hit != nullptr)
 	{
-		//ロープの位置をこのオブジェクトの位置に合わせる　+2.0fすることでロープとスイッチが常にあたるようにする
-		objrope->SetPosX(m_px + 6.0f);
-		objrope->SetPosY(m_py + 6.0f);
+	
+		if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
+		{
+			//ロープの位置をこのオブジェクトの位置に合わせる　+2.0fすることでロープとスイッチが常にあたるようにする
+			objrope->SetPosX(m_px + 6.0f);
+			objrope->SetPosY(m_py + 6.0f);
+		}
 	}
-
 	//画面外なら
 	if (WindowCheck(m_px, m_py, TARZAN_POINT_WIDTH, TARZAN_POINT_HEIGHT) == false )
 	{

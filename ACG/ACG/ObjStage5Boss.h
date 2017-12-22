@@ -44,8 +44,9 @@ public:
 	void SetArmDownFlagLeft() { m_left_arm_down_flag = false; }
 	bool GetArmDownFlagRight() { return m_right_arm_down_flag; }
 	bool GetArmDownFlagLeft() { return m_left_arm_down_flag; }
-
-	bool GetBlockRetuenFlag() { return m_progress_atk_count4; }//120フレームが経過した情報を入れる
+	//攻撃4カウンターが120フレーム経過した情報を入れる
+	bool GetBlockRetuenFlag() { return m_progress_atk4_count; }
+	
 
 private:
 	float m_px;	 // 第五ボスX座標
@@ -78,7 +79,7 @@ private:
 	//4:3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 	int m_attack_mode;
 
-	int m_time;//攻撃のたいみんぐ管理用
+	int m_time;//攻撃のタイミング管理用
 
 	//腕が落ちているかどうかのフラグ
 	bool m_right_arm_down_flag;
@@ -86,7 +87,7 @@ private:
 
 	bool m_lastwall_hit_flag;//ラストウォールとの処理用フラグ
 	
-	bool m_progress_atk_count4;//攻撃4用のカウンターが120フレーム経過したかどうかを判別するための変数
+	bool m_progress_atk4_count;//攻撃4用のカウンターが120フレーム経過したかどうかを判別するための変数
 
 	int m_ani_frame_death;//描画フレーム(死亡)
 	int m_ani_time_death;	//アニメーションフレーム動作間隔(死亡)
