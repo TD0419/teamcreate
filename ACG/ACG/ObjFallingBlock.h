@@ -2,8 +2,8 @@
 //使用するヘッダー
 #include "GameL\SceneManager.h"
 
-//落ちるブロックの当たり判定がなくなる距離
-#define PERDECISION_POINT (1700.0f) 
+//落ちるブロックの当たり判定がなくなる位置
+#define PERDECISION_CLEAR_POINT (1700.0f) 
 
 //使用するネームスペース
 using namespace GameL;
