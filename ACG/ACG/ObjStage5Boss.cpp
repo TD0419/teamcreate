@@ -23,7 +23,7 @@ void CObjStage5Boss::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_hp = 100; //第5ボスのＨＰ(仮にＨＰを[100]と設定)
+	m_hp = 30; //第5ボスのＨＰ
 
 	m_right_arm_down_flag = false;
 	m_left_arm_down_flag = false;
@@ -225,7 +225,7 @@ void CObjStage5Boss::Action()
 			}
 
 			//落ちるブロックの取得
-			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
+			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObjBack(OBJ_FALLING_BLOCK);
 			//スクリーン外にブロック出た情報を取得
 			bool screen_out_brock = objfallingblock->GetScreenOut();
 			
