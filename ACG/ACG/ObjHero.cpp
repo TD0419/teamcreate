@@ -22,7 +22,7 @@ CObjHero::CObjHero(int x, int y, int remaining)
 	m_px = (float)x * BLOCK_SIZE;
 	m_py = (float)y * BLOCK_SIZE;
 	//残機数の初期化
-	m_remaining = remaining;	
+	m_remaining = remaining;
 }
 
 //アクション
@@ -36,20 +36,17 @@ void CObjHero::Action()
 	if (m_count >= 10000)//カウントが一定数になると0に戻る
 	{
 		m_count = 50;//カウントの初期化
-		
+
 		//弾の制御を変数を更新
-		m_before_shot_time = SHOT_INTERVAL - (10000 - m_before_shot_time) ;
+		m_before_shot_time = SHOT_INTERVAL - (10000 - m_before_shot_time);
 	}
 
 	GetBlockInformation();	//主人公の左下、真下、右下にあるブロック情報を取得
+
+	//ステージ５の落ちるブロックのオブジェクト情報を持ってくる
+	CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
+
 	
-	//落下にリスタート----------------------------------
-	//m_pyが2000以下ならリスタートする
-	if (m_hero_die_screen_out == true)
-	{
-		//場外に出たらリスタート
-		Scene::SetScene(new CSceneMain(-1));
-	}
 
 	//マウスの位置情報取得
 	m_mous_x = (float)Input::GetPosX();
@@ -61,7 +58,7 @@ void CObjHero::Action()
 	//ブロックとの当たり判定
 	objblock->AllBlockHit(&m_px, &m_py, 46.0f, HERO_SIZE_HEIGHT,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
-		
+
 	LandingCheck();//着地フラグの更新
 
 	LadderScene();//梯子処理
@@ -79,13 +76,15 @@ void CObjHero::Action()
 	if (m_posture == 0.0f)
 	{
 		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px+3, m_py + 14);
+		HitBoxUpData(Hits::GetHitBox(this), m_px + 3, m_py + 14);
 	}
 	else
 	{
 		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px+15, m_py + 14);
+		HitBoxUpData(Hits::GetHitBox(this), m_px + 15, m_py + 14);
 	}
+
+	
 }
 
 //主人公の左下、真下、右下にあるブロック情報を取得
@@ -131,7 +130,7 @@ void CObjHero::MoveScene()
 
 	//ロープオブジェクト情報を持ってくる
 	CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
-	
+
 	//ロープを出している時かロープがターザンポイントに引っかかっている
 	if (m_rope_ani_con == false || (objrope != nullptr && objrope->GetTarzanPointFlag() == true))
 	{
@@ -143,8 +142,10 @@ void CObjHero::MoveScene()
 			{
 				m_vx += 0.5f;
 				m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
-				m_posture = 0.0f;		    //主人公の向き
+				if (objrope == nullptr)
+					m_posture = 0.0f;		    //主人公の向き
 				m_ani_time_move += 1;
+				
 			}
 			//Aキーがおされたとき：左移動　
 			else if (Input::GetVKey('A') == true)
@@ -154,7 +155,7 @@ void CObjHero::MoveScene()
 
 				if (m_ladder_updown == 1)   //はしごに登ってるときは向きを変えない
 					m_posture = 0.0f;		//主人公の向き
-				else
+				else if (objrope == nullptr)
 					m_posture = 1.0f;		//主人公の向き
 				m_ani_time_move += 1;
 			}
@@ -195,7 +196,7 @@ void CObjHero::MoveScene()
 
 	//ジャンプ終了-------------------------------------------------------------------------------------
 
-
+	
 	//↓キーがおされたとき：下に下がる（デバッグ）
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
@@ -204,10 +205,12 @@ void CObjHero::MoveScene()
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
 		m_vx = 30.0f;
+		
 	}
 	if (Input::GetVKey(VK_LEFT) == true)
 	{
 		m_vx = -90.0f;
+		
 	}
 	//↑キーがおされたとき：上に下がる（デバッグ）
 	if (Input::GetVKey(VK_UP) == true)
@@ -230,69 +233,146 @@ void CObjHero::MoveScene()
 	//ロープオブジェクトが有る かつ ターザンポイントに引っかかっているなら
 	//ロープの位置を中心に振り子の動きをする
 	//このプログラムは単振り子です
+
+	//ステージ５bossのオブジェクトを持ってくる
+	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+
 	if ((objrope != nullptr && objrope->GetTarzanPointFlag() == true))
 	{
-		float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
-		float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
-
-		//ロープの位置
-		float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
-
-		
-		//振り子データの値を求めるかどうかフラグがNOのとき
-		//値(長さ、ふり幅、周期)を求める
-		if (pendulum_data.find_value_flag == true)
+		//ボスが出現しているなら
+		if (objboss != nullptr)
 		{
-			//振り子の糸の長さを計算
-			pendulum_data.length = sqrt((ab_x * ab_x) + (ab_y * ab_y));
+			//ロープの位置
+			float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
 
-			//振り子の糸の長さから今何時(周期)なのかを求める					↓重力加速度が0.98なのを9.8に直している
-			//振り子の等時性
-			pendulum_data.time = 2.0f*3.141592f*sqrt(pendulum_data.length / (pendulum_data.gravity * 10.0f));
+			if (m_hit_down == true && objboss->GetAttackMode() == 4)
+			{
+				//主人公をロープの位置にする
+				m_py = rope_y;
+				if (m_posture == 0.0f)
+					m_px = rope_x - 64.0f;
+				else
+					m_px = rope_x;
+			}
 
-			//ロープのX位置より主人公が右にいたら時間(周期をーにする)
-			if (m_px > rope_x)
-				pendulum_data.time *= -1;
+			float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
+			float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
 
-			//ロープの位置から垂直の線と
-			//主人公の位置から平行の線の
-			//交点
-			float bx = rope_x;
-			float by = m_py;
 
-			//ロープ位置、主人公位置、交点からsinθを求める
-			float r = sqrt(((rope_x - bx) * (rope_x - bx)) + ((rope_y - by) * (rope_y - by))) / sqrt(((rope_x - m_px) * (rope_x - m_px)) + ((rope_y - m_py) * (rope_y - m_py)));
-			r = sinf(r);
+			//振り子データの値を求めるかどうかフラグがNOのとき
+			//値(長さ、ふり幅、周期)を求める
+			if (pendulum_data.find_value_flag == true)
+			{
+				//振り子の糸の長さを計算
+				pendulum_data.length = sqrt((ab_x * ab_x) + (ab_y * ab_y));
 
-			//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
-			pendulum_data.pretend_width = r/2*pendulum_data.length/2;
+				//振り子の糸の長さから今何時(周期)なのかを求める					↓重力加速度が0.98なのを9.8に直している
+				//振り子の等時性
+				pendulum_data.time = 2.0f*3.141592f*sqrt(pendulum_data.length / (pendulum_data.gravity * 10.0f));
 
-			//値を求めたのでフラグをOFFにする
-			pendulum_data.find_value_flag = false;
+				//ロープのX位置より主人公が右にいたら時間(周期をーにする)
+				if (m_px > rope_x)
+					pendulum_data.time *= -1;
+
+				//ロープの位置から垂直の線と
+				//主人公の位置から平行の線の
+				//交点
+				float bx = rope_x;
+				float by = m_py;
+
+				//ロープ位置、主人公位置、交点からsinθを求める
+				float r = sqrt(((rope_x - bx) * (rope_x - bx)) + ((rope_y - by) * (rope_y - by))) / sqrt(((rope_x - m_px) * (rope_x - m_px)) + ((rope_y - m_py) * (rope_y - m_py)));
+				r = sinf(r);
+
+				//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
+				pendulum_data.pretend_width = r / 2 * pendulum_data.length / 2;
+
+				//値を求めたのでフラグをOFFにする
+				pendulum_data.find_value_flag = false;
+			}
+			//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
+			if (!m_hit_down && !m_hit_left && !m_hit_right && !m_hit_up)
+			{
+				m_vx = 0.0f;
+				m_vy = 0.0f;
+			}
+			//ブロックに当たっている==振り子の運動停止しているなら
+			//もう一度値を求めたいのでフラグをONにする
+			else
+				pendulum_data.find_value_flag = true;
+
 		}
-		//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
-		if (!m_hit_down && !m_hit_left && !m_hit_right && !m_hit_up)
-		{
-			//ロープから主人公のベクトルの角度を計算
-			float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
-			r = r * 3.14f / 180.0f;//ラジアン度にする
-			//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
-			m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
-			m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
-			//周期を進める
-			pendulum_data.time += 1.0f;
-		}
-		//ブロックに当たっている==振り子の運動停止しているなら
-		//もう一度値を求めたいのでフラグをONにする
 		else
-			pendulum_data.find_value_flag = true;
-		
+		{
+			float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
+			float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
+
+			//ロープの位置
+			float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
+
+
+			//振り子データの値を求めるかどうかフラグがNOのとき
+			//値(長さ、ふり幅、周期)を求める
+			if (pendulum_data.find_value_flag == true)
+			{
+				//振り子の糸の長さを計算
+				pendulum_data.length = sqrt((ab_x * ab_x) + (ab_y * ab_y));
+
+				//振り子の糸の長さから今何時(周期)なのかを求める					↓重力加速度が0.98なのを9.8に直している
+				//振り子の等時性
+				pendulum_data.time = 2.0f*3.141592f*sqrt(pendulum_data.length / (pendulum_data.gravity * 10.0f));
+
+				//ロープのX位置より主人公が右にいたら時間(周期をーにする)
+				if (m_px > rope_x)
+					pendulum_data.time *= -1;
+
+				//ロープの位置から垂直の線と
+				//主人公の位置から平行の線の
+				//交点
+				float bx = rope_x;
+				float by = m_py;
+
+				//ロープ位置、主人公位置、交点からsinθを求める
+				float r = sqrt(((rope_x - bx) * (rope_x - bx)) + ((rope_y - by) * (rope_y - by))) / sqrt(((rope_x - m_px) * (rope_x - m_px)) + ((rope_y - m_py) * (rope_y - m_py)));
+				r = sinf(r);
+
+				//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
+				pendulum_data.pretend_width = r / 2 * pendulum_data.length / 2;
+
+				//値を求めたのでフラグをOFFにする
+				pendulum_data.find_value_flag = false;
+			}
+			//ブロックに当たっていなかったら移動ベクトルを求め周期を進める
+			if (!m_hit_down && !m_hit_left && !m_hit_right && !m_hit_up)
+			{
+				//ロープから主人公のベクトルの角度を計算
+				float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
+				r = r * 3.14f / 180.0f;//ラジアン度にする
+				//移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
+				m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
+				m_vy = sinf(r) + cosf(r) * pendulum_data.length + (rope_y - m_py);
+				//周期を進める
+				pendulum_data.time += 1.0f;
+			}
+			//ブロックに当たっている==振り子の運動停止しているなら
+			//もう一度値を求めたいのでフラグをONにする
+			else
+				pendulum_data.find_value_flag = true;
+		}
+		if (pendulum_data.find_value_flag == true && m_posture == 0.0f)
+		{
+			if (Input::GetVKey('A') == true)
+				m_vx = 0.0f;
+		}
+		if (pendulum_data.find_value_flag == true && m_posture == 1.0f)
+		{
+			if (Input::GetVKey('D') == true)
+				m_vx = 0.0f;
+		}
 	}
-	//ロープがターザンポイントに引っかかっていなかったら
-	//値を求めるフラグをONにする
 	else
 		pendulum_data.find_value_flag = true;
-	
+
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
@@ -330,7 +410,7 @@ void CObjHero::Scroll()
 	if ((m_px + HERO_SIZE_WIDTH) - objmap->GetScrollX() > SCROLL_LINE_RIGHT)
 	{
 		//差分を調べる
-		float scroll =  ((m_px + HERO_SIZE_WIDTH) - objmap->GetScrollX())-SCROLL_LINE_RIGHT;
+		float scroll = ((m_px + HERO_SIZE_WIDTH) - objmap->GetScrollX()) - SCROLL_LINE_RIGHT;
 		//スクロールに影響を与える
 		objmap->SetScrollX(scroll);
 	}
@@ -352,7 +432,7 @@ void CObjHero::Scroll()
 		//スクロールに影響を与える
 		objmap->SetScrollY(scroll);
 	}
-	
+
 	//下にスクロールです
 	//原点を下にする
 	if ((m_py + HERO_SIZE_HEIGHT) - objmap->GetScrollY() > SCROLL_LINE_DOWN&& objmap->GetScrollY() < WINDOW_SIZE_H)
@@ -403,7 +483,7 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 
 	//半径をだんだん短くする
 	m_radius += add_radius;
-	
+
 	//正四角形の１辺の長さ
 	//長ければ長いほど軽く
 	//短ければ短いほど重いよ
@@ -478,7 +558,7 @@ void CObjHero::LandingCheck()
 	c8 = HitUpCheck(OBJ_NEEDLE_STAND);//針を出す台
 
 		//チェック項目のどれか一つでもtrueなら
-	if (c1 == true || c2 == true || c3 == true || c4 == true || c5 == true || c6 == true || c7 == true||c8 == true)
+	if (c1 == true || c2 == true || c3 == true || c4 == true || c5 == true || c6 == true || c7 == true || c8 == true)
 		m_hit_down = true;//着地フラグをオンにする
 
 }
@@ -490,7 +570,7 @@ bool CObjHero::HitUpCheck(int obj_name)
 {
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
-	
+
 	if (Objs::GetObj(obj_name) == nullptr)
 		return false;
 
@@ -507,7 +587,7 @@ bool CObjHero::HitUpCheck(int obj_name)
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//データがあれば
-  			if (hit_data[i] != nullptr)
+			if (hit_data[i] != nullptr)
 			{
 				//衝突した相手の位置、幅、高さ情報を取得
 				HIT_BOX* hit = Hits::GetHitBox(hit_data[i]->o)->GetHitBox();
@@ -520,7 +600,7 @@ bool CObjHero::HitUpCheck(int obj_name)
 				float hero_vx = m_vx;
 				float hero_vy = m_vy;
 				//衝突した方向を取得
-				int collision = HitTestOfAB(hit->x+objmap->GetScrollX(), hit->y+objmap->GetScrollY(), hit->w, hit->h,
+				int collision = HitTestOfAB(hit->x + objmap->GetScrollX(), hit->y + objmap->GetScrollY(), hit->w, hit->h,
 					&hero_x, &hero_y, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT,
 					&hero_vx, &hero_vy
 				);
@@ -779,7 +859,7 @@ void CObjHero::HitScene()
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	//トゲオブジェクトと衝突していれば
-	if (hit->CheckObjNameHit(OBJ_NEEDLE) != nullptr&&pendulum_data.find_value_flag ==true )
+	if (hit->CheckObjNameHit(OBJ_NEEDLE) != nullptr && pendulum_data.find_value_flag == true)
 	{
 		m_hero_die_enemy = true; //主人公がトゲにあたったとき、死亡フラグをONにする
 	}

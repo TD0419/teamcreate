@@ -70,7 +70,7 @@ void CObjNeedle::Action()
 	{
 		m_time++;
 		hit->SetInvincibility(true);//針の判定をなくす
-		if (m_time == 240) //120フレーム経ったら針を出す
+		if (m_time == 240) //240フレーム経ったら針を出す
 		{
 			m_needle_gauge = 0;
  			m_time = 0;

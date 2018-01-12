@@ -130,7 +130,7 @@ void CObjRope::Action()
 		{
 			m_tarzan_point_flag = true;//フラグをONにする
 			//heroがリフトに乗ってたらor主人公のyベクトルが10.0f以上なら
-			if (objhero->HitUpCheck(OBJ_LIFT)||objhero->GetVecY()>=8.0f)
+			if (objhero->HitUpCheck(OBJ_LIFT)||objhero->GetVecY()>=18.0f)
 			{
 				m_tarzan_point_flag = false;		//ターザン引っ掛かりフラグをOFFにする
 				this->SetStatus(false);		//自身に消去命令を出す。
@@ -145,6 +145,7 @@ void CObjRope::Action()
 
 			//今主人公が持っているm_vxを0にする。それだけではまだ動くので下の処理をする
 			objhero->SetVecX(0.0f);
+			
 		}
 		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
 		{
@@ -346,6 +347,9 @@ void CObjRope::RopeDelete()
 	// ブロックオブジェクトを持ってくる
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
+	//ステージ５bossのオブジェクトを持ってくる
+	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+
 	//ブロックとの当たり判定
 	objblock->AllBlockHit(&m_px, &m_py, ROPE_SIZE, ROPE_SIZE,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
@@ -356,6 +360,17 @@ void CObjRope::RopeDelete()
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
+	}
+
+	//ボスの攻撃が4以外のときにターザンロープの判定があったら消す
+	if (objboss != nullptr)
+	{
+		if (objboss->GetAttackMode() != 4 && m_tarzan_point_flag == true)
+		{
+			this->SetStatus(false);		//自身に消去命令を出す。
+			Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+			return;
+		}
 	}
 
 	//岩に当たった場合ロープを消す

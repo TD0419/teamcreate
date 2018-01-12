@@ -23,7 +23,7 @@ void CObjStage5Boss::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_hp = 100; //第5ボスのＨＰ(仮にＨＰを[100]と設定)
+	m_hp = 30; //第5ボスのＨＰ
 
 	m_right_arm_down_flag = false;
 	m_left_arm_down_flag = false;
@@ -33,7 +33,7 @@ void CObjStage5Boss::Init()
 
 	m_lastwall_hit_flag=false;
 
-	//たいみんぐ管理
+	//タイミング管理
 	m_time = 0;
 
 	//攻撃パターン3
@@ -48,6 +48,8 @@ void CObjStage5Boss::Init()
 
 	//死亡フラグをOFFにする
 	m_death_flag = false;
+
+	m_progress_atk4_count = false;//false…120フレーム経過していない　true…120フレーム経過した
 
 	//音楽
 	Audio::Start(BOSS);
@@ -102,6 +104,8 @@ void CObjStage5Boss::Action()
 		//HitBox更新用ポインター取得
 		CHitBox* hit = Hits::GetHitBox(this);
 
+		m_attack_mode = 4;//デバッグ用
+
 		switch (m_attack_mode)
 		{
 			//何もしていない状態
@@ -110,7 +114,7 @@ void CObjStage5Boss::Action()
 				if (m_time % 100 == 0)
 				{
 					//何もしていないので攻撃モードをランダムで決める
-					m_attack_mode = 1;// GetRandom(1, 4);
+					m_attack_mode = GetRandom(1, 4);
 					m_time = 0;
 				}
 				break;
@@ -237,24 +241,32 @@ void CObjStage5Boss::Action()
 			}
 
 			//落ちるブロックの取得
-			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
-
-			//落ちるブロックがなければ
-			if (objfallingblock == nullptr)
+			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObjBack(OBJ_FALLING_BLOCK);
+			//スクリーン外にブロック出た情報を取得
+			bool screen_out_brock = objfallingblock->GetScreenOut();
+			
+			//スクリーン外にブロック出た
+			if(screen_out_brock ==true)
 				m_attack4_count++;
 
-			if (m_attack4_count >= 120)//ブロックの無い状態で120フレーム経過すれば
+			if (m_attack4_count >= 300)//ブロックの無い状態で300フレーム経過すれば
 			{
 				//腕の位置を初期位置に戻す
 				m_boos_arm_left->SetInitPosFlagON();
 				m_boos_arm_right->SetInitPosFlagON();
 
-				objmap->CreateFallingBloack();//落ちるブロックを作成する
+				screen_out_brock = false;//スクリーン内にブロックを戻す
+				m_progress_atk4_count = true;//120フレームが経過した
+
 				m_attack4_flag = false;
-				
+	
 				m_attack4_count = 0;		//カウンターの初期化
 				m_attack4_scroll = 0.0f;	//スクロール量の初期化
 				m_attack_mode = 0;			
+			}
+			else
+			{
+				m_progress_atk4_count = false;//120フレーム経過していない
 			}
 			break;
 		}
@@ -334,59 +346,7 @@ void CObjStage5Boss::Draw()
 	//生きているときの描画
 	if(m_death_flag == false)
 	{
-		//アームオブジェクトより、ライトアームとレフトアームの移動状況を受け取る
-		bool m_move_right_arm = m_boos_arm_right->GetRightarmAction();//ライトアームの移動状況
-		bool m_move_left_arm = m_boos_arm_left->GetLeftarmAction();		//レフトアームの移動状況
-
-
-		//胴腕接続電気-------------------------------
-		//左腕部分
-		//切り取り位置
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = src.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
-		src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
-
-		//描画位置
-		dst.m_top = m_py - objmap->GetScrollY()  + ELECTRIC_L_CORRECTION_HEIGHT;
-		dst.m_left = m_px - objmap->GetScrollX() - ELECTRIC_L_CORRECTION_WIDTH;
-		dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
-		dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
-
-		//描画
-		//レフトアームが動いているときは、透明に描画する。
-		if (m_move_left_arm == true)//レフトアームが「動いている」判定がでているとき
-		{
-			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
-		}
-		else//レフトアームが「初期位置(描画)から動いていない」判定がでている 
-		{
-			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
-		}
-
-		//右腕部分
-		//切り取り位置
-		src.m_top = STAGE5_BOSS_ELECTRIC_HEIGHT;
-		src.m_left = 0.0f;
-		src.m_right = src.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
-		src.m_bottom = src.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
-
-		//描画位置
-		dst.m_top =  m_py - objmap->GetScrollY() + ELECTRIC_R_CORRECTION_HEIGHT;
-		dst.m_left = m_px - objmap->GetScrollX() + ELECTRIC_R_CORRECTION_WIDTH;
-		dst.m_right = dst.m_left + STAGE5_BOSS_ELECTRIC_WIDTH;
-		dst.m_bottom = dst.m_top + STAGE5_BOSS_ELECTRIC_HEIGHT;
-		//描画
-		//ライトアームが動いているときは、透明に描画する。
-		if (m_move_right_arm == true)//ライトアームが「動いている」判定がでているとき
-		{
-			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, transparent, 0.0f);//透明に描画する。
-		}
-		else//ライトアームが「初期位置(描画)から動いていない」判定がでているとき
-		{
-			Draw::Draw(GRA_STAGE5_BOSS_ELECTRIC, &src, &dst, color, 0.0f);//通常の描画をする。
-		}
-
+		
 		//胴体--------------------------------------
 		//切り取り位置
 		src.m_top = 0.0f;

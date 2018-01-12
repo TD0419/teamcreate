@@ -43,7 +43,8 @@ namespace GameL
 			static void ObjAction();			//アクション実行
 			static void ObjDraw();				//ドロー実行
 			static void ListDeleteSceneObj();	//オブジェクトリスト削除命令メソッド
-			static CObj* GetObj(int name);		//OBJ_NEMEからオブジェクト情報取得
+			static CObj* GetObj(int name);		//OBJ_NEMEからオブジェクト情報取得（前から）
+			static CObj* GetObjBack(int name);		//OBJ_NEMEからオブジェクト情報取得（後ろから）
 			static void ResetPrio();			//優先順位変更
 		private:
 			static list<shared_ptr<CObj>>* m_ListData;	//ゲーム実行リスト
