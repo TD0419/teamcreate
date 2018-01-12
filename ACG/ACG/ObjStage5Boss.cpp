@@ -225,7 +225,7 @@ void CObjStage5Boss::Action()
 			}
 
 			//落ちるブロックの取得
-			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
+			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObjBack(OBJ_FALLING_BLOCK);
 			//スクリーン外にブロック出た情報を取得
 			bool screen_out_brock = objfallingblock->GetScreenOut();
 			

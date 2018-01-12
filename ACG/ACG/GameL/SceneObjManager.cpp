@@ -167,11 +167,16 @@ CObj* CSceneObjManager::GetObj(int name)
 //OBJ_NEMEからオブジェクト情報取得（後ろから）
 CObj* CSceneObjManager::GetObjBack(int name)
 {
-	for (auto itr = m_ListData->end(); itr != m_ListData->begin(); itr--)
+	auto itr = m_ListData->end();
+	do
 	{
-		if ((*itr)->GetName() == name)
+		itr--;
+
+		if (((*itr))->GetName() == name)
 			return (*itr).get();
-	}
+
+
+	} while(itr != m_ListData->begin());
 
 	return NULL;
 }
