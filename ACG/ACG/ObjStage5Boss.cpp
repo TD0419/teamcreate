@@ -88,8 +88,6 @@ void CObjStage5Boss::Action()
 		//HitBox更新用ポインター取得
 		CHitBox* hit = Hits::GetHitBox(this);
 
-		m_attack_mode = 4;//デバッグ用
-
 		switch (m_attack_mode)
 		{
 			//何もしていない状態

@@ -30,6 +30,7 @@ void CObjLastWall::Init()
 	m_wall_unlock_flag = false;
 	m_wall_down_flag = false;
 	m_hero_hit_flag = false;
+
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
 		//ステージ１

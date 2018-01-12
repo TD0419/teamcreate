@@ -377,6 +377,17 @@ void CObjHero::MoveScene()
 	m_px += m_vx;
 	m_py += m_vy;
 
+	//ステージ５なら
+	if (((UserData*)Save::GetData())->stagenum == 5)
+	{
+		//ラストウォールオブジェクトを取得
+		CObjLastWall* objlastwall = (CObjLastWall*)Objs::GetObj(OBJ_LAST_WALL);
+
+		//ラストウォールオブジェクトがあれば
+		if (objlastwall != nullptr)
+			objmap->CreateFallingBloack( (int)(m_px / BLOCK_SIZE) );//落ちるブロックを生成
+	}
+
 	//移動先が画面外なら移動を元に戻す
 	if (WindowCheck(m_px - HERO_SIZE_WIDTH, m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT) == false)
 		m_px -= m_vx;

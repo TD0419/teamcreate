@@ -31,7 +31,7 @@ public:
 	//マップをもとにしたオブジェクトの生成関連----------------------------------
 	void CreateObj(int x, int y);//オブジェクトの生成を行う
 	void ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y);//スクロール量をもとにオブジェクトの生成を行う
-	void CreateFallingBloack();//落ちるブロックだけを生成する（ボス戦用）
+	void CreateFallingBloack(int create_start_x);//落ちるブロックだけを生成する（ボス戦用）
 
 	//ーーーーーーーーーーーーアクセサーーーーーーーーーーーーーーーーー
 

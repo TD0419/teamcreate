@@ -105,9 +105,6 @@ void CObjMap::CreateObj(int x, int y)
 	
 	switch (m_map[y][x].num)
 	{
-		// プランナーからマップが届いたらコメントをはずす
-		
-	
 		case MAP_HERO_START:	//ヒーローの作成
 		{
 
@@ -321,14 +318,7 @@ void CObjMap::CreateObj(int x, int y)
 			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
-		
-		case MAP_FALLING_BLOCK://ステージ5ボス戦専用落ちるブロック
-		{
-			CObjFallingBlock* objfalling_block = new CObjFallingBlock(x,y);
-			Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK,9);
-			break;
-		}
-
+	
 		case MAP_STAGE5_BOSS://ステージ5ボス(本体)
 		{
 			CObjStage5Boss* objstage5_boss = new CObjStage5Boss(x-2,y - 11); //下のほうから生成し、右にも少しずらす
@@ -350,26 +340,35 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 
 		}
-
+		
 	}
 
-	m_map[y][x].create = false;//フラグをオフにする	
+	//落ちるブロック以外なら
+	if(m_map[y][x].num != MAP_FALLING_BLOCK)
+		m_map[y][x].create = false;//フラグをオフにする
+
+		
 }
 
 //落ちるブロックだけを生成する（ボス戦用）
-void CObjMap::CreateFallingBloack()
+void CObjMap::CreateFallingBloack(int create_start_x)
 {
 	//yの値が　マップの最大値　に達するまで回す
 	for (int y = 0 ; y < MAP_Y_MAX ; y++)
 	{
 		//xの値が　マップの最大値　に達するまで回す
-		for (int x = 0;x < MAP_X_MAX ; x++)
+		for (int x = create_start_x ; x < MAP_X_MAX ; x++)
 		{
 			//落ちるブロックだけを生成する
 			if (m_map[y][x].num == MAP_FALLING_BLOCK)
 			{
-				CObjFallingBlock* objfalling_block = new CObjFallingBlock(x, y);
-				Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK, 9);
+				//生成のフラグがオンなら
+				if ( m_map[y][x].create == true )
+				{
+					CObjFallingBlock* objfalling_block = new CObjFallingBlock(x, y);
+					Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK, 9);
+					m_map[y][x].create = false;
+				}
 			}
 		}
 	}
