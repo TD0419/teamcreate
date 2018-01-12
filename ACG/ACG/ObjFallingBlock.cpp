@@ -67,22 +67,31 @@ void CObjFallingBlock::Action()
 		m_fallint_start_flag = objboss->GetBlockDownFlag();
 	}
 	
+
 	//ボスの攻撃4のカウンターが120フレーム経過したら、ブロックを初期位置に戻す
 	if (m_stage5boss_atk4_count == true)
 	{
 		m_py = m_return_block_y;//初期位置にブロックを戻す
 		m_falling_time = 10;	//ブロックが落ちるまでの時間
 		m_fallint_start_flag = false;//落下フラグをオフにする
+		hit->SetInvincibility(false);//自身の当たり判定をつける
 	}
 
 	if (m_fallint_start_flag == true)//落下開始フラグがオンなら
 		m_falling_time--;
 	
+
 	//タイムが0になると下に落ちる
 	if (m_falling_time < 0)
 	{
 		m_py += 1.0f;
 		Audio::Start(GROUND);
+		
+	}
+	//落ちるブロックが一定距離落ちたら、自身の当たり判定をなくす
+	if (m_py>1700)
+	{
+		hit->SetInvincibility(true);//当たり判定をなくす
 	}
 
 	//ヒーローオブジェクトと当たっていれば

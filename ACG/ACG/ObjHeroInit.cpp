@@ -31,7 +31,6 @@ void CObjHero::Init()
 
 	m_hero_die_water = false;
 	m_hero_die_enemy = false;
-	m_hero_die_screen_out = false;
 	m_screen_out = 0.0f;
 	
 	m_ladder_updown = 0;
