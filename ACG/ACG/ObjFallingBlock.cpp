@@ -89,7 +89,7 @@ void CObjFallingBlock::Action()
 		
 	}
 	//落ちるブロックが一定距離落ちたら、自身の当たり判定をなくす
-	if (m_py>1700)
+	if (m_py>PERDECISION_POINT)
 	{
 		hit->SetInvincibility(true);//当たり判定をなくす
 	}

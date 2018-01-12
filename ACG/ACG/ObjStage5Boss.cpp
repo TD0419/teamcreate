@@ -33,7 +33,7 @@ void CObjStage5Boss::Init()
 
 	m_lastwall_hit_flag=false;
 
-	//たいみんぐ管理
+	//タイミング管理
 	m_time = 0;
 
 	//攻撃パターン3
@@ -233,7 +233,7 @@ void CObjStage5Boss::Action()
 			if(screen_out_brock ==true)
 				m_attack4_count++;
 
-			if (m_attack4_count >= 300)//ブロックの無い状態で120フレーム経過すれば
+			if (m_attack4_count >= 300)//ブロックの無い状態で300フレーム経過すれば
 			{
 				//腕の位置を初期位置に戻す
 				m_boos_arm_left->SetInitPosFlagON();
