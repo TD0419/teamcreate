@@ -83,9 +83,14 @@ private:
 
 	bool m_lastwall_hit_flag;//ラストウォールとの処理用フラグ
 
-	int m_ani_frame_death;//描画フレーム(死亡)
-	int m_ani_time_death;	//アニメーションフレーム動作間隔(死亡)
-	int m_ani_max_time_death;//アニメーションフレーム動作間隔最大値(死亡)
+	int m_ani_frame_death[4];	//描画フレーム(死亡)						詳細はInit関数の中の初期化部分
+	int m_ani_time_death[4];	//アニメーションフレーム動作間隔(死亡)		詳細はInit関数の中の初期化部分
+	int m_ani_max_time_death[2];//アニメーションフレーム動作間隔最大値(死亡)詳細はInit関数の中の初期化部分
+
+	//ボスの死亡アニメーション処理用関数(アクション用)
+	bool ActionDeathAnimation();
+	//ボスの死亡アニメーション処理用関数(ドロー用)
+	void DrawDeathAnimation();
 
 	//ランダムで値を決める関数
 	int GetRandom(int min, int max);

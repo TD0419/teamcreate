@@ -53,9 +53,25 @@ void CObjStage5Boss::Init()
 	Audio::Start(BOSS);
 	Audio::Stop(STAGE);
 
-	m_ani_frame_death = 0;//描画フレーム(死亡)
-	m_ani_time_death = 0;	//アニメーションフレーム動作間隔(死亡)
-	m_ani_max_time_death =8;//アニメーションフレーム動作間隔最大値(死亡)
+	//死亡アニメーション関係の変数の初期化
+	for (int i = 0; i < 4; i++)
+	{
+		//描画フレーム、アニメーションフレーム動作間隔の要素数
+		//０：最初の爆発
+		//１：2回目の爆発
+		//２：最後の爆発
+		//３：ボス(胴体)サイズの爆発
+		//詳細はActionDeathAnimation関数に書いています
+		//描画フレーム(死亡)
+		m_ani_frame_death[i] = 0;
+		//アニメーションフレーム動作間隔(死亡)
+		m_ani_time_death[i] = 0;
+	}
+	//アニメーションフレーム動作間隔最大値(死亡)
+	//要素数０：64＊64の爆発をいくつも出すのだがそのアニメーションフレーム動作間隔最大値
+	//要素数１：ボス(胴体)サイズの爆発をボス死亡直後にだすのだがそのアニメーションフレーム動作間隔最大値
+	m_ani_max_time_death[0] = 4;
+	m_ani_max_time_death[1] = 8;
 
 	//左右の腕作成ー------------------
 	//右腕オブジェクト作成								↓ボスの胴体に密着する位置
@@ -290,21 +306,8 @@ void CObjStage5Boss::Action()
 	//死んでいるとき
 	else
 	{
-		//アニメーションフレーム動作間隔(死亡)を進める
-		m_ani_time_death++;
-
-		//アニメーションフレーム動作間隔(死亡)が最大値以上なら
-		if (m_ani_time_death >= m_ani_max_time_death)
-		{
-			//描画フレーム(死亡)を進める
-			m_ani_frame_death++;
-			
-			//アニメーションフレーム動作間隔(死亡)を0にする
-			m_ani_time_death = 0;
-		}
-		
 		//死亡アニメーションが終了したら自身を消す
-		if (m_ani_frame_death == 16)
+		if (ActionDeathAnimation() == false)
 		{
 			//ステージ５ボス消滅アニメーション後のオブジェクト作成
 			CObjAfterBossDisappearance* objafter_boss_disappearance = new CObjAfterBossDisappearance();
@@ -438,21 +441,8 @@ void CObjStage5Boss::Draw()
 	//死んでいるときの描画
 	else
 	{
-		//爆発アニメーション--------------------------------
-		//切り取り位置
-		src.m_top = (m_ani_frame_death / 5) * 64.0f;
-		src.m_left = (m_ani_frame_death % 5) * 64.0f;
-		src.m_right = src.m_left + 64.0f;
-		src.m_bottom = src.m_top + 64.0f;
-
-		//描画位置
-		dst.m_top = m_py - objmap->GetScrollY();
-		dst.m_left = m_px - objmap->GetScrollX();
-		dst.m_right = STAGE5_BOSS_BODY_SIZE + m_px - objmap->GetScrollX();
-		dst.m_bottom = dst.m_top + STAGE5_BOSS_BODY_SIZE;
-		//描画
-		Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
-		//--------------------------------------------------
+		//死亡アニメーションを描画
+		DrawDeathAnimation();
 	}
 }
 
@@ -476,4 +466,212 @@ int CObjStage5Boss::GetRandom(int min, int max)
 		initialization = false;
 	}
 	return min + (int)(rand()*(max - min + 1.0f) / (1.0f + RAND_MAX));
+}
+
+//ボスの死亡アニメーション処理用関数(アクション用)
+//戻り値 bool	:アニメーション中	:true
+//				 アニメーション終了	:false
+/* 　　　　　　　
+					詳細
+
+爆発のタイミングが3回ある
+イメージ図
+下の図([-]のところ)をボス(胴体)全体の画像とする
+{
+12345678
+a--------
+b--------
+c--------
+d--------
+e--------
+f--------
+g--------
+h--------
+}
+ボス(胴体)サイズの爆発：ボス(胴体)の位置でボス(胴体)のサイズで爆発させる
+爆発タイミング		  ：ボスが死亡した直後
+
+最初の爆発		：イメージ図の上(b4,b5)下(g4,g5)右(d8,e8)左(d1,e1)辺りを爆発させる
+爆発タイミング	：ボスが死亡した直後
+
+2回目の爆発		：イメージ図の左上(b2,b3)右上(b6,b7)左下(g2,g3)右下(g6,g7)辺りを爆発させる
+爆発タイミング	：最初の爆発アニメーションの途中(真ん中辺り)
+
+最後の爆発		：最初の爆発と2回目の爆発とイメージ図全体を爆発させる
+爆発タイミング	：2回目の爆発アニメーションの途中(真ん中辺り)
+*/
+bool CObjStage5Boss::ActionDeathAnimation()
+{
+
+	//最初の爆発、2回目の爆発、最後の爆発のアニメーションを進めるかどうかを判断する
+	for (int i = 0; i < 3; i++)
+	{
+		if (m_ani_time_death[i] == m_ani_max_time_death[0] && m_ani_frame_death[i] != 16)
+		{
+			m_ani_time_death[i] = 0;
+			m_ani_frame_death[i]++;
+		}
+	}
+	//ボス(胴体)のアニメーションを[薦めるかどうかを判断する
+	if (m_ani_time_death[3] == m_ani_max_time_death[1] && m_ani_frame_death[3] != 16)
+	{
+		m_ani_time_death[3] = 0;
+		m_ani_frame_death[3]++;
+	}
+	//アニメーションフレーム動作間隔(死亡)ーーーーーーーーーーーー
+	//ボス(胴体)のサイズの爆発のフレームが16でないならこの動作間隔を進める
+	if (m_ani_frame_death[3] != 16)
+		m_ani_time_death[3]++;
+	//最初の爆発のフレームが16でないなら最初の爆発の動作間隔を進める
+	if (m_ani_frame_death[0] != 16)
+		m_ani_time_death[0]++;
+	//2回目の爆発のフレームが16でないならかつ
+	//最初の爆発のフレームが8(真ん中)以上なら2回目の爆発の動作間隔を進める
+	if (m_ani_frame_death[1] != 16 && m_ani_frame_death[0] >= 8)
+		m_ani_time_death[1]++;
+	//最後の爆発のフレームが16でないならかつ
+	//2回目の爆発のフレームが８(真ん中)以上なら最後の爆発の動作間隔を進める
+	if (m_ani_frame_death[2] != 16 && m_ani_frame_death[1] >= 8)
+		m_ani_time_death[2]++;
+	//－－－－－－－－－ーーー－－－－－－－－－－－－－－－－－－－
+
+	//ボス(胴体)のサイズの爆発アニメーションが終了していたら
+	if (m_ani_frame_death[3] == 16)
+		return false;//アニメーションが終了
+
+	return true;//アニメーション動作中
+}
+//ボスの死亡アニメーション処理用関数(ドロー用)
+//詳細はActionDeathAnimation関数を見てください
+void CObjStage5Boss::DrawDeathAnimation()
+{
+	//最初の爆発、2回目の爆発、最後の爆発の描画サイズ
+	//各位置を決めるときにも使っています
+	float size = 64.0f;
+
+	//最初の爆発のときの位置情報　　左					上					右				下
+	float pos_x1[4] = { m_px + 32.0f,	 m_px + 32.0f + size,	m_px + 32.0f + size * 2,	m_px + 32.0f + size };
+	float pos_y1[4] = { m_py + 32.0f + size,m_py + 32.0f,		m_py + 32.0f + size,	m_py + 32.0f + size * 2 };
+
+	//2回目の爆発のときの位置情報		左上			右上					左下						右下			
+	float pos_x2[4] = { m_px + 32.0f,m_px + 32.0f + size * 2	,m_px + 32.0f			,m_px + 32.0f + size * 2 };
+	float pos_y2[4] = { m_py + 32.0f,m_py + 32.0f				,m_py + 32.0f + size * 2,m_py + 32.0f + size * 2 };
+
+	//最後の爆発	a1,b1～a8,b8 -> c1,d1～c8,d8のような順番で登録
+	float pos_x3[16] = { m_px,m_px + size,m_px + size * 2,m_px + size * 3,
+		m_px,m_px + size,m_px + size * 2,m_px + size * 3,
+		m_px,m_px + size,m_px + size * 2,m_px + size * 3,
+		m_px,m_px + size,m_px + size * 2,m_px + size * 3 };
+	float pos_y3[16] = { m_py,m_py,m_py,m_py,
+		m_py + size,m_py + size ,m_py + size ,m_py + size ,
+		m_py + size * 2,m_py + size * 2,m_py + size * 2,m_py + size * 2,
+		m_py + size * 3,m_py + size * 3,m_py + size * 3,m_py + size * 3 };
+
+
+	//描画カラー
+	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
+
+	RECT_F src, dst;
+
+	//マップオブジェクトを持ってくる
+	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	//ボス(胴体)サイズの爆発を描画ーーーーーーーーーーーー
+	//切り取り位置
+	src.m_top = (m_ani_frame_death[3] / 5) * 64.0f;
+	src.m_left = (m_ani_frame_death[3] % 5) * 64.0f;
+	src.m_right = src.m_left + 64.0f;
+	src.m_bottom = src.m_top + 64.0f;
+
+	//描画位置
+	dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_left = m_px - objmap->GetScrollX();
+	dst.m_right = dst.m_left + STAGE5_BOSS_BODY_SIZE;
+	dst.m_bottom = dst.m_top + STAGE5_BOSS_BODY_SIZE;
+	//描画
+	Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
+	//－－－－－－－－－－－－－－－－－－－－－－－－－ー
+	//最初の爆発の描画
+	//最初の爆発のフレームが16でないなら描画をする
+	if (m_ani_frame_death[0] != 16)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			//切り取り位置
+			src.m_top = (m_ani_frame_death[0] / 5) * 64.0f;
+			src.m_left = (m_ani_frame_death[0] % 5) * 64.0f;
+			src.m_right = src.m_left + 64.0f;
+			src.m_bottom = src.m_top + 64.0f;
+
+			//描画位置
+			dst.m_top = pos_y1[i] - objmap->GetScrollY();
+			dst.m_left = pos_x1[i] - objmap->GetScrollX();
+			dst.m_right = dst.m_left + size;
+			dst.m_bottom = dst.m_top + size;
+			//描画
+			Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
+		}
+	}
+
+	//2回目の爆発の描画
+	//2回目の爆発のフレームが16でないかつ
+	//最初の爆発のフレームが８(真ん中)以上なら描画をする
+	if (m_ani_frame_death[1] != 16 && m_ani_frame_death[0] >= 8)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			//切り取り位置
+			src.m_top = (m_ani_frame_death[1] / 5) * 64.0f;
+			src.m_left = (m_ani_frame_death[1] % 5) * 64.0f;
+			src.m_right = src.m_left + 64.0f;
+			src.m_bottom = src.m_top + 64.0f;
+
+			//描画位置
+			dst.m_top = pos_y2[i] - objmap->GetScrollY();
+			dst.m_left = pos_x2[i] - objmap->GetScrollX();
+			dst.m_right = dst.m_left + size;
+			dst.m_bottom = dst.m_top + size;
+			//描画
+			Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
+		}
+	}
+
+	//最後の爆発の描画
+	//最後の爆発のフレームが16でないかつ
+	//2回目の爆発のフレームが８(真ん中)以上なら描画をする
+	if (m_ani_frame_death[2] != 16 && m_ani_frame_death[1] >= 8)
+	{
+		//切り取り位置
+		src.m_top = (m_ani_frame_death[2] / 5) * 64.0f;
+		src.m_left = (m_ani_frame_death[2] % 5) * 64.0f;
+		src.m_right = src.m_left + 64.0f;
+		src.m_bottom = src.m_top + 64.0f;
+		for (int i = 0; i < 16; i++)
+		{
+			//描画位置
+			dst.m_top = pos_y3[i] - objmap->GetScrollY();
+			dst.m_left = pos_x3[i] - objmap->GetScrollX();
+			dst.m_right = dst.m_left + size;
+			dst.m_bottom = dst.m_top + size;
+			//描画
+			Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
+		}
+		for (int i = 0; i < 4; i++)
+		{
+			//描画位置
+			dst.m_top = pos_y2[i] - objmap->GetScrollY();
+			dst.m_left = pos_x2[i] - objmap->GetScrollX();
+			dst.m_right = dst.m_left + size;
+			dst.m_bottom = dst.m_top + size;
+			//描画
+			Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
+			//描画位置
+			dst.m_top = pos_y1[i] - objmap->GetScrollY();
+			dst.m_left = pos_x1[i] - objmap->GetScrollX();
+			dst.m_right = dst.m_left + size;
+			dst.m_bottom = dst.m_top + size;
+			//描画
+			Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
+		}
+	}
 }
