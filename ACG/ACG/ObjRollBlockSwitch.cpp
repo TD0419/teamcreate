@@ -95,14 +95,14 @@ void CObjRollBlockSwitch::Action()
 			m_px = m_base_block_px - sin * ROLL_BLOCK_SIZE_WIDTH;
 			m_py = m_base_block_py + ROLL_BLOCK_SIZE_WIDTH - cos * ROLL_BLOCK_SIZE_WIDTH;
 
-			//ロープオブジェクトを持ってくる
-			CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
-			
-			//ロープの位置をこのオブジェクトの位置に合わせる　+2.0fすることでロープとスイッチが常にあたるようにする
-			objrope->SetPosX(m_px+2.0f);
-			objrope->SetPosY(m_py+2.0f);
-
 		}
+
+		//ロープオブジェクトを持ってくる
+		CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
+
+		//ロープの位置をこのオブジェクトの位置に合わせる　+6.0fすることでロープとスイッチが常にあたるようにする
+		objrope->SetPosX(m_px + 6.0f);
+		objrope->SetPosY(m_py + 6.0f);
 	}
 
 	//フラグを入れる
