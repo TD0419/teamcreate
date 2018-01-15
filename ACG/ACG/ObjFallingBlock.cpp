@@ -54,28 +54,32 @@ void CObjFallingBlock::Action()
 		m_screen_out = false;//画面外にブロックが出ていない
 	}
 
-	//ボスのオブジェクトの取得
+	//ステージ5ボスのオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
-	bool m_stage5boss_atk4_count = false;//ステージ5ボスの攻撃４用カウンターの情報を取得
+	bool stage5boss_atk4_count = false;//ステージ5ボスの攻撃４用カウンターの情報取得用
+	bool stage5boss_death_flag = false;//ステージ5ボスの死亡フラグの情報取得用
 
 	if (objboss != nullptr)//ボスオブジェクトがあれば
 	{
+		//ステージ5ボスの死亡フラグの情報を取得する
+		stage5boss_death_flag = objboss->GetBossDeathFlag();
+		
 		//ブロックを初期位置に戻すためのフラグ
-		m_stage5boss_atk4_count = objboss->GetBlockRetuenFlag();
+		stage5boss_atk4_count = objboss->GetBlockRetuenFlag();
 
 		//落下させるかのフラグを更新
 		m_fallint_start_flag = objboss->GetBlockDownFlag();
 	}
 	
-
-	//ボスの攻撃4のカウンターが120フレーム経過したら、ブロックを初期位置に戻す
-	if (m_stage5boss_atk4_count == true)
+	//ボスの攻撃4のカウンターが300フレーム経過したら、ブロックを初期位置に戻す
+	if (stage5boss_atk4_count == true || stage5boss_death_flag == true)
 	{
 		m_py = m_return_block_y;//初期位置にブロックを戻す
 		m_falling_time = 10;	//ブロックが落ちるまでの時間
 		m_fallint_start_flag = false;//落下フラグをオフにする
 		hit->SetInvincibility(false);//自身の当たり判定をつける
 	}
+	
 
 	if (m_fallint_start_flag == true)//落下開始フラグがオンなら
 		m_falling_time--;

@@ -23,13 +23,13 @@ void CObjStage5Boss::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_hp = 30; //‘æ5ƒ{ƒX‚Ì‚g‚o
+	m_hp = 1; //‘æ5ƒ{ƒX‚Ì‚g‚o
 
 	m_right_arm_down_flag = false;
 	m_left_arm_down_flag = false;
 
 	//‰Šú‰»‚·‚é(‰½‚à‚µ‚Ä‚¢‚È‚¢)
-	m_attack_mode = 0;
+	m_attack_mode = 4;
 
 	m_lastwall_hit_flag=false;
 
