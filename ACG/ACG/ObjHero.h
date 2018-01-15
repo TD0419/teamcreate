@@ -126,6 +126,9 @@ private:
 
 	//------------------------------------------
 
+	//ステージ５用落ちるブロックの生成用フラグ
+	bool m_fallblock_create_flag;
+
 	//blockとの衝突確認用
 	bool m_hit_up;
 	bool m_hit_down;

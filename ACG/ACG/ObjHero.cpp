@@ -43,11 +43,6 @@ void CObjHero::Action()
 
 	GetBlockInformation();	//主人公の左下、真下、右下にあるブロック情報を取得
 
-	//ステージ５の落ちるブロックのオブジェクト情報を持ってくる
-	CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObj(OBJ_FALLING_BLOCK);
-
-	
-
 	//マウスの位置情報取得
 	m_mous_x = (float)Input::GetPosX();
 	m_mous_y = (float)Input::GetPosY();
@@ -83,8 +78,6 @@ void CObjHero::Action()
 		//HitBoxの位置を更新する
 		HitBoxUpData(Hits::GetHitBox(this), m_px + 15, m_py + 14);
 	}
-
-	
 }
 
 //主人公の左下、真下、右下にあるブロック情報を取得
@@ -380,12 +373,19 @@ void CObjHero::MoveScene()
 	//ステージ５なら
 	if (((UserData*)Save::GetData())->stagenum == 5)
 	{
-		//ラストウォールオブジェクトを取得
-		CObjLastWall* objlastwall = (CObjLastWall*)Objs::GetObj(OBJ_LAST_WALL);
+		//落ちるブロック未生成なら
+		if (m_fallblock_create_flag == true)
+		{
+			//ラストウォールオブジェクトを取得
+			CObjLastWall* objlastwall = (CObjLastWall*)Objs::GetObj(OBJ_LAST_WALL);
 
-		//ラストウォールオブジェクトがあれば
-		if (objlastwall != nullptr)
-			objmap->CreateFallingBloack( (int)(m_px / BLOCK_SIZE) );//落ちるブロックを生成
+			//ラストウォールオブジェクトがあれば
+			if (objlastwall != nullptr)
+			{
+				objmap->CreateFallingBloack((int)(m_px / BLOCK_SIZE));//落ちるブロックを生成
+				m_fallblock_create_flag = false;
+			}
+		}
 	}
 
 	//移動先が画面外なら移動を元に戻す

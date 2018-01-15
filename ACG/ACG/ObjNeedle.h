@@ -22,8 +22,10 @@ private:
 	//マップの要素数
 	int m_map_x;
 	int m_map_y;
+
+	//針の移動に使用
 	float m_needle_gauge; //針の沈む速度
-	int   m_time;         //針の沈んだあとのタイム
+	int m_time;         //針の沈んだあとのタイム
 
 	bool m_over_or_under;//トゲの台の上にあるか、下にあるかを判別する
 
