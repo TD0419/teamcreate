@@ -47,7 +47,6 @@ void CObjFallingBlock::Action()
 	{
 		Audio::Stop(GROUND);
 		m_screen_out = true;//画面外にブロックが出ている
-		
 	}
 	else
 	{

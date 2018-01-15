@@ -369,7 +369,7 @@ void CObjHero::MoveScene()
 	//移動
 	m_px += m_vx;
 	m_py += m_vy;
-
+	
 	//ステージ５なら
 	if (((UserData*)Save::GetData())->stagenum == 5)
 	{
@@ -382,7 +382,7 @@ void CObjHero::MoveScene()
 			//ラストウォールオブジェクトがあれば
 			if (objlastwall != nullptr)
 			{
-				objmap->CreateFallingBloack((int)(m_px / BLOCK_SIZE));//落ちるブロックを生成
+				objmap->CreateFallingBloack((int)(m_px / BLOCK_SIZE),(int)(m_py/BLOCK_SIZE));//落ちるブロックを生成
 				m_fallblock_create_flag = false;
 			}
 		}
