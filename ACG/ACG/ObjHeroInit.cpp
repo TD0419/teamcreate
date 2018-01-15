@@ -58,6 +58,8 @@ void CObjHero::Init()
 
 	l_jump = false;
 
+	m_fallblock_create_flag = true;
+
 	m_block_type = 0;//主人公のしたのブロック情報
 	m_block_type_up = 0;
 
