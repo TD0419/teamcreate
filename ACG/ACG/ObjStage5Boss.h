@@ -44,6 +44,7 @@ public:
 	void SetArmDownFlagLeft() { m_left_arm_down_flag = false; }
 	bool GetArmDownFlagRight() { return m_right_arm_down_flag; }
 	bool GetArmDownFlagLeft() { return m_left_arm_down_flag; }
+	bool GetBossDeathFlag() { return m_death_flag; }
 	//攻撃4カウンターが300フレーム経過した情報を入れる
 	bool GetBlockRetuenFlag() { return m_progress_atk4_count; }
 	

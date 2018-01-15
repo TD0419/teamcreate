@@ -60,7 +60,7 @@ public:
 
 private:
 	void CircleDraw(float add_radius,float color[4],int type);		// 死亡時とゴール時用の円を描画する関数
-
+	void TarzanAction();//ターザンの動き(単振り子)をする関数
 private:
 	float m_px;		//X座標
 	float m_py;		//Y座標
