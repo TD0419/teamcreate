@@ -60,7 +60,7 @@ public:
 
 private:
 	void CircleDraw(float add_radius,float color[4],int type);		// 死亡時とゴール時用の円を描画する関数
-
+	void TarzanAction();//ターザンの動き(単振り子)をする関数
 private:
 	float m_px;		//X座標
 	float m_py;		//Y座標
@@ -125,6 +125,9 @@ private:
 	int m_ani_max_time_enemy_die;     //主人公が敵にあたった時主人公アニメーション動作間隔最大値
 
 	//------------------------------------------
+
+	//ステージ５用落ちるブロックの生成用フラグ
+	bool m_fallblock_create_flag;
 
 	//blockとの衝突確認用
 	bool m_hit_up;

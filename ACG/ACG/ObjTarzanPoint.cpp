@@ -71,7 +71,7 @@ void CObjTarzanPoint::Action()
 	
 		if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
 		{
-			//ロープの位置をこのオブジェクトの位置に合わせる　+2.0fすることでロープとスイッチが常にあたるようにする
+			//ロープの位置をこのオブジェクトの位置に合わせる + 6.0fすることでロープとスイッチが常にあたるようにする
 			objrope->SetPosX(m_px + 6.0f);
 			objrope->SetPosY(m_py + 6.0f);
 		}
