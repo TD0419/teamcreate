@@ -97,16 +97,11 @@ void CObjDoor::Action()
 		break;
 	}
 	case 3:
+	case 5:		
 	{
+		CObjStage5Boss* objstage5_boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+		
 		//ステージ５のボスが消滅したとき
-		if (objstage5_boss == nullptr)
-		{
-			m_unlock_flag = true;//施錠解除フラグをonにします
-		}
-		break;
-	}
-	case 5:		//ステージ５のボスが消滅したとき
-	{
 		if (objstage5_boss == nullptr)
 		{
 			m_unlock_flag = true;//施錠解除フラグをonにします

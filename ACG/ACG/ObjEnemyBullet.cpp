@@ -83,7 +83,7 @@ void CObjEnemyBullet::Init()
 			Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
 			break;
 		}
-		case 3;
+		case 3:
 		case 5://ステージ５
 		{
 			//当たり判定用HitBoxを作成
