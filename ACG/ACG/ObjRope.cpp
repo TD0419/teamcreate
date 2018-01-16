@@ -81,8 +81,7 @@ void CObjRope::Action()
 	//画面外にいれば
 	if(WindowCheck(m_px,m_py,ROPE_SIZE, ROPE_SIZE) == false)
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+		Delete();//自身とHitBoxを除去する
 		return;
 	}
 	
@@ -128,8 +127,7 @@ void CObjRope::Action()
 		if (objhero->HitUpCheck(OBJ_LIFT) || objhero->GetVecY() >= 18.0f)
 		{
 			m_tarzan_point_flag = false;		//ターザン引っ掛かりフラグをOFFにする
-			this->SetStatus(false);		//自身に消去命令を出す。
-			Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+			Delete();//自身とHitBoxを除去する
 		}
 
 		if (Input::GetMouButtonR() == false)//　Rキーを押してないならロープをRキーで消せるようにする
@@ -161,8 +159,7 @@ void CObjRope::Action()
 		//　ステージ5の回転ブロックスイッチが最後まで行った時ロープを自動的に消すようにする
 		if (objrolls->GetLastRoll() == true)
 		{
-			this->SetStatus(false);		//自身に消去命令を出す
-			Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+			Delete();//自身とHitBoxを除去する
 			return;
 		}
 	}
@@ -342,8 +339,7 @@ void CObjRope::RopeDelete()
 	//ブロックとあたっていれば削除する
 	if (m_hit_up == true || m_hit_down == true || m_hit_right == true || m_hit_left == true)
 	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+		Delete();//自身とHitBoxを除去する
 		return;
 	}
 
@@ -352,8 +348,7 @@ void CObjRope::RopeDelete()
 	{
 		if (objboss->GetAttackMode() != 4 && m_tarzan_point_flag == true)
 		{
-			this->SetStatus(false);		//自身に消去命令を出す。
-			Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
+			Delete();//自身とHitBoxを除去する
 			return;
 		}
 	}
@@ -433,8 +428,14 @@ void CObjRope::RopeDelete()
 	{
 		m_caught_flag = false;		//ロープ引っかかりフラグをOFFにする
 		m_tarzan_point_flag = false;		//ターザン引っ掛かりフラグをOFFにする
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
+		Delete();//自身とHitBoxを除去する
 		return;
 	}
+}
+
+//自身消去とヒットボックスの消去を行う関数
+void CObjRope::Delete()
+{
+	this->SetStatus(false);		//自身に消去命令を出す
+	Hits::DeleteHitBox(this);	//ロープが所持するHitBoxを除去。
 }

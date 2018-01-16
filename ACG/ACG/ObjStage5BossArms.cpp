@@ -25,7 +25,7 @@ void CObjStage5BossArms::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_arm_hp = 1; //第5ボスアームのＨＰ(仮にＨＰを[10]と設定、左右のアーム共通)
+	m_arm_hp = 10; //第5ボスアームのＨＰ(仮にＨＰを[10]と設定、左右のアーム共通)
 
 	m_ani_flag_claw = false;//爪の開閉アニメーションをしない
 
@@ -68,7 +68,7 @@ void CObjStage5BossArms::Init()
 	{
 		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
 		//																横サイズ補正値						   縦サイズ補正値
-		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
+		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE-5.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
 	}
 }
 
@@ -158,7 +158,7 @@ void CObjStage5BossArms::Action()
 		m_py = m_initial_py;
 
 		//HPを戻す
-		m_arm_hp = 1;
+		m_arm_hp = 10;
 		m_initpos_flag = false;
 		m_block_hit_flag = false;
 
@@ -374,7 +374,7 @@ void CObjStage5BossArms::MoveShotAttack()
 void CObjStage5BossArms::DiffusionAttack(int limit_time)
 {
 	//拡散弾の源を作成
-	CObjDiffusionSource* p = new CObjDiffusionSource(m_px + STAGE5_BOSS_ARMS_WIDTH_SIZE / 2.0f, m_py + STAGE5_BOSS_ARMS_HEIGHT_SIZE - 10.0f, limit_time);
+	CObjDiffusionSource* p = new CObjDiffusionSource(m_px + STAGE5_BOSS_ARMS_WIDTH_SIZE / 2.0f, m_py + STAGE5_BOSS_ARMS_HEIGHT_SIZE, limit_time);
 	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
 }
 

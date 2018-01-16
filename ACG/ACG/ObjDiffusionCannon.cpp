@@ -28,7 +28,7 @@ void CObjDiffusionCannon::Action()
 {
 	m_time++;
 	
-	//ステージ５ボスオブジェクトを持ってくる
+	//ステージ3ボスオブジェクトを持ってくる
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
 	if (objboss != nullptr)	//ボスオブジェクトがあれば

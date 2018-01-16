@@ -46,6 +46,11 @@ void CObjDoor::Init()
 			m_door_type = 2;
 			break;
 		}
+		case 3:
+		{
+			m_door_type = 3;
+			break;
+		}
 		//ステージ５
 		case 5:
 		{
@@ -73,33 +78,41 @@ void CObjDoor::Action()
 
 	switch (m_door_type)
 	{
-		case 1:
-		{
-			CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+	case 1:
+	{
+		CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 
-			//敵がいなくなったとき
-			if (objenemy == nullptr)
-				m_unlock_flag = true;//施錠解除フラグをonにします
-			break;
-		}
-		case 2:
-		{
-			CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-			
-			//ボスが消滅したとき
-			if (objboss == nullptr)
-				m_unlock_flag = true;//施錠解除フラグをonにします
-			break;
-		}
-		case 5:
-		{
-			CObjStage5Boss* objstage5_boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+		//敵がいなくなったとき
+		if (objenemy == nullptr)
+			m_unlock_flag = true;//施錠解除フラグをonにします
+		break;
+	}
+	case 2:
+	{
+		CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 
-			//ボスが消滅したとき
-			if (objstage5_boss == nullptr)
-				m_unlock_flag = true;//施錠解除フラグをonにします
-			break;
+		//ボスが消滅したとき
+		if (objboss == nullptr)
+			m_unlock_flag = true;//施錠解除フラグをonにします
+		break;
+	}
+	case 3:
+	{
+		//ステージ５のボスが消滅したとき
+		if (objstage5_boss == nullptr)
+		{
+			m_unlock_flag = true;//施錠解除フラグをonにします
 		}
+		break;
+	}
+	case 5:		//ステージ５のボスが消滅したとき
+	{
+		if (objstage5_boss == nullptr)
+		{
+			m_unlock_flag = true;//施錠解除フラグをonにします
+		}
+		break;
+	}
 	}
 	
 	//施錠解除フラグオンのとき
