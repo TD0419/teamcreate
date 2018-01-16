@@ -19,8 +19,9 @@ CObjFallingBlock::CObjFallingBlock(int x, int y)
 //イニシャライズ
 void CObjFallingBlock::Init()
 {
-	m_falling_time = 10;	//ブロックが落ちるまでの時間
-	m_fallint_start_flag = false;
+	m_falling_time = 10;			//ブロックが落ちるまでの時間
+	m_fallint_start_flag = false;	//true…落とす  false…落とさない
+	m_screen_out = false;			//ブロックが画面外に出ているかを調べる
 
 	m_screen_out = false;		//ブロックが画面外に出ているかを調べる
 
@@ -66,14 +67,13 @@ void CObjFallingBlock::Action()
 	}
 	
 	//ボスの攻撃4のカウンターが300フレーム経過したら、ブロックを初期位置に戻す
-	if (stage5boss_atk4_count == true || stage5boss_death_flag == true)
+	if (stage5boss_atk4_count == true && stage5boss_death_flag == false)
 	{
 		m_py = m_return_block_y;//初期位置にブロックを戻す
 		m_falling_time = 10;	//ブロックが落ちるまでの時間
 		m_fallint_start_flag = false;//落下フラグをオフにする
 		hit->SetInvincibility(false);//自身の当たり判定をつける
 	}
-	
 
 	if (m_fallint_start_flag == true)//落下開始フラグがオンなら
 		m_falling_time--;
@@ -86,6 +86,21 @@ void CObjFallingBlock::Action()
 		Audio::Start(GROUND);
 		
 	}
+	//ステージ5ボスを倒したとき、落ちるブロックを上昇させる
+	if( stage5boss_death_flag == true)
+	{
+		m_py -= 8.0f;
+		m_falling_time = 10;		 //ブロックが落ちるまでの時間
+		m_fallint_start_flag = false;//落下フラグをオフにする
+		hit->SetInvincibility(false);//自身の当たり判定をつける
+		
+		//戻す位置(初期位置)より上に上昇したら、初期位置で上昇を止める
+		if (m_py<=m_return_block_y)
+		{
+			m_py = m_return_block_y;
+		}
+	}
+
 	//落ちるブロックが一定距離落ちたら、自身の当たり判定をなくす
 	if (m_py>PERDECISION_CLEAR_POINT)
 	{

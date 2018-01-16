@@ -31,7 +31,7 @@ void CObjTarzanPoint::Init()
 //アクション
 void CObjTarzanPoint::Action()
 {
-	//ボスオブジェクトを持ってくる
+	//ステージ5ボスオブジェクトを持ってくる
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 	
 	//ロープオブジェクトを持ってくる
