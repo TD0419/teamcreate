@@ -198,6 +198,7 @@ enum GRAPHIC_ID
 	GRA_BOSS_DIFFUSION,//ボスの発射する拡散弾
 	GRA_STAGE5_BOSS_BULLET,//ボスの発射する弾
 	GRA_EXPLOSION,	//ボスの爆発
+	GRA_FALLING_BLOCK,//落ちるブロック
 };
 
 //音楽(BGM)
@@ -285,6 +286,8 @@ enum MUSIC
 #define WIRE_MESH_SIZE_HEIGHT	(64.0f) //金網の縦サイズ
 #define DIFFUSION_SOURCE_SIZE	(32.0f)//拡散弾を撃つ弾のサイズ
 #define STAGE5_BOSS_BULLET_SIZE (32.0f)//ステージ５のボスが打つ弾のサイズ
+
+#define FALLING_BLOCK_SIZE_WIDTH (192.0f) //落ちるブロックの横幅
 
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左

@@ -69,7 +69,7 @@ void CObjFallingLift::Draw()
 	dst.m_bottom = dst.m_top + ROLL_BLOCK_SIZE_HEIGHT;
 		
 	//•`‰æ
-	Draw::Draw(GRA_FALLING_LIFT, &src, &dst, color, 0);
+	//Draw::Draw(GRA_FALLING_LIFT, &src, &dst, color, 0);
 }
 
 //ålŒö‚ª“–‚½‚Á‚½‚Æ‚«‚Ìˆ—

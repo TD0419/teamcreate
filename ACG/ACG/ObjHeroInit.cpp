@@ -76,5 +76,5 @@ void CObjHero::Init()
 	pendulum_data.find_value_flag = true;//’l‚ğ‹‚ß‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒONO
 	
 	//“–‚½‚è”»’è
-	Hits::SetHitBox(this, m_px, m_py, 46, 112, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, m_px, m_py, 46.0f, 112.0f, ELEMENT_PLAYER, OBJ_HERO, 1);
 }

@@ -21,9 +21,7 @@ public:
 
 	bool GetScreenOut() { return m_screen_out; }//画面外にブロックが出た情報を入れる
 private:
-	//マップ上の位置（要素数）
-	int m_map_x;//X
-	int m_map_y;//Y	
+
 	float m_px;			//落ちるブロックX座標
 	float m_py;			//落ちるブロックY座標
 	int   m_falling_time;//ブロックが落ちるまでの時間

@@ -76,6 +76,7 @@ void CObjBlock::Draw()
 		src.m_right = 128.0f;
 		src.m_bottom = 64.0f;
 	}
+
 	//•`‰æˆÊ’u
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
