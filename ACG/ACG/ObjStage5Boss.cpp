@@ -23,13 +23,13 @@ void CObjStage5Boss::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_hp = 30; //‘æ5ƒ{ƒX‚Ì‚g‚o
+	m_hp = 1; //‘æ5ƒ{ƒX‚Ì‚g‚o
 
 	m_right_arm_down_flag = false;
 	m_left_arm_down_flag = false;
 
 	//‰Šú‰»‚·‚é(‰½‚à‚µ‚Ä‚¢‚È‚¢)
-	m_attack_mode = 0;
+	m_attack_mode = 4;
 
 	m_lastwall_hit_flag=false;
 
@@ -505,15 +505,15 @@ void CObjStage5Boss::DrawDeathAnimation()
 {
 	//Å‰‚Ì”š”­A2‰ñ–Ú‚Ì”š”­AÅŒã‚Ì”š”­‚Ì•`‰æƒTƒCƒY
 	//ŠeˆÊ’u‚ðŒˆ‚ß‚é‚Æ‚«‚É‚àŽg‚Á‚Ä‚¢‚Ü‚·
-	float size = 64.0f;
+	float size = 256.0f;
 
 	//Å‰‚Ì”š”­‚Ì‚Æ‚«‚ÌˆÊ’uî•ñ@@¶					ã					‰E				‰º
-	float pos_x1[4] = { m_px + 32.0f,	 m_px + 32.0f + size,	m_px + 32.0f + size * 2,	m_px + 32.0f + size };
-	float pos_y1[4] = { m_py + 32.0f + size,m_py + 32.0f,		m_py + 32.0f + size,	m_py + 32.0f + size * 2 };
+	float pos_x1[4] = { m_px + 128.0f,	 m_px + 128.0f + size,	m_px + 128.0f + size *  2,	m_px + 128.0f + size };
+	float pos_y1[4] = { m_py + 64.0f + size,m_py + 64.0f,		m_py + 64.0f + size,	m_py + 64.0f + size * 2 };
 
 	//2‰ñ–Ú‚Ì”š”­‚Ì‚Æ‚«‚ÌˆÊ’uî•ñ		¶ã			‰Eã					¶‰º						‰E‰º			
-	float pos_x2[4] = { m_px + 32.0f,m_px + 32.0f + size * 2	,m_px + 32.0f			,m_px + 32.0f + size * 2 };
-	float pos_y2[4] = { m_py + 32.0f,m_py + 32.0f				,m_py + 32.0f + size * 2,m_py + 32.0f + size * 2 };
+	float pos_x2[4] = { m_px + 128.0f,m_px + 128.0f + size * 2	,m_px + 128.0f			,m_px + 128.0f + size * 2 };
+	float pos_y2[4] = { m_py + 128.0f,m_py + 128.0f				,m_py + 128.0f + size * 2,m_py + 128.0f + size * 2 };
 
 	//ÅŒã‚Ì”š”­	a1,b1`a8,b8 -> c1,d1`c8,d8‚Ì‚æ‚¤‚È‡”Ô‚Å“o˜^
 	float pos_x3[16] = { m_px,m_px + size,m_px + size * 2,m_px + size * 3,
@@ -542,10 +542,10 @@ void CObjStage5Boss::DrawDeathAnimation()
 	src.m_bottom = src.m_top + 64.0f;
 
 	//•`‰æˆÊ’u
-	dst.m_top = m_py - objmap->GetScrollY();
-	dst.m_left = m_px - objmap->GetScrollX();
-	dst.m_right = dst.m_left + STAGE5_BOSS_BODY_SIZE;
-	dst.m_bottom = dst.m_top + STAGE5_BOSS_BODY_SIZE;
+	dst.m_top = m_py - objmap->GetScrollY()-64.0f;
+	dst.m_left = m_px - objmap->GetScrollX()-256.0f;
+	dst.m_right = dst.m_left + STAGE5_BOSS_BODY_SIZE*3;
+	dst.m_bottom = dst.m_top + STAGE5_BOSS_BODY_SIZE*3;
 	//•`‰æ
 	Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
 	//|||||||||||||||||||||||||[
@@ -562,8 +562,8 @@ void CObjStage5Boss::DrawDeathAnimation()
 			src.m_bottom = src.m_top + 64.0f;
 
 			//•`‰æˆÊ’u
-			dst.m_top = pos_y1[i] - objmap->GetScrollY();
-			dst.m_left = pos_x1[i] - objmap->GetScrollX();
+			dst.m_top = pos_y1[i] - objmap->GetScrollY()-64.0f;
+			dst.m_left = pos_x1[i] - objmap->GetScrollX()-320.0f;
 			dst.m_right = dst.m_left + size;
 			dst.m_bottom = dst.m_top + size;
 			//•`‰æ
@@ -585,8 +585,8 @@ void CObjStage5Boss::DrawDeathAnimation()
 			src.m_bottom = src.m_top + 64.0f;
 
 			//•`‰æˆÊ’u
-			dst.m_top = pos_y2[i] - objmap->GetScrollY();
-			dst.m_left = pos_x2[i] - objmap->GetScrollX();
+			dst.m_top = pos_y2[i] - objmap->GetScrollY()-64.0f;
+			dst.m_left = pos_x2[i] - objmap->GetScrollX()-320.0f;
 			dst.m_right = dst.m_left + size;
 			dst.m_bottom = dst.m_top + size;
 			//•`‰æ
@@ -607,8 +607,8 @@ void CObjStage5Boss::DrawDeathAnimation()
 		for (int i = 0; i < 16; i++)
 		{
 			//•`‰æˆÊ’u
-			dst.m_top = pos_y3[i] - objmap->GetScrollY();
-			dst.m_left = pos_x3[i] - objmap->GetScrollX();
+			dst.m_top = pos_y3[i] - objmap->GetScrollY()-64.0f;
+			dst.m_left = pos_x3[i] - objmap->GetScrollX()-320.0f;
 			dst.m_right = dst.m_left + size;
 			dst.m_bottom = dst.m_top + size;
 			//•`‰æ
@@ -617,15 +617,15 @@ void CObjStage5Boss::DrawDeathAnimation()
 		for (int i = 0; i < 4; i++)
 		{
 			//•`‰æˆÊ’u
-			dst.m_top = pos_y2[i] - objmap->GetScrollY();
-			dst.m_left = pos_x2[i] - objmap->GetScrollX();
+			dst.m_top = pos_y2[i] - objmap->GetScrollY()-64.0f;
+			dst.m_left = pos_x2[i] - objmap->GetScrollX()-320.0f;
 			dst.m_right = dst.m_left + size;
 			dst.m_bottom = dst.m_top + size;
 			//•`‰æ
 			Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
 			//•`‰æˆÊ’u
-			dst.m_top = pos_y1[i] - objmap->GetScrollY();
-			dst.m_left = pos_x1[i] - objmap->GetScrollX();
+			dst.m_top = pos_y1[i] - objmap->GetScrollY()-64.0f;
+			dst.m_left = pos_x1[i] - objmap->GetScrollX()-320.0f;
 			dst.m_right = dst.m_left + size;
 			dst.m_bottom = dst.m_top + size;
 			//•`‰æ

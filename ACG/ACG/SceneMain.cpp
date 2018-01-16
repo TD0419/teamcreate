@@ -59,10 +59,6 @@ void CSceneMain::InitScene()
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
-	//タイム
-	CObjTime* objtime = new CObjTime();
-	Objs::InsertObj(objtime, OBJ_TIME, 100);
-
 	//デバッグ　”使い終わったら消してください！”----------------
 	
 	//要らんの--------------------------------------------------
@@ -166,111 +162,102 @@ void CSceneMain::ImageDataLoading()
 	//ステージ別の画像読み込み
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
-	//ステージ１
-	case 1:
-	{
-		//背景画像読み込み
-		Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
-		//リフト画像読み込み
-		Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
-		//ブロック画像読み込み
-		Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
-		break;
-	}
-	//ステージ２
-	case 2:
-	{
-		//背景画像読み込み
-		Draw::LoadImageW(L"Image\\BackGround\\Stage2.png", GRA_BACKGROUND, TEX_SIZE_1536);
-		//リフト画像読み込み
-		Draw::LoadImageW(L"Image\\Lift\\Stage2.png", GRA_LIFT, TEX_SIZE_128);
-		//ブロック画像読み込み
-		Draw::LoadImageW(L"Image\\Block\\Stage2.png", GRA_BLOCK, TEX_SIZE_128);
-		//Water画像読み込み
-		Draw::LoadImageW(L"Image\\Water.png", GRA_AQUATIC, TEX_SIZE_1024);
-		//すり抜けるブロック画像読み込み
-		Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
-		//ボス画像読み込み
-		Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1280);
-		//ゴリラの投擲物読み込み
-		Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
-		break;
-	}
-	//ステージ３
-	case 3:
-	{
-		//リフト画像読み込み
-		Draw::LoadImageW(L"Image\\Lift\\Stage3.png", GRA_LIFT, TEX_SIZE_128);
-		//ブロック画像読み込み
-		Draw::LoadImageW(L"Image\\Block\\Stage3.png", GRA_BLOCK, TEX_SIZE_128);
-		//キャノンの読み込み
-		Draw::LoadImageW(L"Image\\Cannon.png", GRA_CANNON, TEX_SIZE_64);
-		//lastwall3画像の読み込み
-		Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL, TEX_SIZE_256);//上
-		Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
-		break;
-	}
-	//ステージ４
-	case 4:
-	{
-		break;
-	}
-	//ステージ５
-	case 5:
-	{
-		//ステージ５の背景画像の読み込み
-		Draw::LoadImageW(L"Image\\BackGround\\Stage5.png", GRA_BACKGROUND, TEX_SIZE_1536);
-		//ブロック画像読み込み
-		Draw::LoadImageW(L"Image\\Block\\Stage5.png", GRA_BLOCK, TEX_SIZE_128);
+		//ステージ１
+		case 1:
+		{
+			//背景画像読み込み
+			Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
+			//リフト画像読み込み
+			Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
+			//ブロック画像読み込み
+			Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
+			break;
+		}
+		//ステージ２
+		case 2:
+		{
+			//背景画像読み込み
+			Draw::LoadImageW(L"Image\\BackGround\\Stage2.png", GRA_BACKGROUND, TEX_SIZE_1536);
+			//リフト画像読み込み
+			Draw::LoadImageW(L"Image\\Lift\\Stage2.png", GRA_LIFT, TEX_SIZE_128);
+			//ブロック画像読み込み
+			Draw::LoadImageW(L"Image\\Block\\Stage2.png", GRA_BLOCK, TEX_SIZE_128);
+			//Water画像読み込み
+			Draw::LoadImageW(L"Image\\Water.png", GRA_AQUATIC, TEX_SIZE_1024);
+			//すり抜けるブロック画像読み込み
+			Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
+			//ボス画像読み込み
+			Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1280);
+			//ゴリラの投擲物読み込み
+			Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
+			break;
+		}
+		//ステージ３
+		case 3:
+		{
+			//リフト画像読み込み
+			Draw::LoadImageW(L"Image\\Lift\\Stage3.png", GRA_LIFT, TEX_SIZE_128);
+			//ブロック画像読み込み
+			Draw::LoadImageW(L"Image\\Block\\Stage3.png", GRA_BLOCK, TEX_SIZE_128);
+			//キャノンの読み込み
+			Draw::LoadImageW(L"Image\\Cannon.png", GRA_CANNON, TEX_SIZE_64);
+			//lastwall3画像の読み込み
+			Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL, TEX_SIZE_256);//上
+			Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
+			break;
+		}
+		//ステージ４
+		case 4:
+		{
+			break;
+		}
+		//ステージ５
+		case 5:
+		{
+			//ステージ５の背景画像の読み込み
+			Draw::LoadImageW(L"Image\\BackGround\\Stage5.png", GRA_BACKGROUND, TEX_SIZE_1536);
+			//ブロック画像読み込み
+			Draw::LoadImageW(L"Image\\Block\\Stage5.png", GRA_BLOCK, TEX_SIZE_64);
+			
+			//落ちるブロック画像読み込み
+			Draw::LoadImageW(L"Image\\Block\\FallingBlock.png", GRA_FALLING_BLOCK, TEX_SIZE_256);
 
-		//回転ブロックの画像読み込み
-		Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
-		Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
+			//回転ブロックの画像読み込み
+			Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
+			Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
 
-		//金網ブロックの読み込み
-		Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_WIRE_MASH, TEX_SIZE_640);
-		
-		//ステージ5の大砲
-		Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
-		//ステージ5の大砲の弾
-		Draw::LoadImageW(L"Image\\Cannon_Laser_Beam.png", GRA_CANNON_BEAM, TEX_SIZE_16);
-		//回転ブロックの仕掛けのスイッチの画像読み込み
-		Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_BLACK_BALL, TEX_SIZE_16);
-		//針の読み込み
-		Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_64);
-		//針の土台の読み込み
-		Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
-		//ロープでぶら下がることができるギミック
-		Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
-		//リフト画像読み込み
-		Draw::LoadImageW(L"Image\\Lift\\Stage5.png", GRA_LIFT, TEX_SIZE_512);
-		//落ちるリフト
-		Draw::LoadImageW(L"Image\\Lift\\Falling_Lift.png", GRA_FALLING_LIFT, TEX_SIZE_256);
-		//横移動リフト
-		Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
-		//拡散弾を撃つ弾
-		Draw::LoadImageW(L"Image\\Boss_Diffusion_Glass.png", GRA_DIFFUSION_SOURCE, TEX_SIZE_32);
-		
-		//ボスの拡散弾
-		Draw::LoadImageW(L"Image\\Diffusion_Bullet.png", GRA_BOSS_DIFFUSION, TEX_SIZE_16);
+			//金網ブロックの読み込み
+			Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_WIRE_MASH, TEX_SIZE_640);
 
-		//ボスの打つ弾
-		Draw::LoadImageW(L"Image\\Lastboss_Bullet.png", GRA_STAGE5_BOSS_BULLET, TEX_SIZE_32);
-		
-		break;		
-	}
-	////画像が用意されていない場合
-	//default:
-	//	//背景画像読み込み
-	//	Draw::LoadImageW(L"Image\\BackGround\\Stage1.png", GRA_BACKGROUND, TEX_SIZE_1536);
-	//	//リフト画像読み込み
-	//	Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
-	//	//ブロック画像読み込み
-	//	Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
+			//ステージ5の大砲
+			Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
+			//ステージ5の大砲の弾
+			Draw::LoadImageW(L"Image\\Cannon_Laser_Beam.png", GRA_CANNON_BEAM, TEX_SIZE_16);
+			//回転ブロックの仕掛けのスイッチの画像読み込み
+			Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_BLACK_BALL, TEX_SIZE_16);
+			//針の読み込み
+			Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_64);
+			//針の土台の読み込み
+			Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
+			//ロープでぶら下がることができるギミック
+			Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
+			//リフト画像読み込み
+			Draw::LoadImageW(L"Image\\Lift\\Stage5.png", GRA_LIFT, TEX_SIZE_512);
+			//落ちるリフト
+			//Draw::LoadImageW(L"", GRA_FALLING_LIFT, TEX_SIZE_256);
+			//横移動リフト
+			Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
+			//拡散弾を撃つ弾
+			Draw::LoadImageW(L"Image\\Boss_Diffusion_Glass.png", GRA_DIFFUSION_SOURCE, TEX_SIZE_32);
 
-	//	//ドア & 錠画像読み込み
-	//	Draw::LoadImageW(L"Image\\Door.png", GRA_DOOR, TEX_SIZE_256);
-	//	break;
+			//ボスの拡散弾
+			Draw::LoadImageW(L"Image\\Diffusion_Bullet.png", GRA_BOSS_DIFFUSION, TEX_SIZE_16);
+
+			//ボスの打つ弾
+			Draw::LoadImageW(L"Image\\Lastboss_Bullet.png", GRA_STAGE5_BOSS_BULLET, TEX_SIZE_32);
+
+			break;
+		}
 	}
 	
 	//プレイヤー画像読み込み

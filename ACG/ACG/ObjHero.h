@@ -50,6 +50,12 @@ public:
 	float GetPosY() { return m_py; }								//ポジションXを返す
 	float GetVecX() { return m_vx; }								//ベクトルXを渡す
 	float GetVecY() { return m_vy; }								//ベクトルYを渡す
+
+	float* GetPointPosX() { return &m_px; }							//ポジションXをポインタで返す
+	float* GetPointPosY() { return &m_py; }							//ポジションXをポインタで返す
+	float* GetPointVecX() { return &m_vx; }							//ベクトルXをポインタで渡す
+	float* GetPointVecY() { return &m_vy; }							//ベクトルYを渡す
+
 	float GetPosture() { return m_posture; }						//今の主人公の姿勢を渡す
 	bool GetRopeAniCon() { return m_rope_ani_con; }					//ロープのアニメーションが始まっているかどうかを返す
 	bool GetRopeDeleteRKey() { return m_rope_delete_r_kye; }		//アニメーション用ロープが消えたかどうかを管理するフラグを渡す

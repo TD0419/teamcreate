@@ -345,16 +345,15 @@ void CObjMap::CreateObj(int x, int y)
 
 	//落ちるブロック以外なら
 	if(m_map[y][x].num != MAP_FALLING_BLOCK)
-		m_map[y][x].create = false;//フラグをオフにする
-
-		
+		m_map[y][x].create = false;//フラグをオフにする		
 }
 
 //落ちるブロックだけを生成する（ボス戦用）
-void CObjMap::CreateFallingBloack(int create_start_x)
+//引数1,2：主人公の位置をブロック単位でもってくる
+void CObjMap::CreateFallingBloack(int create_start_x,int create_start_y)
 {
 	//yの値が　マップの最大値　に達するまで回す
-	for (int y = 0 ; y < MAP_Y_MAX ; y++)
+	for (int y = create_start_y; y < MAP_Y_MAX ; y++)
 	{
 		//xの値が　マップの最大値　に達するまで回す
 		for (int x = create_start_x ; x < MAP_X_MAX ; x++)
@@ -362,8 +361,9 @@ void CObjMap::CreateFallingBloack(int create_start_x)
 			//落ちるブロックだけを生成する
 			if (m_map[y][x].num == MAP_FALLING_BLOCK)
 			{
+				
 				//生成のフラグがオンなら
-				if ( m_map[y][x].create == true )
+				if (m_map[y][x].create == true)
 				{
 					CObjFallingBlock* objfalling_block = new CObjFallingBlock(x, y);
 					Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK, 9);

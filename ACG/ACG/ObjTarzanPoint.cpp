@@ -31,18 +31,26 @@ void CObjTarzanPoint::Init()
 //アクション
 void CObjTarzanPoint::Action()
 {
-	//ボスオブジェクトを持ってくる
+	//ステージ5ボスオブジェクトを持ってくる
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
-
+	
 	//ロープオブジェクトを持ってくる
 	CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
 
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	//ボスオブジェクトがあれば
+	//ステージ5ボスオブジェクトがあれば
 	if (objboss != nullptr)
 	{
+		//ステージ5ボスを倒したら、オブジェクトを削除する
+		if (objboss->GetBossDeathFlag() == true)
+		{
+			this->SetStatus(false);		//自身に消去命令を出す。
+			Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
+			return;
+
+		}
 		//4番目の攻撃なら
 		if (objboss->GetAttackMode() == 4)
 			m_look_flag = true;
@@ -55,6 +63,7 @@ void CObjTarzanPoint::Action()
 		Hits::DeleteHitBox(this);	//所持するHitBoxを除去。
 		return;
 	}
+	
 
 	//ロープと当たっているならロープの位置を合わせる
 	if (hit != nullptr)

@@ -38,7 +38,6 @@ enum OBJ_NAME
 	OBJ_BACKGROUND,		//バッググラウンド(背景)
 	OBJ_CANNON,		    //砲台
 	OBJ_LAST_WALL,		//最後の壁
-	OBJ_TIME,			//タイム
 	OBJ_ROLL_BLOCK,		//回転するブロック
 	OBJ_ROLL_BLOCK_SWITCH,//回転するブロック用のスイッチ
 	OBJ_NEEDLE,			  //針
@@ -198,6 +197,7 @@ enum GRAPHIC_ID
 	GRA_BOSS_DIFFUSION,//ボスの発射する拡散弾
 	GRA_STAGE5_BOSS_BULLET,//ボスの発射する弾
 	GRA_EXPLOSION,	//ボスの爆発
+	GRA_FALLING_BLOCK,//落ちるブロック
 };
 
 //音楽(BGM)
@@ -286,6 +286,8 @@ enum MUSIC
 #define DIFFUSION_SOURCE_SIZE	(32.0f)//拡散弾を撃つ弾のサイズ
 #define STAGE5_BOSS_BULLET_SIZE (32.0f)//ステージ５のボスが打つ弾のサイズ
 
+#define FALLING_BLOCK_SIZE_WIDTH (192.0f) //落ちるブロックの横幅
+
 //スクロールのライン　（要調整）
 #define SCROLL_LINE_LEFT	(464.0f)	//左
 #define SCROLL_LINE_RIGHT	(560.0f)	//右
@@ -335,7 +337,6 @@ enum MUSIC
 #include "ObjBackGround.h"		//バッググラウンド(背景)
 #include "ObjCannon.h"			//砲台
 #include "ObjLastWall.h"		//最後の壁
-#include "ObjTime.h"			//タイム
 #include "ObjNeedle.h"			//針
 #include "ObjNeedleStand.h"     //針の土台
 #include "ObjDiffusionCannon.h" //拡散弾発射装置
