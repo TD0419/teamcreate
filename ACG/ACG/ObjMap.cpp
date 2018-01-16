@@ -186,7 +186,7 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_LAST_WALL:		//壁(次ステージを隔てる壁)
 		{
-			if (((UserData*)Save::GetData())->stagenum == 5)	//ステージ5のときは下のほうから生成する
+			if (((UserData*)Save::GetData())->stagenum == 3)	//ステージ5のときは下のほうから生成する
 			{
 				CObjLastWall* objLastWall = new CObjLastWall(x, y - 8);
 				Objs::InsertObj(objLastWall, OBJ_LAST_WALL, 10);

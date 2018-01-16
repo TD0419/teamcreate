@@ -43,7 +43,7 @@ void CSceneMain::InitScene()
 
 	//デバッグ用ステージ番号調整用
 	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 5;
+	s->stagenum = 3;
 	//----------------
 
 	AudioDataLoading();//音楽データ読み込み関数
@@ -106,9 +106,6 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 		p = Save::ExternalDataOpen(L"stage2.csv", &size);//外部データ読み込み
 		break;
 	case 3:
-		p = Save::ExternalDataOpen(L"stage3.csv", &size);//外部データ読み込み
-		break;
-	case 5:
 		Audio::Start(STAGE);
 		p=Save::ExternalDataOpen(L"stage5ver2.csv", &size);//外部データ読み込み
 		break;
@@ -134,7 +131,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			//マップ情報取得
 			swscanf_s(&p.get()[count], L"%d", &w);
 			
-			if (((UserData*)Save::GetData())->stagenum != 5)
+			if (((UserData*)Save::GetData())->stagenum != 3)
 			{
 				if (j > 99)
 				{
@@ -194,25 +191,6 @@ void CSceneMain::ImageDataLoading()
 		}
 		//ステージ３
 		case 3:
-		{
-			//リフト画像読み込み
-			Draw::LoadImageW(L"Image\\Lift\\Stage3.png", GRA_LIFT, TEX_SIZE_128);
-			//ブロック画像読み込み
-			Draw::LoadImageW(L"Image\\Block\\Stage3.png", GRA_BLOCK, TEX_SIZE_128);
-			//キャノンの読み込み
-			Draw::LoadImageW(L"Image\\Cannon.png", GRA_CANNON, TEX_SIZE_64);
-			//lastwall3画像の読み込み
-			Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL, TEX_SIZE_256);//上
-			Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
-			break;
-		}
-		//ステージ４
-		case 4:
-		{
-			break;
-		}
-		//ステージ５
-		case 5:
 		{
 			//ステージ５の背景画像の読み込み
 			Draw::LoadImageW(L"Image\\BackGround\\Stage5.png", GRA_BACKGROUND, TEX_SIZE_1536);
@@ -315,6 +293,17 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
 	//ボスの爆発
 	Draw::LoadImageW(L"Image\\Explosion.png", GRA_EXPLOSION,TEX_SIZE_320);
+
+	//リフト画像読み込み
+	//Draw::LoadImageW(L"Image\\Lift\\Stage3.png", GRA_LIFT, TEX_SIZE_128);
+	//ブロック画像読み込み
+	//Draw::LoadImageW(L"Image\\Block\\Stage3.png", GRA_BLOCK, TEX_SIZE_128);
+	//キャノンの読み込み
+	//Draw::LoadImageW(L"Image\\Cannon.png", GRA_CANNON, TEX_SIZE_64);
+	//lastwall3画像の読み込み
+	//Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL, TEX_SIZE_256);//上
+	//Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
+
 }
 
 //音楽データ読み込み関数
@@ -351,8 +340,8 @@ void CSceneMain::AudioDataLoading()
 		Audio::LoadAudio(GORILLATHROW, L"SE\\Gorilla Throw.wav", EFFECT);
 		break;
 
-	case 5:
-		//ステージ5
+	case 3:
+		//ステージ3
 		//BGM----------------------------------------------------------
 		Audio::LoadAudio(STAGE, L"BGM\\Temple.wav", BACK_MUSIC);
 		Audio::LoadAudio(BOSS, L"BGM\\LastBoss.wav", BACK_MUSIC);

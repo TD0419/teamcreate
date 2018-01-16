@@ -230,8 +230,8 @@ void CObjHero::MoveScene()
 	m_px += m_vx;
 	m_py += m_vy;
 	
-	//ステージ５なら
-	if (((UserData*)Save::GetData())->stagenum == 5)
+	//ステージ3なら
+	if (((UserData*)Save::GetData())->stagenum == 3)
 	{
 		//落ちるブロック未生成なら
 		if (m_fallblock_create_flag == true)
@@ -377,8 +377,8 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 		// 半径が一定値を超えたらシーン移行
 		if (m_radius >= 768.0f)
 		{
-			//ステージ５ならクリアのシーンにする
-			if (((UserData*)Save::GetData())->stagenum == 5)
+			//ステージ3ならクリアのシーンにする
+			if (((UserData*)Save::GetData())->stagenum == 3)
 			{
 				Scene::SetScene(new CSceneGameClear());
 				return;
