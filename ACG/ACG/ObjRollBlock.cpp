@@ -175,6 +175,8 @@ void CObjRollBlock::Action()
 
 		}
 	}
+	//回転ブロックとロープ(全体)の衝突判定
+	HitRollBlockAndRope();
 }
 
 //ドロー
@@ -388,5 +390,76 @@ void CObjRollBlock::HeroHit()
 			}
 		}
 
+	}
+}
+
+//回転ブロックとロープ(全体)が接触していたらロープを消去する関数
+//回転ブロックの4辺とロープの当たり判定を行い判定ありの場合ロープを消去する。
+void CObjRollBlock::HitRollBlockAndRope()
+{
+	//ロープオブジェクト情報を取得
+	CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
+
+	//ロープオブジェクト情報が正常に取得できていたら衝突判定を行う
+	if (objrope != nullptr)
+	{
+		//主人公オブジェクト情報を取得
+		CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		float hero_x = objhero->GetPosX();	//主人公のロープ発射位置
+		float hero_y = objhero->GetPosY()+80.0f;	//主人公のロープ発射位置
+
+		//主人公が右を向いているときのロープ発射位置を計算
+		//X位置を調整
+		if (objhero->GetPosture() == 0.0f)
+			hero_x += 64.0f;
+
+		//回転ブロックの各頂点座標
+		//要素数０：左上の頂点
+		//要素数１：右上の頂点
+		//要素数２：左下の頂点
+		//要素数３：右下の頂点
+		float rollblock_x[4] = { m_px,m_px,m_px,m_px };
+		float rollblock_y[4] = { m_py,m_py,m_py,m_py };
+
+		//ブロックが横のときの各頂点位置
+		if (m_situation_width_flag)
+		{
+			rollblock_x[1] += ROLL_BLOCK_SIZE_WIDTH;
+
+			rollblock_y[2] += ROLL_BLOCK_SIZE_HEIGHT;
+
+			rollblock_x[3] += ROLL_BLOCK_SIZE_WIDTH;
+			rollblock_y[3] += ROLL_BLOCK_SIZE_HEIGHT;
+		}
+		//ブロックが縦のときの各頂点位置
+		else
+		{
+			rollblock_x[1] += ROLL_BLOCK_SIZE_HEIGHT;
+
+			rollblock_y[2] += ROLL_BLOCK_SIZE_WIDTH;
+
+			rollblock_x[3] += ROLL_BLOCK_SIZE_HEIGHT;
+			rollblock_y[3] += ROLL_BLOCK_SIZE_WIDTH;
+		}
+
+		//四角形の各辺とロープの当たり判定計算
+		for (int i = 0; i < 4; i++)
+		{
+			//交点情報取得用
+			//2直線の交点を求める関数を使うのに必要
+			float cross_pos_x = 0, cross_pos_y = 0;
+
+			//辺の情報(数値は回転ブロックの各頂点座標の要素数)
+			//				　　上	　右　　下	　左
+			int side[4][2] = {{0,1},{1,3},{3,2},{2,0}};
+
+			//2直線の交点を求める関数を使い、交差していたらロープを消去する。
+			if (CrossLineVSLine(hero_x, hero_y, objrope->GetPosX(), objrope->GetPosY(),
+				rollblock_x[side[i][0]], rollblock_y[side[i][0]], rollblock_x[side[i][1]], rollblock_y[side[i][1]], cross_pos_x, cross_pos_y))
+			{
+				objrope->Delete();
+				return;
+			}
+		}
 	}
 }
