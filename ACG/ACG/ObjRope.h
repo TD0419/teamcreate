@@ -23,6 +23,7 @@ public:
 	float GetPosY() { return m_py; }
 	void SetPosX(float x) { m_px = x; }
 	void SetPosY(float y) { m_py = y; }
+	void Delete();			//自身消去とヒットボックスの消去を行う関数
 private:
 	float m_px;			 // ロープX座標
 	float m_py;			 // ロープY座標

@@ -25,7 +25,7 @@ void CObjStage5BossArms::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_arm_hp = 1; //第5ボスアームのＨＰ(仮にＨＰを[10]と設定、左右のアーム共通)
+	m_arm_hp = 10; //第5ボスアームのＨＰ(仮にＨＰを[10]と設定、左右のアーム共通)
 
 	m_ani_flag_claw = false;//爪の開閉アニメーションをしない
 
@@ -158,7 +158,7 @@ void CObjStage5BossArms::Action()
 		m_py = m_initial_py;
 
 		//HPを戻す
-		m_arm_hp = 1;
+		m_arm_hp = 10;
 		m_initpos_flag = false;
 		m_block_hit_flag = false;
 

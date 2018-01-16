@@ -20,3 +20,7 @@ void WindowOutDelete(CObj* obj_p, int map_x, int map_y);//画面外にあるオブジェク
 int HitTestOfAB(float ax, float ay, float aw, float ah,
 	float* bx, float* by, float bw, float bh,
 	float* bvx, float* bvy);
+
+//2直線の交点を求める関数
+bool CrossLineVSLine(float L1_x, float L1_y, float L2_x, float L2_y, float L3_x, float L3_y, float L4_x, float L4_y, float &p_cross_x, float &p_cross_y);
+
