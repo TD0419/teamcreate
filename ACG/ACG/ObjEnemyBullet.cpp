@@ -1,5 +1,4 @@
 #include "GameL\DrawTexture.h"
-#include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\Audio.h"
 #include "GameL\UserData.h"
@@ -39,7 +38,7 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y)
 	float Hvector_y = hero_y - y;
 
 	//斜辺取得
-	float hypotenuse = sqrt(Hvector_y * Hvector_y + Hvector_x * Hvector_x);
+	float hypotenuse = sqrtf(Hvector_y * Hvector_y + Hvector_x * Hvector_x);
 
 	//角度を求める
 	m_r = acosf(Hvector_x / hypotenuse);
@@ -53,36 +52,17 @@ CObjEnemyBullet::CObjEnemyBullet(float x, float y)
 	if (hero_y > y)
 	{
 		//180°～360°の値にする
-		m_r = 360 - abs(m_r);
+		m_r = 360.0f - abs(m_r);
 	}
 	//主人公のY位置が下だった場合の発射角度
 	if (hero_y < y)
 	{
-		m_vy = -sin(acosf(Hvector_x / hypotenuse)) * m_speed;
+		m_vy = -sinf(acosf(Hvector_x / hypotenuse)) * m_speed;
 	}
 	else
 	{
-		m_vy = sin(acosf(Hvector_x / hypotenuse)) * m_speed;
+		m_vy = sinf(acosf(Hvector_x / hypotenuse)) * m_speed;
 	}
-}
-
-//コンストラクタ(ギミック用　指定した方向へ)
-CObjEnemyBullet::CObjEnemyBullet(float x, float y, float rad)
-{
-	//マップオブジェクトを持ってくる
-	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-	//初期位置を決める
-	m_px = x;
-	m_py = y;
-	m_r = rad;
-
-	//速さを決める
-	m_speed = 6.5f;
-
-	//敵用弾丸にスクロールの影響を適用させる
-	x -= objmap->GetScrollX();
-	y -= objmap->GetScrollY();
 }
 
 //イニシャライズ
@@ -97,20 +77,19 @@ void CObjEnemyBullet::Init()
 	
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
-		case 5://ステージ５
-		{
-			//当たり判定用HitBoxを作成
-			Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BULLET_SIZE, STAGE5_BOSS_BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
-			break;
-		}
-		default:
+		case 2:	//ステージ2(ボス):
 		{
 			//当たり判定用HitBoxを作成
 			Hits::SetHitBox(this, m_px, m_py, BULLET_SIZE, BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
 			break;
 		}
+		case 5://ステージ５
+		{
+			//当たり判定用HitBoxを作成
+			Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BULLET_SIZE, STAGE5_BOSS_BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
+			break;
+		}	
 	}
-
 }
 
 //アクション
@@ -218,7 +197,7 @@ void CObjEnemyBullet::Action()
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(hit, m_px, m_py);
 }
 
 //ドロー
@@ -248,7 +227,7 @@ void CObjEnemyBullet::Draw()
 
 		Draw::Draw(GRA_COCONUT, &src, &dst, color, m_r);
 	}
-	else
+	else //ステージ５なら
 	{
 		dst.m_right = dst.m_left + STAGE5_BOSS_BULLET_SIZE;
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_BULLET_SIZE;

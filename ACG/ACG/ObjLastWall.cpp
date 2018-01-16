@@ -58,7 +58,6 @@ void CObjLastWall::Init()
 //アクション
 void CObjLastWall::Action()
 {
-	
 	//HitBoxの位置の変更
 	//引数で持ってきたオブジェクトとあたっているか調べる
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -147,12 +146,12 @@ void CObjLastWall::Action()
 				//LastWallの右側が衝突している場合
 				if (0 < r && r < 85 || 275 < r && r < 360)
 				{
-					objenemy->SetVX(2.0f);//敵のX方向の移動を2にする
+					objenemy->SetVecX(2.0f);//敵のX方向の移動を2にする
 					objenemy->SetPosture(1.0f);//向き変更
 				}
 				else if (94 < r && r < 266)
 				{
-					objenemy->SetVX(-2.0f);//敵のX方向の移動を-2にする
+					objenemy->SetVecX(-2.0f);//敵のX方向の移動を-2にする
 					objenemy->SetPosture(0.0f);//向き変更
 				}
 			}
@@ -172,7 +171,7 @@ void CObjLastWall::Action()
 				//LastWallの右側が衝突している場合
 				if (0.0f < r && r < 85.0f || 275.0f < r && r < 360.0f)
 				{
-					objboss->SetVX(2.0f);//BOSSのX方向の移動を2にする
+					objboss->SetVecX(2.0f);//BOSSのX方向の移動を2にする
 					objboss->SetPosture(0.0f);//BOSS向き変更
 				}
 				//LastWallの左側が衝突している場合
@@ -189,65 +188,65 @@ void CObjLastWall::Action()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	int map_num = objmap->GetMap(m_map_x, m_map_y);
 
-		// m_wall_gaugeが512を越えたら処理ストップ
-		if (m_wall_gauge >= 512)
+	// m_wall_gaugeが512を越えたら処理ストップ
+	if (m_wall_gauge >= 512)
+	{
+		// 主人公が壁の右側にいないと壁がしまらないようにする
+		if (objhero->GetPosX() > m_px + BLOCK_SIZE)
 		{
-			// 主人公が壁の右側にいないと壁がしまらないようにする
-			if (objhero->GetPosX() > m_px + BLOCK_SIZE)
-			{
-				//主人公が右側にいったので、壁が下がるフラグをtrueにする
-				m_wall_down_flag = true;
+			//主人公が右側にいったので、壁が下がるフラグをtrueにする
+			m_wall_down_flag = true;
 
-				//壁のゲージを0にする
-				m_wall_gauge = 0;
-			}
+			//壁のゲージを0にする
+			m_wall_gauge = 0;
+		}
 				
-			Audio::Stop(WALL);//音楽ストップ
-		}
-		else
+		Audio::Stop(WALL);//音楽ストップ
+	}
+	else
+	{
+		//heroが左側に振れてたら
+		if (m_hero_hit_flag == true && m_wall_down_flag == false)
 		{
-			//heroが左側に振れてたら
-			if (m_hero_hit_flag == true && m_wall_down_flag == false)
-			{
-				m_wall_gauge += 3; // 3ずつ増やしていく
-				Audio::Start(WALL);//開門の音楽スタート
-			}
+			m_wall_gauge += 3; // 3ずつ増やしていく
+			Audio::Start(WALL);//開門の音楽スタート
 		}
+	}
 
-		//壁のしまるフラグがfalseのとき
-		if (m_wall_down_flag == false)
-		{
-			// 壁のhitboxを小さくする
-			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 512.0f - m_wall_gauge);
-		}
+	//壁のしまるフラグがfalseのとき
+	if (m_wall_down_flag == false)
+	{
+		// 壁のhitboxを小さくする
+		HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 512.0f - m_wall_gauge);
+	}
 
-		// ボスが出てきたら強制的に閉める処理
-		if (objboss != nullptr || objenemy != nullptr||objstage5boss!=nullptr)
-		{
-			m_wall_down_flag = true;//切り替えフラグオン
-			m_wall_gauge = 0;		//wall初期化
-			Audio::Stop(WALL);		//音楽ストップ
-		}
+	// ボスが出てきたら強制的に閉める処理
+	if (objboss != nullptr || objenemy != nullptr||objstage5boss!=nullptr)
+	{
+		m_wall_down_flag = true;//切り替えフラグオン
+		m_wall_gauge = 0;		//wall初期化
+		Audio::Stop(WALL);		//音楽ストップ
+	}
 
-		//壁がしまった時
-		if (m_wall_gauge2 >= 512)
+	//壁がしまった時
+	if (m_wall_gauge2 >= 512)
+	{
+		Audio::Stop(WALL);//音楽ストップ
+		m_wall_unlock_flag = false;
+	}
+	//壁が開いているとき
+	else
+	{
+		//壁が下がるフラグオン
+		if (m_wall_down_flag == true)
 		{
-			Audio::Stop(WALL);//音楽ストップ
-			m_wall_unlock_flag = false;
-		}
-		//壁が開いているとき
-		else
-		{
-			//壁が下がるフラグオン
-			if (m_wall_down_flag == true)
-			{
-				m_wall_gauge2 += 512;	//一番下まで下がる
-				Audio::Start(WALL);		//開門の音楽スタート
+			m_wall_gauge2 += 512;	//一番下まで下がる
+			Audio::Start(WALL);		//開門の音楽スタート
 
-				//hitboxが小さくなる
-				HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 0.0f + m_wall_gauge2);
-			}
+			//hitboxが小さくなる
+			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 0.0f + m_wall_gauge2);
 		}
+	}
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px+29, m_py+65);

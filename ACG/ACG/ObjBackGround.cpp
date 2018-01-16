@@ -1,25 +1,11 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
-#include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
 #include "ObjBackGround.h"
-#include "Function.h"
 
 //使用するネームスペース
 using namespace GameL;
-
-//イニシャライズ
-void CObjBackGround::Init()
-{
-	 m_px=0.0f;	// 背景X座標
-	 m_py=0.0f;	// 背景Y座標
-}
-
-//アクション
-void CObjBackGround::Action()
-{
-}
 
 //ドロー
 void CObjBackGround::Draw()

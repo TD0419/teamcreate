@@ -192,25 +192,6 @@ void CSceneMain::ImageDataLoading()
 			Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
 			break;
 		}
-		//ステージ３
-		case 3:
-		{
-			//リフト画像読み込み
-			Draw::LoadImageW(L"Image\\Lift\\Stage3.png", GRA_LIFT, TEX_SIZE_128);
-			//ブロック画像読み込み
-			Draw::LoadImageW(L"Image\\Block\\Stage3.png", GRA_BLOCK, TEX_SIZE_128);
-			//キャノンの読み込み
-			Draw::LoadImageW(L"Image\\Cannon.png", GRA_CANNON, TEX_SIZE_64);
-			//lastwall3画像の読み込み
-			Draw::LoadImageW(L"Image\\Lastwall3.png", GRA_LAST_WALL, TEX_SIZE_256);//上
-			Draw::LoadImageW(L"Image\\Openwall3.png", GRA_OPEN_WALL, TEX_SIZE_512);//下
-			break;
-		}
-		//ステージ４
-		case 4:
-		{
-			break;
-		}
 		//ステージ５
 		case 5:
 		{
@@ -258,6 +239,8 @@ void CSceneMain::ImageDataLoading()
 
 			break;
 		}
+		default:
+			break;
 	}
 	
 	//プレイヤー画像読み込み

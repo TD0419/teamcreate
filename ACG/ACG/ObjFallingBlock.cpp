@@ -109,7 +109,7 @@ void CObjFallingBlock::Action()
 
 	//ヒーローオブジェクトと当たっていれば
 	if (hit != nullptr)
-{	
+	{	
 		HeroHit();//衝突処理をする
 		
 		//HitBoxの位置を更新する

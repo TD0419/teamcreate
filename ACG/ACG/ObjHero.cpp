@@ -68,15 +68,15 @@ void CObjHero::Action()
 
 	HitScene();	//当たり判定
 
-	if (m_posture == 0.0f)
+	if (m_posture == 0.0f) //右向きのとき
 	{
 		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px + 3, m_py + 14);
+		HitBoxUpData(Hits::GetHitBox(this), m_px + 3.0f, m_py + 14.0f);
 	}
 	else
 	{
 		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px + 15, m_py + 14);
+		HitBoxUpData(Hits::GetHitBox(this), m_px + 15.0f, m_py + 14.0f);
 	}
 }
 
@@ -96,16 +96,19 @@ void CObjHero::GetBlockInformation()
 		{
 			pos_x = (int)HERO_SIZE_WIDTH;
 		}
-		//左下
+		//真下
 		else if (i == 2)
 		{
 			pos_x = (int)HERO_SIZE_WIDTH / 2;
 		}
+
 		//主人公のX位置(マップの要素数)
 		int x = ((int)m_px + pos_x) / (int)BLOCK_SIZE;
+		
 		//主人公のY位置(マップの要素数)
 		//少し下にする
 		int y = ((int)m_py + 1 + (int)HERO_SIZE_HEIGHT) / (int)BLOCK_SIZE;
+		
 		//ブロック情報が0で無いなら取得
 		if (objmap->GetMap(x, y) != 0)
 		{
@@ -175,21 +178,18 @@ void CObjHero::MoveScene()
 	}
 
 	//ジャンプ--------------------------------------------------------------------
-
-	//ロープを出している時は動かない  はしごを上っている時も動かない　　水に当たっているときと敵と当たった時も動かない
+	//ロープを出している時は動かない  はしごを上っている時も動かない　
+	//水に当たっているときと敵と当たった時も動かない
 	if (Input::GetVKey(VK_SPACE) == true && m_ladder_updown == 0 &&
 		m_rope_ani_con == false && m_hero_die_water == false &&
 		m_ani_frame_enemy_die == false && l_jump == false)
 	{
-		if (m_hit_down == true)
-		{
+		if (m_hit_down == true)	//下にブロックがあれば
 			m_vy = -13.0f;
-		}
+		
 	}
-
 	//ジャンプ終了-------------------------------------------------------------------------------------
-
-	
+		
 	//↓キーがおされたとき：下に下がる（デバッグ）
 	if (Input::GetVKey(VK_DOWN) == true)
 	{

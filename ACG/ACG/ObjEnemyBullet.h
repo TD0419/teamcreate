@@ -11,7 +11,6 @@ class CObjEnemyBullet :public CObj
 {
 public:
 	CObjEnemyBullet(float x, float y);				//コンストラクタ（BOSS用主人公の方向へ）
-	CObjEnemyBullet(float x, float y, float rad);	//コンストラクタ(ギミック用　指定した方向へ)
 	~CObjEnemyBullet() {};	        //デストラクタ
 	void Init();	                //イニシャライズ
 	void Action();	                //アクション

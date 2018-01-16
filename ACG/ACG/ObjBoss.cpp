@@ -1,5 +1,4 @@
 #include "GameL\DrawTexture.h"
-#include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 #include "GameL\Audio.h"
@@ -48,15 +47,14 @@ void CObjBoss::Init()
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py + 100.0f, 150.0f, 150.0f, ELEMENT_ENEMY, OBJ_BOSS, 1);
 
+	//ステージ音を止めてボス戦の音楽を開始する
 	Audio::Stop(STAGE);
 	Audio::Start(BOSS);
-
 }
 
 //アクション
 void CObjBoss::Action()
 {
-
 	m_ani_time_walk++;
 	m_ani_time_throw++;
 
@@ -66,6 +64,7 @@ void CObjBoss::Action()
 		m_ani_frame_walk += 1;
 		m_ani_time_walk = 0;
 	}
+
 	//投げるアニメーションの間隔管理(投げるアニメーションフラグがＯＮのとき)
 	else if (m_ani_throw_start_flag == true && (m_ani_time_throw > m_ani_throw_max_time))
 	{
@@ -86,7 +85,6 @@ void CObjBoss::Action()
 		m_ani_frame_throw = 1;
 		m_throw_bullet_flag = false;
 	}
-
 
 	// 敵弾丸作成
 	if (m_ani_frame_throw == 9)//腕を上げたとき
@@ -113,15 +111,12 @@ void CObjBoss::Action()
 	//HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-
 	if (m_posture == 0.0f)		// 右向きなら
 		m_vx = m_speed;			// 右に進む
 	else if (m_posture == 1.0f) // 左向きなら
 		m_vx = -m_speed;		// 左に進む
 
-
-//摩擦
-	m_vx += -(m_vx * 0.098f);
+	m_vx += -(m_vx * 0.098f);//摩擦
 
 	m_vy = 9.8f / (16.0f);//自由落下
 
@@ -162,7 +157,6 @@ void CObjBoss::Action()
 			//投げるアニメーション開始フラグをＯＮにする
 			m_ani_throw_start_flag = true;
 		}
-
 	}
 	else if (m_hit_left == true || m_wall_hit_flag == true)// ブロックの左側に当たっていたら
 	{
@@ -183,8 +177,6 @@ void CObjBoss::Action()
 		}
 	}
 
-	CObjDoor* objdoor = (CObjDoor*)Objs::GetObj(OBJ_DOOR);
-
 	//弾丸とあたったらHP-1
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
@@ -196,7 +188,6 @@ void CObjBoss::Action()
 	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
 	{
 		CObjLastWall* objlastwall = (CObjLastWall*)Objs::GetObj(OBJ_LAST_WALL);
-
 		m_px = objlastwall->GetPosX() - BOSS_SIZE_WIDTH;//柱の左側に
 	}
 	// 体力が0以下なら
@@ -222,7 +213,6 @@ void CObjBoss::Action()
 //ドロー
 void CObjBoss::Draw()
 {
-
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -244,7 +234,7 @@ void CObjBoss::Draw()
 	else if (m_ani_throw_start_flag == true)
 	{
 		src.m_top = 82.0f;
-		src.m_left = m_ani_frame_throw * 96.0f - 96.0f;
+		src.m_left = (float)(m_ani_frame_throw - 1) * 96.0f;
 		src.m_right = src.m_left + 96.0f;
 		src.m_bottom = src.m_top + 72.0f;
 	}
@@ -253,9 +243,8 @@ void CObjBoss::Draw()
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = BOSS_SIZE_WIDTH * m_posture + m_px - objmap->GetScrollX();
 	dst.m_right = (BOSS_SIZE_WIDTH - BOSS_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
-	dst.m_bottom = dst.m_top + BOSS_SIZE_HEIGHT + 2;
+	dst.m_bottom = dst.m_top + BOSS_SIZE_HEIGHT + 2.0f;
 
 	//描画
 	Draw::Draw(GRA_BOSS, &src, &dst, color, 0.0f);
-
 }

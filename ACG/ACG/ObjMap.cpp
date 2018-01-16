@@ -241,13 +241,6 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
-		case MAP_REFLECT_BLOCK:	//反射用ブロック作成
-		{
-			CObjReflectBlock* objreflec_block = new CObjReflectBlock(x, y);
-			Objs::InsertObj(objreflec_block, OBJ_REFLECT_BLOCK, 9);
-			break;
-		}
-
 		case MAP_ROLL_BLOCK_TYPE_AUTO://回転ブロック（自動回転）作成
 		{
 			CObjRollBlock* objrollblock = new CObjRollBlock(x, y,1);
@@ -262,20 +255,7 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
-		case MAP_STAGE3_BOSS:		//第三ボス作成
-		{
-			CObjStage3Boss* objstage3_boss = new CObjStage3Boss(x, y);
-			Objs::InsertObj(objstage3_boss, OBJ_STAGE3_BOSS, 9);
-			break;
-		}
-
-		case MAP_CANNON:		//砲台
-		{
-			CObjCannon* objcannon = new CObjCannon(x, y);
-			Objs::InsertObj(objcannon, OBJ_CANNON, 9);
-			break;
-		}
-
+	
 		case MAP_TARZAN_POINT://ロープでぶら下がれるギミック
 		{
 			CObjTarzanPoint* objtarzanpoint = new CObjTarzanPoint(x, y,true);
@@ -361,7 +341,6 @@ void CObjMap::CreateFallingBloack(int create_start_x,int create_start_y)
 			//落ちるブロックだけを生成する
 			if (m_map[y][x].num == MAP_FALLING_BLOCK)
 			{
-				
 				//生成のフラグがオンなら
 				if (m_map[y][x].create == true)
 				{

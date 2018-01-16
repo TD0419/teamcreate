@@ -59,9 +59,6 @@
     <Filter Include="ソース ファイル\Main\Stage3Boss">
       <UniqueIdentifier>{e32fec2d-4a65-4cb2-b78b-a8e226b765bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\EndlessSpring">
-      <UniqueIdentifier>{c782f425-bfb7-4f8a-a267-1bfd7a9162d9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\ReflectBlock">
       <UniqueIdentifier>{3e17a3b5-d192-436d-b626-dad0185afe93}</UniqueIdentifier>
     </Filter>
@@ -71,17 +68,8 @@
     <Filter Include="ソース ファイル\Main\ThroughBlock">
       <UniqueIdentifier>{77f04e69-178f-4e96-b919-0d0532fefba0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\BossDropKey">
-      <UniqueIdentifier>{a7e1b532-76af-4058-ba94-098cb00ab2ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Main\FallingWalls">
-      <UniqueIdentifier>{6296e886-feb9-4dad-8082-74c958c81f8c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\BackGround">
       <UniqueIdentifier>{477b5c30-202e-44a1-ab03-445b3ea37cc8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Main\Cannon">
-      <UniqueIdentifier>{e5a59037-b682-4795-a1fd-babcfcd474bb}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Main\Door">
       <UniqueIdentifier>{2142473b-91fb-43be-be4b-e5a486d4221f}</UniqueIdentifier>
@@ -237,17 +225,11 @@
     <ClInclude Include="ObjStage3Boss.h">
       <Filter>ソース ファイル\Main\Stage3Boss</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEndlessSpring.h">
-      <Filter>ソース ファイル\Main\EndlessSpring</Filter>
-    </ClInclude>
     <ClInclude Include="ObjReflectBlock.h">
       <Filter>ソース ファイル\Main\ReflectBlock</Filter>
     </ClInclude>
     <ClInclude Include="ObjLeverswich.h">
       <Filter>ソース ファイル\Main\LeverSwich</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBossDropKey.h">
-      <Filter>ソース ファイル\Main\BossDropKey</Filter>
     </ClInclude>
     <ClInclude Include="ObjBoss.h">
       <Filter>ソース ファイル\Main\Boss</Filter>
@@ -258,14 +240,8 @@
     <ClInclude Include="ObjThroughBlock.h">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
     </ClInclude>
-    <ClInclude Include="ObjFallingWalls.h">
-      <Filter>ソース ファイル\Main\FallingWalls</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBackGround.h">
       <Filter>ソース ファイル\BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjCannon.h">
-      <Filter>ソース ファイル\Main\Cannon</Filter>
     </ClInclude>
     <ClInclude Include="Function.h">
       <Filter>ソース ファイル</Filter>
@@ -419,17 +395,11 @@
     <ClCompile Include="ObjStage3Boss.cpp">
       <Filter>ソース ファイル\Main\Stage3Boss</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEndlessSpring.cpp">
-      <Filter>ソース ファイル\Main\EndlessSpring</Filter>
-    </ClCompile>
     <ClCompile Include="ObjLeverswich.cpp">
       <Filter>ソース ファイル\Main\LeverSwich</Filter>
     </ClCompile>
     <ClCompile Include="ObjReflectBlock.cpp">
       <Filter>ソース ファイル\Main\ReflectBlock</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBossDropKey.cpp">
-      <Filter>ソース ファイル\Main\BossDropKey</Filter>
     </ClCompile>
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソース ファイル\Main\Boss</Filter>
@@ -440,14 +410,8 @@
     <ClCompile Include="ObjThroughBlock.cpp">
       <Filter>ソース ファイル\Main\ThroughBlock</Filter>
     </ClCompile>
-    <ClCompile Include="ObjFallingWalls.cpp">
-      <Filter>ソース ファイル\Main\FallingWalls</Filter>
-    </ClCompile>
     <ClCompile Include="ObjBackGround.cpp">
       <Filter>ソース ファイル\BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjCannon.cpp">
-      <Filter>ソース ファイル\Main\Cannon</Filter>
     </ClCompile>
     <ClCompile Include="ObjLadders.cpp">
       <Filter>ソース ファイル\Main\Ladder</Filter>
