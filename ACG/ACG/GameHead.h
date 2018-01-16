@@ -38,7 +38,6 @@ enum OBJ_NAME
 	OBJ_BACKGROUND,		//バッググラウンド(背景)
 	OBJ_CANNON,		    //砲台
 	OBJ_LAST_WALL,		//最後の壁
-	OBJ_TIME,			//タイム
 	OBJ_ROLL_BLOCK,		//回転するブロック
 	OBJ_ROLL_BLOCK_SWITCH,//回転するブロック用のスイッチ
 	OBJ_NEEDLE,			  //針
@@ -335,7 +334,6 @@ enum MUSIC
 #include "ObjBackGround.h"		//バッググラウンド(背景)
 #include "ObjCannon.h"			//砲台
 #include "ObjLastWall.h"		//最後の壁
-#include "ObjTime.h"			//タイム
 #include "ObjNeedle.h"			//針
 #include "ObjNeedleStand.h"     //針の土台
 #include "ObjDiffusionCannon.h" //拡散弾発射装置

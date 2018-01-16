@@ -89,9 +89,6 @@
     <Filter Include="ソース ファイル\Main\Lastwall">
       <UniqueIdentifier>{414c2d43-9500-4e9e-8793-5499db4f53ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\Time">
-      <UniqueIdentifier>{5cf13a39-2034-4074-b468-0c603f87158f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\Needle">
       <UniqueIdentifier>{230ba973-e57e-4643-8637-354442c26e1e}</UniqueIdentifier>
     </Filter>
@@ -275,9 +272,6 @@
     </ClInclude>
     <ClInclude Include="ObjLastWall.h">
       <Filter>ソース ファイル\Main\Lastwall</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTime.h">
-      <Filter>ソース ファイル\Main\Time</Filter>
     </ClInclude>
     <ClInclude Include="ObjNeedle.h">
       <Filter>ソース ファイル\Main\Needle</Filter>
@@ -463,9 +457,6 @@
     </ClCompile>
     <ClCompile Include="ObjLastWall.cpp">
       <Filter>ソース ファイル\Main\Lastwall</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTime.cpp">
-      <Filter>ソース ファイル\Main\Time</Filter>
     </ClCompile>
     <ClCompile Include="ObjNeedle.cpp">
       <Filter>ソース ファイル\Main\Needle</Filter>

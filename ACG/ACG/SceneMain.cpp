@@ -59,10 +59,6 @@ void CSceneMain::InitScene()
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
 
-	//タイム
-	CObjTime* objtime = new CObjTime();
-	Objs::InsertObj(objtime, OBJ_TIME, 100);
-
 	//デバッグ　”使い終わったら消してください！”----------------
 	
 	//要らんの--------------------------------------------------
