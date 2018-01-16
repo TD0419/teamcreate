@@ -97,7 +97,7 @@ void CObjEnemyBullet::Init()
 	
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
-		case 5://ステージ５
+		case 3://ステージ3
 		{
 			//当たり判定用HitBoxを作成
 			Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BULLET_SIZE, STAGE5_BOSS_BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);

@@ -49,14 +49,14 @@ void CObjFallingBlock::Action()
 		m_screen_out = false;//画面外にブロックが出ていない
 	}
 
-	//ステージ5ボスのオブジェクトの取得
+	//ステージ3ボスのオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 	bool stage5boss_atk4_count = false;//ステージ5ボスの攻撃４用カウンターの情報取得用
 	bool stage5boss_death_flag = false;//ステージ5ボスの死亡フラグの情報取得用
 
 	if (objboss != nullptr)//ボスオブジェクトがあれば
 	{
-		//ステージ5ボスの死亡フラグの情報を取得する
+		//ステージ3ボスの死亡フラグの情報を取得する
 		stage5boss_death_flag = objboss->GetBossDeathFlag();
 		
 		//ブロックを初期位置に戻すためのフラグ
@@ -86,7 +86,7 @@ void CObjFallingBlock::Action()
 		Audio::Start(GROUND);
 		
 	}
-	//ステージ5ボスを倒したとき、落ちるブロックを上昇させる
+	//ステージ3ボスを倒したとき、落ちるブロックを上昇させる
 	if( stage5boss_death_flag == true)
 	{
 		m_py -= 8.0f;
