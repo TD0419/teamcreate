@@ -55,7 +55,7 @@ void CObjRopeSwitch::Action()
 			Objs::InsertObj(objlift, OBJ_LIFT, 9);
 			break;
 		}
-		case 5://ステージ5	
+		case 3://ステージ3	
 		{
 			//リフト（手動）の生成
 			CObjLift* objlift = new CObjLift(29,22 ,0,640.0f ,0);

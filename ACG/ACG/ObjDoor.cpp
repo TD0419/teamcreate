@@ -45,10 +45,8 @@ void CObjDoor::Init()
 	case 3:
 		m_door_type = 3;
 		break;
-		//ステージ５
-	case 5:
-		m_door_type = 5;
-		break;
+	
+	
 	default:
 
 		break;
@@ -90,8 +88,8 @@ void CObjDoor::Action()
 			m_unlock_flag = true;//施錠解除フラグをonにします
 		}
 		break;
-	case 5:
-		//ステージ５のボスが消滅したとき
+	case 3:
+		//ステージ3のボスが消滅したとき
 		if (objstage5_boss == nullptr)
 		{
 			m_unlock_flag = true;//施錠解除フラグをonにします

@@ -160,7 +160,7 @@ void CObjLift::Init()
 			break;
 			
 		}
-		case 5:
+		case 3:
 		{
 			if (m_move_mode == 0)//éËìÆ
 			{
@@ -239,7 +239,7 @@ void CObjLift::Draw()
 			Draw::Draw(GRA_LIFT, &src, &dst, color, 0.0f);
 			break;
 		}
-		case 5:
+		case 3:
 		{
 			if(m_move_mode==0)//éËìÆÇ»ÇÁ
 			{
@@ -339,7 +339,7 @@ void CObjLift::HeroRide()
 					}
 				}
 				break;
-			case 5:
+			case 3:
 				//è„ë§Ç™Ç†ÇΩÇ¡ÇƒÇ¢ÇÍÇŒ
 				if (10.0f <= r && r <= 170.0f&&objhero->GetVecY()>0)
 				{

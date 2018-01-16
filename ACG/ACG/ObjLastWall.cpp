@@ -45,10 +45,7 @@ void CObjLastWall::Init()
 	case 3:
 		m_wall_type = 3;
 		break;
-		//ステージ５
-	case 5:
-		m_wall_type = 5;
-		break;
+		
 	default:
 
 		break;

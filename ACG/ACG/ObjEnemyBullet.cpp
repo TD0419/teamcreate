@@ -97,7 +97,7 @@ void CObjEnemyBullet::Init()
 	
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
-		case 5://ステージ５
+		case 3://ステージ3
 		{
 			//当たり判定用HitBoxを作成
 			Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_BULLET_SIZE, STAGE5_BOSS_BULLET_SIZE, ELEMENT_ENEMY, OBJ_ENEMY_BULLET, 1);
@@ -131,8 +131,13 @@ void CObjEnemyBullet::Action()
 				CObjBoss* objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-				//主人公とボスのXの位置を持ってくる
-				float boss_x = objboss->GetPosX();
+				//主人公とボスのXの位置を持ってくる(死亡していないとき)
+				float boss_x = 0.f; 
+				if (objboss != nullptr)
+				{
+					objboss->GetPosX();
+				}
+				
 				float hero_x = objhero->GetPosX();
 
 				//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
@@ -141,13 +146,18 @@ void CObjEnemyBullet::Action()
 
 				break;
 			}
-			case 5:	//ステージ５
+			case 3:	//ステージ3
 			{
-				CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+				CObjStage5Boss* objboss5 = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-				//主人公とボスのXの位置を持ってくる
-				float boss_y = objboss->GetPosY();
+				//主人公とボス5のXの位置を持ってくる(死亡していないとき)
+				float boss_y = 0.f;
+				if (objboss5!=nullptr)
+				{
+					objboss5->GetPosY();
+				}
+					
 				float hero_y = objhero->GetPosY();
 
 				//ボスと弾の距離　が　ボスとヒーローの距離　より大きければ
@@ -169,7 +179,7 @@ void CObjEnemyBullet::Action()
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//ブロックとの当たり判定
-	if(((UserData*)Save::GetData())->stagenum == 5)	//ステージ5
+	if(((UserData*)Save::GetData())->stagenum == 3)	//ステージ5
 	{
 		objblock->AllBlockHit(&m_px, &m_py, STAGE5_BOSS_BULLET_SIZE, STAGE5_BOSS_BULLET_SIZE,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);

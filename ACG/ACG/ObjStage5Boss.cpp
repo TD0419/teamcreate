@@ -29,7 +29,7 @@ void CObjStage5Boss::Init()
 	m_left_arm_down_flag = false;
 
 	//‰Šú‰»‚·‚é(‰½‚à‚µ‚Ä‚¢‚È‚¢)
-	m_attack_mode = 4;
+	m_attack_mode = 2;
 
 	m_lastwall_hit_flag=false;
 
