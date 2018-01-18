@@ -68,7 +68,7 @@ void CObjStage5BossArms::Init()
 	{
 		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
 		//																横サイズ補正値						   縦サイズ補正値
-		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
+		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE-5.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
 	}
 }
 
@@ -263,7 +263,7 @@ void CObjStage5BossArms::Draw()
 	}
 	//爪の開閉アニメーションをするときの配列
 	//要素数はm_ani_frame_claw
-	int ani_claw[5] = { 1,2,0 };
+	int ani_claw[3] = { 1,2,0 };
 
 	//右腕(ライトアーム)---------------------------------------
 	//アームタイプが1のときはライトアームを描画
@@ -287,7 +287,6 @@ void CObjStage5BossArms::Draw()
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 		//描画
 		Draw::Draw(GRA_STAGE5_BOSS_ARMS_ALL, &src, &dst, color, 0.0f);
-
 	}
 
 	//左腕(ライトアーム)---------------------------------------
@@ -374,7 +373,7 @@ void CObjStage5BossArms::MoveShotAttack()
 void CObjStage5BossArms::DiffusionAttack(int limit_time)
 {
 	//拡散弾の源を作成
-	CObjDiffusionSource* p = new CObjDiffusionSource(m_px + STAGE5_BOSS_ARMS_WIDTH_SIZE / 2.0f, m_py + STAGE5_BOSS_ARMS_HEIGHT_SIZE - 10.0f, limit_time);
+	CObjDiffusionSource* p = new CObjDiffusionSource(m_px + STAGE5_BOSS_ARMS_WIDTH_SIZE / 2.0f, m_py + STAGE5_BOSS_ARMS_HEIGHT_SIZE, limit_time);
 	Objs::InsertObj(p, OBJ_DIFFUSION_SOURCE, 10);
 }
 
@@ -400,7 +399,7 @@ void CObjStage5BossArms::ArmLowerAttack()
 	//120フレームの間に主人公のX位置と同じになるようにベクトルXを調整
 	if (m_armdown_time < 120)
 	{
-		m_vx = (m_arm_lower_marker_px - m_px) / (120 - m_armdown_time);
+		m_vx = (m_arm_lower_marker_px - m_px) / (float)(120 - m_armdown_time);
 	}
 	//120以上なら腕を下ろすのでX移動量を0.0fにする
 	else

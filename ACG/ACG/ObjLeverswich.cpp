@@ -28,6 +28,7 @@ void CObjLeverSwich::Init()
 	m_ani_flag = false;
 	m_ani_flag2 = false;
 	m_water_con = false;
+
 	//“–‚½‚è”»’è—pHitBox‚ðì¬
 	Hits::SetHitBox(this, m_px, m_py, LEVER_SWITCH_SIZE, LEVER_SWITCH_SIZE, ELEMENT_GIMMICK, OBJ_LEVER_SWICH, 1);
 }
@@ -108,8 +109,8 @@ void CObjLeverSwich::Draw()
 	src.m_bottom = 128.0f;
 
 	//•`‰æˆÊ’u
-	dst.m_top = 0.0f + m_py - objmap->GetScrollY();
-	dst.m_left = 0.0f + m_px - objmap->GetScrollX();
+	dst.m_top = m_py - objmap->GetScrollY();
+	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + LEVER_SWITCH_SIZE;
 	dst.m_bottom = dst.m_top + LEVER_SWITCH_SIZE;
 

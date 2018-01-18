@@ -9,11 +9,11 @@ using namespace GameL;
 //コンストラクタ
 CObjLadders::CObjLadders(int x, int y,bool look)
 {
-	m_px = x * LADDERS_SIZE;
-	m_py = y * LADDERS_SIZE;
+	m_px = (float)x * LADDERS_SIZE;
+	m_py = (float)y * LADDERS_SIZE;
 	m_map_x = x;
 	m_map_y = y;	
-	m_obj_look_f = look;		//ハシゴが見えるかどうか false:見えない true:見える
+	m_obj_look_flag = look;		//ハシゴが見えるかどうか false:見えない true:見える
 }
 
 //イニシャライズ
@@ -50,14 +50,14 @@ void CObjLadders::Action()
 
 		// ボタンを押していたら
 	if (objbutton != nullptr && objbutton->GetTrickFlag() == true)
-		m_obj_look_f = true;			   // はしごが見えるようにする
+		m_obj_look_flag = true;			   // はしごが見えるようにする
 }
 
 //ドロー
 void CObjLadders::Draw()
 {
 	// 見える状態なら描画する
-	if (m_obj_look_f == true)
+	if (m_obj_look_flag == true)
 	{
 		//描画カラー
 		float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
@@ -96,7 +96,7 @@ void CObjLadders::Draw()
 void CObjLadders::HeroHit(float px, float py)
 {
 	// 見える状態なら判定をする
-	if (m_obj_look_f == true)
+	if (m_obj_look_flag == true)
 	{
 		//マップオブジェクトを持ってくる
 		CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -223,4 +223,3 @@ void CObjLadders::HeroHit(float px, float py)
 		}
 	}
 }
-

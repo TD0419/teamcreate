@@ -29,8 +29,8 @@ void CObjHero::Init()
 	m_rope_delete_r_kye = false;//アニメーション用ロープが消えたかどうかを管理する 
 	m_hero_die_flag = false;
 
-	m_hero_die_water = false;
-	m_hero_die_enemy = false;
+	m_die_water_flag = false;
+	m_die_enemy_flag = false;
 	m_screen_out = 0.0f;
 	
 	m_ladder_updown = 0;
@@ -56,7 +56,7 @@ void CObjHero::Init()
 	m_ani_time_enemy_die = 0;
 	m_ani_frame_enemy_die = 0;//主人公が敵に当たった時静止フレームを初期にする
 
-	l_jump = false;
+	m_ladder_hit_flag = false;
 
 	m_fallblock_create_flag = true;
 

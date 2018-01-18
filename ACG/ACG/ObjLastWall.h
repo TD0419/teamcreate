@@ -6,7 +6,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト：Water(ギミック)
+//オブジェクト：LastWall(ボス戦の柱）
 class CObjLastWall :public CObj
 {
 	public:
@@ -26,7 +26,7 @@ class CObjLastWall :public CObj
 		int m_map_x;//X
 		int m_map_y;//Y
 		int m_wall_gauge;//壁の高さ管理
-		int m_wall_gauge2;
+		int m_wall_down_gauge;//壁をおろすときの管理用
 		bool m_wall_unlock_flag;//ボタンがおされたかのフラグ
 		bool m_hero_hit_flag;   //壁の左側にheroが当たったときのフラグ
 		bool m_wall_down_flag;  //壁が下に下がるフラグ

@@ -187,7 +187,7 @@ void CObjRope::RopeDraw(float color[])
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//描画の太さ
-	float drow_size = 2;
+	float drow_size = 2.0f;
 
 	//点を打つ位置と主人公の腕の距離
 	float drow_px = 0.0f;
@@ -393,8 +393,6 @@ void CObjRope::RopeDelete()
 		return;
 	}
 	
-
-
 	//ロープが消していいかどうかを調べる
 	bool rope_delete_r_key = objhero->GetRopeDeleteRKey();
 

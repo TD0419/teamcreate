@@ -39,13 +39,12 @@ void CObjWireMesh::Action()
 		{
 			float r = hit_data[i]->r;//あたっている角度を持ってくる
 
-									 //主人公オブジェクトを持ってくる
+			//主人公オブジェクトを持ってくる
 			CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 			//上側があたっていれば
 			if (5.5f < r && r < 174.5f)
 			{
-
 				objhero->SetHitDown(true);//主人公が乗っていたらm_hit_downにtrueを返す
 
 				//乗せる処理

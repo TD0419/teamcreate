@@ -3,6 +3,7 @@
 #include "GameL\HitBoxManager.h"
 #include "GameL\WinInputs.h"
 #include "GameL\UserData.h"
+
 #include "GameL\Audio.h"
 
 #include "GameHead.h"
@@ -35,8 +36,8 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 
 	//最大移動量を決める
 	//値が負の数なら正の数にする
-	if (width_max < 0)
-		width_max *= -1;
+	if (width_max < 0.0f)
+		width_max *= -1.0f;
 
 	//X方向の最大移動量をセット
 	m_width_max = width_max;
@@ -78,7 +79,7 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 				block_count++;
 				if (block_count >= block_max_count)
 				{
-					m_width_max = (px * BLOCK_SIZE) - (i*BLOCK_SIZE);
+					m_width_max = (px * BLOCK_SIZE) - ((float)i*BLOCK_SIZE);
 					break;
 				}
 			}
@@ -109,12 +110,11 @@ CObjLift::CObjLift(int px,int py,int direction,float width_max,int mode)
 				//カウントを進める
 				block_count++;
 					
-				m_width_max = (i*BLOCK_SIZE) - (px * BLOCK_SIZE);
+				m_width_max = (float)( i * BLOCK_SIZE) - (px * BLOCK_SIZE);
 				break;
 			}
 		}
 	}
-	
 }
 
 //コンストラクタ
@@ -160,7 +160,7 @@ void CObjLift::Init()
 			break;
 			
 		}
-		case 5:
+		case 3:
 		{
 			if (m_move_mode == 0)//手動
 			{
@@ -174,15 +174,12 @@ void CObjLift::Init()
 			}
 			break;
 		}
-	}
-
-	
+	}	
 }
 
 //アクション
 void CObjLift::Action()
 {
-	
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 	
@@ -239,7 +236,7 @@ void CObjLift::Draw()
 			Draw::Draw(GRA_LIFT, &src, &dst, color, 0.0f);
 			break;
 		}
-		case 5:
+		case 3:
 		{
 			if(m_move_mode==0)//手動なら
 			{
@@ -271,8 +268,6 @@ void CObjLift::Draw()
 			break;
 		}
 	}
-	
-	
 }
 
 //主人公を乗せる処理をする
@@ -339,9 +334,9 @@ void CObjLift::HeroRide()
 					}
 				}
 				break;
-			case 5:
+			case 3:
 				//上側があたっていれば
-				if (10.0f <= r && r <= 170.0f&&objhero->GetVecY()>0)
+				if (10.0f <= r && r <= 170.0f && objhero->GetVecY() > 0.0f)
 				{
 					objhero->SetHitDown(true);//リフトの上に主人公が乗っていたらm_hit_downにtrueを返す
 
@@ -459,7 +454,6 @@ void CObjLift::ModeMove()
 						//右に進む
 						m_vx = SPEED;
 					}
-
 				}
 			}
 			//Aキーが押されていないならX移動０
@@ -471,7 +465,7 @@ void CObjLift::ModeMove()
 		else//ロープとロープスイッチがあたっていないとき
 		{
 			//初期位置から動いた距離が０を超えていたら移動
-			if (m_move_x > 0)
+			if (m_move_x > 0.0f)
 			{
 				//初期位置に近づくので減算
 				m_move_x -= SPEED;
@@ -514,7 +508,7 @@ void CObjLift::ModeMove()
 			m_move_x = m_width_max;//移動量の初期化
 		}
 		//初期位置から動いた距離が０未満だったら
-		if (m_move_x < 0)
+		if (m_move_x < 0.0f)
 		{
 			//初期の移動方向が右だったら
 			if (m_initial_direction == 0)
@@ -528,11 +522,11 @@ void CObjLift::ModeMove()
 				//行き過ぎた分を計算
 				m_vx = m_move_x;
 			}
-			m_move_x = 0;
+			m_move_x = 0.0f;
 		}
 
 		//初期位置から動いた距離が０またはMAXなら移動ベクトルを０にする
-		if (m_move_x == 0 || m_move_x == m_width_max)
+		if (m_move_x == 0.0f || m_move_x == m_width_max)
 			m_vx = 0.0f;
 		break;
 		//------------------------------自由移動モード(最大右X位置から最大値左X位置の間を自動移動)---------------
@@ -564,7 +558,7 @@ void CObjLift::ModeMove()
 
 		//初期位置から動いた距離が０またはMAX値だったら
 		//現在の移動方向を左右逆にする
-		if (m_move_x == 0 || m_move_x == m_width_max)
+		if (m_move_x == 0.0f || m_move_x == m_width_max)
 		{
 			//現在の移動方向が右なら左に
 			if (m_direction == 0)
@@ -576,7 +570,7 @@ void CObjLift::ModeMove()
 
 		//初期位置から動いた距離がMAX越えまたは０以下だったら
 		//行き過ぎた分を調整して現在の移動方向を左右逆にする
-		else if (m_move_x > m_width_max || m_move_x < 0)
+		else if (m_move_x > m_width_max || m_move_x < 0.0f)
 		{
 			//行き過ぎた分
 			//初期位置から動いた距離がMAX越えなら
@@ -594,13 +588,13 @@ void CObjLift::ModeMove()
 				else
 				{
 					//まず初期位置から動いた距離がMAXになる位置まで進める
-					m_vx = (m_width_max - (m_move_x - SPEED))*-1;
+					m_vx = (m_width_max - (m_move_x - SPEED))*-1.0f;
 					//超えた分を移動させる
 					m_vx += m_move_x - m_width_max;
 
 				}
 				//初期位置から動いた距離を計算
-				m_move_x -= (m_move_x - m_width_max) * 2;
+				m_move_x -= (m_move_x - m_width_max) * 2.0f;
 			}
 			//初期位置から動いた距離が０未満なら
 			else
@@ -617,11 +611,11 @@ void CObjLift::ModeMove()
 				else
 				{
 					//まず初期位置から動いた距離が０のときの位置まで進める
-					m_vx = (m_move_x + SPEED)*-1;
+					m_vx = (m_move_x + SPEED)*-1.0f;
 					//超えた分を移動させる
-					m_vx += m_move_x*-1;
+					m_vx += m_move_x*-1.0f;
 				}
-				////初期位置から動いた距離を計算
+				//初期位置から動いた距離を計算
 				m_move_x *= -1;
 			}
 			//現在の移動方向を左右逆にする
@@ -636,11 +630,11 @@ void CObjLift::ModeMove()
 		//上の限界Y位置
 		//この値より上に行ったら下の限界Y位置から出てくる
 		float up_limti;
-		up_limti = (MAP_Y_MAX - 12)*BLOCK_SIZE - LIFT_SIZE_HEIGHT;
+		up_limti = (float)(MAP_Y_MAX - 12)*BLOCK_SIZE - LIFT_SIZE_HEIGHT;
 		//下の限界Y位置
 		//この値より下に行ったら上の限界Y位置から出てくる
 		float down_limti;
-		down_limti = MAP_Y_MAX*BLOCK_SIZE;
+		down_limti = (float)MAP_Y_MAX * BLOCK_SIZE;
 		//現在の移動方向による移動
 		if (m_direction == 2)
 		{

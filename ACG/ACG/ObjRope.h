@@ -1,6 +1,5 @@
 #pragma once
 //使用するヘッダー
-#include "GameL\DrawTexture.h"
 #include "GameL\SceneObjManager.h"
 
 //使用するネームスペース
@@ -37,7 +36,6 @@ private:
 	float m_r;			 // ロープの角度	
 	bool  m_caught_flag; //ロープスイッチに引っかかったかを調べる用
 	bool  m_r_key_flag;  //ロープスイッチに引っかかるさいにRキーバグを直すための変数（Rキー押したままだとそのまま消える）
-
 	bool m_tarzan_point_flag;//ターザンポイントに引っかかったかどうかフラグ　true=引っかかっている false=引っかかっていない
 	//ブロックとの当たり判定用フラグ
 	bool m_hit_left;

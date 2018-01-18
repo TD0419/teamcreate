@@ -23,13 +23,13 @@ void CObjStage5Boss::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_hp = 1; //第5ボスのＨＰ
+	m_hp = 50; //第5ボスのＨＰ
 
 	m_right_arm_down_flag = false;
 	m_left_arm_down_flag = false;
 
 	//初期化する(何もしていない)
-	m_attack_mode = 4;
+	m_attack_mode = 0;
 
 	m_lastwall_hit_flag=false;
 
@@ -107,34 +107,34 @@ void CObjStage5Boss::Action()
 		switch (m_attack_mode)
 		{
 			//何もしていない状態
-			case 0:
+		case 0:
+		{
+			if (m_time % 100 == 0)
 			{
-				if (m_time % 100 == 0)
-				{
-					//何もしていないので攻撃モードをランダムで決める
-					m_attack_mode = GetRandom(1, 4);
-					m_time = 0;
-				}
-				break;
+				//何もしていないので攻撃モードをランダムで決める
+				m_attack_mode = GetRandom(1, 4);
+				m_time = 0;
 			}
-			//主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす攻撃
-			case 1:
-			{
-				//主人公オブジェクト情報を取得
-				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+			break;
+		}
+		//主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす攻撃
+		case 1:
+		{
+			//主人公オブジェクト情報を取得
+			CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-				if (m_time == 200)
-				{
-					//腕を下ろす攻撃をする(左腕)
-					m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(),true);
-					m_left_arm_down_flag = true;
-				}
-				else if(m_time == 300)
-				{
-					//腕を下ろす攻撃をする(右腕)
-					m_boos_arm_right->ArmLowerAttack(objhero->GetPosX(), true);
-					m_right_arm_down_flag = true;
-				}
+			if (m_time == 200)
+			{
+				//腕を下ろす攻撃をする(左腕)
+				m_boos_arm_left->ArmLowerAttack(objhero->GetPosX(), true);
+				m_left_arm_down_flag = true;
+			}
+			else if (m_time == 300)
+			{
+				//腕を下ろす攻撃をする(右腕)
+				m_boos_arm_right->ArmLowerAttack(objhero->GetPosX(), true);
+				m_right_arm_down_flag = true;
+			}
 
 			if (m_time >= 400)
 			{
@@ -170,60 +170,60 @@ void CObjStage5Boss::Action()
 				CObjEnemyBullet* p = new CObjEnemyBullet(m_px + EYE_CORRECTION_WIDTH + STAGE5_BOSS_EYE_SIZE / 2.0f, m_py + EYE_CORRECTION_HEIGHT + STAGE5_BOSS_EYE_SIZE / 2.0f);
 				Objs::InsertObj(p, OBJ_ENEMY_BULLET, 11);
 
-					m_attack3_count++;
-				}
-
-				if (m_attack3_count == 10)//10回攻撃したら
-				{
-					m_attack3_flag = false;//フラグをオフ
-					m_vx = 0.0f;//移動をとめる
-
-					//腕が地面に残っていなければ
-					if (m_right_arm_down_flag == false && m_left_arm_down_flag == false)
-						m_attack_mode = 0;
-					else
-						m_attack_mode = 3;
-				}
-				//腕にも移動量を渡す
-				if (m_right_arm_down_flag == false)	//腕が落ちていなければ
-					m_boos_arm_right->SetVecX(m_vx);
-				if (m_left_arm_down_flag == false)		//腕が落ちていなければ
-					m_boos_arm_left->SetVecX(m_vx);
-				break;
+				m_attack3_count++;
 			}
-			//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
-			case 4:
+
+			if (m_attack3_count == 10)//10回攻撃したら
 			{
-				//マップオブジェクトを持ってくる
-				CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+				m_attack3_flag = false;//フラグをオフ
+				m_vx = 0.0f;//移動をとめる
 
-				//攻撃が始まって一回のみ
-				if (m_attack4_flag == false)
-				{
-					m_attack4_scroll = objmap->GetScrollX();//スクロール値Xを持ってくる
-					m_attack4_flag = true;
+				//腕が地面に残っていなければ
+				if (m_right_arm_down_flag == false && m_left_arm_down_flag == false)
+					m_attack_mode = 0;
+				else
+					m_attack_mode = 3;
+			}
+			//腕にも移動量を渡す
+			if (m_right_arm_down_flag == false)	//腕が落ちていなければ
+				m_boos_arm_right->SetVecX(m_vx);
+			if (m_left_arm_down_flag == false)		//腕が落ちていなければ
+				m_boos_arm_left->SetVecX(m_vx);
+			break;
+		}
+		//3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
+		case 4:
+		{
+			//マップオブジェクトを持ってくる
+			CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-					//腕を移動させて落とす
+			//攻撃が始まって一回のみ
+			if (m_attack4_flag == false)
+			{
+				m_attack4_scroll = objmap->GetScrollX();//スクロール値Xを持ってくる
+				m_attack4_flag = true;
 
-					//左腕を下ろすX位置
-					//初期値はラストウォールの横
-					float left_down_x = 94 * BLOCK_SIZE;
-					//右腕を下ろす位置
-					//初期値はラストウォールの横
-					float right_down_x = 108 * BLOCK_SIZE;
-					//ラストウォールの横より画面左端が大きかったら
-					//下ろす位置を画面左端にする
-					if (left_down_x < m_attack4_scroll)
-						left_down_x = m_attack4_scroll;
-					//ラストウォールの横より画面右端が小さかったら
-					//下ろす位置を画面右端にする
-					if (right_down_x > m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE)
-						right_down_x = m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE;
+				//腕を移動させて落とす
 
-					//腕を下ろす攻撃をする
-					m_boos_arm_left->ArmLowerAttack(left_down_x,false);
-					m_boos_arm_right->ArmLowerAttack(right_down_x,false);
-				}
+				//左腕を下ろすX位置
+				//初期値はラストウォールの横
+				float left_down_x = 94 * BLOCK_SIZE;
+				//右腕を下ろす位置
+				//初期値はラストウォールの横
+				float right_down_x = 108 * BLOCK_SIZE;
+				//ラストウォールの横より画面左端が大きかったら
+				//下ろす位置を画面左端にする
+				if (left_down_x < m_attack4_scroll)
+					left_down_x = m_attack4_scroll;
+				//ラストウォールの横より画面右端が小さかったら
+				//下ろす位置を画面右端にする
+				if (right_down_x > m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE)
+					right_down_x = m_attack4_scroll + WINDOW_SIZE_W - STAGE5_BOSS_ARMS_WIDTH_SIZE;
+
+				//腕を下ろす攻撃をする
+				m_boos_arm_left->ArmLowerAttack(left_down_x, false);
+				m_boos_arm_right->ArmLowerAttack(right_down_x, false);
+			}
 			//左右の腕が地面まで落ちているかどうかを調べる
 			bool left_arm_down = m_boos_arm_left->GetBlockHit();
 			bool right_arm_down = m_boos_arm_right->GetBlockHit();
@@ -232,7 +232,7 @@ void CObjStage5Boss::Action()
 			if (left_arm_down == true && right_arm_down == true)
 			{
 				m_block_down_flag = true;	//ブロックが落ちる様にする
-			}			
+			}
 			else
 			{
 				m_block_down_flag = false;	//ブロックが落ちない様にする
@@ -242,9 +242,9 @@ void CObjStage5Boss::Action()
 			CObjFallingBlock* objfallingblock = (CObjFallingBlock*)Objs::GetObjBack(OBJ_FALLING_BLOCK);
 			//スクリーン外にブロック出た情報を取得
 			bool screen_out_brock = objfallingblock->GetScreenOut();
-			
+
 			//スクリーン外にブロック出た
-			if(screen_out_brock ==true)
+			if (screen_out_brock == true)
 				m_attack4_count++;
 
 			if (m_attack4_count >= 300)//ブロックの無い状態で300フレーム経過すれば
@@ -257,10 +257,10 @@ void CObjStage5Boss::Action()
 				m_progress_atk4_count = true;//300フレームが経過した
 
 				m_attack4_flag = false;
-	
+
 				m_attack4_count = 0;		//カウンターの初期化
 				m_attack4_scroll = 0.0f;	//スクロール量の初期化
-				m_attack_mode = 0;			
+				m_attack_mode = 0;
 			}
 			else
 			{
@@ -268,7 +268,7 @@ void CObjStage5Boss::Action()
 			}
 			break;
 		}
-	}
+		}
 
 		//移動
 		m_px += m_vx;
@@ -305,7 +305,7 @@ void CObjStage5Boss::Action()
 			m_boos_arm_left->Delete();
 
 			//BOSSが所有するHitBoxを削除する
-			Hits::DeleteHitBox(this);	
+			Hits::DeleteHitBox(this);
 
 			//死亡フラグをONにする
 			m_death_flag = true;
@@ -326,7 +326,6 @@ void CObjStage5Boss::Action()
 			return;
 		}
 	}
-
 }
 
 //ドロー
@@ -344,7 +343,6 @@ void CObjStage5Boss::Draw()
 	//生きているときの描画
 	if(m_death_flag == false)
 	{
-		
 		//胴体--------------------------------------
 		//切り取り位置
 		src.m_top = 0.0f;
@@ -359,7 +357,6 @@ void CObjStage5Boss::Draw()
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_BODY_SIZE;
 		//描画
 		Draw::Draw(GRA_STAGE5_BOSS_BODY, &src, &dst, color, 0.0f);
-
 
 		//眼球---------------------------------------
 		//切り取り位置
@@ -378,15 +375,14 @@ void CObjStage5Boss::Draw()
 		CObjHero* obj_hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 		//眼球を主人公の方へ向くようにする-----------------
-
 		//主人公が生存している場合、角度の計算を行う
 		float r = 0.0f;
 		if (obj_hero != nullptr)
 		{
 			float hero_x = obj_hero->GetPosX() - m_px;		//主人公の位置情報X取得
 			float hero_y = obj_hero->GetPosY() - m_py;		//主人公の位置情報Y取得
-			r = atan2(-hero_y, hero_x)*180.0f / 3.14f;
-			if (r < 0)
+			r = atan2f(-hero_y, hero_x)*180.0f / 3.14f;
+			if (r < 0.0f)
 			{
 				r = 360.0f - abs(r);
 			}
@@ -512,19 +508,18 @@ void CObjStage5Boss::DrawDeathAnimation()
 	float pos_y1[4] = { m_py + 64.0f + size,m_py + 64.0f,		m_py + 64.0f + size,	m_py + 64.0f + size * 2 };
 
 	//2回目の爆発のときの位置情報		左上			右上					左下						右下			
-	float pos_x2[4] = { m_px + 128.0f,m_px + 128.0f + size * 2	,m_px + 128.0f			,m_px + 128.0f + size * 2 };
-	float pos_y2[4] = { m_py + 128.0f,m_py + 128.0f				,m_py + 128.0f + size * 2,m_py + 128.0f + size * 2 };
+	float pos_x2[4] = { m_px + 128.0f,m_px + 128.0f + size * 2.0f	,m_px + 128.0f			,m_px + 128.0f + size * 2.0f };
+	float pos_y2[4] = { m_py + 128.0f,m_py + 128.0f				,m_py + 128.0f + size * 2.0f,m_py + 128.0f + size * 2.0f };
 
 	//最後の爆発	a1,b1～a8,b8 -> c1,d1～c8,d8のような順番で登録
-	float pos_x3[16] = { m_px,m_px + size,m_px + size * 2,m_px + size * 3,
-		m_px,m_px + size,m_px + size * 2,m_px + size * 3,
-		m_px,m_px + size,m_px + size * 2,m_px + size * 3,
-		m_px,m_px + size,m_px + size * 2,m_px + size * 3 };
+	float pos_x3[16] = { m_px,m_px + size,m_px + size * 2.0f,m_px + size * 3.0f,
+		m_px,m_px + size,m_px + size * 2.0f,m_px + size * 3.0f,
+		m_px,m_px + size,m_px + size * 2.0f,m_px + size * 3.0f,
+		m_px,m_px + size,m_px + size * 2.0f,m_px + size * 3.0f };
 	float pos_y3[16] = { m_py,m_py,m_py,m_py,
 		m_py + size,m_py + size ,m_py + size ,m_py + size ,
-		m_py + size * 2,m_py + size * 2,m_py + size * 2,m_py + size * 2,
-		m_py + size * 3,m_py + size * 3,m_py + size * 3,m_py + size * 3 };
-
+		m_py + size * 2.0f,m_py + size * 2.0f,m_py + size * 2,m_py + size * 2.0f,
+		m_py + size * 3.0f,m_py + size * 3.0f,m_py + size * 3,m_py + size * 3.0f };
 
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
@@ -544,8 +539,8 @@ void CObjStage5Boss::DrawDeathAnimation()
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY()-64.0f;
 	dst.m_left = m_px - objmap->GetScrollX()-256.0f;
-	dst.m_right = dst.m_left + STAGE5_BOSS_BODY_SIZE*3;
-	dst.m_bottom = dst.m_top + STAGE5_BOSS_BODY_SIZE*3;
+	dst.m_right = dst.m_left + STAGE5_BOSS_BODY_SIZE*3.0f;
+	dst.m_bottom = dst.m_top + STAGE5_BOSS_BODY_SIZE*3.0f;
 	//描画
 	Draw::Draw(GRA_EXPLOSION, &src, &dst, color, 0.0f);
 	//－－－－－－－－－－－－－－－－－－－－－－－－－ー

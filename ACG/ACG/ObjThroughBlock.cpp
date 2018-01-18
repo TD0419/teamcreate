@@ -19,11 +19,6 @@ CObjThroughBlock::CObjThroughBlock(int x, int y)
 	m_map_y = y;
 }
 
-//イニシャライズ
-void CObjThroughBlock::Init()
-{
-}
-
 //アクション
 void CObjThroughBlock::Action()
 {
@@ -40,7 +35,6 @@ void CObjThroughBlock::Action()
 		objmap->SetMapCreate(m_map_x, m_map_y, true);
 		this->SetStatus(false);		//自身を削除
 	}
-
 }
 
 //ドロー

@@ -49,7 +49,6 @@ void CObjDiffusionSource::Action()
 		
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);	//ヒットボックスを削除
-
 		return;
 	}
 
@@ -59,7 +58,6 @@ void CObjDiffusionSource::Action()
 
 	//当たり判定の更新
 	HitBoxUpData(hit, m_px, m_py);
-
 }
 
 //ドロー

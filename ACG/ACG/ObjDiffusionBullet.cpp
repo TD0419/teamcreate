@@ -5,7 +5,6 @@
 
 #include "GameHead.h"
 #include "ObjDiffusionBullet.h"
-#include "ObjDiffusionSource.h"
 #include "Function.h"
 
 //使用するネームスペース
@@ -31,7 +30,6 @@ CObjDiffusionBullet::CObjDiffusionBullet(float x, float y, int r, CObjDiffusionS
 	m_type = BOSS;
 	mp_base = p;
 	m_speed = 3.0f;
-
 }
 
 //イニシャライズ
@@ -48,13 +46,12 @@ void CObjDiffusionBullet::Init()
 //アクション
 void CObjDiffusionBullet::Action()
 {
-	
 	//移動
-	m_px += m_vx* m_speed;
-	m_py -= m_vy* m_speed;
+	m_px += m_vx * m_speed;
+	m_py -= m_vy * m_speed;
 
 	//画面外なら
-	if(WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE)==false)
+	if( WindowCheck(m_px, m_py, BULLET_SIZE, BULLET_SIZE) == false )
 	{
 		switch (m_type)
 		{
@@ -102,20 +99,18 @@ void CObjDiffusionBullet::Action()
 				break;
 			}
 		}
-
 	}
 
 	//拡散弾HitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//Heroに当たれば削除
-	if (DeleteCheckObjNameHit(hit, this, OBJ_HERO))
-	{
+	if ( DeleteCheckObjNameHit (hit, this, OBJ_HERO))
 		return;
-	}
 
 	// ブロックオブジェクトを持ってくる
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 	//ブロックとの当たり判定
 	objblock->AllBlockHit(&m_px, &m_py, BULLET_SIZE, BULLET_SIZE,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy);
@@ -137,7 +132,7 @@ void CObjDiffusionBullet::Action()
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(hit, m_px, m_py);
 }
 
 //ドロー
@@ -167,7 +162,4 @@ void CObjDiffusionBullet::Draw()
 	
 	if (m_type == BOSS)
 		Draw::Draw(GRA_BOSS_DIFFUSION, &src, &dst, color, m_r);
-
-
-
 }

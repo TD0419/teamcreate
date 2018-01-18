@@ -25,6 +25,7 @@ private:
 	bool m_wood_con;		// 木の判定を入れる変数
 	bool m_ani_flag;        // アニメーションを連続でさせないフラグ変数
 	bool m_ani_flag2;       // アニメーションを連続でさせないフラグ変数の二つ目
+	
 	//マップの要素数
 	int m_map_x;
 	int m_map_y;
@@ -32,5 +33,5 @@ private:
 	//アニメーション関係
 	int m_ani_time;         //アニメーションフレーム動作感覚
 	int m_ani_frame;        //描画フレーム
-	float m_ani_max_time;   //アニメーション動作間隔最大値
+	int m_ani_max_time;   //アニメーション動作間隔最大値
 };

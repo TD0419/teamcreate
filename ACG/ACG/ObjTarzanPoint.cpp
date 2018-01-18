@@ -49,7 +49,6 @@ void CObjTarzanPoint::Action()
 			this->SetStatus(false);		//自身に消去命令を出す。
 			Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
 			return;
-
 		}
 		//4番目の攻撃なら
 		if (objboss->GetAttackMode() == 4)
@@ -63,12 +62,10 @@ void CObjTarzanPoint::Action()
 		Hits::DeleteHitBox(this);	//所持するHitBoxを除去。
 		return;
 	}
-	
 
 	//ロープと当たっているならロープの位置を合わせる
 	if (hit != nullptr)
-	{
-	
+	{	
 		if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
 		{
 			//ロープの位置をこのオブジェクトの位置に合わせる + 6.0fすることでロープとスイッチが常にあたるようにする
@@ -121,5 +118,4 @@ void CObjTarzanPoint::Draw()
 
 	//描画
 	Draw::Draw(GRA_TARZAN_POINT, &src, &dst, color, 0.0f);
-
 }

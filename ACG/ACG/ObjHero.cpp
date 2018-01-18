@@ -1,7 +1,6 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\WinInputs.h"
 #include "GameL\HitBoxManager.h"
-#include "GameL\DrawFont.h"
 #include "GameL\Audio.h"
 #include "GameL\UserData.h"
 
@@ -68,15 +67,15 @@ void CObjHero::Action()
 
 	HitScene();	//当たり判定
 
-	if (m_posture == 0.0f)
+	if (m_posture == 0.0f) //右向きのとき
 	{
 		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px + 3, m_py + 14);
+		HitBoxUpData(Hits::GetHitBox(this), m_px + 3.0f, m_py + 14.0f);
 	}
 	else
 	{
 		//HitBoxの位置を更新する
-		HitBoxUpData(Hits::GetHitBox(this), m_px + 15, m_py + 14);
+		HitBoxUpData(Hits::GetHitBox(this), m_px + 15.0f, m_py + 14.0f);
 	}
 }
 
@@ -96,16 +95,19 @@ void CObjHero::GetBlockInformation()
 		{
 			pos_x = (int)HERO_SIZE_WIDTH;
 		}
-		//左下
+		//真下
 		else if (i == 2)
 		{
 			pos_x = (int)HERO_SIZE_WIDTH / 2;
 		}
+
 		//主人公のX位置(マップの要素数)
 		int x = ((int)m_px + pos_x) / (int)BLOCK_SIZE;
+		
 		//主人公のY位置(マップの要素数)
 		//少し下にする
 		int y = ((int)m_py + 1 + (int)HERO_SIZE_HEIGHT) / (int)BLOCK_SIZE;
+		
 		//ブロック情報が0で無いなら取得
 		if (objmap->GetMap(x, y) != 0)
 		{
@@ -128,17 +130,18 @@ void CObjHero::MoveScene()
 	if (m_rope_ani_con == false || (objrope != nullptr && objrope->GetTarzanPointFlag() == true))
 	{
 		//水に当たった時と敵に当たった時は動かない
-		if (m_hero_die_water == false && m_ani_frame_enemy_die == false && m_py < 2000.0f)
+		if (m_die_water_flag == false && m_ani_frame_enemy_die == false && m_py < 2000.0f)
 		{
 			//Dキーがおされたとき：右移動　
 			if (Input::GetVKey('D') == true)
 			{
 				m_vx += 0.5f;
 				m_ani_frame_stop_move = 0;  //主人公が動いてるなら0にする
+				
 				if (objrope == nullptr)
 					m_posture = 0.0f;		    //主人公の向き
-				m_ani_time_move += 1;
 				
+				m_ani_time_move += 1;
 			}
 			//Aキーがおされたとき：左移動　
 			else if (Input::GetVKey('A') == true)
@@ -175,42 +178,18 @@ void CObjHero::MoveScene()
 	}
 
 	//ジャンプ--------------------------------------------------------------------
-
-	//ロープを出している時は動かない  はしごを上っている時も動かない　　水に当たっているときと敵と当たった時も動かない
+	//ロープを出している時は動かない  はしごを上っている時も動かない　
+	//水に当たっているときと敵と当たった時も動かない
 	if (Input::GetVKey(VK_SPACE) == true && m_ladder_updown == 0 &&
-		m_rope_ani_con == false && m_hero_die_water == false &&
-		m_ani_frame_enemy_die == false && l_jump == false)
+		m_rope_ani_con == false && m_die_water_flag == false &&
+		m_ani_frame_enemy_die == false && m_ladder_hit_flag == false)
 	{
-		if (m_hit_down == true)
-		{
+		if (m_hit_down == true)	//下にブロックがあれば
 			m_vy = -13.0f;
-		}
+		
 	}
-
 	//ジャンプ終了-------------------------------------------------------------------------------------
-
-	
-	//↓キーがおされたとき：下に下がる（デバッグ）
-	if (Input::GetVKey(VK_DOWN) == true)
-	{
-		m_vy = 20.0f;
-	}
-	if (Input::GetVKey(VK_RIGHT) == true)
-	{
-		m_vx = 30.0f;
 		
-	}
-	if (Input::GetVKey(VK_LEFT) == true)
-	{
-		m_vx = -90.0f;
-		
-	}
-	//↑キーがおされたとき：上に下がる（デバッグ）
-	if (Input::GetVKey(VK_UP) == true)
-	{
-		m_vy = -20.0f;
-	}
-
 	//摩擦
 	m_vx += -(m_vx * 0.098f);
 
@@ -230,8 +209,8 @@ void CObjHero::MoveScene()
 	m_px += m_vx;
 	m_py += m_vy;
 	
-	//ステージ５なら
-	if (((UserData*)Save::GetData())->stagenum == 5)
+	//ステージ3なら
+	if (((UserData*)Save::GetData())->stagenum == 3)
 	{
 		//落ちるブロック未生成なら
 		if (m_fallblock_create_flag == true)
@@ -249,17 +228,14 @@ void CObjHero::MoveScene()
 	}
 
 	//移動先が画面外なら移動を元に戻す
-	if (WindowCheck(m_px - HERO_SIZE_WIDTH, m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT) == false)
+	if ( WindowCheck (m_px - HERO_SIZE_WIDTH, m_py, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT) == false)
 		m_px -= m_vx;
 
 	//腕の角度を求める-----------------------
-
 	//マウスポインタとの距離を求める
-
 	float x = m_mous_x - (m_px - objmap->GetScrollX() + (HERO_SIZE_WIDTH / 2.0f));	//X
 	float y = m_mous_y - (m_py - objmap->GetScrollY() + (HERO_SIZE_HEIGHT / 2.0f));//Y
 	float inclination = sqrt(x * x + y * y);				//斜辺
-
 
 	if (y > 0.0f)	//yの値が0より大きいなら角度を正しい値に修正
 		m_r = 360.0f - m_r;
@@ -287,7 +263,7 @@ void CObjHero::Scroll()
 	}
 	//左にスクロールです
 	if (m_px - objmap->GetScrollX() < SCROLL_LINE_LEFT &&
-		objmap->GetScrollX() > 0)
+		objmap->GetScrollX() > 0.0f)
 	{
 		//差分を調べる
 		float scroll = SCROLL_LINE_LEFT - (m_px - objmap->GetScrollX());
@@ -377,8 +353,8 @@ void CObjHero::CircleDraw(float add_radius, float color[4], int type)
 		// 半径が一定値を超えたらシーン移行
 		if (m_radius >= 768.0f)
 		{
-			//ステージ５ならクリアのシーンにする
-			if (((UserData*)Save::GetData())->stagenum == 5)
+			//ステージ3ならクリアのシーンにする
+			if (((UserData*)Save::GetData())->stagenum == 3)
 			{
 				Scene::SetScene(new CSceneGameClear());
 				return;
@@ -431,7 +407,7 @@ void CObjHero::TarzanAction()
 		float ab_x = objrope->GetPosX() - m_px;//主人公からロープのベクトルX成分
 		float ab_y = objrope->GetPosY() - m_py;//主人公からロープのベクトルY成分
 
-											   //ロープの位置
+	   //ロープの位置
 		float rope_x = objrope->GetPosX(), rope_y = objrope->GetPosY();
 
 		//ボス戦のとこにあるターザンポイントかどうかフラグ　
@@ -466,7 +442,7 @@ void CObjHero::TarzanAction()
 
 			//ロープのX位置より主人公が右にいたら時間(周期をマイナスにする)
 			if (m_px > rope_x)
-				pendulum_data.time *= -1;
+				pendulum_data.time *= -1.0f;
 
 			//ロープの位置から垂直の線と
 			//主人公の位置から平行の線の
@@ -479,7 +455,7 @@ void CObjHero::TarzanAction()
 			r = sinf(r);
 
 			//ふり幅を計算		自作で調整しています　求め方があるのでしたらそれにしてください。
-			pendulum_data.pretend_width = r / 2 * pendulum_data.length / 2;
+			pendulum_data.pretend_width = r / 2.0f * pendulum_data.length / 2.0f;
 
 			//値を求めたのでフラグをOFFにする
 			pendulum_data.find_value_flag = false;
@@ -496,7 +472,7 @@ void CObjHero::TarzanAction()
 			else
 			{
 				//ロープから主人公のベクトルの角度を計算
-				float r = 2 * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
+				float r = 2.0f * pendulum_data.pretend_width*sinf(sqrt(pendulum_data.gravity / pendulum_data.length)*pendulum_data.time);
 				r = r * 3.14f / 180.0f;//ラジアン度にする
 									   //移動ベクトルを計算			　						↓の計算は移動ベクトルだけを取りたかったから
 				m_vx = cosf(r) - sinf(r) * pendulum_data.length + (rope_x - m_px);
@@ -528,7 +504,6 @@ void CObjHero::TarzanAction()
 						m_vx = 0.0f;
 			}
 		}
-
 	}
 	else
 		pendulum_data.find_value_flag = true;
@@ -539,8 +514,8 @@ void CObjHero::LandingCheck()
 {
 	bool c1, c2, c3, c4, c5, c6, c7, c8;//チェック結果を保存するための変数:チェック項目を増やすたびに数を増やす必要がある
 
-	c1 = HitUpCheck(OBJ_LIFT); //リフトとの着地チェック
-	c2 = HitUpCheck(OBJ_WOOD); //木との着地チェック
+	c1 = HitUpCheck(OBJ_LIFT);		//リフトとの着地チェック
+	c2 = HitUpCheck(OBJ_WOOD);		//木との着地チェック
 	c3 = HitUpCheck(OBJ_LIFT_MOVE); //動くリフトとの着地チェック
 	c4 = HitUpCheck(OBJ_ROLL_BLOCK);//回転するブロック
 	c5 = HitUpCheck(OBJ_FALLING_LIFT);//落ちるリフト
@@ -618,7 +593,7 @@ void CObjHero::LadderScene()
 			//はしごに登っていない
 			m_ladder_updown = 0;
 		}
-		l_jump = objladders->GetHeroJumpCon();  //はしごと接触しているかどうかを調べる
+		m_ladder_hit_flag = objladders->GetHeroJumpCon();  //はしごと接触しているかどうかを調べる
 		objladders->HeroHit(m_px, m_py);
 	}
 
@@ -640,9 +615,8 @@ void CObjHero::LadderScene()
 }
 
 //ロープ投げる関数
-void CObjHero::RopeThrow() {
-
-	//Scene　開店準備 
+void CObjHero::RopeThrow() 
+{
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	//ロープオブジェクトを持ってくる
@@ -651,15 +625,15 @@ void CObjHero::RopeThrow() {
 	bool rope_caught = false; //ロープがロープスイッチと当たっているかどうかを確かめる変数
 	bool rope_delete = false; //ロープが消えてるか同うかを確かめる変数
 
-							  //マウスの位置がプレイヤーから見てどの方向か調べるための変数
+	//マウスの位置がプレイヤーから見てどの方向か調べるための変数
 	float mous_rope_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
 
-	if ((m_mous_x - (m_px - objmap->GetScrollX())) < 0)//主人公より左をクリックしたとき
+	if ((m_mous_x - (m_px - objmap->GetScrollX())) < 0.0f)//主人公より左をクリックしたとき
 		mous_rope_way = 1.0f;
 
 	//右クリックを押したらの部分を上に変更したのでマージする時は元の奴を消してこっちを残してください
 	//右クリックを押したら   水に当たっているときと敵に当たっているときは動かない
-	if (Input::GetMouButtonR() == true && m_hero_die_water == false && m_ani_frame_enemy_die == false)
+	if (Input::GetMouButtonR() == true && m_die_water_flag == false && m_ani_frame_enemy_die == false)
 	{
 		//主人公をクリックしていた場合
 		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
@@ -719,16 +693,14 @@ void CObjHero::RopeThrow() {
 				{
 					CObjRope* objrope = new CObjRope(m_px + 64.0f, m_py + 80.0f, m_rope_moux, m_rope_mouy);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
-					m_rope_control = false;
-					Audio::Start(ROPE);//ロープの音楽スタート
 				}
 				else if (m_posture == 1.0f)//主人公が左を向いているとき左側から発射
 				{
 					CObjRope* objrope = new CObjRope(m_px, m_py + 80.0f, m_rope_moux, m_rope_mouy);
 					Objs::InsertObj(objrope, OBJ_ROPE, 10);
-					m_rope_control = false;
-					Audio::Start(ROPE);//ロープの音楽スタート
 				}
+				m_rope_control = false;
+				Audio::Start(ROPE);//ロープの音楽スタート
 			}
 			if (m_rope_control == false) //ロープを出している時
 			{
@@ -767,7 +739,7 @@ void CObjHero::Shot()
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	//左クリックを押したら   水に当たっているときと敵に当たっている時は動かない
-	if (Input::GetMouButtonL() == true && m_hero_die_water == false && m_ani_frame_enemy_die == false)
+	if (Input::GetMouButtonL() == true && m_die_water_flag == false && m_ani_frame_enemy_die == false)
 	{
 		//主人公をクリックしていた場合
 		if ((m_px - objmap->GetScrollX()) <= m_mous_x && m_mous_x <= ((m_px - objmap->GetScrollX()) + HERO_SIZE_WIDTH))
@@ -779,7 +751,7 @@ void CObjHero::Shot()
 			//マウスの位置がプレイヤーから見てどの方向か調べるための変数
 			float mous_bullet_way = 0.0f;//右：0.0ｆ　左：1.0ｆ 右向きで初期化
 
-			if ((m_mous_x - (m_px - objmap->GetScrollX())) < 0)//主人公より左をクリックしたとき
+			if ((m_mous_x - (m_px - objmap->GetScrollX())) < 0.0f)//主人公より左をクリックしたとき
 				mous_bullet_way = 1.0f;
 
 			if (m_bullet_control == true)
@@ -852,28 +824,27 @@ void CObjHero::HitScene()
 	//トゲオブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_NEEDLE) != nullptr && pendulum_data.find_value_flag == true)
 	{
-		m_hero_die_enemy = true; //主人公がトゲにあたったとき、死亡フラグをONにする
+		m_die_enemy_flag = true; //主人公がトゲにあたったとき、死亡フラグをONにする
 	}
 	//水オブジェクトと衝突していれば
 	if (hit->CheckObjNameHit(OBJ_WATER) != nullptr)
 	{
-		m_hero_die_water = true; //主人公の水にあたったとき、溺れるフラグをONにする
+		m_die_water_flag = true; //主人公の水にあたったとき、溺れるフラグをONにする
 	}
 	//(ステージ5)トゲの台とリフトにはさまれた場合(二つのオブジェクトの判定のはさまれた)
 	if (hit->CheckObjNameHit(OBJ_NEEDLE_STAND) != nullptr && hit->CheckObjNameHit(OBJ_LIFT) != nullptr)
 	{
-		m_hero_die_enemy = true; //主人公がトゲの台とリフトにはさまったときの死亡フラグをONにする
+		m_die_enemy_flag = true; //主人公がトゲの台とリフトにはさまったときの死亡フラグをONにする
 	}
 
 	//敵オブジェクトと衝突していれば
-	//デバッグ中。消さないで
-	//if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
-	//{
-	//	m_hero_die_enemy = true; //主人公の敵にあたったときの死亡フラグをONにする
-	//}
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	{
+		m_die_enemy_flag = true; //主人公の敵にあたったときの死亡フラグをONにする
+	}
 
 	//主人公の敵に当たったときの死亡フラグがONなら死亡アニメーションをする
-	if (m_hero_die_enemy == true)
+	if (m_die_enemy_flag == true)
 	{
 		//主人公が敵に当たった時のアニメーションタイムを進める
 		m_ani_time_enemy_die += 1;
@@ -886,7 +857,7 @@ void CObjHero::HitScene()
 	}
 
 	//主人公の水に当たったときの溺れるフラグがONなら溺れるアニメーションをする
-	if (m_hero_die_water == true)
+	if (m_die_water_flag == true)
 	{
 		//落ちるのをゆっくりにする（自由落下のおかげでゆっくりになる）
 		m_vy = 0.0f;

@@ -36,16 +36,6 @@ void CObjRollBlockSwitch::Init()
 //アクション
 void CObjRollBlockSwitch::Action()
 {
-
-	//画面外なら
-	if (WindowCheck(m_px, m_py, ROLL_BLOCK_SWITCH_SIZE_WIDTH, ROLL_BLOCK_SWITCH_SIZE_HEIGHT) == false)
-	{
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//所持するHitBoxを除去。
-
-		return;
-	}
-
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
@@ -57,7 +47,7 @@ void CObjRollBlockSwitch::Action()
 	if (m_rotation_flag == true)
 	{
 		
-		//92度以下ならスイッチを回転させる
+		//90度以下ならスイッチを回転させる
 		if (m_r < 90.0f) 
 		{
 			//ロープと回転ブロックスイッチの位置を調整する
@@ -74,12 +64,10 @@ void CObjRollBlockSwitch::Action()
 		if (objrope != nullptr)
 			objrope->Delete();
 
-		m_r = 90.0f;//92を超えないようにする
+		m_r = 90.0f;//90を超えないようにする
 	}
 
-	//ロープと当たっている　かつ
-	//Aキーが入力されたら
-	//回転フラグをON(回転する)にする
+	//ロープと当たっている
 	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
 	{
 		//1フレーム前、フラグがOFFならロープの位置を調整する
@@ -93,6 +81,8 @@ void CObjRollBlockSwitch::Action()
 			//衝突しているのでフラグをONにする
 			m_rope_hit_flag = true;
 		}
+		//Aキーが入力されたら
+		//回転フラグをON(回転する)にする
 		if (Input::GetVKey('A') == true)
 		{
 			m_rotation_flag = true; //回転をする

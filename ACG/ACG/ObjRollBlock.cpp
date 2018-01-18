@@ -59,15 +59,12 @@ void CObjRollBlock::Init()
 			Hits::SetHitBox(this, m_px, m_py, ROLL_BLOCK_SIZE_HEIGHT, ROLL_BLOCK_SIZE_WIDTH, ELEMENT_BLOCK, OBJ_ROLL_BLOCK, 1);
 			break;
 		}
-	}
-
-	
+	}	
 }
 
 //アクション
 void CObjRollBlock::Action()
 {
-	
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 	
@@ -75,7 +72,6 @@ void CObjRollBlock::Action()
 	{
 		case 1:	//90fごとに回転
 		{
-
 			if (m_count <= 90)//90以下なら
 				m_count++;//カウントを増やす
 
@@ -108,7 +104,6 @@ void CObjRollBlock::Action()
 				m_count = 0;			//カウントを0で初期化する
 			}
 			break;
-
 		}
 		case 2:	//引っ張ったときに一度のみ回転
 		{
@@ -133,9 +128,7 @@ void CObjRollBlock::Action()
 	
 	//ヒーローオブジェクトと当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
 		HeroHit();//衝突処理をするをする
-	}
 
 	switch (m_pattan)
 	{
@@ -189,7 +182,6 @@ void CObjRollBlock::Draw()
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
 
 	//切り取り位置
 	src.m_top = 0.0f;
@@ -381,15 +373,13 @@ void CObjRollBlock::HeroHit()
 
 				//下側があたっていれば
 				if (250.0f < r && r < 290.0f)
-				{
-					
+				{	
 					//縦向きなら
 					objhero->SetPosY(m_py + ROLL_BLOCK_SIZE_WIDTH);//主人公の位置をブロックの下にする
 					objhero->SetVecY(objhero->GetVecY());//主人公のY方向の移動量を反転する
 				}
 			}
 		}
-
 	}
 }
 

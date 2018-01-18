@@ -16,16 +16,8 @@ public:
 	void Action();				//アクション
 	void Draw();				//ドロー
 
-   /*-----------------------アクセサ-------------------------*/
-	float GetX() { return m_px; }		// X位置情報取得関数
-	float GetY() { return m_py; }		// Y位置情報取得関数
-	float GetVX() { return m_vx; }		// X移動速度取得関数
-	float GetVY() { return m_vy; }		// Y移動速度取得関数
-	
-	void SetX(float x) { m_px = x; }		// X位置変更関数
-	void SetY(float y) { m_py = y; }		// Y位置変更関数
-	void SetVX(float vx) { m_vx = vx; } // X移動速度変更関数
-	void SetVY(float vy) { m_vy = vy; } // Y移動速度変更関数
+	//アクセサ
+	void SetVecX(float vx) { m_vx = vx; } // X移動速度変更関数
 	void SetPosture(float posture) { m_posture = posture; }//ポジションセット関数
 private:
 	float m_px;			//敵X座標

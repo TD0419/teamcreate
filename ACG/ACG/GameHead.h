@@ -26,11 +26,9 @@ enum OBJ_NAME
 	OBJ_BOSS,			//ボス
 	OBJ_STAGE3_BOSS,	//第三ステージボス
 	OBJ_STAGE5_BOSS,	//第五ステージボス
-	OBJ_BOSS_DROP_KEY,	//ボスが落とす鍵
 	OBJ_TITLE,			//タイトル
 	OBJ_GAME_OVER,		//ゲームオーバー
 	OBJ_GAME_CLEAR,		//ゲームクリア
-	OBJ_ENDLESS_SPRING, //敵生成システム(エンドレス沸き)
 	OBJ_LEVER_SWICH,    //レバースイッチ
 	OBJ_DOOR,           //ドア
 	OBJ_THROUGHT_BLOCK,	//スルーブロック
@@ -123,16 +121,8 @@ enum MAP_BER
 	MAP_THROUGH_BLOCK		,			//通り抜けれるブロック
 	MAP_BOSS				,			//ステージ２のボス
 
-	//ステージ3のみに使用するオブジェクト描画番号
-	MAP_FALLING_WALLS		,			//落下壁
-	MAP_CANNON				,			//砲台
-	MAP_REFLECT_BLOCK		,			//反射ブロック
-	MAP_STAGE3_BOSS			,			//ステージ３のボス
-	MAP_ENDLESS_SPRING		,			//敵自動生成ギミック
-	MAP_OPEN_DOOR_SWITCH    ,			//シャッター開く用スイッチ	
-
 	//ステージ5のみに使用するオブジェクト描画番号
-	MAP_ROLL_BLOCK_TYPE_AUTO	,		//自動式回転するブロック
+	MAP_ROLL_BLOCK_TYPE_AUTO =26,		//自動式回転するブロック
 	MAP_ROLL_BLOCK_TYPE_MANUAL	,		//手動式90度回転するブロック
 	MAP_TARZAN_POINT			,		//ロープでぶら下がれるギミック
 	MAP_NEEDLE					,		//針
@@ -165,13 +155,10 @@ enum GRAPHIC_ID
 	GRA_AQUATIC,		//水上(波がある)
 	GRA_UNDER_WATER,	//水中(波がない)
 	GRA_ROPE_SWITCH,	//ロープスイッチ
-	GRA_CANNON,			//砲台
 	GRA_SIGN_FRAME,		//看板の枠組み
 	GRA_BUTTON,			//ボタン
 	GRA_LAST_WALL,		//壁(上部分の鉄部分)
 	GRA_OPEN_WALL,		//開閉するシャッター(最後の壁用)
-	GRA_LAST_WALL3,		//壁(上部分の鉄部分)
-	GRA_OPEN_WALL3,		//開閉するシャッター(最後の壁用)
 	GRA_LIFE,			//ライフ
 	GRA_SIGN,			//看板
 	GRA_ROLL_BLOCK,		//回転ブロック
@@ -183,10 +170,10 @@ enum GRAPHIC_ID
 	GRA_NEEDLE,         //針
 	GRA_NEEDLE_STAND,   //針の土台
 	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
-
 	GRA_BLACK_BALL,			//回転ブロックの仕掛けのスイッチ
 	GRA_CANNON_BEAM,		//ステージ5の拡散弾
 	GRA_WIRE_MASH,			//ステージ5の金網
+	GRA_CANNON,				//	//ステージ5の大砲
 	GRA_STAGE5_BOSS_ELECTRIC,	 	//ステージ5のボス胴腕接続電気
 	GRA_STAGE5_BOSS_BODY,	//ステージ5のボス胴体
 	GRA_STAGE5_BOSS_EYE,	//ステージ5のボス眼球
@@ -245,7 +232,6 @@ enum MUSIC
 #define SIGN_SIZE			  (32.0f)		//看板のサイズ（仮）
 #define SIGN_FRAME_WIDTH	  (192.0f)		//看板の枠サイズ（横）
 
-
 #define LEVER_SWITCH_SIZE	  (64.0f)	    //レバースイッチのサイズ
 #define ROPE_SWITCH_SIZE	  (64.0f)	    //ロープスイッチのサイズ
 
@@ -262,9 +248,6 @@ enum MUSIC
 #define BOSS_DORP_KEY_SIZE	  (32.0f)	    //ボスドロップキーサイズ(仮)
 #define DOOR_SIZE			  (128.0f)		//ドアのサイズ(仮)
 #define THROUGHT_BLOCK_SIZE	  (64.0f)	    //スルーブロックサイズ（仮）
-#define FALLING_WALLS_SAIZE   (64.0f)		//落下壁サイズ(仮)
-#define CANNON_SIZE_WIDTH	  (64.0f)		//砲台の横サイズ(仮)
-#define CANNON_SIZE_HEIGHT	  (32.0f)		//砲台の縦サイズ(仮)
 #define ROLL_BLOCK_SIZE_WIDTH	(192.0f)	//回転するブロックの横サイズ
 #define ROLL_BLOCK_SIZE_HEIGHT	(64.0f)		//回転するブロックの縦サイズ
 #define NEEDLE_SIZE_WIDTH     (64.0f)		//針の横のサイズ
@@ -278,7 +261,7 @@ enum MUSIC
 #define STAGE5_BOSS_BODY_SIZE	     (256.0f)	//ステージ5のボス胴体サイズ
 #define STAGE5_BOSS_EYE_SIZE	     (133.0f)	//ステージ5のボス眼球サイズ
 #define STAGE5_BOSS_ARMS_WIDTH_SIZE       (175.0f)	//ステージ5のボス腕サイズ(横)
-#define STAGE5_BOSS_ARMS_HEIGHT_SIZE      (577.0f)	//ステージ5のボス腕サイズ(縦)
+#define STAGE5_BOSS_ARMS_HEIGHT_SIZE      (565.0f)	//ステージ5のボス腕サイズ(縦)
 #define STAGE5_BOSS_ELECTRIC_WIDTH	 (300.0f)	//ステージ5のボス胴腕接続電気サイズ(横)
 #define STAGE5_BOSS_ELECTRIC_HEIGHT	 (256.0f)	//ステージ5のボス胴腕接続電気サイズ(縦)
 #define WIRE_MESH_SIZE_WIDTH	(640.0f) //金網の横サイズ
@@ -311,7 +294,6 @@ enum MUSIC
 #include "ObjEnemyBullet.h"		//弾丸(敵用)
 #include "ObjRock.h"			//岩
 #include "ObjBlock.h"			//ブロック
-#include "ObjReflectBlock.h"	//弾を反射するブロック
 #include "ObjLift.h"			//リフト
 #include "ObjLadders.h"			//はしご
 #include "ObjMap.h"				//マップ
@@ -320,22 +302,17 @@ enum MUSIC
 #include "ObjRopeSwitch.h"		//ロープスイッチ
 #include "ObjEnemy.h"			//敵
 #include "ObjBoss.h"			//ボス
-#include "ObjStage3Boss.h"		//第三ステージボス
 #include "ObjStage5Boss.h"		//第五ステージボス
 #include "ObjStage5BossArms.h"	//第五ステージボスの腕
-#include "ObjBossDropKey.h"		//ボスが落とす鍵
 #include "ObjTitle.h"			//タイトル
 #include "ObjSign.h"			//看板
 #include "ObjRope.h"			//縄（スイッチに引っ掛ける縄）
 #include "ObjGameClear.h"		//クリア
 #include "ObjGameOver.h"		//ゲームオーバー
-#include "ObjEndlessSpring.h"	//敵生成システム(エンドレス沸き)
 #include "ObjLeverSwich.h"		//レバースイッチ
 #include "ObjDoor.h"			//ドア
 #include "ObjThroughBlock.h"	//スルーブロック
-#include "ObjFallingWalls.h"	//落下壁
 #include "ObjBackGround.h"		//バッググラウンド(背景)
-#include "ObjCannon.h"			//砲台
 #include "ObjLastWall.h"		//最後の壁
 #include "ObjNeedle.h"			//針
 #include "ObjNeedleStand.h"     //針の土台

@@ -18,17 +18,12 @@ using namespace GameL;
 void CSceneTitle::InitScene()
 {
 	ImageDataLoading();
-
 	AudioDataLoading();
 
+	//タイトルオブジェクトの作成
 	CObjTitle* objtitle = new CObjTitle();
 	Objs::InsertObj(objtitle, OBJ_TITLE, 10);
 	
-}
-
-//実行中メソッド
-void CSceneTitle::Scene()
-{
 }
 
 //画像データ読み込み関数
