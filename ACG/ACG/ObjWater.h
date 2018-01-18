@@ -23,7 +23,6 @@ private:
 	int m_map_x;//X
 	int m_map_y;//Y
 
-
 	//アニメーション関係
 	int m_ani_time; //アニメーションフレーム動作感覚
 	int m_ani_frame;//描画フレーム

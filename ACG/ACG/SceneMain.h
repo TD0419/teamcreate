@@ -13,7 +13,7 @@ public:
 	CSceneMain() ;		//コンストラクタ
 	CSceneMain::CSceneMain(int n);//コンストラクタ(リスタート用)
 	~CSceneMain() {};	//デストラクタ
-	void InitScene();	//ゲームメイン初期化メソッド
+	void InitScene() {};	//ゲームメイン初期化メソッド
 	void Scene();		//ゲームメインの実行中メソッド
 private:
 	int m_map[MAP_Y_MAX][MAP_X_MAX];//マップ格納用変数

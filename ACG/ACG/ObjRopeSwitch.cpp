@@ -48,20 +48,20 @@ void CObjRopeSwitch::Action()
 	{
 		switch (((UserData*)Save::GetData())->stagenum)
 		{
-		case 1://ステージ1
-		{
-			//リフト（手動）の生成
-			CObjLift* objlift = new CObjLift(28, 22, 0, 640.0f,0);
-			Objs::InsertObj(objlift, OBJ_LIFT, 9);
-			break;
-		}
-		case 3://ステージ3	
-		{
-			//リフト（手動）の生成
-			CObjLift* objlift = new CObjLift(29,22 ,0,640.0f ,0);
-			Objs::InsertObj(objlift, OBJ_LIFT, 9);
-			break;
-		}
+			case 1://ステージ1
+			{
+				//リフト（手動）の生成
+				CObjLift* objlift = new CObjLift(28, 22, 0, 640.0f,0);
+				Objs::InsertObj(objlift, OBJ_LIFT, 9);
+				break;
+			}
+			case 3://ステージ3	
+			{
+				//リフト（手動）の生成
+				CObjLift* objlift = new CObjLift(29,22 ,0,640.0f ,0);
+				Objs::InsertObj(objlift, OBJ_LIFT, 9);
+				break;
+			}
 		}
 	}
 

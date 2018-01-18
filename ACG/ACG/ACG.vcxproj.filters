@@ -56,12 +56,6 @@
     <Filter Include="ソース ファイル\Main\Rope">
       <UniqueIdentifier>{06a9a7c3-50d0-4b75-bd4f-72f36d0adf0a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Main\Stage3Boss">
-      <UniqueIdentifier>{e32fec2d-4a65-4cb2-b78b-a8e226b765bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Main\ReflectBlock">
-      <UniqueIdentifier>{3e17a3b5-d192-436d-b626-dad0185afe93}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Main\LeverSwich">
       <UniqueIdentifier>{1238450d-e6ac-4e91-a418-a53b16b7385a}</UniqueIdentifier>
     </Filter>
@@ -221,12 +215,6 @@
     </ClInclude>
     <ClInclude Include="ObjRope.h">
       <Filter>ソース ファイル\Main\Rope</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjStage3Boss.h">
-      <Filter>ソース ファイル\Main\Stage3Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjReflectBlock.h">
-      <Filter>ソース ファイル\Main\ReflectBlock</Filter>
     </ClInclude>
     <ClInclude Include="ObjLeverswich.h">
       <Filter>ソース ファイル\Main\LeverSwich</Filter>
@@ -392,14 +380,8 @@
     <ClCompile Include="ObjRope.cpp">
       <Filter>ソース ファイル\Main\Rope</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStage3Boss.cpp">
-      <Filter>ソース ファイル\Main\Stage3Boss</Filter>
-    </ClCompile>
     <ClCompile Include="ObjLeverswich.cpp">
       <Filter>ソース ファイル\Main\LeverSwich</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjReflectBlock.cpp">
-      <Filter>ソース ファイル\Main\ReflectBlock</Filter>
     </ClCompile>
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソース ファイル\Main\Boss</Filter>

@@ -20,8 +20,6 @@ void CObjTitle::Init()
 	Font::SetStrTex(L"Option");	//オプション
 	Font::SetStrTex(L"Exit");	//終了
 
-	
-
 	((UserData*)Save::GetData())->stagenum = 1;
 
 	Audio::Start(TITLE);
@@ -38,8 +36,7 @@ void CObjTitle::Action()
 		if (m_mode >= 1 && m_keypush_flag == true)
 		{
 			m_mode-=1;	//モード番号を1減らす
-			m_keypush_flag = false;	//キーフラグをオフにする
-			
+			m_keypush_flag = false;	//キーフラグをオフにする	
 		}
 	}
 	//Sキー　又は　↓キーが押された時
@@ -56,7 +53,6 @@ void CObjTitle::Action()
 	//W、S、↑、↓が押されてないとき
 	else
 		m_keypush_flag = true;//キーフラグをオンにする
-
 
 	if (Input::GetVKey(VK_RETURN) == false) //　Enterキーが押されてなかったらメインに移行できるようにする
 	{
@@ -138,5 +134,4 @@ void CObjTitle::Draw()
 		Font::StrDraw(L"Option", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 118.0f, FONT_SIZE_TITLE -10.0f, color_white);
 		Font::StrDraw(L"Exit", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 198.0f, FONT_SIZE_TITLE, color_yellow);
 	}
-
 }

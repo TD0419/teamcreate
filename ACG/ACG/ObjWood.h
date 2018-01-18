@@ -9,23 +9,23 @@ using namespace GameL;
 //オブジェクト：木(ギミック)
 class CObjWood :public CObj
 {
-	public:
-		CObjWood(int x, int y);				//コンストラクタ
-		~CObjWood() {};						//デストラクタ
-		void Init();						//イニシャライズ
-		void Action();						//アクション
-		void Draw();						//ドロー
+public:
+	CObjWood(int x, int y);				//コンストラクタ
+	~CObjWood() {};						//デストラクタ
+	void Init();						//イニシャライズ
+	void Action();						//アクション
+	void Draw();						//ドロー
 
-	private:
-		float m_px;			 //X座標(空気画像を含む)
-		float m_py;			 //Y座標(空気画像を含む)
-		float m_wood_image_x;//木の画像(左上)のX位置
-		float m_wood_image_y;//木の画像(左上)のY位置
-		float m_r;			 //回転角度
-		bool m_audio_start_flag;//木の音を鳴らすためのフラグ変数
+private:
+	float m_px;			 //X座標(空気画像を含む)
+	float m_py;			 //Y座標(空気画像を含む)
+	float m_wood_image_x;//木の画像(左上)のX位置
+	float m_wood_image_y;//木の画像(左上)のY位置
+	float m_r;			 //回転角度
+	bool m_audio_start_flag;//木の音を鳴らすためのフラグ変数
 		
-		//マップの要素数
-		int m_map_x;
-		int m_map_y;
-		int m_wood_determine;  //木の判定用
+	//マップの要素数
+	int m_map_x;
+	int m_map_y;
+	int m_wood_determine;  //木の判定用
 };

@@ -19,5 +19,4 @@ private:
 	int m_mode;				//モードの選択用変数(0～1)
 	bool m_keypush_flag;	//キーのトリガー処理用フラグ
 	bool m_enter_key_flag;  //すぐに飛んでしまうんでそれを制御する変数
-	
 };

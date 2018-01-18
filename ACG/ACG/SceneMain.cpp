@@ -34,22 +34,16 @@ CSceneMain::CSceneMain(int n)
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
-	//残機が０未満になったらGameOver画面へ移動する
+	//残機が0未満になったらGameOver画面へ移動する
 	if (g_remaining < 0)
 	{
 		Scene::SetScene(new CSceneGameOver());
 		return;
 	}
 
-	//デバッグ用ステージ番号調整用
-	UserData* s = (UserData*)Save::GetData();
-	s->stagenum = 3;
-	//----------------
-
 	AudioDataLoading();//音楽データ読み込み関数
 	MapDataLoading(m_map);//マップ情報を読み込み
 	ImageDataLoading();//画像データ読み込み関数
-	
 	
     //Mapオブジェクトを作成する
 	CObjMap* objmap = new CObjMap(m_map,g_remaining);
@@ -58,33 +52,6 @@ void CSceneMain::InitScene()
 	//背景オブジェクトを作成する
 	CObjBackGround* objback_ground = new CObjBackGround();
 	Objs::InsertObj(objback_ground, OBJ_BACKGROUND, 1);
-
-	//デバッグ　”使い終わったら消してください！”----------------
-	
-	//要らんの--------------------------------------------------
-	//要るの--------------------------------------------------
-	//------------------------------
-	/*CObjFallingLift* objfallinglift = new CObjFallingLift(5, 22);
-	Objs::InsertObj(objfallinglift, OBJ_FALLING_LIFT, 10);*/
-
-	////当たり判定まだなのでため置いていてください
-	//CObjWireMesh* objwiremesh = new CObjWireMesh(10, 20);
-	//Objs::InsertObj(objwiremesh, OBJ_WIRE_MESH, 10);
-
-	////落ちるリフト
-	//CObjFallingLift* obj_falling_lift = new CObjFallingLift(4,16);
-	//Objs::InsertObj(obj_falling_lift,OBJ_FALLING_LIFT,9);
-
-	//ステージ５ボス	デバッグで使うためおいといてください
-	/*CObjStage5Boss* p = new CObjStage5Boss(4, 10);
-	Objs::InsertObj(p,OBJ_STAGE5_BOSS,9);*/
-	//デバッグ--------------------------------------------------
-}
-
-//ゲームメイン実行中メソッド
-void CSceneMain::Scene()
-{
-
 }
 
 //マップデータ読み込み関数
@@ -134,9 +101,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 			if (((UserData*)Save::GetData())->stagenum != 3)
 			{
 				if (j > 99)
-				{
 					break;
-				}
 			}
 
 			//マップ情報を代入
@@ -168,6 +133,8 @@ void CSceneMain::ImageDataLoading()
 			Draw::LoadImageW(L"Image\\Lift\\Stage1.png", GRA_LIFT, TEX_SIZE_128);
 			//ブロック画像読み込み
 			Draw::LoadImageW(L"Image\\Block\\Stage1.png", GRA_BLOCK, TEX_SIZE_128);
+			//岩画像読み込み
+			Draw::LoadImageW(L"Image\\rock.png", GRA_ROCK, TEX_SIZE_512);
 			break;
 		}
 		//ステージ２
@@ -203,10 +170,6 @@ void CSceneMain::ImageDataLoading()
 			//回転ブロックの画像読み込み
 			Draw::LoadImageW(L"Image\\RollBlock.png", GRA_ROLL_BLOCK, TEX_SIZE_256);
 			Draw::LoadImageW(L"Image\\Rotate_Block2.png", GRA_ROLL_BLOCK2, TEX_SIZE_256);
-
-			//金網ブロックの読み込み
-			Draw::LoadImageW(L"Image\\Block\\Buttery_Upper_Floor.png", GRA_WIRE_MASH, TEX_SIZE_640);
-
 			//ステージ5の大砲
 			Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
 			//ステージ5の大砲の弾
@@ -227,13 +190,23 @@ void CSceneMain::ImageDataLoading()
 			Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
 			//拡散弾を撃つ弾
 			Draw::LoadImageW(L"Image\\Boss_Diffusion_Glass.png", GRA_DIFFUSION_SOURCE, TEX_SIZE_32);
-
 			//ボスの拡散弾
 			Draw::LoadImageW(L"Image\\Diffusion_Bullet.png", GRA_BOSS_DIFFUSION, TEX_SIZE_16);
-
 			//ボスの打つ弾
 			Draw::LoadImageW(L"Image\\Lastboss_Bullet.png", GRA_STAGE5_BOSS_BULLET, TEX_SIZE_32);
-
+			
+			//ステージ５ボス胴腕接続電気
+			Draw::LoadImageW(L"Image\\Lastboss_Electric.png", GRA_STAGE5_BOSS_ELECTRIC, TEX_SIZE_512);
+			//ステージ５ボス胴体
+			Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_BODY, TEX_SIZE_256);
+			//ステージ５ボス眼球
+			Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
+			//ステージ５ボス腕
+			Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
+			//金網
+			Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
+			//ボスの爆発
+			Draw::LoadImageW(L"Image\\Explosion.png", GRA_EXPLOSION, TEX_SIZE_320);
 			break;
 		}
 		default:
@@ -260,9 +233,6 @@ void CSceneMain::ImageDataLoading()
 	//レバースイッチ画像読み込み
 	Draw::LoadImageW(L"Image\\Lever.png", GRA_LEVER_SWICH, TEX_SIZE_128);
 
-	//岩画像読み込み
-	Draw::LoadImageW(L"Image\\rock.png", GRA_ROCK, TEX_SIZE_512);
-
 	//ロープスイッチ画像読み込み
 	Draw::LoadImageW(L"Image\\RopeSwitch.png", GRA_ROPE_SWITCH, TEX_SIZE_64);
 	
@@ -281,21 +251,6 @@ void CSceneMain::ImageDataLoading()
 
 	//ライフ(仮)画像読み込み
 	Draw::LoadImageW(L"Image\\zanki.png", GRA_LIFE, TEX_SIZE_64);
-	
-	
-	//ステージ５ボス胴腕接続電気
-	Draw::LoadImageW(L"Image\\Lastboss_Electric.png", GRA_STAGE5_BOSS_ELECTRIC, TEX_SIZE_512);
-	//ステージ５ボス胴体
-	Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_BODY, TEX_SIZE_256);
-	//ステージ５ボス眼球
-	Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
-	//ステージ５ボス腕
-	Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
-	//金網
-	Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
-	//ボスの爆発
-	Draw::LoadImageW(L"Image\\Explosion.png", GRA_EXPLOSION,TEX_SIZE_320);
-
 }
 
 //音楽データ読み込み関数

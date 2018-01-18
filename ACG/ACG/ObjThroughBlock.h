@@ -12,7 +12,7 @@ class CObjThroughBlock :public CObj
 public:
 	CObjThroughBlock(int x, int y); 	//コンストラクタ
 	~CObjThroughBlock() {};				//デストラクタ
-	void Init();						//イニシャライズ
+	void Init() {};						//イニシャライズ
 	void Action();						//アクション
 	void Draw();						//ドロー
 	

@@ -22,13 +22,11 @@ void CObjNeedleStand::Init()
 {
 	//当たり判定用HitBoxを作成                          
 	Hits::SetHitBox(this, m_px, m_py, NEEDLE_STAND_SIZE, NEEDLE_STAND_SIZE, ELEMENT_GIMMICK, OBJ_NEEDLE_STAND, 1);
-
 }
 
 //アクション
 void CObjNeedleStand::Action()
 {
-
 	//画面外なら
 	if (WindowCheck(m_px, m_py, NEEDLE_STAND_SIZE, NEEDLE_STAND_SIZE) == false)
 	{
@@ -41,13 +39,10 @@ void CObjNeedleStand::Action()
 
 	//主人公とあたったら
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
 		HeroHit();
-	}
-
-
+	
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(hit, m_px, m_py);
 }
 
 //主人公との当たり判定
@@ -101,10 +96,8 @@ void CObjNeedleStand::HeroHit()
 				objhero->SetPosY(m_py + NEEDLE_STAND_SIZE);//主人公の位置をブロックの下にする
 				objhero->SetVecY(objhero->GetVecY());//主人公のY方向の移動量を反転する
 			}
-
 		}
 	}
-
 }
 
 //ドロー

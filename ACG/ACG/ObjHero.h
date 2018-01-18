@@ -64,9 +64,9 @@ public:
 	int GetLadderUpdown() { return m_ladder_updown; }				//主人公がはしごのどのアニメーション中かを返す
 	void HeroGoal() { m_goal_flag = true; m_radius = 0.0f; }		//主人公のゴール処理切り替え関数(ゴールフラグを立てる)
 
-private:
 	void CircleDraw(float add_radius,float color[4],int type);		// 死亡時とゴール時用の円を描画する関数
 	void TarzanAction();//ターザンの動き(単振り子)をする関数
+
 private:
 	float m_px;		//X座標
 	float m_py;		//Y座標
@@ -97,12 +97,11 @@ private:
 	bool  m_rope_delete_r_kye;    //アニメーション用ロープが消えたかどうかを管理する 
 	bool  m_rope_delete_control;  //ロープが消えた時の判定を制御する変数
 	bool  m_hero_die_flag;        //主人公が死んだ時の高さを制御するためのフラグ
-	bool l_jump;				  //trueなら主人公とはしごがあたっているのでジャンプできないようにする変数
-								  //falseならあたっていないのでジャンプできる
+	bool  m_ladder_hit_flag;	  //主人公とはしごがあたっているかどうかのフラグ
 	//-----------
 	//-------Heroが死ぬ系---------
-	bool   m_hero_die_water;       //主人公が水にあたったかどうかを調べる変数（死）
-	bool   m_hero_die_enemy;	   //主人公が敵にあたったかどうかを調べる変数（死）
+	bool   m_die_water_flag;       //主人公が水にあたったかどうかを調べる変数（死）
+	bool   m_die_enemy_flag;	   //主人公が敵にあたったかどうかを調べる変数（死）
 	float  m_screen_out;           //主人公が死んだ時のｙ位置を記憶するための変数
 	//-----------------
 	int m_ladder_updown; //はしごが上っているかどうかを調べる（0、上ってない１、上っている　2、はしごを上りきるとき）

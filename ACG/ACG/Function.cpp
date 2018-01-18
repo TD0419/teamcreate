@@ -57,10 +57,10 @@ bool WindowCheck(float m_px, float m_py,float obj_size_x, float obj_size_y)
 	float y = m_py - objmap->GetScrollY();
 
 	//上または下でチャック
-	if (y < 0 - obj_size_y || y > WINDOW_SIZE_H)
+	if (y < 0.0f - obj_size_y || y > WINDOW_SIZE_H)
 		return false;
 	//左または右でチェック
-	if (x < 0 - obj_size_x || x > WINDOW_SIZE_W)
+	if (x < 0.0f - obj_size_x || x > WINDOW_SIZE_W)
 		return false;
 
 	return true;

@@ -263,7 +263,7 @@ void CObjStage5BossArms::Draw()
 	}
 	//爪の開閉アニメーションをするときの配列
 	//要素数はm_ani_frame_claw
-	int ani_claw[5] = { 1,2,0 };
+	int ani_claw[3] = { 1,2,0 };
 
 	//右腕(ライトアーム)---------------------------------------
 	//アームタイプが1のときはライトアームを描画
@@ -287,7 +287,6 @@ void CObjStage5BossArms::Draw()
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
 		//描画
 		Draw::Draw(GRA_STAGE5_BOSS_ARMS_ALL, &src, &dst, color, 0.0f);
-
 	}
 
 	//左腕(ライトアーム)---------------------------------------
@@ -400,7 +399,7 @@ void CObjStage5BossArms::ArmLowerAttack()
 	//120フレームの間に主人公のX位置と同じになるようにベクトルXを調整
 	if (m_armdown_time < 120)
 	{
-		m_vx = (m_arm_lower_marker_px - m_px) / (120 - m_armdown_time);
+		m_vx = (m_arm_lower_marker_px - m_px) / (float)(120 - m_armdown_time);
 	}
 	//120以上なら腕を下ろすのでX移動量を0.0fにする
 	else

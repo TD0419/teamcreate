@@ -86,7 +86,6 @@
     <ClInclude Include="ObjThroughBlock.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="ObjDoor.h" />
-    <ClInclude Include="ObjReflectBlock.h" />
     <ClInclude Include="ObjEnemyBullet.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
@@ -125,7 +124,6 @@
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjWater.h" />
-    <ClInclude Include="ObjStage3Boss.h" />
     <ClInclude Include="ObjTarzanPoint.h" />
     <ClInclude Include="ObjWireMesh.h" />
   </ItemGroup>
@@ -184,8 +182,6 @@
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjWater.cpp" />
     <ClCompile Include="ObjSign.cpp" />
-    <ClCompile Include="ObjStage3Boss.cpp" />
-    <ClCompile Include="ObjReflectBlock.cpp" />
     <ClCompile Include="ObjThroughBlock.cpp" />
     <ClCompile Include="ObjStage5Boss.cpp" />
     <ClCompile Include="ObjWireMesh.cpp" />

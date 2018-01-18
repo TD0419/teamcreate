@@ -87,7 +87,6 @@ void CObjMap::ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y)
 			{
 				if (y >= 0 && y < MAP_Y_MAX)
 				{
-
 					CreateObj(x, y);//オブジェクトを生成
 				}
 			}
@@ -107,7 +106,6 @@ void CObjMap::CreateObj(int x, int y)
 	{
 		case MAP_HERO_START:	//ヒーローの作成
 		{
-
 			//主人公オブジェクトを作成する
 			CObjHero* objhero = new CObjHero(x, y, m_remaining);
 			Objs::InsertObj(objhero, OBJ_HERO, 10);
@@ -320,7 +318,6 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 
 		}
-		
 	}
 
 	//落ちるブロック以外なら
@@ -362,4 +359,3 @@ int CObjMap::GetMap(int x, int y)
 
 	return -99999;//無かった場合
 }
-

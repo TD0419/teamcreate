@@ -37,18 +37,6 @@ void CObjRollBlockSwitch::Init()
 //アクション
 void CObjRollBlockSwitch::Action()
 {
-
-	//画面外なら
-	if (WindowCheck(m_px, m_py, ROLL_BLOCK_SWITCH_SIZE_WIDTH, ROLL_BLOCK_SWITCH_SIZE_HEIGHT) == false)
-	{
-		CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//所持するHitBoxを除去。
-
-		return;
-	}
-
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
@@ -76,7 +64,7 @@ void CObjRollBlockSwitch::Action()
 				m_pull_flag = false;
 
 				m_lastroll = true; 
-				m_r = 92.0f;//90を超えないようにする
+				m_r = 92.0f;//92を超えないようにする
 			}
 			else if (m_r < 92.0f) //92度以下ならスイッチを回転させる
 			{

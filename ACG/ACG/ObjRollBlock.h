@@ -20,7 +20,6 @@ public:
 	void HeroHit();	//ヒーローが当たったときの処理
 	void SetRollFlag(bool f) { m_roll_flag = f; }//回転のフラグを入れる関数
 
-private:
 	void HitRollBlockAndRope();//回転ブロックとロープ(全体)が接触していたらロープを消去する関数
 private:
 	//オブジェクトの位置

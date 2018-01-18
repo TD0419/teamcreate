@@ -24,9 +24,10 @@ CObjLastWall::CObjLastWall(int x, int y)
 void CObjLastWall::Init()
 {
 	//当たり判定																
-	Hits::SetHitBox(this, m_px, m_py, 32, 512, ELEMENT_GIMMICK, OBJ_LAST_WALL, 1);
+	Hits::SetHitBox(this, m_px, m_py, 32.0f, 512.0f, ELEMENT_GIMMICK, OBJ_LAST_WALL, 1);
+	
 	m_wall_gauge = 0;
-	m_wall_gauge2 = 0;
+	m_wall_down_gauge = 0;
 	m_wall_unlock_flag = false;
 	m_wall_down_flag = false;
 	m_hero_hit_flag = false;
@@ -47,7 +48,6 @@ void CObjLastWall::Init()
 		break;
 		
 	default:
-
 		break;
 	}
 }
@@ -77,9 +77,9 @@ void CObjLastWall::Action()
 			{
 				float r=0.0f;
 				
-				r=hit_data[i]->r;
+				r =hit_data[i]->r;
 				//主人公が右側に衝突
-				if (0 < r && r < 85 || 275 < r && r < 360)
+				if (0.0f < r && r < 85.0f || 275.0f < r && r < 360.0f)
 				{
 					//壁にめりこまないようにする処理
 					if (objhero->GetPosture() == 0.0f)//右向き
@@ -95,14 +95,14 @@ void CObjLastWall::Action()
 				}
 
 				//LastWallの上側が衝突している場合
-				else if (85 < r && r < 94)
+				else if (85.0f < r && r < 94.0f)
 				{
 					objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 					objhero->SetPosY(m_py - 60.0f);//主人公の位置をLastWallの上側までずらす
 				}
 
 				//LastWallの左側が衝突している場合
-				else if (94 < r && r < 266)
+				else if (94.0f < r && r < 266.0f)
 				{
 					//壁にめりこまないようにする処理
 					if (objhero->GetPosture() == 0.0f)//右向き
@@ -120,7 +120,7 @@ void CObjLastWall::Action()
 				}
 
 				//LastWallの下側が衝突している場合
-				else if (266 < r && r < 275)
+				else if (266.0f < r && r < 275.0f)
 				{
 					objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 					objhero->SetPosY(m_py + 512.0f - m_wall_gauge +65.0f);//主人公の位置をLastWallの下側までずらす
@@ -141,12 +141,12 @@ void CObjLastWall::Action()
 				r = hit_data_enemy[i]->r;
 
 				//LastWallの右側が衝突している場合
-				if (0 < r && r < 85 || 275 < r && r < 360)
+				if (0.0f < r && r < 85.0f || 275.0f < r && r < 360.0f)
 				{
 					objenemy->SetVecX(2.0f);//敵のX方向の移動を2にする
 					objenemy->SetPosture(1.0f);//向き変更
 				}
-				else if (94 < r && r < 266)
+				else if (94.0f < r && r < 266.0f)
 				{
 					objenemy->SetVecX(-2.0f);//敵のX方向の移動を-2にする
 					objenemy->SetPosture(0.0f);//向き変更
@@ -226,7 +226,7 @@ void CObjLastWall::Action()
 	}
 
 	//壁がしまった時
-	if (m_wall_gauge2 >= 512)
+	if (m_wall_down_gauge >= 512)
 	{
 		Audio::Stop(WALL);//音楽ストップ
 		m_wall_unlock_flag = false;
@@ -237,16 +237,16 @@ void CObjLastWall::Action()
 		//壁が下がるフラグオン
 		if (m_wall_down_flag == true)
 		{
-			m_wall_gauge2 += 512;	//一番下まで下がる
+			m_wall_down_gauge += 512;	//一番下まで下がる
 			Audio::Start(WALL);		//開門の音楽スタート
 
 			//hitboxが小さくなる
-			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, 0.0f + m_wall_gauge2);
+			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, m_wall_down_gauge);
 		}
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px+29, m_py+65);
+	HitBoxUpData(hit, m_px+29.0f, m_py+65.0f);
 }
 
 //ドロー
@@ -276,7 +276,7 @@ void CObjLastWall::Draw()
 	Draw::Draw(GRA_LAST_WALL, &src, &dst, color, 0.0f);
 
 	//切り取り位置
-	src.m_top = 0.0f + m_wall_gauge;
+	src.m_top = m_wall_gauge;
 	src.m_left = 0.0f;
 	src.m_right = 32.0f;
 	src.m_bottom = 512.0f;

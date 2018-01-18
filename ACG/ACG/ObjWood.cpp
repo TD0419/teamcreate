@@ -13,8 +13,8 @@ using namespace GameL;
 //コンストラクタ
 CObjWood::CObjWood(int x, int y)
 {
-	m_px = x * BLOCK_SIZE;
-	m_py = y * BLOCK_SIZE;
+	m_px = (float)x * BLOCK_SIZE;
+	m_py = (float)y * BLOCK_SIZE;
 
 	//マップ情報の木の位置が木の下を指していたので調整
 	m_px -= WOOD_SIZE - 64.0f;
@@ -31,14 +31,14 @@ void CObjWood::Init()
 	m_r = 0.0f;
 
 	//初期の木の画像の位置
-	m_wood_image_x = m_px + (WOOD_SIZE - 64.0000f);
+	m_wood_image_x = m_px + (WOOD_SIZE - 64.0f);
 	m_wood_image_y = m_py;
 	m_audio_start_flag = false;//木の音を鳴らすフラグ
 
 	m_wood_determine = 0;//木の判定
 
 	//当たり判定
-	Hits::SetHitBox(this, m_wood_image_x, m_wood_image_y, 64, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
+	Hits::SetHitBox(this, m_wood_image_x, m_wood_image_y, 64.0f, WOOD_SIZE, ELEMENT_GIMMICK, OBJ_WOOD, 1);
 }
 
 //アクション
@@ -59,7 +59,7 @@ void CObjWood::Action()
 	{
 		//木の画像の位置を更新
 		m_wood_image_x = m_px + WOOD_SIZE;
-		m_wood_image_y = m_py + (WOOD_SIZE - 64.0000f);
+		m_wood_image_y = m_py + (WOOD_SIZE - 64.0f);
 
 		//HitBoxの幅、高さ設定
 		hit_w = WOOD_SIZE;
@@ -84,7 +84,7 @@ void CObjWood::Action()
 			}
 		}
 		//木の画像の位置更新
-		m_wood_image_x = m_px + (WOOD_SIZE - 64.0000f);
+		m_wood_image_x = m_px + (WOOD_SIZE - 64.0f);
 		m_wood_image_y = m_py;
 
 		//HitBoxの幅、高さ設定
@@ -94,7 +94,7 @@ void CObjWood::Action()
 
 	//主人公との当たり判定
 	//衝突したら主人公の位置を更新する
-	m_wood_determine = HitTestOfAB(m_wood_image_x-7.0f, m_wood_image_y-2.0f, hit_w-8.0f, hit_h,&hero_x, &hero_y, 42, 120, &hero_vx, &hero_vy);
+	m_wood_determine = HitTestOfAB(m_wood_image_x-7.0f, m_wood_image_y-2.0f, hit_w-8.0f, hit_h,&hero_x, &hero_y, 42.0f, 120.0f, &hero_vx, &hero_vy);
 
 	switch (m_wood_determine)
 	{
@@ -138,7 +138,7 @@ void CObjWood::Draw()
 	src.m_bottom = 320.0f;
 
 	//描画位置
-	dst.m_top = 0.0f + m_py - objmap->GetScrollY();
+	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();
 	dst.m_right = dst.m_left + WOOD_SIZE;
 	dst.m_bottom = dst.m_top + WOOD_SIZE;
