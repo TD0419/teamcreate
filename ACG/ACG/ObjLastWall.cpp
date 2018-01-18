@@ -241,7 +241,7 @@ void CObjLastWall::Action()
 			Audio::Start(WALL);		//開門の音楽スタート
 
 			//hitboxが小さくなる
-			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f, m_wall_down_gauge);
+			HitBoxUpData(hit, m_px, m_py + m_wall_gauge, 32.0f,(float) m_wall_down_gauge);
 		}
 	}
 
@@ -276,7 +276,7 @@ void CObjLastWall::Draw()
 	Draw::Draw(GRA_LAST_WALL, &src, &dst, color, 0.0f);
 
 	//切り取り位置
-	src.m_top = m_wall_gauge;
+	src.m_top = (float)m_wall_gauge;
 	src.m_left = 0.0f;
 	src.m_right = 32.0f;
 	src.m_bottom = 512.0f;
@@ -285,7 +285,7 @@ void CObjLastWall::Draw()
 	dst.m_top = m_py - objmap->GetScrollY() + 65.0f;
 	dst.m_left = m_px - objmap->GetScrollX() + 30.0f;
 	dst.m_right = dst.m_left + 32.0f;
-	dst.m_bottom = dst.m_top + 512.0f - m_wall_gauge;
+	dst.m_bottom = dst.m_top + 512.0f - (float)m_wall_gauge;
 
 	//描画(下の部分)
 	Draw::Draw(GRA_OPEN_WALL, &src, &dst, color, 0.0f);

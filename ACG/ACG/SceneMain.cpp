@@ -185,7 +185,7 @@ void CSceneMain::ImageDataLoading()
 			//リフト画像読み込み
 			Draw::LoadImageW(L"Image\\Lift\\Stage5.png", GRA_LIFT, TEX_SIZE_512);
 			//落ちるリフト
-			//Draw::LoadImageW(L"", GRA_FALLING_LIFT, TEX_SIZE_256);
+			Draw::LoadImageW(L"Image\\Block\\Falling_lift.png", GRA_FALLING_LIFT, TEX_SIZE_256);
 			//横移動リフト
 			Draw::LoadImageW(L"Image\\Lift\\Side_Move_Lift.png", GRA_HAND_LIFT, TEX_SIZE_128);
 			//拡散弾を撃つ弾
