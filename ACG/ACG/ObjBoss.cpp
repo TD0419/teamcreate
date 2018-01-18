@@ -21,7 +21,7 @@ CObjBoss::CObjBoss(int x, int y)
 void CObjBoss::Init()
 {
 	m_vx = -1.0f;		// 移動ベクトル
-	m_hp = 1;			//ボスのＨＰ
+	m_hp = 20;			//ボスのＨＰ
 	m_posture = 1.0f;	// 左向き
 	m_speed = 3.0f;		// 速度
 
