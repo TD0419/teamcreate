@@ -75,9 +75,6 @@ void CObjRope::Action()
 	//主人公のオブジェクトを持ってくる
 	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	//回転ブロックのスイッチのオブジェクトを持ってくる
-	CObjRollBlockSwitch* objrolls = (CObjRollBlockSwitch*)Objs::GetObj(OBJ_ROLL_BLOCK_SWITCH);
-
 	//画面外にいれば
 	if(WindowCheck(m_px,m_py,ROPE_SIZE, ROPE_SIZE) == false)
 	{
@@ -140,28 +137,6 @@ void CObjRope::Action()
 		//移動
 		m_px += m_vx;
 		m_py += m_vy;
-	}
-
-	//バグがおきたので上とわけました
-	//回転床用のスイッチと衝突したとき、ロープが引っかかるようにする
-	if (hit->CheckObjNameHit(OBJ_ROLL_BLOCK_SWITCH) != nullptr)
-	{
-		//　ステージ５の回転ブロックスイッチが動いてる時はRキーを押してもロープが消えないようにする
-		if (objrolls->GetKeyFlag() == true)
-		{
-			m_r_key_flag = true;
-		}
-		else if (objrolls->GetKeyFlag() == false && Input::GetMouButtonR() == false)
-		{
-			m_caught_flag = true;
-			m_r_key_flag = false;
-		}
-		//　ステージ5の回転ブロックスイッチが最後まで行った時ロープを自動的に消すようにする
-		if (objrolls->GetLastRoll() == true)
-		{
-			Delete();//自身とHitBoxを除去する
-			return;
-		}
 	}
 
 	//回転ブロックのスイッチと当たっている場合
