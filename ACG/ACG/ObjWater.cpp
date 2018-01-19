@@ -44,11 +44,12 @@ void CObjWater::Action()
 	CObjLeverSwich* obj_lever = (CObjLeverSwich*)Objs::GetObj(OBJ_LEVER_SWICH);
 
 	bool lever_swich = false;
+	
 	//レバースイッチオブジェクトが当たっているかどうかを調べる
 	if (obj_lever != nullptr)
 		lever_swich = obj_lever->GetWater();
-	else
-		lever_swich = false;
+	//else
+	//	lever_swich = false;
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
