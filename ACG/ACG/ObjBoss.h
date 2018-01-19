@@ -36,6 +36,10 @@ private:
 	float m_speed;	 // 速度
 
 	int m_hp;		 // ボスのＨＰ
+	int m_time;			//たいみんぐ管理用
+	int m_shot_hit_time;//弾丸が当たったたいみんぐの保存用
+
+	bool m_draw_flag;//描画用のフラグ
 	
 	//blockとの衝突確認用
 	bool m_hit_up;
@@ -54,5 +58,7 @@ private:
 	bool m_throw_bullet_flag;   //投げるココナッツの制御フラグ
 	bool m_wall_hit_flag;		//ボスが壁に当たったときのフラグ
 	bool m_down_check_flag;		//下側のチェックをするかどうかのフラグ
+
+	bool m_damage_flag;	//ダメージを受けているかどうかのフラグ
 
 };

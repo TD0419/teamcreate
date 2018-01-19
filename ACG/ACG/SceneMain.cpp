@@ -152,6 +152,8 @@ void CSceneMain::ImageDataLoading()
 			Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
 			//ボス画像読み込み
 			Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1280);
+			//ボス画像読み込み
+			Draw::LoadImageW(L"Image\\White_Gorira.png", GRA_WHITE_BOSS, TEX_SIZE_1280);
 			//ゴリラの投擲物読み込み
 			Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
 			//岩画像読み込み
