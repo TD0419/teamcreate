@@ -126,7 +126,11 @@ void CObjBullet::Action()
 	{
 		return;
 	}
-
+	//落ちるブロックと当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_FALLING_BLOCK))
+	{
+		return;
+	}
 	// ブロックオブジェクトを持ってくる
 	CObjBlock* objblock = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	

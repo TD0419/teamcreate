@@ -52,6 +52,12 @@ void CObjDiffusionSource::Action()
 		return;
 	}
 
+	//—‚¿‚éƒuƒƒbƒN‚Æ“–‚½‚Á‚½‚çÁ‹
+	if (DeleteCheckObjNameHit(hit, this, OBJ_FALLING_BLOCK))
+	{
+		return;
+	}
+
 	//ˆÚ“®
 	m_px += m_vx;
 	m_py += m_vy;
