@@ -44,9 +44,15 @@ public:
 	void SetArmDownFlagLeft() { m_left_arm_down_flag = false; }
 	bool GetArmDownFlagRight() { return m_right_arm_down_flag; }
 	bool GetArmDownFlagLeft() { return m_left_arm_down_flag; }
+	bool GetBossDeathFlag() { return m_death_flag; }
+	
 	//攻撃4カウンターが300フレーム経過した情報を入れる
 	bool GetBlockRetuenFlag() { return m_progress_atk4_count; }
 	
+	//ボスの死亡アニメーション処理用関数(アクション用)
+	bool ActionDeathAnimation();
+	//ボスの死亡アニメーション処理用関数(ドロー用)
+	void DrawDeathAnimation();
 
 private:
 	float m_px;	 // 第五ボスX座標
@@ -72,11 +78,6 @@ private:
 	bool m_death_flag;//死亡フラグ　true=死亡している	false=生きている
 
 	//第五ボスの攻撃モード
-	//0:何もしない
-	//1:主人公のいる位置を取って上から地面までに当たると死ぬ攻撃を落とす
-	//2:打ち出してからランダムな時間経過で拡散弾(15度ほど)になる弾を出す
-	//3:ボス自身が動きながら主人公の位置に弾を撃つ(レーザー)
-	//4:3地点に縄を引っ掛けるオブジェクトを出現させ、その後地面が落ちる攻撃をする。
 	int m_attack_mode;
 
 	int m_time;//攻撃のタイミング管理用
@@ -92,11 +93,6 @@ private:
 	int m_ani_frame_death[4];	//描画フレーム(死亡)						詳細はInit関数の中の初期化部分
 	int m_ani_time_death[4];	//アニメーションフレーム動作間隔(死亡)		詳細はInit関数の中の初期化部分
 	int m_ani_max_time_death[2];//アニメーションフレーム動作間隔最大値(死亡)詳細はInit関数の中の初期化部分
-
-	//ボスの死亡アニメーション処理用関数(アクション用)
-	bool ActionDeathAnimation();
-	//ボスの死亡アニメーション処理用関数(ドロー用)
-	void DrawDeathAnimation();
 
 	//ランダムで値を決める関数
 	int GetRandom(int min, int max);

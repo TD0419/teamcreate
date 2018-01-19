@@ -1,7 +1,5 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
-#include "GameL\HitBoxManager.h"
-#include "GameL\Audio.h"
 #include "GameL\DrawFont.h"
 
 #include "GameHead.h"
@@ -24,15 +22,9 @@ void CObjAfterBossDisappearance::Init()
 	Objs::InsertObj(objDoor, OBJ_DOOR, 9);
 }
 
-//アクション
-void CObjAfterBossDisappearance::Action()
-{
-	
-}
-
 //ドロー
 void CObjAfterBossDisappearance::Draw()
 {
-	float font_color[4] = { 1.0f,1.0f,1.0f,1.0f };
-	Font::StrDraw(L"GAME CLEAR", 150, 120, 150, font_color);
+	float color[4] = { 1.0f,1.0f,1.0f,1.0f };
+	Font::StrDraw(L"GAME CLEAR", 150.0f, 120.0f, 150.0f, color);
 }

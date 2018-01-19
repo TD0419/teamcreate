@@ -6,7 +6,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//クラス　回転ブロック
+//クラス　回転ブロックスイッチ
 class CObjRollBlockSwitch : public CObj
 {
 public:
@@ -16,31 +16,24 @@ public:
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー
-
-	float GetRad() { return m_r; }//角度を返す
-	bool GetKeyFlag() { return m_key_flag; }  //ロープ側に切り離せるかどうかを返す
-	bool GetLastRoll() { return m_lastroll; } //回転が最後まで行ったかどうかを返す
-
-	//ブロックの位置を返す
-	float GetX() { return m_px; }
-	float GetY() { return m_py; }
-
+private:
+	//ロープと回転ブロックスイッチの位置を調整する関数
+	void PositionAdjustment();
 private:
 	//位置
 	float m_px;
 	float m_py;
 	float m_r;
-	bool  m_once_flag; //一回だけ動かせる
+	bool  m_rotation_flag; //回転をするかどうかのフラグ　true=回転する、回転している　false=回転しない、回転していない
 
 	//ブロックのポジション
 	float m_base_block_px;
 	float m_base_block_py;
 
-
 	//スイッチが作用させる回転ブロックのポインタ
 	CObjRollBlock* mp_base_block;
 
-	bool m_pull_flag;//ロープで引かれているかどうかのフラグ
-	bool m_lastroll; //最後まで回転したかどうかを調べる（false:最後まで回転してない true:最後まで回転した）
-	bool m_key_flag; //ロープ側に切り離せるかどうかを渡す変数
+	//ロープと衝突しているかどうかフラグ
+	//true = 衝突している　false = 衝突していない
+	bool m_rope_hit_flag;
 };

@@ -57,10 +57,10 @@ bool WindowCheck(float m_px, float m_py,float obj_size_x, float obj_size_y)
 	float y = m_py - objmap->GetScrollY();
 
 	//上または下でチャック
-	if (y < 0 - obj_size_y || y > WINDOW_SIZE_H)
+	if (y < 0.0f - obj_size_y || y > WINDOW_SIZE_H)
 		return false;
 	//左または右でチェック
-	if (x < 0 - obj_size_x || x > WINDOW_SIZE_W)
+	if (x < 0.0f - obj_size_x || x > WINDOW_SIZE_W)
 		return false;
 
 	return true;
@@ -170,4 +170,49 @@ int HitTestOfAB(float ax, float ay, float aw, float ah,
 		}
 	}
 	return 0;
+}
+
+//2直線の交点を求める関数
+//変数の名前について
+//l = line(直線)	d = dot(点)　例）l1d1_x = 1つ目の直線の1つ目の点のX位置
+//引数1  float l1d1_x	 :1つ目の直線の一つ目の点　X位置
+//引数2  float l1d1_y	 :1つ目の直線の一つ目の点　Y位置
+//引数3  float l1d2_x	 :1つ目の直線の二つ目の点　X位置
+//引数4  float l1d2_y	 :1つ目の直線の二つ目の点　Y位置
+//引数5  float l2d1_x	 :2つ目の直線の一つ目の点　X位置
+//引数6  float l2d1_y	 :2つ目の直線の一つ目の点　Y位置
+//引数7  float l2d2_x 	 :2つ目の直線の二つ目の点　X位置
+//引数8  float l2d2_y    :2つ目の直線の二つ目の点　Y位置
+//引数9  float &p_cross_x:交点があったとき交点のX位置情報が入る変数
+//引数10 float &p_cross_y:交点があったとき交点のY位置情報が入る変数
+//戻り値 bool			 :true = 交点があった場合	false = 交点が無かった場合
+bool CrossLineVSLine(float l1d1_x, float l1d1_y, float l1d2_x, float l1d2_y, float l2d1_x, float l2d1_y, float l2d2_x, float l2d2_y, float &p_cross_x, float &p_cross_y)
+{
+	//このプログラムについては後ほどコメントを書きます。
+	//http://mf-atelier.sakura.ne.jp/mf-atelier/modules/tips/program/algorithm/a1.html
+
+	float ksi, eta, delta;
+	float ramda, mu;
+
+	ksi = (l2d2_y - l2d1_y)*(l2d2_x - l1d1_x) -
+		(l2d2_x - l2d1_x)*(l2d2_y - l1d1_y);
+
+	eta = (l1d2_x - l1d1_x)*(l2d2_y - l1d1_y) -
+		(l1d2_y - l1d1_y)*(l2d2_x - l1d1_x);
+
+	delta = (l1d2_x - l1d1_x)*(l2d2_y - l2d1_y) -
+		(l1d2_y - l1d1_y)*(l2d2_x - l2d1_x);
+
+	ramda = ksi / delta;
+	mu = eta / delta;
+
+	if ((ramda >= 0 && ramda <= 1) && (mu >= 0 && mu <= 1))
+	{
+		p_cross_x = l1d1_x + ramda*(l1d2_x - l1d1_x);
+		p_cross_y = l1d1_y + ramda*(l1d2_y - l1d1_y);
+
+		return true;
+	}
+
+	return false;
 }

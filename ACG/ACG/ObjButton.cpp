@@ -2,7 +2,6 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
-#include "GameL\UserData.h"
 #include "GameL\Audio.h"
 
 #include "GameHead.h"
@@ -36,13 +35,6 @@ void CObjButton::Init()
 //アクション
 void CObjButton::Action()
 {
-	//画面外なら
-	if (WindowCheck(m_px, m_py,36.0f, 32.0f) == false)
-	{
-		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
-		return;
-	}
-
 	// ボタンが押されたら
 	if (m_trick_flag == true)
 	{
@@ -77,8 +69,7 @@ void CObjButton::Action()
 	}
 
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px+13, m_py);
-
+	HitBoxUpData(Hits::GetHitBox(this), m_px+13.0f, m_py);
 }
 
 //ドロー
@@ -89,6 +80,7 @@ void CObjButton::Draw()
 	{
 		0  , 1 ,
 	};
+
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -109,7 +101,6 @@ void CObjButton::Draw()
 	dst.m_right = dst.m_left + BUTTON_SIZE;
 	dst.m_bottom = dst.m_top + BUTTON_SIZE;
 
-	
 	//描画
 	Draw::Draw(GRA_BUTTON, &src, &dst, color, 0.0f);
 }

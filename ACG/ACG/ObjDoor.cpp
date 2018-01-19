@@ -34,24 +34,29 @@ void CObjDoor::Init()
 	switch (((UserData*)Save::GetData())->stagenum)
 	{
 		//ステージ１
-	case 1:
-		m_door_type = 1;
-		break;
-		//ステージ２
-	case 2:
-		m_door_type = 2;
-		break;
-		//ステージ３
-	case 3:
-		m_door_type = 3;
-		break;
-		//ステージ５
-	case 5:
-		m_door_type = 5;
-		break;
-	default:
+		case 1:
+		{
+			m_door_type = 1;
+			break;
+		}
 
-		break;
+		//ステージ２
+		case 2:
+		{
+			m_door_type = 2;
+			break;
+		}
+		case 3:
+		{
+			m_door_type = 3;
+			break;
+		}
+		//ステージ５
+		case 5:
+		{
+			m_door_type = 5;
+			break;
+		}
 	}
 
 	//当たり判定用HitBoxを作成
@@ -71,26 +76,31 @@ void CObjDoor::Action()
 	//ドアのHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//ボスの情報を呼ぶの
-	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-	CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
-	CObjStage5Boss* objstage5_boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 	switch (m_door_type)
 	{
 	case 1:
+	{
+		CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+
+		//敵がいなくなったとき
 		if (objenemy == nullptr)
-		{
 			m_unlock_flag = true;//施錠解除フラグをonにします
-		}
 		break;
+	}
 	case 2:
+	{
+		CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+
 		//ボスが消滅したとき
 		if (objboss == nullptr)
-		{
 			m_unlock_flag = true;//施錠解除フラグをonにします
-		}
 		break;
-	case 5:
+	}
+	case 3:
+	case 5:		
+	{
+		CObjStage5Boss* objstage5_boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+		
 		//ステージ５のボスが消滅したとき
 		if (objstage5_boss == nullptr)
 		{
@@ -98,8 +108,8 @@ void CObjDoor::Action()
 		}
 		break;
 	}
+	}
 	
-
 	//施錠解除フラグオンのとき
 	if (m_unlock_flag==true)
 	{
@@ -107,7 +117,7 @@ void CObjDoor::Action()
 	}
 
 	//ドアアニメタイムがマックスタイムより少なく、フレームが2じゃないとき
-	if (m_ani_door_time > m_ani_door_time_max&&m_ani_door_frame != 2)
+	if (m_ani_door_time > m_ani_door_time_max && m_ani_door_frame != 2)
 	{
 		m_ani_door_frame += 1;//ドアのフレームを+1します。
 		m_ani_door_time = 0;  //ドアタイムを0にします
@@ -130,7 +140,7 @@ void CObjDoor::Action()
 		}
 	}
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(hit, m_px, m_py);
 }
 
 //ドロー
@@ -138,7 +148,6 @@ void CObjDoor::Draw()
 {
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
-
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる
@@ -146,7 +155,7 @@ void CObjDoor::Draw()
 
 	//切り取り位置
 	src.m_top = 0.0f;
-	src.m_left = m_ani_door_frame * 128.0f-128.0f;
+	src.m_left = (float)(m_ani_door_frame - 1) * 128.0f;
 	src.m_right = src.m_left+128.0f;
 	src.m_bottom = src.m_top+128.0f;
 

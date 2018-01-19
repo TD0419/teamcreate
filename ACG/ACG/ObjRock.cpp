@@ -79,7 +79,7 @@ void CObjRock::Action()
 			float r = hit_data[i]->r;//あたっている角度をもってくる
 
 			//岩の右側が衝突している場合
-			if (0 < r && r < 65|| 315 < r && r < 360)
+			if (0.0f < r && r < 65.0f|| 315.0f < r && r < 360.0f)
 			{
 				//岩にめりこまないようにする処理
 				if (objhero->GetPosture() == 0.0f)//右向き
@@ -94,7 +94,7 @@ void CObjRock::Action()
 			}
 			
 			//岩の左側が衝突している場合
-			else if (115 < r && r < 225 )
+			else if (115.0f < r && r < 225.0f)
 			{
 				//岩にめりこまないようにする処理
 				if (objhero->GetPosture() == 0.0f)//右向き
@@ -110,7 +110,7 @@ void CObjRock::Action()
 			}
 
 			//岩の下側が衝突している場合
-			else if (225 < r && r < 315)
+			else if (225.0f < r && r < 315.0f)
 			{
 				objhero->SetVecY(0.0f);//主人公のY方向の移動を０にする
 				objhero->SetPosY(m_py + ROCK_SIZE_HEIGHT);//主人公の位置を岩の下側までずらす
@@ -119,7 +119,6 @@ void CObjRock::Action()
 	}
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py- ROCK_SIZE_WIDTH);
-
 }
 
 //ドロー
@@ -141,7 +140,7 @@ void CObjRock::Draw()
 
 	//切り取り位置
 	src.m_top = 1.0f;
-	src.m_left = AniData[m_ani_frame] * 128.0f - 128.0f;
+	src.m_left = (float)AniData[m_ani_frame] * 128.0f - 128.0f;
 	src.m_right = src.m_left + 128.0f;
 	src.m_bottom = src.m_top + 198.0f;
 	
@@ -151,7 +150,6 @@ void CObjRock::Draw()
 	dst.m_right = dst.m_left + ROCK_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + ROCK_SIZE_HEIGHT;
 
-	
 	//描画
 	Draw::Draw(GRA_ROCK, &src, &dst, color, 0.0f);
 }

@@ -29,20 +29,18 @@ void CObjFallingLift::Action()
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	//主人公オブジェクトと当たってるかつ主人公がリフトの乗っていないとき
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && m_get_on_flag == false)
+	//主人公とあたっているなら
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
+		////主人公がリフトの乗っているとき
+		//if ( m_get_on_flag == false)
+			m_py += 5.0f;	//落ちるリフトが移動(落下する)
+
 		HeroRide();//衝突処理をする
 	}
-	//主人公オブジェクトと当たってるかつ主人公がリフトの乗っているとき
-	else if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && m_get_on_flag == true)
-	{
-		//落ちるリフトが移動(落下する)
-		m_py += 5.0f;
-		HeroRide();//衝突処理をする
-	}
+
 	//HitBoxの位置を更新する
-	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
+	HitBoxUpData(hit, m_px, m_py);
 }
 
 //ドロー
@@ -69,7 +67,7 @@ void CObjFallingLift::Draw()
 	dst.m_bottom = dst.m_top + ROLL_BLOCK_SIZE_HEIGHT;
 		
 	//描画
-	Draw::Draw(GRA_FALLING_LIFT, &src, &dst, color, 0);
+	Draw::Draw(GRA_FALLING_LIFT, &src, &dst, color, 0.0f);
 }
 
 //主人公が当たったときの処理
@@ -120,7 +118,7 @@ void CObjFallingLift::HeroRide()
 			//右側が当たっていれば
 			if (0.0f <= r && r <= 31.0f||335.0f<r&&r<360.0f )
 			{
-				if (objhero->GetPosture() == 1.0)
+				if (objhero->GetPosture() == 1.0f)
 				{
 					m_get_on_flag = false;//「主人公は乗っていない」と識別する。
 					//右に反発する処理

@@ -24,11 +24,10 @@ CObjRollBlockSwitch::CObjRollBlockSwitch(float x, float y, CObjRollBlock* p)
 //イニシャライズ
 void CObjRollBlockSwitch::Init()
 {
-	m_pull_flag = false;
-	m_lastroll = false;
-	m_key_flag = false;
 	m_r = 0.0f;
-	m_once_flag = false;
+	m_rotation_flag = false;//回転はまだしない
+
+	m_rope_hit_flag = false;//初期は衝突してい無い
 
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, ROLL_BLOCK_SWITCH_SIZE_WIDTH, ROLL_BLOCK_SWITCH_SIZE_HEIGHT, ELEMENT_GIMMICK, OBJ_ROLL_BLOCK_SWITCH, 1);
@@ -37,79 +36,70 @@ void CObjRollBlockSwitch::Init()
 //アクション
 void CObjRollBlockSwitch::Action()
 {
-
-	//画面外なら
-	if (WindowCheck(m_px, m_py, ROLL_BLOCK_SWITCH_SIZE_WIDTH, ROLL_BLOCK_SWITCH_SIZE_HEIGHT) == false)
-	{
-		CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
-		this->SetStatus(false);		//自身に消去命令を出す。
-		Hits::DeleteHitBox(this);	//所持するHitBoxを除去。
-
-		return;
-	}
-
 	//HitBoxのポインタを持ってくる
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	//mapオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	//引っ張りをオフにする
-	m_pull_flag = false;
 
-	//ロープと当たっていれば
-	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
+	//回転フラグがONなら
+	if (m_rotation_flag == true)
 	{
-		//左移動していれば
-		if (Input::GetVKey('A') == true)
+		
+		//90度以下ならスイッチを回転させる
+		if (m_r < 90.0f) 
 		{
-			m_once_flag = true; //一回だけ
+			//ロープと回転ブロックスイッチの位置を調整する
+			PositionAdjustment();
+			m_r += 2.0f;//角度の加算
 		}
-
-		if(m_once_flag == true)
-		{
-			//92度を超えていたなら
-			if (m_r >= 92.0f)
-			{
-				//引っ張りをオフにする
-				m_pull_flag = false;
-
-				m_lastroll = true; 
-				m_r = 92.0f;//90を超えないようにする
-			}
-			else if (m_r < 92.0f) //92度以下ならスイッチを回転させる
-			{
-				m_r += 2.0f;//角度の加算
-
-				//引っ張りのフラグをオンにする
-				m_pull_flag = true;
-				m_key_flag = true;
-			}
-
-			//sin値　cos値を求める
-			float sin = sinf(m_r * 3.14f / 180.0f);
-			float cos = cosf(m_r * 3.14f / 180.0f);
-
-			//角度を元に位置を調節する
-			m_px = m_base_block_px - sin * ROLL_BLOCK_SIZE_WIDTH;
-			m_py = m_base_block_py + ROLL_BLOCK_SIZE_WIDTH - cos * ROLL_BLOCK_SIZE_WIDTH;
-
-		}
-
-		//ロープオブジェクトを持ってくる
+	}
+	//90度以上かつロープと接触していたら
+	//ロープを消し、90度にする
+	if (m_r >= 90.0f && hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
+	{
+		//回転が終了しているのでロープを消去する
 		CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
+		if (objrope != nullptr)
+			objrope->Delete();
 
-		//ロープの位置をこのオブジェクトの位置に合わせる　+6.0fすることでロープとスイッチが常にあたるようにする
-		objrope->SetPosX(m_px + 6.0f);
-		objrope->SetPosY(m_py + 6.0f);
+		m_r = 90.0f;//90を超えないようにする
 	}
 
-	//フラグを入れる
-	mp_base_block->SetRollFlag(m_pull_flag);
-
+	//ロープと当たっている
+	if (hit->CheckObjNameHit(OBJ_ROPE) != nullptr)
+	{
+		//1フレーム前、フラグがOFFならロープの位置を調整する
+		if (m_rope_hit_flag == false)
+		{
+			//ロープと回転ブロックスイッチの位置を調整する
+			//一回でもしておかないと回転ブロックスイッチの上のほうでロープが引っかかったら
+			//一瞬だけHit判定は起きるがそれ以降Hit判定無し状態になってしまうので
+			//ここで位置を調整する
+			PositionAdjustment();
+			//衝突しているのでフラグをONにする
+			m_rope_hit_flag = true;
+		}
+		//Aキーが入力されたら
+		//回転フラグをON(回転する)にする
+		if (Input::GetVKey('A') == true)
+		{
+			m_rotation_flag = true; //回転をする
+			//フラグを入れる
+			mp_base_block->SetRollFlag(m_rotation_flag);
+		}
+	}
+	else
+		m_rope_hit_flag = false;
+	
 	//hitBox更新
 	HitBoxUpData(hit, m_px, m_py);
+
+	//回転が最後までいっていたら自身を消去する
+	//回転が終了したら不必要と思ったので消去しました。
+	if (m_r >= 90.0f)
+		WindowOutDelete(this);
 }
 
 //ドロー
@@ -135,4 +125,25 @@ void CObjRollBlockSwitch::Draw()
 	dst.m_bottom = dst.m_top + ROLL_BLOCK_SWITCH_SIZE_HEIGHT;
 
 	Draw::Draw(GRA_BLACK_BALL, &src, &dst, color, 0.0f);
+}
+
+//ロープと回転ブロックスイッチの位置を調整する関数
+void CObjRollBlockSwitch::PositionAdjustment()
+{
+	//sin値　cos値を求める
+	float sin = sinf(m_r * 3.14f / 180.0f);
+	float cos = cosf(m_r * 3.14f / 180.0f);
+
+	//角度を元に位置を調節する
+	m_px = m_base_block_px - sin * ROLL_BLOCK_SIZE_WIDTH;
+	m_py = m_base_block_py + ROLL_BLOCK_SIZE_WIDTH - cos * ROLL_BLOCK_SIZE_WIDTH;
+
+	//ロープオブジェクトを持ってくる
+	CObjRope* objrope = (CObjRope*)Objs::GetObj(OBJ_ROPE);
+	if (objrope != nullptr)
+	{
+		//ロープの位置をこのオブジェクトの位置に合わせる　+6.0fすることでロープとスイッチが常にあたるようにする
+		objrope->SetPosX(m_px + 6.0f);
+		objrope->SetPosY(m_py + 6.0f);
+	}
 }

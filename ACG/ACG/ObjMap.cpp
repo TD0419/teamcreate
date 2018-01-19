@@ -87,7 +87,6 @@ void CObjMap::ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y)
 			{
 				if (y >= 0 && y < MAP_Y_MAX)
 				{
-
 					CreateObj(x, y);//オブジェクトを生成
 				}
 			}
@@ -107,7 +106,6 @@ void CObjMap::CreateObj(int x, int y)
 	{
 		case MAP_HERO_START:	//ヒーローの作成
 		{
-
 			//主人公オブジェクトを作成する
 			CObjHero* objhero = new CObjHero(x, y, m_remaining);
 			Objs::InsertObj(objhero, OBJ_HERO, 10);
@@ -186,7 +184,7 @@ void CObjMap::CreateObj(int x, int y)
 
 		case MAP_LAST_WALL:		//壁(次ステージを隔てる壁)
 		{
-			if (((UserData*)Save::GetData())->stagenum == 5)	//ステージ5のときは下のほうから生成する
+			if (((UserData*)Save::GetData())->stagenum == 3)	//ステージ5のときは下のほうから生成する
 			{
 				CObjLastWall* objLastWall = new CObjLastWall(x, y - 8);
 				Objs::InsertObj(objLastWall, OBJ_LAST_WALL, 10);
@@ -241,13 +239,6 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
-		case MAP_REFLECT_BLOCK:	//反射用ブロック作成
-		{
-			CObjReflectBlock* objreflec_block = new CObjReflectBlock(x, y);
-			Objs::InsertObj(objreflec_block, OBJ_REFLECT_BLOCK, 9);
-			break;
-		}
-
 		case MAP_ROLL_BLOCK_TYPE_AUTO://回転ブロック（自動回転）作成
 		{
 			CObjRollBlock* objrollblock = new CObjRollBlock(x, y,1);
@@ -262,20 +253,7 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 		}
 
-		case MAP_STAGE3_BOSS:		//第三ボス作成
-		{
-			CObjStage3Boss* objstage3_boss = new CObjStage3Boss(x, y);
-			Objs::InsertObj(objstage3_boss, OBJ_STAGE3_BOSS, 9);
-			break;
-		}
-
-		case MAP_CANNON:		//砲台
-		{
-			CObjCannon* objcannon = new CObjCannon(x, y);
-			Objs::InsertObj(objcannon, OBJ_CANNON, 9);
-			break;
-		}
-
+	
 		case MAP_TARZAN_POINT://ロープでぶら下がれるギミック
 		{
 			CObjTarzanPoint* objtarzanpoint = new CObjTarzanPoint(x, y,true);
@@ -340,21 +318,19 @@ void CObjMap::CreateObj(int x, int y)
 			break;
 
 		}
-		
 	}
 
 	//落ちるブロック以外なら
 	if(m_map[y][x].num != MAP_FALLING_BLOCK)
-		m_map[y][x].create = false;//フラグをオフにする
-
-		
+		m_map[y][x].create = false;//フラグをオフにする		
 }
 
 //落ちるブロックだけを生成する（ボス戦用）
-void CObjMap::CreateFallingBloack(int create_start_x)
+//引数1,2：主人公の位置をブロック単位でもってくる
+void CObjMap::CreateFallingBloack(int create_start_x,int create_start_y)
 {
 	//yの値が　マップの最大値　に達するまで回す
-	for (int y = 0 ; y < MAP_Y_MAX ; y++)
+	for (int y = create_start_y; y < MAP_Y_MAX ; y++)
 	{
 		//xの値が　マップの最大値　に達するまで回す
 		for (int x = create_start_x ; x < MAP_X_MAX ; x++)
@@ -363,7 +339,7 @@ void CObjMap::CreateFallingBloack(int create_start_x)
 			if (m_map[y][x].num == MAP_FALLING_BLOCK)
 			{
 				//生成のフラグがオンなら
-				if ( m_map[y][x].create == true )
+				if (m_map[y][x].create == true)
 				{
 					CObjFallingBlock* objfalling_block = new CObjFallingBlock(x, y);
 					Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK, 9);
@@ -383,4 +359,3 @@ int CObjMap::GetMap(int x, int y)
 
 	return -99999;//無かった場合
 }
-

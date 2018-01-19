@@ -78,19 +78,14 @@
     <ClInclude Include="ObjFallingLift.h" />
     <ClInclude Include="ObjLastWall.h" />
     <ClInclude Include="ObjBackGround.h" />
-    <ClInclude Include="ObjCannon.h" />
-    <ClInclude Include="ObjFallingWalls.h" />
     <ClInclude Include="ObjNeedle.h" />
     <ClInclude Include="ObjRollBlockSwitch.h" />
     <ClInclude Include="ObjNeedleStand.h" />
     <ClInclude Include="ObjStage5Boss.h" />
     <ClInclude Include="ObjStage5BossArms.h" />
     <ClInclude Include="ObjThroughBlock.h" />
-    <ClInclude Include="ObjBossDropKey.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="ObjDoor.h" />
-    <ClInclude Include="ObjReflectBlock.h" />
-    <ClInclude Include="ObjEndlessSpring.h" />
     <ClInclude Include="ObjEnemyBullet.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
@@ -120,7 +115,6 @@
     <ClInclude Include="ObjRock.h" />
     <ClInclude Include="ObjRope.h" />
     <ClInclude Include="ObjSign.h" />
-    <ClInclude Include="ObjTime.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjWood.h" />
     <ClInclude Include="ObjRopeSwitch.h" />
@@ -130,7 +124,6 @@
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjWater.h" />
-    <ClInclude Include="ObjStage3Boss.h" />
     <ClInclude Include="ObjTarzanPoint.h" />
     <ClInclude Include="ObjWireMesh.h" />
   </ItemGroup>
@@ -145,12 +138,8 @@
     <ClCompile Include="ObjHeroInit.cpp" />
     <ClCompile Include="ObjLastWall.cpp" />
     <ClCompile Include="ObjBackGround.cpp" />
-    <ClCompile Include="ObjCannon.cpp" />
-    <ClCompile Include="ObjFallingWalls.cpp" />
-    <ClCompile Include="ObjBossDropKey.cpp" />
     <ClCompile Include="Function.cpp" />
     <ClCompile Include="ObjDoor.cpp" />
-    <ClCompile Include="ObjEndlessSpring.cpp" />
     <ClCompile Include="ObjEnemyBullet.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
@@ -180,7 +169,6 @@
     <ClCompile Include="ObjRope.cpp" />
     <ClCompile Include="ObjStage5BossArms.cpp" />
     <ClCompile Include="ObjTarzanPoint.cpp" />
-    <ClCompile Include="ObjTime.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjWood.cpp" />
     <ClCompile Include="ObjRopeSwitch.cpp" />
@@ -194,8 +182,6 @@
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjWater.cpp" />
     <ClCompile Include="ObjSign.cpp" />
-    <ClCompile Include="ObjStage3Boss.cpp" />
-    <ClCompile Include="ObjReflectBlock.cpp" />
     <ClCompile Include="ObjThroughBlock.cpp" />
     <ClCompile Include="ObjStage5Boss.cpp" />
     <ClCompile Include="ObjWireMesh.cpp" />

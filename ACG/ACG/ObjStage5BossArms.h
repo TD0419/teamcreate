@@ -9,8 +9,6 @@ using namespace GameL;
 #define RIGHT_ARM 1
 #define LEFT_ARM 2
 
-//------------------------------------------
-
 //オブジェクト：第五ステージのボスの腕
 class CObjStage5BossArms :public CObj
 {
@@ -23,30 +21,28 @@ public:
 	void Draw();	        //ドロー
 
 	//アクセサーーーーー-------------------------------
-	void SetPosX(float x) { m_px = x; }//ポジションXをセットする
-	void SetPosY(float y) { m_py = y; }//ポジションYをセットする
+	//void SetPosX(float x) { m_px = x; }//ポジションXをセットする
+	//void SetPosY(float y) { m_py = y; }//ポジションYをセットする
 	void SetVecX(float vx) { m_vx = vx; }//ベクトルXをセットする
-	void SetVecY(float vy) { m_vy = vy; }//ベクトルYをセットする
+	//void SetVecY(float vy) { m_vy = vy; }//ベクトルYをセットする
 
-	float GetPosX() { return m_px; }//ポジションXを渡す
-	float GetPosY() { return m_py; }//ポジションYを渡す
-	float GetVecX() { return m_vx; }//ベクトルXを渡す
-	float GetVecY() { return m_vy; }//ベクトルYを渡す
+	//float GetPosX() { return m_px; }//ポジションXを渡す
+	//float GetPosY() { return m_py; }//ポジションYを渡す
+	//float GetVecX() { return m_vx; }//ベクトルXを渡す
+	//float GetVecY() { return m_vy; }//ベクトルYを渡す
 
 	void SetInitPosFlagON() { m_initpos_flag = true; }//初期位置に戻すフラグをオンにする
-
 	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
 
 	void ArmDownTimeInit() { m_armdown_time = 0; }//タイムの初期化
 	bool GetBlockHit() {return m_block_hit_flag;}//ブロックのヒットフラグを返す
-
-	//-------------------------------------------------
-
+	//---------------------------------------------------------
+	
 	void DiffusionAttack(int limit_time);		//拡散弾を打つ攻撃
 	void MoveShotAttack();//移動しながら弾を撃つ攻撃
 	void ArmLowerAttack(float x, bool marker);	//腕を下ろす攻撃(下ろすX位置を求めるとき)
 	void ArmLowerAttack();			//腕を下ろす攻撃(最初にブロックが当たるまで腕を下ろし続ける)
-
+	void UpdateInitial();//初期位置を計算する
 	void Delete();	//HIT_BOXと自身(腕)を消去する
 
 private:
@@ -87,7 +83,4 @@ private:
 	bool m_right_arm_move;//ライトアームが動いているかどうかを判別する
 	
 	bool m_arm_down_flag;//腕が落ちてるかどうかのフラグ
-
-
-	void UpdateInitial();//初期位置を計算する
 };

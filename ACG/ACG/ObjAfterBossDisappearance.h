@@ -13,7 +13,7 @@ public:
 	CObjAfterBossDisappearance() {}; 	//コンストラクタ
 	~CObjAfterBossDisappearance() {};							//デストラクタ
 	void Init();												//イニシャライズ
-	void Action();												//アクション
+	void Action() {};												//アクション
 	void Draw();												//ドロー
 
 private:

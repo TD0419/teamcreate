@@ -4,7 +4,6 @@
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 
-#include "GameL\HitBoxManager.h"
 #include "GameHead.h"
 #include "ObjBlock.h"
 #include "Function.h"
@@ -21,16 +20,9 @@ CObjBlock::CObjBlock(int x, int y)
 	m_py = y * BLOCK_SIZE;
 }
 
-//イニシャライズ
-void CObjBlock::Init()
-{	
-	m_block_determine=0;
-}
-
 //アクション
 void CObjBlock::Action()
 {
-	
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
@@ -39,13 +31,7 @@ void CObjBlock::Action()
 
 	//画面外なら
 	if (wincheck_flag == false)
-	{
-		//削除するので次に来たときに生成するようにフラグをオンにする
-		objmap->SetMapCreate(m_map_x, m_map_y, true);
-		this->SetStatus(false);		//自身を削除
-	}
-
-	
+		WindowOutDelete(this, m_map_x, m_map_y);//削除する(復活する)
 }
 
 //ドロー
@@ -76,6 +62,7 @@ void CObjBlock::Draw()
 		src.m_right = 128.0f;
 		src.m_bottom = 64.0f;
 	}
+
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY();
 	dst.m_left = m_px - objmap->GetScrollX();

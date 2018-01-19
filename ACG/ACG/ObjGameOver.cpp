@@ -26,7 +26,9 @@ void CObjGameOver::Init()
 	Font::SetStrTex(L"Continue");
 	Audio::Start(GAMEOVER);	//BGMをならす
 
-	((UserData*)Save::GetData())->stagenum = 1;//ステージを１から始めるようにする
+	//ゲームオーバーになったステージからリスタートさせる
+	((UserData*)Save::GetData())->stagenum ;
+
 }
 
 //アクション
@@ -83,11 +85,9 @@ void CObjGameOver::Action()
 					Scene::SetScene(new CSceneTitle());
 					break;
 				}
-
 			}
 		}
 	}
-
 }
 
 //ドロー
@@ -126,7 +126,5 @@ void CObjGameOver::Draw()
 	{
 		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 42.0f, FONT_SIZE_GO -10.0f, color_white);
 		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 112.0f, FONT_SIZE_GO, color_yellow);
-
 	}
-
 }

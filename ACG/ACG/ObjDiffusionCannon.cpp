@@ -28,14 +28,12 @@ void CObjDiffusionCannon::Action()
 {
 	m_time++;
 	
-	//ステージ５ボスオブジェクトを持ってくる
+	//ステージ3ボスオブジェクトを持ってくる
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
 	if (objboss != nullptr)	//ボスオブジェクトがあれば
-	{
 		WindowOutDelete(this);//削除
-	}
-
+	
 	//100フレームの度に打ち出す
 	if (m_time > 100)
 	{
@@ -50,7 +48,6 @@ void CObjDiffusionCannon::Action()
 			Objs::InsertObj(obj_b, OBJ_DIFFUSION_BULLET, 100);
 			Audio::Start(DIFFUSION);
 		}
-
 	}
 }
 
@@ -59,7 +56,6 @@ void CObjDiffusionCannon::Draw()
 {
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
-
 	RECT_F src, dst;
 
 	//マップオブジェクトを持ってくる

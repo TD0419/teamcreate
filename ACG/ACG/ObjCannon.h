@@ -20,7 +20,7 @@ private:
 	float m_px;	//X座標
 	float m_py;	//Y座標
 	float m_r;  //砲台の回転角度
-	float m_rec;	//弾丸リキャスト
+	int m_rec;	//弾丸リキャスト
 	int m_map_x;	//マップの要素番号
 	int m_map_y;	//マップの要素番号
 };
