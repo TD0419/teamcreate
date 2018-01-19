@@ -62,7 +62,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//ステージ番号ごとにステージ読み込み
-	switch (((UserData*)Save::GetData())->stagenum =3)
+	switch (((UserData*)Save::GetData())->stagenum)
 	{
 	case 1:
 		Audio::Start(STAGE);
