@@ -145,6 +145,7 @@ enum GRAPHIC_ID
 	GRA_BLOCK,			//ブロック
 	GRA_THROUGH_BLOCK,  //すり抜けるブロック
 	GRA_BOSS,			//ボス
+	GRA_WHITE_BOSS,		//ボスのダメージヒット時
 	GRA_LADDERS,		//はしご
 	GRA_LIFT,			//リフト
 	GRA_DOOR,			//ドア
