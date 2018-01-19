@@ -20,6 +20,7 @@ void CObjTitle::Init()
 	Font::SetStrTex(L"Option");	//オプション
 	Font::SetStrTex(L"Exit");	//終了
 
+	//ステージ1からスタートさせる
 	((UserData*)Save::GetData())->stagenum = 1;
 
 	Audio::Start(TITLE);

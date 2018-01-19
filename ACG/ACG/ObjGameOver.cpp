@@ -26,7 +26,9 @@ void CObjGameOver::Init()
 	Font::SetStrTex(L"Continue");
 	Audio::Start(GAMEOVER);	//BGMをならす
 
-	((UserData*)Save::GetData())->stagenum = 1;//ステージを１から始めるようにする
+	//ゲームオーバーになったステージからリスタートさせる
+	((UserData*)Save::GetData())->stagenum ;
+
 }
 
 //アクション
