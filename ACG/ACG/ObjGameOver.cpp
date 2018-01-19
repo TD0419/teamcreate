@@ -26,8 +26,6 @@ void CObjGameOver::Init()
 	Font::SetStrTex(L"Continue");
 	Audio::Start(GAMEOVER);	//BGMをならす
 
-	//ゲームオーバーになったステージからリスタートさせる
-	((UserData*)Save::GetData())->stagenum ;
 
 }
 
@@ -75,13 +73,14 @@ void CObjGameOver::Action()
 			{
 				case 0:
 				{
-					//シーンメインに移動
+					//ゲーム画面に移動
+					//最後にゲームオーバーになったステージからリスタート
 					Scene::SetScene(new CSceneMain());
 					break;
 				}
 				case 1:
 				{
-					//シーンタイトルに移動
+					//タイトル画面に移動
 					Scene::SetScene(new CSceneTitle());
 					break;
 				}

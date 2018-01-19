@@ -8,6 +8,8 @@ using namespace GameL;
 
 //リフトのスピードマクロ
 #define SPEED (1.5f)
+//手動モードの引っ張る時のリフトのスピード
+#define MANUAL_PULL_SPEED (3.0f)
 
 //オブジェクト：リフト
 class CObjLift :public CObj

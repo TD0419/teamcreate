@@ -436,12 +436,12 @@ void CObjLift::ModeMove()
 				if (m_move_x < m_width_max)
 				{
 					//初期位置から動いた距離を増やす
-					m_move_x += SPEED;
+					m_move_x += MANUAL_PULL_SPEED;
 					//初期の移動方向が右のとき
 					if (m_initial_direction == 0)
 					{
 						//左に進む
-						m_vx = -SPEED;
+						m_vx = -MANUAL_PULL_SPEED;
 						m_lift_audio_count++;
 						if (m_lift_audio_count % 50 == 0)
 						{
@@ -452,7 +452,7 @@ void CObjLift::ModeMove()
 					else
 					{
 						//右に進む
-						m_vx = SPEED;
+						m_vx = MANUAL_PULL_SPEED;
 					}
 				}
 			}
