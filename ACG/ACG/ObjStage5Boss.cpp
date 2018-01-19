@@ -36,6 +36,12 @@ void CObjStage5Boss::Init()
 	//タイミング管理
 	m_time = 0;
 
+	//描画関連
+	m_draw_time = 0;	
+	m_shot_hit_time = 0;
+	m_draw_flag=false;
+	m_damage_flag=false;
+
 	//攻撃パターン3
 	m_attack3_flag = false;
 	m_attack3_count = 0;
@@ -93,6 +99,8 @@ void CObjStage5Boss::Init()
 //アクション
 void CObjStage5Boss::Action()
 {
+	m_draw_time++;
+
 	//生きているとき
 	if (m_death_flag == false)
 	{
@@ -293,6 +301,11 @@ void CObjStage5Boss::Action()
 		//弾丸とあたったらＨＰを1減らす
 		if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 		{
+			//フラグを立ててタイムを保存
+			m_damage_flag = true;
+			m_shot_hit_time = m_time;
+			m_draw_flag = true;
+
 			m_hp -= 1;
 		}
 
@@ -355,8 +368,31 @@ void CObjStage5Boss::Draw()
 		dst.m_left = m_px - objmap->GetScrollX();
 		dst.m_right = STAGE5_BOSS_BODY_SIZE + m_px - objmap->GetScrollX();
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_BODY_SIZE;
-		//描画
-		Draw::Draw(GRA_STAGE5_BOSS_BODY, &src, &dst, color, 0.0f);
+		
+		int time = m_time - m_shot_hit_time;
+
+		//ダメージをうけているなら
+		if (m_damage_flag == true)
+		{
+			if (time % 5 == 0)//5フレームに一度フラグを切り替える
+				m_draw_flag = !m_draw_flag;
+		}
+
+		if (time > 15)//15フレーム経過でダメージフラグをオフにする
+		{
+			//フラグの初期化
+			m_damage_flag = false;
+			m_draw_flag = false;
+			//タイムの初期化
+			m_draw_time = 0;
+			m_shot_hit_time = 0;
+		}
+
+		//描画のフラグがオンなら白く表示
+		if (m_draw_flag == true)
+			Draw::Draw(GRA_STAGE5_BOSS_WHITE_BODY, &src, &dst, color, 0.0f);
+		else
+			Draw::Draw(GRA_STAGE5_BOSS_BODY, &src, &dst, color, 0.0f);
 
 		//眼球---------------------------------------
 		//切り取り位置

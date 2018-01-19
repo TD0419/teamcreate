@@ -38,7 +38,6 @@ private:
 	int m_hp;		 // ボスのＨＰ
 	int m_time;			//たいみんぐ管理用
 	int m_shot_hit_time;//弾丸が当たったたいみんぐの保存用
-
 	bool m_draw_flag;//描画用のフラグ
 	
 	//blockとの衝突確認用

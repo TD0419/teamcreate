@@ -21,15 +21,7 @@ public:
 	void Draw();	        //ドロー
 
 	//アクセサーーーーー-------------------------------
-	//void SetPosX(float x) { m_px = x; }//ポジションXをセットする
-	//void SetPosY(float y) { m_py = y; }//ポジションYをセットする
 	void SetVecX(float vx) { m_vx = vx; }//ベクトルXをセットする
-	//void SetVecY(float vy) { m_vy = vy; }//ベクトルYをセットする
-
-	//float GetPosX() { return m_px; }//ポジションXを渡す
-	//float GetPosY() { return m_py; }//ポジションYを渡す
-	//float GetVecX() { return m_vx; }//ベクトルXを渡す
-	//float GetVecY() { return m_vy; }//ベクトルYを渡す
 
 	void SetInitPosFlagON() { m_initpos_flag = true; }//初期位置に戻すフラグをオンにする
 	void SetPosture(bool posture) { m_input_posture = posture; }//入力姿をセットする　true=開く　false=閉じる
@@ -62,6 +54,12 @@ private:
 
 	float m_initial_px;//初期X位置(ボスの横)
 	float m_initial_py;//初期Y位置(ボスの横)
+
+
+	int m_time;			//たいみんぐ管理用
+	int m_shot_hit_time;//弾丸が当たったたいみんぐの保存用
+	bool m_draw_flag;//描画用のフラグ
+	bool m_damage_flag;//ダメージフラグ
 
 	int m_arms_type;	 //第五ボスアームのタイプ(1…ライトアーム  2…レフトアーム)
 	int m_armdown_time;//腕を下ろすときの管理用タイム
