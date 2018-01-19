@@ -30,12 +30,13 @@ void CObjFallingLift::Action()
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	//主人公とあたっているなら
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&m_get_on_flag == false)
 	{
-		////主人公がリフトの乗っているとき
-		//if ( m_get_on_flag == false)
-			m_py += 5.0f;	//落ちるリフトが移動(落下する)
-
+		HeroRide();//衝突処理をする
+	}
+	else if (hit->CheckObjNameHit(OBJ_HERO) != nullptr&&m_get_on_flag == true)
+	{
+		m_py += 5.0f;	//落ちるリフトが移動(落下する)
 		HeroRide();//衝突処理をする
 	}
 
