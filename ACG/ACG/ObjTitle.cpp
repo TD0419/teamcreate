@@ -17,9 +17,9 @@ void CObjTitle::Init()
 	
 	//文字のグラフィック作成
 	Font::SetStrTex(L"Start");	//スタート
-	Font::SetStrTex(L"Option");	//オプション
 	Font::SetStrTex(L"Exit");	//終了
 
+	//ステージ1からスタートさせる
 	((UserData*)Save::GetData())->stagenum = 1;
 
 	Audio::Start(TITLE);
@@ -43,7 +43,7 @@ void CObjTitle::Action()
 	else if (Input::GetVKey('S') == true || Input::GetVKey(VK_DOWN) == true)
 	{
 		//1以下　且つ　キーフラグがtrue　なら
-		if (m_mode <= 1 && m_keypush_flag == true)
+		if (m_mode <= 0 && m_keypush_flag == true)
 		{
 			m_mode+=1;	//モード番号を1増やす
 			m_keypush_flag = false;	//キーフラグをオフにする
@@ -73,11 +73,6 @@ void CObjTitle::Action()
 					break;
 				}
 				case 1:
-				{
-					//オプション
-					break;
-				}
-				case 2:
 				{
 					//ゲーム終了
 					exit(0);
@@ -112,26 +107,18 @@ void CObjTitle::Draw()
 	Draw::Draw(GRA_TITLE, &src, &dst, color_white, 0.0f);
 
 	//メニュー描画
-	//→がStartを指している場合は、Startの文字を黄色にする。optionとExitの文字は白色。
+	//Startを指している場合は、Startの文字を黄色にする。Exitの文字は白色。
 	if( m_mode == 0 )
 	{
 		Font::StrDraw(L"Start"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 40.0f    , FONT_SIZE_TITLE, color_yellow);
-		Font::StrDraw(L"Option"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 118.0f	, FONT_SIZE_TITLE - 10.0f, color_white);
-		Font::StrDraw(L"Exit"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 198.0f	, FONT_SIZE_TITLE - 10.0f, color_white);
+		Font::StrDraw(L"Exit"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 118.0f	, FONT_SIZE_TITLE - 10.0f, color_white);
 
 	}
-	//→がOptionを指している場合は、Optionの文字を黄色にする。StartとExitの文字は白色。
+	
+	//Exitを指している場合は、Exitの文字を黄色にする。Startの文字は白色。
 	else if ( m_mode == 1 )
 	{
-		Font::StrDraw(L"Start", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 40.0f, FONT_SIZE_TITLE - 10.0f, color_white);
-		Font::StrDraw(L"Option", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 118.0f, FONT_SIZE_TITLE, color_yellow);
-		Font::StrDraw(L"Exit", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 198.0f, FONT_SIZE_TITLE - 10.0f, color_white);
-	}
-	//→がExitを指している場合は、Exitの文字を黄色にする。StartとOptionの文字は白色。
-	else if ( m_mode == 2 )
-	{
 		Font::StrDraw(L"Start", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 40.0f, FONT_SIZE_TITLE -10.0f, color_white);
-		Font::StrDraw(L"Option", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 118.0f, FONT_SIZE_TITLE -10.0f, color_white);
-		Font::StrDraw(L"Exit", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 198.0f, FONT_SIZE_TITLE, color_yellow);
+		Font::StrDraw(L"Exit", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 118.0f, FONT_SIZE_TITLE, color_yellow);
 	}
 }
