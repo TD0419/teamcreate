@@ -107,7 +107,7 @@ void CObjTitle::Draw()
 	Draw::Draw(GRA_TITLE, &src, &dst, color_white, 0.0f);
 
 	//メニュー描画
-	//→がStartを指している場合は、Startの文字を黄色にする。Exitの文字は白色。
+	//Startを指している場合は、Startの文字を黄色にする。Exitの文字は白色。
 	if( m_mode == 0 )
 	{
 		Font::StrDraw(L"Start"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 40.0f    , FONT_SIZE_TITLE, color_yellow);
@@ -115,7 +115,7 @@ void CObjTitle::Draw()
 
 	}
 	
-	//→がExitを指している場合は、Exitの文字を黄色にする。Startの文字は白色。
+	//Exitを指している場合は、Exitの文字を黄色にする。Startの文字は白色。
 	else if ( m_mode == 1 )
 	{
 		Font::StrDraw(L"Start", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 40.0f, FONT_SIZE_TITLE -10.0f, color_white);
