@@ -32,24 +32,6 @@ void CObjLastWall::Init()
 	m_wall_down_flag = false;
 	m_hero_hit_flag = false;
 
-	switch (((UserData*)Save::GetData())->stagenum)
-	{
-		//ステージ１
-	case 1:
-		m_wall_type = 1;
-		break;
-		//ステージ２
-	case 2:
-		m_wall_type = 2;
-		break;
-		//ステージ３
-	case 3:
-		m_wall_type = 3;
-		break;
-		
-	default:
-		break;
-	}
 }
 
 //アクション
@@ -67,6 +49,7 @@ void CObjLastWall::Action()
 	CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
 	//BOSSオブジェクトと持ってくる
 	CObjStage5Boss*objstage5boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+	
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		HIT_DATA** hit_data;		//主人公の衝突の情報を入れる構造体
