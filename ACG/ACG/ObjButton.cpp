@@ -35,13 +35,6 @@ void CObjButton::Init()
 //アクション
 void CObjButton::Action()
 {
-	//画面外なら
-	if (WindowCheck(m_px, m_py,36.0f, 32.0f) == false)
-	{
-		WindowOutDelete(this, m_map_x, m_map_y);//削除処理(復活あり)
-		return;
-	}
-
 	// ボタンが押されたら
 	if (m_trick_flag == true)
 	{
