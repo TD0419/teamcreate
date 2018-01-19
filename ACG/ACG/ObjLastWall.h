@@ -30,10 +30,4 @@ class CObjLastWall :public CObj
 		bool m_wall_unlock_flag;//ボタンがおされたかのフラグ
 		bool m_hero_hit_flag;   //壁の左側にheroが当たったときのフラグ
 		bool m_wall_down_flag;  //壁が下に下がるフラグ
-
-		//壁のステージごとの種類。
-		//1,2＝動かない　3＝スイッチであける　5=主人公が当たったら開く
-		int m_wall_type;
-
-
 };

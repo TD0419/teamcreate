@@ -154,6 +154,8 @@ void CSceneMain::ImageDataLoading()
 			Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1280);
 			//ゴリラの投擲物読み込み
 			Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
+			//岩画像読み込み
+			Draw::LoadImageW(L"Image\\rock.png", GRA_ROCK, TEX_SIZE_512);
 			break;
 		}
 		//ステージ３
