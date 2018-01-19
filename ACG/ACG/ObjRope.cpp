@@ -23,7 +23,7 @@ CObjRope::CObjRope(float arm_x, float arm_y,float mous_x,float mous_y)
 	m_py = arm_y;
 
 	//速さを決める
-	m_speed = 9.5f;
+	m_speed = 9.0f;
 	
 	//Rを押した時のマウスの位置を保存
 	m_moux = mous_x; 

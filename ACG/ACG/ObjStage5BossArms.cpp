@@ -102,6 +102,10 @@ void CObjStage5BossArms::Action()
 	if (m_arm_down_attack_flag == true)
 	{
 		ArmLowerAttack();
+		m_left_arm_move = true; //レフトアームが「初期位置から動いている」判定を出す
+		m_right_arm_move = true;//ライトアームが「初期位置から動いている」判定を出す
+
+		
 	}
 	//ボスオブジェクトの取得
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
@@ -390,6 +394,8 @@ void CObjStage5BossArms::ArmLowerAttack(float x,bool marker)
 	m_arm_lower_marker_px = x;
 	//腕を下ろす位置を示すかどうかを決める
 	m_arm_down_marker = marker;
+	//
+
 }
 //腕を下ろす攻撃
 void CObjStage5BossArms::ArmLowerAttack()

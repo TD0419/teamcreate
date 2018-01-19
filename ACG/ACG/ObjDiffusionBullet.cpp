@@ -130,6 +130,11 @@ void CObjDiffusionBullet::Action()
 		Hits::DeleteHitBox(this);	//弾丸が所持するHitBoxを除去。
 		return;
 	}
+	//落ちるブロックと当たったら消去
+	if (DeleteCheckObjNameHit(hit, this, OBJ_FALLING_BLOCK))
+	{
+		return;
+	}
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);

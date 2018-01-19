@@ -27,6 +27,7 @@ void CObjBoss::Init()
 
 	m_ani_time_walk = 0;
 	m_ani_time_throw = 0;
+	m_time = 0;
 
 	m_ani_frame_walk = 1;		//静止フレームを初期にする(歩くモーション)
 	m_ani_frame_throw = 1;		//静止フレームを初期にする(投げるモーション)
@@ -44,6 +45,11 @@ void CObjBoss::Init()
 	m_hit_left = false;
 	m_hit_right = false;
 
+
+	m_damage_flag=false;	
+	m_draw_flag=false;
+	m_shot_hit_time = 0;
+
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py + 100.0f, 150.0f, 150.0f, ELEMENT_ENEMY, OBJ_BOSS, 1);
 
@@ -55,6 +61,7 @@ void CObjBoss::Init()
 //アクション
 void CObjBoss::Action()
 {
+	m_time++;
 	m_ani_time_walk++;
 	m_ani_time_throw++;
 
@@ -181,9 +188,15 @@ void CObjBoss::Action()
 	if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 	{
 		Audio::Start(LANDING);
+
+		//フラグを立ててタイムを保存
+		m_damage_flag = true;
+		m_shot_hit_time = m_time;
+		m_draw_flag =true;
 		m_hp -= 1;
 	}
-
+	
+	
 	//柱とあたれば
 	if (hit->CheckObjNameHit(OBJ_LAST_WALL) != nullptr)
 	{
@@ -213,6 +226,7 @@ void CObjBoss::Action()
 //ドロー
 void CObjBoss::Draw()
 {
+
 	//描画カラー
 	float color[4] = { 1.0f,1.0f,1.0f, 1.0f };
 
@@ -245,6 +259,28 @@ void CObjBoss::Draw()
 	dst.m_right = (BOSS_SIZE_WIDTH - BOSS_SIZE_WIDTH * m_posture) + m_px - objmap->GetScrollX();
 	dst.m_bottom = dst.m_top + BOSS_SIZE_HEIGHT + 2.0f;
 
-	//描画
-	Draw::Draw(GRA_BOSS, &src, &dst, color, 0.0f);
+	int time = m_time - m_shot_hit_time;
+
+	//ダメージをうけているなら
+	if (m_damage_flag == true)
+	{
+		if (time % 5 == 0)//5フレームに一度フラグを切り替える
+			m_draw_flag = !m_draw_flag;
+	}
+
+	if (time > 15)//15フレーム経過でダメージフラグをオフにする
+	{
+		//フラグの初期化
+		m_damage_flag = false;
+		m_draw_flag = false;
+		//タイムの初期化
+		m_time = 0;
+		m_shot_hit_time = 0;
+	}
+
+	//描画のフラグがオンなら白く表示
+	if( m_draw_flag == true )
+		Draw::Draw(GRA_WHITE_BOSS, &src, &dst, color, 0.0f);
+	else
+		Draw::Draw(GRA_BOSS, &src, &dst, color, 0.0f);
 }
