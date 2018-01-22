@@ -53,7 +53,13 @@ void CObjWater::Action()
 
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	
+
+	// m_water_gaugeが120を超えたら当たり判定をなくす
+	if (m_water_gauge >= 120.0f)
+	{
+		hit->SetInvincibility(true);
+	}
+
 	// m_water_gaugeが192を越えたら処理ストップ
 	if (m_water_gauge >= WATER_SIZE_HEIGHT)
 	{
@@ -74,9 +80,6 @@ void CObjWater::Action()
 		}
 	}
 
-	// hitboxが小さくなる
-	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge+15.0f, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT - m_water_gauge);
-
 	//アニメーションの感覚管理
 	if (m_ani_time > m_ani_max_time)
 	{
@@ -89,6 +92,11 @@ void CObjWater::Action()
 	{
 		m_ani_frame = 0;
 	}
+
+	// hitboxが小さくなる
+	hit->SetPos(m_px - objmap->GetScrollX(), m_py - objmap->GetScrollY() + m_water_gauge+15.0f, WATER_SIZE_WIDTH, WATER_SIZE_HEIGHT - m_water_gauge);
+
+	
 }
 //ドロー
 void CObjWater::Draw()
