@@ -62,7 +62,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//ステージ番号ごとにステージ読み込み
-	switch (((UserData*)Save::GetData())->stagenum)
+	switch (((UserData*)Save::GetData())->stagenum=3)
 	{
 	case 1:
 		Audio::Start(STAGE);
@@ -239,7 +239,7 @@ void CSceneMain::ImageDataLoading()
 	Draw::LoadImageW(L"Image\\RopeSwitch.png", GRA_ROPE_SWITCH, TEX_SIZE_64);
 	
 	//看板の枠線画像読み込み
-	Draw::LoadImageW(L"Image\\Sign.png", GRA_SIGN_FRAME, TEX_SIZE_256);
+	Draw::LoadImageW(L"Image\\Sign.png", GRA_SIGN_FRAME, TEX_SIZE_640);
 	
 	//看板の読み込み
 	Draw::LoadImageW(L"Image\\Billboard_stage1.png", GRA_SIGN, TEX_SIZE_64);
