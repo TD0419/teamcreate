@@ -49,6 +49,7 @@ enum OBJ_NAME
 	OBJ_WIRE_MESH,		  //ステージ5の金網
 	OBJ_DIFFUSION_SOURCE, //拡散弾の源
 	OBJ_AFTER_BOSS_DISAPPEARANCE,	//ステージ５ボス消滅アニメージョン後
+	OBJ_STAGE_CLEAR,//ステージクリアの描画オブジェクト
 };
 //------------------------------------------------
 
@@ -134,6 +135,9 @@ enum MAP_BER
 	MAP_FALLING_BLOCK           ,		//ボスステージ用落ちるブロック
 	MAP_STAGE5_BOSS             ,		//ステージ5のボス
 	MAP_BOSS_TARZAN_POINT		,		//ボス戦時に出現するロープでぶら下がれるギミック
+
+	//全体でしよう
+	MAP_STAGE_CLEAR				,		//ステージクリアの文字を出す
 };
 
 //グラフィックID
@@ -329,6 +333,7 @@ enum MUSIC
 #include "ObjWireMesh.h"			//ステージ5の金網
 #include "ObjDiffusionSource.h"	//ステージ５ボスの拡散弾のソース
 #include "ObjAfterBossDisappearance.h" //ステージ５ボス消滅後
+#include "ObjStageClear.h"	//ステージクリアオブジェクト
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

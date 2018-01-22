@@ -115,6 +115,9 @@
     <Filter Include="ソース ファイル\Main\FallingLift">
       <UniqueIdentifier>{41587347-ca41-4c9a-927c-923071064be6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\StageClear">
+      <UniqueIdentifier>{691bac82-3a59-454b-9b7f-15fa9e9d22a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -284,6 +287,9 @@
     </ClInclude>
     <ClInclude Include="ObjAfterBossDisappearance.h">
       <Filter>ソース ファイル\Main\Stage5Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStageClear.h">
+      <Filter>ソース ファイル\Main\StageClear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -457,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="ObjAfterBossDisappearance.cpp">
       <Filter>ソース ファイル\Main\Stage5Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStageClear.cpp">
+      <Filter>ソース ファイル\Main\StageClear</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -320,8 +320,8 @@ void CObjMap::CreateObj(int x, int y)
 		}
 	}
 
-	//落ちるブロック以外なら
-	if(m_map[y][x].num != MAP_FALLING_BLOCK)
+	//落ちるブロックとクリアブロック以外なら
+	if(m_map[y][x].num != MAP_FALLING_BLOCK && m_map[y][x].num != MAP_STAGE_CLEAR)
 		m_map[y][x].create = false;//フラグをオフにする		
 }
 
@@ -343,6 +343,30 @@ void CObjMap::CreateFallingBloack(int create_start_x,int create_start_y)
 				{
 					CObjFallingBlock* objfalling_block = new CObjFallingBlock(x, y);
 					Objs::InsertObj(objfalling_block, OBJ_FALLING_BLOCK, 9);
+					m_map[y][x].create = false;
+				}
+			}
+		}
+	}
+}
+
+//ステージクリアオブジェクトを作る
+void CObjMap::CreateClearObj()
+{
+	//yの値が　マップの最大値　に達するまで回す
+	for (int y = 0 ; y < MAP_Y_MAX; y++)
+	{
+		//xの値が　マップの最大値　に達するまで回す
+		for (int x =0; x < MAP_X_MAX; x++)
+		{
+			//クリアオブジェクトを生成する
+			if (m_map[y][x].num == MAP_STAGE_CLEAR)
+			{
+				//生成のフラグがオンなら
+				if (m_map[y][x].create == true)
+				{
+					CObjStageClear* objstageclear = new CObjStageClear(x, y);
+					Objs::InsertObj(objstageclear,OBJ_STAGE_CLEAR , 9);
 					m_map[y][x].create = false;
 				}
 			}

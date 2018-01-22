@@ -1,6 +1,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\UserData.h"
 #include "GameL\Audio.h"
 
 #include "GameHead.h"
@@ -90,6 +91,10 @@ void CObjEnemy::Action()
 		this->SetStatus(false);		//自身に消去命令を出す。
 		Hits::DeleteHitBox(this);	//敵が所持するHitBoxを除去。
 	
+		//ステージ１ならステージのBGMを止める
+		if (((UserData*)Save::GetData())->stagenum == 1)
+			Audio::Stop(STAGE);
+
 		return;
 	}
 	
