@@ -152,6 +152,8 @@ void CSceneMain::ImageDataLoading()
 			Draw::LoadImageW(L"Image\\Throughblock.png", GRA_THROUGH_BLOCK, TEX_SIZE_64);
 			//ボス画像読み込み
 			Draw::LoadImageW(L"Image\\Gorira.png", GRA_BOSS, TEX_SIZE_1280);
+			//ボス画像読み込み
+			Draw::LoadImageW(L"Image\\White_Gorira.png", GRA_WHITE_BOSS, TEX_SIZE_1280);
 			//ゴリラの投擲物読み込み
 			Draw::LoadImageW(L"Image\\Coconut.png", GRA_COCONUT, TEX_SIZE_32);
 			//岩画像読み込み
@@ -201,10 +203,15 @@ void CSceneMain::ImageDataLoading()
 			Draw::LoadImageW(L"Image\\Lastboss_Electric.png", GRA_STAGE5_BOSS_ELECTRIC, TEX_SIZE_512);
 			//ステージ５ボス胴体
 			Draw::LoadImageW(L"Image\\Lastboss_Body.png", GRA_STAGE5_BOSS_BODY, TEX_SIZE_256);
+			//ステージ５ボス胴体(ダメージ)
+			Draw::LoadImageW(L"Image\\White_Lastboss_Body.png", GRA_STAGE5_BOSS_WHITE_BODY, TEX_SIZE_256);
 			//ステージ５ボス眼球
 			Draw::LoadImageW(L"Image\\Lastboss_Eye.png", GRA_STAGE5_BOSS_EYE, TEX_SIZE_256);
 			//ステージ５ボス腕
 			Draw::LoadImageW(L"Image\\Lastboss_Arms.png", GRA_STAGE5_BOSS_ARMS_ALL, TEX_SIZE_2048);
+			//ステージ５ボス腕(ダメージ)
+			Draw::LoadImageW(L"Image\\White_Lastboss_Arms.png", GRA_STAGE5_BOSS_WHITE_ARMS, TEX_SIZE_2048);
+
 			//金網
 			Draw::LoadImageW(L"Image\\WireMesh.png", GRA_WIRE_MASH, TEX_SIZE_640);
 			//ボスの爆発

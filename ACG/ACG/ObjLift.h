@@ -11,6 +11,9 @@ using namespace GameL;
 //手動モードの引っ張る時のリフトのスピード
 #define MANUAL_PULL_SPEED (3.0f)
 
+//マクロのスピードの値は3.0f以下にしてください
+//3.0fを超えてしまうとずれてしまいます。
+
 //オブジェクト：リフト
 class CObjLift :public CObj
 {

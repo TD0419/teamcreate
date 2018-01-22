@@ -145,6 +145,7 @@ enum GRAPHIC_ID
 	GRA_BLOCK,			//ブロック
 	GRA_THROUGH_BLOCK,  //すり抜けるブロック
 	GRA_BOSS,			//ボス
+	GRA_WHITE_BOSS,		//ボスのダメージヒット時
 	GRA_LADDERS,		//はしご
 	GRA_LIFT,			//リフト
 	GRA_DOOR,			//ドア
@@ -176,8 +177,10 @@ enum GRAPHIC_ID
 	GRA_CANNON,				//	//ステージ5の大砲
 	GRA_STAGE5_BOSS_ELECTRIC,	 	//ステージ5のボス胴腕接続電気
 	GRA_STAGE5_BOSS_BODY,	//ステージ5のボス胴体
+	GRA_STAGE5_BOSS_WHITE_BODY,//ステージ5のボス胴体(ダメージ)
 	GRA_STAGE5_BOSS_EYE,	//ステージ5のボス眼球
 	GRA_STAGE5_BOSS_ARMS_ALL,      	//ステージ5のボス腕(左右腕)
+	GRA_STAGE5_BOSS_WHITE_ARMS,		//ステージ5のボス腕（ダメージ）
 	GRA_FALLING_LIFT,	//落ちるリフト
 	GRA_HAND_LIFT,//手動で引っ張るリフト
 	GRA_DIFFUSION_SOURCE,//拡散弾を撃つ弾

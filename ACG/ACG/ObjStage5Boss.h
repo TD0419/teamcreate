@@ -82,6 +82,11 @@ private:
 
 	int m_time;//攻撃のタイミング管理用
 
+	int m_draw_time;	//描画のたいみんぐ管理用
+	int m_shot_hit_time;//弾丸が当たったたいみんぐの保存用
+	bool m_draw_flag;//描画用のフラグ
+	bool m_damage_flag;//ダメージフラグ
+
 	//腕が落ちているかどうかのフラグ
 	bool m_right_arm_down_flag;
 	bool m_left_arm_down_flag;

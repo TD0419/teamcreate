@@ -40,6 +40,11 @@ void CObjStage5BossArms::Init()
 
 	m_armdown_time=0;//腕を下ろすときの管理用タイム
 
+	m_time=0;			//たいみんぐ管理用
+	m_shot_hit_time = 0;//弾丸が当たったたいみんぐの保存用
+	m_draw_flag=false;//描画用のフラグ
+	m_damage_flag=false;//ダメージフラグ
+
 	m_wall_hit_flag = false;
 
 	m_block_hit_flag = false;
@@ -75,6 +80,8 @@ void CObjStage5BossArms::Init()
 //アクション
 void CObjStage5BossArms::Action()
 {
+	m_time++;
+
 	//初期位置を更新する
 	UpdateInitial();
 
@@ -130,6 +137,10 @@ void CObjStage5BossArms::Action()
 		//弾丸とあたったらＨＰを1減らす
 		if (hit->CheckObjNameHit(OBJ_BULLET) != nullptr)
 		{
+			m_damage_flag = true;
+			m_shot_hit_time = m_time;
+			m_draw_flag = true;
+
 			m_arm_hp -= 1;
 		}
 	}
@@ -212,6 +223,25 @@ void CObjStage5BossArms::Draw()
 	CObjStage5Boss* objboss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
 
 
+	int time = m_time - m_shot_hit_time;
+
+	//ダメージをうけているなら
+	if (m_damage_flag == true)
+	{
+		if (time % 5 == 0)//5フレームに一度フラグを切り替える
+			m_draw_flag = !m_draw_flag;
+	}
+
+	if (time > 15)//15フレーム経過でダメージフラグをオフにする
+	{
+		//フラグの初期化
+		m_damage_flag = false;
+		m_draw_flag = false;
+		//タイムの初期化
+		m_time = 0;
+		m_shot_hit_time = 0;
+	}
+
 	//胴腕接続電気-------------------------------
 
 	if (m_arms_type == LEFT_ARM)
@@ -289,8 +319,12 @@ void CObjStage5BossArms::Draw()
 		dst.m_left = m_px - objmap->GetScrollX();
 		dst.m_right = dst.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
-		//描画
-		Draw::Draw(GRA_STAGE5_BOSS_ARMS_ALL, &src, &dst, color, 0.0f);
+		
+		//描画のフラグがオンなら白く表示
+		if (m_draw_flag == true)
+			Draw::Draw(GRA_STAGE5_BOSS_WHITE_ARMS, &src, &dst, color, 0.0f);
+		else
+			Draw::Draw(GRA_STAGE5_BOSS_ARMS_ALL, &src, &dst, color, 0.0f);
 	}
 
 	//左腕(ライトアーム)---------------------------------------
@@ -311,8 +345,12 @@ void CObjStage5BossArms::Draw()
 		dst.m_left =   m_px - objmap->GetScrollX();
 		dst.m_right = dst.m_left + STAGE5_BOSS_ARMS_WIDTH_SIZE;
 		dst.m_bottom = dst.m_top + STAGE5_BOSS_ARMS_HEIGHT_SIZE;
-		//描画
-		Draw::Draw(GRA_STAGE5_BOSS_ARMS_ALL, &src, &dst, color, 0.0f);
+	
+		//描画のフラグがオンなら白く表示
+		if (m_draw_flag == true)
+			Draw::Draw(GRA_STAGE5_BOSS_WHITE_ARMS, &src, &dst, color, 0.0f);
+		else
+			Draw::Draw(GRA_STAGE5_BOSS_ARMS_ALL, &src, &dst, color, 0.0f);
 	}
 
 	//腕を下ろす位置を示すなら示す

@@ -182,19 +182,24 @@ void CObjLift::Action()
 {
 	//自身のHitBoxをもってくる
 	CHitBox*hit = Hits::GetHitBox(this);
-	
+
+	//各移動モード(m_move_mode)による移動
+	ModeMove();
+
 	//主人公が当たっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		HeroRide();//主人公を乗せる処理をする
 	}
 
-	//各移動モード(m_move_mode)による移動
-	ModeMove();
+	
 	
 	//位置情報を更新
 	m_px += m_vx;
 	m_py += m_vy;
+
+	m_vx = 0.0f;
+	m_vy = 0.0f;
 
 	//HitBoxの位置を更新する
 	HitBoxUpData(hit, m_px, m_py);
@@ -351,10 +356,22 @@ void CObjLift::HeroRide()
 					//上方向に動いているときのリフトの主人公にかかる反発処理
 					else if (m_direction == 3)
 					{
-						//リフトに乗せる処理
-						objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
-						objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
-						objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + 3.5f + m_vy);//主人公のポジションをリフトの上にする
+						//下の限界Y位置
+						//この値より下に行ったら死ぬようにする
+						float down_limti;
+						down_limti = (float)MAP_Y_MAX * BLOCK_SIZE;
+						if (m_py > down_limti - 2.0f)
+						{
+							objhero->SetVecY(-1.0f);//主人公のY方向の移動を-0.1にする
+							//これによってリフトと一緒に上に上がることなく落ちる
+						}
+						else
+						{
+							//リフトに乗せる処理
+							objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
+							objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
+							objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + 3.5f + m_vy);//主人公のポジションをリフトの上にする
+						}
 					}
 				}
 
@@ -417,6 +434,9 @@ void CObjLift::HeroRide()
 //各移動モード(m_move_mode)による移動関数
 void CObjLift::ModeMove()
 {
+	//主人公オブジェクトを持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//各移動モードによる移動
 	switch (m_move_mode)
 	{
@@ -442,17 +462,17 @@ void CObjLift::ModeMove()
 					{
 						//左に進む
 						m_vx = -MANUAL_PULL_SPEED;
-						m_lift_audio_count++;
-						if (m_lift_audio_count % 50 == 0)
-						{
-							Audio::Start(PULLLIFT);
-						}
 					}
 					//初期の移動方向が左のとき
 					else
 					{
 						//右に進む
 						m_vx = MANUAL_PULL_SPEED;
+					}
+					m_lift_audio_count++;
+					if (m_lift_audio_count % 50 == 0)
+					{
+						Audio::Start(PULLLIFT);
 					}
 				}
 			}
@@ -475,11 +495,7 @@ void CObjLift::ModeMove()
 				{
 					//右に移動
 					m_vx = SPEED;
-					m_lift_audio_count++;
-					if (m_lift_audio_count % 50 == 0)
-					{
-						Audio::Start(RELEASELIFT);
-					}
+					
 				}
 				//初期の移動方向は左だったら
 				else
@@ -487,17 +503,23 @@ void CObjLift::ModeMove()
 					//左に移動
 					m_vx = -SPEED;
 				}
+
+				m_lift_audio_count++;
+				if (m_lift_audio_count % 50 == 0)
+				{
+					Audio::Start(RELEASELIFT);
+				}
 			}
 		}
 
 		//初期位置から動いた距離が最大量を超えると
-		if (m_move_x > m_width_max)
+ 		if (m_move_x > m_width_max)
 		{
 			//初期の移動方向が右だったら
 			if (m_initial_direction == 0)
 			{
 				//行き過ぎた分を計算
-				m_vx = m_move_x - m_width_max;
+				m_vx = -(m_move_x - m_width_max);
 			}
 			//初期の移動方向が左だったら
 			else
@@ -508,7 +530,7 @@ void CObjLift::ModeMove()
 			m_move_x = m_width_max;//移動量の初期化
 		}
 		//初期位置から動いた距離が０未満だったら
-		if (m_move_x < 0.0f)
+		else if (m_move_x < 0.0f)
 		{
 			//初期の移動方向が右だったら
 			if (m_initial_direction == 0)
@@ -520,14 +542,10 @@ void CObjLift::ModeMove()
 			else
 			{
 				//行き過ぎた分を計算
-				m_vx = m_move_x;
+				m_vx = -m_move_x;
 			}
 			m_move_x = 0.0f;
 		}
-
-		//初期位置から動いた距離が０またはMAXなら移動ベクトルを０にする
-		if (m_move_x == 0.0f || m_move_x == m_width_max)
-			m_vx = 0.0f;
 		break;
 		//------------------------------自由移動モード(最大右X位置から最大値左X位置の間を自動移動)---------------
 	case 1:
