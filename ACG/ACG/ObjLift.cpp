@@ -356,10 +356,22 @@ void CObjLift::HeroRide()
 					//上方向に動いているときのリフトの主人公にかかる反発処理
 					else if (m_direction == 3)
 					{
-						//リフトに乗せる処理
-						objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
-						objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
-						objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + 3.5f + m_vy);//主人公のポジションをリフトの上にする
+						//下の限界Y位置
+						//この値より下に行ったら死ぬようにする
+						float down_limti;
+						down_limti = (float)MAP_Y_MAX * BLOCK_SIZE;
+						if (m_py > down_limti - 2.0f)
+						{
+							objhero->SetVecY(-1.0f);//主人公のY方向の移動を-0.1にする
+							//これによってリフトと一緒に上に上がることなく落ちる
+						}
+						else
+						{
+							//リフトに乗せる処理
+							objhero->SetVecY(0.0f);//主人公のY方向の移動を0にする
+							objhero->SetPosX(h_px + m_vx);//主人公の位置をもともと主人公が居た位置＋リフトの移動量にする
+							objhero->SetPosY(m_py - HERO_SIZE_HEIGHT + 3.5f + m_vy);//主人公のポジションをリフトの上にする
+						}
 					}
 				}
 
@@ -422,6 +434,9 @@ void CObjLift::HeroRide()
 //各移動モード(m_move_mode)による移動関数
 void CObjLift::ModeMove()
 {
+	//主人公オブジェクトを持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//各移動モードによる移動
 	switch (m_move_mode)
 	{
