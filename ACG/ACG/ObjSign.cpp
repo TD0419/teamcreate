@@ -110,9 +110,6 @@ void CObjSign::Draw()
 	//主人公と当たっている時
 	if (m_strdrow == true)
 	{
-		//描画
-		Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
-
 		//ステージ別の文字描画
 		switch (((UserData*)Save::GetData())->stagenum)
 		{
@@ -121,22 +118,70 @@ void CObjSign::Draw()
 				//二個目の看板のテキスト
 				if (m_map_x == 68 && m_map_y == 22)
 				{
-					//文字セット
-					Font::StrDraw(L"岩は銃で壊れるぞ", dst.m_left + 15.0f, dst.m_top + 48.0f, 32.0f, color_str);
+					//切り取り位置
+					src.m_top = 254.0f;
+					src.m_left = 0.0f;
+					src.m_right = 298.0f;
+					src.m_bottom = 382.0f;
+					//描画
+					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
 				}
 				else
 				{
-					Font::StrDraw(L"縄で引っ張ると･･･", dst.m_left + 15.0f, dst.m_top + 48.0f, 32.0f, color_str); //一個目の看板のテキスト
+					//切り取り位置
+					src.m_top = 0.0f;
+					src.m_left = 0.0f;
+					src.m_right = 298.0f;
+					src.m_bottom = 128.0f;
+					//描画
+					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
 				}
 				break;
 			}
 			case 2://ステージ2
 			{
-				//文字セット
-				Font::StrDraw(L"ここに何かあるかも", dst.m_left + 7.0f, dst.m_top + 48.0f, 32.0f, color_str);
+				//ボタンの情報とる
+				CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
+				//スイッチが押されていれば看板の文字画像表示
+				if (objbutton->GetTrickFlag() == true)
+				{
+					//切り取り位置
+					src.m_top = 0.0f;
+					src.m_left = 297.0f;
+					src.m_right = 595.0f;
+					src.m_bottom = 128.0f;
+					//描画
+					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+				}
+				break;
+			}
+			case 3://ステージ3
+			{
+				//二個目の看板のテキスト
+				if (m_map_x == 50 && m_map_y == 17)
+				{
+					//切り取り位置
+					src.m_top = 127.0f;
+					src.m_left = 297.0f;
+					src.m_right = 595.0f;
+					src.m_bottom = 254.0f;
+					//描画
+					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+				}
+				else
+				{
+					//切り取り位置
+					src.m_top = 127.0f;
+					src.m_left = 0.0f;
+					src.m_right = 298.0f;
+					src.m_bottom = 254.0f;
+					//描画
+					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+				}
 				break;
 			}
 		}
+		
 	}
 	//----------------------------------------------------------------------------
 
