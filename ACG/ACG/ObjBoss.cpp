@@ -206,8 +206,12 @@ void CObjBoss::Action()
 	// ‘Ì—Í‚ª0ˆÈ‰º‚È‚ç
 	if (m_hp <= 0)
 	{
+		//í“¬BGM‚ğ‚Æ‚ß‚é
+		Audio::Stop(BOSS);
+
 		Hits::DeleteHitBox(this);	//BOSS‚ªŠ—L‚·‚éHitBox‚Éíœ‚·‚é
 		this->SetStatus(false);		//©g‚Éíœ–½—ß‚ğo‚·
+
 		return;
 	}
 

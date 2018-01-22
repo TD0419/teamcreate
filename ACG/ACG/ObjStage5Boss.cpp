@@ -323,6 +323,8 @@ void CObjStage5Boss::Action()
 			//€–Sƒtƒ‰ƒO‚ğON‚É‚·‚é
 			m_death_flag = true;
 
+			Audio::Stop(BOSS);//í“¬‰¹I—¹
+
 			return;
 		}
 	}

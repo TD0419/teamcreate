@@ -39,7 +39,6 @@ void CObjDoor::Init()
 			m_door_type = 1;
 			break;
 		}
-
 		//ステージ２
 		case 2:
 		{
@@ -50,13 +49,7 @@ void CObjDoor::Init()
 		{
 			m_door_type = 3;
 			break;
-		}
-		//ステージ５
-		case 5:
-		{
-			m_door_type = 5;
-			break;
-		}
+		} 
 	}
 
 	//当たり判定用HitBoxを作成
@@ -76,42 +69,46 @@ void CObjDoor::Action()
 	//ドアのHitBox更新用ポインター取得
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	switch (m_door_type)
-	{
-	case 1:
-	{
-		CObjEnemy*objenemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 
+	//施錠解除フラグオンのとき
+	if (m_unlock_flag == false)
+	{
+		void * p_last_enemey;//敵のポインタ格納用
+
+		switch (m_door_type)
+		{
+			case 1:
+			{
+				p_last_enemey = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+
+				
+				break;
+			}
+			case 2:
+			{
+				p_last_enemey = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
+
+				break;
+			}
+			case 3:
+			{
+				p_last_enemey = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
+
+				break;
+			}
+		}
 		//敵がいなくなったとき
-		if (objenemy == nullptr)
-			m_unlock_flag = true;//施錠解除フラグをonにします
-		break;
-	}
-	case 2:
-	{
-		CObjBoss*objboss = (CObjBoss*)Objs::GetObj(OBJ_BOSS);
-
-		//ボスが消滅したとき
-		if (objboss == nullptr)
-			m_unlock_flag = true;//施錠解除フラグをonにします
-		break;
-	}
-	case 3:
-	case 5:		
-	{
-		CObjStage5Boss* objstage5_boss = (CObjStage5Boss*)Objs::GetObj(OBJ_STAGE5_BOSS);
-		
-		//ステージ５のボスが消滅したとき
-		if (objstage5_boss == nullptr)
+		if (p_last_enemey == nullptr)
 		{
 			m_unlock_flag = true;//施錠解除フラグをonにします
+
+			//クリアのオブジェクトを作成
+			CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
+			objmap->CreateClearObj();
 		}
-		break;
 	}
-	}
-	
 	//施錠解除フラグオンのとき
-	if (m_unlock_flag==true)
+	else
 	{
 		m_ani_door_time += 1;//アニメーションタイム+１
 	}

@@ -33,8 +33,10 @@ public:
 	void ScrollCreateObj(int scroll_block_num_x, int scroll_block_num_y);//スクロール量をもとにオブジェクトの生成を行う
 
 	void CreateFallingBloack(int create_start_x, int create_start_y);//落ちるブロックの生成用関数
-	//ーーーーーーーーーーーーアクセサーーーーーーーーーーーーーーーーー
-
+	
+	void CreateClearObj();//ステージクリアオブジェクトを作る
+																	 
+	
 	//m_map[y][x]　のところにidを入れる
 	void SetMap(int x, int y, int id) { m_map[y][x].num = id; }	
 	//------------------------------------------------------------------
