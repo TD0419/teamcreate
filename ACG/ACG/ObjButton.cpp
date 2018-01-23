@@ -28,6 +28,7 @@ void CObjButton::Init()
 	m_ani_frame = 0;  //静止フレームを初期にする
 	m_ani_max_time = 8; //アニメーション間隔幅
 	m_ani_start_flag = false;//アニメフラグOFF
+	m_callout_time = 0;
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, 36, 32, ELEMENT_GIMMICK, OBJ_BUTTON, 1);
 }
@@ -39,6 +40,7 @@ void CObjButton::Action()
 	if (m_trick_flag == true)
 	{
 		m_ani_start_flag = true; // フラグオン
+		m_callout_time++;
 	}
 	HitBox* hit = Hits::GetHitBox(this);
 	
@@ -49,9 +51,10 @@ void CObjButton::Action()
 	}
 
 	//アニメフラグONだと
-	if (m_ani_start_flag == true&&m_ani_frame!=1)
+	if (m_ani_start_flag == true && m_ani_frame != 1)
 	{
 		m_ani_time += 1;
+
 		//アニメーションの感覚管理
 		if (m_ani_time > m_ani_max_time)
 		{
@@ -66,6 +69,7 @@ void CObjButton::Action()
 			return;
 		}
 		Audio::Start(BUTTON);
+
 	}
 
 	//HitBoxの位置を更新する
@@ -75,6 +79,9 @@ void CObjButton::Action()
 //ドロー
 void CObjButton::Draw()
 {
+	//主人公オブジェクトを持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//画像の切り取り配列
 	int AniData[2] =
 	{
@@ -103,4 +110,21 @@ void CObjButton::Draw()
 
 	//描画
 	Draw::Draw(GRA_BUTTON, &src, &dst, color, 0.0f);
+
+	if (m_callout_time>0&&m_callout_time < 100)
+	{
+		//切り取り位置
+		src.m_top = 0.0f;
+		src.m_left = 296.0f;
+		src.m_right = 593.0f;
+		src.m_bottom = 128.0f;
+
+		//描画位置
+		dst.m_top =   objhero->GetPosY()- objmap->GetScrollY() -128.0f;
+		dst.m_left =  objhero->GetPosX()- objmap->GetScrollX();
+		dst.m_right = dst.m_left + 300.0f;
+		dst.m_bottom = dst.m_top + SIGN_SIZE*4.0f;
+		//描画
+		Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0.0f);
+	}
 }

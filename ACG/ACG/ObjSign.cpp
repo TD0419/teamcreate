@@ -25,30 +25,6 @@ void CObjSign::Init()
 	//フラグ初期化
 	m_strdrow = false;
 
-	//ステージ別の文字読み込み
-	switch (((UserData*)Save::GetData())->stagenum)
-	{
-		case 1:
-		{
-			//ステージ1の二個目の看板のテキスト
-			if (m_map_x == 68 && m_map_y == 22)
-			{
-				//文字セット
-				Font::SetStrTex(L"「岩は銃で壊れるぞ」");
-			}
-			else
-			{
-				Font::SetStrTex(L"「縄で引っ張ると･･･」"); //一個目の看板のテキスト
-			}
-			break;
-		}
-		case 2://ステージ２
-		{
-			Font::SetStrTex(L"ここに何かあるかも");
-			break;
-		}
-	}
-
 	//当たり判定
 	Hits::SetHitBox(this, m_px, m_py, SIGN_SIZE+32, SIGN_SIZE, ELEMENT_GIMMICK, OBJ_SIGN, 1);
 }
@@ -65,17 +41,19 @@ void CObjSign::Action()
 
 	//当たり判定をもってくる
 	CHitBox* hit = Hits::GetHitBox(this);
+	//ボタンの情報とる
+	CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
 
 	//主人公とあたっていれば
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		m_strdrow = true;//フラグをオンにする
 	}
+	
 	else
 	{
 		m_strdrow = false;//フラグをオフにする
 	}
-
 	//HitBoxの位置を更新する
 	HitBoxUpData(Hits::GetHitBox(this), m_px, m_py);
 }
@@ -89,16 +67,12 @@ void CObjSign::Draw()
 	float color_str[4] = { 0.0f,0.0f,0.0f,1.0f};
 
 	RECT_F src, dst;
-
+	//主人公オブジェクトを持ってくる
+	CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	//マップオブジェクトを持ってくる
 	CObjMap* objmap = (CObjMap*)Objs::GetObj(OBJ_MAP);
-
+	
 	//枠線　&　文字　-------------------------------------------------------------
-	//切り取り位置
-	src.m_top = 0.0f;
-	src.m_left = 0.0f ;
-	src.m_right = 256.0f ;
-	src.m_bottom = 256.0f;
 
 	//描画位置
 	dst.m_top = m_py - objmap->GetScrollY() -SIGN_SIZE * 6.0f ;
@@ -107,9 +81,10 @@ void CObjSign::Draw()
 	dst.m_bottom = dst.m_top + SIGN_SIZE * 4.0f;
 	//-------------------------------------------------------------
 
-	//主人公と当たっている時
+	//文字を表示させるフラグオンの時
 	if (m_strdrow == true)
 	{
+		
 		//ステージ別の文字描画
 		switch (((UserData*)Save::GetData())->stagenum)
 		{
@@ -119,69 +94,51 @@ void CObjSign::Draw()
 				if (m_map_x == 68 && m_map_y == 22)
 				{
 					//切り取り位置
-					src.m_top = 254.0f;
+					src.m_top = 257.0f;
 					src.m_left = 0.0f;
-					src.m_right = 298.0f;
-					src.m_bottom = 382.0f;
+					src.m_right = 297.0f;
+					src.m_bottom = 386.0f;
 					//描画
-					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0.0f);
 				}
 				else
 				{
 					//切り取り位置
 					src.m_top = 0.0f;
 					src.m_left = 0.0f;
-					src.m_right = 298.0f;
+					src.m_right = 297.0f;
 					src.m_bottom = 128.0f;
 					//描画
-					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
-				}
-				break;
-			}
-			case 2://ステージ2
-			{
-				//ボタンの情報とる
-				CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
-				//スイッチが押されていれば看板の文字画像表示
-				if (objbutton->GetTrickFlag() == true)
-				{
-					//切り取り位置
-					src.m_top = 0.0f;
-					src.m_left = 297.0f;
-					src.m_right = 595.0f;
-					src.m_bottom = 128.0f;
-					//描画
-					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0.0f);
 				}
 				break;
 			}
 			case 3://ステージ3
 			{
-				//ボタンの情報とる
-				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+				
 				//二個目の看板のテキスト
 				if (m_map_x == 50 && m_map_y == 17)
 				{
 					if (objhero->GetRopeAniCon()==false)
 					{
 						//切り取り位置
-						src.m_top = 127.0f;
-						src.m_left = 297.0f;
-						src.m_right = 595.0f;
-						src.m_bottom = 254.0f;
+						src.m_top = 128.0f;
+						src.m_left = 296.0f;
+						src.m_right = 593.0f;
+						src.m_bottom = 257.0f;
 						//描画
-						Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+						Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0.0f);
 					}
 				}
 				else
 				{
 					//切り取り位置
-					src.m_top = 127.0f;
+					src.m_top = 128.0f;
 					src.m_left = 0.0f;
-					src.m_right = 298.0f;
-					src.m_bottom = 254.0f;
+					src.m_right = 297.0f;
+					src.m_bottom = 257.0f;
 					//描画
-					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0.0f);
 				}
 				break;
 			}

@@ -28,6 +28,8 @@ class CObjButton : public CObj
 		int m_ani_time; //アニメーションフレーム動作感覚
 		int m_ani_frame;//描画フレーム
 		int m_ani_max_time;   //アニメーション動作間隔最大値
+
+		int m_callout_time;//吹き出しの時間管理用
 		bool m_ani_start_flag;   //始まるフラグ
 
 		bool m_trick_flag;	//弾と当たっているかどうかを調べる
