@@ -21,7 +21,6 @@ void CObjGameOver::Init()
 	
 
 	//文字のグラフィック作成
-	Font::SetStrTex(L"GAME OVER");
 	Font::SetStrTex(L"Title");
 	Font::SetStrTex(L"Continue");
 	Audio::Start(GAMEOVER);	//BGMをならす
@@ -113,7 +112,6 @@ void CObjGameOver::Draw()
 	//描画
 	Draw::Draw(GRA_GAME_OVER, &src, &dst, color_white, 0.0f);
 	//文字描画
-	Font::StrDraw(L"GAME OVER", WINDOW_SIZE_W - 754.0f, WINDOW_SIZE_H - 722.0f, FONT_SIZE_GO + 51.0f, color_white);
 	//Continueを指している場合は、Continueの文字を黄色にする。Titleの文字は白色。
 	if (m_mode == 0)
 	{
