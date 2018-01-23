@@ -29,13 +29,14 @@ CSceneMain::CSceneMain()
 CSceneMain::CSceneMain(int n)
 {
 	g_remaining += n;
+
 }
 
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
 	//残機が0未満になったらGameOver画面へ移動する
-	if (g_remaining < 0)
+	if (g_remaining <= 0)
 	{
 		Scene::SetScene(new CSceneGameOver());
 		return;
@@ -62,7 +63,7 @@ void CSceneMain::MapDataLoading(int map[MAP_Y_MAX][MAP_X_MAX])
 	int size;				//ステージ情報の大きさ
 
 	//ステージ番号ごとにステージ読み込み
-	switch (((UserData*)Save::GetData())->stagenum=3)
+	switch (((UserData*)Save::GetData())->stagenum)
 	{
 	case 1:
 		Audio::Start(STAGE);

@@ -19,11 +19,6 @@ void CObjGameOver::Init()
 	m_keypush_flag = true;	//キーフラグの初期化
 	m_enter_key_flag = true;
 	
-
-	//文字のグラフィック作成
-	Font::SetStrTex(L"GAME OVER");
-	Font::SetStrTex(L"Title");
-	Font::SetStrTex(L"Continue");
 	Audio::Start(GAMEOVER);	//BGMをならす
 
 
@@ -47,8 +42,8 @@ void CObjGameOver::Action()
 	//Sキー　又は　↓キーが押された時
 	else if (Input::GetVKey('S') == true || Input::GetVKey(VK_DOWN) == true)
 	{
-		//0以下　且つ　キーフラグがtrue　なら
-		if (m_mode <= 0 && m_keypush_flag == true)
+		//1以下　且つ　キーフラグがtrue　なら
+		if (m_mode <= 1 && m_keypush_flag == true)
 		{
 			m_mode+=1;	//モード番号を1増やす
 			m_keypush_flag = false;	//キーフラグをオフにする
@@ -71,16 +66,19 @@ void CObjGameOver::Action()
 		{
 			switch (m_mode)
 			{
-				case 0:
+				case 0:	//Continue
 				{
-					//ゲーム画面に移動
-					//最後にゲームオーバーになったステージからリスタート
+					Scene::SetScene(new CSceneMain(+3));
+					break;
+				}
+				case 1:	//Restart
+				{
+					((UserData*)Save::GetData())->stagenum = 1;
 					Scene::SetScene(new CSceneMain());
 					break;
 				}
-				case 1:
+				case 2:	//Title
 				{
-					//タイトル画面に移動
 					Scene::SetScene(new CSceneTitle());
 					break;
 				}
@@ -114,16 +112,19 @@ void CObjGameOver::Draw()
 	Draw::Draw(GRA_GAME_OVER, &src, &dst, color_white, 0.0f);
 	//文字描画
 	Font::StrDraw(L"GAME OVER", WINDOW_SIZE_W - 754.0f, WINDOW_SIZE_H - 722.0f, FONT_SIZE_GO + 51.0f, color_white);
-	//Continueを指している場合は、Continueの文字を黄色にする。Titleの文字は白色。
-	if (m_mode == 0)
+	
+	wchar_t str[3][12] =
 	{
-		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 42.0f, FONT_SIZE_GO, color_yellow);
-		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 112.0f, FONT_SIZE_GO -10.0f, color_white);
-	}
-	//Titleを指している場合は、Titleの文字を黄色にする。Continueの文字は白色。
-	else if (m_mode == 1)
+		L"Continue",
+		L"Restart",
+		L"Title",
+	};
+
+	for (int i = 0; i < 3; i++)
 	{
-		Font::StrDraw(L"Continue", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 42.0f, FONT_SIZE_GO -10.0f, color_white);
-		Font::StrDraw(L"Title", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 200.0f + 112.0f, FONT_SIZE_GO, color_yellow);
+		if( i == m_mode )//選択しているモードのみ黄色で表示する
+			Font::StrDraw(str[i], WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 300.0f + i*(FONT_SIZE_GO * 1.5f), FONT_SIZE_GO + 10.0f, color_yellow);
+		else
+			Font::StrDraw(str[i], WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 300.0f + i*(FONT_SIZE_GO * 1.5f), FONT_SIZE_GO, color_white);
 	}
 }
