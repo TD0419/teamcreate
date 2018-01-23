@@ -107,7 +107,10 @@ void CObjStage5Boss::Action()
 		m_time++;
 
 		if (m_time > 10000)
+		{
 			m_time = 0;
+			m_shot_hit_time = 0;
+		}
 
 		//HitBox更新用ポインター取得
 		CHitBox* hit = Hits::GetHitBox(this);
@@ -121,7 +124,6 @@ void CObjStage5Boss::Action()
 			{
 				//何もしていないので攻撃モードをランダムで決める
 				m_attack_mode = GetRandom(1, 4);
-				m_time = 0;
 			}
 			break;
 		}
