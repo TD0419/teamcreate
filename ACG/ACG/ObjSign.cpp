@@ -157,16 +157,21 @@ void CObjSign::Draw()
 			}
 			case 3://ステージ3
 			{
+				//ボタンの情報とる
+				CObjHero* objhero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 				//二個目の看板のテキスト
 				if (m_map_x == 50 && m_map_y == 17)
 				{
-					//切り取り位置
-					src.m_top = 127.0f;
-					src.m_left = 297.0f;
-					src.m_right = 595.0f;
-					src.m_bottom = 254.0f;
-					//描画
-					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+					if (objhero->GetRopeAniCon()==false)
+					{
+						//切り取り位置
+						src.m_top = 127.0f;
+						src.m_left = 297.0f;
+						src.m_right = 595.0f;
+						src.m_bottom = 254.0f;
+						//描画
+						Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+					}
 				}
 				else
 				{
@@ -181,7 +186,6 @@ void CObjSign::Draw()
 				break;
 			}
 		}
-		
 	}
 	//----------------------------------------------------------------------------
 
