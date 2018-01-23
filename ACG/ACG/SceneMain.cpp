@@ -186,7 +186,7 @@ void CSceneMain::ImageDataLoading()
 			//針の土台の読み込み
 			Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
 			//ロープでぶら下がることができるギミック
-			Draw::LoadImageW(L"Image\\Vis_Blackball2.png", GRA_TARZAN_POINT, TEX_SIZE_16);
+			Draw::LoadImageW(L"Image\\Vis_Skyblueball.png", GRA_TARZAN_POINT, TEX_SIZE_16);
 			//リフト画像読み込み
 			Draw::LoadImageW(L"Image\\Lift\\Stage5.png", GRA_LIFT, TEX_SIZE_512);
 			//落ちるリフト
