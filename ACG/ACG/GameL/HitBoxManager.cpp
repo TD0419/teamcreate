@@ -381,6 +381,7 @@ void  CHitBoxManager::DrawHitBox()
 		else								{ col[0]=0.5f;col[1]=0.5f;col[2]=0.5f; }
 		
 		//“–‚½‚è”»’è•`‰æ
+		/*
 		CDrawTexture::DrawHitBox(
 			(*itr)->GetHitBox()->x,
 			(*itr)->GetHitBox()->y,
@@ -388,6 +389,6 @@ void  CHitBoxManager::DrawHitBox()
 			(*itr)->GetHitBox()->w,
 			col
 		);
-
+		*/
 	}
 }

@@ -65,15 +65,15 @@ void CObjStage5BossArms::Init()
 	{
 		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
 		//																横サイズ補正値						   縦サイズ補正値
-		Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 1);
+		Hits::SetHitBox(this, m_px, m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE-20.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE-15.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 1);
 		
 	}
 	//typeの値が1のときレフトアームの当たり判定表示
 	else if (m_arms_type == LEFT_ARM)
 	{
 		//当たり判定用HitBoxを作成(HITBOXのサイズ調整用に補正値を加えています)
-		//																横サイズ補正値						   縦サイズ補正値
-		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE, STAGE5_BOSS_ARMS_HEIGHT_SIZE-5.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
+		//								横サイズ補正値						   縦サイズ補正値
+		Hits::SetHitBox(this, m_px , m_py, STAGE5_BOSS_ARMS_WIDTH_SIZE-20.0f, STAGE5_BOSS_ARMS_HEIGHT_SIZE-20.0f, ELEMENT_ENEMY, OBJ_STAGE5_BOSS_ARMS, 2);
 	}
 }
 

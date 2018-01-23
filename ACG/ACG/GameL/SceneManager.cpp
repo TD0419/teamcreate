@@ -57,7 +57,7 @@ void CSceneManager::GameLoop()
 		
 		if(m_Time>=1000)
 		{
-			swprintf_s(c,L"%d",m_TimeCount);
+			//swprintf_s(c,L"%d",m_TimeCount);
 			m_TimeCount=0;
 		}
 		CDrawFont::StrDraw(c,0,0,16,cl);
