@@ -106,19 +106,17 @@ void CObjTitle::Draw()
 	//描画
 	Draw::Draw(GRA_TITLE, &src, &dst, color_white, 0.0f);
 
-	//メニュー描画
-	//Startを指している場合は、Startの文字を黄色にする。Exitの文字は白色。
-	if( m_mode == 0 )
+	wchar_t str[2][12] =
 	{
-		Font::StrDraw(L"Start"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 40.0f    , FONT_SIZE_TITLE, color_yellow);
-		Font::StrDraw(L"Exit"	, WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H/2.0f + 118.0f	, FONT_SIZE_TITLE - 10.0f, color_white);
+		L"Start",
+		L"Exit",
+	};
 
-	}
-	
-	//Exitを指している場合は、Exitの文字を黄色にする。Startの文字は白色。
-	else if ( m_mode == 1 )
+	for (int i = 0; i < 2; i++)
 	{
-		Font::StrDraw(L"Start", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 40.0f, FONT_SIZE_TITLE -10.0f, color_white);
-		Font::StrDraw(L"Exit", WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H / 2.0f + 118.0f, FONT_SIZE_TITLE, color_yellow);
+		if (i == m_mode)//選択しているモードのみ黄色で表示する
+			Font::StrDraw(str[i], WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 250.0f + i*(FONT_SIZE_GO * 1.5f), FONT_SIZE_GO + 10.0f, color_yellow);
+		else
+			Font::StrDraw(str[i], WINDOW_SIZE_W - 250.0f, WINDOW_SIZE_H - 250.0f + i*(FONT_SIZE_GO * 1.5f), FONT_SIZE_GO, color_white);
 	}
 }

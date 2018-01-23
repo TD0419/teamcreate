@@ -142,16 +142,21 @@ void CObjSign::Draw()
 			{
 				//ボタンの情報とる
 				CObjButton* objbutton = (CObjButton*)Objs::GetObj(OBJ_BUTTON);
-				//スイッチが押されていれば看板の文字画像表示
-				if (objbutton->GetTrickFlag() == true)
+				
+				//ボタンオブジェクトがあれば
+				if (objbutton != nullptr)
 				{
-					//切り取り位置
-					src.m_top = 0.0f;
-					src.m_left = 297.0f;
-					src.m_right = 595.0f;
-					src.m_bottom = 128.0f;
-					//描画
-					Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+					//スイッチが押されていれば看板の文字画像表示
+					if (objbutton->GetTrickFlag() == true)
+					{
+						//切り取り位置
+						src.m_top = 0.0f;
+						src.m_left = 297.0f;
+						src.m_right = 595.0f;
+						src.m_bottom = 128.0f;
+						//描画
+						Draw::Draw(GRA_SIGN_FRAME, &src, &dst, color, 0);
+					}
 				}
 				break;
 			}
