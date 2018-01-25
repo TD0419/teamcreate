@@ -124,7 +124,7 @@ void CObjRollBlockSwitch::Draw()
 	dst.m_right = dst.m_left + ROLL_BLOCK_SWITCH_SIZE_WIDTH;
 	dst.m_bottom = dst.m_top + ROLL_BLOCK_SWITCH_SIZE_HEIGHT;
 
-	Draw::Draw(GRA_BLACK_BALL, &src, &dst, color, 0.0f);
+	Draw::Draw(GRA_TARZAN_POINT, &src, &dst, color, 0.0f);
 }
 
 //ロープと回転ブロックスイッチの位置を調整する関数
