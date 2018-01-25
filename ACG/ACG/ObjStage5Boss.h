@@ -46,7 +46,7 @@ public:
 	bool GetArmDownFlagLeft() { return m_left_arm_down_flag; }
 	bool GetBossDeathFlag() { return m_death_flag; }
 	
-	//攻撃4カウンターが300フレーム経過した情報を入れる
+	//攻撃4カウンターが200フレーム経過した情報を入れる
 	bool GetBlockRetuenFlag() { return m_progress_atk4_count; }
 	
 	//ボスの死亡アニメーション処理用関数(アクション用)
@@ -82,8 +82,8 @@ private:
 
 	int m_time;//攻撃のタイミング管理用
 
-	int m_draw_time;	//描画のたいみんぐ管理用
-	int m_shot_hit_time;//弾丸が当たったたいみんぐの保存用
+	int m_draw_time;	//描画のタイミング管理用
+	int m_shot_hit_time;//弾丸が当たったタイミングの保存用
 	bool m_draw_flag;//描画用のフラグ
 	bool m_damage_flag;//ダメージフラグ
 
@@ -93,7 +93,7 @@ private:
 
 	bool m_lastwall_hit_flag;//ラストウォールとの処理用フラグ
 	
-	bool m_progress_atk4_count;//攻撃4用のカウンターが120フレーム経過したかどうかを判別するための変数
+	bool m_progress_atk4_count;//攻撃4用のカウンターが200フレーム経過したかどうかを判別するための変数
 
 	int m_ani_frame_death[4];	//描画フレーム(死亡)						詳細はInit関数の中の初期化部分
 	int m_ani_time_death[4];	//アニメーションフレーム動作間隔(死亡)		詳細はInit関数の中の初期化部分
