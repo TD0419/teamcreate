@@ -111,7 +111,7 @@ void CObjButton::Draw()
 	//•`‰æ
 	Draw::Draw(GRA_BUTTON, &src, &dst, color, 0.0f);
 
-	if (m_callout_time>0&&m_callout_time < 100)
+	if (m_callout_time>0&&m_callout_time < 240)
 	{
 		//Ø‚èŽæ‚èˆÊ’u
 		src.m_top = 0.0f;
@@ -121,7 +121,7 @@ void CObjButton::Draw()
 
 		//•`‰æˆÊ’u
 		dst.m_top =   objhero->GetPosY()- objmap->GetScrollY() -128.0f;
-		dst.m_left =  objhero->GetPosX()- objmap->GetScrollX();
+		dst.m_left =  objhero->GetPosX()- objmap->GetScrollX()-128.0f;
 		dst.m_right = dst.m_left + 300.0f;
 		dst.m_bottom = dst.m_top + SIGN_SIZE*4.0f;
 		//•`‰æ

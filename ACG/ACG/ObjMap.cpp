@@ -214,7 +214,7 @@ void CObjMap::CreateObj(int x, int y)
 		case MAP_BUTTON:	//É{É^ÉìçÏê¨
 		{
 			CObjButton* objbutton = new CObjButton(x, y);
-			Objs::InsertObj(objbutton, OBJ_BUTTON, 9);
+			Objs::InsertObj(objbutton, OBJ_BUTTON, 12);
 			break;
 		}
 
