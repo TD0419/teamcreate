@@ -115,7 +115,7 @@ void CObjEnemyBullet::Action()
 				float boss_x = 0.f; 
 				if (objboss != nullptr)
 				{
-					objboss->GetPosX();
+					boss_x = objboss->GetPosX();
 				}
 				
 				float hero_x = objhero->GetPosX();
@@ -135,7 +135,7 @@ void CObjEnemyBullet::Action()
 				float boss_y = 0.f;
 				if (objboss5!=nullptr)
 				{
-					objboss5->GetPosY();
+					boss_y = objboss5->GetPosY();
 				}
 					
 				float hero_y = objhero->GetPosY();

@@ -145,6 +145,16 @@ void CObjBoss::Action()
 	{
 		if (m_down_check_flag = true)
 		{
+			if (m_posture == 0.f)
+			{
+				//投げモーション中でなければ（多重生成を防ぐ）
+				if (m_ani_throw_start_flag == false)
+				{
+					//投げるアニメーション開始フラグをＯＮにする
+					m_ani_throw_start_flag = true;
+				}
+			}
+
 			m_posture = 1.0f;//左向きにする
 			m_px -= m_vx;		//移動前の位置に戻す
 		}
