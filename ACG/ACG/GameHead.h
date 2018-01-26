@@ -175,7 +175,6 @@ enum GRAPHIC_ID
 	GRA_NEEDLE,         //針
 	GRA_NEEDLE_STAND,   //針の土台
 	GRA_TARZAN_POINT,	//ロープでぶら下がれるギミック
-	GRA_BLACK_BALL,			//回転ブロックの仕掛けのスイッチ
 	GRA_CANNON_BEAM,		//ステージ5の拡散弾
 	GRA_WIRE_MASH,			//ステージ5の金網
 	GRA_CANNON,				//	//ステージ5の大砲

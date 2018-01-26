@@ -13,7 +13,7 @@ CObjFallingBlock::CObjFallingBlock(int x, int y)
 {
 	m_px = x * BLOCK_SIZE;
 	m_py = y * BLOCK_SIZE;
-	m_return_block_y = m_py;
+	m_return_block_y = m_py;//初期位置(Y軸)の値を保存
 }
 
 //イニシャライズ
@@ -66,7 +66,7 @@ void CObjFallingBlock::Action()
 		m_fallint_start_flag = objboss->GetBlockDownFlag();
 	}
 	
-	//ボスの攻撃4のカウンターが300フレーム経過したら、ブロックを初期位置に戻す
+	//ボスの攻撃4のカウンターが200フレーム経過したら、ブロックを初期位置に戻す
 	if (stage5boss_atk4_count == true && stage5boss_death_flag == false)
 	{
 		m_py = m_return_block_y;//初期位置にブロックを戻す

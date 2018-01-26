@@ -29,7 +29,6 @@ CSceneMain::CSceneMain()
 CSceneMain::CSceneMain(int n)
 {
 	g_remaining += n;
-
 }
 
 //ゲームメイン初期化メソッド
@@ -179,14 +178,15 @@ void CSceneMain::ImageDataLoading()
 			Draw::LoadImageW(L"Image\\Stage5Cannon.png", GRA_CANNON, TEX_SIZE_128);
 			//ステージ5の大砲の弾
 			Draw::LoadImageW(L"Image\\Cannon_Laser_Beam.png", GRA_CANNON_BEAM, TEX_SIZE_16);
-			//回転ブロックの仕掛けのスイッチの画像読み込み
-			Draw::LoadImageW(L"Image\\Vis_Blackball.png", GRA_BLACK_BALL, TEX_SIZE_16);
+			
 			//針の読み込み
 			Draw::LoadImageW(L"Image\\Needle.png", GRA_NEEDLE, TEX_SIZE_64);
 			//針の土台の読み込み
 			Draw::LoadImageW(L"Image\\Needle stand.png", GRA_NEEDLE_STAND, TEX_SIZE_64);
-			//ロープでぶら下がることができるギミック
+			
+			//ロープでを引っ掛けるポイント（ターザンと回転ブロック）
 			Draw::LoadImageW(L"Image\\Vis_Skyblueball.png", GRA_TARZAN_POINT, TEX_SIZE_16);
+			
 			//リフト画像読み込み
 			Draw::LoadImageW(L"Image\\Lift\\Stage5.png", GRA_LIFT, TEX_SIZE_512);
 			//落ちるリフト

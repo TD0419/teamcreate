@@ -111,7 +111,7 @@ void CObjButton::Draw()
 	//•`‰æ
 	Draw::Draw(GRA_BUTTON, &src, &dst, color, 0.0f);
 
-	if (m_callout_time>0&&m_callout_time < 240)
+	if (m_callout_time>0&&m_callout_time < 300)
 	{
 		//Ø‚èŽæ‚èˆÊ’u
 		src.m_top = 0.0f;
